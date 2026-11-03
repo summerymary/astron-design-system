@@ -1,0 +1,296 @@
+.club-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.logo-wide {
+  width: 172px;
+  height: 72px;
+  padding: 10px 14px;
+}
+.logo-compact {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  border-radius: 8px;
+}
+.logo-surface-brand {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+.logo-surface-light {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border: 1px solid var(--color-line);
+}
+.logo-surface-dark {
+  background: var(--color-ink);
+  color: var(--color-on-accent);
+}
+.club-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.club-logo.logo-frameless {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.club-logo-fallback {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0;
+  max-width: 100%;
+  text-align: center;
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+}
+.logo-compact .club-logo-fallback {
+  font-size: 13px;
+  line-height: 1;
+}
+.sidebar .brand {
+  min-height: 72px;
+  padding: 0;
+  letter-spacing: 0;
+}
+.sidebar .brand > .club-logo {
+  width: 100%;
+}
+.club-switch > .club-logo {
+  width: 29px;
+  height: 31px;
+}
+.mobile-brand > .club-logo {
+  width: 140px;
+  height: 56px;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+.design-system .ds-section-number {
+  font-size: 10px;
+  letter-spacing: 0.4px;
+}
+.workstation-button > .club-logo {
+  width: 32px;
+  height: 35px;
+}
+.ds-intro {
+  margin: 0 0 18px;
+  padding: 0;
+  max-width: 760px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--color-muted);
+}
+.design-system .ds-categories {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 0;
+}
+.design-system .ds-categories > button {
+  min-width: 0;
+}
+.color-purpose {
+  display: block;
+  font-size: 11px;
+  color: var(--color-muted);
+  line-height: 1.6;
+  margin: 8px 3px 0;
+}
+.logo-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 22px;
+}
+.logo-demo-card {
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+  background: var(--color-surface);
+  overflow: hidden;
+}
+.logo-demo-stage {
+  min-height: 165px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+.logo-demo-stage.on-brand {
+  background: var(--color-accent);
+}
+.logo-demo-stage.on-dark {
+  background: var(--color-ink);
+}
+.logo-demo-stage .club-logo {
+  width: 240px;
+  height: 104px;
+  padding: 16px 24px;
+  border: 1px dashed #ffffff80;
+  border-radius: 0;
+  background: transparent;
+}
+.logo-demo-caption {
+  padding: 17px 20px;
+  border-top: 1px solid var(--color-line);
+}
+.logo-demo-caption strong {
+  font-size: 13px;
+  font-weight: 500;
+}
+.logo-demo-caption p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--color-muted);
+  margin-top: 5px;
+}
+.logo-guidelines {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.logo-guidelines > div {
+  padding: 20px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+.logo-guidelines h3 {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 8px;
+}
+.logo-guidelines p,
+.logo-rules-list {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--color-muted);
+}
+.logo-example-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 92px;
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  background: var(--color-surface-subtle);
+  margin-bottom: 14px;
+  padding: 12px;
+}
+.logo-example-block .logo-wide {
+  width: 150px;
+  height: 62px;
+  padding: 9px 12px;
+}
+.logo-example-block .logo-compact {
+  width: 36px;
+  height: 36px;
+}
+.logo-example-block > span:last-child:not(.club-logo) {
+  font-size: 12px;
+  color: var(--color-text);
+}
+.logo-size-example {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+.logo-rules-list {
+  margin: 0;
+  padding: 20px 22px 20px 40px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+}
+.logo-rules-list li + li {
+  margin-top: 8px;
+}
+.logo-setup-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 20px 23px;
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-accent-line);
+  border-radius: 12px;
+  margin-top: 18px;
+}
+.logo-setup-note > svg {
+  color: var(--color-accent);
+  margin-top: 2px;
+}
+.logo-setup-note strong {
+  font-size: 13px;
+}
+.logo-setup-note p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--color-text);
+  margin-top: 6px;
+}
+.type-row code {
+  white-space: normal;
+  line-height: 1.6;
+}
+@container (max-width:1100px) {
+  .design-system .ds-categories {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .logo-guidelines {
+    grid-template-columns: 1fr;
+  }
+}
+@container (max-width:700px) {
+  .ds-intro {
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .design-system .ds-categories {
+    gap: 8px;
+  }
+  .design-system .ds-categories > button {
+    font-size: 11px;
+    padding: 12px 10px;
+    gap: 8px;
+  }
+  .logo-demo-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .logo-demo-stage {
+    min-height: 135px;
+    padding: 20px;
+  }
+  .logo-demo-stage .club-logo {
+    max-width: 100%;
+  }
+  .logo-demo-caption {
+    padding: 15px 17px;
+  }
+  .logo-guidelines > div {
+    padding: 17px;
+  }
+  .color-purpose {
+    font-size: 10px;
+  }
+  .design-system .ds-section-number {
+    font-size: 9px;
+  }
+  .logo-rules-list {
+    padding: 18px 18px 18px 34px;
+  }
+  .logo-setup-note {
+    padding: 17px;
+  }
+}

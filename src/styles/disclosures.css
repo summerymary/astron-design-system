@@ -1,0 +1,55 @@
+/* Keep every disclosure arrow inside a predictable end inset. */
+:root {
+  --disclosure-inset: 12px;
+}
+.app-shell select:not([multiple]),
+.workspace-toolbar select:not([multiple]),
+.workspace-role-mobile select:not([multiple]),
+.mobile-state-menu select:not([multiple]) {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-inline-end: 36px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23606A5C' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--disclosure-inset) center;
+  background-size: 14px;
+}
+.workstation-button {
+  padding-inline-end: var(--disclosure-inset);
+}
+.role-select select {
+  max-width: 190px;
+}
+.workstation-button > span:nth-child(2) {
+  flex: 1;
+}
+.workstation-button > svg {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.club-switch {
+  padding-inline-end: var(--disclosure-inset);
+}
+.club-switch > svg {
+  flex-shrink: 0;
+}
+.admin-quick-panel nav > button,
+.quick-mobile-toggle {
+  padding-inline-end: var(--disclosure-inset);
+}
+.admin-quick-panel nav > button > svg,
+.quick-mobile-toggle > svg,
+.ds-categories > button > svg {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+@media (forced-colors: active) {
+  .app-shell select:not([multiple]),
+  .workspace-toolbar select:not([multiple]),
+  .workspace-role-mobile select:not([multiple]),
+  .mobile-state-menu select:not([multiple]) {
+    appearance: auto;
+    background-image: none;
+    padding-inline-end: var(--disclosure-inset);
+  }
+}

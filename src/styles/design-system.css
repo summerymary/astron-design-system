@@ -1,0 +1,183 @@
+/* Shared spacing and card geometry for the styleguide. */
+.design-system {
+  --ds-card-padding: 24px;
+  --ds-grid-gap: 16px;
+  --ds-section-gap: 32px;
+}
+.design-system .ds-intro {
+  margin-bottom: 16px;
+}
+.design-system .ds-categories {
+  gap: var(--ds-grid-gap);
+  margin: 0 0 var(--ds-section-gap);
+}
+.design-system .ds-categories > button {
+  border-radius: var(--radius-control);
+  padding: 16px;
+}
+.design-system .ds-section {
+  margin-bottom: var(--ds-section-gap);
+}
+.design-system .ds-section > .section-heading {
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.design-system .section-heading > div {
+  min-width: 0;
+}
+.design-system .section-heading p {
+  margin-top: 8px;
+  max-width: none;
+  line-height: 1.65;
+}
+.design-system .ds-section-number {
+  padding-top: 4px;
+}
+.design-system
+  :is(.color-grid, .pattern-grid, .logo-demo-grid, .logo-guidelines, .palette-guidance) {
+  gap: var(--ds-grid-gap);
+}
+.design-system
+  :is(
+    .type-panel,
+    .spacing-examples,
+    .radius-examples,
+    .component-panel,
+    .pattern-example,
+    .palette-guidance > div,
+    .logo-demo-card,
+    .logo-guidelines > div,
+    .logo-rules-list,
+    .logo-setup-note,
+    .ds-note,
+    .color-card
+  ) {
+  border-radius: var(--radius-card);
+}
+.design-system
+  :is(
+    .spacing-examples,
+    .radius-examples,
+    .component-panel,
+    .pattern-example,
+    .palette-guidance > div,
+    .logo-guidelines > div,
+    .logo-setup-note,
+    .ds-note
+  ) {
+  padding: var(--ds-card-padding);
+}
+.design-system .color-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 8px 8px 16px;
+}
+.design-system .color-grid {
+  grid-auto-rows: 1fr;
+}
+.design-system .color-swatch {
+  flex-shrink: 0;
+  border-radius: var(--radius-control);
+  margin-bottom: 12px;
+}
+.design-system .color-purpose {
+  margin-top: 8px;
+}
+.design-system .palette-guidance {
+  margin-top: 24px;
+}
+.design-system .type-panel {
+  overflow: hidden;
+}
+.design-system .type-intro {
+  padding: var(--ds-card-padding);
+}
+.design-system .type-specimens {
+  padding: 0 var(--ds-card-padding);
+}
+.design-system .type-row {
+  padding: 16px 0;
+  gap: 24px;
+}
+.design-system .ds-two-columns {
+  gap: 16px 24px;
+  margin-bottom: var(--ds-section-gap);
+}
+.design-system .ds-two-columns > .ds-section {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 2;
+  margin-bottom: 0;
+}
+.design-system .ds-two-columns .section-heading {
+  margin-bottom: 0;
+}
+.design-system .radius-examples {
+  align-items: center;
+}
+.design-system .buttons-showcase {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+.design-system .inputs-showcase {
+  gap: 24px;
+}
+.design-system .example-label {
+  margin-bottom: 16px;
+}
+.design-system .pattern-hint {
+  margin-top: 16px;
+}
+.design-system :is(.logo-demo-grid, .logo-guidelines) {
+  margin-bottom: 24px;
+}
+.design-system .logo-demo-caption {
+  padding: 16px var(--ds-card-padding);
+}
+.design-system .logo-rules-list {
+  padding: var(--ds-card-padding) var(--ds-card-padding) var(--ds-card-padding)
+    calc(var(--ds-card-padding) + 20px);
+}
+.design-system .logo-setup-note {
+  gap: 16px;
+  margin-top: 16px;
+}
+.design-system .ds-note {
+  gap: 16px;
+  margin: 0 0 var(--ds-section-gap);
+}
+.design-system .ds-footer {
+  padding: 24px 0 0;
+}
+@container (max-width: 1100px) {
+  .design-system .buttons-showcase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@container (max-width: 700px) {
+  .design-system {
+    --ds-card-padding: 16px;
+    --ds-grid-gap: 12px;
+    --ds-section-gap: 24px;
+  }
+  .design-system .ds-categories > button {
+    padding: 12px;
+  }
+  .design-system .ds-two-columns {
+    gap: 24px;
+  }
+  .design-system .ds-two-columns > .ds-section {
+    grid-template-rows: auto auto;
+    grid-row: auto;
+    gap: 16px;
+  }
+  .design-system .type-row {
+    gap: 16px;
+  }
+  .design-system :is(.buttons-showcase, .inputs-showcase) {
+    gap: 20px 16px;
+  }
+}
