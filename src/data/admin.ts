@@ -1,0 +1,158 @@
+import type { Visit, VisitKind } from '../types';
+
+export const workstations = [
+  { id: 'central-01', clubId: 'central', name: 'Ресепшен 01' },
+  { id: 'central-02', clubId: 'central', name: 'Ресепшен 02' },
+  { id: 'park-01', clubId: 'park', name: 'Ресепшен 01' },
+  { id: 'river-01', clubId: 'river', name: 'Ресепшен 01' },
+];
+
+export const memberCards: Record<number, string> = {
+  1001: '100001',
+  1002: '100002',
+  1003: '100003',
+  1004: '100004',
+  1005: '100005',
+  1006: '100006',
+};
+export const memberDemographics: Record<number, { gender: 'male' | 'female'; age: number }> = {
+  1001: { gender: 'female', age: 28 },
+  1002: { gender: 'male', age: 34 },
+  1003: { gender: 'female', age: 41 },
+  1004: { gender: 'male', age: 26 },
+  1005: { gender: 'female', age: 32 },
+  1006: { gender: 'male', age: 45 },
+};
+export const visitKinds: Record<VisitKind, string> = {
+  gym: 'Тренажерный зал',
+  group: 'Групповые занятия',
+  personal: 'Персональные тренировки',
+  online: 'Онлайн-тренировки',
+};
+
+export const initialVisits: Visit[] = [
+  {
+    id: 'v-12',
+    memberId: 1001,
+    card: '100001',
+    enteredAt: '2026-11-01T14:30',
+    kind: 'gym',
+    plan: 'Безлимит',
+    clubId: 'central',
+  },
+  {
+    id: 'v-11',
+    memberId: 1002,
+    card: '100002',
+    enteredAt: '2026-11-01T14:21',
+    kind: 'personal',
+    plan: 'Дневной',
+    clubId: 'central',
+  },
+  {
+    id: 'v-10',
+    memberId: 1005,
+    card: '100005',
+    enteredAt: '2026-11-01T14:15',
+    kind: 'group',
+    plan: 'Безлимит',
+    clubId: 'central',
+  },
+  {
+    id: 'v-09',
+    memberId: 1003,
+    card: '100003',
+    enteredAt: '2026-11-01T14:08',
+    kind: 'gym',
+    plan: 'Безлимит',
+    clubId: 'central',
+  },
+  {
+    id: 'v-08',
+    memberId: 1006,
+    card: '100006',
+    enteredAt: '2026-11-01T13:52',
+    kind: 'gym',
+    plan: 'Дневной',
+    clubId: 'park',
+  },
+  {
+    id: 'v-07',
+    memberId: 1004,
+    card: '100004',
+    enteredAt: '2026-11-01T13:40',
+    kind: 'online',
+    plan: '12 занятий',
+    clubId: 'river',
+  },
+  {
+    id: 'v-06',
+    memberId: 1006,
+    card: '100006',
+    enteredAt: '2026-11-01T13:36',
+    kind: 'personal',
+    plan: 'Дневной',
+    clubId: 'central',
+  },
+  {
+    id: 'v-05',
+    memberId: 1002,
+    card: '100002',
+    enteredAt: '2026-11-01T13:18',
+    kind: 'gym',
+    plan: 'Дневной',
+    clubId: 'park',
+  },
+  {
+    id: 'v-04',
+    memberId: 1005,
+    card: '100005',
+    enteredAt: '2026-11-01T12:45',
+    kind: 'gym',
+    plan: 'Безлимит',
+    clubId: 'central',
+  },
+  {
+    id: 'v-03',
+    memberId: 1001,
+    card: '100001',
+    enteredAt: '2026-11-01T11:20',
+    kind: 'group',
+    plan: 'Безлимит',
+    clubId: 'central',
+  },
+  {
+    id: 'v-02',
+    memberId: 1003,
+    card: '100003',
+    enteredAt: '2026-11-01T10:10',
+    kind: 'group',
+    plan: 'Безлимит',
+    clubId: 'park',
+  },
+  {
+    id: 'v-01',
+    memberId: 1006,
+    card: '100006',
+    enteredAt: '2026-10-31T19:40',
+    kind: 'gym',
+    plan: 'Дневной',
+    clubId: 'central',
+  },
+];
+
+export const adminSections = [
+  { id: 'schedule', label: 'Расписание', caption: 'Занятия и записи' },
+  { id: 'registration', label: 'Регистрация посещения', caption: 'Выбрать клиента' },
+  { id: 'services', label: 'Продажа услуг', caption: 'Абонементы и тренировки' },
+  { id: 'members', label: 'Клиенты', caption: 'База и карточки клиентов' },
+  { id: 'products', label: 'Продажа товаров', caption: 'Товары и аксессуары' },
+  { id: 'collagen', label: 'Коллагенарий', caption: 'Сеансы и запись' },
+  { id: 'cash', label: 'Касса', caption: 'Операции смены' },
+  { id: 'crm', label: 'CRM', caption: 'Работа с клиентами' },
+  { id: 'bar', label: 'Бар', caption: 'Заказы и товары бара' },
+  { id: 'requests', label: 'Онлайн-заявки', caption: 'Новые обращения' },
+  { id: 'messages', label: 'Сообщения', caption: 'Переписка с клиентами' },
+  { id: 'reviews', label: 'Отзывы', caption: 'Обратная связь' },
+] as const;
+export type AdminSectionId = (typeof adminSections)[number]['id'];

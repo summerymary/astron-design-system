@@ -1,0 +1,282 @@
+import { astronBrand } from './branding';
+import type { DemoUser, RoleDefinition, RoleHomeData, UserRole } from '../types';
+
+export const demoNetworks = [
+  { id: 'astron', name: `Сеть «${astronBrand.name}»`, brand: astronBrand },
+];
+export const demoClubs = [
+  {
+    id: 'central',
+    networkId: 'astron',
+    brand: astronBrand,
+    shortName: 'Центральный',
+    name: `${astronBrand.name} · Центральный`,
+    city: 'Йошкар-Ола',
+  },
+  {
+    id: 'park',
+    networkId: 'astron',
+    brand: astronBrand,
+    shortName: 'Парк',
+    name: `${astronBrand.name} · Парк`,
+    city: 'Йошкар-Ола',
+  },
+  {
+    id: 'river',
+    networkId: 'astron',
+    brand: astronBrand,
+    shortName: 'Речной',
+    name: `${astronBrand.name} · Речной`,
+    city: 'Йошкар-Ола',
+  },
+];
+
+export const roles: RoleDefinition[] = [
+  {
+    id: 'administrator',
+    label: 'Администратор',
+    scope: 'club',
+    canViewMembers: true,
+    canAddMembers: true,
+  },
+  { id: 'trainer', label: 'Тренер', scope: 'club', canViewMembers: false, canAddMembers: false },
+  {
+    id: 'club-director',
+    label: 'Директор клуба',
+    scope: 'club',
+    canViewMembers: true,
+    canAddMembers: true,
+  },
+  {
+    id: 'network-director',
+    label: 'Директор сети',
+    scope: 'network',
+    canViewMembers: false,
+    canAddMembers: false,
+  },
+  {
+    id: 'marketer',
+    label: 'Маркетолог',
+    scope: 'network',
+    canViewMembers: false,
+    canAddMembers: false,
+  },
+];
+
+export const demoUsers: DemoUser[] = [
+  {
+    id: 'user-admin',
+    name: 'Александра Крылова',
+    email: 'admin@example.com',
+    role: 'administrator',
+    networkId: 'astron',
+    clubIds: ['central'],
+  },
+  {
+    id: 'user-trainer',
+    name: 'Алина Белова',
+    email: 'trainer@example.com',
+    role: 'trainer',
+    networkId: 'astron',
+    clubIds: ['central'],
+  },
+  {
+    id: 'user-director',
+    name: 'Андрей Ковалёв',
+    email: 'director@example.com',
+    role: 'club-director',
+    networkId: 'astron',
+    clubIds: ['central'],
+  },
+  {
+    id: 'user-network',
+    name: 'Виктория Орлова',
+    email: 'network@example.com',
+    role: 'network-director',
+    networkId: 'astron',
+    clubIds: ['central', 'park', 'river'],
+  },
+  {
+    id: 'user-marketer',
+    name: 'Игорь Соколов',
+    email: 'marketing@example.com',
+    role: 'marketer',
+    networkId: 'astron',
+    clubIds: ['central', 'park', 'river'],
+  },
+];
+
+export const roleHomes: Record<UserRole, RoleHomeData> = {
+  administrator: {
+    title: 'Ресепшен',
+    caption: 'Посещения, клиенты и всё для работы смены.',
+    summaryTitle: 'Клуб готов к новому дню',
+    summaryText: 'Клиенты, посещения и ближайшие занятия.',
+    metrics: [],
+    itemsTitle: 'Сегодня в клубе',
+    itemsCaption: '',
+    items: [],
+    noteTitle: 'На стойке регистрации',
+    noteText: 'У Михаила и Алексея скоро истекают абонементы.',
+    emptyTitle: 'Здесь пока нет клиентов',
+    emptyDescription: 'Добавьте первого клиента — и пространство начнёт оживать.',
+  },
+  trainer: {
+    title: 'Мой тренировочный день',
+    caption: 'Ваши занятия, участники и время для движения.',
+    summaryTitle: 'Алина, сегодня у вас два занятия',
+    summaryText: 'Мягкая йога утром и пилатес вечером. Между ними — время для подготовки.',
+    metrics: [
+      { label: 'Занятия сегодня', value: '2', detail: 'В студии 01' },
+      { label: 'Записано участников', value: '14', detail: '8 на йогу · 6 на пилатес' },
+      { label: 'До первого занятия', value: '10:00', detail: 'Мягкая йога · 55 минут' },
+    ],
+    itemsTitle: 'Моё расписание',
+    itemsCaption: 'Только занятия тренера Алины Беловой.',
+    items: [
+      {
+        id: 'trainer-yoga',
+        title: 'Мягкая йога',
+        subtitle: 'Студия 01 · 55 минут · 8 из 12 участников',
+        time: '10:00',
+        status: 'По плану',
+      },
+      {
+        id: 'trainer-pilates',
+        title: 'Пилатес',
+        subtitle: 'Студия 01 · 55 минут · 6 из 10 участников',
+        time: '18:00',
+        status: 'По плану',
+      },
+    ],
+    noteTitle: 'Пространство для подготовки',
+    noteText:
+      'Студия доступна за 15 минут до занятия. Проверьте коврики и оборудование перед началом.',
+    emptyTitle: 'Сегодня нет занятий',
+    emptyDescription: 'Назначенные вам тренировки появятся в этом расписании.',
+  },
+  'club-director': {
+    title: 'Пульс клуба',
+    caption: 'Команда, план и результат Центрального клуба.',
+    summaryTitle: 'Клуб движется к месячному плану',
+    summaryText: 'Загрузка стабильна. В фокусе — продление абонементов и вечерние занятия.',
+    metrics: [
+      { label: 'Выручка за месяц', value: '842 500 ₽', detail: '84% от плана 1 млн ₽' },
+      { label: 'Команда на смене', value: '12', detail: 'Все ключевые зоны закрыты' },
+      { label: 'Продления', value: '86%', detail: '+4 п. п. к прошлому месяцу' },
+    ],
+    itemsTitle: 'В фокусе руководителя',
+    itemsCaption: 'Операционные вопросы Центрального клуба.',
+    items: [
+      {
+        id: 'director-meeting',
+        title: 'Планёрка с командой',
+        subtitle: 'Администраторы и старший тренер · переговорная',
+        time: '09:30',
+        status: 'Сегодня',
+      },
+      {
+        id: 'director-renewals',
+        title: 'Продления абонементов',
+        subtitle: '2 абонемента истекают на этой неделе',
+        time: 'До 13:00',
+        status: 'Внимание',
+      },
+      {
+        id: 'director-stock',
+        title: 'Проверить заявку на инвентарь',
+        subtitle: 'Новые коврики для студии 01',
+        time: 'До 17:00',
+        status: 'На согласовании',
+      },
+    ],
+    noteTitle: 'Результат складывается из деталей',
+    noteText:
+      'В этом представлении собраны показатели одного клуба. Для общего обзора трёх клубов выберите роль директора сети.',
+    emptyTitle: 'Показателей пока нет',
+    emptyDescription: 'Здесь появятся результаты и рабочие вопросы вашего клуба.',
+  },
+  'network-director': {
+    title: 'Обзор сети',
+    caption: 'Три клуба. Общая картина. Единый ритм.',
+    summaryTitle: 'Сеть «Астрон» растёт',
+    summaryText: 'Сводные примеры показателей Центрального, Паркового и Речного клубов.',
+    metrics: [
+      { label: 'Клубов в сети', value: '3', detail: 'Все в Йошкар-Оле' },
+      { label: 'Выручка сети', value: '2 415 000 ₽', detail: 'За демонстрационный месяц' },
+      { label: 'Активные клиенты', value: '3 620', detail: 'Во всех клубах сети' },
+    ],
+    itemsTitle: 'Клубы сети',
+    itemsCaption: 'Выручка и активная клиентская база по филиалам.',
+    items: [
+      {
+        id: 'central',
+        title: 'Астрон · Центральный',
+        subtitle: '842 500 ₽ · 1 248 активных клиентов',
+        time: 'Йошкар-Ола',
+        status: '84% плана',
+      },
+      {
+        id: 'park',
+        title: 'Астрон · Парк',
+        subtitle: '798 000 ₽ · 1 180 активных клиентов',
+        time: 'Йошкар-Ола',
+        status: '80% плана',
+      },
+      {
+        id: 'river',
+        title: 'Астрон · Речной',
+        subtitle: '774 500 ₽ · 1 192 активных клиентов',
+        time: 'Йошкар-Ола',
+        status: '77% плана',
+      },
+    ],
+    noteTitle: 'Фокус на качестве сети',
+    noteText:
+      'На этой неделе — общая встреча директоров и согласование декабрьской программы занятий.',
+    emptyTitle: 'В сети пока нет клубов',
+    emptyDescription: 'Сводка появится после добавления первого клуба в сеть.',
+  },
+  marketer: {
+    title: 'Маркетинг сети',
+    caption: 'От первого интереса — к первому посещению.',
+    summaryTitle: 'Ноябрь начинается с новых знакомств',
+    summaryText:
+      'Кампании работают на три клуба сети. В фокусе — пробные визиты и возвращение клиентов.',
+    metrics: [
+      { label: 'Новые заявки', value: '128', detail: '+18% за неделю' },
+      { label: 'Пробные визиты', value: '42', detail: 'Из рекламных кампаний' },
+      { label: 'Стоимость заявки', value: '640 ₽', detail: 'Средняя по сети' },
+    ],
+    itemsTitle: 'Кампании',
+    itemsCaption: 'Примеры активностей маркетолога сети «Астрон».',
+    items: [
+      {
+        id: 'campaign-trial',
+        title: 'Первый шаг в клубе «Астрон»',
+        subtitle: 'Пробное занятие · все клубы · 74 заявки',
+        time: '1–15 ноя',
+        status: 'Активна',
+      },
+      {
+        id: 'campaign-friends',
+        title: 'Движение вместе',
+        subtitle: 'Приведи друга · Центральный и Парк · 38 заявок',
+        time: '1–30 ноя',
+        status: 'Активна',
+      },
+      {
+        id: 'campaign-return',
+        title: 'Пора вернуться',
+        subtitle: 'Повторный визит · все клубы · 16 заявок',
+        time: '5–20 ноя',
+        status: 'Запланирована',
+      },
+    ],
+    noteTitle: 'Следующий шаг — новые гипотезы',
+    noteText:
+      'Сравните сообщения для пробного визита и оцените результат по фактическим посещениям.',
+    emptyTitle: 'Пока нет кампаний',
+    emptyDescription: 'Здесь появятся рекламные активности и их результаты по клубам сети.',
+  },
+};
