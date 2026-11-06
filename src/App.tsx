@@ -18,12 +18,10 @@ import {
   Users,
   X,
   Menu,
-  ContactRound,
   CreditCard,
   MessageSquare,
   Phone,
   Settings2,
-  BarChart3,
   CupSoda,
   Library,
   BriefcaseBusiness,
@@ -44,6 +42,8 @@ import { AdminOverview } from './pages/AdminOverview';
 import { AdminSection } from './pages/AdminSection';
 import { ClientProfile } from './pages/ClientProfile';
 import { RoleOverview } from './pages/RoleOverview';
+import { BartenderHome, TrainerHome } from './pages/StaffWorkspace';
+import { canOpenModule } from './lib/staff-rules';
 import type { Device, Member, Page, Scenario, UserRole, Visit, VisitKind } from './types';
 
 const navigation = [
@@ -53,14 +53,12 @@ const navigation = [
 const workNavigation = [
   { id: 'schedule', label: 'Расписание', icon: CalendarDays },
   { id: 'memberships', label: 'Абонементы', icon: CreditCard },
-  { id: 'crm', label: 'CRM', icon: ContactRound },
   { id: 'registration', label: 'Посещения', icon: Check },
   { id: 'calls', label: 'Звонки', icon: Phone },
   { id: 'messages', label: 'Сообщения', icon: MessageSquare },
   { id: 'bar', label: 'Бар', icon: CupSoda },
 ] as const;
 const managementNavigation = [
-  { id: 'statistics', label: 'Статистика', icon: BarChart3 },
   { id: 'employees', label: 'Персонал', icon: BriefcaseBusiness },
   { id: 'directories', label: 'Справочники', icon: Library },
   { id: 'service-settings', label: 'Настройки', icon: Settings2 },
@@ -70,9 +68,12 @@ function initialOptions() {
   const [path, query] = window.location.hash.replace('#/', '').split('?');
   const params = new URLSearchParams(query);
   const role = roles.find((r) => r.id === params.get('role')) ?? roles[0];
+  const section = adminSections.find((s) => s.id === params.get('section'))?.id || 'schedule';
   return {
     page:
-      path === 'admin-section' && role.id === 'administrator'
+      path === 'admin-section' &&
+      canOpenModule(role.id, section) &&
+      (!params.get('section') || adminSections.some((s) => s.id === params.get('section')))
         ? ('admin-section' as Page)
         : path === 'client-profile' && role.canViewMembers
           ? ('client-profile' as Page)
@@ -81,7 +82,7 @@ function initialOptions() {
             : ('overview' as Page),
     role: role.id,
     clientId: Number(params.get('clientId')) || null,
-    section: adminSections.find((s) => s.id === params.get('section'))?.id ?? 'schedule',
+    section,
     device: params.get('device') === 'mobile' ? ('mobile' as Device) : ('desktop' as Device),
     scenario: scenarios.some((s) => s.id === params.get('state'))
       ? (params.get('state') as Scenario)
@@ -230,7 +231,8 @@ export function App() {
     setRegistrationKind('gym');
     setModal('registration');
   };
-  const openModule = (section: AdminSectionId) => {
+  const openModule = (section: AdminSectionId, member?: Member) => {
+    if (!canOpenModule(role, section)) return;
     if (section === 'members') {
       goTo('members');
       return;
@@ -243,7 +245,7 @@ export function App() {
         member: sectionMember,
       });
     setAdminSection(section);
-    setSectionMember(null);
+    setSectionMember(member || null);
     setSectionsOpen(false);
     setScenario('default');
     goTo('admin-section');
@@ -598,6 +600,29 @@ export function App() {
                 </button>
               </nav>
             )}
+            {(role === 'trainer' || role === 'bartender') && (
+              <nav className="side-nav ws-module-nav" aria-label="Рабочие разделы">
+                {(role === 'trainer'
+                  ? [
+                      { id: 'schedule' as const, label: 'Моё расписание', icon: CalendarDays },
+                      { id: 'trainer-clients' as const, label: 'Мои клиенты', icon: Users },
+                    ]
+                  : [
+                      { id: 'bar-catalog' as const, label: 'Каталог бара', icon: CupSoda },
+                      { id: 'bar-sales' as const, label: 'Продажи бара', icon: CreditCard },
+                    ]
+                ).map((n) => (
+                  <button
+                    key={n.id}
+                    className={page === 'admin-section' && adminSection === n.id ? 'active' : ''}
+                    onClick={() => openModule(n.id)}
+                  >
+                    <n.icon size={18} />
+                    {n.label}
+                  </button>
+                ))}
+              </nav>
+            )}
             <div className="sidebar-bottom">
               <div className="sandbox-card">
                 <span>
@@ -802,19 +827,29 @@ export function App() {
                 />
               ) : page === 'admin-section' ? (
                 <AdminSection
-                  key={adminSection}
+                  key={`${adminSection}-${currentUser.id}`}
                   section={adminSection}
                   member={sectionMember}
                   members={members}
                   clubName={club.name}
                   employeeName={currentUser.name}
+                  user={currentUser}
                   navigate={openModule}
                   onMember={openMember}
                   onRegister={createVisit}
                   onBack={backFromSection}
                 />
               ) : page === 'overview' ? (
-                role !== 'administrator' ? (
+                role === 'trainer' ? (
+                  <TrainerHome
+                    user={currentUser}
+                    members={members}
+                    clubName={club.name}
+                    navigate={openModule}
+                  />
+                ) : role === 'bartender' ? (
+                  <BartenderHome clubName={club.name} navigate={openModule} />
+                ) : role !== 'administrator' ? (
                   <RoleOverview user={currentUser} />
                 ) : (
                   <AdminOverview
@@ -855,6 +890,34 @@ export function App() {
                   <span>{n.id === 'overview' ? 'Главная' : n.label}</span>
                 </button>
               ))}
+              {(role === 'trainer' || role === 'bartender') && (
+                <>
+                  <button
+                    className={
+                      page === 'admin-section' &&
+                      adminSection === (role === 'trainer' ? 'schedule' : 'bar-catalog')
+                        ? 'active'
+                        : ''
+                    }
+                    onClick={() => openModule(role === 'trainer' ? 'schedule' : 'bar-catalog')}
+                  >
+                    {role === 'trainer' ? <CalendarDays size={20} /> : <CupSoda size={20} />}
+                    <span>{role === 'trainer' ? 'Расписание' : 'Каталог'}</span>
+                  </button>
+                  <button
+                    className={
+                      page === 'admin-section' &&
+                      adminSection === (role === 'trainer' ? 'trainer-clients' : 'bar-sales')
+                        ? 'active'
+                        : ''
+                    }
+                    onClick={() => openModule(role === 'trainer' ? 'trainer-clients' : 'bar-sales')}
+                  >
+                    {role === 'trainer' ? <Users size={20} /> : <CreditCard size={20} />}
+                    <span>{role === 'trainer' ? 'Мои клиенты' : 'Продажи'}</span>
+                  </button>
+                </>
+              )}
               {role === 'administrator' && (
                 <>
                   <button
@@ -1067,7 +1130,6 @@ export function App() {
                 'notifications',
                 'bar',
                 'cash',
-                'statistics',
                 'employees',
                 'clubs',
                 'directories',
