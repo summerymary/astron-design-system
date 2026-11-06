@@ -341,7 +341,6 @@ export function AdminOverview({
                             <Avatar member={member} />
                             <span>
                               <strong>{member.name}</strong>
-                              <small>Клиент #{member.id}</small>
                             </span>
                           </button>
                         </td>
