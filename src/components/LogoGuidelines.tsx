@@ -18,7 +18,7 @@ export function LogoGuidelines() {
               <ClubLogo brand={astronWhiteBrand} />
             </div>
             <div className="logo-demo-caption">
-              <strong>Белый логотип на основном цвете</strong>
+              <strong>Белый логотип на контрастной подложке</strong>
               <p>
                 Светлая версия для контрастной цветной подложки. Логотип хорошо виден, вокруг
                 оставлено свободное место.

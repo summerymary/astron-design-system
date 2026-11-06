@@ -2,21 +2,26 @@ import { useState } from 'react';
 import { ArrowRight, Check, Copy, RotateCcw } from 'lucide-react';
 import { Button, SectionTitle } from './ui';
 import { useTheme } from './ThemeProvider';
-import { contrastRatio, DEFAULT_PRIMARY, normalizeHex, paletteToCss } from '../lib/theme';
-
-const presets = [
-  { name: 'Астрон', color: DEFAULT_PRIMARY },
-  { name: 'Океан', color: '#2563EB' },
-  { name: 'Лес', color: '#16825D' },
-  { name: 'Солнце', color: '#F6C445' },
-  { name: 'Графит', color: '#111111' },
-];
+import {
+  contrastRatio,
+  DEFAULT_PRIMARY,
+  normalizeHex,
+  paletteToCss,
+  THEME_PRESETS,
+} from '../lib/theme';
 
 export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void }) {
   const { palette, setPrimary } = useTheme();
   const [draft, setDraft] = useState(palette.primary);
   const [error, setError] = useState('');
   const colors = palette.tokens;
+  const swatches = [
+    { label: 'Главный', value: colors['--color-action'] },
+    { label: 'Дополнительный', value: colors['--color-accent'] },
+    { label: 'Подписи', value: colors['--color-muted'] },
+    { label: 'Фон', value: colors['--color-canvas'] },
+    { label: 'Границы', value: colors['--color-control-border'] },
+  ];
   const apply = (value: string) => {
     const hex = normalizeHex(value);
     if (!hex) {
@@ -46,8 +51,8 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
         <div className="theme-settings">
           <h3 id="theme-title">Выберите основной цвет</h3>
           <p>
-            Кнопки, выделения, фоны, границы и текст подстроятся автоматически. Результат сразу
-            виден во всём макете.
+            Кнопки, выделения, фоны, границы и текст подстроятся автоматически. Образцы ниже
+            обновятся сразу.
           </p>
           <form
             className="theme-color-form"
@@ -89,7 +94,7 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
             </p>
           )}
           <div className="theme-presets" aria-label="Примеры фирменных цветов">
-            {presets.map((preset) => (
+            {THEME_PRESETS.map((preset) => (
               <button
                 key={preset.name}
                 type="button"
@@ -98,6 +103,27 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
               >
                 <i style={{ background: preset.color }} />
                 {preset.name}
+              </button>
+            ))}
+          </div>
+          <div className="theme-swatch-strip" aria-label="Рассчитанная палитра с HEX">
+            {swatches.map(({ label, value }) => (
+              <button
+                key={label}
+                type="button"
+                aria-label={`Скопировать ${label} ${value}`}
+                onClick={async () => {
+                  try {
+                    await navigator.clipboard.writeText(value);
+                    onNotify(`${value} скопирован`);
+                  } catch {
+                    onNotify(`Цвет: ${value}`);
+                  }
+                }}
+              >
+                <i style={{ background: value }} />
+                <span>{label}</span>
+                <code>{value}</code>
               </button>
             ))}
           </div>
@@ -112,7 +138,8 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
             </Button>
           </div>
           <p className="theme-session-note">
-            Выбор действует до обновления страницы. Логотип клуба сохраняет свои цвета.
+            Цвет сохраняется в ссылке. Кнопка «Открыть прототип» покажет приложение в выбранной
+            теме.
           </p>
         </div>
         <div className="theme-preview" aria-label="Образец новой палитры">
@@ -135,13 +162,13 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
           </Button>
           <dl className="theme-result" aria-live="polite">
             <div>
-              <dt>Цвет для кнопок</dt>
-              <dd>{colors['--color-accent']}</dd>
+              <dt>Цвет главной кнопки</dt>
+              <dd>{colors['--color-action']}</dd>
             </div>
             <div>
               <dt>Контраст текста кнопки</dt>
               <dd>
-                {contrastRatio(colors['--color-on-accent'], colors['--color-accent']).toFixed(2)}:1
+                {contrastRatio(colors['--color-on-action'], colors['--color-action']).toFixed(2)}:1
               </dd>
             </div>
             <div>
@@ -156,9 +183,11 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
       <p className="theme-adjustment" role="status">
         {palette.primary === DEFAULT_PRIMARY
           ? 'Используется исходная палитра «Астрона» с бордовым акцентом и серо-зелёными подписями.'
-          : palette.adjusted
-            ? `Выбран ${palette.primary}. Для кнопок подобран ${colors['--color-accent']}, чтобы белый текст и выделения оставались хорошо видны.`
-            : `Выбран ${palette.primary}. Этот цвет подходит для кнопок без дополнительного изменения яркости.`}
+          : palette.appearance === 'citrus'
+            ? `Яркий лайм ${palette.primary} сочетается с холодным графитовым ${colors['--color-accent']}. На главной кнопке — тёмный текст, в подписях и фонах — спокойные холодные оттенки.`
+            : palette.adjusted
+              ? `Выбран ${palette.primary}. Для кнопок подобран ${colors['--color-accent']}, чтобы белый текст и выделения оставались хорошо видны.`
+              : `Выбран ${palette.primary}. Этот цвет подходит для кнопок без дополнительного изменения яркости.`}
       </p>
       <div className="theme-rules">
         <div>
@@ -178,8 +207,8 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
         <div>
           <strong>Как сохраняется читаемость</strong>
           <p>
-            Для обычного текста проверяется контраст от 4,5:1, для границ полей — от 3:1. Слишком
-            светлый цвет кнопок затемняется.
+            Для обычного текста проверяется контраст от 4,5:1, для границ полей — от 3:1. На ярком
+            лайме используется тёмный текст, на тёмных кнопках — белый.
           </p>
         </div>
       </div>

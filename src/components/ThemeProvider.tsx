@@ -9,12 +9,23 @@ const ThemeContext = createContext<{
 } | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [palette, setPalette] = useState(() => generatePalette(DEFAULT_PRIMARY));
+  const [palette, setPalette] = useState(() => {
+    const input = new URLSearchParams(window.location.search).get('theme');
+    try {
+      return generatePalette(input ?? DEFAULT_PRIMARY);
+    } catch {
+      return generatePalette(DEFAULT_PRIMARY);
+    }
+  });
   const value = useMemo(
     () => ({ palette, setPrimary: (hex: string) => setPalette(generatePalette(hex)) }),
     [palette],
   );
   useLayoutEffect(() => {
+    const url = new URL(window.location.href);
+    if (palette.primary === DEFAULT_PRIMARY) url.searchParams.delete('theme');
+    else url.searchParams.set('theme', palette.primary.slice(1));
+    window.history.replaceState(null, '', url);
     const root = document.documentElement;
     const previous = Object.keys(palette.tokens).map((name) => [
       name,
@@ -26,11 +37,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.style.setProperty('--select-chevron', arrow);
     const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
     const oldMeta = meta?.content;
-    if (meta) meta.content = palette.tokens['--color-accent'];
+    if (meta) meta.content = palette.tokens['--color-action'];
     const icon = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
     const oldIcon = icon?.getAttribute('href');
     if (icon && palette.primary !== DEFAULT_PRIMARY) {
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><title>Астрон</title><rect width="64" height="64" rx="18" fill="${palette.tokens['--color-accent']}"/><text x="32" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#ffffff">А</text></svg>`;
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><title>Астрон</title><rect width="64" height="64" rx="18" fill="${palette.tokens['--color-action']}"/><text x="32" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="${palette.tokens['--color-on-action']}">А</text></svg>`;
       icon.href = `data:image/svg+xml,${encodeURIComponent(svg)}`;
     }
     return () => {
