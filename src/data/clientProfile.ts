@@ -2,16 +2,16 @@ import { memberCards, memberDemographics } from './admin';
 import type { Member } from '../types';
 
 export const clientTabs = [
-  { id: 'subscriptions', label: 'Абонементы' },
-  { id: 'info', label: 'Инфо' },
+  { id: 'info', label: 'Обзор' },
   { id: 'visits', label: 'Посещения' },
-  { id: 'finances', label: 'Финансы' },
+  { id: 'subscriptions', label: 'Абонементы' },
   { id: 'comments', label: 'Комментарии' },
-  { id: 'actions', label: 'Действия' },
+  { id: 'actions', label: 'Активность' },
+  { id: 'messages', label: 'Переписка' },
+  { id: 'finances', label: 'Финансы' },
   { id: 'bookings', label: 'Предзапись' },
   { id: 'reviews', label: 'Отзывы' },
   { id: 'calls', label: 'Звонки' },
-  { id: 'messages', label: 'Переписка' },
 ] as const;
 export type ClientTabId = (typeof clientTabs)[number]['id'];
 export type SubscriptionStatus = 'active' | 'expired' | 'pending' | 'paused';

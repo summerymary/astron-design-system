@@ -8,9 +8,11 @@ import type { Member } from '../types';
 export function ClientSearch({
   members,
   onMember,
+  mode = 'profile',
 }: {
   members: Member[];
   onMember: (member: Member) => void;
+  mode?: 'profile' | 'selection';
 }) {
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
@@ -48,7 +50,7 @@ export function ClientSearch({
     <form
       ref={root}
       role="search"
-      aria-label="Быстрый поиск клиента"
+      aria-label={mode === 'profile' ? 'Быстрый поиск клиента' : 'Поиск клиента для посещения'}
       className={`quick-card client-search ${invalid ? 'quick-card-error' : ''}`}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
@@ -73,7 +75,9 @@ export function ClientSearch({
     >
       <Search size={18} aria-hidden="true" />
       <label className="sr-only" htmlFor={`${id}-input`}>
-        Карта, ФИО или телефон клиента
+        {mode === 'profile'
+          ? 'Карта, ФИО или телефон клиента'
+          : 'Клиент для посещения: карта, ФИО или телефон'}
       </label>
       <input
         ref={input}
@@ -133,8 +137,8 @@ export function ClientSearch({
         <CornerDownLeft size={16} />
       </button>
       <span className="sr-only" id={`${id}-help`}>
-        Введите номер карты, ФИО или телефон. Стрелки — выбор, Enter — открыть карточку, Escape —
-        закрыть список.
+        Введите номер карты, ФИО или телефон. Стрелки — выбор, Enter —{' '}
+        {mode === 'profile' ? 'открыть карточку' : 'выбрать клиента'}, Escape — закрыть список.
       </span>
       {visible && (
         <div className="client-search-dropdown">
@@ -174,7 +178,9 @@ export function ClientSearch({
             </p>
           )}
           <p className="client-search-help">
-            Поиск открывает карточку. Посещение оформляется отдельно.
+            {mode === 'profile'
+              ? 'Поиск открывает карточку. Посещение оформляется отдельно.'
+              : 'Выбор клиента не создаёт посещение. Для этого нужна кнопка подтверждения.'}
           </p>
         </div>
       )}

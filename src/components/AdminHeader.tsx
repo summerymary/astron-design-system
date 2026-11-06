@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ClubLogo } from './ClubLogo';
 import { ClientSearch } from './ClientSearch';
+import { useWorkspace } from './WorkspaceProvider';
 import type { Member } from '../types';
 import {
   ChevronDown,
@@ -8,7 +9,7 @@ import {
   Plus,
   PhoneIncoming,
   ShieldCheck,
-  Star,
+  Bell,
   UserRound,
   CupSoda,
   X,
@@ -33,7 +34,9 @@ export function AdminHeader({
   name: string;
 }) {
   const [open, setOpen] = useState(false);
-  const [callsEnabled, setCallsEnabled] = useState(false);
+  const { data } = useWorkspace();
+  const newLeads = data.leads.filter((row) => row.stage === 'Новая').length;
+  const unread = data.notifications.filter((row) => row.status === 'Новое').length;
   const workplace = workstations.find((w) => w.id === workstationId)!;
   const club = demoClubs.find((c) => c.id === workplace.clubId)!;
   return (
@@ -104,11 +107,10 @@ export function AdminHeader({
       </div>
       <div className="admin-header-indicators">
         <button
-          className={`icon-button header-call-button ${callsEnabled ? 'calls-enabled' : ''}`}
-          aria-label="Уведомления о звонках"
-          aria-pressed={callsEnabled}
-          title="Уведомления о звонках"
-          onClick={() => setCallsEnabled(!callsEnabled)}
+          className="icon-button header-call-button"
+          aria-label="Журнал звонков"
+          title="Журнал звонков"
+          onClick={() => onAction('calls')}
         >
           <PhoneIncoming size={16} />
         </button>
@@ -117,22 +119,31 @@ export function AdminHeader({
           <span>Всё работает</span>
         </span>
         <button
-          aria-label="Онлайн-заявки: 1"
+          aria-label={`Онлайн-заявки: ${newLeads}`}
           className="header-inbox"
           onClick={() => onAction('requests')}
         >
           <span>Заявки</span>
-          <b>1</b>
+          <b>{newLeads}</b>
         </button>
         <button className="icon-button" aria-label="Сообщения" onClick={() => onAction('messages')}>
           <MessageSquare size={16} />
         </button>
-        <button className="icon-button" aria-label="Отзывы" onClick={() => onAction('reviews')}>
-          <Star size={16} />
+        <button
+          className="icon-button"
+          aria-label={`Уведомления: ${unread} новых`}
+          onClick={() => onAction('notifications')}
+        >
+          <Bell size={16} />
         </button>
-        <span className="admin-user-avatar" title={`${name} · Администратор`} aria-label={name}>
+        <button
+          className="admin-user-avatar"
+          title={`${name} · Администратор`}
+          aria-label={`Мой профиль: ${name}`}
+          onClick={() => onAction('settings')}
+        >
           <UserRound size={17} />
-        </span>
+        </button>
       </div>
     </div>
   );

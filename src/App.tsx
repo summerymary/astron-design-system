@@ -16,6 +16,16 @@ import {
   Smartphone,
   Users,
   X,
+  Menu,
+  ContactRound,
+  CreditCard,
+  MessageSquare,
+  Phone,
+  Settings2,
+  BarChart3,
+  CupSoda,
+  Library,
+  BriefcaseBusiness,
 } from 'lucide-react';
 import { Button, Modal, StateContent, Toast } from './components/ui';
 import { AdminHeader } from './components/AdminHeader';
@@ -26,6 +36,8 @@ import { classes, initialMembers, pages, scenarios } from './data/mock';
 import { demoClubs, demoNetworks, demoUsers, roleHomes, roles } from './data/roles';
 import { initialProfileBookings } from './data/profileBookings';
 import { useTheme } from './components/ThemeProvider';
+import { useWorkspace } from './components/WorkspaceProvider';
+import { LinkCards } from './components/WorkspaceUI';
 import { Members } from './pages/Members';
 import { AdminOverview } from './pages/AdminOverview';
 import { AdminSection } from './pages/AdminSection';
@@ -37,6 +49,21 @@ const navigation = [
   { id: 'overview' as const, label: 'Ресепшен', icon: LayoutDashboard },
   { id: 'members' as const, label: 'Клиенты', icon: Users },
 ];
+const workNavigation = [
+  { id: 'schedule', label: 'Расписание', icon: CalendarDays },
+  { id: 'memberships', label: 'Абонементы', icon: CreditCard },
+  { id: 'crm', label: 'CRM', icon: ContactRound },
+  { id: 'registration', label: 'Посещения', icon: Check },
+  { id: 'calls', label: 'Звонки', icon: Phone },
+  { id: 'messages', label: 'Сообщения', icon: MessageSquare },
+  { id: 'bar', label: 'Бар', icon: CupSoda },
+] as const;
+const managementNavigation = [
+  { id: 'statistics', label: 'Статистика', icon: BarChart3 },
+  { id: 'employees', label: 'Персонал', icon: BriefcaseBusiness },
+  { id: 'directories', label: 'Справочники', icon: Library },
+  { id: 'service-settings', label: 'Настройки', icon: Settings2 },
+] as const;
 
 function initialOptions() {
   const [path, query] = window.location.hash.replace('#/', '').split('?');
@@ -63,6 +90,7 @@ function initialOptions() {
 
 export function App() {
   const { palette } = useTheme();
+  const workspace = useWorkspace();
   const guideHref = `./design-system.html?theme=${palette.primary.slice(1)}`;
   const [options] = useState(initialOptions);
   const [page, setPage] = useState<Page>(options.page);
@@ -70,6 +98,7 @@ export function App() {
   const [scenario, setScenario] = useState<Scenario>(options.scenario);
   const [role, setRole] = useState<UserRole>(options.role);
   const [members, setMembers] = useState<Member[]>(initialMembers);
+  const [resetVersion, setResetVersion] = useState(0);
   const [visits, setVisits] = useState<Visit[]>(initialVisits);
   const [workstationId, setWorkstationId] = useState('central-01');
   const [adminSection, setAdminSection] = useState<AdminSectionId>(options.section);
@@ -83,6 +112,7 @@ export function App() {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [toast, setToast] = useState('');
   const [mobileStateOpen, setMobileStateOpen] = useState(false);
+  const [sectionsOpen, setSectionsOpen] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const contentRef = useRef<HTMLElement>(null);
   const currentRole = roles.find((r) => r.id === role)!;
@@ -184,7 +214,7 @@ export function App() {
   const closeClass = useCallback(() => setSelectedClass(null), []);
   const openMember = (member: Member) => {
     if (!currentRole.canViewMembers) return;
-    if (page !== 'client-profile') setMemberReturnPage(page === 'members' ? 'members' : 'overview');
+    if (page !== 'client-profile') setMemberReturnPage(page);
     setSelectedMemberId(member.id);
     setScenario('default');
     goTo('client-profile');
@@ -193,6 +223,17 @@ export function App() {
     setRegistrationMemberId(member ? String(member.id) : '');
     setRegistrationKind('gym');
     setModal('registration');
+  };
+  const openModule = (section: AdminSectionId) => {
+    if (section === 'members') {
+      goTo('members');
+      return;
+    }
+    setAdminSection(section);
+    setSectionMember(null);
+    setSectionsOpen(false);
+    setScenario('default');
+    goTo('admin-section');
   };
   const openAdminAction = (section: AdminSectionId, member?: Member) => {
     if (role !== 'administrator') return;
@@ -210,12 +251,9 @@ export function App() {
     setScenario('default');
     goTo('admin-section');
   };
-  const registerVisit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const createVisit = (member: Member, kind: VisitKind) => {
     if (role !== 'administrator') return;
-    const member = members.find((m) => String(m.id) === registrationMemberId);
-    if (!member) return;
-    const time = new Date(Date.UTC(2026, 10, 1, 14, 35 + visits.length - initialVisits.length))
+    const time = new Date(Date.UTC(2026, 10, 6, 14, 35 + visits.length - initialVisits.length))
       .toISOString()
       .slice(0, 16);
     const visit: Visit = {
@@ -223,18 +261,36 @@ export function App() {
       memberId: member.id,
       card: memberCards[member.id] ?? String(member.id + 99000),
       enteredAt: time,
-      kind: registrationKind,
+      kind,
       plan: member.plan,
       clubId: workstation.clubId,
     };
     setVisits((prev) => [visit, ...prev]);
+    workspace.put('logs', {
+      id: `log-${visit.id}`,
+      name: 'Регистрация посещения',
+      memberId: String(member.id),
+      date: time,
+      user: currentUser.name,
+      service: 'Посещения',
+      type: 'Действия',
+      request: 'DEMO',
+      status: 'Выполнено',
+      description: 'Посещение зарегистрировано после явного подтверждения.',
+    });
     setMembers((prev) =>
       prev.map((m) => (m.id === member.id ? { ...m, visits: m.visits + 1 } : m)),
     );
+    notify(`Посещение зарегистрировано · ${member.name}`);
+  };
+  const registerVisit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const member = members.find((m) => String(m.id) === registrationMemberId);
+    if (!member) return;
+    createVisit(member, registrationKind);
     setModal(null);
     setScenario('default');
     goTo('overview');
-    notify(`Посещение зарегистрировано · ${member.name}`);
   };
   const addMember = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -261,6 +317,8 @@ export function App() {
     notify(`${name} — клиент добавлен`);
   };
   const reset = () => {
+    workspace.reset();
+    setResetVersion((value) => value + 1);
     setMembers(initialMembers);
     setVisits(initialVisits);
     setScenario('default');
@@ -475,6 +533,41 @@ export function App() {
                 </button>
               ))}
             </nav>
+            {role === 'administrator' && (
+              <nav className="side-nav ws-module-nav" aria-label="Рабочие разделы">
+                {workNavigation.map((n) => (
+                  <button
+                    key={n.id}
+                    aria-current={
+                      page === 'admin-section' && adminSection === n.id ? 'page' : undefined
+                    }
+                    className={page === 'admin-section' && adminSection === n.id ? 'active' : ''}
+                    onClick={() => openModule(n.id)}
+                  >
+                    <n.icon size={18} strokeWidth={1.75} />
+                    {n.label}
+                  </button>
+                ))}
+                <span className="nav-label ws-nav-separator">УПРАВЛЕНИЕ</span>
+                {managementNavigation.map((n) => (
+                  <button
+                    key={n.id}
+                    aria-current={
+                      page === 'admin-section' && adminSection === n.id ? 'page' : undefined
+                    }
+                    className={page === 'admin-section' && adminSection === n.id ? 'active' : ''}
+                    onClick={() => openModule(n.id)}
+                  >
+                    <n.icon size={18} strokeWidth={1.75} />
+                    {n.label}
+                  </button>
+                ))}
+                <button onClick={() => setSectionsOpen(true)}>
+                  <Menu size={18} />
+                  Все разделы
+                </button>
+              </nav>
+            )}
             <div className="sidebar-bottom">
               <div className="sandbox-card">
                 <span>
@@ -573,12 +666,12 @@ export function App() {
                 </>
               )}
             </header>
-            <main className="app-content" ref={contentRef} id="main-content">
+            <main className="app-content" ref={contentRef} id="main-content" key={resetVersion}>
               {page !== 'client-profile' && (
                 <div className="page-heading">
                   <div>
                     <div className="page-eyebrow">
-                      {`${currentRole.label.toUpperCase()} / 1 НОЯБРЯ 2026`}
+                      {`${currentRole.label.toUpperCase()} / 6 НОЯБРЯ 2026`}
                     </div>
                     <h1>
                       {currentPage.title}
@@ -590,7 +683,7 @@ export function App() {
                     {page === 'overview' && role === 'administrator' && (
                       <span className="date-chip">
                         <CalendarDays size={15} />
-                        Сегодня, 1 ноября
+                        Сегодня, 6 ноября
                       </span>
                     )}
                     {(page === 'overview' || page === 'members') && currentRole.canAddMembers && (
@@ -615,6 +708,11 @@ export function App() {
                     onBack={() => goTo(memberReturnPage)}
                     onRegistration={() => openRegistration(selectedMember)}
                     onAction={(id) => openAdminAction(id, selectedMember)}
+                    onUpdate={(updated) =>
+                      setMembers((previous) =>
+                        previous.map((member) => (member.id === updated.id ? updated : member)),
+                      )
+                    }
                   />
                 ) : (
                   <div className="empty-state">
@@ -627,11 +725,13 @@ export function App() {
                 <StateContent
                   scenario={scenario}
                   onAdd={() =>
-                    role === 'administrator' && page === 'overview'
-                      ? openRegistration()
-                      : currentRole.canAddMembers
-                        ? setModal('add')
-                        : setScenario('default')
+                    page === 'admin-section'
+                      ? setScenario('default')
+                      : role === 'administrator' && page === 'overview'
+                        ? openRegistration()
+                        : currentRole.canAddMembers
+                          ? setModal('add')
+                          : setScenario('default')
                   }
                   onReset={() => setScenario('default')}
                   emptyState={
@@ -650,15 +750,27 @@ export function App() {
                               ? 'Добавить клиента'
                               : 'Показать демоданные',
                           }
-                        : undefined
+                        : page === 'admin-section'
+                          ? {
+                              title: 'В этом разделе пока нет записей',
+                              description: 'Записи появятся после начала работы с разделом.',
+                              actionLabel: 'Показать демоданные',
+                            }
+                          : undefined
                   }
                 />
               ) : page === 'admin-section' ? (
                 <AdminSection
+                  key={adminSection}
                   section={adminSection}
                   member={sectionMember}
+                  members={members}
+                  clubName={club.name}
+                  employeeName={currentUser.name}
+                  navigate={openModule}
+                  onMember={openMember}
+                  onRegister={createVisit}
                   onBack={() => goTo('overview')}
-                  onMembers={() => goTo('members')}
                 />
               ) : page === 'overview' ? (
                 role !== 'administrator' ? (
@@ -702,6 +814,23 @@ export function App() {
                   <span>{n.id === 'overview' ? 'Главная' : n.label}</span>
                 </button>
               ))}
+              {role === 'administrator' && (
+                <>
+                  <button
+                    className={
+                      page === 'admin-section' && adminSection === 'schedule' ? 'active' : ''
+                    }
+                    onClick={() => openModule('schedule')}
+                  >
+                    <CalendarDays size={20} />
+                    <span>Расписание</span>
+                  </button>
+                  <button aria-expanded={sectionsOpen} onClick={() => setSectionsOpen(true)}>
+                    <Menu size={20} />
+                    <span>Все разделы</span>
+                  </button>
+                </>
+              )}
             </nav>
           </div>
         </div>
@@ -726,14 +855,11 @@ export function App() {
               />
             </label>
             <label className="form-field">
-              <span>
-                Email <em>*</em>
-              </span>
+              <span>Email</span>
               <input
                 name="email"
                 type="email"
                 placeholder="anna@example.com"
-                required
                 maxLength={120}
                 autoComplete="email"
               />
@@ -886,6 +1012,36 @@ export function App() {
         </Modal>
       )}
       {toast && <Toast message={toast} />}
+      {sectionsOpen && (
+        <Modal title="Все разделы" onClose={() => setSectionsOpen(false)}>
+          <div className="ws-stack">
+            <LinkCards
+              ids={[
+                'schedule',
+                'memberships',
+                'registration',
+                'crm',
+                'calls',
+                'messages',
+                'notifications',
+                'bar',
+                'cash',
+                'statistics',
+                'employees',
+                'clubs',
+                'directories',
+                'cameras',
+                'rbac',
+                'security',
+                'event-logs',
+                'settings',
+                'service-settings',
+              ]}
+              navigate={openModule}
+            />
+          </div>
+        </Modal>
+      )}
     </>
   );
 }

@@ -181,3 +181,25 @@
     gap: 20px 16px;
   }
 }
+
+.ds-work-rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+}
+.ds-work-rules article {
+  padding: var(--ds-card-padding);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+.ds-work-rules h3 {
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.ds-work-rules p {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--color-muted);
+}
