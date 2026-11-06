@@ -182,7 +182,7 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
       </div>
       <p className="theme-adjustment" role="status">
         {palette.primary === DEFAULT_PRIMARY
-          ? 'Палитра «Астрона»: тёплый бордовый, графитовый текст, белые карточки и спокойный светло-серый фон. Серо-зелёные подписи сохраняют читаемость.'
+          ? 'Палитра «Астрона»: тёплый бордовый, графитовый текст, белые карточки и едва тёплый белый фон. Серо-зелёные подписи сохраняют читаемость.'
           : palette.appearance === 'citrus'
             ? `Яркий лайм ${palette.primary} сочетается с холодным графитовым ${colors['--color-accent']}. На главной кнопке — тёмный текст, в подписях и фонах — спокойные холодные оттенки.`
             : palette.adjusted
