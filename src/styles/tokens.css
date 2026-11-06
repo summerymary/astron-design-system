@@ -7,6 +7,11 @@
   --color-accent-soft-hover: #eedbd2;
   --color-accent-line: #d7b0a2;
   --color-on-accent: #ffffff;
+  --color-action: #8a332c;
+  --color-action-hover: #722820;
+  --color-action-pressed: #5b1f19;
+  --color-action-border: #8a332c;
+  --color-on-action: #ffffff;
   --color-ink: #302723;
   --color-text: #53453f;
   --color-muted: #606a5c;

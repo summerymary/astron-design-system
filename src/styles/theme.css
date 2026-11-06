@@ -93,6 +93,55 @@
   gap: 8px;
   margin: 24px 0 12px;
 }
+.theme-swatch-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 20px;
+}
+.theme-swatch-strip button {
+  min-width: 0;
+  padding: 0 0 8px;
+  text-align: left;
+  background: transparent;
+  border-radius: 8px;
+}
+.theme-swatch-strip i {
+  display: block;
+  height: 30px;
+  border-radius: 7px;
+  border: 1px solid var(--color-line);
+  margin-bottom: 8px;
+}
+.theme-swatch-strip span {
+  display: block;
+  font-size: 9px;
+  color: var(--color-muted);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.theme-swatch-strip code {
+  display: block;
+  font-size: 10px;
+  line-height: 1.8;
+}
+.button-primary,
+.page-actions .button-primary,
+.palette-action-demo {
+  background: var(--color-action);
+  color: var(--color-on-action);
+  border: 1px solid var(--color-action-border);
+}
+.button-primary:not(:disabled):hover,
+.page-actions .button-primary:not(:disabled):hover {
+  background: var(--color-action-hover);
+  border-color: var(--color-action-border);
+}
+.button-primary:not(:disabled):active,
+.page-actions .button-primary:not(:disabled):active {
+  background: var(--color-action-pressed);
+  border-color: var(--color-action-border);
+}
 .theme-session-note {
   font-size: 11px !important;
 }
@@ -208,6 +257,10 @@
   }
 }
 @container (max-width: 700px) {
+  .theme-swatch-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
   .theme-editor {
     gap: 20px;
   }
