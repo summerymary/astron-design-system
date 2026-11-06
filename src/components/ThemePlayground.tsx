@@ -25,7 +25,7 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
   const apply = (value: string) => {
     const hex = normalizeHex(value);
     if (!hex) {
-      setError('Введите HEX из 3 или 6 символов: например, #8A332C.');
+      setError('Введите HEX из 3 или 6 символов: например, #7A263A.');
       return;
     }
     setPrimary(hex);
@@ -182,7 +182,7 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
       </div>
       <p className="theme-adjustment" role="status">
         {palette.primary === DEFAULT_PRIMARY
-          ? 'Используется исходная палитра «Астрона» с бордовым акцентом и серо-зелёными подписями.'
+          ? 'Палитра «Астрона»: глубокий бордовый, графитовый текст, белые карточки и спокойный светло-серый фон. Серо-зелёные подписи сохраняют читаемость.'
           : palette.appearance === 'citrus'
             ? `Яркий лайм ${palette.primary} сочетается с холодным графитовым ${colors['--color-accent']}. На главной кнопке — тёмный текст, в подписях и фонах — спокойные холодные оттенки.`
             : palette.adjusted

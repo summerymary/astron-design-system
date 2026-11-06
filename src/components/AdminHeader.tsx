@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { ClubLogo } from './ClubLogo';
+import { ClientSearch } from './ClientSearch';
+import type { Member } from '../types';
 import {
   ChevronDown,
-  CornerDownLeft,
-  CreditCard,
   MessageSquare,
   Plus,
   PhoneIncoming,
@@ -20,20 +20,19 @@ import type { AdminSectionId } from '../data/admin';
 export function AdminHeader({
   workstationId,
   onWorkstation,
-  onCard,
+  members,
+  onMember,
   onAction,
-  cardError,
   name,
 }: {
   workstationId: string;
   onWorkstation: (id: string) => void;
-  onCard: (card: string) => void;
+  members: Member[];
+  onMember: (member: Member) => void;
   onAction: (id: AdminSectionId) => void;
-  cardError: string;
   name: string;
 }) {
   const [open, setOpen] = useState(false);
-  const [card, setCard] = useState('');
   const [callsEnabled, setCallsEnabled] = useState(false);
   const workplace = workstations.find((w) => w.id === workstationId)!;
   const club = demoClubs.find((c) => c.id === workplace.clubId)!;
@@ -92,36 +91,7 @@ export function AdminHeader({
           </>
         )}
       </div>
-      <form
-        className={`quick-card ${cardError ? 'quick-card-error' : ''}`}
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (card.trim()) onCard(card.trim());
-        }}
-      >
-        <CreditCard size={19} />
-        <label className="sr-only" htmlFor="quick-card">
-          Номер карты клиента
-        </label>
-        <input
-          id="quick-card"
-          inputMode="numeric"
-          placeholder="Номер карты клиента"
-          value={card}
-          onChange={(e) => setCard(e.target.value)}
-          aria-invalid={!!cardError}
-          aria-describedby={cardError ? 'quick-card-error' : 'quick-card-help'}
-        />
-        <button type="submit" aria-label="Открыть карточку по карте" title="Открыть карточку">
-          <CornerDownLeft size={16} />
-        </button>
-        <span
-          className="quick-card-tooltip"
-          id={cardError ? 'quick-card-error' : 'quick-card-help'}
-        >
-          {cardError || 'Пример карты: 100001 · Enter — карточка клиента'}
-        </span>
-      </form>
+      <ClientSearch key={workstationId} members={members} onMember={onMember} />
       <div className="admin-header-actions">
         <button className="header-visit-action" onClick={() => onAction('registration')}>
           <Plus size={15} />

@@ -65,7 +65,7 @@ export function AdminQuickLinks({ onAction }: { onAction: (id: AdminSectionId) =
       <div className="quick-card-note">
         <CreditCard size={19} />
         <strong>Клиент уже у стойки?</strong>
-        <p>Введите номер карты в шапке — откроется его карточка с доступными действиями.</p>
+        <p>Найдите клиента по карте, ФИО или телефону в шапке и откройте его карточку.</p>
         <span>
           Демокарта <b>100001</b>
         </span>
