@@ -13,12 +13,13 @@ import {
 } from 'lucide-react';
 import { Button, Modal } from './ui';
 import { adminSections } from '../data/admin';
+import type { Member } from '../types';
 import type { AdminSectionId } from '../data/admin';
 import type { DemoRecord, Field, Resource } from '../data/workspace';
 import { money, prettyDate } from '../data/workspace';
 import { demoId, useWorkspace } from './WorkspaceProvider';
 
-export type Navigate = (section: AdminSectionId) => void;
+export type Navigate = (section: AdminSectionId, member?: Member) => void;
 export function Tabs({
   items,
   value,

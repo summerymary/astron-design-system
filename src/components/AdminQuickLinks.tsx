@@ -5,10 +5,8 @@ import {
   Sparkles,
   Users,
   ShoppingBag,
-  Dumbbell,
   Wallet,
   ChevronRight,
-  ContactRound,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { adminSections } from '../data/admin';
@@ -19,9 +17,7 @@ const shortcuts = [
   { id: 'services', icon: Sparkles },
   { id: 'members', icon: Users },
   { id: 'products', icon: ShoppingBag },
-  { id: 'collagen', icon: Dumbbell },
   { id: 'cash', icon: Wallet },
-  { id: 'crm', icon: ContactRound },
 ] satisfies { id: AdminSectionId; icon: LucideIcon }[];
 export function AdminQuickLinks({ onAction }: { onAction: (id: AdminSectionId) => void }) {
   const [shortcutsExpanded, setShortcutsExpanded] = useState(false);
