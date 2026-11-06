@@ -16,10 +16,14 @@ import {
 import { Avatar, Badge, Button, SectionTitle } from '../components/ui';
 import { initialMembers } from '../data/mock';
 import { LogoGuidelines } from '../components/LogoGuidelines';
+import { ThemePlayground } from '../components/ThemePlayground';
+import { useTheme } from '../components/ThemeProvider';
+import { contrastRatio } from '../lib/theme';
+import type { ThemeToken } from '../lib/theme';
 
 const palette = [
   {
-    name: 'Бордовый',
+    name: 'Основной акцент',
     description: 'Главные кнопки и выбранные разделы',
     token: '--color-accent',
     dark: true,
@@ -66,32 +70,17 @@ const palette = [
     token: '--color-control-border',
     dark: true,
   },
-];
+] as const;
 const semanticPalette = [
   { name: 'Успех', token: '--color-success', className: 'semantic-success' },
   { name: 'Внимание', token: '--color-warning', className: 'semantic-warning' },
   { name: 'Ошибка', token: '--color-danger', className: 'semantic-danger' },
   { name: 'Информация', token: '--color-info', className: 'semantic-info' },
-];
-const themeColor = (token: string) =>
-  getComputedStyle(document.documentElement).getPropertyValue(token).trim().toUpperCase();
-function contrastRatio(foreground: string, background: string) {
-  const luminance = (hex: string) => {
-    const channels = hex
-      .replace('#', '')
-      .match(/.{2}/g)!
-      .map((channel) => {
-        const value = parseInt(channel, 16) / 255;
-        return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
-      });
-    return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
-  };
-  const a = luminance(foreground),
-    b = luminance(background);
-  return ((Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05)).toFixed(1);
-}
+] as const;
 
 export function DesignSystem({ onNotify }: { onNotify: (text: string) => void }) {
+  const { palette: theme } = useTheme();
+  const themeColor = (token: ThemeToken) => theme.tokens[token];
   const [category, setCategory] = useState('foundations');
   const [toggle, setToggle] = useState(true);
   const [checked, setChecked] = useState(true);
@@ -135,6 +124,7 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
       {category === 'branding' && <LogoGuidelines />}
       {category === 'foundations' && (
         <>
+          <ThemePlayground onNotify={onNotify} />
           <section className="ds-section">
             <SectionTitle
               title="Цвета"
@@ -177,8 +167,8 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                 </span>
                 <h3>Главная кнопка</h3>
                 <p>
-                  Бордовый используется для главного действия и выбранного раздела. Спокойный
-                  светлый фон помогает читать данные.
+                  Рабочий оттенок основного цвета используется для главного действия и выбранного
+                  раздела. Спокойный светлый фон помогает читать данные.
                 </p>
               </div>
               <div>
@@ -194,14 +184,21 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
               </div>
               <div>
                 <span className="palette-contrast-demo">
-                  {contrastRatio(themeColor('--color-on-accent'), themeColor('--color-accent'))}:1
+                  {contrastRatio(
+                    themeColor('--color-on-accent'),
+                    themeColor('--color-accent'),
+                  ).toFixed(1)}
+                  :1
                 </span>
                 <h3>Читаемый текст</h3>
                 <p>
-                  Контраст белого текста на бордовом. Вторичный текст на белом —{' '}
-                  {contrastRatio(themeColor('--color-muted'), themeColor('--color-surface'))}:1. Чем
-                  выше это число, тем лучше различимы текст и фон. При переходе клавишей Tab вокруг
-                  кнопки или поля появляется рамка.
+                  Контраст белого текста на основном цвете кнопок. Вторичный текст на белом —{' '}
+                  {contrastRatio(
+                    themeColor('--color-muted'),
+                    themeColor('--color-surface'),
+                  ).toFixed(1)}
+                  :1. Чем выше это число, тем лучше различимы текст и фон. При переходе клавишей Tab
+                  вокруг кнопки или поля появляется рамка.
                 </p>
                 <a
                   href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
