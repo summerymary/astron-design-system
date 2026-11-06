@@ -14,6 +14,7 @@ const {
   paletteToCss,
   ASTRON_TOKENS,
   DEFAULT_PRIMARY,
+  THEME_PRESETS,
 } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
 assert.equal(normalizeHex(' #abc '), '#AABBCC');
 assert.equal(normalizeHex('606a5c'), '#606A5C');
@@ -49,9 +50,8 @@ const inputs = [
   '#FFFF00',
   '#00FFFF',
   '#FF00FF',
+  ...THEME_PRESETS.filter((p) => p.color !== DEFAULT_PRIMARY).map((p) => p.color),
   '#F6C445',
-  '#2563EB',
-  '#16825D',
 ];
 let seed = 48271;
 for (let i = 0; i < 1000; i++) {
@@ -68,6 +68,16 @@ for (const input of inputs) {
   assert.deepEqual(generatePalette(input), result, `${input}: deterministic`);
   for (const value of Object.values(t)) assert.match(value, /^#[0-9A-F]{6}$/);
   for (const key of semantic) assert.equal(t[key], ASTRON_TOKENS[key]);
+  for (const key of ['--color-action', '--color-action-hover', '--color-action-pressed']) {
+    assert.ok(
+      contrastRatio(t[key], t['--color-on-action']) >= 4.5,
+      `${input}: button text on ${key}`,
+    );
+    assert.ok(
+      contrastRatio(t[key], t['--color-action-border']) >= 3 || result.appearance === 'standard',
+      `${input}: citrus button edge`,
+    );
+  }
   const surfaces = [
     '--color-surface',
     '--color-canvas',
@@ -96,6 +106,11 @@ for (const input of inputs) {
   );
   assert.ok(paletteToCss(result).includes(`--color-accent: ${t['--color-accent']};`));
 }
+const lime = generatePalette('#F0FC03');
+assert.equal(lime.appearance, 'citrus');
+assert.equal(lime.tokens['--color-action'], '#F0FC03');
+assert.equal(lime.tokens['--color-accent'], '#243341');
+assert.equal(lime.tokens['--color-on-action'], '#243341');
 console.log(
   `Theme checks passed: exact Astron defaults, input validation, ${inputs.length} palettes, text/control contrast, states, fixed statuses and CSS export.`,
 );
