@@ -2,6 +2,9 @@ import { useMemo, useState } from 'react';
 import { ArrowDown, ArrowUpRight, Search, SlidersHorizontal, Users, X } from 'lucide-react';
 import type { Member, MemberStatus } from '../types';
 import { Avatar, Badge, Button } from '../components/ui';
+import { Status, Tabs } from '../components/WorkspaceUI';
+import { memberCards } from '../data/admin';
+import { searchMembers } from '../lib/member-search';
 
 export function Members({
   members,
@@ -17,6 +20,8 @@ export function Members({
   const [plan, setPlan] = useState('all');
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [ascending, setAscending] = useState(true);
+  const [view, setView] = useState('Контакты');
+  const [clientState, setClientState] = useState('Активные клиенты');
   const filtered = useMemo(
     () =>
       members
@@ -24,12 +29,16 @@ export function Members({
           (m) =>
             (filter === 'all' || m.status === filter) &&
             (plan === 'all' || m.plan === plan) &&
-            `${m.name} ${m.email} ${m.phone} ${m.id}`.toLowerCase().includes(query.toLowerCase()),
+            (clientState === 'Все клиенты' ||
+              (clientState === 'В архиве' ? m.archived : !m.archived)) &&
+            (!query.trim() ||
+              searchMembers([m], memberCards, query).length > 0 ||
+              m.email.toLowerCase().includes(query.toLowerCase())),
         )
         .sort((a, b) =>
           ascending ? a.name.localeCompare(b.name, 'ru') : b.name.localeCompare(a.name, 'ru'),
         ),
-    [members, query, filter, plan, ascending],
+    [members, query, filter, plan, ascending, clientState],
   );
   const tabs = [
     { id: 'all', title: 'Все клиенты' },
@@ -57,27 +66,37 @@ export function Members({
         </div>
       </div>
       <section className="panel clients-panel">
-        <div className="clients-tabs" aria-label="Статус клиента">
-          {tabs.map((t) => (
-            <button
-              key={t.id}
-              aria-pressed={filter === t.id}
-              className={filter === t.id ? 'selected' : ''}
-              onClick={() => setFilter(t.id)}
-            >
-              {t.title}
-              <span>
-                {t.id === 'all' ? members.length : members.filter((m) => m.status === t.id).length}
-              </span>
-            </button>
-          ))}
-        </div>
+        <Tabs
+          items={['Контакты', 'Абонементы']}
+          value={view}
+          onChange={setView}
+          label="Вид клиентской базы"
+        />
+        {view === 'Абонементы' && (
+          <div className="clients-tabs" aria-label="Статус абонемента">
+            {tabs.map((t) => (
+              <button
+                key={t.id}
+                aria-pressed={filter === t.id}
+                className={filter === t.id ? 'selected' : ''}
+                onClick={() => setFilter(t.id)}
+              >
+                {t.title}
+                <span>
+                  {t.id === 'all'
+                    ? members.length
+                    : members.filter((m) => m.status === t.id).length}
+                </span>
+              </button>
+            ))}
+          </div>
+        )}
         <div className="table-toolbar">
           <label className="search-field">
             <Search size={17} />
             <input
               aria-label="Поиск клиентов"
-              placeholder="Поиск по имени, телефону или email"
+              placeholder="ФИО, телефон, email или карта"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
@@ -99,6 +118,15 @@ export function Members({
             <SlidersHorizontal size={15} />
             Фильтры{plan !== 'all' && <span className="filter-dot" />}
           </Button>
+          <select
+            aria-label="Статус клиента"
+            value={clientState}
+            onChange={(event) => setClientState(event.target.value)}
+          >
+            <option>Активные клиенты</option>
+            <option>Все клиенты</option>
+            <option>В архиве</option>
+          </select>
         </div>
         {filtersOpen && (
           <div className="extra-filters">
@@ -136,10 +164,22 @@ export function Members({
                         />
                       </button>
                     </th>
-                    <th>Абонемент</th>
-                    <th>Статус</th>
-                    <th>Действует до</th>
-                    <th>Посещения</th>
+                    {view === 'Контакты' ? (
+                      <>
+                        <th>Телефон</th>
+                        <th>Email</th>
+                        <th>Карта</th>
+                        <th>Статус клиента</th>
+                        <th>Теги</th>
+                      </>
+                    ) : (
+                      <>
+                        <th>Абонемент</th>
+                        <th>Статус абонемента</th>
+                        <th>Действует до</th>
+                        <th>Посещения</th>
+                      </>
+                    )}
                     <th>
                       <span className="sr-only">Открыть</span>
                     </th>
@@ -153,16 +193,32 @@ export function Members({
                           <Avatar member={m} />
                           <span>
                             <strong>{m.name}</strong>
-                            <small>{m.email}</small>
+                            {view === 'Абонементы' && <small>{m.email}</small>}
                           </span>
                         </button>
                       </td>
-                      <td>{m.plan}</td>
-                      <td>
-                        <Badge status={m.status} />
-                      </td>
-                      <td>{m.expires}</td>
-                      <td>{m.visits}</td>
+                      {view === 'Контакты' ? (
+                        <>
+                          <td>{m.phone}</td>
+                          <td>{m.email || '—'}</td>
+                          <td>
+                            <code>{memberCards[m.id] || String(m.id + 99000)}</code>
+                          </td>
+                          <td>
+                            <Status>{m.archived ? 'В архиве' : 'Активен'}</Status>
+                          </td>
+                          <td>{m.tags || '—'}</td>
+                        </>
+                      ) : (
+                        <>
+                          <td>{m.plan}</td>
+                          <td>
+                            <Badge status={m.status} />
+                          </td>
+                          <td>{m.expires}</td>
+                          <td>{m.visits}</td>
+                        </>
+                      )}
                       <td>
                         <button
                           className="icon-button"
@@ -183,11 +239,13 @@ export function Members({
                   <Avatar member={m} />
                   <span>
                     <strong>{m.name}</strong>
-                    <small>
-                      {m.plan} · до {m.expires}
-                    </small>
+                    <small>{view === 'Контакты' ? m.phone : `${m.plan} · до ${m.expires}`}</small>
                   </span>
-                  <Badge status={m.status} />
+                  {view === 'Контакты' ? (
+                    <Status>{m.archived ? 'В архиве' : 'Активен'}</Status>
+                  ) : (
+                    <Badge status={m.status} />
+                  )}
                 </button>
               ))}
             </div>
@@ -203,6 +261,7 @@ export function Members({
                 setQuery('');
                 setPlan('all');
                 setFilter('all');
+                setClientState('Все клиенты');
               }}
             >
               Сбросить фильтры

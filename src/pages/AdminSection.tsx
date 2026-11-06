@@ -1,44 +1,118 @@
-import { ArrowLeft, ArrowUpRight, CalendarDays, PanelRightOpen } from 'lucide-react';
 import { Button } from '../components/ui';
+import { ResourcePage, SectionLinks } from '../components/WorkspaceUI';
+import type { Navigate } from '../components/WorkspaceUI';
+import { resources } from '../data/workspace';
 import { adminSections } from '../data/admin';
 import type { AdminSectionId } from '../data/admin';
-import type { Member } from '../types';
+import type { Member, VisitKind } from '../types';
+import {
+  BarWorkspace,
+  CashWorkspace,
+  InventoryWorkspace,
+  MembershipWorkspace,
+  RegistrationWorkspace,
+  SaleWorkspace,
+  ScheduleWorkspace,
+  StatisticsWorkspace,
+} from './WorkspaceOperations';
+import { CRMWorkspace, MessagesWorkspace, NotificationsWorkspace } from './WorkspaceCRM';
+import {
+  CamerasWorkspace,
+  DirectoriesWorkspace,
+  EventLogsWorkspace,
+  PayrollWorkspace,
+  PreferencesWorkspace,
+  RolesWorkspace,
+  SecurityWorkspace,
+} from './WorkspaceSystem';
 
 export function AdminSection({
   section,
   member,
+  members,
+  clubName,
+  employeeName,
+  navigate,
+  onMember,
+  onRegister,
   onBack,
-  onMembers,
 }: {
   section: AdminSectionId;
   member: Member | null;
+  members: Member[];
+  clubName: string;
+  employeeName: string;
+  navigate: Navigate;
+  onMember: (member: Member) => void;
+  onRegister: (member: Member, kind: VisitKind) => void;
   onBack: () => void;
-  onMembers: () => void;
 }) {
-  const info = adminSections.find((s) => s.id === section)!;
+  if (resources[section])
+    return (
+      <ResourcePage
+        key={section}
+        collection={section}
+        config={resources[section]}
+        navigate={navigate}
+      />
+    );
+  if (section === 'schedule')
+    return <ScheduleWorkspace members={members} navigate={navigate} clubName={clubName} />;
+  if (section === 'memberships') return <MembershipWorkspace navigate={navigate} />;
+  if (section === 'registration')
+    return (
+      <RegistrationWorkspace
+        members={members}
+        initialMember={member}
+        clubName={clubName}
+        onRegister={onRegister}
+        onMember={onMember}
+      />
+    );
+  if (section === 'services')
+    return (
+      <SaleWorkspace
+        members={members}
+        initialMember={member}
+        navigate={navigate}
+        clubName={clubName}
+      />
+    );
+  if (section === 'statistics') return <StatisticsWorkspace />;
+  if (section === 'bar') return <BarWorkspace navigate={navigate} clubName={clubName} />;
+  if (section === 'cash') return <CashWorkspace navigate={navigate} />;
+  if (section === 'inventory') return <InventoryWorkspace navigate={navigate} />;
+  if (['crm', 'leads', 'requests', 'segments', 'pipelines', 'retention'].includes(section))
+    return <CRMWorkspace key={section} section={section} navigate={navigate} />;
+  if (section === 'messages' || section === 'external-messages')
+    return (
+      <MessagesWorkspace
+        key={section}
+        external={section === 'external-messages'}
+        navigate={navigate}
+      />
+    );
+  if (section === 'notifications') return <NotificationsWorkspace navigate={navigate} />;
+  if (section === 'directories') return <DirectoriesWorkspace navigate={navigate} />;
+  if (section === 'payroll') return <PayrollWorkspace navigate={navigate} />;
+  if (section === 'rbac') return <RolesWorkspace />;
+  if (section === 'security') return <SecurityWorkspace navigate={navigate} />;
+  if (section === 'event-logs') return <EventLogsWorkspace />;
+  if (section === 'cameras') return <CamerasWorkspace />;
+  if (['settings', 'service-settings', 'schedule-calendar'].includes(section))
+    return <PreferencesWorkspace key={section} section={section} name={employeeName} />;
   return (
-    <section className="panel admin-section-placeholder">
-      <span className="section-preview-icon">
-        {section === 'schedule' ? <CalendarDays size={30} /> : <PanelRightOpen size={30} />}
-      </span>
-      <span className="eyebrow">СЛЕДУЮЩИЙ ЭКРАН</span>
-      <h2>{info.label}</h2>
-      <p>Дизайн и функции этого раздела будут разработаны на следующем этапе.</p>
-      {member && (
-        <span className="section-member-context">
-          Клиент: <strong>{member.name}</strong>
-        </span>
-      )}
-      <div>
-        <Button variant="secondary" onClick={onBack}>
-          <ArrowLeft size={15} />
-          На главную
-        </Button>
-        <Button onClick={onMembers}>
-          Открыть клиентов
-          <ArrowUpRight size={15} />
-        </Button>
-      </div>
+    <section className="panel ws-panel-body ws-stack">
+      <h2>{adminSections.find((value) => value.id === section)?.label}</h2>
+      <p>
+        {section === 'reviews'
+          ? 'Ссылка на отзывы в новом источнике возвращает ошибку 404. Состав страницы будет уточнён.'
+          : 'В новом источнике этот раздел недоступен. Его экраны будут разработаны после уточнения требований.'}
+      </p>
+      <SectionLinks ids={['directories', 'crm']} navigate={navigate} />
+      <Button variant="secondary" onClick={onBack}>
+        На главную
+      </Button>
     </section>
   );
 }

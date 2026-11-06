@@ -19,6 +19,8 @@ import {
   Wallet,
 } from 'lucide-react';
 import { Avatar, Badge, Button, Modal, StateContent } from '../components/ui';
+import { demoId, useWorkspace } from '../components/WorkspaceProvider';
+import { DataTable, RecordForm, Stats } from '../components/WorkspaceUI';
 import { AdminQuickLinks } from '../components/AdminQuickLinks';
 import { clientTabs, getClientProfile } from '../data/clientProfile';
 import type { ClientTabId, SubscriptionStatus } from '../data/clientProfile';
@@ -70,6 +72,7 @@ export function ClientProfile({
   onBack,
   onRegistration,
   onAction,
+  onUpdate,
 }: {
   member: Member;
   visits: Visit[];
@@ -80,9 +83,34 @@ export function ClientProfile({
   onBack: () => void;
   onRegistration: () => void;
   onAction: (id: AdminSectionId) => void;
+  onUpdate: (member: Member) => void;
 }) {
+  const { data, put } = useWorkspace();
   const profile = getClientProfile(member);
-  const [tab, setTab] = useState<ClientTabId>('subscriptions');
+  (data['issued-plans'] || [])
+    .filter((row) => row.memberId === String(member.id))
+    .forEach((row) =>
+      profile.subscriptions.unshift({
+        id: row.id,
+        name: row.name,
+        used: 0,
+        remaining: row.type === 'Безлимитный' ? null : Number(row.visits),
+        boughtAt: row.issued.split('-').reverse().join('.'),
+        activatedAt: null,
+        endsAt: null,
+        status: 'pending',
+      }),
+    );
+  const [tab, setTab] = useState<ClientTabId>('info');
+  const [form, setForm] = useState<'edit' | 'comment' | null>(null);
+  const closeForm = useCallback(() => setForm(null), []);
+  const clientSales = data.ledger.filter(
+    (row) => row.memberId === String(member.id) || row.client === member.name,
+  );
+  const notes = (data.comments || []).filter((row) => row.memberId === String(member.id));
+  const eventBookings = data.events.filter((row) =>
+    (row.attendees || '').split(',').includes(String(member.id)),
+  );
   const [filter, setFilter] = useState('all');
   const [phoneVisible, setPhoneVisible] = useState(false);
   const [previewAction, setPreviewAction] = useState<string | null>(null);
@@ -171,7 +199,9 @@ export function ClientProfile({
                           key={action}
                           onClick={(e) => {
                             e.currentTarget.closest('details')?.removeAttribute('open');
-                            setPreviewAction(action);
+                            if (action === 'Редактировать данные') setForm('edit');
+                            else if (action === 'Добавить комментарий') setForm('comment');
+                            else setPreviewAction(action);
                           }}
                         >
                           {action}
@@ -424,6 +454,29 @@ export function ClientProfile({
                   )}
                   {tab === 'info' && (
                     <div className="client-info-groups">
+                      <section className="ws-client-overview">
+                        <Stats
+                          items={[
+                            {
+                              label: 'Оплачено в демопримерах',
+                              value: money(
+                                clientSales.reduce((sum, row) => sum + Number(row.amount), 0),
+                              ),
+                            },
+                            { label: 'Продажи', value: clientSales.length },
+                            {
+                              label: 'Статус клиента',
+                              value: member.archived ? 'В архиве' : 'Активен',
+                            },
+                          ]}
+                        />
+                        <p className="ws-muted">Теги: {member.tags || 'Не добавлены'}</p>
+                        {canOperate && (
+                          <Button variant="secondary" onClick={() => setForm('edit')}>
+                            Редактировать сведения
+                          </Button>
+                        )}
+                      </section>
                       <section>
                         <h3>Контакты и профиль</h3>
                         <dl>
@@ -518,6 +571,20 @@ export function ClientProfile({
                         description="История операций по лицевому счёту будет отображаться здесь."
                       />
                     ))}
+                  {tab === 'finances' && !!clientSales.length && (
+                    <div className="ws-panel-body">
+                      <h3>Покупки в прототипе</h3>
+                      <DataTable
+                        rows={clientSales}
+                        columns={[
+                          { key: 'name', label: 'Услуга' },
+                          { key: 'date', label: 'Дата' },
+                          { key: 'amount', label: 'Сумма' },
+                          { key: 'method', label: 'Оплата' },
+                        ]}
+                      />
+                    </div>
+                  )}
                   {tab === 'comments' &&
                     (profile.note ? (
                       <div className="client-comment">
@@ -535,10 +602,40 @@ export function ClientProfile({
                         description="Здесь будут заметки сотрудников о клиенте."
                       />
                     ))}
+                  {tab === 'comments' && (
+                    <div className="ws-panel-body ws-stack">
+                      {notes.map((row) => (
+                        <div className="client-comment" key={row.id}>
+                          <div>
+                            <strong>
+                              Александра Крылова <small>Сегодня</small>
+                            </strong>
+                            <p>{row.text}</p>
+                          </div>
+                        </div>
+                      ))}
+                      {canOperate && (
+                        <Button variant="secondary" onClick={() => setForm('comment')}>
+                          <Plus size={14} />
+                          Добавить заметку
+                        </Button>
+                      )}
+                    </div>
+                  )}
                   {tab === 'actions' && (
-                    <EmptyTab
-                      title="Журнал действий ещё не заполнен"
-                      description="Здесь будет история изменений карточки. Состав записей будет определён на следующем этапе."
+                    <DataTable
+                      rows={data.logs.filter((row) => row.memberId === String(member.id))}
+                      columns={[
+                        { key: 'date', label: 'Время' },
+                        { key: 'name', label: 'Действие' },
+                        { key: 'user', label: 'Сотрудник' },
+                      ]}
+                      empty={
+                        <EmptyTab
+                          title="Действий пока нет"
+                          description="Изменения карточки и новые посещения появятся здесь."
+                        />
+                      }
                     />
                   )}
                   {tab === 'bookings' &&
@@ -570,6 +667,20 @@ export function ClientProfile({
                       description="Отзывы клиента будут собраны в этом разделе."
                     />
                   )}
+                  {tab === 'bookings' && !!eventBookings.length && (
+                    <div className="ws-panel-body">
+                      <h3>Новые записи из расписания</h3>
+                      <DataTable
+                        rows={eventBookings}
+                        columns={[
+                          { key: 'name', label: 'Занятие' },
+                          { key: 'day', label: 'Дата' },
+                          { key: 'time', label: 'Начало' },
+                          { key: 'room', label: 'Зал' },
+                        ]}
+                      />
+                    </div>
+                  )}
                   {tab === 'calls' && (
                     <EmptyTab
                       title="Звонков пока нет"
@@ -577,10 +688,30 @@ export function ClientProfile({
                     />
                   )}
                   {tab === 'messages' && (
-                    <EmptyTab
-                      title="Переписка пока не начата"
-                      description="Здесь будут сообщения и история общения с клиентом."
-                    />
+                    <div className="ws-panel-body ws-stack">
+                      {data.chats
+                        .filter((row) => row.name === member.name)
+                        .map((row) => (
+                          <div className="ws-chat-history" key={row.id}>
+                            {row.messages.split('\n').map((line, index) => (
+                              <p
+                                key={index}
+                                className={line.startsWith('Клуб:') ? 'from-club' : ''}
+                              >
+                                {line}
+                              </p>
+                            ))}
+                          </div>
+                        ))}
+                      {!data.chats.some((row) => row.name === member.name) && (
+                        <p>Переписка пока не начата.</p>
+                      )}
+                      {canOperate && (
+                        <Button variant="secondary" onClick={() => onAction('messages')}>
+                          Открыть очередь сообщений
+                        </Button>
+                      )}
+                    </div>
                   )}
                 </>
               )}
@@ -605,6 +736,67 @@ export function ClientProfile({
             </Button>
           </div>
         </Modal>
+      )}
+      {form === 'comment' && (
+        <RecordForm
+          title="Новая заметка"
+          fields={[
+            { key: 'text', label: 'Комментарий для сотрудников', type: 'textarea', required: true },
+          ]}
+          onClose={closeForm}
+          onSave={(record) => {
+            put('comments', { ...record, memberId: String(member.id) });
+            closeForm();
+            setTab('comments');
+          }}
+        />
+      )}
+      {form === 'edit' && (
+        <RecordForm
+          title="Сведения о клиенте"
+          fields={[
+            { key: 'name', label: 'Имя и фамилия', required: true },
+            { key: 'fullName', label: 'Полное ФИО' },
+            { key: 'phone', label: 'Телефон', type: 'tel' },
+            { key: 'email', label: 'Email', type: 'email' },
+            { key: 'tags', label: 'Теги через запятую' },
+            { key: 'clientState', label: 'Статус клиента', options: ['Активен', 'В архиве'] },
+          ]}
+          initial={{
+            id: String(member.id),
+            name: member.name,
+            fullName: member.fullName || member.name,
+            phone: member.phone,
+            email: member.email,
+            tags: member.tags || '',
+            clientState: member.archived ? 'В архиве' : 'Активен',
+          }}
+          onClose={closeForm}
+          onSave={(record) => {
+            onUpdate({
+              ...member,
+              name: record.name,
+              fullName: record.fullName,
+              phone: record.phone,
+              email: record.email,
+              tags: record.tags,
+              archived: record.clientState === 'В архиве',
+            });
+            put('logs', {
+              id: demoId('log'),
+              name: 'Изменение карточки клиента',
+              memberId: String(member.id),
+              date: '2026-11-06T14:40',
+              user: 'Александра Крылова',
+              service: 'Клиенты',
+              type: 'Аудит',
+              request: 'DEMO',
+              status: 'Выполнено',
+              description: 'Изменены демонстрационные сведения клиента.',
+            });
+            closeForm();
+          }}
+        />
       )}
     </div>
   );
