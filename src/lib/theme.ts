@@ -1,4 +1,4 @@
-export const DEFAULT_PRIMARY = '#8A332C';
+export const DEFAULT_PRIMARY = '#7A263A';
 export const THEME_PRESETS = [
   { name: 'Астрон', color: DEFAULT_PRIMARY },
   { name: 'Глубокий синий', color: '#173B70' },
@@ -9,29 +9,29 @@ export const THEME_PRESETS = [
 
 // Keep the established Astron palette exact; tokens.css is its first-paint fallback.
 export const ASTRON_TOKENS = {
-  '--color-accent': '#8A332C',
-  '--color-accent-hover': '#722820',
-  '--color-accent-pressed': '#5B1F19',
-  '--color-accent-soft': '#F6EBE6',
-  '--color-accent-soft-hover': '#EEDBD2',
-  '--color-accent-line': '#D7B0A2',
+  '--color-accent': '#7A263A',
+  '--color-accent-hover': '#631D2F',
+  '--color-accent-pressed': '#4D1524',
+  '--color-accent-soft': '#F6EDF0',
+  '--color-accent-soft-hover': '#EEDDE3',
+  '--color-accent-line': '#CDA5B2',
   '--color-on-accent': '#FFFFFF',
-  '--color-action': '#8A332C',
-  '--color-action-hover': '#722820',
-  '--color-action-pressed': '#5B1F19',
-  '--color-action-border': '#8A332C',
+  '--color-action': '#7A263A',
+  '--color-action-hover': '#631D2F',
+  '--color-action-pressed': '#4D1524',
+  '--color-action-border': '#7A263A',
   '--color-on-action': '#FFFFFF',
-  '--color-ink': '#302723',
-  '--color-text': '#53453F',
+  '--color-ink': '#181C24',
+  '--color-text': '#3D4652',
   '--color-muted': '#606A5C',
   '--color-subtle': '#606A5C',
-  '--color-canvas': '#F8F5F2',
-  '--color-stage': '#EFEAE5',
+  '--color-canvas': '#F4F5F7',
+  '--color-stage': '#E8EBEF',
   '--color-surface': '#FFFFFF',
-  '--color-surface-subtle': '#FCFAF8',
-  '--color-surface-muted': '#F2EDE8',
-  '--color-line': '#E5DCD4',
-  '--color-control-border': '#96857B',
+  '--color-surface-subtle': '#FAFBFC',
+  '--color-surface-muted': '#EDF0F3',
+  '--color-line': '#DCE1E7',
+  '--color-control-border': '#7C8794',
   '--color-success': '#276444',
   '--color-success-bg': '#EAF4EE',
   '--color-warning': '#83520D',
@@ -42,9 +42,9 @@ export const ASTRON_TOKENS = {
   '--color-info-bg': '#EEF2F8',
   '--color-paused': '#6B547E',
   '--color-paused-bg': '#F3EEF6',
-  '--color-chart': '#B16B59',
-  '--color-skeleton': '#E5DCD4',
-  '--color-skeleton-highlight': '#F8F4F0',
+  '--color-chart': '#A75E74',
+  '--color-skeleton': '#DCE1E7',
+  '--color-skeleton-highlight': '#F7F8FA',
 };
 
 export type ThemeToken = keyof typeof ASTRON_TOKENS;
@@ -66,7 +66,7 @@ export function normalizeHex(input: string): string | null {
 
 function linearChannels(hex: string) {
   const normalized = normalizeHex(hex);
-  if (!normalized) throw new Error('Нужен цвет в формате HEX, например #8A332C.');
+  if (!normalized) throw new Error('Нужен цвет в формате HEX, например #7A263A.');
   return [1, 3, 5].map((i) => {
     const value = parseInt(normalized.slice(i, i + 2), 16) / 255;
     return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
@@ -148,7 +148,7 @@ function readableTone(color: Lch, backgrounds: string[], minimum: number) {
 
 export function generatePalette(input: string): ThemePalette {
   const primary = normalizeHex(input);
-  if (!primary) throw new Error('Нужен цвет в формате HEX, например #8A332C.');
+  if (!primary) throw new Error('Нужен цвет в формате HEX, например #7A263A.');
   if (primary === DEFAULT_PRIMARY)
     return { primary, adjusted: false, appearance: 'standard', tokens: { ...ASTRON_TOKENS } };
   const source = toLch(primary);
