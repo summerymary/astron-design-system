@@ -23,9 +23,9 @@ import type { ThemeToken } from '../lib/theme';
 
 const palette = [
   {
-    name: 'Основной акцент',
-    description: 'Главные кнопки и выбранные разделы',
-    token: '--color-accent',
+    name: 'Главное действие',
+    description: 'Главные кнопки и их состояния',
+    token: '--color-action',
     dark: true,
   },
   {
@@ -140,7 +140,7 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                   aria-label={`Скопировать цвет ${c.name} ${c.value}`}
                 >
                   <span
-                    className={`color-swatch ${c.dark ? 'swatch-dark' : ''}`}
+                    className={`color-swatch ${contrastRatio('#FFFFFF', c.value) >= 4.5 ? 'swatch-dark' : ''}`}
                     style={{ background: c.value }}
                   >
                     <Copy size={15} />
@@ -167,8 +167,8 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                 </span>
                 <h3>Главная кнопка</h3>
                 <p>
-                  Рабочий оттенок основного цвета используется для главного действия и выбранного
-                  раздела. Спокойный светлый фон помогает читать данные.
+                  Главные кнопки используют фирменный цвет или его читаемый оттенок. Для яркого
+                  лайма предусмотрен тёмный текст и графитовый дополнительный цвет.
                 </p>
               </div>
               <div>
@@ -185,14 +185,14 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
               <div>
                 <span className="palette-contrast-demo">
                   {contrastRatio(
-                    themeColor('--color-on-accent'),
-                    themeColor('--color-accent'),
+                    themeColor('--color-on-action'),
+                    themeColor('--color-action'),
                   ).toFixed(1)}
                   :1
                 </span>
                 <h3>Читаемый текст</h3>
                 <p>
-                  Контраст белого текста на основном цвете кнопок. Вторичный текст на белом —{' '}
+                  Контраст текста на главной кнопке. Вторичный текст на белом —{' '}
                   {contrastRatio(
                     themeColor('--color-muted'),
                     themeColor('--color-surface'),
