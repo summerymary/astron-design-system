@@ -1,28 +1,28 @@
 /* Edit these tokens to update the entire prototype and its component library. */
 :root {
-  --color-accent: #8a332c;
-  --color-accent-hover: #722820;
-  --color-accent-pressed: #5b1f19;
-  --color-accent-soft: #f6ebe6;
-  --color-accent-soft-hover: #eedbd2;
-  --color-accent-line: #d7b0a2;
+  --color-accent: #7a263a;
+  --color-accent-hover: #631d2f;
+  --color-accent-pressed: #4d1524;
+  --color-accent-soft: #f6edf0;
+  --color-accent-soft-hover: #eedde3;
+  --color-accent-line: #cda5b2;
   --color-on-accent: #ffffff;
-  --color-action: #8a332c;
-  --color-action-hover: #722820;
-  --color-action-pressed: #5b1f19;
-  --color-action-border: #8a332c;
+  --color-action: #7a263a;
+  --color-action-hover: #631d2f;
+  --color-action-pressed: #4d1524;
+  --color-action-border: #7a263a;
   --color-on-action: #ffffff;
-  --color-ink: #302723;
-  --color-text: #53453f;
+  --color-ink: #181c24;
+  --color-text: #3d4652;
   --color-muted: #606a5c;
   --color-subtle: var(--color-muted);
-  --color-canvas: #f8f5f2;
-  --color-stage: #efeae5;
+  --color-canvas: #f4f5f7;
+  --color-stage: #e8ebef;
   --color-surface: #ffffff;
-  --color-surface-subtle: #fcfaf8;
-  --color-surface-muted: #f2ede8;
-  --color-line: #e5dcd4;
-  --color-control-border: #96857b;
+  --color-surface-subtle: #fafbfc;
+  --color-surface-muted: #edf0f3;
+  --color-line: #dce1e7;
+  --color-control-border: #7c8794;
   --color-success: #276444;
   --color-success-bg: #eaf4ee;
   --color-warning: #83520d;
@@ -33,9 +33,9 @@
   --color-info-bg: #eef2f8;
   --color-paused: #6b547e;
   --color-paused-bg: #f3eef6;
-  --color-chart: #b16b59;
-  --color-skeleton: #e5dcd4;
-  --color-skeleton-highlight: #f8f4f0;
+  --color-chart: #a75e74;
+  --color-skeleton: #dce1e7;
+  --color-skeleton-highlight: #f7f8fa;
   --table-record-row-height: 40px;
   --table-record-padding-y: 3px;
   --table-record-avatar-size: 24px;
@@ -52,5 +52,5 @@
   --radius-control: 10px;
   --radius-card: 16px;
   --radius-pill: 999px;
-  --shadow-popup: 0 16px 56px #30272316;
+  --shadow-popup: 0 16px 56px #181c2416;
 }
