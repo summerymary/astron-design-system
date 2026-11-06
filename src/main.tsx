@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './App';
 import { ThemeProvider } from './components/ThemeProvider';
+import { WorkspaceProvider } from './components/WorkspaceProvider';
 import './styles/tokens.css';
 import './styles/app.css';
 import './styles/roles.css';
@@ -13,6 +14,7 @@ import './styles/disclosures.css';
 import './styles/theme.css';
 import './styles/guide.css';
 import './styles/client-search.css';
+import './styles/workspace.css';
 
 function redirectLegacyGuide() {
   if (!/^#\/design-system(?:\?|$)/.test(window.location.hash)) return false;
@@ -24,7 +26,9 @@ if (!redirectLegacyGuide())
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <ThemeProvider>
-        <App />
+        <WorkspaceProvider>
+          <App />
+        </WorkspaceProvider>
       </ThemeProvider>
     </React.StrictMode>,
   );

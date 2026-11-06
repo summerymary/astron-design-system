@@ -58,4 +58,6 @@ export interface Member {
   expires: string;
   visits: number;
   color: string;
+  archived?: boolean;
+  tags?: string;
 }
