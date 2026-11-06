@@ -143,11 +143,13 @@ export const initialVisits: Visit[] = [
 
 export const adminSections = [
   { id: 'schedule', label: 'Расписание', caption: 'Занятия и записи' },
+  { id: 'trainer-clients', label: 'Мои клиенты', caption: 'Персональные тренировки и заметки' },
+  { id: 'bar-catalog', label: 'Каталог бара', caption: 'Напитки, цены и остатки' },
+  { id: 'bar-sales', label: 'Продажи бара', caption: 'История заказов выбранного клуба' },
   { id: 'registration', label: 'Регистрация посещения', caption: 'Выбрать клиента' },
   { id: 'services', label: 'Продажа услуг', caption: 'Абонементы и тренировки' },
   { id: 'members', label: 'Клиенты', caption: 'База и карточки клиентов' },
   { id: 'products', label: 'Продажа товаров', caption: 'Товары и аксессуары' },
-  { id: 'collagen', label: 'Коллагенарий', caption: 'Сеансы и запись' },
   { id: 'cash', label: 'Касса', caption: 'Операции смены' },
   { id: 'crm', label: 'CRM', caption: 'Работа с клиентами' },
   { id: 'bar', label: 'Бар', caption: 'Заказы и товары бара' },
