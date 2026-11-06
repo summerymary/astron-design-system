@@ -1,3 +1,4 @@
+import { ScheduleWorkspace } from './ScheduleWorkspace';
 import { Button } from '../components/ui';
 import { ResourcePage, SectionLinks } from '../components/WorkspaceUI';
 import type { Navigate } from '../components/WorkspaceUI';
@@ -12,7 +13,6 @@ import {
   MembershipWorkspace,
   RegistrationWorkspace,
   SaleWorkspace,
-  ScheduleWorkspace,
   StatisticsWorkspace,
 } from './WorkspaceOperations';
 import { CRMWorkspace, MessagesWorkspace, NotificationsWorkspace } from './WorkspaceCRM';
