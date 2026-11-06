@@ -1,4 +1,11 @@
 export const DEFAULT_PRIMARY = '#8A332C';
+export const THEME_PRESETS = [
+  { name: 'Астрон', color: DEFAULT_PRIMARY },
+  { name: 'Глубокий синий', color: '#173B70' },
+  { name: 'Тёмный лес', color: '#164B3B' },
+  { name: 'Лайм', color: '#F0FC03' },
+  { name: 'Графит', color: '#111111' },
+];
 
 // Keep the established Astron palette exact; tokens.css is its first-paint fallback.
 export const ASTRON_TOKENS = {
@@ -9,6 +16,11 @@ export const ASTRON_TOKENS = {
   '--color-accent-soft-hover': '#EEDBD2',
   '--color-accent-line': '#D7B0A2',
   '--color-on-accent': '#FFFFFF',
+  '--color-action': '#8A332C',
+  '--color-action-hover': '#722820',
+  '--color-action-pressed': '#5B1F19',
+  '--color-action-border': '#8A332C',
+  '--color-on-action': '#FFFFFF',
   '--color-ink': '#302723',
   '--color-text': '#53453F',
   '--color-muted': '#606A5C',
@@ -40,6 +52,7 @@ export type ThemeTokens = Record<ThemeToken, string>;
 export interface ThemePalette {
   primary: string;
   adjusted: boolean;
+  appearance: 'standard' | 'citrus';
   tokens: ThemeTokens;
 }
 type Lch = { l: number; c: number; h: number };
@@ -137,17 +150,25 @@ export function generatePalette(input: string): ThemePalette {
   const primary = normalizeHex(input);
   if (!primary) throw new Error('Нужен цвет в формате HEX, например #8A332C.');
   if (primary === DEFAULT_PRIMARY)
-    return { primary, adjusted: false, tokens: { ...ASTRON_TOKENS } };
+    return { primary, adjusted: false, appearance: 'standard', tokens: { ...ASTRON_TOKENS } };
   const source = toLch(primary);
-  const neutralChroma = Math.min(source.c * 0.12, 0.016);
-  const tone = (l: number, c: number) => toHex({ l, c, h: source.h });
-  const soft = tone(0.965, Math.min(source.c * 0.2, 0.028));
-  const softHover = tone(0.94, Math.min(source.c * 0.22, 0.035));
+  const degrees = ((source.h * 180) / Math.PI + 360) % 360;
+  const citrus = source.l > 0.82 && source.c > 0.1 && degrees >= 90 && degrees <= 125;
+  // Bright citrus uses a cool graphite companion instead of muddy olive neutrals.
+  const family = citrus ? toLch('#243341') : source;
+  const neutralChroma = citrus ? 0.015 : Math.min(source.c * 0.12, 0.016);
+  const tone = (l: number, c: number) => toHex({ l, c, h: family.h });
+  const soft = tone(0.965, citrus ? 0.012 : Math.min(source.c * 0.2, 0.028));
+  const softHover = tone(0.94, citrus ? 0.018 : Math.min(source.c * 0.22, 0.035));
   const canvas = tone(0.982, neutralChroma * 0.5);
   const surfaceSubtle = tone(0.993, neutralChroma * 0.25);
   const surfaceMuted = tone(0.96, neutralChroma * 0.7);
   const backgrounds = ['#FFFFFF', soft, softHover, canvas, surfaceSubtle, surfaceMuted];
-  const accent = readableTone({ ...source, l: clamp(source.l, 0.32, 0.82) }, backgrounds, 4.7);
+  const accent = readableTone(
+    { ...family, l: citrus ? family.l : clamp(family.l, 0.32, 0.82) },
+    backgrounds,
+    4.7,
+  );
   const working = toLch(accent);
   const hover = readableTone({ ...working, l: Math.max(0.06, working.l - 0.06) }, backgrounds, 4.7);
   const pressed = readableTone(
@@ -156,17 +177,23 @@ export function generatePalette(input: string): ThemePalette {
     4.7,
   );
   const ink = tone(0.24, neutralChroma);
-  const text = readableTone({ l: 0.37, c: neutralChroma, h: source.h }, backgrounds, 7);
-  const muted = readableTone({ l: 0.51, c: neutralChroma, h: source.h }, backgrounds, 4.7);
+  const text = readableTone({ l: 0.37, c: neutralChroma, h: family.h }, backgrounds, 7);
+  const muted = readableTone({ l: 0.51, c: neutralChroma, h: family.h }, backgrounds, 4.7);
   const line = tone(0.88, neutralChroma * 0.65);
   return {
     primary,
     adjusted: primary !== accent,
+    appearance: citrus ? 'citrus' : 'standard',
     tokens: {
       ...ASTRON_TOKENS,
       '--color-accent': accent,
       '--color-accent-hover': hover,
       '--color-accent-pressed': pressed,
+      '--color-action': citrus ? primary : accent,
+      '--color-action-hover': citrus ? toHex({ ...source, l: source.l - 0.025 }) : hover,
+      '--color-action-pressed': citrus ? toHex({ ...source, l: source.l - 0.05 }) : pressed,
+      '--color-action-border': accent,
+      '--color-on-action': citrus ? accent : '#FFFFFF',
       '--color-accent-soft': soft,
       '--color-accent-soft-hover': softHover,
       '--color-accent-line': tone(0.75, Math.min(source.c * 0.4, 0.07)),
@@ -180,7 +207,7 @@ export function generatePalette(input: string): ThemePalette {
       '--color-surface-muted': surfaceMuted,
       '--color-line': line,
       '--color-control-border': readableTone(
-        { l: 0.62, c: neutralChroma, h: source.h },
+        { l: 0.62, c: neutralChroma, h: family.h },
         backgrounds,
         3.15,
       ),
