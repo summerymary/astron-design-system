@@ -1,0 +1,126 @@
+.staff-welcome {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.staff-welcome h2 {
+  font-size: var(--text-heading-md);
+  margin: 8px 0;
+}
+.staff-welcome p,
+.staff-muted,
+.staff-form-context {
+  color: var(--color-muted);
+}
+.staff-session-list > button {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 24px;
+  width: 100%;
+  background: var(--color-surface);
+  text-align: left;
+  border-top: 1px solid var(--color-line);
+}
+.staff-session-list > button:hover {
+  background: var(--color-surface-subtle);
+}
+.staff-session-list time {
+  font: var(--text-caption) var(--font-mono);
+}
+.staff-session-list > button > span:nth-child(2) {
+  flex: 1;
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.staff-session-list small {
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+.staff-session-list strong {
+  font-size: var(--text-body);
+}
+.staff-clients-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.staff-client-list > button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  gap: 12px;
+  text-align: left;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-line);
+}
+.staff-client-list > button.selected {
+  background: var(--color-accent-soft);
+}
+.staff-client-list > button > span:nth-child(2) {
+  display: grid;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+.staff-client-list strong {
+  font-size: var(--text-body);
+}
+.staff-client-list small {
+  color: var(--color-muted);
+}
+.staff-note {
+  border-top: 1px solid var(--color-line);
+  padding-top: 16px;
+}
+.staff-note > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+}
+.staff-note time {
+  color: var(--color-muted);
+  font-size: var(--text-caption);
+}
+.staff-note p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.6;
+}
+.staff-client-session {
+  display: grid;
+  gap: 5px;
+  border-bottom: 1px solid var(--color-line);
+  padding-bottom: 12px;
+}
+.staff-client-session span {
+  color: var(--color-muted);
+  font-size: var(--text-caption);
+}
+@container workspace (max-width: 850px) {
+  .staff-clients-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .staff-welcome {
+    padding: 18px;
+  }
+  .staff-session-list > button {
+    gap: 10px;
+    padding: 16px;
+    flex-wrap: wrap;
+  }
+  .staff-session-list > button > span:nth-child(2) {
+    min-width: 160px;
+  }
+  .staff-session-list .ws-status {
+    margin-left: auto;
+  }
+}
