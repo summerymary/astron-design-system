@@ -7,7 +7,7 @@
   align-items: center;
   gap: 18px;
   margin-bottom: 22px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .client-back {
@@ -18,7 +18,7 @@
   background: none;
   color: var(--color-text);
   padding: 6px 0;
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .client-page-topline > span > span {
   margin: 0 9px;
@@ -26,7 +26,7 @@
 }
 .client-page-topline .client-demo-label {
   margin-left: auto;
-  font-size: 10px;
+  font-size: var(--text-caption);
   background: var(--color-canvas);
   color: var(--color-text);
   padding: 5px 9px;
@@ -67,7 +67,7 @@
   width: 74px;
   height: 80px;
   border-radius: 16px;
-  font-size: 25px;
+  font-size: var(--text-heading-lg);
   font-weight: 500;
 }
 .client-photo > button {
@@ -89,12 +89,12 @@
   min-width: 200px;
 }
 .client-name-block > .eyebrow {
-  font-size: 9px;
+  font-size: var(--text-caption);
   letter-spacing: 1.3px;
   color: var(--color-muted);
 }
 .client-name-block h1 {
-  font-size: 27px;
+  font-size: var(--text-heading-xl);
   font-weight: 550;
   letter-spacing: -1px;
   line-height: 1.25;
@@ -108,11 +108,11 @@
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-text);
 }
 .client-name-meta > .badge {
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .client-name-meta > span:not(.badge) {
   display: flex;
@@ -121,7 +121,7 @@
 }
 .client-name-meta b {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--text-caption);
   font-weight: 500;
   color: var(--color-text);
 }
@@ -133,7 +133,7 @@
 }
 .client-primary-actions .button {
   min-height: 38px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   padding: 0 12px;
   white-space: nowrap;
 }
@@ -176,7 +176,7 @@
   background: none;
   border: 0;
   text-align: left;
-  font-size: 12px;
+  font-size: var(--text-caption);
   padding: 11px;
   border-radius: 5px;
   color: var(--color-text);
@@ -204,13 +204,13 @@
 }
 .client-contact-facts dt,
 .client-info-groups dt {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-bottom: 8px;
 }
 .client-contact-facts dd {
-  font-size: 12px;
-  line-height: 19px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   margin: 0;
   color: var(--color-ink);
   overflow-wrap: anywhere;
@@ -239,11 +239,11 @@
   align-items: center;
   gap: 7px;
   color: var(--color-text);
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .client-balance > strong {
   display: block;
-  font-size: 26px;
+  font-size: var(--text-heading-xl);
   font-weight: 500;
   letter-spacing: -0.9px;
   margin: 7px 0 9px;
@@ -256,7 +256,7 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-accent);
   background: none;
   border: 0;
@@ -286,7 +286,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .client-context-row .connected {
@@ -297,7 +297,7 @@
   align-items: center;
   gap: 6px;
   color: var(--color-muted);
-  font-size: 10px;
+  font-size: var(--text-caption);
   margin: 0;
 }
 .client-history {
@@ -321,7 +321,7 @@
   border-bottom: 2px solid transparent;
   background: none;
   padding: 18px 0 16px;
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .client-tabs > button[aria-selected='true'] {
@@ -330,7 +330,7 @@
   font-weight: 500;
 }
 .client-tabs > button > span {
-  font-size: 9px;
+  font-size: var(--text-caption);
   border-radius: 4px;
   background: var(--color-accent-soft);
   padding: 2px 5px;
@@ -351,12 +351,12 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 19px;
+  font-size: var(--text-heading-sm);
   font-weight: 550;
   letter-spacing: -0.4px;
 }
 .client-section-heading h2 > span {
-  font-size: 10px;
+  font-size: var(--text-caption);
   font-weight: 400;
   letter-spacing: 0;
   background: var(--color-success-bg);
@@ -365,7 +365,7 @@
   padding: 4px 7px;
 }
 .client-section-heading p {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-top: 7px;
   line-height: 1.6;
@@ -377,7 +377,7 @@
   border: 0;
   background: none;
   color: var(--color-accent);
-  font-size: 11px;
+  font-size: var(--text-caption);
   white-space: nowrap;
 }
 .client-sub-filters {
@@ -395,12 +395,12 @@
   color: var(--color-muted);
   border-radius: 7px;
   padding: 7px 9px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   white-space: nowrap;
 }
 .client-sub-filters > button > span {
   color: inherit;
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .client-sub-filters > button[aria-pressed='true'] {
   background: var(--color-accent-soft);
@@ -422,7 +422,7 @@
 }
 .client-sub-table th,
 .client-simple-table th {
-  font-size: 10px;
+  font-size: var(--text-caption);
   font-weight: 400;
   color: var(--color-muted);
   background: var(--color-surface-subtle);
@@ -434,7 +434,7 @@
 .client-sub-table td,
 .client-simple-table td {
   padding: 20px 13px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   line-height: 1.5;
   border-bottom: 1px solid var(--color-line);
   color: var(--color-text);
@@ -455,13 +455,13 @@
 .client-sub-table td:nth-child(2) > strong {
   display: block;
   color: var(--color-ink);
-  font-size: 12px;
+  font-size: var(--text-caption);
   font-weight: 500;
   line-height: 1.5;
 }
 .client-record-id {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   white-space: nowrap;
 }
@@ -469,7 +469,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-success);
   margin-top: 7px;
 }
@@ -503,7 +503,7 @@
   gap: 10px;
   padding: 15px 23px;
   color: var(--color-muted);
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .client-simple-table {
   min-width: 650px;
@@ -520,7 +520,7 @@
   padding: 0 24px 28px;
 }
 .client-info-groups h3 {
-  font-size: 12px;
+  font-size: var(--text-caption);
   font-weight: 500;
   color: var(--color-text);
   margin: 5px 0 18px;
@@ -541,7 +541,7 @@
   margin: 0;
 }
 .client-info-groups dd {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-text);
   margin: 0;
   line-height: 1.6;
@@ -567,12 +567,12 @@
   margin-bottom: 18px;
 }
 .client-tab-empty h3 {
-  font-size: 15px;
+  font-size: var(--text-body);
   font-weight: 500;
   color: var(--color-text);
 }
 .client-tab-empty p {
-  font-size: 12px;
+  font-size: var(--text-caption);
   line-height: 1.7;
   color: var(--color-muted);
   max-width: 360px;
@@ -591,7 +591,7 @@
 .client-comment-avatar {
   background: var(--color-surface-muted);
   color: var(--color-muted);
-  font-size: 10px;
+  font-size: var(--text-caption);
   border-radius: 8px;
   width: 32px;
   height: 32px;
@@ -602,20 +602,20 @@
 }
 .client-comment strong {
   display: block;
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--color-text);
   font-weight: 500;
 }
 .client-comment small {
   display: block;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   font-weight: 400;
   margin-top: 4px;
 }
 .client-comment p {
   color: var(--color-text);
-  font-size: 12px;
+  font-size: var(--text-caption);
   margin-top: 12px;
   line-height: 1.6;
 }
@@ -636,23 +636,23 @@
   flex: 1;
 }
 .client-bookings strong {
-  font-size: 13px;
+  font-size: var(--text-small);
   font-weight: 500;
   color: var(--color-text);
 }
 .client-bookings small {
   display: block;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-top: 6px;
 }
 .client-bookings b {
-  font-size: 12px;
+  font-size: var(--text-caption);
   font-weight: 500;
   color: var(--color-text);
 }
 .client-booking-status {
-  font-size: 10px;
+  font-size: var(--text-caption);
   background: var(--color-success-bg);
   color: var(--color-success);
   border-radius: 5px;
@@ -666,11 +666,11 @@
   padding: 15px 0;
 }
 .client-action-preview h3 {
-  font-size: 20px;
+  font-size: var(--text-heading-md);
   font-weight: 500;
 }
 .client-action-preview p {
-  font-size: 13px;
+  font-size: var(--text-small);
   color: var(--color-muted);
   line-height: 1.8;
   margin: 13px 0 23px;
@@ -703,7 +703,7 @@
   .client-page-topline {
     gap: 12px;
     margin-bottom: 14px;
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .client-page-topline > span:nth-child(2) {
     display: none;
@@ -726,7 +726,7 @@
   .client-photo > .avatar {
     width: 55px;
     height: 64px;
-    font-size: 19px;
+    font-size: var(--text-heading-sm);
     border-radius: 12px;
   }
   .client-photo > button {
@@ -737,20 +737,20 @@
     min-width: 0;
   }
   .client-name-block > .eyebrow {
-    font-size: 8px;
+    font-size: var(--text-caption);
     letter-spacing: 0.7px;
   }
   .client-name-block h1 {
-    font-size: 22px;
+    font-size: var(--text-heading-md);
     margin: 7px 0 10px;
     letter-spacing: -0.6px;
   }
   .client-name-meta {
     gap: 8px;
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .client-name-meta > .badge {
-    font-size: 8px;
+    font-size: var(--text-caption);
     padding: 4px 6px;
   }
   .client-name-meta > span:last-child {
@@ -762,7 +762,7 @@
     margin-top: 8px;
   }
   .client-primary-actions .button {
-    font-size: 10px;
+    font-size: var(--text-caption);
     padding: 0 10px;
     min-height: 39px;
   }
@@ -787,11 +787,11 @@
     gap: 17px;
   }
   .client-contact-facts dt {
-    font-size: 9px;
+    font-size: var(--text-caption);
     margin-bottom: 5px;
   }
   .client-contact-facts dd {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .client-balance {
     border-left: 0;
@@ -803,10 +803,10 @@
     gap: 5px 15px;
   }
   .client-balance > span {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .client-balance > strong {
-    font-size: 24px;
+    font-size: var(--text-heading-lg);
     grid-row: 2;
     grid-column: 1;
     margin: 2px 0 0;
@@ -818,7 +818,7 @@
   }
   .client-balance button {
     min-height: 32px;
-    font-size: 10px;
+    font-size: var(--text-caption);
     color: var(--color-accent);
   }
   .client-context-row {
@@ -828,10 +828,10 @@
     border-radius: 0 0 12px 12px;
   }
   .client-context-row span {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .client-context-row > p {
-    font-size: 9px;
+    font-size: var(--text-caption);
     line-height: 1.7;
   }
   .client-history {
@@ -843,7 +843,7 @@
     gap: 20px;
   }
   .client-tabs > button {
-    font-size: 11px;
+    font-size: var(--text-caption);
     padding: 16px 0 14px;
   }
   .client-section-heading {
@@ -851,16 +851,16 @@
     align-items: start;
   }
   .client-section-heading h2 {
-    font-size: 18px;
+    font-size: var(--text-heading-sm);
     gap: 8px;
   }
   .client-section-heading h2 > span {
-    font-size: 8px;
+    font-size: var(--text-caption);
     background: var(--color-success-bg);
     color: var(--color-success);
   }
   .client-section-heading p {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .client-text-action {
     font-size: 0;
@@ -877,7 +877,7 @@
     gap: 5px;
   }
   .client-sub-filters > button {
-    font-size: 9px;
+    font-size: var(--text-caption);
     padding: 7px 8px;
   }
   .client-sub-table,
@@ -898,12 +898,12 @@
   .client-sub-table td {
     padding: 0 !important;
     border: 0;
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .client-sub-table td::before {
     content: attr(data-label);
     display: block;
-    font-size: 8px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
     margin-bottom: 4px;
   }
@@ -924,16 +924,16 @@
     display: none;
   }
   .client-sub-table td:nth-child(2) > strong {
-    font-size: 13px;
+    font-size: var(--text-small);
   }
   .subscription-status {
     margin-top: 6px;
-    font-size: 9px;
+    font-size: var(--text-caption);
     color: var(--color-success);
   }
   .client-table-footer {
     padding: 14px 16px;
-    font-size: 9px;
+    font-size: var(--text-caption);
     border-top: 1px solid var(--color-line);
   }
   .client-table-footer > span:last-child {
@@ -951,17 +951,17 @@
     padding: 30px 20px 40px;
   }
   .client-tab-empty h3 {
-    font-size: 13px;
+    font-size: var(--text-small);
   }
   .client-tab-empty p {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .client-comment {
     margin: 0 16px 20px;
     padding: 13px;
   }
   .client-comment p {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .client-bookings {
     padding: 0 16px 16px;
@@ -971,10 +971,10 @@
     gap: 10px;
   }
   .client-bookings strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .client-bookings small {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .client-booking-status {
     display: none;

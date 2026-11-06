@@ -4,7 +4,7 @@
 body {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: var(--text-body);
   color: var(--color-ink);
   background: var(--color-canvas);
   -webkit-font-smoothing: antialiased;
@@ -103,8 +103,8 @@ code {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 12px;
-  line-height: 18px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   font-weight: 600;
   white-space: nowrap;
   transition:
@@ -154,7 +154,7 @@ code {
   flex-shrink: 0;
 }
 .eyebrow {
-  font-size: 10px;
+  font-size: var(--text-caption);
   letter-spacing: 1.4px;
   font-weight: 600;
   color: var(--color-text);
@@ -166,7 +166,7 @@ code {
   white-space: nowrap;
   background: none;
   font-weight: 500;
-  font-size: 12px;
+  font-size: var(--text-caption);
   padding: 6px 0;
 }
 .text-link:hover {
@@ -203,22 +203,22 @@ code {
   border-radius: 9px;
 }
 .workspace-brand > span:nth-child(2) {
-  font-size: 13px;
+  font-size: var(--text-small);
   font-weight: 600;
-  line-height: 18px;
+  line-height: 1.45;
 }
 .workspace-brand small {
   display: block;
   color: var(--color-muted);
-  font-size: 10px;
-  line-height: 16px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   font-weight: 400;
 }
 .workspace-version {
   font-family: var(--font-mono);
   border: 1px solid var(--color-line);
   border-radius: 5px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   padding: 3px 5px;
   margin: 0 0 15px 2px;
   color: var(--color-text);
@@ -236,7 +236,7 @@ code {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  font-size: 12px;
+  font-size: var(--text-caption);
   background: none;
   color: var(--color-text);
   min-width: 110px;
@@ -259,7 +259,7 @@ code {
   display: flex;
   align-items: center;
   position: relative;
-  font-size: 11px;
+  font-size: var(--text-caption);
   gap: 7px;
 }
 .scenario-label {
@@ -288,7 +288,7 @@ code {
   appearance: none;
   background: var(--color-surface);
   border: 1px solid var(--color-line);
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 500;
   border-radius: 8px;
   height: 34px;
@@ -342,14 +342,14 @@ code {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-bottom: 12px;
 }
 .device-caption span {
   margin-left: auto;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .app-shell.is-mobile {
   width: 390px;
@@ -375,7 +375,7 @@ code {
   z-index: 20;
 }
 .mobile-preview-hint {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-top: 17px;
 }
@@ -395,7 +395,7 @@ code {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 27px;
+  font-size: var(--text-heading-xl);
   font-weight: 750;
   letter-spacing: -1.6px;
   padding: 0 8px;
@@ -411,7 +411,7 @@ code {
   color: var(--color-on-accent);
 }
 .brand-period {
-  font-size: 11px;
+  font-size: var(--text-caption);
   letter-spacing: 0;
   align-self: flex-start;
   margin-top: 2px;
@@ -434,17 +434,17 @@ code {
   height: 31px;
   border-radius: 7px;
   background: var(--color-canvas);
-  font-size: 15px;
+  font-size: var(--text-body);
   font-weight: 700;
 }
 .club-switch strong {
   display: block;
-  font-size: 10px;
-  line-height: 17px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   font-weight: 600;
 }
 .club-switch small {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .club-switch svg {
@@ -453,7 +453,7 @@ code {
 }
 .nav-label {
   display: block;
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   letter-spacing: 1.2px;
   margin: 0 10px 13px;
@@ -471,7 +471,7 @@ code {
   height: 43px;
   border-radius: 9px;
   padding: 0 12px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   background: transparent;
   text-align: left;
@@ -485,7 +485,7 @@ code {
   color: var(--color-on-accent);
 }
 .side-nav button > span {
-  font-size: 9px;
+  font-size: var(--text-caption);
   margin-left: auto;
   background: var(--color-canvas);
   border-radius: 4px;
@@ -498,7 +498,7 @@ code {
 }
 .side-nav button .nav-new {
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: var(--text-caption);
   background: transparent;
   border: 1px solid var(--color-line);
 }
@@ -523,12 +523,12 @@ code {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   font-weight: 500;
 }
 .sandbox-card p {
-  font-size: 10px;
-  line-height: 17px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-muted);
   margin: 9px 0 13px;
 }
@@ -540,7 +540,7 @@ code {
   justify-content: space-between;
   gap: 8px;
   width: 100%;
-  font-size: 9px;
+  font-size: var(--text-caption);
   font-weight: 600;
 }
 .user-block {
@@ -559,17 +559,17 @@ code {
   width: 34px;
   height: 34px;
   background: var(--color-surface-muted);
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-text);
   font-weight: 600;
 }
 .user-block strong {
   display: block;
-  font-size: 10px;
-  line-height: 18px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
 }
 .user-block small {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .user-online {
@@ -599,7 +599,7 @@ code {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-text);
 }
 .desktop-breadcrumb {
@@ -614,7 +614,7 @@ code {
   gap: 18px;
 }
 .prototype-label {
-  font-size: 9px;
+  font-size: var(--text-caption);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -628,7 +628,7 @@ code {
 .topbar-avatar {
   width: 29px;
   height: 29px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   border: 2px solid white;
   outline: 1px solid var(--color-line);
 }
@@ -662,17 +662,17 @@ code {
   box-shadow: var(--shadow-popup);
 }
 .notification-popover > strong {
-  font-size: 14px;
+  font-size: var(--text-body);
 }
 .notification-popover p {
-  font-size: 12px;
-  line-height: 19px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-muted);
   margin: 9px 0 14px;
 }
 .notification-popover small {
   display: block;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-top: 12px;
 }
@@ -701,14 +701,14 @@ code {
   margin-bottom: 27px;
 }
 .page-eyebrow {
-  font-size: 8px;
+  font-size: var(--text-caption);
   letter-spacing: 1.4px;
   color: var(--color-muted);
   margin-bottom: 9px;
 }
 .page-heading h1 {
-  font-size: 28px;
-  line-height: 34px;
+  font-size: var(--text-heading-xl);
+  line-height: 1.45;
   letter-spacing: -0.8px;
 }
 .heading-dot {
@@ -717,8 +717,8 @@ code {
 .page-heading p {
   margin-top: 7px;
   color: var(--color-muted);
-  font-size: 11px;
-  line-height: 18px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
 }
 .page-actions {
   display: flex;
@@ -733,7 +733,7 @@ code {
   height: 39px;
   border-radius: 9px;
   padding: 0 11px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-text);
   background: #ffffff70;
   white-space: nowrap;
@@ -752,7 +752,7 @@ code {
 .library-badge {
   border: 1px solid var(--color-line);
   color: var(--color-text);
-  font-size: 10px;
+  font-size: var(--text-caption);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -784,7 +784,7 @@ code {
   align-items: center;
   justify-content: space-between;
   gap: 5px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-text);
   position: relative;
   z-index: 1;
@@ -798,7 +798,7 @@ code {
   color: var(--color-ink);
 }
 .stat-value {
-  font-size: 29px;
+  font-size: var(--text-heading-xl);
   font-weight: 600;
   letter-spacing: -0.8px;
   margin: 18px 0 14px;
@@ -807,7 +807,7 @@ code {
   white-space: nowrap;
 }
 .stat-value > span {
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 400;
   letter-spacing: 0;
   color: var(--color-muted);
@@ -820,7 +820,7 @@ code {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 8px;
+  font-size: var(--text-caption);
   position: relative;
   z-index: 1;
   white-space: nowrap;
@@ -831,7 +831,7 @@ code {
   align-items: center;
   gap: 1px;
   color: var(--color-success);
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .stat-accent .stat-foot {
   color: var(--color-text);
@@ -871,13 +871,13 @@ code {
   gap: 16px;
 }
 .section-heading h2 {
-  font-size: 14px;
-  line-height: 21px;
+  font-size: var(--text-body);
+  line-height: 1.45;
   letter-spacing: -0.2px;
 }
 .section-heading p {
-  font-size: 10px;
-  line-height: 17px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-muted);
   margin-top: 3px;
 }
@@ -904,7 +904,7 @@ code {
   padding: 0 11px;
   border-radius: 5px;
   background: none;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .small-segment .selected {
@@ -919,12 +919,12 @@ code {
   margin-top: 22px;
 }
 .chart-summary > strong {
-  font-size: 25px;
+  font-size: var(--text-heading-lg);
   letter-spacing: -0.8px;
   font-weight: 600;
 }
 .chart-summary > span {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .chart-summary .chart-growth {
@@ -936,7 +936,7 @@ code {
   background: var(--color-success-bg);
   padding: 3px 5px;
   border-radius: 4px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   margin-left: 5px;
 }
 .bar-chart {
@@ -959,7 +959,7 @@ code {
   transform: translateY(-4px);
 }
 .chart-grid span {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   width: 24px;
   text-align: left;
@@ -1018,7 +1018,7 @@ code {
 }
 .bar-label {
   padding-top: 11px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .chart-column.current .bar-label {
@@ -1033,7 +1033,7 @@ code {
   color: white;
   border-radius: 5px;
   padding: 5px 7px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   box-shadow: 0 2px 8px #2d252911;
   z-index: 3;
   pointer-events: none;
@@ -1044,7 +1044,7 @@ code {
   display: flex;
   justify-content: space-between;
   margin-top: 12px;
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   gap: 8px;
 }
@@ -1065,10 +1065,10 @@ code {
   border-radius: 5px;
   color: var(--color-muted);
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .panel-subtitle {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-top: 4px;
 }
@@ -1104,11 +1104,11 @@ code {
   min-width: 34px;
 }
 .class-time strong {
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 500;
 }
 .class-time span {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .class-marker {
@@ -1132,15 +1132,15 @@ code {
   min-width: 0;
 }
 .class-info > strong {
-  font-size: 10px;
-  line-height: 17px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 500;
 }
 .class-info > span {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-top: 1px;
 }
@@ -1148,7 +1148,7 @@ code {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 8px;
+  font-size: var(--text-caption);
   margin-top: 8px;
   color: var(--color-muted);
 }
@@ -1169,7 +1169,7 @@ code {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   border-top: 1px solid var(--color-line);
   padding-top: 13px;
@@ -1195,7 +1195,7 @@ code {
   white-space: nowrap;
 }
 .members-table th {
-  font-size: 8px;
+  font-size: var(--text-caption);
   font-weight: 400;
   color: var(--color-muted);
   padding: 12px 20px;
@@ -1204,7 +1204,7 @@ code {
   border-bottom: 1px solid var(--color-line);
 }
 .members-table td {
-  font-size: 10px;
+  font-size: var(--text-caption);
   height: var(--table-record-row-height);
   padding: var(--table-record-padding-y) 20px;
   color: var(--color-text);
@@ -1249,18 +1249,18 @@ code {
   height: var(--table-record-avatar-size);
 }
 .members-table .member-name-button strong {
-  line-height: 16px;
+  line-height: 1.45;
 }
 .members-table .member-name-button small {
-  line-height: 13px;
+  line-height: 1.45;
 }
 .member-name-button strong {
-  font-size: 10px;
+  font-size: var(--text-caption);
   font-weight: 500;
   color: var(--color-ink);
 }
 .member-name-button small {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .avatar {
@@ -1270,7 +1270,7 @@ code {
   width: 33px;
   height: 33px;
   border-radius: 50%;
-  font-size: 9px;
+  font-size: var(--text-caption);
   font-weight: 500;
   flex-shrink: 0;
   letter-spacing: -0.3px;
@@ -1278,7 +1278,7 @@ code {
 .avatar-small {
   width: 25px;
   height: 25px;
-  font-size: 8px;
+  font-size: var(--text-caption);
 }
 .avatar-peach {
   background: #f6e5d6;
@@ -1309,11 +1309,11 @@ code {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  font-size: 8px;
+  font-size: var(--text-caption);
   font-weight: 500;
   padding: 5px 7px;
   border-radius: 5px;
-  line-height: 11px;
+  line-height: 1.45;
   white-space: nowrap;
 }
 .badge > span {
@@ -1338,7 +1338,7 @@ code {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-top: 20px;
   padding: 0 2px;
@@ -1367,7 +1367,7 @@ code {
   margin-bottom: 22px;
 }
 .members-summary .eyebrow {
-  font-size: 8px;
+  font-size: var(--text-caption);
   letter-spacing: 1.2px;
 }
 .members-summary strong {
@@ -1375,12 +1375,12 @@ code {
   align-items: center;
   gap: 13px;
   margin-top: 9px;
-  font-size: 35px;
+  font-size: var(--text-display-sm);
   font-weight: 500;
   letter-spacing: -1px;
 }
 .members-summary strong > span {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   font-weight: 400;
   letter-spacing: 0;
@@ -1390,8 +1390,8 @@ code {
   align-items: center;
   gap: 15px;
   color: var(--color-muted);
-  font-size: 11px;
-  line-height: 20px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
 }
 .summary-caption svg {
   color: var(--color-muted);
@@ -1415,7 +1415,7 @@ code {
   height: 57px;
   flex-shrink: 0;
   padding: 0;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
@@ -1425,7 +1425,7 @@ code {
   border-bottom-color: var(--color-accent);
 }
 .clients-tabs > button > span {
-  font-size: 8px;
+  font-size: var(--text-caption);
   background: var(--color-canvas);
   border-radius: 4px;
   padding: 2px 5px;
@@ -1460,7 +1460,7 @@ code {
   border: 0;
   background: none;
   padding: 10px 0;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-text);
   outline: none;
 }
@@ -1472,7 +1472,7 @@ code {
   color: var(--color-muted);
 }
 .table-toolbar .button {
-  font-size: 10px;
+  font-size: var(--text-caption);
   min-height: 38px;
 }
 .filter-dot {
@@ -1486,7 +1486,7 @@ code {
   display: flex;
   gap: 12px;
   align-items: center;
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .extra-filters select {
@@ -1495,7 +1495,7 @@ code {
   border-radius: 6px;
   background: var(--color-surface);
   color: var(--color-text);
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 .sort-button {
   background: none;
@@ -1516,11 +1516,11 @@ code {
   gap: 10px;
   padding: 17px 22px;
   border-top: 1px solid var(--color-line);
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .clients-bottom-note {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin: 22px 3px;
   display: flex;
@@ -1534,7 +1534,7 @@ code {
   gap: 4px;
   padding: 0;
   background: none;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-text);
 }
 .no-results {
@@ -1547,11 +1547,11 @@ code {
   color: var(--color-muted);
 }
 .no-results h3 {
-  font-size: 16px;
+  font-size: var(--text-lead);
   color: var(--color-text);
 }
 .no-results p {
-  font-size: 12px;
+  font-size: var(--text-caption);
   margin: 8px 0 20px;
 }
 
@@ -1612,30 +1612,30 @@ code {
   background: #ecc3b5;
 }
 .empty-state > .eyebrow {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .empty-state h2 {
-  font-size: 22px;
+  font-size: var(--text-heading-md);
   margin: 13px 0 11px;
   letter-spacing: -0.5px;
 }
 .empty-state p {
   max-width: 310px;
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
-  line-height: 20px;
+  line-height: 1.45;
   margin-bottom: 23px;
 }
 .empty-state .button {
   background: var(--color-accent);
   border-color: var(--color-accent);
   color: var(--color-on-accent);
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 .state-demo-note {
   display: block;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-top: 35px;
   text-align: center;
@@ -1722,12 +1722,12 @@ code {
   border-radius: 9px;
   padding: 15px 18px;
   flex: 1;
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 500;
 }
 .ds-categories > button > span {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .ds-categories > button > svg {
@@ -1753,15 +1753,15 @@ code {
   margin-bottom: 17px;
 }
 .ds-section .section-heading h2 {
-  font-size: 16px;
+  font-size: var(--text-lead);
 }
 .ds-section .section-heading p {
-  font-size: 10px;
+  font-size: var(--text-caption);
   margin-top: 5px;
 }
 .ds-section-number {
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   letter-spacing: 1px;
   white-space: nowrap;
@@ -1806,21 +1806,21 @@ code {
   color: var(--color-on-accent);
 }
 .color-card > strong {
-  font-size: 9px;
+  font-size: var(--text-caption);
   font-weight: 500;
   display: block;
-  line-height: 16px;
+  line-height: 1.45;
   margin: 0 3px;
 }
 .color-code {
   display: block;
-  font-size: 8px;
+  font-size: var(--text-caption);
   font-family: var(--font-mono);
   color: var(--color-muted);
   margin: 3px;
 }
 .color-card > code {
-  font-size: 7px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   display: block;
   margin: 7px 3px 0;
@@ -1832,7 +1832,7 @@ code {
   gap: 25px;
   border-bottom: 1px solid var(--color-line);
   padding: 17px 0;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .semantic-colors > span {
@@ -1841,7 +1841,7 @@ code {
   gap: 6px;
 }
 .semantic-colors code {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-left: 3px;
 }
@@ -1871,28 +1871,28 @@ code {
   border-right: 1px solid var(--color-line);
 }
 .type-intro > span {
-  font-size: 75px;
-  line-height: 85px;
+  font-size: var(--text-display-xl);
+  line-height: 1.45;
   font-weight: 500;
   letter-spacing: -5px;
   color: var(--color-ink);
   display: block;
 }
 .type-intro > strong {
-  font-size: 14px;
+  font-size: var(--text-body);
   display: block;
   margin-top: 13px;
 }
 .type-intro p {
-  font-size: 9px;
-  line-height: 16px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-muted);
   margin-top: 9px;
 }
 .type-intro > div {
   display: flex;
   gap: 7px;
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-top: 22px;
   flex-wrap: wrap;
@@ -1919,12 +1919,12 @@ code {
 }
 .type-row > div > strong {
   display: block;
-  font-size: 9px;
+  font-size: var(--text-caption);
   font-weight: 500;
   color: var(--color-muted);
 }
 .type-row code {
-  font-size: 7px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   display: block;
   margin-top: 5px;
@@ -1934,33 +1934,33 @@ code {
   overflow-wrap: anywhere;
 }
 .type-display {
-  font-size: 40px;
-  line-height: 44px;
+  font-size: var(--text-display);
+  line-height: 1.45;
   font-weight: 600;
   letter-spacing: -1.5px;
   color: var(--color-ink);
 }
 .type-h1 {
-  font-size: 28px;
-  line-height: 34px;
+  font-size: var(--text-heading-xl);
+  line-height: 1.45;
   font-weight: 600;
   letter-spacing: -1px;
   color: var(--color-ink);
 }
 .type-h2 {
-  font-size: 18px;
-  line-height: 26px;
+  font-size: var(--text-heading-sm);
+  line-height: 1.45;
   font-weight: 600;
   color: var(--color-ink);
 }
 .type-body {
-  font-size: 14px;
-  line-height: 22px;
+  font-size: var(--text-body);
+  line-height: 1.45;
   color: var(--color-text);
 }
 .type-caption {
-  font-size: 12px;
-  line-height: 18px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-muted);
 }
 .ds-two-columns {
@@ -1984,7 +1984,7 @@ code {
   margin: 0;
 }
 .spacing-examples code {
-  font-size: 9px;
+  font-size: var(--text-caption);
   min-width: 20px;
   color: var(--color-muted);
 }
@@ -1994,7 +1994,7 @@ code {
   border-radius: 2px;
 }
 .spacing-examples small {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-left: auto;
 }
@@ -2018,13 +2018,13 @@ code {
   margin: 0 auto 20px;
 }
 .radius-examples strong {
-  font-size: 9px;
+  font-size: var(--text-caption);
   display: block;
   font-weight: 500;
   color: var(--color-muted);
 }
 .radius-examples code {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   display: block;
   margin-top: 7px;
@@ -2045,7 +2045,7 @@ code {
 .example-label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-bottom: 18px;
 }
@@ -2061,7 +2061,7 @@ code {
   min-width: 0;
 }
 .form-field > span {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-text);
   font-weight: 500;
 }
@@ -2076,17 +2076,17 @@ code {
   border-radius: 8px;
   padding: 11px 12px;
   min-height: 41px;
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--color-text);
   width: 100%;
   min-width: 0;
 }
 .form-field input::placeholder {
   color: var(--color-muted);
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 .form-field small {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .field-error input {
@@ -2101,7 +2101,7 @@ code {
   flex-direction: column;
   gap: 24px;
   padding-top: 23px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .toggle-field {
@@ -2111,7 +2111,7 @@ code {
   padding: 0;
   background: none;
   text-align: left;
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 .toggle {
   display: block;
@@ -2158,7 +2158,7 @@ code {
   flex-wrap: wrap;
 }
 .badge-examples .badge {
-  font-size: 10px;
+  font-size: var(--text-caption);
   padding: 6px 8px;
 }
 .avatar-examples {
@@ -2169,7 +2169,7 @@ code {
 .avatar-examples .avatar {
   width: 38px;
   height: 38px;
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 .icon-examples {
   display: flex;
@@ -2217,11 +2217,11 @@ code {
   gap: 6px;
 }
 .pattern-member strong {
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 500;
 }
 .pattern-member small {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .pattern-stat {
@@ -2236,19 +2236,19 @@ code {
 .pattern-stat > span {
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 .pattern-stat > strong {
-  font-size: 31px;
+  font-size: var(--text-display-sm);
   letter-spacing: -1px;
   font-weight: 500;
   color: var(--color-ink);
 }
 .pattern-stat > small {
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .pattern-hint {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   margin-top: 20px;
 }
@@ -2261,15 +2261,15 @@ code {
   border: 1px solid var(--color-success);
   border-radius: 9px;
   color: var(--color-success);
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .inline-success strong {
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 500;
 }
 .inline-success p {
-  font-size: 9px;
-  line-height: 15px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   margin-top: 5px;
   color: var(--color-success);
 }
@@ -2285,13 +2285,13 @@ code {
   margin: 5px 0 35px;
 }
 .ds-note strong {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--color-text);
   font-weight: 500;
 }
 .ds-note p {
-  font-size: 10px;
-  line-height: 18px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   margin-top: 5px;
 }
 .ds-footer {
@@ -2299,12 +2299,12 @@ code {
   justify-content: space-between;
   padding: 20px 0 5px;
   border-top: 1px solid var(--color-line);
-  font-size: 8px;
+  font-size: var(--text-caption);
   letter-spacing: 0.6px;
   color: var(--color-muted);
 }
 .ds-footer > span:last-child {
-  font-size: 9px;
+  font-size: var(--text-caption);
   letter-spacing: 0;
 }
 .ds-footer > span:last-child > span {
@@ -2344,12 +2344,12 @@ code {
   margin-bottom: 24px;
 }
 .modal-heading h2 {
-  font-size: 22px;
+  font-size: var(--text-heading-md);
   letter-spacing: -0.6px;
 }
 .modal-heading p {
-  font-size: 12px;
-  line-height: 19px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-muted);
   margin-top: 9px;
 }
@@ -2363,8 +2363,8 @@ code {
   gap: 19px;
 }
 .form-note {
-  font-size: 10px;
-  line-height: 17px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-muted);
   background: var(--color-canvas);
   border-radius: 7px;
@@ -2384,16 +2384,16 @@ code {
 .member-detail > .avatar {
   width: 64px;
   height: 64px;
-  font-size: 18px;
+  font-size: var(--text-heading-sm);
   margin-bottom: 13px;
 }
 .member-detail h3 {
-  font-size: 19px;
+  font-size: var(--text-heading-sm);
   letter-spacing: -0.5px;
   margin-bottom: 10px;
 }
 .member-detail > .badge {
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .member-detail dl,
 .class-detail dl {
@@ -2408,7 +2408,7 @@ code {
   justify-content: space-between;
   border-bottom: 1px solid var(--color-line);
   padding: 13px 0;
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 .member-detail dt,
 .class-detail dt {
@@ -2445,7 +2445,7 @@ code {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 12px;
+  font-size: var(--text-caption);
   width: max-content;
   max-width: calc(100% - 32px);
   animation: appear 0.18s ease-out;
@@ -2489,14 +2489,14 @@ code {
     padding: 16px 13px;
   }
   .stat-value {
-    font-size: 25px;
+    font-size: var(--text-heading-lg);
   }
   .stat-foot {
     gap: 3px;
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .stat-foot .trend {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .date-chip {
     display: none;
@@ -2521,7 +2521,7 @@ code {
     gap: 8px;
   }
   .color-card > code {
-    font-size: 6px;
+    font-size: var(--text-caption);
   }
   .type-row {
     gap: 13px;
@@ -2530,16 +2530,16 @@ code {
     min-width: 85px;
   }
   .type-display {
-    font-size: 31px;
+    font-size: var(--text-display-sm);
   }
   .type-h1 {
-    font-size: 25px;
+    font-size: var(--text-heading-lg);
   }
   .type-h2 {
-    font-size: 15px;
+    font-size: var(--text-body);
   }
   .type-body {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
 }
 @container (max-width:900px) and (min-width:701px) {
@@ -2547,7 +2547,7 @@ code {
     width: 173px;
   }
   .brand {
-    font-size: 23px;
+    font-size: var(--text-heading-lg);
   }
   .club-switch {
     padding-left: 0;
@@ -2555,20 +2555,20 @@ code {
     gap: 6px;
   }
   .club-switch strong {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .club-switch small {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .club-switch > svg {
     width: 10px;
   }
   .nav-label {
-    font-size: 7px;
+    font-size: var(--text-caption);
     letter-spacing: 0.7px;
   }
   .side-nav button {
-    font-size: 10px;
+    font-size: var(--text-caption);
     gap: 7px;
     padding: 0 9px;
   }
@@ -2579,23 +2579,23 @@ code {
     padding: 0 20px;
   }
   .page-heading h1 {
-    font-size: 25px;
+    font-size: var(--text-heading-lg);
   }
   .page-heading p {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .page-actions .button {
-    font-size: 10px;
+    font-size: var(--text-caption);
     padding: 0 12px;
   }
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .stat-value {
-    font-size: 28px;
+    font-size: var(--text-heading-xl);
   }
   .stat-foot {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .overview-grid {
     grid-template-columns: 1fr;
@@ -2615,12 +2615,12 @@ code {
     min-width: 30px;
   }
   .class-time strong {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .class-info > strong {
-    font-size: 9px;
+    font-size: var(--text-caption);
     white-space: normal;
-    line-height: 14px;
+    line-height: 1.45;
   }
   .class-marker {
     height: 55px;
@@ -2642,7 +2642,7 @@ code {
     grid-template-columns: repeat(3, 1fr);
   }
   .color-card > code {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .type-panel {
     grid-template-columns: 1fr;
@@ -2663,7 +2663,7 @@ code {
     gap: 17px;
   }
   .clients-tabs > button {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .summary-caption {
     display: none;
@@ -2691,7 +2691,7 @@ code {
     display: flex;
     align-items: center;
     gap: 7px;
-    font-size: 19px;
+    font-size: var(--text-heading-sm);
     font-weight: 750;
     letter-spacing: -1px;
   }
@@ -2727,18 +2727,18 @@ code {
     margin-bottom: 23px;
   }
   .page-eyebrow {
-    font-size: 7px;
+    font-size: var(--text-caption);
     letter-spacing: 1.1px;
     margin-bottom: 7px;
   }
   .page-heading h1 {
-    font-size: 27px;
-    line-height: 32px;
+    font-size: var(--text-heading-xl);
+    line-height: 1.45;
     letter-spacing: -0.8px;
   }
   .page-heading p {
-    font-size: 10px;
-    line-height: 17px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
     margin-top: 5px;
   }
   .page-actions {
@@ -2746,7 +2746,7 @@ code {
   }
   .page-actions .button {
     min-height: 37px;
-    font-size: 10px;
+    font-size: var(--text-caption);
     padding: 0 13px;
     gap: 6px;
   }
@@ -2759,7 +2759,7 @@ code {
     order: 2;
     border: 0;
     background: transparent;
-    font-size: 8px;
+    font-size: var(--text-caption);
     padding: 0;
     height: auto;
     gap: 5px;
@@ -2777,31 +2777,31 @@ code {
     border-radius: 10px;
   }
   .stat-label {
-    font-size: 8px;
+    font-size: var(--text-caption);
     gap: 3px;
-    line-height: 13px;
+    line-height: 1.45;
   }
   .stat-label > svg {
     width: 13px;
     height: 13px;
   }
   .stat-value {
-    font-size: 24px;
+    font-size: var(--text-heading-lg);
     margin: 13px 0 11px;
     letter-spacing: -0.7px;
   }
   .stat-value > span {
-    font-size: 9px;
+    font-size: var(--text-caption);
     margin-left: 4px;
   }
   .stat-foot {
-    font-size: 6px;
+    font-size: var(--text-caption);
     gap: 3px;
     flex-wrap: wrap;
-    line-height: 10px;
+    line-height: 1.45;
   }
   .stat-foot .trend {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .stat-foot svg {
     width: 10px;
@@ -2825,16 +2825,16 @@ code {
     padding: 18px;
   }
   .section-heading h2 {
-    font-size: 13px;
+    font-size: var(--text-small);
   }
   .section-heading p {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .small-segment {
     padding: 2px;
   }
   .small-segment button {
-    font-size: 8px;
+    font-size: var(--text-caption);
     height: 24px;
     padding: 0 9px;
   }
@@ -2842,10 +2842,10 @@ code {
     margin-top: 18px;
   }
   .chart-summary > strong {
-    font-size: 24px;
+    font-size: var(--text-heading-lg);
   }
   .chart-summary > span {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .bar-chart {
     height: 171px;
@@ -2856,7 +2856,7 @@ code {
     left: 29px;
   }
   .chart-caption {
-    font-size: 7px;
+    font-size: var(--text-caption);
     margin-top: 12px;
     padding-top: 12px;
   }
@@ -2871,19 +2871,19 @@ code {
     min-width: 37px;
   }
   .class-time strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .class-time span {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .class-info > strong {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .class-info > span {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .class-meta {
-    font-size: 8px;
+    font-size: var(--text-caption);
     margin-top: 9px;
   }
   .class-marker {
@@ -2893,18 +2893,18 @@ code {
     width: 13px;
   }
   .schedule-note {
-    font-size: 8px;
+    font-size: var(--text-caption);
     padding-top: 14px;
   }
   .members-preview > .section-heading {
     padding: 18px;
   }
   .members-preview > .section-heading p {
-    font-size: 8px;
+    font-size: var(--text-caption);
     max-width: 180px;
   }
   .text-link {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .text-link > svg {
     width: 12px;
@@ -2931,7 +2931,7 @@ code {
   .mobile-member > .avatar {
     width: 31px;
     height: 31px;
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .mobile-member > span:nth-child(2) {
     display: flex;
@@ -2941,7 +2941,7 @@ code {
     min-width: 0;
   }
   .mobile-member strong {
-    font-size: 10px;
+    font-size: var(--text-caption);
     font-weight: 500;
     color: var(--color-text);
     overflow: hidden;
@@ -2949,11 +2949,11 @@ code {
     white-space: nowrap;
   }
   .mobile-member small {
-    font-size: 8px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .mobile-member .badge {
-    font-size: 7px;
+    font-size: var(--text-caption);
     padding: 4px 5px;
     gap: 3px;
   }
@@ -2962,12 +2962,12 @@ code {
     height: 3px;
   }
   .prototype-footnote {
-    font-size: 7px;
+    font-size: var(--text-caption);
     gap: 4px;
     margin-top: 18px;
   }
   .prototype-footnote > span:last-child {
-    font-size: 6px;
+    font-size: var(--text-caption);
   }
   .mobile-nav {
     display: flex;
@@ -2994,7 +2994,7 @@ code {
     border-radius: 9px;
   }
   .mobile-nav > button > span {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .mobile-nav > button.active {
     color: var(--color-accent);
@@ -3006,14 +3006,14 @@ code {
     border-radius: 11px;
   }
   .members-summary .eyebrow {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .members-summary strong {
-    font-size: 32px;
+    font-size: var(--text-display-sm);
     margin-top: 10px;
   }
   .members-summary strong > span {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .summary-caption {
     display: none;
@@ -3024,11 +3024,11 @@ code {
   }
   .clients-tabs > button {
     height: 48px;
-    font-size: 9px;
+    font-size: var(--text-caption);
     gap: 5px;
   }
   .clients-tabs > button > span {
-    font-size: 7px;
+    font-size: var(--text-caption);
     padding: 2px 4px;
   }
   .table-toolbar {
@@ -3045,11 +3045,11 @@ code {
     width: 13px;
   }
   .search-field input {
-    font-size: 9px;
+    font-size: var(--text-caption);
     padding: 9px 0;
   }
   .search-field input::placeholder {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .table-toolbar .button {
     font-size: 0;
@@ -3064,30 +3064,30 @@ code {
     margin-top: -16px;
   }
   .table-footer {
-    font-size: 7px;
+    font-size: var(--text-caption);
     padding: 14px 17px;
   }
   .clients-bottom-note {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
-    font-size: 9px;
-    line-height: 15px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .clients-bottom-note button {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .extra-filters {
     flex-wrap: wrap;
     padding: 0 16px 15px;
-    font-size: 9px;
+    font-size: var(--text-caption);
     gap: 7px;
   }
   .extra-filters select {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .extra-filters .button {
-    font-size: 9px;
+    font-size: var(--text-caption);
     min-height: 29px;
   }
   .library-badge {
@@ -3099,12 +3099,12 @@ code {
   }
   .ds-categories > button {
     padding: 12px 10px;
-    font-size: 9px;
+    font-size: var(--text-caption);
     gap: 6px;
     border-radius: 7px;
   }
   .ds-categories > button > span {
-    font-size: 6px;
+    font-size: var(--text-caption);
   }
   .ds-categories > button > svg {
     width: 10px;
@@ -3118,15 +3118,15 @@ code {
     align-items: flex-start;
   }
   .ds-section .section-heading h2 {
-    font-size: 14px;
+    font-size: var(--text-body);
   }
   .ds-section .section-heading p {
-    font-size: 8px;
-    line-height: 15px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
     max-width: 240px;
   }
   .ds-section-number {
-    font-size: 6px;
+    font-size: var(--text-caption);
     letter-spacing: 0.4px;
     padding-top: 5px;
   }
@@ -3147,27 +3147,27 @@ code {
     width: 10px;
   }
   .color-card > strong {
-    font-size: 8px;
-    line-height: 14px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
     margin: 0 2px;
   }
   .color-code {
-    font-size: 7px;
+    font-size: var(--text-caption);
     margin: 3px 2px;
   }
   .color-card > code {
-    font-size: 5.5px;
+    font-size: var(--text-caption);
     margin: 6px 2px 0;
   }
   .semantic-colors {
     gap: 13px;
     flex-wrap: wrap;
     padding: 13px 0;
-    font-size: 7px;
+    font-size: var(--text-caption);
     row-gap: 10px;
   }
   .semantic-colors code {
-    font-size: 6px;
+    font-size: var(--text-caption);
   }
   .semantic-colors > span {
     gap: 4px;
@@ -3189,23 +3189,23 @@ code {
     align-items: center;
   }
   .type-intro > span {
-    font-size: 60px;
-    line-height: 65px;
+    font-size: var(--text-display-lg);
+    line-height: 1.45;
     grid-row: span 2;
   }
   .type-intro > strong {
-    font-size: 13px;
+    font-size: var(--text-small);
     margin: 0;
   }
   .type-intro p {
-    font-size: 8px;
+    font-size: var(--text-caption);
     margin: 0;
-    line-height: 15px;
+    line-height: 1.45;
   }
   .type-intro > div {
     grid-column: span 2;
     margin-top: 13px;
-    font-size: 8px;
+    font-size: var(--text-caption);
     gap: 15px;
   }
   .type-specimens {
@@ -3220,32 +3220,32 @@ code {
     min-width: 72px;
   }
   .type-row > div > strong {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .type-row code {
-    font-size: 6px;
+    font-size: var(--text-caption);
   }
   .type-display {
-    font-size: 28px;
-    line-height: 32px;
+    font-size: var(--text-heading-xl);
+    line-height: 1.45;
     letter-spacing: -1px;
   }
   .type-h1 {
-    font-size: 24px;
-    line-height: 28px;
+    font-size: var(--text-heading-lg);
+    line-height: 1.45;
     letter-spacing: -0.6px;
   }
   .type-h2 {
-    font-size: 14px;
-    line-height: 19px;
+    font-size: var(--text-body);
+    line-height: 1.45;
   }
   .type-body {
-    font-size: 11px;
-    line-height: 17px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .type-caption {
-    font-size: 10px;
-    line-height: 16px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .ds-two-columns {
     grid-template-columns: 1fr;
@@ -3265,10 +3265,10 @@ code {
     margin-bottom: 17px;
   }
   .radius-examples strong {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .radius-examples code {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .component-panel {
     padding: 20px;
@@ -3280,7 +3280,7 @@ code {
     gap: 22px 13px;
   }
   .buttons-showcase .button {
-    font-size: 9px;
+    font-size: var(--text-caption);
     padding: 0 10px;
     gap: 5px;
     min-height: 35px;
@@ -3289,7 +3289,7 @@ code {
     width: 12px;
   }
   .example-label {
-    font-size: 8px;
+    font-size: var(--text-caption);
     margin-bottom: 13px;
   }
   .inputs-showcase {
@@ -3304,7 +3304,7 @@ code {
     gap: 6px;
   }
   .badge-examples .badge {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .avatar-examples {
     margin-top: 24px;
@@ -3312,7 +3312,7 @@ code {
   .avatar-examples .avatar {
     width: 33px;
     height: 33px;
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .icon-examples {
     gap: 13px;
@@ -3333,13 +3333,13 @@ code {
     gap: 8px;
   }
   .pattern-member strong {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .pattern-member small {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .pattern-member .badge {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .ds-note {
     padding: 20px;
@@ -3350,20 +3350,20 @@ code {
     width: 17px;
   }
   .ds-note strong {
-    font-size: 10px;
-    line-height: 17px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
     display: block;
   }
   .ds-note p {
-    font-size: 9px;
-    line-height: 16px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .ds-footer {
-    font-size: 6px;
+    font-size: var(--text-caption);
     padding-top: 16px;
   }
   .ds-footer > span:last-child {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .empty-state {
     min-height: 470px;
@@ -3371,24 +3371,24 @@ code {
     padding: 40px 20px;
   }
   .empty-state h2 {
-    font-size: 20px;
-    line-height: 25px;
+    font-size: var(--text-heading-md);
+    line-height: 1.45;
   }
   .empty-state p {
-    font-size: 11px;
-    line-height: 19px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
     max-width: 260px;
   }
   .empty-state .eyebrow {
-    font-size: 6px;
+    font-size: var(--text-caption);
     letter-spacing: 1px;
   }
   .empty-state .button {
-    font-size: 10px;
+    font-size: var(--text-caption);
     color: var(--color-on-accent);
   }
   .state-demo-note {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .skeleton-stats {
     grid-template-columns: 1fr 1fr;
@@ -3445,16 +3445,16 @@ code {
     padding: 24px;
   }
   .stat-label {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .stat-value {
-    font-size: 35px;
+    font-size: var(--text-display-sm);
   }
   .stat-foot {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .section-heading h2 {
-    font-size: 16px;
+    font-size: var(--text-lead);
   }
   .attendance-panel,
   .schedule-panel {
@@ -3467,48 +3467,48 @@ code {
     padding: 20px 0;
   }
   .class-info > strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .class-info > span {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .class-meta {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .class-time strong {
-    font-size: 13px;
+    font-size: var(--text-small);
   }
   .members-table td {
-    font-size: 12px;
+    font-size: var(--text-caption);
     padding-top: 17px;
     padding-bottom: 17px;
   }
   .member-name-button strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .member-name-button small {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .badge {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .members-table th {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .members-preview > .section-heading {
     padding: 24px 26px;
   }
   .page-heading p {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .page-heading h1 {
-    font-size: 32px;
+    font-size: var(--text-display-sm);
   }
   .page-heading {
     margin-bottom: 30px;
   }
   .page-eyebrow {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
 }
 @media (max-width: 1000px) {
@@ -3533,7 +3533,7 @@ code {
     min-width: 95px;
   }
   .workspace-brand small {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
 }
 @media (max-width: 760px) {
@@ -3547,11 +3547,11 @@ code {
     gap: 7px;
   }
   .workspace-brand > span:nth-child(2) {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .workspace-brand small {
-    font-size: 8px;
-    line-height: 14px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .workspace-icon {
     width: 28px;
@@ -3632,11 +3632,11 @@ code {
     flex: 1;
     flex-direction: column;
     gap: 5px;
-    font-size: 8px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .mobile-state-menu select {
-    font-size: 10px;
+    font-size: var(--text-caption);
     width: 120px;
     background: var(--color-surface);
     border: 1px solid var(--color-line);
@@ -3645,7 +3645,7 @@ code {
     color: var(--color-text);
   }
   .mobile-state-menu .button {
-    font-size: 9px;
+    font-size: var(--text-caption);
     padding: 0 7px;
   }
   .preview-stage {
@@ -3668,10 +3668,10 @@ code {
   }
   .device-caption {
     padding: 0 5px;
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .device-caption span {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .app-shell.is-mobile {
     height: min(844px, calc(100dvh - 132px));
@@ -3680,7 +3680,7 @@ code {
     border-radius: 32px;
   }
   .mobile-preview-hint {
-    font-size: 8px;
+    font-size: var(--text-caption);
     margin-top: 12px;
   }
   .modal-backdrop {
@@ -3692,20 +3692,20 @@ code {
     border-radius: 15px;
   }
   .modal-heading h2 {
-    font-size: 20px;
+    font-size: var(--text-heading-md);
   }
   .modal-heading p {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .toast {
     bottom: 19px;
-    font-size: 10px;
+    font-size: var(--text-caption);
     padding: 11px 15px;
     background: var(--color-ink);
     color: var(--color-on-accent);
   }
   .notification-popover .button {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3721,85 +3721,85 @@ code {
 /* Keep information readable in working mockups at both target sizes. */
 @container (min-width:701px) {
   .side-nav button {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .nav-label {
-    font-size: 9px;
+    font-size: var(--text-caption);
     letter-spacing: 0.8px;
   }
   .club-switch strong {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .club-switch small {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .club-switch {
     gap: 7px;
   }
   .sandbox-card > span {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .sandbox-card p {
-    font-size: 11px;
-    line-height: 18px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .sandbox-card button {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .user-block strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .user-block small {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .page-heading p {
-    font-size: 13px;
+    font-size: var(--text-small);
     color: var(--color-text);
   }
   .page-eyebrow {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .breadcrumbs {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .stat-label {
-    font-size: 12px;
+    font-size: var(--text-caption);
     color: var(--color-text);
   }
   .stat-value {
-    font-size: 32px;
+    font-size: var(--text-display-sm);
   }
   .stat-value > span {
-    font-size: 12px;
+    font-size: var(--text-caption);
     color: var(--color-text);
   }
   .stat-foot {
-    font-size: 10px;
+    font-size: var(--text-caption);
     color: var(--color-text);
     white-space: normal;
     flex-wrap: wrap;
   }
   .stat-foot .trend {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .section-heading h2 {
-    font-size: 16px;
+    font-size: var(--text-lead);
   }
   .section-heading p {
-    font-size: 11px;
+    font-size: var(--text-caption);
     color: var(--color-text);
   }
   .class-info > strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .class-info > span,
   .class-time span,
   .class-meta {
-    font-size: 10px;
+    font-size: var(--text-caption);
     color: var(--color-text);
   }
   .class-time strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .class-time {
     min-width: 40px;
@@ -3808,118 +3808,118 @@ code {
     margin-top: 9px;
   }
   .schedule-note {
-    font-size: 10px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .class-item {
     padding: 17px 0;
   }
   .panel-subtitle {
-    font-size: 11px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .chart-summary > span {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .chart-caption {
-    font-size: 10px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .bar-label {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .chart-grid span {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .members-table th {
-    font-size: 11px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .members-table td {
-    font-size: 12px;
+    font-size: var(--text-caption);
     color: var(--color-text);
     padding-top: var(--table-record-padding-y);
     padding-bottom: var(--table-record-padding-y);
   }
   .member-name-button strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .member-name-button small {
-    font-size: 10px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .members-table .badge {
-    font-size: 10px;
+    font-size: var(--text-caption);
     padding: 5px 8px;
   }
   .prototype-footnote {
-    font-size: 10px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .clients-tabs > button {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .clients-tabs > button > span {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .search-field input {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .table-toolbar .button {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .table-footer {
-    font-size: 11px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .clients-bottom-note,
   .clients-bottom-note button {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .summary-caption {
-    font-size: 12px;
+    font-size: var(--text-caption);
     color: var(--color-text);
   }
   .members-summary strong > span {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .ds-categories > button {
-    font-size: 13px;
+    font-size: var(--text-small);
   }
   .ds-section .section-heading p {
-    font-size: 12px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .color-card > strong {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .color-code {
-    font-size: 10px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .color-card > code {
-    font-size: 9px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .semantic-colors {
-    font-size: 11px;
+    font-size: var(--text-caption);
     color: var(--color-text);
   }
   .semantic-colors code {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .type-row > div > strong {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .type-row code {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .type-intro p {
-    font-size: 11px;
-    line-height: 19px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .type-intro > div {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .type-body {
     color: var(--color-text);
@@ -3929,114 +3929,114 @@ code {
   }
   .spacing-examples code,
   .spacing-examples small {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .radius-examples strong {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .radius-examples code {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .example-label {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .pattern-member strong {
-    font-size: 13px;
+    font-size: var(--text-small);
   }
   .pattern-member small {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .pattern-hint {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .ds-note strong {
-    font-size: 14px;
+    font-size: var(--text-body);
   }
   .ds-note p {
-    font-size: 12px;
-    line-height: 19px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .ds-footer {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .ds-footer > span:last-child {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
 }
 @container (max-width:1100px) and (min-width:701px) {
   .club-switch strong {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .club-switch small {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .side-nav button {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .stat-label {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .stat-value {
-    font-size: 29px;
+    font-size: var(--text-heading-xl);
   }
   .stat-foot {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .ds-categories > button {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .color-card > code {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .class-info > strong {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
 }
 @container (max-width:700px) {
   .page-heading p {
-    font-size: 12px;
+    font-size: var(--text-caption);
     color: var(--color-text);
   }
   .page-eyebrow {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .stat-label {
-    font-size: 10px;
+    font-size: var(--text-caption);
     color: var(--color-text);
   }
   .stat-label svg {
     width: 13px;
   }
   .stat-foot {
-    font-size: 9px;
-    line-height: 13px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
     gap: 3px;
     color: var(--color-muted);
   }
   .stat-foot .trend {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .stat-value {
-    font-size: 25px;
+    font-size: var(--text-heading-lg);
   }
   .section-heading h2 {
-    font-size: 15px;
+    font-size: var(--text-body);
   }
   .section-heading p {
-    font-size: 10px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .class-info > strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .class-info > span,
   .class-meta,
   .class-time span {
-    font-size: 10px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .class-time strong {
-    font-size: 13px;
+    font-size: var(--text-small);
   }
   .class-time {
     min-width: 39px;
@@ -4049,171 +4049,171 @@ code {
     height: 53px;
   }
   .schedule-note {
-    font-size: 9px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .panel-subtitle {
-    font-size: 11px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .chart-caption {
-    font-size: 9px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .chart-grid span {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .bar-label {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .prototype-footnote {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .mobile-nav > button > span {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .mobile-nav > button {
     height: 43px;
   }
   .mobile-member strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .mobile-member small {
-    font-size: 10px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .mobile-member .badge {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .members-preview > .section-heading p {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .text-link {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .clients-tabs > button {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .clients-tabs > button > span {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .search-field input,
   .search-field input::placeholder {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .table-footer {
-    font-size: 9px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .clients-bottom-note,
   .clients-bottom-note button {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .members-summary .eyebrow {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .members-summary strong > span {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .ds-categories > button {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .ds-section .section-heading p {
-    font-size: 11px;
-    line-height: 17px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
     color: var(--color-muted);
   }
   .ds-section-number {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .color-card > strong {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .color-code {
-    font-size: 8px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .color-card > code {
-    font-size: 6px;
+    font-size: var(--text-caption);
   }
   .semantic-colors {
-    font-size: 9px;
+    font-size: var(--text-caption);
     color: var(--color-text);
     gap: 10px;
   }
   .semantic-colors code {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .type-row > div > strong {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .type-row code {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .type-row > div {
     min-width: 86px;
   }
   .type-body {
-    font-size: 12px;
+    font-size: var(--text-caption);
     color: var(--color-text);
   }
   .type-caption {
-    font-size: 11px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .type-intro p {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .type-intro > div {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .spacing-examples code,
   .spacing-examples small {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .radius-examples strong {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .radius-examples code {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .example-label {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .pattern-member strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .pattern-member small {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .pattern-member .badge {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .pattern-hint {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .ds-note strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .ds-note p {
-    font-size: 11px;
-    line-height: 18px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .ds-footer {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .ds-footer > span:last-child {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .empty-state p {
-    font-size: 12px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
   }
   .empty-state > .eyebrow {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .empty-state .state-demo-note {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
 }
 .club-avatar {
@@ -4276,7 +4276,7 @@ code {
   min-height: 36px;
   padding: 0 11px;
   border-radius: 7px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 500;
   margin-bottom: 18px;
 }
@@ -4292,15 +4292,15 @@ code {
   background: var(--color-accent-soft);
   color: var(--color-accent);
   font-family: var(--font-mono);
-  font-size: 18px;
+  font-size: var(--text-heading-sm);
 }
 .palette-guidance h3 {
-  font-size: 13px;
+  font-size: var(--text-small);
   margin-bottom: 8px;
   color: var(--color-ink);
 }
 .palette-guidance p {
-  font-size: 12px;
+  font-size: var(--text-caption);
   line-height: 1.75;
   color: var(--color-muted);
 }
@@ -4311,7 +4311,7 @@ code {
   color: var(--color-accent);
   text-decoration: underline;
   text-underline-offset: 3px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   margin-top: 12px;
 }
 @container (max-width:900px) {
@@ -4325,9 +4325,9 @@ code {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .color-card > code {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .color-code {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
 }

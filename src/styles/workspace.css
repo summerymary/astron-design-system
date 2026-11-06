@@ -20,11 +20,11 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 14px;
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .ws-home-shift small {
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .clients-panel .table-toolbar > select {
   min-height: 40px;
@@ -75,12 +75,12 @@
 }
 .ws-panel-heading h2,
 .ws-directory-group > h2 {
-  font-size: 18px;
+  font-size: var(--text-heading-sm);
   line-height: 1.4;
 }
 .ws-panel-heading p {
   color: var(--color-muted);
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.6;
   margin-top: 5px;
   max-width: 680px;
@@ -140,7 +140,7 @@
   margin-bottom: 10px;
 }
 .ws-subheading h3 {
-  font-size: 15px;
+  font-size: var(--text-body);
 }
 .ws-subheading p {
   color: var(--color-muted);
@@ -179,12 +179,12 @@
   gap: 8px;
 }
 .ws-link-card strong {
-  font-size: 16px;
+  font-size: var(--text-lead);
   font-weight: 600;
 }
 .ws-link-card small {
   color: var(--color-muted);
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.5;
 }
 .ws-link-card > svg {
@@ -204,11 +204,11 @@
 .ws-stats span,
 .ws-stats small {
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: var(--text-caption);
   line-height: 1.5;
 }
 .ws-stats strong {
-  font-size: 26px;
+  font-size: var(--text-heading-xl);
   line-height: 1.15;
   font-weight: 600;
   letter-spacing: -0.6px;
@@ -226,7 +226,7 @@
   background: none;
   padding: 16px 2px 14px;
   border-bottom: 2px solid transparent;
-  font-size: 13px;
+  font-size: var(--text-small);
   color: var(--color-muted);
 }
 .ws-tabs > button.selected {
@@ -240,11 +240,11 @@
 .ws-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: var(--text-caption);
   text-align: left;
 }
 .ws-table th {
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 500;
   color: var(--color-muted);
   background: var(--color-surface-subtle);
@@ -301,7 +301,7 @@
 .ws-table-footer {
   padding: 14px 24px;
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: var(--text-caption);
   border-top: 1px solid var(--color-line);
 }
 .ws-mobile-records {
@@ -311,7 +311,7 @@
   display: inline-flex;
   gap: 6px;
   align-items: center;
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 500;
   line-height: 1.4;
   padding: 4px 8px;
@@ -347,7 +347,7 @@
   padding: 14px 16px;
   color: var(--color-info);
   background: var(--color-info-bg);
-  font-size: 12px;
+  font-size: var(--text-caption);
   line-height: 1.65;
 }
 .ws-notice-success {
@@ -374,11 +374,11 @@
   color: var(--color-muted);
 }
 .ws-empty h3 {
-  font-size: 16px;
+  font-size: var(--text-lead);
 }
 .ws-empty p {
   color: var(--color-muted);
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.6;
   max-width: 460px;
 }
@@ -414,7 +414,7 @@
   line-height: 1.5;
 }
 .form-field small {
-  font-size: 11px;
+  font-size: var(--text-caption);
   line-height: 1.5;
   color: var(--color-muted);
 }
@@ -425,7 +425,7 @@
 }
 .ws-error {
   color: var(--color-danger);
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.5;
   background: var(--color-danger-bg);
   padding: 12px;
@@ -442,7 +442,7 @@
   gap: 16px;
   border-bottom: 1px solid var(--color-line);
   padding: 12px 0;
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.5;
 }
 .ws-facts dt {
@@ -468,14 +468,14 @@
 .ws-confirm > p {
   width: 100%;
   line-height: 1.5;
-  font-size: 13px;
+  font-size: var(--text-small);
 }
 .ws-swatch {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 .ws-swatch i {
   height: 18px;
@@ -490,7 +490,7 @@
   background: none;
   padding: 8px 0;
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: var(--text-caption);
   align-self: flex-start;
 }
 .ws-back:hover {
@@ -498,7 +498,7 @@
 }
 .ws-muted {
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: var(--text-caption);
   line-height: 1.6;
 }
 .ws-muted svg {
@@ -512,7 +512,7 @@
   justify-content: space-between;
   gap: 12px;
   border-bottom: 1px solid var(--color-line);
-  font-size: 13px;
+  font-size: var(--text-small);
 }
 .ws-list-line small,
 .ws-list-line strong {
@@ -535,7 +535,7 @@
   border-radius: 8px;
   text-align: center;
   padding: 8px;
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .ws-week {
   display: grid;
@@ -552,7 +552,7 @@
   width: 100%;
   padding: 10px 5px;
   text-transform: capitalize;
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 .ws-week-day > button.is-today {
   background: var(--color-accent-soft);
@@ -561,7 +561,7 @@
 }
 .ws-week-day > button small {
   display: block;
-  font-size: 9px;
+  font-size: var(--text-caption);
   margin-top: 5px;
 }
 .ws-week-day > div {
@@ -571,7 +571,7 @@
   gap: 8px;
 }
 .ws-week-empty {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   text-align: center;
   padding-top: 16px;
@@ -596,20 +596,20 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 5px;
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .ws-event b span {
   font-weight: 400;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .ws-event > strong {
-  font-size: 11px;
+  font-size: var(--text-caption);
   line-height: 1.45;
   overflow-wrap: anywhere;
 }
 .ws-event > small {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   line-height: 1.4;
 }
@@ -628,7 +628,7 @@
   background: var(--color-surface);
   border-radius: 8px;
   white-space: nowrap;
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .ws-day-picker button.selected {
   background: var(--color-accent-soft);
@@ -642,10 +642,10 @@
   gap: 16px;
 }
 .ws-event-list .ws-event strong {
-  font-size: 14px;
+  font-size: var(--text-body);
 }
 .ws-event-list .ws-event small {
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .ws-disclosure {
   border: 1px solid var(--color-line);
@@ -654,11 +654,11 @@
 .ws-disclosure summary {
   cursor: pointer;
   padding: 14px 36px 14px 14px;
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .ws-disclosure > :not(summary) {
   margin: 0 14px 14px;
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.6;
 }
 .ws-builder {
@@ -682,11 +682,11 @@
   top: 20px;
 }
 .ws-plan-preview h2 {
-  font-size: 24px;
+  font-size: var(--text-heading-lg);
   line-height: 1.2;
 }
 .ws-plan-preview p {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   line-height: 1.65;
   white-space: pre-line;
@@ -697,7 +697,7 @@
   border-radius: 10px;
 }
 .ws-price {
-  font-size: 30px;
+  font-size: var(--text-display-sm);
   font-weight: 600;
   letter-spacing: -1px;
 }
@@ -719,7 +719,7 @@
 }
 .ws-selected-client p {
   color: var(--color-muted);
-  font-size: 13px;
+  font-size: var(--text-small);
 }
 .ws-bars {
   display: flex;
@@ -731,7 +731,7 @@
   grid-template-columns: 140px minmax(0, 1fr) 100px;
   gap: 16px;
   align-items: center;
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .ws-bars > div > div {
   height: 24px;
@@ -759,7 +759,7 @@
 }
 .ws-shift-gate small {
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: var(--text-caption);
   line-height: 1.65;
   max-width: 540px;
 }
@@ -810,12 +810,12 @@
   color: var(--color-accent);
 }
 .ws-product-grid strong {
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.5;
 }
 .ws-product-grid small {
   color: var(--color-muted);
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .ws-cart-line {
   display: flex;
@@ -826,13 +826,13 @@
   border-bottom: 1px solid var(--color-line);
 }
 .ws-cart-line strong {
-  font-size: 12px;
+  font-size: var(--text-caption);
   line-height: 1.5;
 }
 .ws-cart-line small {
   display: block;
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: var(--text-caption);
   margin-top: 5px;
 }
 .ws-quantity {
@@ -853,7 +853,7 @@
   justify-content: space-between;
 }
 .ws-total strong {
-  font-size: 24px;
+  font-size: var(--text-heading-lg);
 }
 .ws-split {
   display: grid;
@@ -884,7 +884,7 @@
   border-left-color: var(--color-accent);
 }
 .ws-master-list strong {
-  font-size: 13px;
+  font-size: var(--text-small);
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -892,13 +892,13 @@
 }
 .ws-master-list small,
 .ws-master-list time {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   line-height: 1.4;
   font-weight: 400;
 }
 .ws-master-list p {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--color-text);
   line-height: 1.5;
 }
@@ -911,10 +911,10 @@
   align-items: flex-start;
 }
 .ws-detail h2 {
-  font-size: 20px;
+  font-size: var(--text-heading-md);
 }
 .ws-detail p {
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.6;
 }
 .ws-detail .ws-subheading,
@@ -933,7 +933,7 @@
   padding-top: 12px;
 }
 .ws-timeline h3 {
-  font-size: 14px;
+  font-size: var(--text-body);
 }
 .ws-timeline p {
   border-left: 2px solid var(--color-accent-line);
@@ -953,14 +953,14 @@
 }
 .ws-task strong {
   display: block;
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.5;
 }
 .ws-task small {
   display: block;
   color: var(--color-muted);
   margin-top: 4px;
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .ws-task-check {
   width: 24px;
@@ -979,7 +979,7 @@
   align-items: center;
   gap: 10px;
   line-height: 1.5;
-  font-size: 13px;
+  font-size: var(--text-small);
 }
 .ws-checkbox input,
 .ws-permission input,
@@ -996,7 +996,7 @@
   align-items: center;
   gap: 14px;
   border-bottom: 1px solid var(--color-line);
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .ws-chat-history {
   min-height: 240px;
@@ -1039,16 +1039,16 @@
   flex: 1;
 }
 .ws-notification h3 {
-  font-size: 14px;
+  font-size: var(--text-body);
 }
 .ws-notification p {
-  font-size: 12px;
+  font-size: var(--text-caption);
   line-height: 1.6;
   color: var(--color-text);
   margin-top: 6px;
 }
 .ws-notification small {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   display: block;
   margin-top: 8px;
@@ -1076,7 +1076,7 @@
   width: 100%;
   border-bottom: 1px solid var(--color-line);
   padding: 14px 0;
-  font-size: 13px;
+  font-size: var(--text-small);
 }
 .ws-permission span {
   flex: 1;
@@ -1105,20 +1105,20 @@
   background:
     repeating-linear-gradient(0deg, transparent 0 31px, var(--color-line) 31px 32px),
     repeating-linear-gradient(90deg, var(--color-surface-muted) 0 31px, var(--color-line) 31px 32px);
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 .ws-camera-card > div:last-child {
   padding: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: var(--text-small);
 }
 .ws-camera-card span {
   display: flex;
   gap: 7px;
   align-items: center;
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .ws-camera-large {
@@ -1219,7 +1219,7 @@
     border-bottom: 1px solid var(--color-line);
   }
   .ws-mobile-record > strong {
-    font-size: 14px;
+    font-size: var(--text-body);
     line-height: 1.5;
   }
   .ws-mobile-record dl {
@@ -1232,7 +1232,7 @@
     justify-content: space-between;
     align-items: baseline;
     gap: 12px;
-    font-size: 12px;
+    font-size: var(--text-caption);
     line-height: 1.5;
   }
   .ws-mobile-record dt {
@@ -1248,7 +1248,7 @@
     padding: 16px;
   }
   .ws-panel-heading h2 {
-    font-size: 17px;
+    font-size: var(--text-lead);
   }
   .ws-panel-heading > .button {
     width: 100%;
@@ -1264,7 +1264,7 @@
     padding: 16px;
   }
   .ws-stats strong {
-    font-size: 22px;
+    font-size: var(--text-heading-md);
   }
   .ws-tabs {
     padding: 0 16px;
@@ -1286,7 +1286,7 @@
   .ws-week-day > button {
     text-align: left;
     padding: 14px 16px;
-    font-size: 13px;
+    font-size: var(--text-small);
     min-height: 48px;
   }
   .ws-week-day > button small {
@@ -1308,13 +1308,13 @@
     gap: 10px;
   }
   .ws-event strong {
-    font-size: 14px;
+    font-size: var(--text-body);
   }
   .ws-event small {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .ws-event b {
-    font-size: 14px;
+    font-size: var(--text-body);
   }
   .ws-master-detail .ws-split {
     display: block;

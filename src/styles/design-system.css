@@ -194,12 +194,12 @@
   background: var(--color-surface);
 }
 .ds-work-rules h3 {
-  font-size: 15px;
+  font-size: var(--text-body);
   line-height: 1.5;
   margin-bottom: 10px;
 }
 .ds-work-rules p {
-  font-size: 13px;
+  font-size: var(--text-small);
   line-height: 1.75;
   color: var(--color-muted);
 }

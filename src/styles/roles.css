@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .role-select select {
@@ -14,7 +14,7 @@
   border-radius: 8px;
   background: var(--color-surface);
   color: var(--color-ink);
-  font-size: 11px;
+  font-size: var(--text-caption);
   cursor: pointer;
 }
 .workspace-role-mobile {
@@ -39,24 +39,24 @@
   border-color: var(--color-accent-line);
 }
 .role-welcome .eyebrow {
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .role-welcome h2 {
-  font-size: 23px;
-  line-height: 31px;
+  font-size: var(--text-heading-lg);
+  line-height: 1.45;
   letter-spacing: -0.6px;
   margin: 10px 0;
 }
 .role-welcome p {
-  font-size: 12px;
-  line-height: 21px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-text);
   max-width: 650px;
 }
 .role-welcome .avatar {
   height: 60px;
   width: 60px;
-  font-size: 18px;
+  font-size: var(--text-heading-sm);
   background: var(--color-surface);
   color: var(--color-accent);
   border: 4px solid #ffffff80;
@@ -71,15 +71,15 @@
   padding: 22px;
 }
 .role-metric-value {
-  font-size: clamp(23px, 2.2cqi, 32px);
+  font-size: clamp(var(--text-heading-lg), 2.2cqi, var(--text-display-sm));
   font-weight: 600;
   letter-spacing: -0.8px;
   margin: 17px 0 10px;
   overflow-wrap: anywhere;
 }
 .role-metrics .stat-card p {
-  font-size: 11px;
-  line-height: 18px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-text);
 }
 .role-metrics .stat-accent p {
@@ -87,7 +87,7 @@
 }
 .role-metrics .badge {
   margin-top: 12px;
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .role-items {
   overflow: hidden;
@@ -107,20 +107,20 @@
   flex-shrink: 0;
   width: 75px;
   color: var(--color-text);
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .role-item-copy {
   flex: 1;
   min-width: 0;
 }
 .role-item-copy strong {
-  font-size: 14px;
+  font-size: var(--text-body);
   font-weight: 500;
-  line-height: 21px;
+  line-height: 1.45;
 }
 .role-item-copy p {
-  font-size: 11px;
-  line-height: 19px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-text);
   margin-top: 5px;
 }
@@ -129,7 +129,7 @@
   background: var(--color-info-bg);
   color: var(--color-info);
   border-radius: 6px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   white-space: nowrap;
 }
 .role-item-status.done {
@@ -172,13 +172,13 @@
   margin-top: 2px;
 }
 .role-note strong {
-  font-size: 13px;
+  font-size: var(--text-small);
   font-weight: 500;
-  line-height: 20px;
+  line-height: 1.45;
 }
 .role-note p {
-  font-size: 12px;
-  line-height: 21px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   margin-top: 5px;
   color: var(--color-muted);
 }
@@ -186,7 +186,7 @@
   padding: 14px 24px;
   border-top: 1px solid var(--color-line);
   color: var(--color-muted);
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 @media (max-width: 1100px) {
   .workspace-brand {
@@ -234,7 +234,7 @@
   }
   .workspace-role-mobile .role-select > span {
     display: inline;
-    font-size: 10px;
+    font-size: var(--text-caption);
     white-space: nowrap;
   }
   .workspace-role-mobile select {
@@ -243,7 +243,7 @@
   }
   .workspace-role-mobile > span {
     color: var(--color-muted);
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .preview-stage,
   .app-shell.is-desktop,
@@ -269,16 +269,16 @@
     border-color: var(--color-accent-line);
   }
   .role-welcome .eyebrow {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .role-welcome h2 {
-    font-size: 19px;
-    line-height: 26px;
+    font-size: var(--text-heading-sm);
+    line-height: 1.45;
     margin: 10px 0;
   }
   .role-welcome p {
-    font-size: 11px;
-    line-height: 19px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .role-welcome .avatar {
     display: none;
@@ -297,27 +297,27 @@
     grid-column: span 2;
   }
   .role-metrics .stat-label {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .role-metric-value {
-    font-size: 22px;
+    font-size: var(--text-heading-md);
     margin: 14px 0 8px;
     letter-spacing: -0.5px;
   }
   .role-metrics .stat-card p {
-    font-size: 10px;
-    line-height: 17px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .role-metrics .badge {
-    font-size: 8px;
+    font-size: var(--text-caption);
     padding: 4px 6px;
   }
   .role-items > .section-heading {
     padding: 19px 18px;
   }
   .role-items .section-heading p {
-    font-size: 10px;
-    line-height: 17px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .role-item {
     flex-wrap: wrap;
@@ -326,28 +326,28 @@
   }
   .role-item-time {
     width: 100%;
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .role-item-copy {
     flex-basis: 55%;
   }
   .role-item-copy strong {
-    font-size: 12px;
-    line-height: 19px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .role-item-copy p {
-    font-size: 10px;
-    line-height: 17px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .role-item-status {
-    font-size: 8px;
+    font-size: var(--text-caption);
     padding: 5px 6px;
     background: var(--color-info-bg);
     color: var(--color-info);
   }
   .role-item .button {
     min-height: 34px;
-    font-size: 9px;
+    font-size: var(--text-caption);
     padding: 0 9px;
     gap: 4px;
   }
@@ -378,28 +378,28 @@
     gap: 12px;
   }
   .role-note strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .role-note p {
-    font-size: 11px;
-    line-height: 19px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .role-note > svg {
     width: 17px;
   }
   .role-overview .prototype-footnote {
     flex-wrap: wrap;
-    font-size: 9px;
+    font-size: var(--text-caption);
     gap: 7px;
   }
   .role-overview .prototype-footnote > span:last-child {
     width: 100%;
     margin-left: 0;
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .booking-note {
     padding: 13px 18px;
-    font-size: 9px;
-    line-height: 16px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
 }

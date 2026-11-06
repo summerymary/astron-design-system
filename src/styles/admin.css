@@ -46,8 +46,8 @@
 }
 .workstation-button strong {
   display: block;
-  font-size: 11px;
-  line-height: 17px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
@@ -55,8 +55,8 @@
 }
 .workstation-button small {
   display: block;
-  font-size: 9px;
-  line-height: 16px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-muted);
   white-space: nowrap;
 }
@@ -91,10 +91,10 @@
   padding-left: 5px;
 }
 .workstation-menu > div > strong {
-  font-size: 13px;
+  font-size: var(--text-small);
 }
 .workstation-menu > p {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   padding: 0 5px;
   margin: 3px 0 15px;
@@ -108,12 +108,12 @@
   border-radius: 7px;
   background: none;
   text-align: left;
-  font-size: 11px;
+  font-size: var(--text-caption);
   margin-top: 3px;
 }
 .workstation-menu small {
   display: block;
-  font-size: 9px;
+  font-size: var(--text-caption);
   margin-top: 4px;
   color: var(--color-muted);
 }
@@ -150,14 +150,14 @@
   min-width: 0;
   width: 100%;
   background: transparent;
-  font-size: 12px;
+  font-size: var(--text-caption);
   outline: none;
   color: var(--color-ink);
   padding: 10px 0;
 }
 .quick-card input::placeholder {
   color: var(--color-muted);
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 .quick-card:focus-within {
   border-color: var(--color-accent);
@@ -189,7 +189,7 @@
   color: var(--color-muted);
   padding: 9px 10px;
   border-radius: 7px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   box-shadow: 0 5px 20px #2d25290d;
   z-index: 28;
 }
@@ -220,7 +220,7 @@
   border-radius: 7px;
   white-space: nowrap;
   background: none;
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .admin-header-actions .header-visit-action {
   border: 1px solid var(--color-line);
@@ -244,7 +244,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-success);
   margin-right: 7px;
   white-space: nowrap;
@@ -258,7 +258,7 @@
   align-items: center;
   gap: 6px;
   background: transparent;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   padding: 0 7px;
 }
@@ -267,7 +267,7 @@
   color: var(--color-accent);
   padding: 3px 5px;
   border-radius: 4px;
-  font-size: 8px;
+  font-size: var(--text-caption);
 }
 .admin-header-indicators > .icon-button {
   width: 27px;
@@ -306,13 +306,13 @@
   padding: 24px 23px 20px;
 }
 .visitor-heading .eyebrow {
-  font-size: 8px;
+  font-size: var(--text-caption);
   letter-spacing: 1.4px;
   color: var(--color-muted);
 }
 .visitor-heading h2 {
-  font-size: 19px;
-  line-height: 27px;
+  font-size: var(--text-heading-sm);
+  line-height: 1.45;
   letter-spacing: -0.4px;
   margin: 7px 0 4px;
   display: flex;
@@ -327,15 +327,15 @@
   height: 21px;
   border: 1px solid var(--color-line);
   border-radius: 5px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   letter-spacing: 0;
   color: var(--color-muted);
   font-weight: 500;
   padding: 0 5px;
 }
 .visitor-heading p {
-  font-size: 11px;
-  line-height: 18px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-muted);
 }
 .visitor-live {
@@ -343,7 +343,7 @@
   align-items: center;
   gap: 5px;
   white-space: nowrap;
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-success);
   align-self: flex-start;
   padding-top: 6px;
@@ -382,13 +382,13 @@
   min-width: 0;
   width: 100%;
   background: transparent;
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-text);
   padding: 10px 0;
 }
 .visitor-search input::placeholder {
   color: var(--color-muted);
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .visitor-search > svg {
   width: 15px;
@@ -408,7 +408,7 @@
   padding: 0 11px;
   height: 39px;
   color: var(--color-muted);
-  font-size: 10px;
+  font-size: var(--text-caption);
   white-space: nowrap;
 }
 .visitor-filter-button.active {
@@ -417,7 +417,7 @@
   color: var(--color-accent);
 }
 .visitor-filter-button b {
-  font-size: 8px;
+  font-size: var(--text-caption);
   padding: 2px 4px;
   border-radius: 3px;
   background: var(--color-surface-muted);
@@ -438,7 +438,7 @@
   display: flex;
   flex-direction: column;
   gap: 7px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   min-width: 0;
 }
@@ -447,7 +447,7 @@
   border: 1px solid var(--color-control-border);
   background: var(--color-surface);
   padding: 9px 8px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   border-radius: 6px;
   color: var(--color-text);
   width: 100%;
@@ -470,15 +470,15 @@
 .filter-form-actions > span {
   margin-right: auto;
   color: var(--color-muted);
-  font-size: 8px;
+  font-size: var(--text-caption);
 }
 .filter-form-actions .button {
   min-height: 33px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   padding: 0 11px;
 }
 .filter-error {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-danger);
   margin-top: 13px;
 }
@@ -494,7 +494,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .visitor-table-controls input {
@@ -508,7 +508,7 @@
   background: var(--color-surface);
   border: 0;
   outline: none;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   padding-right: 0;
   max-width: 125px;
@@ -535,7 +535,7 @@
   border-top: 1px solid var(--color-line);
   border-bottom: 1px solid var(--color-line);
   padding: 12px 11px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   font-weight: 400;
   color: var(--color-muted);
 }
@@ -543,7 +543,7 @@
   height: var(--table-record-row-height);
   padding: var(--table-record-padding-y) 11px;
   border-bottom: 1px solid var(--color-line);
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--color-text);
 }
 .visitor-table tr:last-child td {
@@ -553,25 +553,25 @@
 .visitor-table th:first-child {
   padding-left: 22px;
   color: var(--color-muted);
-  font-size: 8px;
+  font-size: var(--text-caption);
 }
 .visitor-table tbody tr:hover {
   background: var(--color-surface-subtle);
 }
 .visitor-table time {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 500;
   color: var(--color-text);
 }
 .visitor-table td > small {
   display: block;
-  font-size: 8px;
+  font-size: var(--text-caption);
   margin-top: 4px;
 }
 .visitor-card-link {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--text-caption);
   background: var(--color-accent-soft);
   color: var(--color-accent);
   border: 1px solid var(--color-line);
@@ -598,30 +598,30 @@
   gap: 2px;
 }
 .visitor-member-button strong {
-  font-size: 11px;
-  line-height: 16px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   font-weight: 500;
   color: var(--color-text);
 }
 .visitor-member-button small {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
-  line-height: 13px;
+  line-height: 1.45;
 }
 .visitor-member-button .avatar {
   height: var(--table-record-avatar-size);
   width: var(--table-record-avatar-size);
-  font-size: 8px;
+  font-size: var(--text-caption);
 }
 .visit-kind {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
   white-space: normal;
   min-width: 90px;
-  line-height: 14px;
+  line-height: 1.45;
 }
 .visit-kind::before {
   content: '';
@@ -647,7 +647,7 @@
   gap: 12px;
   padding: 17px 23px;
   border-top: 1px solid var(--color-line);
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .visitor-footer strong {
@@ -661,7 +661,7 @@
   padding: 13px 23px;
   background: var(--color-surface-subtle);
   color: var(--color-muted);
-  font-size: 9px;
+  font-size: var(--text-caption);
   border-top: 1px solid var(--color-line);
 }
 .visitor-hint svg {
@@ -681,13 +681,13 @@
   color: var(--color-muted);
 }
 .visitor-no-results h3 {
-  font-size: 16px;
+  font-size: var(--text-lead);
   color: var(--color-text);
   margin: 15px 0 8px;
 }
 .visitor-no-results p {
-  font-size: 11px;
-  line-height: 19px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-muted);
   margin-bottom: 20px;
 }
@@ -695,13 +695,13 @@
   padding: 4px 0 19px;
 }
 .quick-panel-heading .eyebrow {
-  font-size: 8px;
+  font-size: var(--text-caption);
   letter-spacing: 1.3px;
   color: var(--color-muted);
 }
 .quick-panel-heading h2 {
-  font-size: 15px;
-  line-height: 23px;
+  font-size: var(--text-body);
+  line-height: 1.45;
   letter-spacing: -0.3px;
   margin-top: 6px;
 }
@@ -743,15 +743,15 @@
   min-width: 0;
 }
 .admin-quick-panel nav strong {
-  font-size: 11px;
-  line-height: 17px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   font-weight: 500;
   display: block;
   color: var(--color-text);
 }
 .admin-quick-panel nav small {
-  font-size: 8px;
-  line-height: 14px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   margin-top: 3px;
   color: var(--color-muted);
   display: block;
@@ -786,14 +786,14 @@
 }
 .quick-card-note > strong {
   display: block;
-  font-size: 11px;
-  line-height: 18px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   font-weight: 500;
   color: var(--color-accent);
 }
 .quick-card-note p {
-  font-size: 10px;
-  line-height: 18px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   margin-top: 7px;
   color: var(--color-muted);
 }
@@ -804,11 +804,11 @@
   margin-top: 15px;
   padding-top: 12px;
   border-top: 1px solid var(--color-line);
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .quick-card-note b {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--text-caption);
   font-weight: 400;
   color: var(--color-text);
 }
@@ -840,16 +840,16 @@
   margin-bottom: 25px;
 }
 .admin-section-placeholder .eyebrow {
-  font-size: 8px;
+  font-size: var(--text-caption);
 }
 .admin-section-placeholder h2 {
-  font-size: 25px;
+  font-size: var(--text-heading-lg);
   letter-spacing: -0.6px;
   margin: 13px 0 11px;
 }
 .admin-section-placeholder p {
-  font-size: 12px;
-  line-height: 21px;
+  font-size: var(--text-caption);
+  line-height: 1.45;
   color: var(--color-muted);
   max-width: 345px;
 }
@@ -863,7 +863,7 @@
   border: 1px solid var(--color-line);
   background: var(--color-surface-subtle);
   padding: 10px 14px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   margin-top: 20px;
   border-radius: 8px;
   color: var(--color-muted);
@@ -895,7 +895,7 @@
   background: var(--color-canvas);
   border: 1px solid var(--color-line);
   border-radius: 8px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--color-muted);
 }
 .registration-summary strong {
@@ -973,10 +973,10 @@
     max-width: calc(100% - 85px);
   }
   .workstation-button strong {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .workstation-button small {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .workstation-icon {
     height: 31px;
@@ -1010,7 +1010,7 @@
     display: none;
   }
   .header-inbox b {
-    font-size: 9px;
+    font-size: var(--text-caption);
     background: var(--color-accent-soft);
     color: var(--color-accent);
   }
@@ -1028,16 +1028,16 @@
     border-color: var(--color-control-border);
   }
   .quick-card input {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .quick-card input::placeholder {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .quick-card-tooltip {
-    font-size: 8px;
+    font-size: var(--text-caption);
     white-space: normal;
     width: 100%;
-    line-height: 15px;
+    line-height: 1.45;
     top: 45px;
   }
   .admin-header-actions {
@@ -1049,7 +1049,7 @@
   }
   .admin-header-actions > button {
     height: 27px;
-    font-size: 9px;
+    font-size: var(--text-caption);
     padding: 0 8px;
   }
   .admin-header-actions > button > svg {
@@ -1089,7 +1089,7 @@
     border: 1px solid var(--color-line);
     background: var(--color-accent-soft);
     border-radius: 9px;
-    font-size: 11px;
+    font-size: var(--text-caption);
     color: var(--color-accent);
     border-color: var(--color-accent-line);
   }
@@ -1097,7 +1097,7 @@
     margin-right: auto;
   }
   .quick-mobile-toggle > b {
-    font-size: 8px;
+    font-size: var(--text-caption);
     font-weight: 500;
     border: 1px solid var(--color-line);
     border-radius: 4px;
@@ -1127,8 +1127,8 @@
     border-radius: 8px;
   }
   .admin-quick-panel nav strong {
-    font-size: 9px;
-    line-height: 15px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .admin-quick-panel nav small {
     display: none;
@@ -1149,22 +1149,22 @@
     gap: 10px;
   }
   .visitor-heading h2 {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: var(--text-lead);
+    line-height: 1.45;
     margin-top: 6px;
     gap: 7px;
   }
   .visitor-heading h2 > span {
-    font-size: 9px;
+    font-size: var(--text-caption);
     min-width: 19px;
     height: 18px;
   }
   .visitor-heading .eyebrow {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .visitor-heading p {
-    font-size: 10px;
-    line-height: 17px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
     max-width: 200px;
   }
   .visitor-live {
@@ -1185,13 +1185,13 @@
     width: 13px;
   }
   .visitor-search input {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .visitor-search input::placeholder {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .visitor-filter-button {
-    font-size: 9px;
+    font-size: var(--text-caption);
     padding: 0 8px;
     gap: 4px;
     height: 36px;
@@ -1204,9 +1204,9 @@
     gap: 8px;
   }
   .visitor-table-controls > label {
-    font-size: 8px;
+    font-size: var(--text-caption);
     gap: 5px;
-    line-height: 14px;
+    line-height: 1.45;
   }
   .visitor-table-controls input {
     width: 11px;
@@ -1217,7 +1217,7 @@
     display: none;
   }
   .visitor-sort select {
-    font-size: 8px;
+    font-size: var(--text-caption);
     max-width: 110px;
   }
   .visitor-table-scroll {
@@ -1238,7 +1238,7 @@
   .visitor-mobile-card .avatar {
     height: 30px;
     width: 30px;
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .visitor-mobile-card button {
     padding: 0;
@@ -1248,14 +1248,14 @@
     min-width: 0;
   }
   .visitor-mobile-card button > strong {
-    font-size: 11px;
+    font-size: var(--text-caption);
     font-weight: 500;
     color: var(--color-text);
     display: block;
-    line-height: 18px;
+    line-height: 1.45;
   }
   .visitor-mobile-card button > span {
-    font-size: 9px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
     display: flex;
     align-items: center;
@@ -1263,7 +1263,7 @@
     margin-top: 3px;
   }
   .visitor-mobile-card time {
-    font-size: 11px;
+    font-size: var(--text-caption);
     font-family: var(--font-mono);
     color: var(--color-text);
     align-self: flex-start;
@@ -1279,25 +1279,25 @@
     grid-column: span 2;
   }
   .visitor-mobile-card dt {
-    font-size: 8px;
+    font-size: var(--text-caption);
     color: var(--color-muted);
-    line-height: 14px;
+    line-height: 1.45;
   }
   .visitor-mobile-card dd {
-    font-size: 10px;
-    line-height: 17px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
     margin: 2px 0 0;
     color: var(--color-text);
   }
   .visitor-footer {
-    font-size: 8px;
+    font-size: var(--text-caption);
     padding: 14px 17px;
     gap: 7px;
   }
   .visitor-hint {
     padding: 13px 17px;
-    font-size: 8px;
-    line-height: 15px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
     align-items: flex-start;
   }
   .visitor-hint svg {
@@ -1316,11 +1316,11 @@
     gap: 12px 8px;
   }
   .visitor-filters label {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .visitor-filters input,
   .visitor-filters select {
-    font-size: 10px;
+    font-size: var(--text-caption);
     height: 35px;
     padding: 7px 6px;
     border: 1px solid var(--color-control-border);
@@ -1330,24 +1330,24 @@
   }
   .filter-form-actions > span {
     width: 100%;
-    font-size: 8px;
-    line-height: 14px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
     margin-bottom: 5px;
   }
   .filter-form-actions .button {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .admin-section-placeholder {
     min-height: 410px;
     padding: 35px 20px;
   }
   .admin-section-placeholder h2 {
-    font-size: 22px;
-    line-height: 29px;
+    font-size: var(--text-heading-md);
+    line-height: 1.45;
   }
   .admin-section-placeholder p {
-    font-size: 11px;
-    line-height: 20px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .admin-section-placeholder > div {
     flex-direction: column;
@@ -1355,11 +1355,11 @@
     max-width: 230px;
   }
   .member-quick-actions .button {
-    font-size: 10px;
+    font-size: var(--text-caption);
     padding: 0 10px;
   }
   .registration-summary {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
 }
 
@@ -1405,147 +1405,147 @@
     min-width: 190px;
   }
   .workstation-button strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .workstation-button small {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .quick-card input,
   .quick-card input::placeholder {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .admin-header-actions > button {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .system-health {
-    font-size: 9px;
+    font-size: var(--text-caption);
     color: var(--color-success);
   }
   .header-inbox {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .visitor-heading p {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .visitor-heading .eyebrow {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .visitor-live {
-    font-size: 9px;
+    font-size: var(--text-caption);
     color: var(--color-success);
   }
   .visitor-search input {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .visitor-search input::placeholder {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .visitor-filter-button {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .visitor-table-controls > label,
   .visitor-sort select {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .visitor-table {
     min-width: 760px;
   }
   .visitor-table th {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .visitor-table td {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .visitor-table time {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .visitor-card-link {
-    font-size: 11px;
+    font-size: var(--text-caption);
     background: var(--color-accent-soft);
     color: var(--color-accent);
     border-color: var(--color-accent-line);
   }
   .visitor-member-button strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .visitor-member-button small {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .visit-kind {
-    font-size: 10px;
-    line-height: 16px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .visitor-footer {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .visitor-hint {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .admin-quick-panel nav strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .admin-quick-panel nav small {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .admin-quick-panel nav > button {
     min-height: 72px;
   }
   .quick-card-note > strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
     color: var(--color-accent);
   }
   .quick-card-note p {
-    font-size: 11px;
-    line-height: 19px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .quick-card-note > span {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
 }
 @container (max-width:700px) {
   .workstation-button strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .workstation-button small {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .visitor-heading p {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .visitor-search input::placeholder {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .visitor-filter-button {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .visitor-table-controls > label,
   .visitor-sort select {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .visitor-mobile-card button > strong {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .visitor-mobile-card button > span {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .visitor-mobile-card dt {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .visitor-mobile-card dd {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .visitor-mobile-card dl {
     gap: 11px 9px;
   }
   .visitor-footer {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .visitor-hint {
-    font-size: 9px;
-    line-height: 16px;
+    font-size: var(--text-caption);
+    line-height: 1.45;
   }
   .admin-quick-panel nav strong {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
 }
 .header-call-button.calls-enabled {
