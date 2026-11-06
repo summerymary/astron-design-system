@@ -5,7 +5,8 @@ import type { Navigate } from '../components/WorkspaceUI';
 import { resources } from '../data/workspace';
 import { adminSections } from '../data/admin';
 import type { AdminSectionId } from '../data/admin';
-import type { Member, VisitKind } from '../types';
+import type { DemoUser, Member, VisitKind } from '../types';
+import { BarCatalog, BarSales, BartenderHome, TrainerClients } from './StaffWorkspace';
 import {
   BarWorkspace,
   CashWorkspace,
@@ -32,6 +33,7 @@ export function AdminSection({
   members,
   clubName,
   employeeName,
+  user,
   navigate,
   onMember,
   onRegister,
@@ -42,11 +44,18 @@ export function AdminSection({
   members: Member[];
   clubName: string;
   employeeName: string;
+  user: DemoUser;
   navigate: Navigate;
   onMember: (member: Member) => void;
   onRegister: (member: Member, kind: VisitKind) => void;
   onBack: () => void;
 }) {
+  if (section === 'trainer-clients')
+    return (
+      <TrainerClients user={user} members={members} initialMember={member} navigate={navigate} />
+    );
+  if (section === 'bar-catalog') return <BarCatalog navigate={navigate} />;
+  if (section === 'bar-sales') return <BarSales clubName={clubName} />;
   if (resources[section])
     return (
       <ResourcePage
@@ -57,7 +66,9 @@ export function AdminSection({
       />
     );
   if (section === 'schedule')
-    return <ScheduleWorkspace members={members} navigate={navigate} clubName={clubName} />;
+    return (
+      <ScheduleWorkspace members={members} navigate={navigate} clubName={clubName} user={user} />
+    );
   if (section === 'memberships') return <MembershipWorkspace navigate={navigate} />;
   if (section === 'registration')
     return (
@@ -79,7 +90,12 @@ export function AdminSection({
       />
     );
   if (section === 'statistics') return <StatisticsWorkspace />;
-  if (section === 'bar') return <BarWorkspace navigate={navigate} clubName={clubName} />;
+  if (section === 'bar')
+    return user.role === 'bartender' ? (
+      <BartenderHome navigate={navigate} clubName={clubName} />
+    ) : (
+      <BarWorkspace navigate={navigate} clubName={clubName} />
+    );
   if (section === 'cash') return <CashWorkspace navigate={navigate} />;
   if (section === 'inventory') return <InventoryWorkspace navigate={navigate} />;
   if (['crm', 'leads', 'requests', 'segments', 'pipelines', 'retention'].includes(section))

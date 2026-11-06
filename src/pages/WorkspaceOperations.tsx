@@ -798,9 +798,21 @@ export function SaleWorkspace({
   );
 }
 
-export function BarWorkspace({ navigate, clubName }: { navigate: Navigate; clubName: string }) {
+export function BarWorkspace({
+  navigate,
+  clubName,
+  limited = false,
+}: {
+  navigate: Navigate;
+  clubName: string;
+  limited?: boolean;
+}) {
   const { data, put, barOpen, setBarOpen } = useWorkspace();
-  const [cart, setCart] = useState<Record<string, number>>({});
+  const cart = JSON.parse(
+    data['bar-cart']?.find((r) => r.id === 'current')?.items || '{}',
+  ) as Record<string, number>;
+  const setCart = (value: Record<string, number>) =>
+    put('bar-cart', { id: 'current', items: JSON.stringify(value) });
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('Все');
   const [method, setMethod] = useState('Карта');
@@ -816,7 +828,10 @@ export function BarWorkspace({ navigate, clubName }: { navigate: Navigate; clubN
   if (!barOpen)
     return (
       <div className="ws-stack">
-        <SectionLinks ids={['products', 'inventory']} navigate={navigate} />
+        <SectionLinks
+          ids={limited ? ['bar-catalog', 'bar-sales'] : ['products', 'inventory']}
+          navigate={navigate}
+        />
         <section className="panel ws-shift-gate">
           <span className="ws-feature-icon">
             <CupSoda size={30} />
@@ -824,10 +839,7 @@ export function BarWorkspace({ navigate, clubName }: { navigate: Navigate; clubN
           <h2>Бар готов к работе</h2>
           <p>{clubName} · Бар у ресепшена</p>
           <Button onClick={() => setBarOpen(true)}>Открыть демосмену</Button>
-          <small>
-            На исходном сайте смена не открывалась. Экран продажи ниже — предлагаемый демосценарий
-            для обсуждения.
-          </small>
+          <small>Заказы сохраняются в памяти прототипа. Реальной оплаты нет.</small>
         </section>
       </div>
     );
@@ -835,7 +847,10 @@ export function BarWorkspace({ navigate, clubName }: { navigate: Navigate; clubN
     <div className="ws-stack">
       <div className="ws-subheading">
         <Status>Смена открыта</Status>
-        <SectionLinks ids={['products', 'inventory']} navigate={navigate} />
+        <SectionLinks
+          ids={limited ? ['bar-catalog', 'bar-sales'] : ['products', 'inventory']}
+          navigate={navigate}
+        />
         <Button variant="ghost" onClick={() => setClosing(true)}>
           Закрыть смену…
         </Button>

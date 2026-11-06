@@ -28,14 +28,15 @@ import type { Navigate } from '../components/WorkspaceUI';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { TODAY } from '../data/workspace';
 import type { DemoRecord } from '../data/workspace';
-import type { Member } from '../types';
+import type { DemoUser, Member } from '../types';
+import { PersonalTrainingForm, personalDraft } from './StaffWorkspace';
+import { canManageEvent, personalScopeError } from '../lib/staff-rules';
 import {
   addDays,
   calendarBounds,
   clock,
   dayText,
   eventTime,
-  isMovable,
   layoutEvents,
   minutes,
   moveEvent,
@@ -64,25 +65,32 @@ export function ScheduleWorkspace({
   members,
   navigate,
   clubName,
+  user,
 }: {
   members: Member[];
   navigate: Navigate;
   clubName: string;
+  user: DemoUser;
 }) {
   const { data, put } = useWorkspace();
-  const saved = data['calendar-view']?.[0];
+  const isTrainer = user.role === 'trainer';
+  const canEdit = (event: DemoRecord) => canManageEvent(event, user);
+  const saved = data['calendar-view']?.find((r) => r.id === user.id);
   const [day, setDay] = useState(saved?.day || TODAY);
   const [view, setView] = useState(saved?.view || 'День');
   const [club, setClub] = useState(saved?.club || clubName.split(' · ').at(-1) || 'Центральный');
   const [room, setRoom] = useState(
-    saved?.room || data.rooms.find((r) => r.club === club)?.name || 'Все залы',
+    saved?.room ||
+      (isTrainer ? 'Все залы' : data.rooms.find((r) => r.club === club)?.name) ||
+      'Все залы',
   );
-  const [trainer, setTrainer] = useState(saved?.trainer || 'Все тренеры');
-  const [scale, setScale] = useState(saved?.scale || 'Весь день');
+  const [trainer, setTrainer] = useState(isTrainer ? user.name : saved?.trainer || 'Все тренеры');
+  const [scale, setScale] = useState(saved?.scale || 'Комфортно');
   const [step, setStep] = useState(
     saved?.step || data.preferences?.find((r) => r.id === 'schedule')?.step || '5',
   );
   const [fullscreen, setFullscreen] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [openedId, setOpenedId] = useState('');
   const [editing, setEditing] = useState<DemoRecord | null>(null);
   const [library, setLibrary] = useState<DemoRecord | null>(null);
@@ -115,6 +123,7 @@ export function ScheduleWorkspace({
   const events = data.events.filter(
     (e) =>
       e.club === club &&
+      (!isTrainer || e.trainer === user.name) &&
       (room === 'Все залы' || e.room === room) &&
       (trainer === 'Все тренеры' || e.trainer === trainer) &&
       (view === 'Неделя' ? dates.includes(e.day) : e.day === day),
@@ -130,10 +139,28 @@ export function ScheduleWorkspace({
         }))
       : activeRooms
           .filter((r) => room === 'Все залы' || r.name === room)
+          .filter(
+            (r) =>
+              !isTrainer ||
+              room !== 'Все залы' ||
+              !events.length ||
+              events.some((e) => e.room === r.name),
+          )
           .map((r) => ({ key: r.id, day, room: r.name, label: r.name }));
   const { start, end } = calendarBounds(events);
   const shortest = Math.min(50, ...events.map((e) => Number(e.duration)));
-  const minTarget = available.width < 540 || view === 'Неделя' ? 44 : 22;
+  const minTarget =
+    scale === 'Весь день'
+      ? available.width < 540
+        ? 64
+        : view === 'Неделя'
+          ? 60
+          : 20
+      : view === 'Неделя'
+        ? 72
+        : available.width < 540
+          ? 64
+          : 52;
   const gridHeight = Math.max(
     available.height,
     ((end - start) / shortest) * minTarget,
@@ -157,7 +184,7 @@ export function ScheduleWorkspace({
 
   // View preferences live in the same resettable memory as the prototype data.
   useEffect(() => {
-    put('calendar-view', { id: 'calendar', day, view, club, room, trainer, scale, step });
+    put('calendar-view', { id: user.id, day, view, club, room, trainer, scale, step });
     // put is intentionally not a dependency: provider creates it on every update.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [day, view, club, room, trainer, scale, step]);
@@ -256,6 +283,19 @@ export function ScheduleWorkspace({
     status: 'Запись открыта',
   });
   const openLibrary = (initial = seed()) => {
+    if (isTrainer) {
+      setEditing(
+        personalDraft(
+          data,
+          user,
+          initial.club,
+          initial.day,
+          initial.keepRoom === 'true' ? initial.room : '',
+          initial.time,
+        ),
+      );
+      return;
+    }
     setQuery('');
     setLibrary(initial);
   };
@@ -281,16 +321,19 @@ export function ScheduleWorkspace({
   const finishMove = () => {
     if (!pending) return;
     const current = data.events.find((e) => e.id === pending.before.id);
-    if (!current || !isMovable(current) || !sameSlot(current, pending.before)) {
+    if (!current || !canEdit(current) || !sameSlot(current, pending.before)) {
       setError('Занятие уже изменилось. Закройте окно и выберите его заново.');
       return;
     }
     const after: DemoRecord = {
       ...pending.after,
       booked: current.booked,
-      attendees: current.attendees,
+      attendees: current.kind === 'personal' ? pending.after.memberId : current.attendees,
     };
-    const problem = validateEvent(after, data.events, data.rooms);
+    const problem =
+      (after.kind === 'personal'
+        ? personalScopeError(after, user, data['personal-clients'] || [])
+        : null) || validateEvent(after, data.events, data.rooms);
     if (problem) {
       setError(problem);
       return;
@@ -309,7 +352,7 @@ export function ScheduleWorkspace({
   const startDrag = (e: ReactPointerEvent<HTMLButtonElement>, event: DemoRecord) => {
     if (e.button !== 0) return;
     suppressClick.current = false;
-    if (e.pointerType === 'touch' || !isMovable(event)) return;
+    if (e.pointerType === 'touch' || !canEdit(event)) return;
     const rect = e.currentTarget.getBoundingClientRect();
     drag.current = {
       event,
@@ -371,11 +414,33 @@ export function ScheduleWorkspace({
     setGhost(null);
     if (current.active && current.target) requestMove(current.event, current.target);
   };
+  const saveRecord = (record: DemoRecord): string | void => {
+    if (isTrainer && record.kind !== 'personal')
+      return 'Тренер может добавлять только свои персональные тренировки.';
+    const before = data.events.find((e) => e.id === record.id);
+    if (before && !canEdit(before)) return 'Эту тренировку нельзя изменить в выбранной роли.';
+    const problem =
+      (record.kind === 'personal'
+        ? personalScopeError(record, user, data['personal-clients'] || [])
+        : null) || validateEvent(record, data.events, data.rooms);
+    if (problem) return problem;
+    if (before && !sameSlot(before, record)) {
+      setEditing(null);
+      requestMove(before, record);
+      return;
+    }
+    put('events', record);
+    setEditing(null);
+    setMessage(before ? 'Изменения сохранены.' : 'Тренировка добавлена в расписание.');
+    setDay(record.day);
+    setClub(record.club);
+    if (room !== 'Все залы') setRoom(record.room);
+  };
 
   const content = (
     <div
       ref={root}
-      className={`calendar-workspace ${fullscreen ? 'calendar-fullscreen' : ''}`}
+      className={`calendar-workspace ${isTrainer ? 'calendar-is-trainer' : ''} calendar-scale-${scale === 'Весь день' ? 'fit' : 'comfortable'} ${fullscreen ? 'calendar-fullscreen' : ''}`}
       role={fullscreen ? 'dialog' : undefined}
       aria-modal={fullscreen ? true : undefined}
       aria-label={fullscreen ? 'Расписание на весь экран' : undefined}
@@ -417,13 +482,16 @@ export function ScheduleWorkspace({
             label="Вид расписания"
           />
           <div className="calendar-create">
-            <Button variant="secondary" onClick={() => openLibrary()}>
+            <Button
+              variant="secondary"
+              onClick={() => (isTrainer ? navigate('trainer-clients') : openLibrary())}
+            >
               <BookOpen size={15} />
-              База тренировок
+              {isTrainer ? 'Мои клиенты' : 'База тренировок'}
             </Button>
             <Button onClick={() => openLibrary()}>
               <Plus size={15} />
-              Занятие
+              {isTrainer ? 'Персональная тренировка' : 'Занятие'}
             </Button>
             <button
               className="icon-button"
@@ -457,11 +525,29 @@ export function ScheduleWorkspace({
             </button>
           ))}
         </div>
-        <div className="calendar-filters">
+        <button
+          className="calendar-filter-toggle"
+          aria-label="Фильтры расписания"
+          aria-expanded={filtersOpen}
+          aria-controls="calendar-filters"
+          onClick={() => setFiltersOpen(!filtersOpen)}
+        >
+          <Settings2 size={16} />
+          <span>
+            {room} · {scale}
+          </span>
+          <b>{events.length}</b>
+          <ChevronRight size={16} className={filtersOpen ? 'is-open' : ''} />
+        </button>
+        <div
+          className={`calendar-filters ${filtersOpen ? 'is-expanded' : ''}`}
+          id="calendar-filters"
+        >
           <label>
             <span className="sr-only">Клуб расписания</span>
             <select
               value={club}
+              disabled={isTrainer}
               onChange={(e) => {
                 setClub(e.target.value);
                 setRoom(
@@ -477,7 +563,13 @@ export function ScheduleWorkspace({
           </label>
           <label>
             <span className="sr-only">Зал расписания</span>
-            <select value={room} onChange={(e) => setRoom(e.target.value)}>
+            <select
+              value={room}
+              onChange={(e) => {
+                setRoom(e.target.value);
+                setFiltersOpen(false);
+              }}
+            >
               <option>Все залы</option>
               {activeRooms.map((r) => (
                 <option key={r.id}>{r.name}</option>
@@ -486,7 +578,11 @@ export function ScheduleWorkspace({
           </label>
           <label>
             <span className="sr-only">Тренер расписания</span>
-            <select value={trainer} onChange={(e) => setTrainer(e.target.value)}>
+            <select
+              value={trainer}
+              disabled={isTrainer}
+              onChange={(e) => setTrainer(e.target.value)}
+            >
               <option>Все тренеры</option>
               {trainers.map((t) => (
                 <option key={t}>{t}</option>
@@ -495,7 +591,14 @@ export function ScheduleWorkspace({
           </label>
           <label className="calendar-scale">
             <span className="sr-only">Масштаб расписания</span>
-            <select value={scale} onChange={(e) => setScale(e.target.value)}>
+            <select
+              value={scale}
+              onChange={(e) => {
+                setScale(e.target.value);
+                setFiltersOpen(false);
+              }}
+            >
+              <option>Комфортно</option>
               <option>Весь день</option>
               <option>Крупнее</option>
             </select>
@@ -503,35 +606,37 @@ export function ScheduleWorkspace({
           <span className="calendar-count">
             Занятий: <b>{events.length}</b>
           </span>
-          <details className="calendar-more">
-            <summary aria-label="Другие действия с расписанием">
-              <Settings2 size={16} />
-            </summary>
-            <div>
-              <label>
-                Шаг переноса
-                <select
-                  aria-label="Шаг переноса"
-                  value={step}
-                  onChange={(e) => setStep(e.target.value)}
-                >
-                  <option value="5">5 минут</option>
-                  <option value="15">15 минут</option>
-                  <option value="30">30 минут</option>
-                </select>
-              </label>
-              <Button variant="ghost" onClick={() => setCopying(true)}>
-                <Copy size={14} />
-                Из прошлой недели
-              </Button>
-              <Button variant="ghost" onClick={() => navigate('schedule-calendar')}>
-                Настройки календаря
-              </Button>
-              <Button variant="ghost" onClick={() => navigate('training-groups')}>
-                Группы тренировок
-              </Button>
-            </div>
-          </details>
+          {!isTrainer && (
+            <details className="calendar-more">
+              <summary aria-label="Другие действия с расписанием">
+                <Settings2 size={16} />
+              </summary>
+              <div>
+                <label>
+                  Шаг переноса
+                  <select
+                    aria-label="Шаг переноса"
+                    value={step}
+                    onChange={(e) => setStep(e.target.value)}
+                  >
+                    <option value="5">5 минут</option>
+                    <option value="15">15 минут</option>
+                    <option value="30">30 минут</option>
+                  </select>
+                </label>
+                <Button variant="ghost" onClick={() => setCopying(true)}>
+                  <Copy size={14} />
+                  Из прошлой недели
+                </Button>
+                <Button variant="ghost" onClick={() => navigate('schedule-calendar')}>
+                  Настройки календаря
+                </Button>
+                <Button variant="ghost" onClick={() => navigate('training-groups')}>
+                  Группы тренировок
+                </Button>
+              </div>
+            </details>
+          )}
         </div>
         {message && (
           <div className="calendar-feedback" role="status">
@@ -662,7 +767,7 @@ export function ScheduleWorkspace({
                   ).map(({ event, lane, lanes }) => (
                     <button
                       key={event.id}
-                      className={`calendar-event ${event.status === 'Отменено' ? 'is-cancelled' : ''} ${ghost?.id === event.id ? 'is-dragging' : ''}`}
+                      className={`calendar-event ${canEdit(event) ? 'is-editable' : 'is-readonly'} ${event.status === 'Отменено' ? 'is-cancelled' : ''} ${ghost?.id === event.id ? 'is-dragging' : ''}`}
                       style={
                         {
                           top: `${((minutes(event.time) - start) / (end - start)) * 100}%`,
@@ -672,8 +777,8 @@ export function ScheduleWorkspace({
                           '--event-color': event.color || 'var(--color-accent)',
                         } as CSSProperties
                       }
-                      aria-label={`${event.name}, ${dayText(event.day)}, ${eventTime(event)}, ${event.trainer}, ${event.room}, записано ${event.booked} из ${event.capacity}${!isMovable(event) ? ', ' + event.status : ''}`}
-                      title={`${eventTime(event)} · ${event.name}\n${event.trainer} · ${event.room}\n${event.booked} из ${event.capacity} мест. Нажмите для подробностей${isMovable(event) ? ' или перетащите для переноса' : ''}.`}
+                      aria-label={`${event.name}${event.kind === 'personal' ? ', ' + members.find((m) => String(m.id) === event.memberId)?.name : ''}, ${dayText(event.day)}, ${eventTime(event)}, ${event.trainer}, ${event.room}, записано ${event.booked} из ${event.capacity}${!canEdit(event) ? ', ' + event.status : ''}`}
+                      title={`${eventTime(event)} · ${event.name}\n${event.trainer} · ${event.room}\n${event.booked} из ${event.capacity} мест. Нажмите для подробностей${canEdit(event) ? ' или перетащите для переноса' : ''}.`}
                       onPointerDown={(e) => startDrag(e, event)}
                       onPointerMove={onDrag}
                       onPointerUp={endDrag}
@@ -691,16 +796,26 @@ export function ScheduleWorkspace({
                       }}
                     >
                       <time>{eventTime(event)}</time>
-                      <strong>{event.name}</strong>
+                      <strong>
+                        {event.kind === 'personal'
+                          ? `ПТ · ${members.find((m) => String(m.id) === event.memberId)?.name || 'Клиент'}`
+                          : event.name}
+                      </strong>
                       <span className="calendar-event-trainer">
                         {event.trainer}
                         {view === 'Неделя' && room === 'Все залы' ? ` · ${event.room}` : ''}
                       </span>
                       <span
-                        className={`calendar-places ${Number(event.booked) >= Number(event.capacity) ? 'is-full' : ''}`}
+                        className={`calendar-places ${event.kind !== 'personal' && Number(event.booked) >= Number(event.capacity) ? 'is-full' : ''}`}
                       >
                         <Users size={12} />
-                        {event.booked}/{event.capacity}
+                        {event.kind === 'personal' ? (
+                          '1 клиент'
+                        ) : (
+                          <>
+                            {event.booked}/{event.capacity}
+                          </>
+                        )}
                       </span>
                     </button>
                   ))}
@@ -812,7 +927,17 @@ export function ScheduleWorkspace({
               </div>
             </Modal>
           )}
-          {editing && (
+          {editing && editing.kind === 'personal' && (
+            <PersonalTrainingForm
+              key={editing.id}
+              initial={editing}
+              user={user}
+              members={members}
+              onClose={closeEditing}
+              onSave={saveRecord}
+            />
+          )}
+          {editing && editing.kind !== 'personal' && (
             <EventForm
               key={editing.id}
               initial={editing}
@@ -820,28 +945,13 @@ export function ScheduleWorkspace({
               rooms={data.rooms}
               trainers={trainers}
               onClose={closeEditing}
-              onSave={(record) => {
-                const problem = validateEvent(record, data.events, data.rooms);
-                if (problem) return problem;
-                const before = data.events.find((e) => e.id === record.id);
-                if (before && !sameSlot(before, record)) {
-                  setEditing(null);
-                  requestMove(before, record);
-                  return;
-                }
-                put('events', record);
-                setEditing(null);
-                setMessage(before ? 'Изменения сохранены.' : 'Занятие добавлено в расписание.');
-                setDay(record.day);
-                setClub(record.club);
-                if (room !== 'Все залы') setRoom(record.room);
-              }}
+              onSave={saveRecord}
             />
           )}
           {pending && (
             <Modal
               title="Перенести занятие?"
-              subtitle={`${pending.after.name} · ${pending.after.trainer}`}
+              subtitle={`${pending.after.kind === 'personal' ? members.find((m) => String(m.id) === pending.after.memberId)?.name || 'Клиент' : pending.after.name} · ${pending.after.trainer}`}
               onClose={closePending}
             >
               <div className="calendar-move-summary">
@@ -886,7 +996,11 @@ export function ScheduleWorkspace({
           )}
           {opened && (
             <Modal
-              title={opened.name}
+              title={
+                opened.kind === 'personal'
+                  ? `ПТ · ${members.find((m) => String(m.id) === opened.memberId)?.name || 'Клиент'}`
+                  : opened.name
+              }
               subtitle={`${dayText(opened.day)} · ${eventTime(opened)} · ${opened.room}`}
               onClose={closeDetails}
             >
@@ -902,7 +1016,23 @@ export function ScheduleWorkspace({
                 </p>
                 {opened.description && <p>{opened.description}</p>}
                 <Status>{opened.status}</Status>
-                {isMovable(opened) && (
+                {isTrainer && opened.kind !== 'personal' && (
+                  <Notice>Групповое занятие доступно тренеру только для просмотра.</Notice>
+                )}
+                {isTrainer && opened.kind === 'personal' && (
+                  <Button
+                    variant="secondary"
+                    onClick={() => {
+                      const member = members.find((m) => String(m.id) === opened.memberId);
+                      closeDetails();
+                      setFullscreen(false);
+                      navigate('trainer-clients', member);
+                    }}
+                  >
+                    Заметки о клиенте
+                  </Button>
+                )}
+                {canEdit(opened) && (
                   <>
                     <div className="ws-actions">
                       <Button
@@ -916,69 +1046,75 @@ export function ScheduleWorkspace({
                         Перенести / изменить
                       </Button>
                     </div>
-                    <label className="form-field">
-                      <span>Клиент для записи</span>
-                      <select value={booking} onChange={(e) => setBooking(e.target.value)}>
-                        <option value="">Выберите клиента</option>
-                        {members.map((m) => (
-                          <option key={m.id} value={m.id}>
-                            {m.name}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
-                    <Button
-                      disabled={
-                        !booking ||
-                        (opened.attendees || '').split(',').includes(booking) ||
-                        Number(opened.booked) >= Number(opened.capacity)
-                      }
-                      onClick={() => {
-                        const next = {
-                          ...opened,
-                          booked: String(Number(opened.booked) + 1),
-                          status:
-                            Number(opened.booked) + 1 >= Number(opened.capacity)
-                              ? 'Мест нет'
-                              : 'Запись открыта',
-                          attendees: [opened.attendees, booking].filter(Boolean).join(','),
-                        };
-                        put('events', next);
-                        setBooking('');
-                        setMessage('Клиент записан на занятие.');
-                      }}
-                    >
-                      Записать клиента
-                    </Button>
-                    {Number(opened.booked) >= Number(opened.capacity) && (
-                      <Notice tone="warning">
-                        Все места заняты. Правила работы листа ожидания требуют уточнения.
-                      </Notice>
+                    {user.role === 'administrator' && opened.kind !== 'personal' && (
+                      <>
+                        <label className="form-field">
+                          <span>Клиент для записи</span>
+                          <select value={booking} onChange={(e) => setBooking(e.target.value)}>
+                            <option value="">Выберите клиента</option>
+                            {members.map((m) => (
+                              <option key={m.id} value={m.id}>
+                                {m.name}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+                        <Button
+                          disabled={
+                            !booking ||
+                            (opened.attendees || '').split(',').includes(booking) ||
+                            Number(opened.booked) >= Number(opened.capacity)
+                          }
+                          onClick={() => {
+                            const next = {
+                              ...opened,
+                              booked: String(Number(opened.booked) + 1),
+                              status:
+                                Number(opened.booked) + 1 >= Number(opened.capacity)
+                                  ? 'Мест нет'
+                                  : 'Запись открыта',
+                              attendees: [opened.attendees, booking].filter(Boolean).join(','),
+                            };
+                            put('events', next);
+                            setBooking('');
+                            setMessage('Клиент записан на занятие.');
+                          }}
+                        >
+                          Записать клиента
+                        </Button>
+                        {Number(opened.booked) >= Number(opened.capacity) && (
+                          <Notice tone="warning">
+                            Все места заняты. Правила работы листа ожидания требуют уточнения.
+                          </Notice>
+                        )}
+                        {opened.attendees
+                          ?.split(',')
+                          .filter(Boolean)
+                          .map((id) => (
+                            <div className="ws-list-line" key={id}>
+                              <span>
+                                {members.find((m) => String(m.id) === id)?.name || 'Клиент'}
+                              </span>
+                              <Button
+                                variant="ghost"
+                                onClick={() =>
+                                  put('events', {
+                                    ...opened,
+                                    booked: String(Math.max(0, Number(opened.booked) - 1)),
+                                    status: 'Запись открыта',
+                                    attendees: opened.attendees
+                                      .split(',')
+                                      .filter((value) => value !== id)
+                                      .join(','),
+                                  })
+                                }
+                              >
+                                Снять запись
+                              </Button>
+                            </div>
+                          ))}
+                      </>
                     )}
-                    {opened.attendees
-                      ?.split(',')
-                      .filter(Boolean)
-                      .map((id) => (
-                        <div className="ws-list-line" key={id}>
-                          <span>{members.find((m) => String(m.id) === id)?.name || 'Клиент'}</span>
-                          <Button
-                            variant="ghost"
-                            onClick={() =>
-                              put('events', {
-                                ...opened,
-                                booked: String(Math.max(0, Number(opened.booked) - 1)),
-                                status: 'Запись открыта',
-                                attendees: opened.attendees
-                                  .split(',')
-                                  .filter((value) => value !== id)
-                                  .join(','),
-                              })
-                            }
-                          >
-                            Снять запись
-                          </Button>
-                        </div>
-                      ))}
                     <details className="ws-disclosure">
                       <summary>Другие действия</summary>
                       <Button
