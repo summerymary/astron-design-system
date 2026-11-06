@@ -1,8 +1,6 @@
 name: Publish prototype
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -24,6 +22,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm test:theme
+      - run: pnpm test:search
       - run: pnpm build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
