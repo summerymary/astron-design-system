@@ -25,11 +25,11 @@ export const ASTRON_TOKENS = {
   '--color-text': '#3D4652',
   '--color-muted': '#606A5C',
   '--color-subtle': '#606A5C',
-  '--color-canvas': '#F4F5F7',
-  '--color-stage': '#E8EBEF',
+  '--color-canvas': '#FAF9F6',
+  '--color-stage': '#F1EFEA',
   '--color-surface': '#FFFFFF',
-  '--color-surface-subtle': '#FAFBFC',
-  '--color-surface-muted': '#EDF0F3',
+  '--color-surface-subtle': '#FDFCF9',
+  '--color-surface-muted': '#F3F1ED',
   '--color-line': '#DCE1E7',
   '--color-control-border': '#7C8794',
   '--color-success': '#276444',
@@ -44,7 +44,7 @@ export const ASTRON_TOKENS = {
   '--color-paused-bg': '#F3EEF6',
   '--color-chart': '#B16B59',
   '--color-skeleton': '#DCE1E7',
-  '--color-skeleton-highlight': '#F7F8FA',
+  '--color-skeleton-highlight': '#FCFBF8',
 };
 
 export type ThemeToken = keyof typeof ASTRON_TOKENS;
