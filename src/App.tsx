@@ -25,7 +25,7 @@ import type { AdminSectionId } from './data/admin';
 import { classes, initialMembers, pages, scenarios } from './data/mock';
 import { demoClubs, demoNetworks, demoUsers, roleHomes, roles } from './data/roles';
 import { initialProfileBookings } from './data/profileBookings';
-import { DesignSystem } from './pages/DesignSystem';
+import { useTheme } from './components/ThemeProvider';
 import { Members } from './pages/Members';
 import { AdminOverview } from './pages/AdminOverview';
 import { AdminSection } from './pages/AdminSection';
@@ -36,7 +36,6 @@ import type { Device, Member, Page, Scenario, UserRole, Visit, VisitKind } from 
 const navigation = [
   { id: 'overview' as const, label: 'Ресепшен', icon: LayoutDashboard },
   { id: 'members' as const, label: 'Клиенты', icon: Users },
-  { id: 'design-system' as const, label: 'Дизайн-система', icon: BookOpen },
 ];
 
 function initialOptions() {
@@ -63,6 +62,8 @@ function initialOptions() {
 }
 
 export function App() {
+  const { palette } = useTheme();
+  const guideHref = `./design-system.html?theme=${palette.primary.slice(1)}`;
   const [options] = useState(initialOptions);
   const [page, setPage] = useState<Page>(options.page);
   const [device, setDevice] = useState<Device>(options.device);
@@ -296,7 +297,7 @@ export function App() {
             <LayoutDashboard size={16} />
           </span>
           <span>
-            Макет системы<small>Астрон · экраны и оформление</small>
+            Макет системы<small>Астрон · прототип приложения</small>
           </span>
           <span className="workspace-version">v0.1</span>
         </a>
@@ -321,6 +322,17 @@ export function App() {
           </button>
         </div>
         <div className="workspace-actions">
+          <a
+            className="workspace-guide-link"
+            href={guideHref}
+            target="_blank"
+            rel="noopener"
+            aria-label="Открыть дизайн-систему в отдельной вкладке"
+          >
+            <BookOpen size={16} />
+            <span>Дизайн-система</span>
+            <ArrowUpRight size={13} />
+          </a>
           <label className="role-select role-select-desktop">
             <span>Роль</span>
             <select
@@ -335,15 +347,12 @@ export function App() {
               ))}
             </select>
           </label>
-          <label
-            className={`scenario-select ${page === 'design-system' ? 'scenario-disabled' : ''}`}
-          >
+          <label className="scenario-select">
             <span className="scenario-label">Состояние</span>
             <span className={`scenario-dot scenario-${scenario}`} />
             <select
               aria-label="Состояние экрана"
               value={scenario}
-              disabled={page === 'design-system'}
               onChange={(e) => setScenario(e.target.value as Scenario)}
             >
               {scenarios.map((s) => (
@@ -396,7 +405,6 @@ export function App() {
             <select
               aria-label="Состояние на телефоне"
               value={scenario}
-              disabled={page === 'design-system'}
               onChange={(e) => setScenario(e.target.value as Scenario)}
             >
               {scenarios.map((s) => (
@@ -460,39 +468,26 @@ export function App() {
               {currentRole.scope === 'network' ? 'УПРАВЛЕНИЕ СЕТЬЮ' : 'ВАШ КЛУБ'}
             </span>
             <nav className="side-nav" aria-label="Основная навигация">
-              {visibleNavigation
-                .filter((n) => n.id !== 'design-system')
-                .map((n) => (
-                  <button
-                    key={n.id}
-                    aria-current={
-                      page === n.id || (n.id === 'members' && page === 'client-profile')
-                        ? 'page'
-                        : undefined
-                    }
-                    className={
-                      page === n.id || (n.id === 'members' && page === 'client-profile')
-                        ? 'active'
-                        : ''
-                    }
-                    onClick={() => goTo(n.id)}
-                  >
-                    <n.icon size={18} strokeWidth={1.75} />
-                    {n.label}
-                    {n.id === 'members' && <span>{members.length}</span>}
-                  </button>
-                ))}
-            </nav>
-            <span className="nav-label library-label">ОФОРМЛЕНИЕ</span>
-            <nav className="side-nav" aria-label="Библиотека">
-              <button
-                aria-current={page === 'design-system' ? 'page' : undefined}
-                className={page === 'design-system' ? 'active' : ''}
-                onClick={() => goTo('design-system')}
-              >
-                <BookOpen size={18} strokeWidth={1.75} />
-                Дизайн-система<span className="nav-new">01</span>
-              </button>
+              {visibleNavigation.map((n) => (
+                <button
+                  key={n.id}
+                  aria-current={
+                    page === n.id || (n.id === 'members' && page === 'client-profile')
+                      ? 'page'
+                      : undefined
+                  }
+                  className={
+                    page === n.id || (n.id === 'members' && page === 'client-profile')
+                      ? 'active'
+                      : ''
+                  }
+                  onClick={() => goTo(n.id)}
+                >
+                  <n.icon size={18} strokeWidth={1.75} />
+                  {n.label}
+                  {n.id === 'members' && <span>{members.length}</span>}
+                </button>
+              ))}
             </nav>
             <div className="sidebar-bottom">
               <div className="sandbox-card">
@@ -500,11 +495,7 @@ export function App() {
                   <i />
                   Режим прототипа
                 </span>
-                <p>Примеры экранов и правила их оформления.</p>
-                <button onClick={() => goTo('design-system')}>
-                  Открыть стайлгайд
-                  <ArrowUpRight size={14} />
-                </button>
+                <p>Демонстрационные данные хранятся в памяти приложения.</p>
               </div>
               <div className="user-block">
                 <span className="user-avatar">{userInitials}</span>
@@ -602,9 +593,7 @@ export function App() {
                 <div className="page-heading">
                   <div>
                     <div className="page-eyebrow">
-                      {page === 'design-system'
-                        ? 'ПРАВИЛА ОФОРМЛЕНИЯ'
-                        : `${currentRole.label.toUpperCase()} / 1 НОЯБРЯ 2026`}
+                      {`${currentRole.label.toUpperCase()} / 1 НОЯБРЯ 2026`}
                     </div>
                     <h1>
                       {currentPage.title}
@@ -624,12 +613,6 @@ export function App() {
                         <Plus size={16} />
                         <span>Добавить клиента</span>
                       </Button>
-                    )}
-                    {page === 'design-system' && (
-                      <span className="library-badge">
-                        <BookOpen size={14} />
-                        Правила оформления
-                      </span>
                     )}
                   </div>
                 </div>
@@ -655,8 +638,6 @@ export function App() {
                     <Button onClick={() => goTo('members')}>К списку клиентов</Button>
                   </div>
                 )
-              ) : page === 'design-system' ? (
-                <DesignSystem onNotify={notify} />
               ) : scenario !== 'default' ? (
                 <StateContent
                   scenario={scenario}
@@ -733,13 +714,7 @@ export function App() {
                   onClick={() => goTo(n.id)}
                 >
                   <n.icon size={20} strokeWidth={1.75} />
-                  <span>
-                    {n.id === 'overview'
-                      ? 'Главная'
-                      : n.id === 'design-system'
-                        ? 'Дизайн'
-                        : n.label}
-                  </span>
+                  <span>{n.id === 'overview' ? 'Главная' : n.label}</span>
                 </button>
               ))}
             </nav>
