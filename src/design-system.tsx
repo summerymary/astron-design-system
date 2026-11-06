@@ -9,6 +9,7 @@ import './styles/design-system.css';
 import './styles/disclosures.css';
 import './styles/theme.css';
 import './styles/guide.css';
+import './styles/typography.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import {
+  ArrowLeft,
   ArrowUpRight,
   Bell,
   BookOpen,
@@ -115,6 +116,9 @@ export function App() {
   const [sectionsOpen, setSectionsOpen] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const contentRef = useRef<HTMLElement>(null);
+  const sectionHistory = useRef<
+    { page: Page; section: AdminSectionId; clientId: number | null; member: Member | null }[]
+  >([]);
   const currentRole = roles.find((r) => r.id === role)!;
   const currentUser = demoUsers.find((u) => u.role === role)!;
   const roleHome = roleHomes[role];
@@ -171,6 +175,7 @@ export function App() {
   }, [page, device, scenario, role, adminSection, selectedMemberId, currentPage.title]);
   useEffect(() => {
     const onHashChange = () => {
+      sectionHistory.current = [];
       const next = initialOptions();
       setRole(next.role);
       setPage(next.page);
@@ -198,6 +203,7 @@ export function App() {
     window.scrollTo(0, 0);
   };
   const changeRole = (next: UserRole) => {
+    sectionHistory.current = [];
     setRole(next);
     setPage('overview');
     setScenario('default');
@@ -229,6 +235,13 @@ export function App() {
       goTo('members');
       return;
     }
+    if (page !== 'admin-section' || adminSection !== section)
+      sectionHistory.current.push({
+        page,
+        section: adminSection,
+        clientId: selectedMemberId,
+        member: sectionMember,
+      });
     setAdminSection(section);
     setSectionMember(null);
     setSectionsOpen(false);
@@ -246,10 +259,26 @@ export function App() {
       goTo('members');
       return;
     }
+    if (page !== 'admin-section' || adminSection !== section)
+      sectionHistory.current.push({
+        page,
+        section: adminSection,
+        clientId: selectedMemberId,
+        member: sectionMember,
+      });
     setAdminSection(section);
     setSectionMember(member ?? null);
     setScenario('default');
     goTo('admin-section');
+  };
+  const backFromSection = () => {
+    const previous = sectionHistory.current.pop();
+    if (previous) {
+      setAdminSection(previous.section);
+      setSelectedMemberId(previous.clientId);
+      setSectionMember(previous.member);
+      goTo(previous.page);
+    } else goTo('overview');
   };
   const createVisit = (member: Member, kind: VisitKind) => {
     if (role !== 'administrator') return;
@@ -317,6 +346,7 @@ export function App() {
     notify(`${name} — клиент добавлен`);
   };
   const reset = () => {
+    sectionHistory.current = [];
     workspace.reset();
     setResetVersion((value) => value + 1);
     setMembers(initialMembers);
@@ -666,10 +696,21 @@ export function App() {
                 </>
               )}
             </header>
-            <main className="app-content" ref={contentRef} id="main-content" key={resetVersion}>
+            <main
+              className={`app-content ${page === 'admin-section' && adminSection === 'schedule' ? 'has-calendar' : ''}`}
+              ref={contentRef}
+              id="main-content"
+              key={resetVersion}
+            >
               {page !== 'client-profile' && (
                 <div className="page-heading">
                   <div>
+                    {page === 'admin-section' && (
+                      <button className="page-back" onClick={backFromSection}>
+                        <ArrowLeft size={14} />
+                        Назад
+                      </button>
+                    )}
                     <div className="page-eyebrow">
                       {`${currentRole.label.toUpperCase()} / 6 НОЯБРЯ 2026`}
                     </div>
@@ -770,7 +811,7 @@ export function App() {
                   navigate={openModule}
                   onMember={openMember}
                   onRegister={createVisit}
-                  onBack={() => goTo('overview')}
+                  onBack={backFromSection}
                 />
               ) : page === 'overview' ? (
                 role !== 'administrator' ? (
