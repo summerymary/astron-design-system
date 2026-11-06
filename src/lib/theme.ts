@@ -1,4 +1,4 @@
-export const DEFAULT_PRIMARY = '#7A263A';
+export const DEFAULT_PRIMARY = '#8A332C';
 export const THEME_PRESETS = [
   { name: 'Астрон', color: DEFAULT_PRIMARY },
   { name: 'Глубокий синий', color: '#173B70' },
@@ -9,17 +9,17 @@ export const THEME_PRESETS = [
 
 // Keep the established Astron palette exact; tokens.css is its first-paint fallback.
 export const ASTRON_TOKENS = {
-  '--color-accent': '#7A263A',
-  '--color-accent-hover': '#631D2F',
-  '--color-accent-pressed': '#4D1524',
-  '--color-accent-soft': '#F6EDF0',
-  '--color-accent-soft-hover': '#EEDDE3',
-  '--color-accent-line': '#CDA5B2',
+  '--color-accent': '#8A332C',
+  '--color-accent-hover': '#722820',
+  '--color-accent-pressed': '#5B1F19',
+  '--color-accent-soft': '#F6EBE6',
+  '--color-accent-soft-hover': '#EEDBD2',
+  '--color-accent-line': '#D7B0A2',
   '--color-on-accent': '#FFFFFF',
-  '--color-action': '#7A263A',
-  '--color-action-hover': '#631D2F',
-  '--color-action-pressed': '#4D1524',
-  '--color-action-border': '#7A263A',
+  '--color-action': '#8A332C',
+  '--color-action-hover': '#722820',
+  '--color-action-pressed': '#5B1F19',
+  '--color-action-border': '#8A332C',
   '--color-on-action': '#FFFFFF',
   '--color-ink': '#181C24',
   '--color-text': '#3D4652',
@@ -42,7 +42,7 @@ export const ASTRON_TOKENS = {
   '--color-info-bg': '#EEF2F8',
   '--color-paused': '#6B547E',
   '--color-paused-bg': '#F3EEF6',
-  '--color-chart': '#A75E74',
+  '--color-chart': '#B16B59',
   '--color-skeleton': '#DCE1E7',
   '--color-skeleton-highlight': '#F7F8FA',
 };
@@ -66,7 +66,7 @@ export function normalizeHex(input: string): string | null {
 
 function linearChannels(hex: string) {
   const normalized = normalizeHex(hex);
-  if (!normalized) throw new Error('Нужен цвет в формате HEX, например #7A263A.');
+  if (!normalized) throw new Error('Нужен цвет в формате HEX, например #8A332C.');
   return [1, 3, 5].map((i) => {
     const value = parseInt(normalized.slice(i, i + 2), 16) / 255;
     return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
@@ -148,7 +148,7 @@ function readableTone(color: Lch, backgrounds: string[], minimum: number) {
 
 export function generatePalette(input: string): ThemePalette {
   const primary = normalizeHex(input);
-  if (!primary) throw new Error('Нужен цвет в формате HEX, например #7A263A.');
+  if (!primary) throw new Error('Нужен цвет в формате HEX, например #8A332C.');
   if (primary === DEFAULT_PRIMARY)
     return { primary, adjusted: false, appearance: 'standard', tokens: { ...ASTRON_TOKENS } };
   const source = toLch(primary);
