@@ -22,6 +22,7 @@ export const initialMembers: Member[] = [
   {
     id: 1001,
     name: 'Анна Смирнова',
+    fullName: 'Смирнова Анна Андреевна',
     email: 'anna.smirnova@example.com',
     phone: '+7 999 123-45-67',
     plan: 'Безлимит',
@@ -34,6 +35,7 @@ export const initialMembers: Member[] = [
   {
     id: 1002,
     name: 'Михаил Волков',
+    fullName: 'Волков Михаил Сергеевич',
     email: 'm.volkov@example.com',
     phone: '+7 999 234-56-78',
     plan: 'Дневной',
@@ -46,6 +48,7 @@ export const initialMembers: Member[] = [
   {
     id: 1003,
     name: 'Елена Козлова',
+    fullName: 'Козлова Елена Викторовна',
     email: 'elena.k@example.com',
     phone: '+7 999 345-67-89',
     plan: 'Безлимит',
@@ -58,6 +61,7 @@ export const initialMembers: Member[] = [
   {
     id: 1004,
     name: 'Дмитрий Соколов',
+    fullName: 'Соколов Дмитрий Алексеевич',
     email: 'd.sokolov@example.com',
     phone: '+7 999 456-78-90',
     plan: '12 занятий',
@@ -70,6 +74,7 @@ export const initialMembers: Member[] = [
   {
     id: 1005,
     name: 'Мария Лебедева',
+    fullName: 'Лебедева Мария Игоревна',
     email: 'maria.l@example.com',
     phone: '+7 999 567-89-01',
     plan: 'Безлимит',
@@ -82,6 +87,7 @@ export const initialMembers: Member[] = [
   {
     id: 1006,
     name: 'Алексей Морозов',
+    fullName: 'Морозов Алексей Николаевич',
     email: 'alex.m@example.com',
     phone: '+7 999 678-90-12',
     plan: 'Дневной',
