@@ -172,11 +172,14 @@ export function moveEvent(
     ...event,
     ...target,
     capacity: String(capacity),
-    status: isMovable(event)
-      ? Number(event.booked) >= capacity
-        ? 'Мест нет'
-        : 'Запись открыта'
-      : event.status,
+    status:
+      event.kind === 'personal'
+        ? event.status
+        : isMovable(event)
+          ? Number(event.booked) >= capacity
+            ? 'Мест нет'
+            : 'Запись открыта'
+          : event.status,
   };
 }
 
@@ -215,6 +218,9 @@ export function validateEvent(
     return `В зале «${room.name}» не больше ${room.capacity} мест.`;
   if (Number(event.booked || 0) > Number(event.capacity))
     return 'В новом зале недостаточно мест для уже записанных клиентов.';
+  const minimum = Number(event.minimum || 0);
+  if (!Number.isInteger(minimum) || minimum < 0 || minimum > Number(event.capacity))
+    return 'Минимум участников не может быть больше вместимости занятия.';
   const conflicts = events.filter(
     (other) => other.id !== event.id && other.status !== 'Отменено' && overlaps(event, other),
   );
@@ -226,6 +232,11 @@ export function validateEvent(
   const trainerConflict = conflicts.find((other) => other.trainer === event.trainer);
   if (trainerConflict)
     return `У тренера уже есть «${trainerConflict.name}», ${eventTime(trainerConflict)} (${trainerConflict.room}).`;
+  const clientConflict =
+    event.kind === 'personal' &&
+    conflicts.find((other) => (other.attendees || '').split(',').includes(event.memberId));
+  if (clientConflict)
+    return `У клиента уже есть запись на «${clientConflict.name}», ${eventTime(clientConflict)}. Выберите другое время.`;
   return null;
 }
 
