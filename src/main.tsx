@@ -12,6 +12,7 @@ import './styles/design-system.css';
 import './styles/disclosures.css';
 import './styles/theme.css';
 import './styles/guide.css';
+import './styles/client-search.css';
 
 function redirectLegacyGuide() {
   if (!/^#\/design-system(?:\?|$)/.test(window.location.hash)) return false;

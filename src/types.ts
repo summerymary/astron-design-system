@@ -49,6 +49,7 @@ export interface RoleHomeData {
 export interface Member {
   id: number;
   name: string;
+  fullName?: string;
   email: string;
   phone: string;
   plan: string;

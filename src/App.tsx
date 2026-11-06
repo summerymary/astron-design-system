@@ -74,7 +74,6 @@ export function App() {
   const [workstationId, setWorkstationId] = useState('central-01');
   const [adminSection, setAdminSection] = useState<AdminSectionId>(options.section);
   const [sectionMember, setSectionMember] = useState<Member | null>(null);
-  const [cardError, setCardError] = useState('');
   const [registrationMemberId, setRegistrationMemberId] = useState('');
   const [registrationKind, setRegistrationKind] = useState<VisitKind>('gym');
   const [modal, setModal] = useState<'add' | 'reset' | 'registration' | null>(null);
@@ -177,7 +176,6 @@ export function App() {
     setSelectedClass(null);
     setModal(null);
     setToast('');
-    setCardError('');
     setSectionMember(null);
     contentRef.current?.scrollTo(0, 0);
     window.scrollTo(0, 0);
@@ -211,17 +209,6 @@ export function App() {
     setSectionMember(member ?? null);
     setScenario('default');
     goTo('admin-section');
-  };
-  const lookupCard = (card: string) => {
-    const member = members.find(
-      (m) => (memberCards[m.id] ?? String(m.id + 99000)) === card.replace(/\s/g, ''),
-    );
-    if (!member) {
-      setCardError('Карта не найдена. Попробуйте 100001.');
-      return;
-    }
-    setCardError('');
-    openMember(member);
   };
   const registerVisit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -276,7 +263,6 @@ export function App() {
   const reset = () => {
     setMembers(initialMembers);
     setVisits(initialVisits);
-    setCardError('');
     setScenario('default');
     setModal(null);
     notify('Демоданные восстановлены');
@@ -514,11 +500,10 @@ export function App() {
                   workstationId={workstationId}
                   onWorkstation={(id) => {
                     setWorkstationId(id);
-                    setCardError('');
                   }}
-                  onCard={lookupCard}
+                  members={members}
+                  onMember={openMember}
                   onAction={openAdminAction}
-                  cardError={cardError}
                   name={currentUser.name}
                 />
               ) : (
