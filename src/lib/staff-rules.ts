@@ -1,7 +1,19 @@
 import type { DemoRecord } from '../data/workspace';
 import type { DemoUser, Member, UserRole } from '../types';
 
+export const managementRoles: UserRole[] = [
+  'club-director',
+  'network-director',
+  'fitness-director',
+  'operations-director',
+  'sysadmin',
+];
+export function isManagementRole(role: UserRole): boolean {
+  return managementRoles.includes(role);
+}
+
 export function canOpenModule(role: UserRole, section: string): boolean {
+  if (isManagementRole(role)) return section !== 'collagen';
   if (role === 'administrator')
     return !['trainer-clients', 'bar-catalog', 'bar-sales', 'collagen'].includes(section);
   if (role === 'trainer') return ['schedule', 'trainer-clients', 'settings'].includes(section);
@@ -25,6 +37,7 @@ export function canManageEvent(event: DemoRecord, user: DemoUser): boolean {
   if (['Завершено', 'Отменено'].includes(event.status)) return false;
   return (
     user.role === 'administrator' ||
+    isManagementRole(user.role) ||
     (user.role === 'trainer' &&
       event.kind === 'personal' &&
       event.trainerId === user.id &&
@@ -36,7 +49,8 @@ export function personalScopeError(
   user: DemoUser,
   assignments: DemoRecord[],
 ): string | null {
-  if (!['administrator', 'trainer'].includes(user.role)) return 'Эта роль не добавляет тренировки.';
+  if (!['administrator', 'trainer'].includes(user.role) && !isManagementRole(user.role))
+    return 'Эта роль не добавляет тренировки.';
   if (user.role === 'trainer' && (event.trainerId !== user.id || event.trainer !== user.name))
     return 'Можно записывать тренировки только от своего имени.';
   if (
