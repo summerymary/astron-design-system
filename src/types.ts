@@ -6,6 +6,7 @@ export type VisitKind = 'gym' | 'group' | 'personal' | 'online';
 export interface Visit {
   id: string;
   memberId: number;
+  passId?: string;
   card: string;
   enteredAt: string;
   kind: VisitKind;
@@ -65,6 +66,7 @@ export interface Member {
   joined: string;
   expires: string;
   visits: number;
+  initialPassVisits?: number;
   color: string;
   archived?: boolean;
   tags?: string;

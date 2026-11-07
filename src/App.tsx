@@ -43,7 +43,7 @@ import {
 import { Button, Modal, StateContent, Toast } from './components/ui';
 import { AdminHeader } from './components/AdminHeader';
 import { ClubLogo } from './components/ClubLogo';
-import { adminSections, initialVisits, memberCards, visitKinds, workstations } from './data/admin';
+import { adminSections, initialVisits, memberCards, workstations } from './data/admin';
 import type { AdminSectionId } from './data/admin';
 import { classes, initialMembers, pages, scenarios } from './data/mock';
 import { demoClubs, demoNetworks, demoUsers, roleHomes, roles } from './data/roles';
@@ -160,9 +160,7 @@ export function App() {
   const [workstationId, setWorkstationId] = useState('central-01');
   const [adminSection, setAdminSection] = useState<AdminSectionId>(options.section);
   const [sectionMember, setSectionMember] = useState<Member | null>(null);
-  const [registrationMemberId, setRegistrationMemberId] = useState('');
-  const [registrationKind, setRegistrationKind] = useState<VisitKind>('gym');
-  const [modal, setModal] = useState<'add' | 'reset' | 'registration' | null>(null);
+  const [modal, setModal] = useState<'add' | 'reset' | null>(null);
   const [selectedMemberId, setSelectedMemberId] = useState<number | null>(options.clientId);
   const [memberReturnPage, setMemberReturnPage] = useState<Page>('overview');
   const [selectedClass, setSelectedClass] = useState<number | null>(null);
@@ -170,7 +168,7 @@ export function App() {
   const [toast, setToast] = useState('');
   const [mobileStateOpen, setMobileStateOpen] = useState(false);
   const [sectionsOpen, setSectionsOpen] = useState(false);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(options.role === 'administrator');
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const contentRef = useRef<HTMLElement>(null);
   const sidebarNavigationRef = useRef<HTMLDivElement>(null);
@@ -256,6 +254,7 @@ export function App() {
       sectionHistory.current = [];
       const next = initialOptions();
       setRole(next.role);
+      setSidebarCollapsed(next.role === 'administrator');
       setPage(next.page);
       setDevice(next.device);
       setScenario(next.scenario);
@@ -283,6 +282,7 @@ export function App() {
   const changeRole = (next: UserRole) => {
     sectionHistory.current = [];
     setRole(next);
+    setSidebarCollapsed(next === 'administrator');
     setPage('overview');
     setScenario('default');
     setNotificationOpen(false);
@@ -303,11 +303,7 @@ export function App() {
     setScenario('default');
     goTo('client-profile');
   };
-  const openRegistration = (member?: Member) => {
-    setRegistrationMemberId(member ? String(member.id) : '');
-    setRegistrationKind('gym');
-    setModal('registration');
-  };
+  const openRegistration = (member?: Member) => openModule('registration', member);
   const openModule = (section: AdminSectionId, member?: Member) => {
     if (!canOpenModule(role, section)) return;
     if (section === 'members') {
@@ -359,7 +355,7 @@ export function App() {
       goTo(previous.page);
     } else goTo('overview');
   };
-  const createVisit = (member: Member, kind: VisitKind) => {
+  const createVisit = (member: Member, kind: VisitKind, passName?: string, passId?: string) => {
     if (!canOpenModule(role, 'registration')) return;
     const time = new Date(Date.UTC(2026, 10, 6, 14, 35 + visits.length - initialVisits.length))
       .toISOString()
@@ -370,7 +366,8 @@ export function App() {
       card: memberCards[member.id] ?? String(member.id + 99000),
       enteredAt: time,
       kind,
-      plan: member.plan,
+      plan: passName || member.plan,
+      passId,
       clubId: workstation.clubId,
     };
     setVisits((prev) => [visit, ...prev]);
@@ -387,18 +384,13 @@ export function App() {
       description: 'Посещение зарегистрировано после явного подтверждения.',
     });
     setMembers((prev) =>
-      prev.map((m) => (m.id === member.id ? { ...m, visits: m.visits + 1 } : m)),
+      prev.map((m) =>
+        m.id === member.id
+          ? { ...m, visits: m.visits + 1, initialPassVisits: m.initialPassVisits ?? m.visits }
+          : m,
+      ),
     );
     notify(`Посещение зарегистрировано · ${member.name}`);
-  };
-  const registerVisit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const member = members.find((m) => String(m.id) === registrationMemberId);
-    if (!member) return;
-    createVisit(member, registrationKind);
-    setModal(null);
-    setScenario('default');
-    goTo('overview');
   };
   const addMember = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -669,7 +661,7 @@ export function App() {
               {managingRole && (
                 <nav className="side-nav management-module-nav" aria-label="Разделы управления">
                   {managementNavigationGroups.map((group) => (
-                    <details className="management-nav-group nav-accordion" key={group.label} open>
+                    <details className="management-nav-group nav-accordion" key={group.label}>
                       <summary className="nav-label ws-nav-separator">{group.label}</summary>
                       {group.items.map((id) => {
                         const section = adminSections.find((section) => section.id === id)!;
@@ -697,6 +689,14 @@ export function App() {
                       })}
                     </details>
                   ))}
+                  <button
+                    onClick={() => setSectionsOpen(true)}
+                    title={sidebarCollapsed ? 'Каталог разделов' : undefined}
+                    aria-label={sidebarCollapsed ? 'Каталог разделов' : undefined}
+                  >
+                    <Menu size={18} />
+                    <span className="nav-item-label">Каталог разделов</span>
+                  </button>
                 </nav>
               )}
               {role === 'administrator' && (
@@ -1164,64 +1164,6 @@ export function App() {
           </div>
         </Modal>
       )}
-      {modal === 'registration' && (
-        <Modal
-          title="Регистрация посещения"
-          subtitle={`${club.name} · ${workstation.name}`}
-          onClose={closeModal}
-        >
-          <form className="member-form" onSubmit={registerVisit}>
-            <label className="form-field">
-              <span>Клиент</span>
-              <select
-                aria-label="Клиент для посещения"
-                required
-                value={registrationMemberId}
-                onChange={(e) => setRegistrationMemberId(e.target.value)}
-              >
-                <option value="" disabled>
-                  Выберите клиента
-                </option>
-                {members.map((m) => (
-                  <option key={m.id} value={m.id}>
-                    {m.name} · {memberCards[m.id] ?? String(m.id + 99000)}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="form-field">
-              <span>Тип посещения</span>
-              <select
-                aria-label="Тип нового посещения"
-                value={registrationKind}
-                onChange={(e) => setRegistrationKind(e.target.value as VisitKind)}
-              >
-                {Object.entries(visitKinds).map(([id, label]) => (
-                  <option key={id} value={id}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            {registrationMemberId && (
-              <div className="registration-summary">
-                <span>Абонемент</span>
-                <strong>{members.find((m) => String(m.id) === registrationMemberId)?.plan}</strong>
-              </div>
-            )}
-            <p className="form-note">Демонстрационное посещение сохранится в памяти прототипа.</p>
-            <div className="modal-actions">
-              <Button type="button" variant="secondary" onClick={closeModal}>
-                Отмена
-              </Button>
-              <Button type="submit" disabled={!registrationMemberId}>
-                <Check size={15} />
-                Зарегистрировать
-              </Button>
-            </div>
-          </form>
-        </Modal>
-      )}
       {selectedClass !== null && (
         <Modal
           title={classes[selectedClass].name}
@@ -1271,7 +1213,18 @@ export function App() {
               labels={managingRole ? { 'trainer-clients': 'Персональные клиенты' } : undefined}
               ids={
                 managingRole
-                  ? managementNavigationGroups.flatMap((group) => group.items)
+                  ? adminSections
+                      .filter(
+                        (section) =>
+                          ![
+                            'bar',
+                            'bar-catalog',
+                            'bar-sales',
+                            'bar-categories',
+                            'bar-collections',
+                          ].includes(section.id),
+                      )
+                      .map((section) => section.id)
                   : [
                       'schedule',
                       'memberships',
