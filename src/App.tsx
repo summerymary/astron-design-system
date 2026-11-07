@@ -25,6 +25,20 @@ import {
   CupSoda,
   Library,
   BriefcaseBusiness,
+  PanelLeftClose,
+  PanelLeftOpen,
+  Building2,
+  DoorOpen,
+  Package,
+  ShieldCheck,
+  Camera as CameraIcon,
+  ClipboardList,
+  ChartNoAxesCombined,
+  Tags,
+  GitBranch,
+  CalendarX2,
+  BadgeDollarSign,
+  Globe,
 } from 'lucide-react';
 import { Button, Modal, StateContent, Toast } from './components/ui';
 import { AdminHeader } from './components/AdminHeader';
@@ -43,7 +57,9 @@ import { AdminSection } from './pages/AdminSection';
 import { ClientProfile } from './pages/ClientProfile';
 import { RoleOverview } from './pages/RoleOverview';
 import { BartenderHome, TrainerHome } from './pages/StaffWorkspace';
-import { canOpenModule } from './lib/staff-rules';
+import { canOpenModule, isManagementRole } from './lib/staff-rules';
+import { managementNavigationGroups } from './data/management-navigation';
+import { membershipKinds } from './data/membership-kinds';
 import type { Device, Member, Page, Scenario, UserRole, Visit, VisitKind } from './types';
 
 const navigation = [
@@ -63,6 +79,45 @@ const managementNavigation = [
   { id: 'directories', label: 'Справочники', icon: Library },
   { id: 'service-settings', label: 'Настройки', icon: Settings2 },
 ] as const;
+const managementIcons = {
+  schedule: CalendarDays,
+  memberships: CreditCard,
+  registration: Check,
+  services: CreditCard,
+  products: Package,
+  cash: CreditCard,
+  inventory: Package,
+  crm: Users,
+  leads: Users,
+  requests: Globe,
+  segments: Tags,
+  pipelines: GitBranch,
+  retention: Users,
+  'trainer-clients': Dumbbell,
+  messages: MessageSquare,
+  'external-messages': Globe,
+  calls: Phone,
+  reviews: MessageSquare,
+  notifications: Bell,
+  employees: BriefcaseBusiness,
+  positions: BriefcaseBusiness,
+  absences: CalendarX2,
+  payroll: BadgeDollarSign,
+  directories: Library,
+  clubs: Building2,
+  rooms: DoorOpen,
+  receptions: Monitor,
+  'training-templates': ClipboardList,
+  'training-groups': Dumbbell,
+  'schedule-calendar': CalendarDays,
+  statistics: ChartNoAxesCombined,
+  cameras: CameraIcon,
+  rbac: Users,
+  security: ShieldCheck,
+  'event-logs': ClipboardList,
+  'service-settings': Settings2,
+  settings: Settings2,
+};
 
 function initialOptions() {
   const [path, query] = window.location.hash.replace('#/', '').split('?');
@@ -115,12 +170,15 @@ export function App() {
   const [toast, setToast] = useState('');
   const [mobileStateOpen, setMobileStateOpen] = useState(false);
   const [sectionsOpen, setSectionsOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const contentRef = useRef<HTMLElement>(null);
+  const sidebarNavigationRef = useRef<HTMLDivElement>(null);
   const sectionHistory = useRef<
     { page: Page; section: AdminSectionId; clientId: number | null; member: Member | null }[]
   >([]);
   const currentRole = roles.find((r) => r.id === role)!;
+  const managingRole = isManagementRole(role);
   const currentUser = demoUsers.find((u) => u.role === role)!;
   const roleHome = roleHomes[role];
   const selectedMember = members.find((m) => m.id === selectedMemberId);
@@ -129,7 +187,10 @@ export function App() {
       ? { title: selectedMember?.name ?? 'Карточка клиента', caption: 'Сведения о клиенте' }
       : page === 'admin-section'
         ? {
-            title: adminSections.find((s) => s.id === adminSection)!.label,
+            title:
+              managingRole && adminSection === 'trainer-clients'
+                ? 'Персональные клиенты'
+                : adminSections.find((s) => s.id === adminSection)!.label,
             caption: adminSections.find((s) => s.id === adminSection)!.caption,
           }
         : page === 'overview'
@@ -166,6 +227,22 @@ export function App() {
     },
     [],
   );
+  useEffect(() => {
+    if (!managingRole) return;
+    const menu = sidebarNavigationRef.current;
+    if (sidebarCollapsed)
+      menu?.querySelectorAll('details').forEach((group) => {
+        group.open = true;
+      });
+    const active = menu?.querySelector<HTMLElement>('button[aria-current="page"]');
+    if (!menu || !active) return;
+    const activeGroup = active.closest('details');
+    if (activeGroup) activeGroup.open = true;
+    const bounds = menu.getBoundingClientRect();
+    const item = active.getBoundingClientRect();
+    if (item.top < bounds.top + 8) menu.scrollTop += item.top - bounds.top - 8;
+    else if (item.bottom > bounds.bottom - 8) menu.scrollTop += item.bottom - bounds.bottom + 8;
+  }, [managingRole, role, page, adminSection, sidebarCollapsed]);
   useEffect(() => {
     window.history.replaceState(
       null,
@@ -251,7 +328,7 @@ export function App() {
     goTo('admin-section');
   };
   const openAdminAction = (section: AdminSectionId, member?: Member) => {
-    if (role !== 'administrator') return;
+    if (!canOpenModule(role, section)) return;
     if (section === 'registration') {
       openRegistration(member);
       return;
@@ -283,7 +360,7 @@ export function App() {
     } else goTo('overview');
   };
   const createVisit = (member: Member, kind: VisitKind) => {
-    if (role !== 'administrator') return;
+    if (!canOpenModule(role, 'registration')) return;
     const time = new Date(Date.UTC(2026, 10, 6, 14, 35 + visits.length - initialVisits.length))
       .toISOString()
       .slice(0, 16);
@@ -516,18 +593,35 @@ export function App() {
             Мобильная версия<span>390 × 844</span>
           </div>
         )}
-        <div className={`app-shell is-${device}`}>
-          <aside className="sidebar">
-            <a
-              className="brand"
-              href="#/overview"
-              onClick={(e) => {
-                e.preventDefault();
-                goTo('overview');
-              }}
-            >
-              <ClubLogo brand={club.brand} />
-            </a>
+        <div className={`app-shell is-${device}${sidebarCollapsed ? ' is-sidebar-collapsed' : ''}`}>
+          <aside
+            className={`sidebar ${managingRole ? 'has-management-menu' : ''}`}
+            aria-label="Боковое меню"
+          >
+            <div className="sidebar-head">
+              <a
+                className="brand"
+                title={sidebarCollapsed ? club.name : undefined}
+                href="#/overview"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goTo('overview');
+                }}
+              >
+                <ClubLogo brand={club.brand} variant={sidebarCollapsed ? 'compact' : 'wide'} />
+              </a>
+              <button
+                type="button"
+                className="icon-button sidebar-toggle"
+                aria-label={sidebarCollapsed ? 'Развернуть меню' : 'Свернуть меню'}
+                title={sidebarCollapsed ? 'Развернуть меню' : 'Свернуть меню'}
+                aria-expanded={!sidebarCollapsed}
+                aria-controls="workspace-navigation"
+                onClick={() => setSidebarCollapsed((value) => !value)}
+              >
+                {sidebarCollapsed ? <PanelLeftOpen size={19} /> : <PanelLeftClose size={19} />}
+              </button>
+            </div>
             <div className="club-switch">
               <ClubLogo brand={club.brand} variant="compact" decorative />
               <span>
@@ -540,89 +634,140 @@ export function App() {
               </span>
               <ChevronDown size={14} />
             </div>
-            <span className="nav-label">
-              {currentRole.scope === 'network' ? 'УПРАВЛЕНИЕ СЕТЬЮ' : 'ВАШ КЛУБ'}
-            </span>
-            <nav className="side-nav" aria-label="Основная навигация">
-              {visibleNavigation.map((n) => (
-                <button
-                  key={n.id}
-                  aria-current={
-                    page === n.id || (n.id === 'members' && page === 'client-profile')
-                      ? 'page'
-                      : undefined
-                  }
-                  className={
-                    page === n.id || (n.id === 'members' && page === 'client-profile')
-                      ? 'active'
-                      : ''
-                  }
-                  onClick={() => goTo(n.id)}
-                >
-                  <n.icon size={18} strokeWidth={1.75} />
-                  {n.label}
-                  {n.id === 'members' && <span>{members.length}</span>}
-                </button>
-              ))}
-            </nav>
-            {role === 'administrator' && (
-              <nav className="side-nav ws-module-nav" aria-label="Рабочие разделы">
-                {workNavigation.map((n) => (
+            <div
+              id="workspace-navigation"
+              className="sidebar-navigation"
+              ref={sidebarNavigationRef}
+            >
+              <span className="nav-label">
+                {currentRole.scope === 'network' ? 'УПРАВЛЕНИЕ СЕТЬЮ' : 'ВАШ КЛУБ'}
+              </span>
+              <nav className="side-nav" aria-label="Основная навигация">
+                {visibleNavigation.map((n) => (
                   <button
                     key={n.id}
+                    title={sidebarCollapsed ? n.label : undefined}
+                    aria-label={sidebarCollapsed ? n.label : undefined}
                     aria-current={
-                      page === 'admin-section' && adminSection === n.id ? 'page' : undefined
+                      page === n.id || (n.id === 'members' && page === 'client-profile')
+                        ? 'page'
+                        : undefined
                     }
-                    className={page === 'admin-section' && adminSection === n.id ? 'active' : ''}
-                    onClick={() => openModule(n.id)}
+                    className={
+                      page === n.id || (n.id === 'members' && page === 'client-profile')
+                        ? 'active'
+                        : ''
+                    }
+                    onClick={() => goTo(n.id)}
                   >
                     <n.icon size={18} strokeWidth={1.75} />
-                    {n.label}
-                  </button>
-                ))}
-                <span className="nav-label ws-nav-separator">УПРАВЛЕНИЕ</span>
-                {managementNavigation.map((n) => (
-                  <button
-                    key={n.id}
-                    aria-current={
-                      page === 'admin-section' && adminSection === n.id ? 'page' : undefined
-                    }
-                    className={page === 'admin-section' && adminSection === n.id ? 'active' : ''}
-                    onClick={() => openModule(n.id)}
-                  >
-                    <n.icon size={18} strokeWidth={1.75} />
-                    {n.label}
-                  </button>
-                ))}
-                <button onClick={() => setSectionsOpen(true)}>
-                  <Menu size={18} />
-                  Все разделы
-                </button>
-              </nav>
-            )}
-            {(role === 'trainer' || role === 'bartender') && (
-              <nav className="side-nav ws-module-nav" aria-label="Рабочие разделы">
-                {(role === 'trainer'
-                  ? [
-                      { id: 'schedule' as const, label: 'Моё расписание', icon: CalendarDays },
-                      { id: 'trainer-clients' as const, label: 'Мои клиенты', icon: Users },
-                    ]
-                  : [
-                      { id: 'bar-catalog' as const, label: 'Каталог бара', icon: CupSoda },
-                      { id: 'bar-sales' as const, label: 'Продажи бара', icon: CreditCard },
-                    ]
-                ).map((n) => (
-                  <button
-                    key={n.id}
-                    className={page === 'admin-section' && adminSection === n.id ? 'active' : ''}
-                    onClick={() => openModule(n.id)}
-                  >
-                    <n.icon size={18} />
-                    {n.label}
+                    <span className="nav-item-label">{n.label}</span>
+                    {n.id === 'members' && <span className="nav-count">{members.length}</span>}
                   </button>
                 ))}
               </nav>
-            )}
+              {managingRole && (
+                <nav className="side-nav management-module-nav" aria-label="Разделы управления">
+                  {managementNavigationGroups.map((group) => (
+                    <details className="management-nav-group nav-accordion" key={group.label} open>
+                      <summary className="nav-label ws-nav-separator">{group.label}</summary>
+                      {group.items.map((id) => {
+                        const section = adminSections.find((section) => section.id === id)!;
+                        const label =
+                          id === 'trainer-clients' ? 'Персональные клиенты' : section.label;
+                        const Icon =
+                          managementIcons[id as keyof typeof managementIcons] || BookOpen;
+                        return (
+                          <button
+                            key={id}
+                            title={sidebarCollapsed ? label : undefined}
+                            aria-label={sidebarCollapsed ? label : undefined}
+                            aria-current={
+                              page === 'admin-section' && adminSection === id ? 'page' : undefined
+                            }
+                            className={
+                              page === 'admin-section' && adminSection === id ? 'active' : ''
+                            }
+                            onClick={() => openModule(id)}
+                          >
+                            <Icon size={18} strokeWidth={1.75} />
+                            <span className="nav-item-label">{label}</span>
+                          </button>
+                        );
+                      })}
+                    </details>
+                  ))}
+                </nav>
+              )}
+              {role === 'administrator' && (
+                <nav className="side-nav ws-module-nav" aria-label="Рабочие разделы">
+                  {workNavigation.map((n) => (
+                    <button
+                      key={n.id}
+                      title={sidebarCollapsed ? n.label : undefined}
+                      aria-label={sidebarCollapsed ? n.label : undefined}
+                      aria-current={
+                        page === 'admin-section' && adminSection === n.id ? 'page' : undefined
+                      }
+                      className={page === 'admin-section' && adminSection === n.id ? 'active' : ''}
+                      onClick={() => openModule(n.id)}
+                    >
+                      <n.icon size={18} strokeWidth={1.75} />
+                      <span className="nav-item-label">{n.label}</span>
+                    </button>
+                  ))}
+                  <span className="nav-label ws-nav-separator">УПРАВЛЕНИЕ</span>
+                  {managementNavigation.map((n) => (
+                    <button
+                      key={n.id}
+                      title={sidebarCollapsed ? n.label : undefined}
+                      aria-label={sidebarCollapsed ? n.label : undefined}
+                      aria-current={
+                        page === 'admin-section' && adminSection === n.id ? 'page' : undefined
+                      }
+                      className={page === 'admin-section' && adminSection === n.id ? 'active' : ''}
+                      onClick={() => openModule(n.id)}
+                    >
+                      <n.icon size={18} strokeWidth={1.75} />
+                      <span className="nav-item-label">{n.label}</span>
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => setSectionsOpen(true)}
+                    title={sidebarCollapsed ? 'Все разделы' : undefined}
+                    aria-label={sidebarCollapsed ? 'Все разделы' : undefined}
+                  >
+                    <Menu size={18} />
+                    <span className="nav-item-label">Все разделы</span>
+                  </button>
+                </nav>
+              )}
+              {(role === 'trainer' || role === 'bartender') && (
+                <nav className="side-nav ws-module-nav" aria-label="Рабочие разделы">
+                  {(role === 'trainer'
+                    ? [
+                        { id: 'schedule' as const, label: 'Моё расписание', icon: CalendarDays },
+                        { id: 'trainer-clients' as const, label: 'Мои клиенты', icon: Users },
+                      ]
+                    : [
+                        { id: 'bar-catalog' as const, label: 'Каталог бара', icon: CupSoda },
+                        { id: 'bar-sales' as const, label: 'Продажи бара', icon: CreditCard },
+                      ]
+                  ).map((n) => (
+                    <button
+                      key={n.id}
+                      title={sidebarCollapsed ? n.label : undefined}
+                      aria-label={sidebarCollapsed ? n.label : undefined}
+                      className={page === 'admin-section' && adminSection === n.id ? 'active' : ''}
+                      onClick={() => openModule(n.id)}
+                    >
+                      <n.icon size={18} />
+                      <span className="nav-item-label">{n.label}</span>
+                    </button>
+                  ))}
+                </nav>
+              )}
+            </div>
             <div className="sidebar-bottom">
               <div className="sandbox-card">
                 <span>
@@ -631,7 +776,10 @@ export function App() {
                 </span>
                 <p>Демонстрационные данные хранятся в памяти приложения.</p>
               </div>
-              <div className="user-block">
+              <div
+                className="user-block"
+                title={sidebarCollapsed ? `${currentUser.name} · ${currentRole.label}` : undefined}
+              >
                 <span className="user-avatar">{userInitials}</span>
                 <span>
                   <strong>{currentUser.name.split(' ')[0]}</strong>
@@ -768,7 +916,7 @@ export function App() {
                     member={selectedMember}
                     visits={visits.filter((v) => v.memberId === selectedMember.id)}
                     bookings={selectedMember.id === 1001 ? initialProfileBookings : []}
-                    canOperate={role === 'administrator'}
+                    canOperate={role === 'administrator' || managingRole}
                     scenario={scenario}
                     onReset={() => setScenario('default')}
                     onBack={() => goTo(memberReturnPage)}
@@ -918,7 +1066,7 @@ export function App() {
                   </button>
                 </>
               )}
-              {role === 'administrator' && (
+              {(role === 'administrator' || managingRole) && (
                 <>
                   <button
                     className={
@@ -981,9 +1129,9 @@ export function App() {
             <label className="form-field">
               <span>Абонемент</span>
               <select name="plan">
-                <option>Безлимит</option>
-                <option>Дневной</option>
-                <option>12 занятий</option>
+                {membershipKinds.map((kind) => (
+                  <option key={kind.id}>{kind.name}</option>
+                ))}
               </select>
             </label>
             <p className="form-note">Данные сохранятся в памяти до обновления страницы.</p>
@@ -1120,26 +1268,31 @@ export function App() {
         <Modal title="Все разделы" onClose={() => setSectionsOpen(false)}>
           <div className="ws-stack">
             <LinkCards
-              ids={[
-                'schedule',
-                'memberships',
-                'registration',
-                'crm',
-                'calls',
-                'messages',
-                'notifications',
-                'bar',
-                'cash',
-                'employees',
-                'clubs',
-                'directories',
-                'cameras',
-                'rbac',
-                'security',
-                'event-logs',
-                'settings',
-                'service-settings',
-              ]}
+              labels={managingRole ? { 'trainer-clients': 'Персональные клиенты' } : undefined}
+              ids={
+                managingRole
+                  ? managementNavigationGroups.flatMap((group) => group.items)
+                  : [
+                      'schedule',
+                      'memberships',
+                      'registration',
+                      'crm',
+                      'calls',
+                      'messages',
+                      'notifications',
+                      'bar',
+                      'cash',
+                      'employees',
+                      'clubs',
+                      'directories',
+                      'cameras',
+                      'rbac',
+                      'security',
+                      'event-logs',
+                      'settings',
+                      'service-settings',
+                    ]
+              }
               navigate={openModule}
             />
           </div>

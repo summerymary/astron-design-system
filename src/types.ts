@@ -13,7 +13,15 @@ export interface Visit {
   clubId: string;
 }
 export type UserRole =
-  'administrator' | 'trainer' | 'bartender' | 'club-director' | 'network-director' | 'marketer';
+  | 'administrator'
+  | 'trainer'
+  | 'bartender'
+  | 'club-director'
+  | 'network-director'
+  | 'marketer'
+  | 'fitness-director'
+  | 'operations-director'
+  | 'sysadmin';
 
 export interface DemoUser {
   id: string;
