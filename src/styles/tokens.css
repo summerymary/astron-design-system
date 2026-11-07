@@ -65,4 +65,8 @@
   --radius-card: 16px;
   --radius-pill: 999px;
   --shadow-popup: 0 16px 56px #181c2416;
+  --color-divider: color-mix(in srgb, var(--color-line) 60%, var(--color-surface));
+  --layout-page-padding: clamp(28px, 3cqi, 48px);
+  --layout-panel-padding: 28px;
+  --layout-section-gap: 28px;
 }

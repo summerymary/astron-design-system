@@ -1,16 +1,3 @@
-.staff-welcome {
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-.staff-welcome h2 {
-  font-size: var(--text-heading-md);
-  margin: 8px 0;
-}
-.staff-welcome p,
 .staff-muted,
 .staff-form-context {
   color: var(--color-muted);
@@ -108,9 +95,6 @@
   .staff-clients-layout {
     grid-template-columns: 1fr;
     gap: 16px;
-  }
-  .staff-welcome {
-    padding: 18px;
   }
   .staff-session-list > button {
     gap: 10px;

@@ -1,0 +1,377 @@
+/* Shared layout and surface hierarchy. Loaded last in both entry points. */
+.panel {
+  border-color: var(--color-divider);
+  border-radius: var(--radius-card);
+  box-shadow: none;
+}
+.button {
+  font-weight: 500;
+}
+.app-content:not(.has-calendar) {
+  padding: 40px var(--layout-page-padding) 32px;
+}
+.page-heading {
+  margin-bottom: 32px;
+  align-items: flex-start;
+}
+.page-eyebrow {
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+}
+.page-heading h1 {
+  line-height: 1.2;
+}
+.page-heading p {
+  color: var(--color-muted);
+  margin-top: 12px;
+  max-width: 720px;
+  line-height: 1.65;
+}
+.sidebar {
+  width: 240px;
+  padding: 32px 20px 0;
+  border-color: var(--color-divider);
+}
+.club-switch {
+  border: 0;
+  margin: 24px 0 32px;
+  padding: 12px 4px;
+}
+.club-switch strong,
+.club-switch small {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+.nav-label {
+  letter-spacing: 0.6px;
+}
+.side-nav {
+  gap: 6px;
+}
+.side-nav button {
+  font-size: var(--text-small);
+  min-height: 44px;
+  color: var(--color-muted);
+}
+.side-nav button.active {
+  background: var(--color-accent-soft);
+  color: var(--color-action);
+  font-weight: 600;
+}
+.side-nav button.active > span {
+  background: var(--color-surface);
+  color: var(--color-action);
+}
+.sandbox-card {
+  background: transparent;
+  border: 0;
+  padding: 12px 4px;
+}
+.sandbox-card > span {
+  color: var(--color-muted);
+}
+.user-block,
+.app-topbar {
+  border-color: var(--color-divider);
+}
+.app-topbar:not(.admin-topbar) {
+  padding-inline: var(--layout-page-padding);
+}
+.date-chip {
+  background: transparent;
+  border: 0;
+  padding-inline: 0;
+}
+
+/* Numbers belong to one summary, rather than a collection of nested cards. */
+.ws-stats,
+.stats-grid,
+.role-metrics {
+  gap: 0;
+  padding: 8px 0;
+}
+.ws-stats > div,
+.stat-card,
+.stat-card.stat-accent,
+.role-metrics .stat-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 4px 28px;
+  box-shadow: none;
+  border-inline-end: 1px solid var(--color-divider);
+}
+.ws-stats > div:first-child,
+.stats-grid > .stat-card:first-child,
+.role-metrics > .stat-card:first-child {
+  padding-inline-start: 0;
+}
+.ws-stats > div:last-child,
+.stats-grid > .stat-card:last-child,
+.role-metrics > .stat-card:last-child {
+  border-inline-end: 0;
+}
+.stat-decoration {
+  display: none;
+}
+.stat-label,
+.stat-accent .stat-label,
+.stat-accent .stat-label svg,
+.stat-accent .stat-foot {
+  color: var(--color-muted);
+}
+.stat-value,
+.role-metric-value {
+  margin: 16px 0 8px;
+  font-weight: 500;
+}
+.ws-stats strong {
+  font-weight: 500;
+}
+.ws-stack {
+  gap: var(--layout-section-gap);
+}
+.ws-panel-heading,
+.ws-panel-body {
+  padding: var(--layout-panel-padding);
+}
+.ws-toolbar,
+.ws-panel-footer {
+  padding-inline: var(--layout-panel-padding);
+  border-color: var(--color-divider);
+}
+.ws-panel-heading h2,
+.section-heading h2 {
+  font-weight: 600;
+}
+.role-welcome {
+  padding: 0 0 24px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+.role-welcome .eyebrow,
+.role-welcome > .avatar {
+  display: none;
+}
+.role-welcome h2 {
+  font-size: var(--text-lead);
+  letter-spacing: 0;
+  margin-top: 0;
+}
+.role-note {
+  border: 0;
+  background: transparent;
+  padding: 20px 0;
+}
+.staff-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.staff-session-list > button {
+  padding: 20px var(--layout-panel-padding);
+  border-color: var(--color-divider);
+}
+.staff-session-list time {
+  min-width: 116px;
+  color: var(--color-muted);
+}
+.staff-session-list small {
+  font-size: var(--text-caption);
+}
+.staff-clients-layout {
+  gap: 28px;
+}
+.admin-home-grid {
+  gap: 28px;
+}
+.ws-home-shift {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--color-divider);
+  border-radius: 0;
+  padding: 0 0 20px;
+  margin-bottom: 28px;
+}
+.visitor-heading h2,
+.quick-panel-heading h2 {
+  margin-top: 0;
+}
+.members-summary {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--color-divider);
+  border-radius: 0;
+  padding: 8px 0 24px;
+  margin-bottom: 28px;
+  justify-content: flex-start;
+  gap: 16px;
+  color: var(--color-muted);
+}
+.members-summary strong {
+  margin: 0;
+  font-size: var(--text-heading-lg);
+  color: var(--color-ink);
+}
+.clients-bottom-note {
+  justify-content: flex-end;
+}
+.admin-quick-panel nav {
+  gap: 4px;
+}
+.admin-quick-panel nav > button,
+.admin-quick-panel nav > .quick-nav-primary {
+  background: transparent;
+  border-color: transparent;
+  padding: 14px 8px;
+}
+.admin-quick-panel nav > button:hover {
+  background: var(--color-surface);
+  border-color: transparent;
+}
+.quick-nav-icon,
+.quick-nav-primary .quick-nav-icon {
+  background: transparent;
+  border: 0;
+  color: var(--color-muted);
+}
+.admin-quick-panel nav > .quick-nav-primary strong {
+  color: var(--color-ink);
+}
+.quick-card-note {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--color-divider);
+  border-radius: 0;
+  padding: 24px 8px;
+}
+
+/* The guide demonstrates the same spacing and restrained surface treatment. */
+.design-system {
+  --ds-card-padding: var(--layout-panel-padding);
+  --ds-grid-gap: 20px;
+  --ds-section-gap: 40px;
+}
+.design-system .ds-categories {
+  gap: 0;
+  border-bottom: 1px solid var(--color-divider);
+}
+.design-system .ds-categories > button {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  padding: 20px 12px;
+  justify-content: flex-start;
+}
+.design-system .ds-categories > button.selected {
+  color: var(--color-action);
+  background: transparent;
+  border-bottom-color: var(--color-action);
+}
+.design-system .ds-categories > button > svg,
+.design-system .ds-categories > button > span {
+  display: none;
+}
+.design-system .pattern-stat {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+@container workspace (max-width: 1000px) and (min-width: 701px) {
+  .sidebar {
+    width: 220px;
+    padding-inline: 16px;
+  }
+  .app-content:not(.has-calendar) {
+    padding-inline: 28px;
+  }
+}
+@container workspace (max-width: 700px) {
+  .app-content:not(.has-calendar) {
+    padding: 28px 20px 24px;
+  }
+  .app-topbar:not(.admin-topbar) {
+    padding-inline: 20px;
+  }
+  .page-heading {
+    margin-bottom: 28px;
+  }
+  .ws-stack {
+    --layout-panel-padding: 20px;
+    --layout-section-gap: 24px;
+  }
+  .ws-stats,
+  .stats-grid,
+  .role-metrics {
+    gap: 24px 16px;
+    padding: 4px 0;
+  }
+  .ws-stats > div,
+  .stat-card,
+  .role-metrics .stat-card {
+    padding: 0;
+    border: 0;
+  }
+  .staff-workspace > .ws-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+  .staff-workspace > .ws-stats span {
+    overflow-wrap: anywhere;
+    min-height: 42px;
+  }
+  .staff-workspace > .ws-panel > .ws-panel-heading {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
+  .staff-workspace > .ws-panel > .ws-panel-heading > div {
+    min-width: 0;
+    flex: 1;
+  }
+  .staff-actions .ws-actions {
+    width: 100%;
+    gap: 8px;
+  }
+  .staff-actions .button-primary {
+    flex: 1 1 100%;
+  }
+  .staff-actions .button-ghost {
+    padding-inline: 0;
+  }
+  .staff-session-list > button {
+    padding: 20px;
+    gap: 8px 12px;
+  }
+  .staff-session-list time {
+    width: 100%;
+  }
+  .role-welcome {
+    padding-bottom: 12px;
+  }
+}
+@container workspace (max-width: 360px) {
+  .staff-workspace > .ws-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .staff-workspace > .ws-stats span {
+    overflow-wrap: normal;
+  }
+  .staff-workspace > .ws-panel > .ws-panel-heading {
+    flex-wrap: wrap;
+  }
+}
+@container (max-width: 700px) {
+  .design-system {
+    --ds-card-padding: 20px;
+    --ds-grid-gap: 16px;
+    --ds-section-gap: 32px;
+  }
+  .design-system .ds-categories > button {
+    padding: 16px 8px;
+  }
+}
