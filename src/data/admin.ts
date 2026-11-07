@@ -37,7 +37,7 @@ export const initialVisits: Visit[] = [
     card: '100001',
     enteredAt: '2026-11-06T14:30',
     kind: 'gym',
-    plan: 'Безлимит',
+    plan: 'Железная карта',
     clubId: 'central',
   },
   {
@@ -46,7 +46,7 @@ export const initialVisits: Visit[] = [
     card: '100002',
     enteredAt: '2026-11-06T14:21',
     kind: 'personal',
-    plan: 'Дневной',
+    plan: 'Персональные тренировки',
     clubId: 'central',
   },
   {
@@ -55,7 +55,7 @@ export const initialVisits: Visit[] = [
     card: '100005',
     enteredAt: '2026-11-06T14:15',
     kind: 'group',
-    plan: 'Безлимит',
+    plan: 'Гостевой визит',
     clubId: 'central',
   },
   {
@@ -64,7 +64,7 @@ export const initialVisits: Visit[] = [
     card: '100003',
     enteredAt: '2026-11-06T14:08',
     kind: 'gym',
-    plan: 'Безлимит',
+    plan: 'Разовое посещение',
     clubId: 'central',
   },
   {
@@ -73,7 +73,7 @@ export const initialVisits: Visit[] = [
     card: '100006',
     enteredAt: '2026-11-06T13:52',
     kind: 'gym',
-    plan: 'Дневной',
+    plan: 'Железная карта',
     clubId: 'park',
   },
   {
@@ -82,7 +82,7 @@ export const initialVisits: Visit[] = [
     card: '100004',
     enteredAt: '2026-11-06T13:40',
     kind: 'online',
-    plan: '12 занятий',
+    plan: 'Групповые тренировки',
     clubId: 'river',
   },
   {
@@ -91,7 +91,7 @@ export const initialVisits: Visit[] = [
     card: '100006',
     enteredAt: '2026-11-06T13:36',
     kind: 'personal',
-    plan: 'Дневной',
+    plan: 'Железная карта',
     clubId: 'central',
   },
   {
@@ -100,7 +100,7 @@ export const initialVisits: Visit[] = [
     card: '100002',
     enteredAt: '2026-11-06T13:18',
     kind: 'gym',
-    plan: 'Дневной',
+    plan: 'Персональные тренировки',
     clubId: 'park',
   },
   {
@@ -109,7 +109,7 @@ export const initialVisits: Visit[] = [
     card: '100005',
     enteredAt: '2026-11-06T12:45',
     kind: 'gym',
-    plan: 'Безлимит',
+    plan: 'Гостевой визит',
     clubId: 'central',
   },
   {
@@ -118,7 +118,7 @@ export const initialVisits: Visit[] = [
     card: '100001',
     enteredAt: '2026-11-06T11:20',
     kind: 'group',
-    plan: 'Безлимит',
+    plan: 'Железная карта',
     clubId: 'central',
   },
   {
@@ -127,7 +127,7 @@ export const initialVisits: Visit[] = [
     card: '100003',
     enteredAt: '2026-11-06T10:10',
     kind: 'group',
-    plan: 'Безлимит',
+    plan: 'Разовое посещение',
     clubId: 'park',
   },
   {
@@ -136,7 +136,7 @@ export const initialVisits: Visit[] = [
     card: '100006',
     enteredAt: '2026-11-05T19:40',
     kind: 'gym',
-    plan: 'Дневной',
+    plan: 'Железная карта',
     clubId: 'central',
   },
 ];

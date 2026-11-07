@@ -52,7 +52,7 @@ export const roles: RoleDefinition[] = [
     id: 'network-director',
     label: 'Директор сети',
     scope: 'network',
-    canViewMembers: false,
+    canViewMembers: true,
     canAddMembers: false,
   },
   {
@@ -62,9 +62,54 @@ export const roles: RoleDefinition[] = [
     canViewMembers: false,
     canAddMembers: false,
   },
+  {
+    id: 'fitness-director',
+    label: 'Фитнес-директор',
+    scope: 'club',
+    canViewMembers: true,
+    canAddMembers: false,
+  },
+  {
+    id: 'operations-director',
+    label: 'Операционный директор',
+    scope: 'network',
+    canViewMembers: true,
+    canAddMembers: false,
+  },
+  {
+    id: 'sysadmin',
+    label: 'Сисадмин',
+    scope: 'network',
+    canViewMembers: true,
+    canAddMembers: false,
+  },
 ];
 
 export const demoUsers: DemoUser[] = [
+  {
+    id: 'user-fitness-director',
+    name: 'Дарья Миронова',
+    email: 'fitness-director@example.com',
+    role: 'fitness-director',
+    networkId: 'astron',
+    clubIds: ['central'],
+  },
+  {
+    id: 'user-operations-director',
+    name: 'Сергей Лавров',
+    email: 'operations-director@example.com',
+    role: 'operations-director',
+    networkId: 'astron',
+    clubIds: ['central', 'park', 'river'],
+  },
+  {
+    id: 'user-sysadmin',
+    name: 'Павел Зорин',
+    email: 'sysadmin@example.com',
+    role: 'sysadmin',
+    networkId: 'astron',
+    clubIds: ['central', 'park', 'river'],
+  },
   {
     id: 'user-admin',
     name: 'Александра Крылова',
@@ -116,6 +161,107 @@ export const demoUsers: DemoUser[] = [
 ];
 
 export const roleHomes: Record<UserRole, RoleHomeData> = {
+  'fitness-director': {
+    title: 'Фитнес-направление',
+    caption: 'Тренеры, занятия и качество тренировочного процесса.',
+    summaryTitle: 'Расписание и команда тренеров',
+    summaryText: 'Обзор фитнес-направления Центрального клуба.',
+    metrics: [
+      { label: 'Занятий сегодня', value: '18', detail: 'В групповом зале' },
+      { label: 'Тренеров', value: '6', detail: 'В демокоманде клуба' },
+      { label: 'Заполняемость', value: '76%', detail: 'Пример показателя за неделю' },
+    ],
+    itemsTitle: 'В фокусе фитнес-директора',
+    itemsCaption: 'Демонстрационные задачи клуба.',
+    items: [
+      {
+        id: 'fitness-schedule',
+        title: 'Проверить вечернее расписание',
+        subtitle: 'Загрузка залов и доступность тренеров',
+        time: 'Сегодня',
+        status: 'В работе',
+      },
+      {
+        id: 'fitness-training',
+        title: 'Обсудить планы персональных тренировок',
+        subtitle: 'Встреча с тренерской командой',
+        time: '15:00',
+        status: 'Запланировано',
+      },
+    ],
+    noteTitle: 'Рабочие разделы рядом',
+    noteText: 'Расписание, база тренировок, персонал и клиентские разделы доступны в меню слева.',
+    emptyTitle: 'Задач пока нет',
+    emptyDescription: 'Здесь появятся задачи и показатели фитнес-направления.',
+  },
+  'operations-director': {
+    title: 'Операционная работа',
+    caption: 'Ежедневная работа клубов сети.',
+    summaryTitle: 'Три клуба в одном рабочем пространстве',
+    summaryText: 'Смены, команда и процессы сети «Астрон».',
+    metrics: [
+      { label: 'Клубов', value: '3', detail: 'Йошкар-Ола' },
+      { label: 'Открытых смен', value: '3', detail: 'Демонстрационный пример' },
+      { label: 'Вопросов в работе', value: '4', detail: 'По клубам сети' },
+    ],
+    itemsTitle: 'Операционные задачи',
+    itemsCaption: 'Примеры задач по клубам сети.',
+    items: [
+      {
+        id: 'operations-shifts',
+        title: 'Проверить график сотрудников',
+        subtitle: 'Центральный, Парк и Речной',
+        time: 'Сегодня',
+        status: 'В работе',
+      },
+      {
+        id: 'operations-stock',
+        title: 'Согласовать перемещение инвентаря',
+        subtitle: 'Коврики для группового зала',
+        time: 'До 17:00',
+        status: 'На согласовании',
+      },
+    ],
+    noteTitle: 'Общий обзор процессов',
+    noteText:
+      'Все разделы системы собраны в меню по задачам: работа клуба, клиенты, команда и настройки.',
+    emptyTitle: 'Операционных задач пока нет',
+    emptyDescription: 'Здесь появятся вопросы ежедневной работы клубов.',
+  },
+  sysadmin: {
+    title: 'Системное управление',
+    caption: 'Настройки, доступ и состояние системы.',
+    summaryTitle: 'Система клубов под наблюдением',
+    summaryText: 'Демонстрационный обзор рабочих мест и системных задач.',
+    metrics: [
+      { label: 'Клубов', value: '3', detail: 'В демосети' },
+      { label: 'Рабочих мест', value: '4', detail: 'Точки ресепшена' },
+      { label: 'Проверок доступа', value: '2', detail: 'Примеры задач' },
+    ],
+    itemsTitle: 'Системные задачи',
+    itemsCaption: 'Вымышленные примеры для макета.',
+    items: [
+      {
+        id: 'sysadmin-access',
+        title: 'Проверить матрицу ролей',
+        subtitle: 'Настройки доступа сотрудников',
+        time: 'Сегодня',
+        status: 'В работе',
+      },
+      {
+        id: 'sysadmin-events',
+        title: 'Просмотреть журнал событий',
+        subtitle: 'События системы и рабочих мест',
+        time: 'Сегодня',
+        status: 'Запланировано',
+      },
+    ],
+    noteTitle: 'Настройки и диагностика',
+    noteText:
+      'Доступны роли, безопасность, журнал событий, камеры и остальные рабочие разделы прототипа.',
+    emptyTitle: 'Системных задач пока нет',
+    emptyDescription: 'Здесь появятся задачи настройки и поддержки системы.',
+  },
   administrator: {
     title: 'Ресепшен',
     caption: 'Посещения, клиенты и всё для работы смены.',

@@ -1,5 +1,6 @@
 import { memberCards, memberDemographics } from './admin';
 import type { Member } from '../types';
+import { getMembershipKind } from './membership-kinds';
 
 export const clientTabs = [
   { id: 'info', label: 'Обзор' },
@@ -18,6 +19,7 @@ export type SubscriptionStatus = 'active' | 'expired' | 'pending' | 'paused';
 export interface DemoSubscription {
   id: string;
   name: string;
+  kindId?: string;
   used: number;
   remaining: number | null;
   boughtAt: string;
@@ -30,12 +32,15 @@ export function getClientProfile(member: Member) {
   const demographic = memberDemographics[member.id];
   const hasDemoProfile = Boolean(demographic);
   const birthYear = demographic ? 2026 - demographic.age : null;
+  const kind = getMembershipKind(member.plan);
+  const limit = kind && kind.type !== 'Безлимитный' ? Number(kind.visits) : null;
   const subscriptions: DemoSubscription[] = [
     {
       id: `S-${member.id}-01`,
       name: member.plan,
-      used: member.visits,
-      remaining: member.plan === '12 занятий' ? Math.max(0, 12 - member.visits) : null,
+      kindId: kind?.id,
+      used: limit === null ? member.visits : Math.min(member.visits, limit),
+      remaining: limit === null ? null : Math.max(0, limit - member.visits),
       boughtAt: member.joined,
       activatedAt: member.joined,
       endsAt: member.expires,

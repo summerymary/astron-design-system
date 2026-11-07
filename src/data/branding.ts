@@ -6,14 +6,16 @@ export interface ClubBrand {
   logoTone: 'light' | 'dark' | 'color';
   logoBackground?: string;
   logoFrameless?: boolean;
+  fallbackColor?: string;
 }
 
 export const astronBrand: ClubBrand = {
   name: 'Астрон',
   initials: 'А',
-  logoSrc: './brand/astron-black.svg',
-  logoTone: 'dark',
+  logoSrc: './brand/astron-burgundy.svg',
+  logoTone: 'color',
   logoFrameless: true,
+  fallbackColor: '#B32D3D',
 };
 
 export const astronWhiteBrand: ClubBrand = {
@@ -21,4 +23,5 @@ export const astronWhiteBrand: ClubBrand = {
   logoSrc: './brand/astron-white.svg',
   logoTone: 'light',
   logoFrameless: false,
+  fallbackColor: '#FFFFFF',
 };
