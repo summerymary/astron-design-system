@@ -54,7 +54,7 @@ export function AdminSection({
   user: DemoUser;
   navigate: Navigate;
   onMember: (member: Member) => void;
-  onRegister: (member: Member, kind: VisitKind) => void;
+  onRegister: (member: Member, kind: VisitKind, passName?: string, passId?: string) => void;
   onBack: () => void;
 }) {
   if (section === 'trainer-clients')
@@ -86,6 +86,7 @@ export function AdminSection({
         initialMember={member}
         clubName={clubName}
         onRegister={onRegister}
+        navigate={navigate}
         onMember={onMember}
       />
     );

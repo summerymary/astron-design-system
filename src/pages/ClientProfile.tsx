@@ -10,7 +10,6 @@ import {
   Eye,
   EyeOff,
   FileText,
-  Infinity as InfinityIcon,
   MessageSquare,
   MoreHorizontal,
   Plus,
@@ -29,7 +28,7 @@ import { visitKinds } from '../data/admin';
 import { demoClubs } from '../data/roles';
 import { profileBookingOptions } from '../data/profileBookings';
 import { findClientChat, readChatMessages } from '../lib/client-messages';
-import { MembershipTag } from '../components/MembershipTag';
+import { MembershipCard } from '../components/MembershipCard';
 import type { Member, Scenario, Visit } from '../types';
 
 const subscriptionLabels: Record<SubscriptionStatus, string> = {
@@ -88,22 +87,7 @@ export function ClientProfile({
   onUpdate: (member: Member) => void;
 }) {
   const { data, put } = useWorkspace();
-  const profile = getClientProfile(member);
-  (data['issued-plans'] || [])
-    .filter((row) => row.memberId === String(member.id))
-    .forEach((row) =>
-      profile.subscriptions.unshift({
-        id: row.id,
-        name: row.name,
-        kindId: row.kindId,
-        used: 0,
-        remaining: row.type === 'Безлимитный' ? null : Number(row.visits),
-        boughtAt: row.issued.split('-').reverse().join('.'),
-        activatedAt: null,
-        endsAt: null,
-        status: 'pending',
-      }),
-    );
+  const profile = getClientProfile(member, data);
   const [tab, setTab] = useState<ClientTabId>('info');
   const [form, setForm] = useState<'edit' | 'comment' | null>(null);
   const closeForm = useCallback(() => setForm(null), []);
@@ -379,77 +363,35 @@ export function ClientProfile({
                         ))}
                       </div>
                       {shownSubscriptions.length ? (
-                        <div className="client-table-wrap">
-                          <table className="client-sub-table">
-                            <caption className="sr-only">Абонементы и услуги клиента</caption>
-                            <thead>
-                              <tr>
-                                <th>ID</th>
-                                <th>Наименование</th>
-                                <th>
-                                  Совершено
-                                  <br />
-                                  посещений
-                                </th>
-                                <th>
-                                  Дата
-                                  <br />
-                                  покупки
-                                </th>
-                                <th>
-                                  Дата
-                                  <br />
-                                  активации
-                                </th>
-                                <th>
-                                  Осталось
-                                  <br />
-                                  посещений
-                                </th>
-                                <th>
-                                  Дата
-                                  <br />
-                                  окончания
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {shownSubscriptions.map((sub) => (
-                                <tr key={sub.id} className={`subscription-${sub.status}`}>
-                                  <td data-label="ID">
-                                    <span className="client-record-id">{sub.id}</span>
-                                  </td>
-                                  <td data-label="Наименование">
-                                    <strong>
-                                      <MembershipTag name={sub.name} kindId={sub.kindId} />
-                                    </strong>
-                                    <span className={`subscription-status status-${sub.status}`}>
-                                      <i />
-                                      {subscriptionLabels[sub.status]}
-                                    </span>
-                                  </td>
-                                  <td data-label="Совершено посещений">{sub.used}</td>
-                                  <td data-label="Дата покупки">{sub.boughtAt}</td>
-                                  <td data-label="Дата активации">
-                                    {sub.activatedAt ?? 'Не активирован'}
-                                  </td>
-                                  <td data-label="Осталось посещений">
-                                    {sub.remaining === null ? (
-                                      <span
-                                        className="client-unlimited"
-                                        aria-label="Без ограничений"
-                                      >
-                                        <InfinityIcon size={17} />
-                                      </span>
-                                    ) : (
-                                      <b>{sub.remaining}</b>
-                                    )}
-                                  </td>
-                                  <td data-label="Дата окончания">{sub.endsAt ?? '—'}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
+                        <div className="plastic-card-grid">
+                          {shownSubscriptions.map((sub) => (
+                            <div key={sub.id} className="client-pass-item">
+                              <MembershipCard
+                                name={sub.name}
+                                kindId={sub.kindId}
+                                detail={subscriptionLabels[sub.status]}
+                                footer={
+                                  sub.remaining === null
+                                    ? 'Без ограничений'
+                                    : `Осталось посещений: ${sub.remaining}`
+                                }
+                              />
+                              <details className="ws-disclosure">
+                                <summary>Подробности абонемента</summary>
+                                <dl className="ws-facts">
+                                  <Fact label="Покупка">{sub.boughtAt}</Fact>
+                                  <Fact label="Активация">
+                                    {sub.activatedAt || 'Не активирован'}
+                                  </Fact>
+                                  <Fact label="Действует до">
+                                    {sub.endsAt || 'Срок начнётся после активации'}
+                                  </Fact>
+                                  <Fact label="Посещений использовано">{sub.used}</Fact>
+                                  <Fact label="Номер">{sub.id}</Fact>
+                                </dl>
+                              </details>
+                            </div>
+                          ))}
                         </div>
                       ) : (
                         <EmptyTab

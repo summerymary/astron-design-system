@@ -20,8 +20,9 @@ import { ThemePlayground } from '../components/ThemePlayground';
 import { useTheme } from '../components/ThemeProvider';
 import { contrastRatio } from '../lib/theme';
 import type { ThemeToken } from '../lib/theme';
-import { membershipKinds } from '../data/membership-kinds';
+import { membershipKinds, quantityLabel } from '../data/membership-kinds';
 import { MembershipTag } from '../components/MembershipTag';
+import { MembershipCard } from '../components/MembershipCard';
 
 const palette = [
   {
@@ -178,6 +179,32 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                       Фон {kind.background === 'transparent' ? 'прозрачный' : kind.background}
                     </code>
                   </div>
+                ))}
+              </div>
+              <h3>Карты в продаже и у клиента</h3>
+              <p>
+                Крупная карта помогает выбрать абонемент: на ней название, назначение, срок или
+                остаток посещений. Стальной и насыщенный синий хорошо различаются. В журнале
+                посещений используем только цветные буквы, чтобы строки оставались компактными.
+              </p>
+              <div className="plastic-card-grid">
+                {membershipKinds.map((kind) => (
+                  <MembershipCard
+                    key={kind.id}
+                    name={kind.name}
+                    kindId={kind.id}
+                    detail={quantityLabel(kind.duration, 'day')}
+                    footer={
+                      kind.type === 'Безлимитный'
+                        ? 'Без ограничений'
+                        : quantityLabel(kind.visits, 'visit')
+                    }
+                  />
+                ))}
+              </div>
+              <div className="component-panel">
+                {membershipKinds.map((kind) => (
+                  <MembershipTag key={kind.id} name={kind.name} kindId={kind.id} textOnly />
                 ))}
               </div>
               <p>
@@ -471,6 +498,32 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
       )}
       {category === 'patterns' && (
         <>
+          <section className="ds-section">
+            <SectionTitle
+              title="Меню по сегментам"
+              subtitle="Сначала основные рабочие задачи. Детальные настройки доступны внутри разделов, а не длинным списком слева."
+            />
+            <details className="ws-disclosure">
+              <summary>Работа клуба</summary>
+              <div className="ws-stack">
+                <Button variant="secondary">Расписание</Button>
+                <Button variant="secondary">Регистрация посещения</Button>
+                <Button variant="secondary">Продажа</Button>
+              </div>
+            </details>
+            <p>
+              Группы по умолчанию свёрнуты. При переходе раскрывается текущий сегмент. Заголовок
+              целиком нажимается, стрелка стоит справа с отступом, выбранный пункт имеет мягкую
+              фирменную подложку. Управление — мышью, Enter или пробелом; видимая рамка показывает
+              фокус.
+            </p>
+            <h3>Регистрация посещения</h3>
+            <p>
+              Поиск по телефону, ФИО или карте → выбор клиента → «Зарегистрировать посещение» →
+              выбор доступного абонемента → подтверждение. До подтверждения посещение не создаётся.
+              Рядом — продажа абонементов, товаров, услуг и персонального тренинга.
+            </p>
+          </section>
           <section className="ds-section">
             <SectionTitle
               title="Правила рабочих экранов"

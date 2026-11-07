@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
-import { ArrowLeft, ArrowRight, Check, ChevronRight, CupSoda, Plus } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronRight, CupSoda, Plus } from 'lucide-react';
 import { Button, Modal } from '../components/ui';
-import { ClientSearch } from '../components/ClientSearch';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import {
   Back,
@@ -20,8 +19,6 @@ import {
 import type { Navigate } from '../components/WorkspaceUI';
 import type { DemoRecord, Field } from '../data/workspace';
 import { money, prettyDate, TODAY } from '../data/workspace';
-import { visitKinds } from '../data/admin';
-import type { Member, VisitKind } from '../types';
 import { inventoryStock, validatePlan } from '../lib/workspace-rules';
 import { getMembershipKind, membershipKinds } from '../data/membership-kinds';
 import { MembershipTag } from '../components/MembershipTag';
@@ -475,114 +472,7 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
   );
 }
 
-export function RegistrationWorkspace({
-  members,
-  initialMember,
-  clubName,
-  onRegister,
-  onMember,
-}: {
-  members: Member[];
-  initialMember: Member | null;
-  clubName: string;
-  onRegister: (member: Member, kind: VisitKind) => void;
-  onMember: (member: Member) => void;
-}) {
-  const [selected, setSelected] = useState<Member | null>(initialMember);
-  const [kind, setKind] = useState<VisitKind>('gym');
-  const [confirmed, setConfirmed] = useState(false);
-  return (
-    <div className="ws-two-column">
-      <section className="panel ws-panel">
-        <div className="ws-panel-heading">
-          <div>
-            <h2>1. Найдите клиента</h2>
-            <p>Карта, ФИО или телефон. Выбор клиента не создаёт посещение.</p>
-          </div>
-        </div>
-        <div className="ws-panel-body">
-          <ClientSearch
-            mode="selection"
-            members={members}
-            onMember={(member) => {
-              setSelected(member);
-              setConfirmed(false);
-            }}
-          />
-          {selected && (
-            <div className="ws-selected-client">
-              <h3>{selected.name}</h3>
-              <p>{selected.phone}</p>
-              <p>
-                {selected.plan} · до {selected.expires}
-              </p>
-              <Button variant="secondary" onClick={() => onMember(selected)}>
-                Открыть карточку
-              </Button>
-            </div>
-          )}
-        </div>
-      </section>
-      <section className="panel ws-panel">
-        <div className="ws-panel-heading">
-          <div>
-            <h2>2. Подтвердите посещение</h2>
-            <p>{clubName}</p>
-          </div>
-        </div>
-        <div className="ws-panel-body ws-stack">
-          {selected ? (
-            <>
-              <p>
-                Клиент: <strong>{selected.name}</strong>
-              </p>
-              <label className="form-field">
-                <span>Тип посещения</span>
-                <select
-                  value={kind}
-                  onChange={(e) => {
-                    setKind(e.target.value as VisitKind);
-                    setConfirmed(false);
-                  }}
-                >
-                  {Object.entries(visitKinds).map(([id, label]) => (
-                    <option key={id} value={id}>
-                      {label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              {selected.status !== 'active' && (
-                <Notice tone="warning">
-                  Проверьте условия абонемента перед регистрацией. Проверка реальных ограничений не
-                  подключена.
-                </Notice>
-              )}
-              <Button
-                disabled={confirmed}
-                onClick={() => {
-                  onRegister(selected, kind);
-                  setConfirmed(true);
-                }}
-              >
-                <Check size={15} />
-                {confirmed ? 'Посещение зарегистрировано' : 'Зарегистрировать посещение'}
-              </Button>
-              {confirmed && (
-                <Notice tone="success">Посещение появилось в журнале на главной.</Notice>
-              )}
-            </>
-          ) : (
-            <Empty
-              title="Сначала выберите клиента"
-              text="Здесь появятся его абонемент и параметры посещения."
-            />
-          )}
-        </div>
-      </section>
-    </div>
-  );
-}
+export { RegistrationWorkspace } from './VisitRegistration';
 
 export function StatisticsWorkspace() {
   const { data } = useWorkspace();
@@ -757,132 +647,7 @@ export function StatisticsWorkspace() {
   );
 }
 
-export function SaleWorkspace({
-  members,
-  initialMember,
-  navigate,
-  clubName,
-}: {
-  members: Member[];
-  initialMember: Member | null;
-  navigate: Navigate;
-  clubName: string;
-}) {
-  const { data, put } = useWorkspace();
-  const [memberId, setMemberId] = useState(initialMember ? String(initialMember.id) : '');
-  const [planId, setPlanId] = useState('');
-  const [method, setMethod] = useState('Карта');
-  const [done, setDone] = useState(false);
-  const plan = data.plans.find((row) => row.id === planId);
-  return (
-    <div className="ws-stack">
-      <SectionLinks ids={['memberships', 'cash']} navigate={navigate} />
-      <div className="ws-two-column">
-        <section className="panel ws-panel">
-          <div className="ws-panel-heading">
-            <h2>Продажа абонемента</h2>
-          </div>
-          <div className="ws-panel-body ws-stack">
-            <label className="form-field">
-              <span>Клиент</span>
-              <select
-                value={memberId}
-                onChange={(e) => {
-                  setMemberId(e.target.value);
-                  setDone(false);
-                }}
-              >
-                <option value="">Выберите клиента</option>
-                {members.map((member) => (
-                  <option key={member.id} value={member.id}>
-                    {member.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="form-field">
-              <span>Абонемент</span>
-              <select
-                value={planId}
-                onChange={(e) => {
-                  setPlanId(e.target.value);
-                  setDone(false);
-                }}
-              >
-                <option value="">Выберите абонемент</option>
-                {data.plans
-                  .filter((row) => row.status === 'Опубликован')
-                  .map((row) => (
-                    <option key={row.id} value={row.id}>
-                      {row.name} · {money(row.price)}
-                    </option>
-                  ))}
-              </select>
-            </label>
-            <label className="form-field">
-              <span>Способ оплаты</span>
-              <select value={method} onChange={(e) => setMethod(e.target.value)}>
-                <option>Карта</option>
-                <option>Наличные</option>
-              </select>
-            </label>
-            <Notice>Это демонстрация продажи. Реальная оплата не производится.</Notice>
-          </div>
-        </section>
-        <section className="panel ws-panel">
-          <div className="ws-panel-heading">
-            <h2>Проверьте продажу</h2>
-          </div>
-          <div className="ws-panel-body ws-stack">
-            {plan && memberId ? (
-              <>
-                <p>{members.find((member) => String(member.id) === memberId)?.name}</p>
-                <h3>
-                  <MembershipTag name={plan.name} kindId={plan.kindId} />
-                </h3>
-                <p>
-                  {plan.duration} дней · {plan.type}
-                </p>
-                <strong className="ws-price">{money(plan.price)}</strong>
-                <Button
-                  disabled={done}
-                  onClick={() => {
-                    put('ledger', {
-                      id: demoId('sale'),
-                      name: plan.name,
-                      category: 'Абонементы',
-                      date: TODAY,
-                      club: clubName.split(' · ').at(-1) || 'Центральный',
-                      client: members.find((member) => String(member.id) === memberId)!.name,
-                      amount: plan.price,
-                      method,
-                      status: 'Оплачено',
-                      memberId,
-                    });
-                    put('issued-plans', { ...plan, id: demoId('issued'), memberId, issued: TODAY });
-                    setDone(true);
-                  }}
-                >
-                  {done ? 'Демопродажа сохранена' : 'Подтвердить демопродажу'}
-                </Button>
-                {done && (
-                  <Notice tone="success">
-                    Продажа появилась в кассе и отчётах. Абонемент добавлен в карточку клиента.
-                  </Notice>
-                )}
-              </>
-            ) : (
-              <Empty
-                title="Выберите клиента и абонемент"
-                text="Затем здесь можно проверить сумму и подтвердить демопродажу."
-              />
-            )}
-          </div>
-        </section>
-      </div>
-    </div>
-  );
-}
+export { SaleWorkspace } from './ClientSale';
 
 export function BarWorkspace({
   navigate,

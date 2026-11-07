@@ -373,7 +373,7 @@ export function AdminOverview({
                             </span>
                           </td>
                           <td>
-                            <MembershipTag name={v.plan} />
+                            <MembershipTag name={v.plan} textOnly />
                           </td>
                           <td>{demoClubs.find((c) => c.id === v.clubId)?.shortName}</td>
                         </tr>
@@ -406,7 +406,7 @@ export function AdminOverview({
                         <div>
                           <dt>Абонемент</dt>
                           <dd>
-                            <MembershipTag name={v.plan} />
+                            <MembershipTag name={v.plan} textOnly />
                           </dd>
                         </div>
                         <div>
