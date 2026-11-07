@@ -1,6 +1,7 @@
 import { memberCards, memberDemographics } from './admin';
 import type { Member } from '../types';
 import { getMembershipKind } from './membership-kinds';
+import type { DemoRecord } from './workspace';
 
 export const clientTabs = [
   { id: 'info', label: 'Обзор' },
@@ -28,19 +29,20 @@ export interface DemoSubscription {
   status: SubscriptionStatus;
 }
 
-export function getClientProfile(member: Member) {
+export function getClientProfile(member: Member, data: Record<string, DemoRecord[]> = {}) {
   const demographic = memberDemographics[member.id];
   const hasDemoProfile = Boolean(demographic);
   const birthYear = demographic ? 2026 - demographic.age : null;
   const kind = getMembershipKind(member.plan);
   const limit = kind && kind.type !== 'Безлимитный' ? Number(kind.visits) : null;
+  const baseUsed = member.initialPassVisits ?? member.visits;
   const subscriptions: DemoSubscription[] = [
     {
       id: `S-${member.id}-01`,
       name: member.plan,
       kindId: kind?.id,
-      used: limit === null ? member.visits : Math.min(member.visits, limit),
-      remaining: limit === null ? null : Math.max(0, limit - member.visits),
+      used: limit === null ? baseUsed : Math.min(baseUsed, limit),
+      remaining: limit === null ? null : Math.max(0, limit - baseUsed),
       boughtAt: member.joined,
       activatedAt: member.joined,
       endsAt: member.expires,
@@ -77,6 +79,41 @@ export function getClientProfile(member: Member) {
       status: 'expired',
     },
   ];
+  const all = hasDemoProfile ? subscriptions : subscriptions.slice(0, 1);
+  for (const row of (data['issued-plans'] || []).filter(
+    (row) => row.memberId === String(member.id),
+  )) {
+    all.unshift({
+      id: row.id,
+      name: row.name,
+      kindId: row.kindId,
+      used: 0,
+      remaining: row.type === 'Безлимитный' ? null : Number(row.visits),
+      boughtAt: row.issued.split('-').reverse().join('.'),
+      activatedAt: null,
+      endsAt: null,
+      status: 'pending',
+    });
+  }
+  for (const sub of all) {
+    sub.kindId ||= getMembershipKind(sub.name)?.id;
+    const usage = (data['pass-usage'] || []).find(
+      (row) => row.memberId === String(member.id) && row.passId === sub.id,
+    );
+    if (usage) {
+      sub.used = Number(usage.used);
+      sub.remaining = usage.remaining === 'unlimited' ? null : Number(usage.remaining);
+      sub.activatedAt = usage.activatedAt;
+      sub.endsAt = usage.endsAt || sub.endsAt;
+      if (sub.status === 'pending') sub.status = 'active';
+    }
+    if (
+      sub.status !== 'paused' &&
+      (sub.remaining === 0 ||
+        (sub.endsAt && sub.endsAt.split('.').reverse().join('-') < '2026-11-06'))
+    )
+      sub.status = 'expired';
+  }
   return {
     card: memberCards[member.id] ?? String(member.id + 99000),
     birthDate: birthYear ? `12.04.${birthYear}` : 'Не указана',
@@ -90,6 +127,6 @@ export function getClientProfile(member: Member) {
     source: hasDemoProfile ? 'Рекомендация друга' : 'Не указан',
     smsConsent: hasDemoProfile,
     emailConsent: hasDemoProfile,
-    subscriptions: hasDemoProfile ? subscriptions : subscriptions.slice(0, 1),
+    subscriptions: all,
   };
 }

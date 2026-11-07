@@ -40,9 +40,9 @@ export const membershipKinds = [
     name: 'Разовое посещение',
     description: 'Один самостоятельный визит',
     colorName: 'Дымчато-синий',
-    background: '#EDF2F8',
-    foreground: '#46648B',
-    line: '#CDD9E8',
+    background: '#E8F0FF',
+    foreground: '#204DA8',
+    line: '#B8CDF3',
     type: 'Разовое посещение',
     visits: '1',
     duration: '1',
@@ -62,6 +62,13 @@ export const membershipKinds = [
 ] as const;
 export type MembershipKind = (typeof membershipKinds)[number];
 export type MembershipKindId = MembershipKind['id'];
+
+export function quantityLabel(value: number | string, unit: 'day' | 'visit'): string {
+  const count = Number(value);
+  const forms = unit === 'day' ? ['день', 'дня', 'дней'] : ['посещение', 'посещения', 'посещений'];
+  const plural = new Intl.PluralRules('ru').select(count);
+  return `${count} ${forms[plural === 'one' ? 0 : plural === 'few' ? 1 : 2]}`;
+}
 
 export function getMembershipKind(name: string, kindId?: string): MembershipKind | undefined {
   const explicit = membershipKinds.find((kind) => kind.id === kindId);

@@ -3,48 +3,19 @@ import type { AdminSectionId } from './admin';
 export const managementNavigationGroups: { label: string; items: AdminSectionId[] }[] = [
   {
     label: 'Работа клуба',
-    items: ['schedule', 'memberships', 'registration', 'services', 'products', 'cash', 'inventory'],
+    items: ['schedule', 'registration', 'services'],
   },
   {
     label: 'Клиенты и CRM',
-    items: [
-      'crm',
-      'leads',
-      'requests',
-      'segments',
-      'pipelines',
-      'retention',
-      'trainer-clients',
-      'messages',
-      'external-messages',
-      'calls',
-      'reviews',
-      'notifications',
-    ],
+    items: ['crm', 'trainer-clients', 'messages', 'notifications'],
   },
-  { label: 'Команда', items: ['employees', 'positions', 'absences', 'payroll'] },
+  { label: 'Команда', items: ['employees', 'payroll'] },
   {
     label: 'Клубы и занятия',
-    items: [
-      'directories',
-      'clubs',
-      'rooms',
-      'receptions',
-      'training-templates',
-      'training-groups',
-      'schedule-calendar',
-    ],
+    items: ['directories', 'memberships', 'inventory'],
   },
   {
     label: 'Управление системой',
-    items: [
-      'statistics',
-      'cameras',
-      'rbac',
-      'security',
-      'event-logs',
-      'service-settings',
-      'settings',
-    ],
+    items: ['statistics', 'rbac', 'security', 'service-settings'],
   },
 ];

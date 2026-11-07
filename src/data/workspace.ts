@@ -867,7 +867,7 @@ export const initialExtra: Record<string, DemoRecord[]> = {
       description: 'Самостоятельная тренировка без покупки длительного абонемента.',
       training: 'Тренажёрный зал',
       hours: 'Пн–Вс 07:00–23:00',
-      color: '#46648B',
+      color: '#204DA8',
     },
     {
       id: 'plan-5',
