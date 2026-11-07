@@ -23,6 +23,9 @@ import { money, prettyDate, TODAY } from '../data/workspace';
 import { visitKinds } from '../data/admin';
 import type { Member, VisitKind } from '../types';
 import { inventoryStock, validatePlan } from '../lib/workspace-rules';
+import { getMembershipKind, membershipKinds } from '../data/membership-kinds';
+import { MembershipTag } from '../components/MembershipTag';
+import { matchesSearch } from '../lib/directory-search';
 
 const clubField: Field = {
   key: 'club',
@@ -46,10 +49,16 @@ const planSteps = [
 ];
 const planFields: Field[][] = [
   [
+    {
+      key: 'kind',
+      label: 'Вид абонемента',
+      options: membershipKinds.map((kind) => kind.name),
+      required: true,
+    },
     { key: 'name', label: 'Название карты', required: true },
     {
       key: 'type',
-      label: 'Тип абонемента',
+      label: 'Учёт посещений',
       options: ['Безлимитный', 'По посещениям', 'Разовое посещение'],
     },
     { key: 'short', label: 'Короткое описание' },
@@ -101,7 +110,6 @@ const planFields: Field[][] = [
   ],
   [
     { key: 'storefront', label: 'Категория витрины', options: ['Клубные карты', 'Тренировки'] },
-    { key: 'color', label: 'Цвет карточки', type: 'color' },
     { key: 'onlineTraining', label: 'Онлайн-тренировки', options: ['Нет', 'Да'] },
   ],
   [],
@@ -117,6 +125,7 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
   const [step, setStep] = useState(planSteps[0]);
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState('Все');
+  const [kindFilter, setKindFilter] = useState('');
   const [categoryForm, setCategoryForm] = useState<DemoRecord | 'new' | null>(null);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
@@ -164,12 +173,42 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
                     field={field}
                     value={draft[field.key] ?? ''}
                     onChange={(value) => {
-                      setDraft({ ...draft, [field.key]: value });
+                      const kind =
+                        field.key === 'kind'
+                          ? membershipKinds.find((kind) => kind.name === value)
+                          : undefined;
+                      setDraft({
+                        ...(kind
+                          ? {
+                              ...data.plans.find((plan) => plan.kindId === kind.id),
+                              id: draft.id,
+                              status: draft.status,
+                              category:
+                                data.plans.find((plan) => plan.kindId === kind.id)?.category ||
+                                draft.category,
+                              kindId: kind.id,
+                              kind: kind.name,
+                              color: kind.foreground,
+                              type: kind.type,
+                              visits: kind.visits,
+                              duration: kind.duration,
+                              name: membershipKinds.some((item) => item.name === draft.name)
+                                ? kind.name
+                                : draft.name,
+                            }
+                          : { ...draft, [field.key]: value }),
+                      });
                       setError('');
                     }}
                   />
                 ))}
               </div>
+              {step === 'Основное' && (
+                <p className="form-note">
+                  Цвет и значок обозначают вид услуги. При выборе другого вида подставляются условия
+                  соответствующего примера — проверьте их перед сохранением.
+                </p>
+              )}
               {step === 'Бонусы' && (
                 <Empty
                   title="Бонусы не настроены"
@@ -222,9 +261,11 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
           </section>
           <aside className="panel ws-plan-preview">
             <span className="eyebrow">КАРТОЧКА ДЛЯ КЛИЕНТА</span>
-            <div
-              className="ws-plan-mark"
-              style={{ background: draft.color || 'var(--color-accent)' }}
+            <MembershipTag
+              name={
+                getMembershipKind(draft.kind || '', draft.kindId)?.description || 'Тренажёрный зал'
+              }
+              kindId={draft.kindId}
             />
             <h2>{draft.name || 'Название абонемента'}</h2>
             <p>{draft.short || 'Короткое описание'}</p>
@@ -262,7 +303,8 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
   const plans = data.plans.filter(
     (row) =>
       (!category || row.category === category) &&
-      row.name.toLowerCase().includes(query.toLowerCase()) &&
+      (!kindFilter || getMembershipKind(row.name, row.kindId)?.id === kindFilter) &&
+      matchesSearch([row.name, row.short, row.description, row.kind].join(' '), query) &&
       (filter === 'Все' ||
         (filter === 'Онлайн'
           ? row.online === 'Доступен'
@@ -273,6 +315,35 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
   return (
     <div className="ws-stack">
       {message && <Notice tone="success">{message}</Notice>}
+      <section className="ws-stack" aria-label="Виды абонементов">
+        <div className="ws-subheading">
+          <h2>Пять видов абонементов</h2>
+          {kindFilter && (
+            <Button variant="ghost" onClick={() => setKindFilter('')}>
+              Все виды
+            </Button>
+          )}
+        </div>
+        <div className="membership-kind-grid">
+          {membershipKinds.map((kind) => (
+            <button
+              key={kind.id}
+              className="membership-kind-card"
+              aria-pressed={kindFilter === kind.id}
+              onClick={() => {
+                setKindFilter(kindFilter === kind.id ? '' : kind.id);
+                setCategory(null);
+              }}
+            >
+              <MembershipTag name={kind.name} kindId={kind.id} />
+              <p>{kind.description}</p>
+            </button>
+          ))}
+        </div>
+        <p className="form-note">
+          Цвет обозначает вид услуги. Срок действия и состояние абонемента показаны отдельно.
+        </p>
+      </section>
       {!category ? (
         <>
           <div className="ws-actions">
@@ -281,20 +352,14 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
               Категория
             </Button>
           </div>
-          <div className="ws-card-grid">
+          <div className="ws-actions" aria-label="Категории абонементов">
             {data.categories.map((row) => (
               <button
-                className="panel ws-link-card"
+                className="button button-secondary"
                 key={row.id}
                 onClick={() => setCategory(row.id)}
               >
-                <span>
-                  <strong>{row.name}</strong>
-                  <small>
-                    {row.club} · Тарифов:{' '}
-                    {data.plans.filter((plan) => plan.category === row.id).length}
-                  </small>
-                </span>
+                {row.name} · {data.plans.filter((plan) => plan.category === row.id).length}
                 <ChevronRight size={18} />
               </button>
             ))}
@@ -316,19 +381,34 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
           </div>
           <Button
             onClick={() => {
+              const kind =
+                membershipKinds.find((kind) => kind.id === kindFilter) || membershipKinds[0];
               setDraft({
+                ...data.plans.find((plan) => plan.kindId === kind.id),
                 id: demoId('plan'),
-                category: category || data.categories[0]?.id || '',
+                category:
+                  category ||
+                  data.categories.find(
+                    (row) =>
+                      row.id ===
+                      (kind.id === 'single' || kind.id === 'guest'
+                        ? 'membership-2'
+                        : 'membership-1'),
+                  )?.id ||
+                  data.categories[0]?.id ||
+                  '',
                 name: '',
-                type: 'Безлимитный',
-                duration: '30',
-                visits: '0',
-                price: '',
+                kindId: kind.id,
+                kind: kind.name,
+                type: kind.type,
+                duration: kind.duration,
+                visits: kind.visits,
+                price: data.plans.find((plan) => plan.kindId === kind.id)?.price || '',
                 discount: '0',
                 activation: 'С первого посещения',
                 club: 'Все клубы',
                 online: 'Недоступен',
-                color: '#8A332C',
+                color: kind.foreground,
                 status: 'Черновик',
               });
               setStep(planSteps[0]);
@@ -352,8 +432,12 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
         <DataTable
           rows={plans}
           columns={[
-            { key: 'name', label: 'Название' },
-            { key: 'type', label: 'Тип' },
+            {
+              key: 'name',
+              label: 'Название',
+              render: (row) => <MembershipTag name={row.name} kindId={row.kindId} />,
+            },
+            { key: 'type', label: 'Учёт посещений' },
             { key: 'duration', label: 'Дней' },
             { key: 'price', label: 'Стоимость' },
             { key: 'online', label: 'Онлайн' },
@@ -753,7 +837,9 @@ export function SaleWorkspace({
             {plan && memberId ? (
               <>
                 <p>{members.find((member) => String(member.id) === memberId)?.name}</p>
-                <h3>{plan.name}</h3>
+                <h3>
+                  <MembershipTag name={plan.name} kindId={plan.kindId} />
+                </h3>
                 <p>
                   {plan.duration} дней · {plan.type}
                 </p>

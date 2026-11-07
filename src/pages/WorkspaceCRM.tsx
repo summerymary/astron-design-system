@@ -20,6 +20,14 @@ import type { AdminSectionId } from '../data/admin';
 import type { DemoRecord, Field, Resource } from '../data/workspace';
 import { prettyDate, TODAY } from '../data/workspace';
 import { leadTask, leadTransitions } from '../lib/workspace-rules';
+import {
+  appendClientMessage,
+  clientChatDraft,
+  findClientChat,
+  readChatMessages,
+} from '../lib/client-messages';
+import type { Member } from '../types';
+import { AttentionFlags } from '../components/AttentionFlags';
 
 export function CRMWorkspace({
   section,
@@ -488,19 +496,39 @@ function SegmentsWorkspace({ navigate }: { navigate: Navigate }) {
 export function MessagesWorkspace({
   external,
   navigate,
+  initialMember,
+  members,
 }: {
   external: boolean;
   navigate: Navigate;
+  initialMember: Member | null;
+  members: Member[];
 }) {
   const { data, put } = useWorkspace();
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const displayChats = data.chats.map((row) => {
+    const member = members.find((item) => String(item.id) === row.memberId);
+    return member ? { ...row, name: member.name } : row;
+  });
+  const existingClientChat = initialMember
+    ? findClientChat(displayChats, initialMember.id)
+    : undefined;
+  const draft =
+    initialMember && !external && !existingClientChat ? clientChatDraft(initialMember) : null;
+  const [selectedId, setSelectedId] = useState<string | null>(
+    () => existingClientChat?.id || draft?.id || null,
+  );
   const [query, setQuery] = useState('');
   const [channel, setChannel] = useState('Все каналы');
+  const [attention, setAttention] = useState('Все');
   const [text, setText] = useState('');
-  const chat = data.chats.find((row) => row.id === selectedId);
-  const rows = data.chats.filter(
+  const [messageError, setMessageError] = useState('');
+  const chat =
+    displayChats.find((row) => row.id === selectedId) || (draft?.id === selectedId ? draft : null);
+  const rows = [...(draft ? [draft] : []), ...displayChats].filter(
     (row) =>
       (external ? row.channel !== 'Поддержка' : row.channel === 'Поддержка') &&
+      (attention === 'Все' ||
+        (attention === 'Важные' ? row.important === 'true' : row.unread === 'true')) &&
       row.name.toLowerCase().includes(query.toLowerCase()) &&
       (channel === 'Все каналы' || row.channel === channel),
   );
@@ -513,8 +541,8 @@ export function MessagesWorkspace({
       <section className={`panel ws-panel ws-master-detail ${chat ? 'has-selection' : ''}`}>
         <div className="ws-panel-heading">
           <div>
-            <h2>{external ? 'Внешние обращения' : 'Очередь поддержки'}</h2>
-            <p>Ответы в этом прототипе остаются только на экране.</p>
+            <h2>{external ? 'Внешние обращения' : 'Сообщения клиентам'}</h2>
+            <p>Переписка хранится в памяти прототипа. Реальной отправки нет.</p>
           </div>
         </div>
         <div className="ws-toolbar">
@@ -533,6 +561,12 @@ export function MessagesWorkspace({
         </div>
         <div className="ws-split">
           <div className="ws-master-list">
+            <Tabs
+              items={['Все', 'Важные', 'Не просмотрены']}
+              value={attention}
+              onChange={setAttention}
+              label="Отметки чатов"
+            />
             {rows.map((row) => (
               <button
                 key={row.id}
@@ -540,6 +574,7 @@ export function MessagesWorkspace({
                 onClick={() => {
                   setSelectedId(row.id);
                   setText('');
+                  setMessageError('');
                 }}
               >
                 <strong>
@@ -547,6 +582,10 @@ export function MessagesWorkspace({
                   <time>{row.time}</time>
                 </strong>
                 <small>{row.channel}</small>
+                <small className="attention-labels">
+                  {row.important === 'true' && '★ Важное '}
+                  {row.unread === 'true' && '● Не просмотрено'}
+                </small>
                 <p>{row.preview}</p>
                 <Status>{row.status}</Status>
               </button>
@@ -562,55 +601,76 @@ export function MessagesWorkspace({
                     <h2>{chat.name}</h2>
                     <p>{chat.channel}</p>
                   </div>
-                  <Button
-                    variant="secondary"
-                    onClick={() =>
-                      put('chats', {
-                        ...chat,
-                        status: chat.status === 'Решено' ? 'В работе' : 'Решено',
-                      })
-                    }
-                  >
-                    {chat.status === 'Решено' ? 'Вернуть в работу' : 'Вопрос решён'}
-                  </Button>
+                  {data.chats.some((row) => row.id === chat.id) && (
+                    <Button
+                      variant="secondary"
+                      onClick={() =>
+                        put('chats', {
+                          ...chat,
+                          status: chat.status === 'Решено' ? 'В работе' : 'Решено',
+                        })
+                      }
+                    >
+                      {chat.status === 'Решено' ? 'Вернуть в работу' : 'Вопрос решён'}
+                    </Button>
+                  )}
                 </div>
-                <div className="ws-chat-history" aria-live="polite">
-                  {chat.messages.split('\n').map((line, index) => (
-                    <p className={line.startsWith('Клуб:') ? 'from-club' : ''} key={index}>
-                      {line}
+                <AttentionFlags record={chat} onChange={(row) => put('chats', row)} />
+                <div
+                  className={`ws-chat-history${readChatMessages(chat).length ? '' : ' is-empty'}`}
+                  role="log"
+                  aria-label={`Переписка: ${chat.name}`}
+                >
+                  {readChatMessages(chat).map((entry, index) => (
+                    <p className={entry.sender === 'club' ? 'from-club' : ''} key={index}>
+                      <span className="sr-only">
+                        {entry.sender === 'club' ? 'Клуб: ' : 'Клиент: '}
+                      </span>
+                      {entry.text}
                     </p>
                   ))}
                 </div>
+                {!readChatMessages(chat).length && (
+                  <p className="ws-muted">Переписка ещё не начата. Напишите первое сообщение.</p>
+                )}
                 <form
                   className="ws-chat-compose"
                   onSubmit={(event) => {
                     event.preventDefault();
-                    if (!text.trim()) return;
-                    put('chats', {
-                      ...chat,
-                      messages: `${chat.messages}\nКлуб: ${text.trim()}`,
-                      preview: text.trim(),
-                      status: 'В работе',
-                      time: 'Сейчас',
-                    });
-                    setText('');
+                    const body = String(new FormData(event.currentTarget).get('message') || '');
+                    try {
+                      put('chats', appendClientMessage(chat, body));
+                      setText('');
+                      setMessageError('');
+                    } catch (error) {
+                      setMessageError(
+                        error instanceof Error ? error.message : 'Проверьте сообщение.',
+                      );
+                    }
                   }}
                 >
                   <label className="form-field">
-                    <span>Ответ клиенту</span>
+                    <span>Сообщение клиенту</span>
                     <textarea
+                      name="message"
                       rows={3}
                       value={text}
                       maxLength={2000}
-                      onChange={(e) => setText(e.target.value)}
-                      placeholder="Текст демонстрационного ответа"
+                      required
+                      onInput={(e) => setText(e.currentTarget.value)}
+                      onChange={(e) => {
+                        setText(e.target.value);
+                        setMessageError('');
+                      }}
+                      placeholder="Напишите сообщение"
                     />
                   </label>
                   <Button type="submit" disabled={!text.trim()}>
                     <Send size={15} />
-                    Добавить демоответ
+                    Отправить демосообщение
                   </Button>
                 </form>
+                {messageError && <Notice tone="warning">{messageError}</Notice>}
               </>
             ) : (
               <Empty title="Выберите обращение" text="Диалог откроется здесь." />
@@ -625,7 +685,10 @@ export function MessagesWorkspace({
 export function NotificationsWorkspace({ navigate }: { navigate: Navigate }) {
   const { data, put } = useWorkspace();
   const [filter, setFilter] = useState('Все');
-  const rows = data.notifications.filter((row) => filter === 'Все' || row.status === 'Новое');
+  const rows = data.notifications.filter(
+    (row) =>
+      filter === 'Все' || (filter === 'Важные' ? row.important === 'true' : row.status === 'Новое'),
+  );
   return (
     <section className="panel ws-panel">
       <div className="ws-panel-heading">
@@ -637,7 +700,7 @@ export function NotificationsWorkspace({ navigate }: { navigate: Navigate }) {
           variant="secondary"
           onClick={() =>
             data.notifications.forEach((row) =>
-              put('notifications', { ...row, status: 'Просмотрено' }),
+              put('notifications', { ...row, status: 'Просмотрено', unread: 'false' }),
             )
           }
         >
@@ -645,7 +708,7 @@ export function NotificationsWorkspace({ navigate }: { navigate: Navigate }) {
         </Button>
       </div>
       <Tabs
-        items={['Все', 'Новые']}
+        items={['Все', 'Новые', 'Важные']}
         value={filter}
         onChange={setFilter}
         label="Фильтр уведомлений"
@@ -660,6 +723,15 @@ export function NotificationsWorkspace({ navigate }: { navigate: Navigate }) {
               <small>
                 {row.type} · {row.time}
               </small>
+              <AttentionFlags
+                record={{ ...row, unread: String(row.status === 'Новое') }}
+                onChange={(next) =>
+                  put('notifications', {
+                    ...next,
+                    status: next.unread === 'true' ? 'Новое' : 'Просмотрено',
+                  })
+                }
+              />
             </div>
             <div className="ws-actions">
               <Button variant="secondary" onClick={() => navigate(row.section as AdminSectionId)}>

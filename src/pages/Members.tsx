@@ -5,6 +5,7 @@ import { Avatar, Badge, Button } from '../components/ui';
 import { Status, Tabs } from '../components/WorkspaceUI';
 import { memberCards } from '../data/admin';
 import { searchMembers } from '../lib/member-search';
+import { MembershipTag } from '../components/MembershipTag';
 
 export function Members({
   members,
@@ -120,9 +121,9 @@ export function Members({
             <label htmlFor="plan-filter">Абонемент</label>
             <select id="plan-filter" value={plan} onChange={(e) => setPlan(e.target.value)}>
               <option value="all">Все абонементы</option>
-              <option>Безлимит</option>
-              <option>Дневной</option>
-              <option>12 занятий</option>
+              {[...new Set(members.map((member) => member.plan))].map((name) => (
+                <option key={name}>{name}</option>
+              ))}
             </select>
             <Button
               variant="ghost"
@@ -198,7 +199,9 @@ export function Members({
                         </>
                       ) : (
                         <>
-                          <td>{m.plan}</td>
+                          <td>
+                            <MembershipTag name={m.plan} />
+                          </td>
                           <td>
                             <Badge status={m.status} />
                           </td>

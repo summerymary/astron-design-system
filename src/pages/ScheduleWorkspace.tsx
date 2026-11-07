@@ -79,11 +79,7 @@ export function ScheduleWorkspace({
   const [day, setDay] = useState(saved?.day || TODAY);
   const [view, setView] = useState(saved?.view || 'День');
   const [club, setClub] = useState(saved?.club || clubName.split(' · ').at(-1) || 'Центральный');
-  const [room, setRoom] = useState(
-    saved?.room ||
-      (isTrainer ? 'Все залы' : data.rooms.find((r) => r.club === club)?.name) ||
-      'Все залы',
-  );
+  const [room, setRoom] = useState(saved?.room || 'Все залы');
   const [trainer, setTrainer] = useState(isTrainer ? user.name : saved?.trainer || 'Все тренеры');
   const [scale, setScale] = useState(saved?.scale || 'Комфортно');
   const [step, setStep] = useState(
@@ -102,12 +98,22 @@ export function ScheduleWorkspace({
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [ghost, setGhost] = useState<DemoRecord | null>(null);
+  const [context, setContext] = useState<{
+    event?: DemoRecord;
+    slot: DemoRecord;
+    x: number;
+    y: number;
+  } | null>(null);
+  const contextRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (context) contextRef.current?.querySelector<HTMLButtonElement>('button')?.focus();
+  }, [context]);
   const [available, setAvailable] = useState({ height: 580, width: 900, heading: 40 });
   const root = useRef<HTMLDivElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
   const drag = useRef<Drag | null>(null);
   const suppressClick = useRef(false);
-  const dialog = Boolean(openedId || editing || library || pending || copying);
+  const dialog = Boolean(openedId || editing || library || pending || copying || context);
   const activeRooms = data.rooms.filter((r) => r.club === club && r.status !== 'В архиве');
   const trainers = [
     ...new Set(
@@ -445,6 +451,81 @@ export function ScheduleWorkspace({
       aria-modal={fullscreen ? true : undefined}
       aria-label={fullscreen ? 'Расписание на весь экран' : undefined}
     >
+      {context &&
+        createPortal(
+          <>
+            <button
+              className="calendar-context-dismiss"
+              aria-label="Закрыть быстрые действия"
+              onClick={() => setContext(null)}
+            />
+            <div
+              ref={contextRef}
+              className="calendar-context-menu"
+              role="menu"
+              aria-label="Быстрые действия с расписанием"
+              style={{
+                left: Math.max(8, Math.min(context.x, window.innerWidth - 292)),
+                top: Math.max(8, Math.min(context.y, window.innerHeight - 230)),
+              }}
+              onKeyDown={(e) => {
+                const buttons = [...e.currentTarget.querySelectorAll<HTMLButtonElement>('button')];
+                if (e.key === 'Escape' || e.key === 'Tab') {
+                  setContext(null);
+                  return;
+                }
+                if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
+                  e.preventDefault();
+                  const index = buttons.indexOf(document.activeElement as HTMLButtonElement);
+                  buttons[
+                    e.key === 'Home'
+                      ? 0
+                      : e.key === 'End'
+                        ? buttons.length - 1
+                        : (index + (e.key === 'ArrowDown' ? 1 : -1) + buttons.length) %
+                          buttons.length
+                  ]?.focus();
+                }
+              }}
+            >
+              <small>
+                {context.event?.name || 'Свободное время'} · {context.slot.time}
+              </small>
+              {context.event && (
+                <button
+                  role="menuitem"
+                  onClick={() => {
+                    show(context.event!);
+                    setContext(null);
+                  }}
+                >
+                  Открыть занятие
+                </button>
+              )}
+              {context.event && canEdit(context.event) && (
+                <button
+                  role="menuitem"
+                  onClick={() => {
+                    setEditing({ ...context.event! });
+                    setContext(null);
+                  }}
+                >
+                  Перенести / изменить
+                </button>
+              )}
+              <button
+                role="menuitem"
+                onClick={() => {
+                  openLibrary(context.slot);
+                  setContext(null);
+                }}
+              >
+                Добавить тренировку{context.event?.status === 'Отменено' ? ' на это время' : ''}
+              </button>
+            </div>
+          </>,
+          document.body,
+        )}
       <section className="calendar-panel panel">
         <div className="calendar-toolbar">
           <div className="calendar-date-nav">
@@ -740,6 +821,36 @@ export function ScheduleWorkspace({
                   data-day={column.day}
                   data-room={column.room}
                   style={{ height: gridHeight }}
+                  tabIndex={0}
+                  aria-label={`Время в расписании: ${column.label}`}
+                  onContextMenu={(e) => {
+                    if (e.target !== e.currentTarget) return;
+                    e.preventDefault();
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setContext({
+                      slot: seed(
+                        slotAt(e.clientY, rect.top, rect.height, start, end, Number(step)),
+                        column.room,
+                        column.day,
+                      ),
+                      x: e.clientX,
+                      y: e.clientY,
+                    });
+                  }}
+                  onKeyDown={(e) => {
+                    if (
+                      e.target !== e.currentTarget ||
+                      !(e.key === 'ContextMenu' || (e.shiftKey && e.key === 'F10'))
+                    )
+                      return;
+                    e.preventDefault();
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setContext({
+                      slot: seed(clock(start), column.room, column.day),
+                      x: rect.left,
+                      y: rect.top,
+                    });
+                  }}
                   onDoubleClick={(e) => {
                     if (e.target !== e.currentTarget) return;
                     const rect = e.currentTarget.getBoundingClientRect();
@@ -780,6 +891,28 @@ export function ScheduleWorkspace({
                       aria-label={`${event.name}${event.kind === 'personal' ? ', ' + members.find((m) => String(m.id) === event.memberId)?.name : ''}, ${dayText(event.day)}, ${eventTime(event)}, ${event.trainer}, ${event.room}, записано ${event.booked} из ${event.capacity}${!canEdit(event) ? ', ' + event.status : ''}`}
                       title={`${eventTime(event)} · ${event.name}\n${event.trainer} · ${event.room}\n${event.booked} из ${event.capacity} мест. Нажмите для подробностей${canEdit(event) ? ' или перетащите для переноса' : ''}.`}
                       onPointerDown={(e) => startDrag(e, event)}
+                      onContextMenu={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setContext({
+                          event,
+                          slot: seed(event.time, event.room, event.day),
+                          x: e.clientX,
+                          y: e.clientY,
+                        });
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === 'ContextMenu' || (e.shiftKey && e.key === 'F10')) {
+                          e.preventDefault();
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          setContext({
+                            event,
+                            slot: seed(event.time, event.room, event.day),
+                            x: rect.left,
+                            y: rect.top,
+                          });
+                        }
+                      }}
                       onPointerMove={onDrag}
                       onPointerUp={endDrag}
                       onPointerCancel={() => {
@@ -792,7 +925,9 @@ export function ScheduleWorkspace({
                           suppressClick.current = false;
                           return;
                         }
-                        show(event);
+                        if (event.status === 'Отменено')
+                          openLibrary(seed(event.time, event.room, event.day));
+                        else show(event);
                       }}
                     >
                       <time>{eventTime(event)}</time>
@@ -1016,6 +1151,18 @@ export function ScheduleWorkspace({
                 </p>
                 {opened.description && <p>{opened.description}</p>}
                 <Status>{opened.status}</Status>
+                {opened.status === 'Отменено' && (
+                  <Button
+                    onClick={() => {
+                      const initial = seed(opened.time, opened.room, opened.day);
+                      closeDetails();
+                      openLibrary(initial);
+                    }}
+                  >
+                    <Plus size={16} />
+                    Добавить тренировку на это время
+                  </Button>
+                )}
                 {isTrainer && opened.kind !== 'personal' && (
                   <Notice>Групповое занятие доступно тренеру только для просмотра.</Notice>
                 )}

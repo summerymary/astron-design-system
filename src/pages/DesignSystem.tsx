@@ -20,6 +20,8 @@ import { ThemePlayground } from '../components/ThemePlayground';
 import { useTheme } from '../components/ThemeProvider';
 import { contrastRatio } from '../lib/theme';
 import type { ThemeToken } from '../lib/theme';
+import { membershipKinds } from '../data/membership-kinds';
+import { MembershipTag } from '../components/MembershipTag';
 
 const palette = [
   {
@@ -86,7 +88,7 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
   const [checked, setChecked] = useState(true);
   const [tab, setTab] = useState('Все');
   const [input, setInput] = useState('');
-  const [selectedPlan, setSelectedPlan] = useState('Безлимит');
+  const [selectedPlan, setSelectedPlan] = useState('Железная карта');
   const colors = palette.map((color) => ({ ...color, value: themeColor(color.token) }));
   const copyColor = async (value: string) => {
     try {
@@ -155,6 +157,34 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                   <code>{themeColor(color.token)}</code>
                 </span>
               ))}
+            </div>
+            <div className="ds-membership-colors">
+              <h3>Виды абонементов</h3>
+              <p>
+                Светлый фон и небольшая цветная подпись помогают различать услуги. Это не кнопки и
+                не статусы. Главные действия сохраняют фирменный цвет клуба, а состояния «Действует»
+                или «Истёк» показываются отдельно.
+              </p>
+              <div className="membership-kind-grid">
+                {membershipKinds.map((kind) => (
+                  <div className="membership-kind-card" key={kind.id}>
+                    <MembershipTag name={kind.name} kindId={kind.id} />
+                    <p>
+                      {kind.description} · {kind.colorName.toLowerCase()}
+                    </p>
+                    <code>
+                      Текст {kind.foreground}
+                      <br />
+                      Фон {kind.background === 'transparent' ? 'прозрачный' : kind.background}
+                    </code>
+                  </div>
+                ))}
+              </div>
+              <p>
+                Всегда сохраняются название и значок: услугу можно узнать без различения цветов. В
+                других темах эти пять цветов остаются прежними. Гостевой визит показан без заливки,
+                с тонким контуром.
+              </p>
             </div>
             <div className="palette-guidance">
               <div>
@@ -363,9 +393,9 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
               <label className="form-field">
                 <span>Абонемент</span>
                 <select value={selectedPlan} onChange={(e) => setSelectedPlan(e.target.value)}>
-                  <option>Безлимит</option>
-                  <option>Дневной</option>
-                  <option>12 занятий</option>
+                  {membershipKinds.map((kind) => (
+                    <option key={kind.id}>{kind.name}</option>
+                  ))}
                 </select>
               </label>
               <label className="form-field field-error">
@@ -450,7 +480,15 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
               {[
                 [
                   'Навигация',
-                  'Рабочие разделы находятся в одном меню. На телефоне основные пункты внизу, остальные — в «Все разделы». У вложенного экрана есть понятный возврат.',
+                  'Левое меню сворачивается кнопкой в узкую панель иконок. У иконок остаются подписи для программ чтения и подсказки при наведении. Повторное нажатие возвращает названия. На телефоне основные пункты находятся внизу. У вложенного экрана есть понятный возврат.',
+                ],
+                [
+                  'Карточка клиента',
+                  'Сведения разделены на контакты, историю в клубе, тренировки и документы, связь и доступ. Тонкая линия отделяет одну строку от другой. Подпись стоит рядом со значением, на телефоне — над ним. Кнопка «Написать» открывает переписку именно с этим клиентом. Новый диалог сохраняется после первого сообщения.',
+                ],
+                [
+                  'Быстрые действия',
+                  'У быстрых переходов справа есть тонкая рамка, значок, название и короткое пояснение. Рамка помогает увидеть границы кнопки, а выделение при наведении и фокусе показывает, что её можно нажать.',
                 ],
                 [
                   'Поиск клиента',
@@ -520,7 +558,7 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                   <Avatar member={initialMembers[0]} />
                   <span>
                     <strong>Анна Смирнова</strong>
-                    <small>Безлимит · активен</small>
+                    <small>Железная карта · активен</small>
                   </span>
                   <Badge status="active" />
                 </button>

@@ -6,7 +6,14 @@ import { resources } from '../data/workspace';
 import { adminSections } from '../data/admin';
 import type { AdminSectionId } from '../data/admin';
 import type { DemoUser, Member, VisitKind } from '../types';
-import { BarCatalog, BarSales, BartenderHome, TrainerClients } from './StaffWorkspace';
+import {
+  BarCatalog,
+  BarSales,
+  BartenderHome,
+  ManagedPersonalClients,
+  TrainerClients,
+} from './StaffWorkspace';
+import { isManagementRole } from '../lib/staff-rules';
 import {
   BarWorkspace,
   CashWorkspace,
@@ -51,7 +58,9 @@ export function AdminSection({
   onBack: () => void;
 }) {
   if (section === 'trainer-clients')
-    return (
+    return isManagementRole(user.role) ? (
+      <ManagedPersonalClients members={members} navigate={navigate} onMember={onMember} />
+    ) : (
       <TrainerClients user={user} members={members} initialMember={member} navigate={navigate} />
     );
   if (section === 'bar-catalog') return <BarCatalog navigate={navigate} />;
@@ -103,9 +112,11 @@ export function AdminSection({
   if (section === 'messages' || section === 'external-messages')
     return (
       <MessagesWorkspace
-        key={section}
+        key={`${section}-${member?.id || 'queue'}`}
         external={section === 'external-messages'}
         navigate={navigate}
+        initialMember={member}
+        members={members}
       />
     );
   if (section === 'notifications') return <NotificationsWorkspace navigate={navigate} />;

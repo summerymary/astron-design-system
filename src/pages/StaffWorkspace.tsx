@@ -13,6 +13,7 @@ import {
 import type { Navigate } from '../components/WorkspaceUI';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { money, resources, TODAY } from '../data/workspace';
+import { demoUsers } from '../data/roles';
 import type { DemoRecord } from '../data/workspace';
 import type { DemoUser, Member } from '../types';
 import { dayText, eventTime, nextFreeTime, validateEvent } from '../lib/schedule';
@@ -324,6 +325,65 @@ export function TrainerHome({
         />
       )}
     </div>
+  );
+}
+
+export function ManagedPersonalClients({
+  members,
+  navigate,
+  onMember,
+}: {
+  members: Member[];
+  navigate: Navigate;
+  onMember: (member: Member) => void;
+}) {
+  const { data } = useWorkspace();
+  const rows = (data['personal-clients'] || []).flatMap((assignment) => {
+    const member = members.find(
+      (member) => String(member.id) === assignment.memberId && !member.archived,
+    );
+    return member
+      ? [
+          {
+            ...assignment,
+            name: member.name,
+            trainer:
+              demoUsers.find((user) => user.id === assignment.trainerId)?.name || 'Не назначен',
+            notes: String(
+              (data['trainer-notes'] || []).filter(
+                (note) =>
+                  note.memberId === assignment.memberId && note.trainerId === assignment.trainerId,
+              ).length,
+            ),
+          },
+        ]
+      : [];
+  });
+  return (
+    <section className="panel ws-panel">
+      <div className="ws-panel-heading">
+        <div>
+          <h2>Персональные клиенты</h2>
+          <p>Закреплённые клиенты, тренеры и цели занятий.</p>
+        </div>
+        <Button variant="secondary" onClick={() => navigate('schedule')}>
+          Расписание <ArrowRight size={16} />
+        </Button>
+      </div>
+      <DataTable
+        rows={rows}
+        columns={[
+          { key: 'name', label: 'Клиент' },
+          { key: 'trainer', label: 'Тренер' },
+          { key: 'goal', label: 'Цель занятий' },
+          { key: 'notes', label: 'Заметок тренера' },
+        ]}
+        onOpen={(row) => {
+          const member = members.find((member) => String(member.id) === row.memberId);
+          if (member) onMember(member);
+        }}
+      />
+    </section>
   );
 }
 

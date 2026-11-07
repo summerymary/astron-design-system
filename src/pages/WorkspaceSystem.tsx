@@ -1,5 +1,15 @@
-import { useCallback, useState } from 'react';
-import { ArrowRight, Camera, Pause, Play, Plus, ShieldCheck, VolumeX } from 'lucide-react';
+import { useCallback, useMemo, useState } from 'react';
+import {
+  ArrowRight,
+  Camera,
+  Pause,
+  Play,
+  Plus,
+  Search,
+  ShieldCheck,
+  VolumeX,
+  X,
+} from 'lucide-react';
 import { Button, Modal } from '../components/ui';
 import { useTheme } from '../components/ThemeProvider';
 import { useWorkspace } from '../components/WorkspaceProvider';
@@ -19,20 +29,183 @@ import {
   Tabs,
 } from '../components/WorkspaceUI';
 import type { Navigate } from '../components/WorkspaceUI';
+import { adminSections } from '../data/admin';
 import type { AdminSectionId } from '../data/admin';
 import type { DemoRecord, Field, Resource } from '../data/workspace';
-import { directoryGroups, money, prettyDate, TODAY } from '../data/workspace';
+import { directoryGroups, resources, money, prettyDate, TODAY } from '../data/workspace';
 import { roles } from '../data/roles';
+import { directorySnippet, searchDirectories, searchWords } from '../lib/directory-search';
+
+const membershipSearchFields: Field[] = [
+  { key: 'name', label: 'Название' },
+  { key: 'short', label: 'Условия' },
+  { key: 'description', label: 'Описание' },
+  { key: 'duration', label: 'Срок, дней' },
+  { key: 'visitSummary', label: 'Посещения' },
+  { key: 'price', label: 'Стоимость' },
+  { key: 'club', label: 'Клуб' },
+  { key: 'status', label: 'Статус' },
+];
 
 export function DirectoriesWorkspace({ navigate }: { navigate: Navigate }) {
+  const { data } = useWorkspace();
+  const [query, setQuery] = useState('');
+  const [opened, setOpened] = useState<{ section: AdminSectionId; row: DemoRecord } | null>(null);
+  const close = useCallback(() => setOpened(null), []);
+  const fieldsFor = (id: string) =>
+    id === 'memberships' ? membershipSearchFields : (resources[id]?.fields ?? []);
+  const recordsFor = (id: string): DemoRecord[] =>
+    id === 'memberships'
+      ? data.plans.map((plan) => ({
+          ...plan,
+          visitSummary: plan.type === 'Безлимитный' ? 'Без ограничений' : plan.visits,
+        }))
+      : (data[id] ?? []);
+  const index = useMemo(
+    () =>
+      directoryGroups.flatMap((group) =>
+        group.items.map((id) => {
+          const meta = adminSections.find((section) => section.id === id)!;
+          const config = resources[id];
+          const fields = fieldsFor(id);
+          return {
+            id,
+            title: meta.label,
+            description: [meta.caption, config?.description].filter(Boolean).join('. '),
+            group: group.label,
+            keywords: fields.map((field) => field.label).join(' '),
+            records: recordsFor(id).map((row) => ({
+              id: row.id,
+              title: row.name,
+              details: fields
+                .filter((field) => field.key !== 'name' && field.key !== 'color' && row[field.key])
+                .map((field) => `${field.label}: ${row[field.key]}`)
+                .join(' · '),
+            })),
+          };
+        }),
+      ),
+    [data],
+  );
+  const searching = searchWords(query).length > 0;
+  const results = useMemo(() => searchDirectories(index, query), [index, query]);
   return (
     <div className="ws-stack">
-      {directoryGroups.map((group) => (
-        <section key={group.label} className="ws-directory-group">
-          <h2>{group.label}</h2>
-          <LinkCards ids={group.items} navigate={navigate} />
-        </section>
-      ))}
+      <section className="directory-search-panel" aria-label="Поиск в справочниках">
+        <label htmlFor="directory-search">Что нужно найти?</label>
+        <div className="directory-search-input">
+          <Search size={24} aria-hidden="true" />
+          <input
+            id="directory-search"
+            type="search"
+            value={query}
+            placeholder="Например, йога, вместимость зала или тренер"
+            aria-describedby="directory-search-hint"
+            aria-controls="directory-results"
+            onChange={(event) => setQuery(event.target.value)}
+            onInput={(event) => setQuery(event.currentTarget.value)}
+          />
+          {query && (
+            <button
+              type="button"
+              className="icon-button"
+              aria-label="Очистить поиск по справочникам"
+              onClick={() => setQuery('')}
+            >
+              <X size={20} />
+            </button>
+          )}
+        </div>
+        <p id="directory-search-hint">
+          Поиск по названиям разделов, описаниям и записям. Можно ввести несколько слов.
+        </p>
+        {!searching && (
+          <div className="directory-search-examples" aria-label="Примеры поиска">
+            {['Йога', 'Вместимость', 'Тренер', 'Абонементы'].map((word) => (
+              <button key={word} onClick={() => setQuery(word)}>
+                {word}
+              </button>
+            ))}
+          </div>
+        )}
+      </section>
+      <div id="directory-results" className="ws-stack">
+        {searching ? (
+          <>
+            <p className="directory-result-count" role="status">
+              Найдено разделов: {results.length} · Записей:{' '}
+              {results.reduce((sum, result) => sum + result.records.length, 0)}
+            </p>
+            {results.map((result) => (
+              <section className="panel directory-result" key={result.id}>
+                <div className="directory-result-heading">
+                  <div>
+                    <small>{result.group}</small>
+                    <h2>{result.title}</h2>
+                    <p>{result.description}</p>
+                  </div>
+                  <Button variant="secondary" onClick={() => navigate(result.id as AdminSectionId)}>
+                    Открыть раздел <ArrowRight size={16} />
+                  </Button>
+                </div>
+                {result.records.length > 0 && (
+                  <ul className="directory-record-results">
+                    {result.records.map((record) => (
+                      <li key={record.id}>
+                        <button
+                          onClick={() => {
+                            const row = recordsFor(result.id).find((row) => row.id === record.id);
+                            if (row) setOpened({ section: result.id as AdminSectionId, row });
+                          }}
+                        >
+                          <span>
+                            <strong>{record.title}</strong>
+                            <small>
+                              {directorySnippet(record.details, query) || 'Посмотреть сведения'}
+                            </small>
+                          </span>
+                          <ArrowRight size={18} />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            ))}
+            {!results.length && (
+              <Empty
+                title="Ничего не найдено"
+                text="Попробуйте другое слово или более короткий запрос."
+                action={
+                  <Button variant="secondary" onClick={() => setQuery('')}>
+                    Сбросить поиск
+                  </Button>
+                }
+              />
+            )}
+          </>
+        ) : (
+          directoryGroups.map((group) => (
+            <section key={group.label} className="ws-directory-group">
+              <h2>{group.label}</h2>
+              <LinkCards ids={group.items} navigate={navigate} />
+            </section>
+          ))
+        )}
+      </div>
+      {opened && (
+        <RecordDetails
+          title={opened.row.name}
+          record={opened.row}
+          fields={fieldsFor(opened.section)}
+          onClose={close}
+          actions={
+            <Button variant="secondary" onClick={() => navigate(opened.section)}>
+              Открыть раздел <ArrowRight size={16} />
+            </Button>
+          }
+        />
+      )}
     </div>
   );
 }
@@ -274,6 +447,9 @@ const defaultRights: Record<string, string[]> = {
   bartender: ['Работать в баре'],
   'club-director': rights.slice(0, 7),
   'network-director': [...rights],
+  'fitness-director': rights.slice(0, 8),
+  'operations-director': rights.slice(0, 8),
+  sysadmin: rights.slice(0, 8),
   marketer: ['Просматривать отчёты'],
 };
 export function RolesWorkspace() {

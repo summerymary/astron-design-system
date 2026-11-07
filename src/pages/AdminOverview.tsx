@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { MembershipTag } from '../components/MembershipTag';
 import { ArrowDownWideNarrow, ArrowUpRight, CreditCard, ListFilter, Search, X } from 'lucide-react';
 import { Avatar, Button } from '../components/ui';
 import { AdminQuickLinks } from '../components/AdminQuickLinks';
@@ -371,7 +372,9 @@ export function AdminOverview({
                               {visitKinds[v.kind]}
                             </span>
                           </td>
-                          <td>{v.plan}</td>
+                          <td>
+                            <MembershipTag name={v.plan} />
+                          </td>
                           <td>{demoClubs.find((c) => c.id === v.clubId)?.shortName}</td>
                         </tr>
                       );
@@ -402,7 +405,9 @@ export function AdminOverview({
                         </div>
                         <div>
                           <dt>Абонемент</dt>
-                          <dd>{v.plan}</dd>
+                          <dd>
+                            <MembershipTag name={v.plan} />
+                          </dd>
                         </div>
                         <div>
                           <dt>Клуб</dt>

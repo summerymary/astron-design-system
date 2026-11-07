@@ -28,6 +28,8 @@ import type { AdminSectionId } from '../data/admin';
 import { visitKinds } from '../data/admin';
 import { demoClubs } from '../data/roles';
 import { profileBookingOptions } from '../data/profileBookings';
+import { findClientChat, readChatMessages } from '../lib/client-messages';
+import { MembershipTag } from '../components/MembershipTag';
 import type { Member, Scenario, Visit } from '../types';
 
 const subscriptionLabels: Record<SubscriptionStatus, string> = {
@@ -93,6 +95,7 @@ export function ClientProfile({
       profile.subscriptions.unshift({
         id: row.id,
         name: row.name,
+        kindId: row.kindId,
         used: 0,
         remaining: row.type === 'Безлимитный' ? null : Number(row.visits),
         boughtAt: row.issued.split('-').reverse().join('.'),
@@ -182,6 +185,14 @@ export function ClientProfile({
                   <Button variant="secondary" onClick={() => onAction('services')}>
                     <ShoppingBag size={15} />
                     Продать
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    onClick={() => onAction('messages')}
+                    aria-label="Написать сообщение"
+                  >
+                    <MessageSquare size={15} />
+                    Написать
                   </Button>
                   <details className="client-more">
                     <summary aria-label="Другие действия">
@@ -409,7 +420,9 @@ export function ClientProfile({
                                     <span className="client-record-id">{sub.id}</span>
                                   </td>
                                   <td data-label="Наименование">
-                                    <strong>{sub.name}</strong>
+                                    <strong>
+                                      <MembershipTag name={sub.name} kindId={sub.kindId} />
+                                    </strong>
                                     <span className={`subscription-status status-${sub.status}`}>
                                       <i />
                                       {subscriptionLabels[sub.status]}
@@ -470,39 +483,63 @@ export function ClientProfile({
                             },
                           ]}
                         />
-                        <p className="ws-muted">Теги: {member.tags || 'Не добавлены'}</p>
-                        {canOperate && (
-                          <Button variant="secondary" onClick={() => setForm('edit')}>
-                            Редактировать сведения
-                          </Button>
-                        )}
+                        <div className="client-info-summary-footer">
+                          <p className="ws-muted">Теги: {member.tags || 'Не добавлены'}</p>
+                          {canOperate && (
+                            <Button variant="secondary" onClick={() => setForm('edit')}>
+                              Редактировать сведения
+                            </Button>
+                          )}
+                        </div>
                       </section>
-                      <section>
-                        <h3>Контакты и профиль</h3>
+                      <section className="client-info-card" aria-labelledby="client-contacts-title">
+                        <h3 id="client-contacts-title">Контакты</h3>
                         <dl>
-                          <Fact label="E-mail">{member.email || 'Не указан'}</Fact>
+                          <Fact label="Электронная почта">{member.email || 'Не указана'}</Fact>
                           <Fact label="Адрес">Не указан</Fact>
-                          <Fact label="Цель тренировки">{profile.goal}</Fact>
-                          <Fact label="Организация">{profile.organization}</Fact>
                           <Fact label="Социальные сети">Не указаны</Fact>
-                          <Fact label="Документ на льготу">Не добавлен</Fact>
+                          <Fact label="Организация">{profile.organization}</Fact>
                         </dl>
                       </section>
-                      <section>
-                        <h3>Участие в клубе</h3>
+                      <section className="client-info-card" aria-labelledby="client-history-title">
+                        <h3 id="client-history-title">История в клубе</h3>
                         <dl>
                           <Fact label="Дата регистрации">{member.joined}</Fact>
-                          <Fact label="Время жизни">{daysInClub} дн. в клубе</Fact>
+                          <Fact label="Дней в клубе">{daysInClub}</Fact>
                           <Fact label="Последний визит">
                             {sortedVisits[0] ? dateTime(sortedVisits[0].enteredAt) : 'Нет записей'}
                           </Fact>
-                          <Fact label="Источник">{profile.source}</Fact>
-                          <Fact label="Реферал">Не указан</Fact>
-                          <Fact label="Получать СМС">{profile.smsConsent ? 'Да' : 'Нет'}</Fact>
-                          <Fact label="Получать письма">{profile.emailConsent ? 'Да' : 'Нет'}</Fact>
-                          <Fact label="Чёрный список">Нет</Fact>
+                          <Fact label="Как узнал о клубе">{profile.source}</Fact>
+                          <Fact label="Кто рекомендовал">Не указан</Fact>
+                        </dl>
+                      </section>
+                      <section className="client-info-card" aria-labelledby="client-training-title">
+                        <h3 id="client-training-title">Тренировки и документы</h3>
+                        <dl>
+                          <Fact label="Цель тренировок">{profile.goal}</Fact>
+                          <Fact label="Документ на льготу">Не добавлен</Fact>
                           <Fact label="Загруженные документы">Нет документов</Fact>
-                          <Fact label="Скидка в честь дня рождения">Не задана</Fact>
+                          <Fact label="Скидка ко дню рождения">Не задана</Fact>
+                        </dl>
+                      </section>
+                      <section className="client-info-card" aria-labelledby="client-consents-title">
+                        <h3 id="client-consents-title">Связь и доступ</h3>
+                        <dl>
+                          <Fact label="Получать СМС">
+                            <span className="client-info-status">
+                              {profile.smsConsent ? <Check size={15} aria-hidden="true" /> : null}
+                              {profile.smsConsent ? 'Да' : 'Нет'}
+                            </span>
+                          </Fact>
+                          <Fact label="Получать письма">
+                            <span className="client-info-status">
+                              {profile.emailConsent ? <Check size={15} aria-hidden="true" /> : null}
+                              {profile.emailConsent ? 'Да' : 'Нет'}
+                            </span>
+                          </Fact>
+                          <Fact label="Чёрный список">
+                            <span className="client-info-status">Нет</span>
+                          </Fact>
                         </dl>
                       </section>
                     </div>
@@ -690,25 +727,28 @@ export function ClientProfile({
                   {tab === 'messages' && (
                     <div className="ws-panel-body ws-stack">
                       {data.chats
-                        .filter((row) => row.name === member.name)
+                        .filter((row) => row.memberId === String(member.id))
                         .map((row) => (
                           <div className="ws-chat-history" key={row.id}>
-                            {row.messages.split('\n').map((line, index) => (
-                              <p
-                                key={index}
-                                className={line.startsWith('Клуб:') ? 'from-club' : ''}
-                              >
-                                {line}
+                            {readChatMessages(row).map((entry, index) => (
+                              <p key={index} className={entry.sender === 'club' ? 'from-club' : ''}>
+                                <span className="sr-only">
+                                  {entry.sender === 'club' ? 'Клуб: ' : 'Клиент: '}
+                                </span>
+                                {entry.text}
                               </p>
                             ))}
                           </div>
                         ))}
-                      {!data.chats.some((row) => row.name === member.name) && (
+                      {!data.chats.some((row) => row.memberId === String(member.id)) && (
                         <p>Переписка пока не начата.</p>
                       )}
                       {canOperate && (
                         <Button variant="secondary" onClick={() => onAction('messages')}>
-                          Открыть очередь сообщений
+                          <MessageSquare size={15} />
+                          {findClientChat(data.chats, member.id)
+                            ? 'Открыть чат'
+                            : 'Написать сообщение'}
                         </Button>
                       )}
                     </div>

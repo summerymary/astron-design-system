@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MembershipTag } from '../components/MembershipTag';
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -235,7 +236,9 @@ export function Overview({
                       </span>
                     </button>
                   </td>
-                  <td>{m.plan}</td>
+                  <td>
+                    <MembershipTag name={m.plan} />
+                  </td>
                   <td>
                     <Badge status={m.status} />
                   </td>
