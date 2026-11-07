@@ -8,8 +8,17 @@ async function load(path) {
   }).outputText;
   return import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
 }
-const { canOpenModule, personalClients, canManageEvent, personalScopeError, noteError } =
-  await load('../src/lib/staff-rules.ts');
+const {
+  canOpenModule,
+  managementRoles,
+  isManagementRole,
+  personalClients,
+  canManageEvent,
+  personalScopeError,
+  noteError,
+} = await load('../src/lib/staff-rules.ts');
+const { managementNavigationGroups } = await load('../src/data/management-navigation.ts');
+const { adminSections } = await load('../src/data/admin.ts');
 const { createWorkspaceData } = await load('../src/data/workspace.ts');
 const { validateEvent, moveEvent } = await load('../src/lib/schedule.ts');
 const data = createWorkspaceData();
@@ -42,6 +51,30 @@ for (const section of [
   assert.equal(canOpenModule('bartender', section), false, section);
 assert.equal(canOpenModule('administrator', 'collagen'), false);
 assert.ok(canOpenModule('administrator', 'crm'));
+const managerSections = managementNavigationGroups.flatMap((group) => group.items);
+const omitted = ['members', 'bar', 'bar-catalog', 'bar-sales', 'bar-categories', 'bar-collections'];
+assert.deepEqual(
+  [...managerSections].sort(),
+  adminSections
+    .map((section) => section.id)
+    .filter((id) => !omitted.includes(id))
+    .sort(),
+);
+assert.equal(
+  new Set(managerSections).size,
+  managerSections.length,
+  'Management menu must not repeat sections',
+);
+assert.equal(managementRoles.length, 5);
+for (const role of managementRoles) {
+  assert.ok(isManagementRole(role));
+  for (const section of managerSections)
+    assert.ok(canOpenModule(role, section), `${role}: ${section}`);
+  assert.ok(canOpenModule(role, 'members'));
+  assert.equal(canOpenModule(role, 'collagen'), false);
+}
+for (const role of ['administrator', 'trainer', 'bartender', 'marketer'])
+  assert.equal(isManagementRole(role), false);
 const members = [
   { id: 1001, name: 'А' },
   { id: 1003, name: 'Б' },
@@ -64,6 +97,11 @@ assert.equal(
 const session = data.events.find((e) => e.id === 'personal-demo-1');
 assert.ok(canManageEvent(session, trainer));
 assert.ok(canManageEvent(session, admin));
+for (const role of managementRoles) {
+  const manager = { ...admin, role };
+  assert.ok(canManageEvent(session, manager));
+  assert.equal(personalScopeError(session, manager, data['personal-clients']), null);
+}
 assert.equal(canManageEvent(session, bartender), false);
 assert.equal(canManageEvent({ ...session, trainerId: 'other-trainer' }, trainer), false);
 assert.equal(
