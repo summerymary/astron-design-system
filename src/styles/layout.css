@@ -1,100 +1,106 @@
-/* Shared layout and surface hierarchy. Loaded last in both entry points. */
-.panel {
+/* Shared layout and surface hierarchy. Product selectors are scoped because
+   Vite may load shared CSS before prototype-specific CSS in production. */
+.panel,
+.app-shell .panel {
   border-color: var(--color-divider);
   border-radius: var(--radius-card);
   box-shadow: none;
 }
-.button {
+.button,
+.app-shell .button {
   font-weight: 500;
 }
-.app-content:not(.has-calendar) {
+.app-shell .app-content:not(.has-calendar) {
   padding: 40px var(--layout-page-padding) 32px;
 }
-.page-heading {
+.app-shell .page-heading {
   margin-bottom: 32px;
   align-items: flex-start;
 }
-.page-eyebrow {
+.app-shell .page-eyebrow {
   letter-spacing: 0.8px;
   margin-bottom: 12px;
 }
-.page-heading h1 {
+.app-shell .page-heading h1 {
   line-height: 1.2;
 }
-.page-heading p {
+.app-shell .page-heading p {
   color: var(--color-muted);
   margin-top: 12px;
   max-width: 720px;
   line-height: 1.65;
 }
-.sidebar {
+.app-shell .sidebar {
   width: 240px;
   padding: 32px 20px 0;
   border-color: var(--color-divider);
 }
-.club-switch {
+.app-shell .club-switch {
   border: 0;
   margin: 24px 0 32px;
   padding: 12px 4px;
 }
-.club-switch strong,
-.club-switch small {
+.app-shell .club-switch strong,
+.app-shell .club-switch small {
   white-space: normal;
   overflow: visible;
   text-overflow: clip;
 }
-.nav-label {
+.app-shell .nav-label {
   letter-spacing: 0.6px;
 }
-.side-nav {
+.app-shell .side-nav {
   gap: 6px;
 }
-.side-nav button {
+.app-shell .side-nav button {
   font-size: var(--text-small);
   min-height: 44px;
   color: var(--color-muted);
 }
-.side-nav button.active {
+.app-shell .side-nav button.active {
   background: var(--color-accent-soft);
   color: var(--color-action);
   font-weight: 600;
 }
-.side-nav button.active > span {
+.app-shell .side-nav button.active > span {
   background: var(--color-surface);
   color: var(--color-action);
 }
-.sandbox-card {
+.app-shell .sandbox-card {
   background: transparent;
   border: 0;
   padding: 12px 4px;
 }
-.sandbox-card > span {
+.app-shell .sandbox-card > span {
   color: var(--color-muted);
 }
-.user-block,
-.app-topbar {
+.app-shell .user-block,
+.app-shell .app-topbar {
   border-color: var(--color-divider);
 }
-.app-topbar:not(.admin-topbar) {
+.app-shell .app-topbar:not(.admin-topbar) {
   padding-inline: var(--layout-page-padding);
 }
-.date-chip {
+.app-shell .admin-header-content {
+  flex-wrap: wrap;
+}
+.app-shell .date-chip {
   background: transparent;
   border: 0;
   padding-inline: 0;
 }
 
 /* Numbers belong to one summary, rather than a collection of nested cards. */
-.ws-stats,
-.stats-grid,
-.role-metrics {
+.app-shell .ws-stats,
+.app-shell .stats-grid,
+.app-shell .role-metrics {
   gap: 0;
   padding: 8px 0;
 }
-.ws-stats > div,
-.stat-card,
-.stat-card.stat-accent,
-.role-metrics .stat-card {
+.app-shell .ws-stats > div,
+.app-shell .stat-card,
+.app-shell .stat-card.stat-accent,
+.app-shell .role-metrics .stat-card {
   background: transparent;
   border: 0;
   border-radius: 0;
@@ -102,93 +108,93 @@
   box-shadow: none;
   border-inline-end: 1px solid var(--color-divider);
 }
-.ws-stats > div:first-child,
-.stats-grid > .stat-card:first-child,
-.role-metrics > .stat-card:first-child {
+.app-shell .ws-stats > div:first-child,
+.app-shell .stats-grid > .stat-card:first-child,
+.app-shell .role-metrics > .stat-card:first-child {
   padding-inline-start: 0;
 }
-.ws-stats > div:last-child,
-.stats-grid > .stat-card:last-child,
-.role-metrics > .stat-card:last-child {
+.app-shell .ws-stats > div:last-child,
+.app-shell .stats-grid > .stat-card:last-child,
+.app-shell .role-metrics > .stat-card:last-child {
   border-inline-end: 0;
 }
-.stat-decoration {
+.app-shell .stat-decoration {
   display: none;
 }
-.stat-label,
-.stat-accent .stat-label,
-.stat-accent .stat-label svg,
-.stat-accent .stat-foot {
+.app-shell .stat-label,
+.app-shell .stat-accent .stat-label,
+.app-shell .stat-accent .stat-label svg,
+.app-shell .stat-accent .stat-foot {
   color: var(--color-muted);
 }
-.stat-value,
-.role-metric-value {
+.app-shell .stat-value,
+.app-shell .role-metric-value {
   margin: 16px 0 8px;
   font-weight: 500;
 }
-.ws-stats strong {
+.app-shell .ws-stats strong {
   font-weight: 500;
 }
-.ws-stack {
+.app-shell .ws-stack {
   gap: var(--layout-section-gap);
 }
-.ws-panel-heading,
-.ws-panel-body {
+.app-shell .ws-panel-heading,
+.app-shell .ws-panel-body {
   padding: var(--layout-panel-padding);
 }
-.ws-toolbar,
-.ws-panel-footer {
+.app-shell .ws-toolbar,
+.app-shell .ws-panel-footer {
   padding-inline: var(--layout-panel-padding);
   border-color: var(--color-divider);
 }
-.ws-panel-heading h2,
-.section-heading h2 {
+.app-shell .ws-panel-heading h2,
+.app-shell .section-heading h2 {
   font-weight: 600;
 }
-.role-welcome {
+.app-shell .role-welcome {
   padding: 0 0 24px;
   background: transparent;
   border: 0;
   border-radius: 0;
 }
-.role-welcome .eyebrow,
-.role-welcome > .avatar {
+.app-shell .role-welcome .eyebrow,
+.app-shell .role-welcome > .avatar {
   display: none;
 }
-.role-welcome h2 {
+.app-shell .role-welcome h2 {
   font-size: var(--text-lead);
   letter-spacing: 0;
   margin-top: 0;
 }
-.role-note {
+.app-shell .role-note {
   border: 0;
   background: transparent;
   padding: 20px 0;
 }
-.staff-actions {
+.app-shell .staff-actions {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
 }
-.staff-session-list > button {
+.app-shell .staff-session-list > button {
   padding: 20px var(--layout-panel-padding);
   border-color: var(--color-divider);
 }
-.staff-session-list time {
+.app-shell .staff-session-list time {
   min-width: 116px;
   color: var(--color-muted);
 }
-.staff-session-list small {
+.app-shell .staff-session-list small {
   font-size: var(--text-caption);
 }
-.staff-clients-layout {
+.app-shell .staff-clients-layout {
   gap: 28px;
 }
-.admin-home-grid {
+.app-shell .admin-home-grid {
   gap: 28px;
 }
-.ws-home-shift {
+.app-shell .ws-home-shift {
   background: transparent;
   border: 0;
   border-bottom: 1px solid var(--color-divider);
@@ -196,11 +202,11 @@
   padding: 0 0 20px;
   margin-bottom: 28px;
 }
-.visitor-heading h2,
-.quick-panel-heading h2 {
+.app-shell .visitor-heading h2,
+.app-shell .quick-panel-heading h2 {
   margin-top: 0;
 }
-.members-summary {
+.app-shell .members-summary {
   background: transparent;
   border: 0;
   border-bottom: 1px solid var(--color-divider);
@@ -211,37 +217,37 @@
   gap: 16px;
   color: var(--color-muted);
 }
-.members-summary strong {
+.app-shell .members-summary strong {
   margin: 0;
   font-size: var(--text-heading-lg);
   color: var(--color-ink);
 }
-.clients-bottom-note {
+.app-shell .clients-bottom-note {
   justify-content: flex-end;
 }
-.admin-quick-panel nav {
+.app-shell .admin-quick-panel nav {
   gap: 4px;
 }
-.admin-quick-panel nav > button,
-.admin-quick-panel nav > .quick-nav-primary {
+.app-shell .admin-quick-panel nav > button,
+.app-shell .admin-quick-panel nav > .quick-nav-primary {
   background: transparent;
   border-color: transparent;
   padding: 14px 8px;
 }
-.admin-quick-panel nav > button:hover {
+.app-shell .admin-quick-panel nav > button:hover {
   background: var(--color-surface);
   border-color: transparent;
 }
-.quick-nav-icon,
-.quick-nav-primary .quick-nav-icon {
+.app-shell .quick-nav-icon,
+.app-shell .quick-nav-primary .quick-nav-icon {
   background: transparent;
   border: 0;
   color: var(--color-muted);
 }
-.admin-quick-panel nav > .quick-nav-primary strong {
+.app-shell .admin-quick-panel nav > .quick-nav-primary strong {
   color: var(--color-ink);
 }
-.quick-card-note {
+.app-shell .quick-card-note {
   background: transparent;
   border: 0;
   border-top: 1px solid var(--color-divider);
@@ -283,85 +289,85 @@
 }
 
 @container workspace (max-width: 1000px) and (min-width: 701px) {
-  .sidebar {
+  .app-shell .sidebar {
     width: 220px;
     padding-inline: 16px;
   }
-  .app-content:not(.has-calendar) {
+  .app-shell .app-content:not(.has-calendar) {
     padding-inline: 28px;
   }
 }
 @container workspace (max-width: 700px) {
-  .app-content:not(.has-calendar) {
+  .app-shell .app-content:not(.has-calendar) {
     padding: 28px 20px 24px;
   }
-  .app-topbar:not(.admin-topbar) {
+  .app-shell .app-topbar:not(.admin-topbar) {
     padding-inline: 20px;
   }
-  .page-heading {
+  .app-shell .page-heading {
     margin-bottom: 28px;
   }
-  .ws-stack {
+  .app-shell .ws-stack {
     --layout-panel-padding: 20px;
     --layout-section-gap: 24px;
   }
-  .ws-stats,
-  .stats-grid,
-  .role-metrics {
+  .app-shell .ws-stats,
+  .app-shell .stats-grid,
+  .app-shell .role-metrics {
     gap: 24px 16px;
     padding: 4px 0;
   }
-  .ws-stats > div,
-  .stat-card,
-  .role-metrics .stat-card {
+  .app-shell .ws-stats > div,
+  .app-shell .stat-card,
+  .app-shell .role-metrics .stat-card {
     padding: 0;
     border: 0;
   }
-  .staff-workspace > .ws-stats {
+  .app-shell .staff-workspace > .ws-stats {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     column-gap: 16px;
   }
-  .staff-workspace > .ws-stats span {
+  .app-shell .staff-workspace > .ws-stats span {
     overflow-wrap: anywhere;
     min-height: 42px;
   }
-  .staff-workspace > .ws-panel > .ws-panel-heading {
+  .app-shell .staff-workspace > .ws-panel > .ws-panel-heading {
     flex-wrap: nowrap;
     align-items: flex-start;
   }
-  .staff-workspace > .ws-panel > .ws-panel-heading > div {
+  .app-shell .staff-workspace > .ws-panel > .ws-panel-heading > div {
     min-width: 0;
     flex: 1;
   }
-  .staff-actions .ws-actions {
+  .app-shell .staff-actions .ws-actions {
     width: 100%;
     gap: 8px;
   }
-  .staff-actions .button-primary {
+  .app-shell .staff-actions .button-primary {
     flex: 1 1 100%;
   }
-  .staff-actions .button-ghost {
+  .app-shell .staff-actions .button-ghost {
     padding-inline: 0;
   }
-  .staff-session-list > button {
+  .app-shell .staff-session-list > button {
     padding: 20px;
     gap: 8px 12px;
   }
-  .staff-session-list time {
+  .app-shell .staff-session-list time {
     width: 100%;
   }
-  .role-welcome {
+  .app-shell .role-welcome {
     padding-bottom: 12px;
   }
 }
 @container workspace (max-width: 360px) {
-  .staff-workspace > .ws-stats {
+  .app-shell .staff-workspace > .ws-stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .staff-workspace > .ws-stats span {
+  .app-shell .staff-workspace > .ws-stats span {
     overflow-wrap: normal;
   }
-  .staff-workspace > .ws-panel > .ws-panel-heading {
+  .app-shell .staff-workspace > .ws-panel > .ws-panel-heading {
     flex-wrap: wrap;
   }
 }
