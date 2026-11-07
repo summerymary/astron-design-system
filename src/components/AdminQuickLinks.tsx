@@ -34,7 +34,6 @@ export function AdminQuickLinks({ onAction }: { onAction: (id: AdminSectionId) =
         <ChevronRight size={14} />
       </button>
       <div className="quick-panel-heading">
-        <span className="eyebrow">ВСЕГДА ПОД РУКОЙ</span>
         <h2>Быстрый переход</h2>
       </div>
       <nav id="admin-quick-links" aria-label="Быстрые переходы администратора">
