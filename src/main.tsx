@@ -16,6 +16,7 @@ import './styles/guide.css';
 import './styles/client-search.css';
 import './styles/workspace.css';
 import './styles/typography.css';
+import './styles/layout.css';
 
 function redirectLegacyGuide() {
   if (!/^#\/design-system(?:\?|$)/.test(window.location.hash)) return false;
