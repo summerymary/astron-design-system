@@ -53,13 +53,22 @@ assert.equal(canOpenModule('administrator', 'collagen'), false);
 assert.ok(canOpenModule('administrator', 'crm'));
 const managerSections = managementNavigationGroups.flatMap((group) => group.items);
 const omitted = ['members', 'bar', 'bar-catalog', 'bar-sales', 'bar-categories', 'bar-collections'];
-assert.deepEqual(
-  [...managerSections].sort(),
-  adminSections
-    .map((section) => section.id)
-    .filter((id) => !omitted.includes(id))
-    .sort(),
+assert.ok(
+  managerSections.length <= 18,
+  'Management navigation should contain only key destinations',
 );
+for (const id of managerSections)
+  assert.ok(adminSections.some((section) => section.id === id) && !omitted.includes(id));
+for (const id of [
+  'schedule',
+  'registration',
+  'services',
+  'crm',
+  'employees',
+  'directories',
+  'service-settings',
+])
+  assert.ok(managerSections.includes(id));
 assert.equal(
   new Set(managerSections).size,
   managerSections.length,
