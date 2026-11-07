@@ -155,7 +155,7 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
           <small>Подписи остаются читаемыми на светлом фоне.</small>
           <label className="form-field">
             <span>Абонемент</span>
-            <input value="Безлимит" readOnly />
+            <input value="Железная карта" readOnly />
           </label>
           <Button onClick={() => onNotify('Это образец кнопки в выбранной палитре')}>
             Оформить абонемент <ArrowRight size={14} />

@@ -9,7 +9,7 @@ export function LogoGuidelines() {
       <section className="ds-section">
         <SectionTitle
           title="Логотип клуба"
-          subtitle="Основной логотип «Астрона» — чёрный на светлом фоне. Белая версия показывает, как сохраняется контраст на тёмных подложках."
+          subtitle="Текущий логотип «Астрона» — ярко-бордовый #B32D3D на светлом фоне. Белая версия показывает, как сохраняется контраст на тёмных подложках."
           action={<span className="ds-section-number">01 / ПРИМЕРЫ</span>}
         />
         <div className="logo-demo-grid">

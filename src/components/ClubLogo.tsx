@@ -18,11 +18,12 @@ export function ClubLogo({
   return (
     <span
       className={`club-logo logo-${variant} logo-surface-${background}${brand.logoFrameless && variant === 'wide' && !surface ? ' logo-frameless' : ''}`}
-      style={
-        background === 'brand' && brand.logoBackground
+      style={{
+        ...(background === 'brand' && brand.logoBackground
           ? { background: brand.logoBackground }
-          : undefined
-      }
+          : {}),
+        ...(!source && brand.fallbackColor ? { color: brand.fallbackColor } : {}),
+      }}
       role={!decorative && (!source || failedSource === source) ? 'img' : undefined}
       aria-label={!decorative && (!source || failedSource === source) ? brand.name : undefined}
       aria-hidden={decorative || undefined}

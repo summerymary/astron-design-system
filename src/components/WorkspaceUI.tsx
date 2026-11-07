@@ -169,9 +169,11 @@ export function SectionLinks({
 export function LinkCards({
   ids,
   navigate,
+  labels,
 }: {
   ids: readonly AdminSectionId[];
   navigate: Navigate;
+  labels?: Partial<Record<AdminSectionId, string>>;
 }) {
   return (
     <div className="ws-card-grid">
@@ -180,7 +182,7 @@ export function LinkCards({
         return (
           <button className="ws-link-card panel" key={id} onClick={() => navigate(id)}>
             <span>
-              <strong>{meta.label}</strong>
+              <strong>{labels?.[id] || meta.label}</strong>
               <small>{meta.caption}</small>
             </span>
             <ArrowUpRight size={19} />
@@ -372,7 +374,7 @@ export function DataTable({
   onOpen,
   empty,
 }: {
-  columns: { key: string; label: string }[];
+  columns: { key: string; label: string; render?: (row: DemoRecord) => ReactNode }[];
   rows: DemoRecord[];
   onOpen?: (record: DemoRecord) => void;
   empty?: ReactNode;
@@ -428,8 +430,12 @@ export function DataTable({
                   <td key={column.key}>
                     {index === 0 && onOpen ? (
                       <button className="ws-record-link" onClick={() => onOpen(row)}>
-                        {recordValue(row[column.key], column.key)}
+                        {column.render
+                          ? column.render(row)
+                          : recordValue(row[column.key], column.key)}
                       </button>
+                    ) : column.render ? (
+                      column.render(row)
                     ) : (
                       recordValue(row[column.key], column.key)
                     )}
@@ -454,14 +460,20 @@ export function DataTable({
       <div className="ws-mobile-records">
         {ordered.map((row) => (
           <div className="ws-mobile-record" key={row.id}>
-            <strong>{row.name || row[columns[0].key]}</strong>
+            <strong>
+              {columns[0]?.render ? columns[0].render(row) : row.name || row[columns[0].key]}
+            </strong>
             <dl>
               {columns
                 .filter((column) => column.key !== 'name')
                 .map((column) => (
                   <div key={column.key}>
                     <dt>{column.label}</dt>
-                    <dd>{recordValue(row[column.key], column.key)}</dd>
+                    <dd>
+                      {column.render
+                        ? column.render(row)
+                        : recordValue(row[column.key], column.key)}
+                    </dd>
                   </div>
                 ))}
             </dl>
