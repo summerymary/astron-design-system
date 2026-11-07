@@ -230,12 +230,7 @@ export function TrainerHome({
     .sort((a, b) => a.time.localeCompare(b.time));
   return (
     <div className="ws-stack staff-workspace">
-      <section className="panel staff-welcome">
-        <div>
-          <span className="eyebrow">МОЙ РАБОЧИЙ ДЕНЬ</span>
-          <h2>{user.name.split(' ')[0]}, всё готово к тренировкам</h2>
-          <p>Личное расписание, персональные клиенты и заметки к занятиям.</p>
-        </div>
+      <section className="staff-actions" aria-label="Действия тренера">
         <div className="ws-actions">
           <Button
             onClick={() =>
@@ -245,7 +240,7 @@ export function TrainerHome({
             <Plus size={16} />
             Персональная тренировка
           </Button>
-          <Button variant="secondary" onClick={() => navigate('trainer-clients')}>
+          <Button variant="ghost" onClick={() => navigate('trainer-clients')}>
             <NotebookPen size={16} />
             Мои клиенты
           </Button>

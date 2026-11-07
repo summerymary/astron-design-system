@@ -120,11 +120,9 @@ export function AdminOverview({
         <section className="panel visitor-panel">
           <div className="visitor-heading">
             <div>
-              <span className="eyebrow">РАБОЧИЙ ЖУРНАЛ</span>
               <h2>
                 Недавние посетители <span>{filtered.length}</span>
               </h2>
-              <p>Кто приходит в клуб — здесь и сейчас.</p>
             </div>
             <span className="visitor-live">
               <i />

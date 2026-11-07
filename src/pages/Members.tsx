@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ArrowDown, ArrowUpRight, Search, SlidersHorizontal, Users, X } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Search, SlidersHorizontal, X } from 'lucide-react';
 import type { Member, MemberStatus } from '../types';
 import { Avatar, Badge, Button } from '../components/ui';
 import { Status, Tabs } from '../components/WorkspaceUI';
@@ -49,21 +49,8 @@ export function Members({
   return (
     <>
       <div className="members-summary">
-        <div>
-          <span className="eyebrow">КЛИЕНТСКАЯ БАЗА</span>
-          <strong>
-            {members.length.toString().padStart(2, '0')}
-            <span>клиентов в прототипе</span>
-          </strong>
-        </div>
-        <div className="summary-caption">
-          <Users size={20} />
-          <span>
-            Каждое большое сообщество
-            <br />
-            начинается с одного человека.
-          </span>
-        </div>
+        <span>Клиентов в базе</span>
+        <strong>{members.length}</strong>
       </div>
       <section className="panel clients-panel">
         <Tabs
@@ -276,7 +263,6 @@ export function Members({
         </div>
       </section>
       <div className="clients-bottom-note">
-        <span>Это начало вашей клиентской базы.</span>
         <button onClick={onAdd}>
           Добавить ещё одного клиента <ArrowUpRight size={14} />
         </button>
