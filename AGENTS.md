@@ -133,3 +133,7 @@ Production-сборка дополнительно проверена через
 ## Attention and calendar actions release — 8 November 2026
 
 The user explicitly requested push and update for all accumulated local changes. This authorizes this release only; future commit/push still requires a new direct request. Includes independent important/unread marks, day/all-rooms default, context menu and new training in cancelled slots, styled disclosures and management accordion groups. Details: docs/design/attention-and-calendar-actions.md.
+
+## Registration and card redesign - 8 November 2026
+
+The latest user request explicitly authorizes GitHub commit/push and publication of this set. Registration is a dedicated page with member search, explicit pass selection, final confirmation and per-pass usage. Sales include memberships, products, services and personal training. Recent visitors use text-only membership colour; plastic cards appear in sales, registration and client purchases. Blue is now #204DA8 on #E8F0FF, distinct from steel. Administrator sidebar defaults collapsed. Management groups default closed with 16 primary destinations plus an optional full catalog, instead of listing all pages. Details: docs/design/registration-and-plastic-cards.md; test:registration is required in CI. Older menu and inline-card rules above are superseded. Future commits/push still require a new direct request.

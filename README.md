@@ -17,6 +17,7 @@ pnpm test:schedule
 pnpm test:staff
 pnpm test:messages
 pnpm test:catalog
+pnpm test:registration
 pnpm build
 pnpm preview
 ```
@@ -40,7 +41,7 @@ pnpm preview
 - Роли и права, контекстные политики/группы, дела безопасности, журнал событий. Камеры представлены схемами и состояниями без реального видео.
 - Профиль, уведомления, форма демо-PIN без хранения кодов; оформление и параметры расписания.
 
-У прототипа девять ролей: администратор, тренер, бармен, директор клуба, директор сети, маркетолог, фитнес-директор, операционный директор и сисадмин. У управляющих полное меню разделов, кроме пунктов бара, с раскрывающимися группами. Ролевая модель на фронтенде не является серверной авторизацией.
+У прототипа девять ролей: администратор, тренер, бармен, директор клуба, директор сети, маркетолог, фитнес-директор, операционный директор и сисадмин. У управляющих компактное меню основных сегментов с раскрывающимися группами; остальные страницы доступны внутри разделов и каталога. Ролевая модель на фронтенде не является серверной авторизацией.
 
 Переключатели «Десктоп / Телефон» и состояния «С данными / Пусто / Загрузка / Ошибка» остаются в панели прототипа. На телефоне таблицы превращаются в карточки, CRM и переписка работают как список → детали. Основной текст — 16 px, подписи — не меньше 14 px, включая телефон. На компьютере клиентские строки имеют высоту от 44 px с возможностью роста при увеличении текста.
 
@@ -78,3 +79,7 @@ https://system.astron.club/ и https://my-dev.astron.imbateam.tech/ исполь
 - Стайлгайд: https://summerymary.github.io/astron-design-system/design-system.html
 
 Относительные пути и hash-маршруты работают в подпапке репозитория. Workflow `.github/workflows/pages.yml` устанавливает зависимости по lockfile, выполняет проверки, собирает и публикует GitHub Pages. В настройках Pages используется GitHub Actions. Внутренний репозиторий Sites и публичный GitHub имеют разные истории; принудительный push между ними не использовать.
+
+## Registration and plastic club cards - 8 November
+
+Registration is a dedicated page: search by card/name/phone, choose a client, choose an eligible membership and explicitly confirm. Only the selected membership balance is consumed. Sales offer memberships, products, services and personal training. Plastic-style club cards are used for selection and client purchases; the recent-visitor journal uses coloured text only. Administrators start with a collapsed sidebar. Management navigation shows key destinations grouped into segments. Details: docs/design/registration-and-plastic-cards.md.
