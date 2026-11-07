@@ -1,0 +1,102 @@
+/* Category colours remain independent of the current club theme and of statuses. */
+.ds-membership-colors {
+  display: grid;
+  gap: 20px;
+  margin-top: 32px;
+}
+.ds-membership-colors > p {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+}
+.membership-tag,
+.app-shell .membership-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  padding: 3px 8px;
+  border: 1px solid var(--membership-line);
+  border-radius: 6px;
+  background: var(--membership-bg);
+  color: var(--membership-text);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  line-height: 20px;
+  vertical-align: middle;
+  text-align: left;
+}
+.membership-tag > svg {
+  flex-shrink: 0;
+}
+.membership-tag > span {
+  overflow-wrap: anywhere;
+}
+.app-shell .membership-tag > span {
+  color: inherit;
+}
+.membership-kind-grid,
+.app-shell .membership-kind-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.membership-kind-card,
+.app-shell .membership-kind-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  text-align: left;
+}
+button.membership-kind-card {
+  cursor: pointer;
+}
+.app-shell button.membership-kind-card:hover {
+  border-color: var(--color-control-border);
+}
+.app-shell button.membership-kind-card[aria-pressed='true'] {
+  outline: 2px solid var(--color-action);
+  outline-offset: 2px;
+}
+.membership-kind-card p,
+.app-shell .membership-kind-card p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.membership-kind-card code {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+.app-shell .ws-plan-preview .membership-tag {
+  margin-block: 20px 8px;
+}
+.app-shell .ws-plan-preview h2 {
+  overflow-wrap: anywhere;
+}
+@container (min-width: 1700px) {
+  .membership-kind-grid,
+  .app-shell .membership-kind-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+@container (max-width: 1000px) and (min-width: 701px) {
+  .membership-kind-grid,
+  .app-shell .membership-kind-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@container (max-width: 700px) {
+  .membership-kind-grid,
+  .app-shell .membership-kind-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

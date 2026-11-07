@@ -1,5 +1,173 @@
 /* Shared layout and surface hierarchy. Product selectors are scoped because
    Vite may load shared CSS before prototype-specific CSS in production. */
+.app-shell .directory-search-panel {
+  display: grid;
+  gap: 14px;
+  padding: 28px;
+  border: 1px solid var(--color-divider);
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+}
+.app-shell .directory-search-panel > label {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+.app-shell .directory-search-input {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 64px;
+  padding: 10px 18px;
+  border: 1px solid var(--color-control-border);
+  border-radius: var(--radius-control);
+  color: var(--color-muted);
+  background: var(--color-surface);
+}
+.app-shell .directory-search-input:focus-within {
+  outline: 2px solid var(--color-action);
+  outline-offset: 3px;
+}
+.app-shell .directory-search-input input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  font-size: 18px;
+  color: var(--color-ink);
+}
+.app-shell .directory-search-input input::-webkit-search-cancel-button {
+  display: none;
+}
+.app-shell .directory-search-input > svg {
+  flex-shrink: 0;
+}
+.app-shell .directory-search-input .icon-button {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+}
+.app-shell .directory-search-panel p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.app-shell .directory-search-examples {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.app-shell .directory-search-examples button {
+  padding: 8px 14px;
+  min-height: 44px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 14px;
+  cursor: pointer;
+}
+.app-shell .directory-search-examples button:hover {
+  background: var(--color-surface-muted);
+}
+.app-shell .directory-result-count {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+.app-shell .directory-result {
+  overflow: hidden;
+}
+.app-shell .directory-result-heading {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+}
+.app-shell .directory-result-heading h2 {
+  font-size: 20px;
+  margin: 8px 0;
+}
+.app-shell .directory-result-heading p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--color-muted);
+}
+.app-shell .directory-result-heading small {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+.app-shell .directory-result-heading .button {
+  flex-shrink: 0;
+}
+.app-shell .directory-record-results {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.app-shell .directory-record-results li {
+  border-top: 1px solid var(--color-divider);
+}
+.app-shell .directory-record-results button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: left;
+  width: 100%;
+  padding: 18px 24px;
+  border: 0;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+.app-shell .directory-record-results button:hover {
+  background: var(--color-surface-subtle);
+}
+.app-shell .directory-record-results button > span {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+.app-shell .directory-record-results strong {
+  font-size: 16px;
+  font-weight: 500;
+}
+.app-shell .directory-record-results small {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-muted);
+  overflow-wrap: anywhere;
+}
+.app-shell .directory-record-results button > svg {
+  flex-shrink: 0;
+}
+@container (max-width: 700px) {
+  .app-shell .directory-search-panel {
+    padding: 20px;
+  }
+  .app-shell .directory-search-input {
+    min-height: 60px;
+    padding-inline: 12px;
+    gap: 10px;
+  }
+  .app-shell .directory-search-input input {
+    font-size: 16px;
+  }
+  .app-shell .directory-result-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 20px;
+  }
+  .app-shell .directory-record-results button {
+    padding: 16px 20px;
+  }
+}
 .panel,
 .app-shell .panel {
   border-color: var(--color-divider);
@@ -62,7 +230,7 @@
   color: var(--color-action);
   font-weight: 600;
 }
-.app-shell .side-nav button.active > span {
+.app-shell .side-nav button.active > .nav-count {
   background: var(--color-surface);
   color: var(--color-action);
 }
@@ -226,17 +394,17 @@
   justify-content: flex-end;
 }
 .app-shell .admin-quick-panel nav {
-  gap: 4px;
+  gap: 10px;
 }
 .app-shell .admin-quick-panel nav > button,
 .app-shell .admin-quick-panel nav > .quick-nav-primary {
-  background: transparent;
-  border-color: transparent;
-  padding: 14px 8px;
+  background: var(--color-surface);
+  border-color: var(--color-line);
+  padding: 14px 12px;
 }
 .app-shell .admin-quick-panel nav > button:hover {
-  background: var(--color-surface);
-  border-color: transparent;
+  background: var(--color-surface-subtle);
+  border-color: var(--color-control-border);
 }
 .app-shell .quick-nav-icon,
 .app-shell .quick-nav-primary .quick-nav-icon {
@@ -288,6 +456,242 @@
   padding: 0;
 }
 
+/* Desktop navigation can collapse without hiding destinations or their names. */
+.app-shell .sidebar-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.app-shell .sidebar-head .brand {
+  flex: 1;
+  min-width: 0;
+}
+.app-shell .sidebar-toggle {
+  width: 36px;
+  height: 36px;
+  color: var(--color-muted);
+}
+.app-shell .sidebar-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.app-shell .sidebar.has-management-menu {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: calc(100dvh - 72px);
+  min-height: 500px;
+  padding: 20px 16px 0;
+}
+.app-shell .has-management-menu .sidebar-head .brand,
+.app-shell .has-management-menu .sidebar-head .club-logo {
+  height: 48px;
+}
+.app-shell .has-management-menu .sidebar-head .club-logo {
+  padding: 4px 8px;
+}
+.app-shell .has-management-menu .sidebar-head,
+.app-shell .has-management-menu .club-switch,
+.app-shell .has-management-menu .sidebar-bottom {
+  flex-shrink: 0;
+}
+.app-shell .has-management-menu .club-switch {
+  margin: 8px 0 16px;
+  padding: 8px 4px;
+}
+.app-shell .has-management-menu .club-switch > .club-logo {
+  display: none;
+}
+.app-shell .has-management-menu .club-switch small {
+  font-size: 14px;
+}
+.app-shell .has-management-menu .sidebar-navigation {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+  padding: 4px;
+  margin-inline: -4px;
+}
+.app-shell .management-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.app-shell .management-nav-group + .management-nav-group {
+  margin-top: 16px;
+}
+.app-shell .management-nav-group .nav-label {
+  margin: 12px 0 8px;
+  line-height: 1.5;
+}
+.app-shell .has-management-menu .side-nav button {
+  flex-shrink: 0;
+  text-align: left;
+}
+.app-shell .has-management-menu .sidebar-bottom {
+  padding-top: 12px;
+}
+.app-shell .has-management-menu .sandbox-card {
+  display: none;
+}
+.app-shell .has-management-menu .user-block {
+  padding-block: 16px;
+}
+.app-shell .has-management-menu .user-block small {
+  white-space: normal;
+  line-height: 1.5;
+}
+.workspace-toolbar .role-select select,
+.workspace-role-mobile .role-select select {
+  max-width: none;
+  width: 230px;
+  flex-shrink: 0;
+}
+.workspace-role-mobile .role-select {
+  flex-wrap: wrap;
+}
+.app-shell .side-nav .nav-item-label {
+  min-width: 0;
+  font: inherit;
+}
+.app-shell.is-sidebar-collapsed .sidebar {
+  width: 80px;
+  padding: 20px 12px 0;
+}
+.app-shell.is-sidebar-collapsed .sidebar-head {
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.app-shell.is-sidebar-collapsed .sidebar-head .brand {
+  min-height: 44px;
+  flex: none;
+}
+.app-shell.is-sidebar-collapsed .sidebar-head .club-logo {
+  width: 44px;
+  height: 44px;
+  padding: 5px;
+  background: transparent;
+}
+.app-shell.is-sidebar-collapsed .sidebar-toggle {
+  width: 44px;
+  height: 44px;
+}
+.app-shell.is-sidebar-collapsed .club-switch,
+.app-shell.is-sidebar-collapsed .nav-item-label,
+.app-shell.is-sidebar-collapsed .nav-count,
+.app-shell.is-sidebar-collapsed .nav-label,
+.app-shell.is-sidebar-collapsed .sandbox-card,
+.app-shell.is-sidebar-collapsed .user-block > span:nth-child(2),
+.app-shell.is-sidebar-collapsed .user-online {
+  display: none;
+}
+.app-shell.is-sidebar-collapsed .side-nav button {
+  justify-content: center;
+  padding: 0;
+  min-height: 44px;
+}
+.app-shell.is-sidebar-collapsed .ws-nav-separator {
+  display: block;
+  height: 0;
+  padding: 0;
+  margin: 14px 8px 10px;
+  border-top: 1px solid var(--color-line);
+  font-size: 0;
+}
+.app-shell.is-sidebar-collapsed .sidebar-bottom {
+  padding-top: 24px;
+}
+.app-shell.is-sidebar-collapsed .user-block {
+  justify-content: center;
+  padding-inline: 0;
+}
+
+/* Facts remain paired with their labels and are grouped by everyday tasks. */
+.app-shell .client-info-groups {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 0 24px 28px;
+}
+.app-shell .client-info-groups > .ws-client-overview {
+  flex: 1 1 100%;
+  width: 100%;
+}
+.app-shell .client-info-summary-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+.app-shell .client-info-card {
+  flex: 1 1 calc(50% - 12px);
+  min-width: min(100%, 340px);
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.app-shell .client-info-card h3 {
+  margin: 0;
+  padding: 18px 20px;
+  background: var(--color-surface-subtle);
+  border-bottom: 1px solid var(--color-line);
+  color: var(--color-ink);
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+.app-shell .client-info-card dl {
+  margin: 0;
+}
+.app-shell .client-info-card dl > div {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.9fr) minmax(0, 1.2fr);
+  gap: 20px;
+  margin: 0;
+  padding: 16px 20px;
+}
+.app-shell .client-info-card dl > div + div {
+  border-top: 1px solid var(--color-divider);
+}
+.app-shell .client-info-card dt {
+  font-size: var(--text-caption);
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+.app-shell .client-info-card dd {
+  min-width: 0;
+  font-size: var(--text-body);
+  color: var(--color-ink);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.app-shell .client-info-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 2px 9px;
+  border-radius: 6px;
+  background: var(--color-surface-muted);
+  font-size: var(--text-small);
+}
+.app-shell .ws-chat-history p {
+  white-space: pre-wrap;
+}
+.app-shell .ws-chat-history.is-empty {
+  min-height: 0;
+  padding: 0;
+}
+
 @container workspace (max-width: 1000px) and (min-width: 701px) {
   .app-shell .sidebar {
     width: 220px;
@@ -298,6 +702,15 @@
   }
 }
 @container workspace (max-width: 700px) {
+  .app-shell .client-info-groups {
+    gap: 20px;
+    padding: 0 16px 20px;
+  }
+  .app-shell .client-info-card dl > div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 14px 18px;
+  }
   .app-shell .app-content:not(.has-calendar) {
     padding: 28px 20px 24px;
   }

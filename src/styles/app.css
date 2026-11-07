@@ -484,7 +484,7 @@ code {
   background: var(--color-accent);
   color: var(--color-on-accent);
 }
-.side-nav button > span {
+.side-nav button > .nav-count {
   font-size: var(--text-caption);
   margin-left: auto;
   background: var(--color-canvas);
@@ -492,7 +492,7 @@ code {
   padding: 1px 5px;
   color: var(--color-text);
 }
-.side-nav button.active > span {
+.side-nav button.active > .nav-count {
   background: var(--color-accent-hover);
   color: var(--color-on-accent);
 }

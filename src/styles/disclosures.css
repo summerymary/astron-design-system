@@ -56,3 +56,199 @@
     padding-inline-end: var(--disclosure-inset);
   }
 }
+
+/* One disclosure style for expandable content throughout both entry pages. */
+.ws-disclosure,
+.app-shell .ws-disclosure {
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-surface);
+  overflow: hidden;
+}
+.ws-disclosure > summary,
+.app-shell .ws-disclosure > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 48px;
+  padding: 14px 16px;
+  list-style: none;
+  color: var(--color-ink);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.ws-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+.ws-disclosure > summary::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  margin: -4px 4px 0 12px;
+  transition: transform 0.15s;
+}
+.ws-disclosure[open] > summary::after {
+  transform: rotate(225deg);
+  margin-top: 4px;
+}
+.ws-disclosure[open] > summary {
+  background: var(--color-surface-muted);
+  border-bottom: 1px solid var(--color-line);
+}
+.ws-disclosure > summary:hover {
+  background: var(--color-surface-muted);
+}
+.ws-disclosure > summary:focus-visible {
+  outline: 2px solid var(--color-action);
+  outline-offset: -3px;
+}
+.ws-disclosure > :not(summary),
+.app-shell .ws-disclosure > :not(summary) {
+  margin: 16px;
+}
+.app-shell .client-more > summary,
+.app-shell .calendar-more > summary {
+  min-height: 44px;
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  gap: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+.app-shell .client-more[open] > summary,
+.app-shell .calendar-more[open] > summary {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent-line);
+  color: var(--color-accent);
+}
+.app-shell .calendar-more > div {
+  top: 50px;
+  border-radius: 12px;
+  padding: 16px;
+}
+.attention-flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: 12px;
+}
+.attention-flags > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: var(--color-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.attention-flags > button[aria-pressed='true'] {
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent-line);
+}
+.attention-labels {
+  color: var(--color-accent);
+}
+.calendar-context-dismiss {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: transparent;
+  border: 0;
+}
+.calendar-context-menu {
+  position: fixed;
+  z-index: 10001;
+  width: 280px;
+  max-width: calc(100vw - 16px);
+  display: grid;
+  gap: 4px;
+  padding: 8px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-popup);
+}
+.calendar-context-menu small {
+  padding: 10px;
+  font-size: 14px;
+  color: var(--color-muted);
+  overflow-wrap: anywhere;
+}
+.calendar-context-menu button {
+  padding: 12px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-ink);
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+}
+.calendar-context-menu button:hover,
+.calendar-context-menu button:focus-visible {
+  background: var(--color-accent-soft);
+  outline: 2px solid var(--color-accent-line);
+  outline-offset: -2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ws-disclosure > summary::after {
+    transition: none;
+  }
+}
+.app-shell .nav-accordion {
+  display: block;
+  border: 0;
+}
+.app-shell .nav-accordion > summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.app-shell .nav-accordion > summary::-webkit-details-marker {
+  display: none;
+}
+.app-shell .nav-accordion > summary::after {
+  content: '';
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  margin-right: 4px;
+}
+.app-shell .nav-accordion[open] > summary::after {
+  transform: rotate(45deg);
+}
+.app-shell .nav-accordion > summary:hover {
+  background: var(--color-surface-muted);
+}
+.app-shell .nav-accordion > button {
+  width: 100%;
+  margin-block: 6px;
+}
+.app-shell.is-sidebar-collapsed .nav-accordion > summary {
+  display: none;
+}
