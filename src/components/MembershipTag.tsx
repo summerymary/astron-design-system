@@ -2,7 +2,15 @@ import type { CSSProperties } from 'react';
 import { Dumbbell, Ticket, UserRound, Users, UserRoundPlus } from 'lucide-react';
 import { getMembershipKind } from '../data/membership-kinds';
 
-export function MembershipTag({ name, kindId }: { name: string; kindId?: string }) {
+export function MembershipTag({
+  name,
+  kindId,
+  textOnly = false,
+}: {
+  name: string;
+  kindId?: string;
+  textOnly?: boolean;
+}) {
   const kind = getMembershipKind(name, kindId);
   if (!kind) return <span>{name}</span>;
   const Icon = {
@@ -14,7 +22,7 @@ export function MembershipTag({ name, kindId }: { name: string; kindId?: string 
   }[kind.id];
   return (
     <span
-      className="membership-tag"
+      className={`membership-tag${textOnly ? ' is-text-only' : ''}`}
       data-kind={kind.id}
       style={
         {
@@ -24,7 +32,7 @@ export function MembershipTag({ name, kindId }: { name: string; kindId?: string 
         } as CSSProperties
       }
     >
-      <Icon size={15} aria-hidden="true" />
+      {!textOnly && <Icon size={15} aria-hidden="true" />}
       <span>{name}</span>
     </span>
   );
