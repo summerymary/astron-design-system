@@ -6,14 +6,8 @@ import { resources } from '../data/workspace';
 import { adminSections } from '../data/admin';
 import type { AdminSectionId } from '../data/admin';
 import type { DemoUser, Member, VisitKind } from '../types';
-import {
-  BarCatalog,
-  BarSales,
-  BartenderHome,
-  ManagedPersonalClients,
-  TrainerClients,
-} from './StaffWorkspace';
-import { isManagementRole } from '../lib/staff-rules';
+import { BarCatalog, BarSales, BartenderHome, TrainerClients } from './StaffWorkspace';
+import { canOpenModule } from '../lib/staff-rules';
 import {
   BarWorkspace,
   CashWorkspace,
@@ -58,11 +52,9 @@ export function AdminSection({
   onBack: () => void;
 }) {
   if (section === 'trainer-clients')
-    return isManagementRole(user.role) ? (
-      <ManagedPersonalClients members={members} navigate={navigate} onMember={onMember} />
-    ) : (
+    return user.role === 'trainer' ? (
       <TrainerClients user={user} members={members} initialMember={member} navigate={navigate} />
-    );
+    ) : null;
   if (section === 'bar-catalog') return <BarCatalog navigate={navigate} />;
   if (section === 'bar-sales') return <BarSales clubName={clubName} />;
   if (section === 'products')
@@ -74,6 +66,8 @@ export function AdminSection({
         initialMember={member}
         navigate={navigate}
         clubName={clubName}
+        employeeName={employeeName}
+        allowRegistration={canOpenModule(user.role, 'registration')}
       />
     );
   if (section === 'bar-inventory') return <InventoryWorkspace key="bar" bar navigate={navigate} />;
@@ -109,6 +103,8 @@ export function AdminSection({
         initialMember={member}
         navigate={navigate}
         clubName={clubName}
+        employeeName={employeeName}
+        allowRegistration={canOpenModule(user.role, 'registration')}
       />
     );
   if (section === 'statistics') return <StatisticsWorkspace />;
@@ -118,7 +114,16 @@ export function AdminSection({
     ) : (
       <BarWorkspace navigate={navigate} clubName={clubName} />
     );
-  if (section === 'cash') return <CashWorkspace navigate={navigate} />;
+  if (section === 'cash')
+    return (
+      <CashWorkspace
+        navigate={navigate}
+        clubName={clubName}
+        employeeName={employeeName}
+        members={members}
+        onMember={onMember}
+      />
+    );
   if (section === 'inventory') return <InventoryWorkspace key="retail" navigate={navigate} />;
   if (['crm', 'leads', 'requests', 'segments', 'pipelines', 'retention'].includes(section))
     return <CRMWorkspace key={section} section={section} navigate={navigate} />;

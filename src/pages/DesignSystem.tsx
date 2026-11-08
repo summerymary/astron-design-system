@@ -161,23 +161,31 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
               ))}
             </div>
             <div className="ds-membership-colors">
-              <h3>Виды абонементов</h3>
+              <h3>Цвета карточек абонементов</h3>
               <p>
-                Светлый фон и небольшая цветная подпись помогают различать услуги. Это не кнопки и
-                не статусы. Главные действия сохраняют фирменный цвет клуба, а состояния «Действует»
-                или «Истёк» показываются отдельно.
+                Цветом заполняется вся карточка. Он помогает различать назначения услуг; состояние
+                «Действует» или «Истёк» показывается отдельно. Это примеры оформления, а не
+                ограничение числа тарифов: названия, категории и условия могут быть любыми.
               </p>
               <div className="membership-kind-grid">
                 {membershipKinds.map((kind) => (
-                  <div className="membership-kind-card" key={kind.id}>
-                    <MembershipTag name={kind.name} kindId={kind.id} />
+                  <div
+                    className="membership-kind-card"
+                    key={kind.id}
+                    style={{
+                      background: kind.background === 'transparent' ? '#F8F9F5' : kind.background,
+                      color: kind.foreground,
+                      borderColor: kind.line,
+                    }}
+                  >
+                    <MembershipTag name={kind.name} kindId={kind.id} textOnly />
                     <p>
                       {kind.description} · {kind.colorName.toLowerCase()}
                     </p>
                     <code>
                       Текст {kind.foreground}
                       <br />
-                      Фон {kind.background === 'transparent' ? 'прозрачный' : kind.background}
+                      Фон {kind.background === 'transparent' ? '#F8F9F5' : kind.background}
                     </code>
                   </div>
                 ))}
@@ -211,8 +219,10 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
               </div>
               <p>
                 Всегда сохраняются название и значок: услугу можно узнать без различения цветов. В
-                других темах эти пять цветов остаются прежними. Гостевой визит показан без заливки,
-                с тонким контуром.
+                других темах цвета карт остаются прежними. Гостевой визит показан очень светлым.
+                Каталог и продажа используют одинаковые разделы: абонементы, персональный тренинг,
+                корпоративные абонементы, исключения, товары и услуги. Раздел определяет место
+                предложения в каталоге, а цвет карты можно выбрать отдельно.
               </p>
             </div>
             <div className="palette-guidance">
@@ -432,7 +442,10 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                     <option key={kind.id}>{kind.name}</option>
                   ))}
                 </Select>
-                <small>Стрелки — выбор, Enter — подтвердить, Escape — закрыть. В длинных списках появляется поиск.</small>
+                <small>
+                  Стрелки — выбор, Enter — подтвердить, Escape — закрыть. В длинных списках
+                  появляется поиск.
+                </small>
               </label>
               <label className="form-field field-error">
                 <span>Email</span>

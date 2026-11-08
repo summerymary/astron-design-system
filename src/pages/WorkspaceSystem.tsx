@@ -465,6 +465,10 @@ const rights = [
   'Записывать персональные тренировки',
   'Вести заметки о своих клиентах',
   'Работать в баре',
+  'Работать с заявками CRM',
+  'Настраивать сценарии заявок',
+  'Работать с кассой',
+  'Вести расчёт зарплаты',
 ];
 const defaultRights: Record<string, string[]> = {
   administrator: rights.slice(0, 5),
@@ -479,7 +483,14 @@ const defaultRights: Record<string, string[]> = {
   'fitness-director': rights.slice(0, 8),
   'operations-director': rights.slice(0, 8),
   sysadmin: rights.slice(0, 8),
-  marketer: ['Просматривать отчёты'],
+  marketer: ['Просматривать отчёты', 'Работать с заявками CRM', 'Настраивать сценарии заявок'],
+  accountant: [
+    'Просматривать клиентов',
+    'Продавать услуги',
+    'Просматривать отчёты',
+    'Работать с кассой',
+    'Вести расчёт зарплаты',
+  ],
 };
 export function RolesWorkspace() {
   const { data, put } = useWorkspace();

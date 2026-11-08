@@ -14,6 +14,7 @@ import {
   Move,
   Plus,
   Settings2,
+  Trash2,
   Users,
 } from 'lucide-react';
 import { Button, Modal } from '../components/ui';
@@ -74,7 +75,7 @@ export function ScheduleWorkspace({
   clubName: string;
   user: DemoUser;
 }) {
-  const { data, put } = useWorkspace();
+  const { data, put, remove } = useWorkspace();
   const isTrainer = user.role === 'trainer';
   const canEdit = (event: DemoRecord) => canManageEvent(event, user);
   const saved = data['calendar-view']?.find((r) => r.id === user.id);
@@ -94,6 +95,7 @@ export function ScheduleWorkspace({
   const [library, setLibrary] = useState<DemoRecord | null>(null);
   const [query, setQuery] = useState('');
   const [pending, setPending] = useState<PendingMove | null>(null);
+  const [deleting, setDeleting] = useState<DemoRecord | null>(null);
   const [undo, setUndo] = useState<PendingMove | null>(null);
   const [copying, setCopying] = useState(false);
   const [booking, setBooking] = useState('');
@@ -115,7 +117,9 @@ export function ScheduleWorkspace({
   const scroller = useRef<HTMLDivElement>(null);
   const drag = useRef<Drag | null>(null);
   const suppressClick = useRef(false);
-  const dialog = Boolean(openedId || editing || library || pending || copying || context);
+  const dialog = Boolean(
+    openedId || editing || library || pending || deleting || copying || context,
+  );
   const activeRooms = data.rooms.filter((r) => r.club === club && r.status !== 'В архиве');
   const trainers = [
     ...new Set(
@@ -189,6 +193,10 @@ export function ScheduleWorkspace({
     setError('');
   }, []);
   const closeCopy = useCallback(() => setCopying(false), []);
+  const closeDelete = useCallback(() => {
+    setDeleting(null);
+    setError('');
+  }, []);
 
   // View preferences live in the same resettable memory as the prototype data.
   useEffect(() => {
@@ -278,6 +286,31 @@ export function ScheduleWorkspace({
   const show = (event: DemoRecord) => {
     setOpenedId(event.id);
     setError('');
+  };
+  const requestDelete = (event: DemoRecord) => {
+    if (!canEdit(event)) return;
+    setDeleting({ ...event });
+    setContext(null);
+    closeDetails();
+    setError('');
+  };
+  const deleteTraining = () => {
+    if (!deleting) return;
+    const current = data.events.find((event) => event.id === deleting.id);
+    if (!current || !canEdit(current)) {
+      setError('Занятие уже удалено или больше недоступно для изменения.');
+      return;
+    }
+    if (Object.keys({ ...current, ...deleting }).some((key) => current[key] !== deleting[key])) {
+      setError('Занятие изменилось. Закройте окно и проверьте его заново перед удалением.');
+      return;
+    }
+    remove('events', current.id);
+    if (undo?.after.id === current.id) setUndo(null);
+    closeDelete();
+    setMessage(
+      `«${current.name}» удалено из расписания: ${dayText(current.day)}, ${eventTime(current)}, ${current.room}.`,
+    );
   };
   const seed = (time?: string, selectedRoom?: string, selectedDay = day): DemoRecord => ({
     id: demoId('event'),
@@ -468,7 +501,11 @@ export function ScheduleWorkspace({
               aria-label="Быстрые действия с расписанием"
               style={{
                 left: Math.max(8, Math.min(context.x, window.innerWidth - 292)),
-                top: Math.max(8, Math.min(context.y, window.innerHeight - 230)),
+                top: Math.max(8, Math.min(context.y, window.innerHeight - 300)),
+                maxHeight:
+                  window.innerHeight -
+                  Math.max(8, Math.min(context.y, window.innerHeight - 300)) -
+                  8,
               }}
               onKeyDown={(e) => {
                 const buttons = [...e.currentTarget.querySelectorAll<HTMLButtonElement>('button')];
@@ -524,6 +561,16 @@ export function ScheduleWorkspace({
               >
                 Добавить тренировку{context.event?.status === 'Отменено' ? ' на это время' : ''}
               </button>
+              {context.event && canEdit(context.event) && (
+                <button
+                  role="menuitem"
+                  className="calendar-delete-action"
+                  onClick={() => requestDelete(context.event!)}
+                >
+                  <Trash2 size={18} aria-hidden="true" />
+                  Удалить тренировку
+                </button>
+              )}
             </div>
           </>,
           document.body,
@@ -1001,6 +1048,38 @@ export function ScheduleWorkspace({
       {fullscreen ? createPortal(content, document.body) : content}
       {createPortal(
         <>
+          {deleting && (
+            <Modal
+              title="Удалить тренировку?"
+              subtitle={`${dayText(deleting.day)} · ${eventTime(deleting)} · ${deleting.room}`}
+              onClose={closeDelete}
+            >
+              <div className="ws-stack calendar-delete-summary">
+                <h3>{deleting.name}</h3>
+                <p>
+                  Тренер: <strong>{deleting.trainer}</strong>
+                </p>
+                <Notice tone="warning">
+                  Из расписания будет удалено только это занятие и записи на него. Записано
+                  участников: {deleting.booked || '0'}. Абонементы клиентов сохранятся.
+                </Notice>
+                {error && (
+                  <p role="alert" className="form-error">
+                    {error}
+                  </p>
+                )}
+                <div className="modal-actions">
+                  <Button variant="secondary" onClick={closeDelete}>
+                    Оставить тренировку
+                  </Button>
+                  <Button onClick={deleteTraining}>
+                    <Trash2 size={17} />
+                    Удалить тренировку
+                  </Button>
+                </div>
+              </div>
+            </Modal>
+          )}
           {library && (
             <Modal
               title="База тренировок"
@@ -1193,6 +1272,14 @@ export function ScheduleWorkspace({
                       >
                         <Move size={15} />
                         Перенести / изменить
+                      </Button>
+                      <Button
+                        variant="secondary"
+                        className="calendar-delete-action"
+                        onClick={() => requestDelete(opened)}
+                      >
+                        <Trash2 size={17} />
+                        Удалить тренировку
                       </Button>
                     </div>
                     {user.role === 'administrator' && opened.kind !== 'personal' && (

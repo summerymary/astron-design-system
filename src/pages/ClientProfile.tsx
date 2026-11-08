@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import { Avatar, Badge, Button, Modal, StateContent } from '../components/ui';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
-import { DataTable, RecordForm, Stats } from '../components/WorkspaceUI';
+import { DataTable, RecordForm } from '../components/WorkspaceUI';
 import { AdminQuickLinks } from '../components/AdminQuickLinks';
 import { clientTabs, getClientProfile } from '../data/clientProfile';
 import type { ClientTabId, SubscriptionStatus } from '../data/clientProfile';
@@ -68,6 +68,7 @@ export function ClientProfile({
   visits,
   bookings,
   canOperate,
+  canSell = false,
   scenario,
   onReset,
   onBack,
@@ -80,6 +81,7 @@ export function ClientProfile({
   visits: Visit[];
   bookings: string[];
   canOperate: boolean;
+  canSell?: boolean;
   scenario: Scenario;
   onReset: () => void;
   onBack: () => void;
@@ -148,7 +150,11 @@ export function ClientProfile({
               <div className="client-name-block">
                 <h1>{member.name}</h1>
                 <div className="client-name-meta">
-                  <Badge status={member.status} />
+                  {member.archived ? (
+                    <span className="client-info-status">В архиве</span>
+                  ) : (
+                    <Badge status={member.status} />
+                  )}
                   <span>
                     <CreditCard size={13} />
                     Карта <b>{profile.card}</b>
@@ -156,13 +162,29 @@ export function ClientProfile({
                   <span>В клубе с {member.joined}</span>
                 </div>
               </div>
+              {!canOperate && canSell && (
+                <div className="client-primary-actions">
+                  <Button
+                    variant="secondary"
+                    className="client-sell-button"
+                    onClick={() => onAction('services')}
+                  >
+                    <ShoppingBag size={15} />
+                    Продать
+                  </Button>
+                </div>
+              )}
               {canOperate && (
                 <div className="client-primary-actions">
                   <Button onClick={onRegistration}>
                     <Check size={15} />
                     Отметить посещение
                   </Button>
-                  <Button variant="secondary" onClick={() => onAction('services')}>
+                  <Button
+                    variant="secondary"
+                    className="client-sell-button"
+                    onClick={() => onAction('services')}
+                  >
                     <ShoppingBag size={15} />
                     Продать
                   </Button>
@@ -399,21 +421,6 @@ export function ClientProfile({
                   {tab === 'info' && (
                     <div className="client-info-groups">
                       <section className="ws-client-overview">
-                        <Stats
-                          items={[
-                            {
-                              label: 'Оплачено в демопримерах',
-                              value: money(
-                                clientSales.reduce((sum, row) => sum + Number(row.amount), 0),
-                              ),
-                            },
-                            { label: 'Продажи', value: clientSales.length },
-                            {
-                              label: 'Статус клиента',
-                              value: member.archived ? 'В архиве' : 'Активен',
-                            },
-                          ]}
-                        />
                         <div className="client-info-summary-footer">
                           <p className="ws-muted">Теги: {member.tags || 'Не добавлены'}</p>
                           {canOperate && (

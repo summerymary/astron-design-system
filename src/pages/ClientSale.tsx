@@ -1,21 +1,6 @@
 import { Select } from '../components/Select';
 import { useCallback, useEffect, useState } from 'react';
-import {
-  ArrowLeft,
-  Banknote,
-  Building2,
-  ChevronRight,
-  CreditCard,
-  Dumbbell,
-  Gift,
-  Layers,
-  Search,
-  ShoppingBag,
-  Sparkles,
-  UserRound,
-  Wallet,
-  X,
-} from 'lucide-react';
+import { ArrowLeft, Banknote, CreditCard, Gift, Layers, Search, Wallet, X } from 'lucide-react';
 import type { Member } from '../types';
 import type { Navigate } from '../components/WorkspaceUI';
 import { Button, Modal } from '../components/ui';
@@ -23,6 +8,7 @@ import { Notice, Empty } from '../components/WorkspaceUI';
 import { ClientSearch } from '../components/ClientSearch';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { MembershipCard } from '../components/MembershipCard';
+import { CatalogSectionCard } from '../components/CatalogSectionCard';
 import { quantityLabel } from '../data/membership-kinds';
 import { memberCards } from '../data/admin';
 import { money, TODAY } from '../data/workspace';
@@ -32,25 +18,22 @@ import type { PaymentMethod, PaymentParts } from '../lib/checkout';
 
 import { saleCatalog, saleSections, searchSaleCatalog } from '../lib/sale-catalog';
 import type { SaleCatalogItem, SaleSectionId } from '../lib/sale-catalog';
-const sectionIcons = {
-  memberships: Dumbbell,
-  personal: UserRound,
-  corporate: Building2,
-  exceptions: Sparkles,
-  'goods-services': ShoppingBag,
-};
 const methodIcons = [Banknote, CreditCard, Gift, Wallet, Layers];
 export function SaleWorkspace({
   members,
   initialMember,
   navigate,
   clubName,
+  employeeName,
+  allowRegistration = true,
   initialSection = null,
 }: {
   members: Member[];
   initialMember: Member | null;
   navigate: Navigate;
   clubName: string;
+  employeeName: string;
+  allowRegistration?: boolean;
   initialSection?: SaleSectionId | null;
 }) {
   const { data, put } = useWorkspace();
@@ -123,6 +106,9 @@ export function SaleWorkspace({
         description: item.short || item.description || item.name,
         category,
         date: TODAY,
+        time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+        cashier: employeeName,
+        receiptNumber: printReceipt ? `DEMO-${id.slice(-8).toUpperCase()}` : '',
         club: clubName.split(' · ').at(-1) || 'Центральный',
         client: member.fullName || member.name,
         memberId,
@@ -234,9 +220,11 @@ export function SaleWorkspace({
             <h2>1. Клиент</h2>
             <p>Найдите клиента по карте, ФИО или номеру телефона.</p>
           </div>
-          <Button variant="secondary" onClick={() => navigate('registration', member)}>
-            К регистрации посещения
-          </Button>
+          {allowRegistration && (
+            <Button variant="secondary" onClick={() => navigate('registration', member)}>
+              К регистрации посещения
+            </Button>
+          )}
         </div>
         <div className="ws-panel-body ws-stack">
           <ClientSearch
@@ -306,22 +294,14 @@ export function SaleWorkspace({
           {!sectionId && !query.trim() ? (
             <div className="sale-section-grid">
               {saleSections.map((section) => {
-                const Icon = sectionIcons[section.id];
                 const count = catalog.filter((entry) => entry.sectionId === section.id).length;
                 return (
-                  <button
-                    className="sale-section-link"
+                  <CatalogSectionCard
                     key={section.id}
+                    id={section.id}
+                    count={count}
                     onClick={() => openSection(section.id)}
-                  >
-                    <Icon size={22} aria-hidden="true" />
-                    <span>
-                      <strong>{section.name}</strong>
-                      <small>{section.description}</small>
-                    </span>
-                    <b>{count}</b>
-                    <ChevronRight size={18} aria-hidden="true" />
-                  </button>
+                  />
                 );
               })}
             </div>

@@ -21,8 +21,12 @@ import type { Navigate } from '../components/WorkspaceUI';
 import type { DemoRecord, Field } from '../data/workspace';
 import { money, prettyDate, TODAY } from '../data/workspace';
 import { inventoryStock, validatePlan } from '../lib/workspace-rules';
-import { getMembershipKind, membershipKinds } from '../data/membership-kinds';
-import { MembershipTag } from '../components/MembershipTag';
+import { membershipKinds } from '../data/membership-kinds';
+import { MembershipCard } from '../components/MembershipCard';
+import { CatalogSectionCard } from '../components/CatalogSectionCard';
+import { planSaleSection, saleSections } from '../lib/sale-catalog';
+import type { SaleSectionId } from '../lib/sale-catalog';
+import { quantityLabel } from '../data/membership-kinds';
 import { matchesSearch } from '../lib/directory-search';
 
 const clubField: Field = {
@@ -49,8 +53,7 @@ const planFields: Field[][] = [
   [
     {
       key: 'kind',
-      label: 'Вид абонемента',
-      options: membershipKinds.map((kind) => kind.name),
+      label: 'Назначение абонемента',
       required: true,
     },
     { key: 'name', label: 'Название карты', required: true },
@@ -123,12 +126,25 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
   const [step, setStep] = useState(planSteps[0]);
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState('Все');
-  const [kindFilter, setKindFilter] = useState('');
+  const [sectionId, setSectionId] = useState<SaleSectionId | null>(null);
   const [categoryForm, setCategoryForm] = useState<DemoRecord | 'new' | null>(null);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const closeCategory = useCallback(() => setCategoryForm(null), []);
   const selected = data.categories.find((row) => row.id === category);
+  const currentSection = saleSections.find((section) => section.id === sectionId);
+  const sectionPlans = data.plans.filter(
+    (plan) => !sectionId || planSaleSection(plan) === sectionId,
+  );
+  const categories = data.categories.filter(
+    (row) => row.saleSection === sectionId || sectionPlans.some((plan) => plan.category === row.id),
+  );
+  const openSection = (id: SaleSectionId | null) => {
+    setSectionId(id);
+    setCategory(null);
+    setQuery('');
+    setFilter('Все');
+  };
   const savePlan = (publish: boolean) => {
     if (!draft) return;
     const invalid = validatePlan(draft, publish);
@@ -138,6 +154,7 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
       return;
     }
     put('plans', { ...draft, currency: 'RUB', status: publish ? 'Опубликован' : 'Черновик' });
+    openSection(planSaleSection(draft));
     setDraft(null);
     setError('');
     setMessage(publish ? 'Абонемент опубликован в демокаталоге.' : 'Черновик сохранён.');
@@ -165,37 +182,68 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
             <Tabs items={planSteps} value={step} onChange={setStep} label="Настройка абонемента" />
             <div className="ws-panel-body">
               <div className="ws-fields">
+                {step === 'Основное' && (
+                  <>
+                    <label className="form-field">
+                      <span>Раздел каталога</span>
+                      <Select
+                        value={planSaleSection(draft)}
+                        onChange={(e) =>
+                          setDraft({
+                            ...draft,
+                            saleSection: e.target.value,
+                            corporate: e.target.value === 'corporate' ? 'Да' : 'Нет',
+                          })
+                        }
+                      >
+                        {saleSections
+                          .filter((section) => section.id !== 'goods-services')
+                          .map((section) => (
+                            <option key={section.id} value={section.id}>
+                              {section.name}
+                            </option>
+                          ))}
+                      </Select>
+                    </label>
+                    <label className="form-field">
+                      <span>Цвет карты</span>
+                      <Select
+                        value={draft.kindId || 'gym'}
+                        onChange={(e) => {
+                          const kind = membershipKinds.find((kind) => kind.id === e.target.value)!;
+                          setDraft({ ...draft, kindId: kind.id, color: kind.foreground });
+                        }}
+                      >
+                        {membershipKinds.map((kind) => (
+                          <option value={kind.id} key={kind.id}>
+                            {kind.colorName}
+                          </option>
+                        ))}
+                      </Select>
+                    </label>
+                    <label className="form-field">
+                      <span>Категория</span>
+                      <Select
+                        value={draft.category || ''}
+                        onChange={(e) => setDraft({ ...draft, category: e.target.value })}
+                      >
+                        <option value="">Без категории</option>
+                        {data.categories.map((row) => (
+                          <option key={row.id} value={row.id}>
+                            {row.name}
+                          </option>
+                        ))}
+                      </Select>
+                    </label>
+                  </>
+                )}
                 {planFields[planSteps.indexOf(step)].map((field) => (
                   <FieldControl
                     key={field.key}
                     field={field}
                     value={draft[field.key] ?? ''}
                     onChange={(value) => {
-                      const kind =
-                        field.key === 'kind'
-                          ? membershipKinds.find((kind) => kind.name === value)
-                          : undefined;
-                      setDraft({
-                        ...(kind
-                          ? {
-                              ...data.plans.find((plan) => plan.kindId === kind.id),
-                              id: draft.id,
-                              status: draft.status,
-                              category:
-                                data.plans.find((plan) => plan.kindId === kind.id)?.category ||
-                                draft.category,
-                              kindId: kind.id,
-                              kind: kind.name,
-                              color: kind.foreground,
-                              type: kind.type,
-                              visits: kind.visits,
-                              duration: kind.duration,
-                              name: membershipKinds.some((item) => item.name === draft.name)
-                                ? kind.name
-                                : draft.name,
-                            }
-                          : { ...draft, [field.key]: value }),
-                      });
+                      setDraft({ ...draft, [field.key]: value });
                       setError('');
                     }}
                   />
@@ -203,8 +251,8 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
               </div>
               {step === 'Основное' && (
                 <p className="form-note">
-                  Цвет и значок обозначают вид услуги. При выборе другого вида подставляются условия
-                  соответствующего примера — проверьте их перед сохранением.
+                  Название и назначение можно задать свободно. Цвет помогает различать карты и не
+                  меняет цену, срок или условия.
                 </p>
               )}
               {step === 'Бонусы' && (
@@ -259,15 +307,13 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
           </section>
           <aside className="panel ws-plan-preview">
             <span className="eyebrow">КАРТОЧКА ДЛЯ КЛИЕНТА</span>
-            <MembershipTag
-              name={
-                getMembershipKind(draft.kind || '', draft.kindId)?.description || 'Тренажёрный зал'
-              }
+            <MembershipCard
+              compact
+              name={draft.name || 'Название абонемента'}
               kindId={draft.kindId}
+              detail={draft.short || draft.kind}
+              footer={money(draft.price)}
             />
-            <h2>{draft.name || 'Название абонемента'}</h2>
-            <p>{draft.short || 'Короткое описание'}</p>
-            <strong className="ws-price">{money(draft.price)}</strong>
             <dl className="ws-facts">
               <div>
                 <dt>Посещения</dt>
@@ -298,156 +344,218 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
         </div>
       </div>
     );
-  const plans = data.plans.filter(
+  const plans = sectionPlans.filter(
     (row) =>
       (!category || row.category === category) &&
-      (!kindFilter || getMembershipKind(row.name, row.kindId)?.id === kindFilter) &&
       matchesSearch([row.name, row.short, row.description, row.kind].join(' '), query) &&
       (filter === 'Все' ||
-        (filter === 'Онлайн'
-          ? row.online === 'Доступен'
-          : filter === 'В архиве'
-            ? row.status === 'В архиве'
-            : row.status === filter)),
+        (filter === 'Онлайн' ? row.online === 'Доступен' : row.status === filter)),
   );
-  return (
-    <div className="ws-stack">
-      {message && <Notice tone="success">{message}</Notice>}
-      <section className="ws-stack" aria-label="Виды абонементов">
-        <div className="ws-subheading">
-          <h2>Пять видов абонементов</h2>
-          {kindFilter && (
-            <Button variant="ghost" onClick={() => setKindFilter('')}>
-              Все виды
-            </Button>
-          )}
+  const otherResults = [
+    ...(data['retail-products'] || []),
+    ...(data['reception-services'] || []),
+  ].filter((row) => matchesSearch(row.name, query));
+  const renderOtherItems = (rows: DemoRecord[]) => (
+    <div className="membership-service-grid">
+      {rows.map((row) => (
+        <div key={row.id} className="membership-service-card">
+          <strong>{row.name}</strong>
+          <span>{money(row.price)}</span>
+          <Status>{row.status}</Status>
         </div>
-        <div className="membership-kind-grid">
-          {membershipKinds.map((kind) => (
-            <button
-              key={kind.id}
-              className="membership-kind-card"
-              aria-pressed={kindFilter === kind.id}
-              onClick={() => {
-                setKindFilter(kindFilter === kind.id ? '' : kind.id);
-                setCategory(null);
-              }}
-            >
-              <MembershipTag name={kind.name} kindId={kind.id} />
-              <p>{kind.description}</p>
-            </button>
-          ))}
-        </div>
-        <p className="form-note">
-          Цвет обозначает вид услуги. Срок действия и состояние абонемента показаны отдельно.
-        </p>
-      </section>
-      {!category ? (
-        <>
-          <div className="ws-actions">
-            <Button onClick={() => setCategoryForm('new')}>
-              <Plus size={15} />
-              Категория
-            </Button>
-          </div>
-          <div className="ws-actions" aria-label="Категории абонементов">
-            {data.categories.map((row) => (
-              <button
-                className="button button-secondary"
-                key={row.id}
-                onClick={() => setCategory(row.id)}
-              >
-                {row.name} · {data.plans.filter((plan) => plan.category === row.id).length}
-                <ChevronRight size={18} />
-              </button>
-            ))}
-          </div>
-        </>
-      ) : (
-        <div className="ws-subheading">
-          <Back onClick={() => setCategory(null)}>Все категории</Back>
-          <Button variant="secondary" onClick={() => setCategoryForm(selected!)}>
-            Изменить категорию
-          </Button>
-        </div>
-      )}
-      <section className="panel ws-panel">
-        <div className="ws-panel-heading">
-          <div>
-            <h2>{selected?.name || 'Все абонементы'}</h2>
-            <p>Условия, стоимость и доступность покупки.</p>
-          </div>
-          <Button
-            onClick={() => {
-              const kind =
-                membershipKinds.find((kind) => kind.id === kindFilter) || membershipKinds[0];
-              setDraft({
-                ...data.plans.find((plan) => plan.kindId === kind.id),
-                id: demoId('plan'),
-                category:
-                  category ||
-                  data.categories.find(
-                    (row) =>
-                      row.id ===
-                      (kind.id === 'single' || kind.id === 'guest'
-                        ? 'membership-2'
-                        : 'membership-1'),
-                  )?.id ||
-                  data.categories[0]?.id ||
-                  '',
-                name: '',
-                kindId: kind.id,
-                kind: kind.name,
-                type: kind.type,
-                duration: kind.duration,
-                visits: kind.visits,
-                price: data.plans.find((plan) => plan.kindId === kind.id)?.price || '',
-                discount: '0',
-                activation: 'С первого посещения',
-                club: 'Все клубы',
-                online: 'Недоступен',
-                color: kind.foreground,
-                status: 'Черновик',
-              });
-              setStep(planSteps[0]);
-              setError('');
-            }}
-            disabled={!data.categories.length}
-          >
-            <Plus size={15} />
-            Абонемент
-          </Button>
-        </div>
-        <Tabs
-          items={['Все', 'Опубликован', 'Черновик', 'Онлайн', 'В архиве']}
-          value={filter}
-          onChange={setFilter}
-          label="Фильтр абонементов"
-        />
-        <div className="ws-toolbar">
-          <SearchBox value={query} onChange={setQuery} placeholder="Название абонемента" />
-        </div>
-        <DataTable
-          rows={plans}
-          columns={[
-            {
-              key: 'name',
-              label: 'Название',
-              render: (row) => <MembershipTag name={row.name} kindId={row.kindId} />,
-            },
-            { key: 'type', label: 'Учёт посещений' },
-            { key: 'duration', label: 'Дней' },
-            { key: 'price', label: 'Стоимость' },
-            { key: 'online', label: 'Онлайн' },
-            { key: 'status', label: 'Статус' },
-          ]}
-          onOpen={(row) => {
-            setDraft({ ...row });
+      ))}
+    </div>
+  );
+  const renderPlans = (rows: DemoRecord[]) => (
+    <div className="membership-catalog-grid">
+      {rows.map((row) => (
+        <button
+          key={row.id}
+          className="membership-catalog-card"
+          aria-label={`Редактировать: ${row.name}`}
+          onClick={() => {
+            setDraft({ ...row, saleSection: planSaleSection(row) });
             setStep(planSteps[0]);
             setError('');
           }}
+        >
+          <MembershipCard
+            compact
+            name={row.name}
+            kindId={row.kindId}
+            detail={`${quantityLabel(row.duration, 'day')} · ${row.type === 'Безлимитный' ? 'без ограничений' : quantityLabel(row.visits, 'visit')}`}
+            footer={money(row.price)}
+          />
+          <span className="membership-catalog-meta">
+            <Status>{row.status}</Status>
+            <span>{row.online === 'Доступен' ? 'Доступен онлайн' : 'В клубе'}</span>
+          </span>
+        </button>
+      ))}
+    </div>
+  );
+  const startPlan = () => {
+    const base = data.plans.find((plan) => planSaleSection(plan) === sectionId);
+    const kind = membershipKinds.find(
+      (kind) => kind.id === (sectionId === 'personal' ? 'personal' : 'gym'),
+    )!;
+    setDraft({
+      ...base,
+      id: demoId('plan'),
+      name: '',
+      saleSection: sectionId || 'memberships',
+      corporate: sectionId === 'corporate' ? 'Да' : 'Нет',
+      category: category || base?.category || data.categories[0]?.id || '',
+      kindId: base?.kindId || kind.id,
+      kind: base?.kind || kind.description,
+      type: base?.type || kind.type,
+      duration: base?.duration || kind.duration,
+      visits: base?.visits || kind.visits,
+      price: '',
+      discount: '0',
+      activation: 'С первого посещения',
+      club: 'Все клубы',
+      online: 'Недоступен',
+      color: base?.color || kind.foreground,
+      status: 'Черновик',
+    });
+    setStep(planSteps[0]);
+    setError('');
+  };
+  return (
+    <div className="ws-stack membership-workspace">
+      {message && <Notice tone="success">{message}</Notice>}
+      <div className="membership-navigation-row">
+        {sectionId && <Back onClick={() => openSection(null)}>Все разделы</Back>}
+        <SearchBox
+          value={query}
+          onChange={setQuery}
+          label="Поиск в каталоге абонементов"
+          placeholder={sectionId ? 'Поиск в разделе по названию' : 'Поиск по всему каталогу'}
         />
-      </section>
+      </div>
+      {!sectionId && !query.trim() ? (
+        <div className="membership-section-grid" aria-label="Разделы каталога">
+          {saleSections.map((section) => (
+            <CatalogSectionCard
+              key={section.id}
+              id={section.id}
+              count={
+                section.id === 'goods-services'
+                  ? (data['retail-products'] || []).length +
+                    (data['reception-services'] || []).length
+                  : data.plans.filter((plan) => planSaleSection(plan) === section.id).length
+              }
+              onClick={() => openSection(section.id)}
+            />
+          ))}
+        </div>
+      ) : sectionId === 'goods-services' ? (
+        <section className="panel ws-panel">
+          <div className="ws-panel-heading">
+            <h2>Товары и услуги</h2>
+            <Button variant="secondary" onClick={() => navigate('services')}>
+              Перейти к продаже <ChevronRight size={16} />
+            </Button>
+          </div>
+          <div className="ws-panel-body ws-stack">
+            {[
+              { label: 'Товары ресепшена', rows: data['retail-products'] || [] },
+              { label: 'Услуги клуба', rows: data['reception-services'] || [] },
+            ].map((group) => (
+              <section key={group.label} className="ws-stack">
+                <h3>{group.label}</h3>
+                {renderOtherItems(group.rows.filter((row) => matchesSearch(row.name, query)))}
+                {!group.rows.some((row) => matchesSearch(row.name, query)) && (
+                  <Empty title="Позиций не найдено" />
+                )}
+              </section>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <section className="panel ws-panel">
+          <div className="ws-panel-heading">
+            <h2>{currentSection?.name || 'Результаты поиска'}</h2>
+            {sectionId && (
+              <Button onClick={startPlan}>
+                <Plus size={16} />
+                Абонемент
+              </Button>
+            )}
+          </div>
+          <Tabs
+            items={['Все', 'Опубликован', 'Черновик', 'Онлайн', 'В архиве']}
+            value={filter}
+            onChange={setFilter}
+            label="Фильтр абонементов"
+          />
+          {sectionId && (
+            <details className="ws-disclosure membership-category-filter">
+              <summary>
+                {selected ? `Категория: ${selected.name}` : 'Категории и группировка'}
+              </summary>
+              <div className="ws-toolbar membership-category-toolbar">
+                <label className="form-field">
+                  <span>Категория</span>
+                  <Select
+                    value={category || ''}
+                    onChange={(e) => setCategory(e.target.value || null)}
+                  >
+                    <option value="">Все категории</option>
+                    {categories.map((row) => (
+                      <option key={row.id} value={row.id}>
+                        {row.name}
+                      </option>
+                    ))}
+                  </Select>
+                </label>
+                <Button variant="secondary" onClick={() => setCategoryForm('new')}>
+                  <Plus size={15} />
+                  Категория
+                </Button>
+                {selected && (
+                  <Button variant="ghost" onClick={() => setCategoryForm(selected)}>
+                    Изменить категорию
+                  </Button>
+                )}
+              </div>
+            </details>
+          )}
+          <div className="ws-panel-body ws-stack">
+            {plans.length || (!sectionId && otherResults.length) ? (
+              sectionId ? (
+                renderPlans(plans)
+              ) : (
+                <>
+                  {saleSections
+                    .filter((section) => section.id !== 'goods-services')
+                    .map((section) => {
+                      const rows = plans.filter((plan) => planSaleSection(plan) === section.id);
+                      return rows.length ? (
+                        <section className="ws-stack" key={section.id}>
+                          <h3>{section.name}</h3>
+                          {renderPlans(rows)}
+                        </section>
+                      ) : null;
+                    })}
+                  {otherResults.length > 0 && (
+                    <section className="ws-stack">
+                      <h3>Товары и услуги</h3>
+                      {renderOtherItems(otherResults)}
+                    </section>
+                  )}
+                </>
+              )
+            ) : (
+              <Empty
+                title="Абонементы не найдены"
+                text="Измените поиск или фильтр. В каждом разделе можно добавлять свои тарифы."
+              />
+            )}
+          </div>
+        </section>
+      )}
       <SectionLinks ids={['services', 'directories']} navigate={navigate} />
       {categoryForm && (
         <RecordForm
@@ -463,7 +571,12 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
           initial={categoryForm === 'new' ? undefined : categoryForm}
           onClose={closeCategory}
           onSave={(record) => {
-            put('categories', { ...record, status: 'Активна' });
+            put('categories', {
+              ...record,
+              saleSection: sectionId || record.saleSection || 'memberships',
+              status: 'Активна',
+            });
+            setCategory(record.id);
             closeCategory();
             setMessage('Категория сохранена.');
           }}
@@ -1053,61 +1166,4 @@ export function InventoryWorkspace({
   );
 }
 
-export function CashWorkspace({ navigate }: { navigate: Navigate }) {
-  const { data } = useWorkspace();
-  const rows = data.ledger.filter((row) => row.category !== 'Бар' && row.date === TODAY);
-  return (
-    <div className="ws-stack">
-      <SectionLinks ids={['services', 'products', 'statistics']} navigate={navigate} />
-      <Stats
-        items={[
-          { label: 'Продажи сегодня', value: rows.length },
-          { label: 'Всего', value: money(rows.reduce((sum, row) => sum + Number(row.amount), 0)) },
-          {
-            label: 'Наличными',
-            value: money(
-              rows.reduce(
-                (sum, row) =>
-                  sum + Number(row.cashAmount ?? (row.method === 'Наличные' ? row.amount : 0)),
-                0,
-              ),
-            ),
-          },
-          {
-            label: 'Картой',
-            value: money(
-              rows.reduce(
-                (sum, row) =>
-                  sum +
-                  Number(
-                    row.cardAmount ??
-                      (['Карта', 'Безналичная оплата'].includes(row.method) ? row.amount : 0),
-                  ),
-                0,
-              ),
-            ),
-          },
-        ]}
-      />
-      <section className="panel ws-panel">
-        <div className="ws-panel-heading">
-          <div>
-            <h2>Операции смены</h2>
-            <p>Продажи ресепшена, услуг и абонементов.</p>
-          </div>
-        </div>
-        <DataTable
-          rows={rows}
-          columns={[
-            { key: 'name', label: 'Позиция' },
-            { key: 'client', label: 'Клиент' },
-            { key: 'category', label: 'Категория' },
-            { key: 'amount', label: 'Сумма' },
-            { key: 'method', label: 'Оплата' },
-            { key: 'status', label: 'Статус' },
-          ]}
-        />
-      </section>
-    </div>
-  );
-}
+export { CashWorkspace } from './CashWorkspace';

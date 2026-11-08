@@ -6,7 +6,6 @@ import { useWorkspace } from '../components/WorkspaceProvider';
 import {
   Back,
   Empty,
-  LinkCards,
   Notice,
   RecordForm,
   ResourcePage,
@@ -29,6 +28,8 @@ import {
 } from '../lib/client-messages';
 import type { Member } from '../types';
 import { AttentionFlags } from '../components/AttentionFlags';
+import { CrmScenarios } from './CrmScenarios';
+import { parseStages, stageAction, stageMeaning } from '../lib/crm';
 
 export function CRMWorkspace({
   section,
@@ -38,21 +39,28 @@ export function CRMWorkspace({
   navigate: Navigate;
 }) {
   const { data, put } = useWorkspace();
+  const savedView = data['crm-view']?.find((row) => row.id === 'active');
   const [query, setQuery] = useState('');
-  const [stage, setStage] = useState('Все этапы');
-  const [pipeline, setPipeline] = useState('Все воронки');
-  const [completed, setCompleted] = useState('В работе');
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [stage, setStage] = useState(savedView?.stage || 'Все этапы');
+  const [pipeline, setPipeline] = useState(savedView?.pipeline || 'Все воронки');
+  const [completed, setCompleted] = useState(
+    ['Покупка', 'Отказ'].includes(savedView?.stage || '') ? 'Завершены' : 'В работе',
+  );
+  const [selectedId, setSelectedId] = useState<string | null>(savedView?.leadId || null);
   const [form, setForm] = useState<DemoRecord | 'new' | null>(null);
   const [taskFilter, setTaskFilter] = useState('Сегодня');
   const [message, setMessage] = useState('');
   const closeForm = useCallback(() => setForm(null), []);
   const lead = data.leads.find((row) => row.id === selectedId);
+  const openLeads = (name = 'Все воронки', status = 'Все этапы', leadId = '') => {
+    put('crm-view', { id: 'active', pipeline: name, stage: status, leadId });
+    navigate('leads');
+  };
   const stages = [
     ...new Set(
       data.pipelines
         .filter((row) => pipeline === 'Все воронки' || row.name === pipeline)
-        .flatMap((row) => row.stages.split('\n'))
+        .flatMap((row) => parseStages(row.stages))
         .filter(Boolean),
     ),
   ];
@@ -62,7 +70,7 @@ export function CRMWorkspace({
     { key: 'club', label: 'Клуб', options: ['Центральный', 'Парк', 'Речной'] },
     {
       key: 'pipeline',
-      label: 'Воронка',
+      label: 'Сценарий работы',
       options: data.pipelines.filter((row) => row.status !== 'В архиве').map((row) => row.name),
     },
     {
@@ -85,6 +93,8 @@ export function CRMWorkspace({
       done: '',
     });
     setMessage(`Этап изменён: ${next}.`);
+    setStage('Все этапы');
+    setCompleted(['Покупка', 'Отказ'].includes(next) ? 'Завершены' : 'В работе');
   };
   if (section === 'crm') {
     const tasks = data.leads.filter(
@@ -114,12 +124,35 @@ export function CRMWorkspace({
             },
           ]}
         />
-        <LinkCards ids={['leads', 'segments', 'pipelines', 'retention']} navigate={navigate} />
+        <div className="crm-home-links">
+          <button onClick={() => openLeads()}>
+            <strong>Заявки</strong>
+            <span>
+              Люди, которые интересуются клубом. Контакты, текущий статус и следующее действие.
+            </span>
+          </button>
+          <button onClick={() => navigate('pipelines')}>
+            <strong>Сценарии работы с заявками</strong>
+            <span>
+              Путь от первого обращения до покупки. Что означает каждый статус и что делать дальше.
+            </span>
+          </button>
+          <button onClick={() => navigate('segments')}>
+            <strong>Группы клиентов</strong>
+            <span>
+              Соберите нужную аудиторию, например людей, которым назначено пробное занятие.
+            </span>
+          </button>
+          <button onClick={() => navigate('retention')}>
+            <strong>Вернуть клиентов в клуб</strong>
+            <span>Кому нужно позвонить, чтобы помочь вернуться к занятиям.</span>
+          </button>
+        </div>
         <section className="panel ws-panel">
           <div className="ws-panel-heading">
             <div>
-              <h2>Мой день</h2>
-              <p>Заявки и следующие шаги администратора.</p>
+              <h2>Задачи по заявкам</h2>
+              <p>Что нужно сделать и с кем связаться. Завершение задачи не меняет статус заявки.</p>
             </div>
           </div>
           <Tabs
@@ -145,8 +178,11 @@ export function CRMWorkspace({
                       {row.name} · {prettyDate(row.due)}
                     </small>
                   </span>
-                  <Button variant="ghost" onClick={() => navigate('leads')}>
-                    К заявкам
+                  <Button
+                    variant="ghost"
+                    onClick={() => openLeads(row.pipeline, 'Все этапы', row.id)}
+                  >
+                    Открыть заявку
                     <ArrowRight size={14} />
                   </Button>
                 </div>
@@ -162,39 +198,8 @@ export function CRMWorkspace({
       </div>
     );
   }
-  if (section === 'pipelines') {
-    const config: Resource = {
-      title: 'Воронки и этапы',
-      singular: 'Воронка',
-      description: 'Этапы описывают последовательность работы. Первый этап — стартовый.',
-      validate: (record, original) => {
-        const values = record.stages
-          .split('\n')
-          .map((value) => value.trim())
-          .filter(Boolean);
-        if (values.length < 2) return 'Добавьте хотя бы два этапа.';
-        if (new Set(values).size !== values.length) return 'Названия этапов не должны повторяться.';
-        if (original && values[0] !== original.stages.split('\n')[0])
-          return 'Первый этап существующей воронки сохраняется. Создайте новую воронку для другой структуры.';
-        return undefined;
-      },
-      fields: [
-        { key: 'name', label: 'Название', required: true },
-        {
-          key: 'stages',
-          label: 'Этапы по порядку — каждый с новой строки',
-          type: 'textarea',
-          required: true,
-          hint: 'Пример: Новая → Связались → Пробное назначено → Покупка.',
-        },
-        { key: 'status', label: 'Статус', options: ['Активна', 'В архиве'] },
-      ],
-      columns: ['name', 'stages', 'status'],
-      rows: [],
-      links: ['crm', 'leads'],
-    };
-    return <ResourcePage collection="pipelines" config={config} navigate={navigate} />;
-  }
+  if (section === 'pipelines')
+    return <CrmScenarios onLeads={(name, status) => openLeads(name, status)} />;
   if (section === 'retention') {
     const config: Resource = {
       title: 'Клиенты на контроле',
@@ -249,31 +254,59 @@ export function CRMWorkspace({
         <Tabs
           items={['В работе', 'Завершены']}
           value={completed}
-          onChange={setCompleted}
+          onChange={(value) => {
+            setCompleted(value);
+            setSelectedId(null);
+          }}
           label="Состояние заявок"
         />
         <div className="ws-toolbar">
-          <SearchBox value={query} onChange={setQuery} placeholder="Имя или телефон" />
+          <SearchBox
+            value={query}
+            onChange={(value) => {
+              setQuery(value);
+              setSelectedId(null);
+            }}
+            placeholder="Имя или телефон"
+          />
           <Select
-            aria-label="Воронка заявок"
+            aria-label="Сценарий заявок"
             value={pipeline}
             onChange={(e) => {
               setPipeline(e.target.value);
               setStage('Все этапы');
+              setSelectedId(null);
             }}
           >
-            <option>Все воронки</option>
+            <option value="Все воронки">Все сценарии</option>
             {data.pipelines.map((row) => (
               <option key={row.id}>{row.name}</option>
             ))}
           </Select>
-          <Select aria-label="Этап заявок" value={stage} onChange={(e) => setStage(e.target.value)}>
-            <option>Все этапы</option>
-            {stages.map((value) => (
+          <Select
+            aria-label="Статус заявки"
+            value={stage}
+            onChange={(e) => {
+              setStage(e.target.value);
+              setSelectedId(null);
+            }}
+          >
+            <option value="Все этапы">Любой статус</option>
+            {[...new Set([...stages, 'Отказ'])].map((value) => (
               <option key={value}>{value}</option>
             ))}
-            <option>Отказ</option>
           </Select>
+          <Button
+            variant="ghost"
+            onClick={() => {
+              setQuery('');
+              setPipeline('Все воронки');
+              setStage('Все этапы');
+              setCompleted('В работе');
+            }}
+          >
+            Сбросить фильтры
+          </Button>
         </div>
         <div className="ws-split">
           <div className="ws-master-list">
@@ -305,9 +338,10 @@ export function CRMWorkspace({
                 </div>
                 <p>{lead.phone}</p>
                 <Status>{lead.stage}</Status>
+                <p className="crm-lead-explanation">{stageMeaning(lead.stage)}</p>
                 <dl className="ws-facts">
                   <div>
-                    <dt>Воронка</dt>
+                    <dt>Сценарий работы</dt>
                     <dd>{lead.pipeline}</dd>
                   </div>
                   <div>
@@ -315,7 +349,7 @@ export function CRMWorkspace({
                     <dd>{lead.owner}</dd>
                   </div>
                   <div>
-                    <dt>Следующий шаг</dt>
+                    <dt>Следующее действие</dt>
                     <dd>{lead.task || 'Не назначен'}</dd>
                   </div>
                   <div>
@@ -326,7 +360,7 @@ export function CRMWorkspace({
                 <div className="ws-actions">
                   {transitions.map((next) => (
                     <Button key={next} onClick={() => advance(next)}>
-                      {next}
+                      {stageAction(next)}
                       <ArrowRight size={14} />
                     </Button>
                   ))}
@@ -373,12 +407,16 @@ export function CRMWorkspace({
           initial={form === 'new' ? undefined : form}
           onClose={closeForm}
           onSave={(record) => {
-            const first =
-              data.pipelines.find((row) => row.name === record.pipeline)?.stages.split('\n')[0] ||
-              'Новая';
+            const availableStages = parseStages(
+              data.pipelines.find((row) => row.name === record.pipeline)?.stages || 'Новая',
+            );
+            const first = availableStages[0];
             put('leads', {
               ...record,
-              stage: record.stage || first,
+              stage:
+                availableStages.includes(record.stage) || record.stage === 'Отказ'
+                  ? record.stage
+                  : first,
               history: record.history || '06.11 · Заявка добавлена в прототип',
             });
             closeForm();
