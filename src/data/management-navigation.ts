@@ -2,20 +2,20 @@ import type { AdminSectionId } from './admin';
 
 export const managementNavigationGroups: { label: string; items: AdminSectionId[] }[] = [
   {
-    label: 'Работа клуба',
-    items: ['schedule', 'registration', 'services'],
+    label: 'Занятия и тренеры',
+    items: ['schedule', 'trainer-clients'],
   },
   {
-    label: 'Клиенты и CRM',
-    items: ['crm', 'trainer-clients', 'messages', 'notifications'],
+    label: 'Клиенты и продажи',
+    items: ['registration', 'services', 'memberships', 'crm', 'messages', 'notifications'],
   },
   { label: 'Команда', items: ['employees', 'payroll'] },
   {
-    label: 'Клубы и занятия',
-    items: ['directories', 'memberships', 'inventory'],
+    label: 'Ресурсы клуба',
+    items: ['inventory', 'directories'],
   },
   {
-    label: 'Управление системой',
+    label: 'Настройки и контроль',
     items: ['statistics', 'rbac', 'security', 'service-settings'],
   },
 ];
