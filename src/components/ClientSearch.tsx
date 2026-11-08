@@ -9,10 +9,12 @@ export function ClientSearch({
   members,
   onMember,
   mode = 'profile',
+  purpose = 'посещения',
 }: {
   members: Member[];
   onMember: (member: Member) => void;
   mode?: 'profile' | 'selection';
+  purpose?: 'посещения' | 'покупки';
 }) {
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
@@ -50,8 +52,8 @@ export function ClientSearch({
     <form
       ref={root}
       role="search"
-      aria-label={mode === 'profile' ? 'Быстрый поиск клиента' : 'Поиск клиента для посещения'}
-      className={`quick-card client-search ${invalid ? 'quick-card-error' : ''}`}
+      aria-label={mode === 'profile' ? 'Быстрый поиск клиента' : `Поиск клиента для ${purpose}`}
+      className={`quick-card client-search ${mode === 'selection' ? 'client-search-select' : ''} ${invalid ? 'quick-card-error' : ''}`}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
       }}
@@ -77,7 +79,7 @@ export function ClientSearch({
       <label className="sr-only" htmlFor={`${id}-input`}>
         {mode === 'profile'
           ? 'Карта, ФИО или телефон клиента'
-          : 'Клиент для посещения: карта, ФИО или телефон'}
+          : `Клиент для ${purpose}: карта, ФИО или телефон`}
       </label>
       <input
         ref={input}
