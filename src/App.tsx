@@ -60,6 +60,7 @@ import { BartenderHome, TrainerHome } from './pages/StaffWorkspace';
 import { canOpenModule, isManagementRole } from './lib/staff-rules';
 import { managementNavigationGroups } from './data/management-navigation';
 import { membershipKinds } from './data/membership-kinds';
+import { AdminPageLayout } from './components/AdminPageLayout';
 import type { Device, Member, Page, Scenario, UserRole, Visit, VisitKind } from './types';
 
 const navigation = [
@@ -875,148 +876,164 @@ export function App() {
               id="main-content"
               key={resetVersion}
             >
-              {page !== 'client-profile' && (
-                <div className="page-heading">
-                  <div>
-                    {page === 'admin-section' && (
-                      <button className="page-back" onClick={backFromSection}>
-                        <ArrowLeft size={14} />
-                        Назад
-                      </button>
-                    )}
-                    <div className="page-eyebrow">
-                      {`${currentRole.label.toUpperCase()} / 6 НОЯБРЯ 2026`}
+              <AdminPageLayout
+                enabled={role === 'administrator'}
+                pageKey={`${page}-${adminSection}-${selectedMemberId}`}
+                activeId={
+                  page === 'client-profile' || page === 'members'
+                    ? 'members'
+                    : page === 'admin-section'
+                      ? adminSection
+                      : undefined
+                }
+                onAction={(id) =>
+                  openAdminAction(id, page === 'client-profile' ? selectedMember : undefined)
+                }
+              >
+                {page !== 'client-profile' && (
+                  <div className="page-heading">
+                    <div>
+                      {page === 'admin-section' && (
+                        <button className="page-back" onClick={backFromSection}>
+                          <ArrowLeft size={14} />
+                          Назад
+                        </button>
+                      )}
+                      <div className="page-eyebrow">
+                        {`${currentRole.label.toUpperCase()} / 6 НОЯБРЯ 2026`}
+                      </div>
+                      <h1>
+                        {currentPage.title}
+                        <span className="heading-dot">.</span>
+                      </h1>
+                      {currentPage.caption && <p>{currentPage.caption}</p>}
                     </div>
-                    <h1>
-                      {currentPage.title}
-                      <span className="heading-dot">.</span>
-                    </h1>
-                    {currentPage.caption && <p>{currentPage.caption}</p>}
+                    <div className="page-actions">
+                      {page === 'overview' && role === 'administrator' && (
+                        <span className="date-chip">
+                          <CalendarDays size={15} />
+                          Сегодня, 6 ноября
+                        </span>
+                      )}
+                      {(page === 'overview' || page === 'members') && currentRole.canAddMembers && (
+                        <Button onClick={() => setModal('add')}>
+                          <Plus size={16} />
+                          <span>Добавить клиента</span>
+                        </Button>
+                      )}
+                    </div>
                   </div>
-                  <div className="page-actions">
-                    {page === 'overview' && role === 'administrator' && (
-                      <span className="date-chip">
-                        <CalendarDays size={15} />
-                        Сегодня, 6 ноября
-                      </span>
-                    )}
-                    {(page === 'overview' || page === 'members') && currentRole.canAddMembers && (
-                      <Button onClick={() => setModal('add')}>
-                        <Plus size={16} />
-                        <span>Добавить клиента</span>
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              )}
-              {page === 'client-profile' ? (
-                selectedMember ? (
-                  <ClientProfile
-                    key={selectedMember.id}
-                    member={selectedMember}
-                    visits={visits.filter((v) => v.memberId === selectedMember.id)}
-                    bookings={selectedMember.id === 1001 ? initialProfileBookings : []}
-                    canOperate={role === 'administrator' || managingRole}
+                )}
+                {page === 'client-profile' ? (
+                  selectedMember ? (
+                    <ClientProfile
+                      key={selectedMember.id}
+                      member={selectedMember}
+                      visits={visits.filter((v) => v.memberId === selectedMember.id)}
+                      bookings={selectedMember.id === 1001 ? initialProfileBookings : []}
+                      canOperate={role === 'administrator' || managingRole}
+                      showQuickLinks={role !== 'administrator'}
+                      scenario={scenario}
+                      onReset={() => setScenario('default')}
+                      onBack={() => goTo(memberReturnPage)}
+                      onRegistration={() => openRegistration(selectedMember)}
+                      onAction={(id) => openAdminAction(id, selectedMember)}
+                      onUpdate={(updated) =>
+                        setMembers((previous) =>
+                          previous.map((member) => (member.id === updated.id ? updated : member)),
+                        )
+                      }
+                    />
+                  ) : (
+                    <div className="empty-state">
+                      <h1>Клиент не найден</h1>
+                      <p>Этой карты нет в демонстрационных данных.</p>
+                      <Button onClick={() => goTo('members')}>К списку клиентов</Button>
+                    </div>
+                  )
+                ) : scenario !== 'default' ? (
+                  <StateContent
                     scenario={scenario}
+                    onAdd={() =>
+                      page === 'admin-section'
+                        ? setScenario('default')
+                        : role === 'administrator' && page === 'overview'
+                          ? openRegistration()
+                          : currentRole.canAddMembers
+                            ? setModal('add')
+                            : setScenario('default')
+                    }
                     onReset={() => setScenario('default')}
-                    onBack={() => goTo(memberReturnPage)}
-                    onRegistration={() => openRegistration(selectedMember)}
-                    onAction={(id) => openAdminAction(id, selectedMember)}
-                    onUpdate={(updated) =>
-                      setMembers((previous) =>
-                        previous.map((member) => (member.id === updated.id ? updated : member)),
-                      )
+                    emptyState={
+                      page === 'overview' && role === 'administrator'
+                        ? {
+                            title: 'Посещений пока нет',
+                            description:
+                              'Новые посещения появятся в журнале после регистрации клиента.',
+                            actionLabel: 'Зарегистрировать посещение',
+                          }
+                        : page === 'overview' && role !== 'administrator'
+                          ? {
+                              title: roleHome.emptyTitle,
+                              description: roleHome.emptyDescription,
+                              actionLabel: currentRole.canAddMembers
+                                ? 'Добавить клиента'
+                                : 'Показать демоданные',
+                            }
+                          : page === 'admin-section'
+                            ? {
+                                title: 'В этом разделе пока нет записей',
+                                description: 'Записи появятся после начала работы с разделом.',
+                                actionLabel: 'Показать демоданные',
+                              }
+                            : undefined
                     }
                   />
-                ) : (
-                  <div className="empty-state">
-                    <h1>Клиент не найден</h1>
-                    <p>Этой карты нет в демонстрационных данных.</p>
-                    <Button onClick={() => goTo('members')}>К списку клиентов</Button>
-                  </div>
-                )
-              ) : scenario !== 'default' ? (
-                <StateContent
-                  scenario={scenario}
-                  onAdd={() =>
-                    page === 'admin-section'
-                      ? setScenario('default')
-                      : role === 'administrator' && page === 'overview'
-                        ? openRegistration()
-                        : currentRole.canAddMembers
-                          ? setModal('add')
-                          : setScenario('default')
-                  }
-                  onReset={() => setScenario('default')}
-                  emptyState={
-                    page === 'overview' && role === 'administrator'
-                      ? {
-                          title: 'Посещений пока нет',
-                          description:
-                            'Новые посещения появятся в журнале после регистрации клиента.',
-                          actionLabel: 'Зарегистрировать посещение',
-                        }
-                      : page === 'overview' && role !== 'administrator'
-                        ? {
-                            title: roleHome.emptyTitle,
-                            description: roleHome.emptyDescription,
-                            actionLabel: currentRole.canAddMembers
-                              ? 'Добавить клиента'
-                              : 'Показать демоданные',
-                          }
-                        : page === 'admin-section'
-                          ? {
-                              title: 'В этом разделе пока нет записей',
-                              description: 'Записи появятся после начала работы с разделом.',
-                              actionLabel: 'Показать демоданные',
-                            }
-                          : undefined
-                  }
-                />
-              ) : page === 'admin-section' ? (
-                <AdminSection
-                  key={`${adminSection}-${currentUser.id}`}
-                  section={adminSection}
-                  member={sectionMember}
-                  members={members}
-                  clubName={club.name}
-                  employeeName={currentUser.name}
-                  user={currentUser}
-                  navigate={openModule}
-                  onMember={openMember}
-                  onRegister={createVisit}
-                  onBack={backFromSection}
-                />
-              ) : page === 'overview' ? (
-                role === 'trainer' ? (
-                  <TrainerHome
-                    user={currentUser}
+                ) : page === 'admin-section' ? (
+                  <AdminSection
+                    key={`${adminSection}-${currentUser.id}`}
+                    section={adminSection}
+                    member={sectionMember}
                     members={members}
                     clubName={club.name}
+                    employeeName={currentUser.name}
+                    user={currentUser}
                     navigate={openModule}
-                  />
-                ) : role === 'bartender' ? (
-                  <BartenderHome clubName={club.name} navigate={openModule} />
-                ) : role !== 'administrator' ? (
-                  <RoleOverview user={currentUser} />
-                ) : (
-                  <AdminOverview
-                    key={workstationId}
-                    visits={visits}
-                    members={members}
-                    clubId={workstation.clubId}
                     onMember={openMember}
-                    onAction={openAdminAction}
+                    onRegister={createVisit}
+                    onBack={backFromSection}
                   />
-                )
-              ) : (
-                <Members
-                  key={members.length}
-                  members={members}
-                  onMember={openMember}
-                  onAdd={() => setModal('add')}
-                />
-              )}
+                ) : page === 'overview' ? (
+                  role === 'trainer' ? (
+                    <TrainerHome
+                      user={currentUser}
+                      members={members}
+                      clubName={club.name}
+                      navigate={openModule}
+                    />
+                  ) : role === 'bartender' ? (
+                    <BartenderHome clubName={club.name} navigate={openModule} />
+                  ) : role !== 'administrator' ? (
+                    <RoleOverview user={currentUser} />
+                  ) : (
+                    <AdminOverview
+                      key={workstationId}
+                      visits={visits}
+                      members={members}
+                      clubId={workstation.clubId}
+                      onMember={openMember}
+                      onAction={openAdminAction}
+                    />
+                  )
+                ) : (
+                  <Members
+                    key={members.length}
+                    members={members}
+                    onMember={openMember}
+                    onAdd={() => setModal('add')}
+                  />
+                )}
+              </AdminPageLayout>
             </main>
             <nav className="mobile-nav" aria-label="Мобильная навигация">
               {visibleNavigation.map((n) => (
@@ -1222,6 +1239,7 @@ export function App() {
                             'bar-sales',
                             'bar-categories',
                             'bar-collections',
+                            'bar-inventory',
                           ].includes(section.id),
                       )
                       .map((section) => section.id)
