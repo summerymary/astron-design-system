@@ -63,9 +63,14 @@ export const membershipKinds = [
 export type MembershipKind = (typeof membershipKinds)[number];
 export type MembershipKindId = MembershipKind['id'];
 
-export function quantityLabel(value: number | string, unit: 'day' | 'visit'): string {
+export function quantityLabel(value: number | string, unit: 'day' | 'visit' | 'training'): string {
   const count = Number(value);
-  const forms = unit === 'day' ? ['день', 'дня', 'дней'] : ['посещение', 'посещения', 'посещений'];
+  const forms =
+    unit === 'day'
+      ? ['день', 'дня', 'дней']
+      : unit === 'training'
+        ? ['занятие', 'занятия', 'занятий']
+        : ['посещение', 'посещения', 'посещений'];
   const plural = new Intl.PluralRules('ru').select(count);
   return `${count} ${forms[plural === 'one' ? 0 : plural === 'few' ? 1 : 2]}`;
 }
