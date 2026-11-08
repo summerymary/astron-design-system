@@ -26,7 +26,7 @@
   color: var(--color-muted);
   font-size: var(--text-caption);
 }
-.clients-panel .table-toolbar > select {
+.clients-panel .table-toolbar > :is(select, .select-trigger) {
   min-height: 40px;
   padding-left: 12px;
   border: 1px solid var(--color-control-border);
@@ -105,9 +105,9 @@
   border-bottom: 1px solid var(--color-line);
   flex-wrap: wrap;
 }
-.ws-toolbar > select,
-.ws-inline-field > select,
-.ws-stack > select {
+.ws-toolbar > :is(select, .select-trigger),
+.ws-inline-field > :is(select, .select-trigger),
+.ws-stack > :is(select, .select-trigger) {
   height: 40px;
   border: 1px solid var(--color-control-border);
   background-color: var(--color-surface);
@@ -399,7 +399,7 @@
   min-width: 0;
 }
 .ws-fields input,
-.ws-fields select,
+.ws-fields :is(select, .select-trigger),
 .ws-fields textarea {
   width: 100%;
   min-width: 0;
@@ -1273,7 +1273,7 @@
   .ws-tabs > button {
     min-height: 48px;
   }
-  .ws-toolbar > select {
+  .ws-toolbar > :is(select, .select-trigger) {
     flex: 1 1 120px;
   }
   .ws-toolbar > .ws-search {

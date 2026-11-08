@@ -6,7 +6,7 @@
   font-size: var(--text-caption);
   color: var(--color-muted);
 }
-.role-select select {
+.role-select :is(select, .select-trigger) {
   height: 34px;
   max-width: 160px;
   padding: 0 10px;
@@ -210,7 +210,7 @@
   .role-select > span {
     display: none;
   }
-  .role-select select {
+  .role-select :is(select, .select-trigger) {
     max-width: 142px;
   }
 }
@@ -237,7 +237,7 @@
     font-size: var(--text-caption);
     white-space: nowrap;
   }
-  .workspace-role-mobile select {
+  .workspace-role-mobile :is(select, .select-trigger) {
     flex: 1;
     max-width: 170px;
   }

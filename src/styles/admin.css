@@ -443,7 +443,7 @@
   min-width: 0;
 }
 .visitor-filters input,
-.visitor-filters select {
+.visitor-filters :is(select, .select-trigger) {
   border: 1px solid var(--color-control-border);
   background: var(--color-surface);
   padding: 9px 8px;
@@ -503,7 +503,7 @@
   height: 12px;
   margin: 0;
 }
-.visitor-sort select {
+.visitor-sort :is(select, .select-trigger) {
   appearance: auto;
   background: var(--color-surface);
   border: 0;
@@ -513,7 +513,7 @@
   padding-right: 0;
   max-width: 125px;
 }
-.visitor-sort select:focus-visible {
+.visitor-sort :is(select, .select-trigger):focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
 }
@@ -1216,7 +1216,7 @@
   .visitor-sort > svg {
     display: none;
   }
-  .visitor-sort select {
+  .visitor-sort :is(select, .select-trigger) {
     font-size: var(--text-caption);
     max-width: 110px;
   }
@@ -1319,7 +1319,7 @@
     font-size: var(--text-caption);
   }
   .visitor-filters input,
-  .visitor-filters select {
+  .visitor-filters :is(select, .select-trigger) {
     font-size: var(--text-caption);
     height: 35px;
     padding: 7px 6px;
@@ -1367,7 +1367,7 @@
 .visitor-heading p,
 .visitor-search input::placeholder,
 .visitor-table-controls > label,
-.visitor-sort select {
+.visitor-sort :is(select, .select-trigger) {
   color: var(--color-text);
 }
 .visitor-table td {
@@ -1444,7 +1444,7 @@
     font-size: var(--text-caption);
   }
   .visitor-table-controls > label,
-  .visitor-sort select {
+  .visitor-sort :is(select, .select-trigger) {
     font-size: var(--text-caption);
   }
   .visitor-table {
@@ -1519,7 +1519,7 @@
     font-size: var(--text-caption);
   }
   .visitor-table-controls > label,
-  .visitor-sort select {
+  .visitor-sort :is(select, .select-trigger) {
     font-size: var(--text-caption);
   }
   .visitor-mobile-card button > strong {

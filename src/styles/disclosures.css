@@ -20,7 +20,7 @@
 .workstation-button {
   padding-inline-end: var(--disclosure-inset);
 }
-.role-select select {
+.role-select :is(select, .select-trigger) {
   max-width: 190px;
 }
 .workstation-button > span:nth-child(2) {

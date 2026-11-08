@@ -11,12 +11,12 @@ small {
 }
 button,
 input,
-select,
+:is(select, .select-trigger),
 textarea {
   line-height: 1.4;
 }
 input,
-select,
+:is(select, .select-trigger),
 textarea {
   min-height: 40px;
 }
@@ -80,7 +80,7 @@ h3 {
 .calendar-toolbar .ws-tabs button {
   min-height: 34px;
 }
-.calendar-filters select {
+.calendar-filters :is(select, .select-trigger) {
   min-height: 36px;
 }
 .calendar-column-heading {
@@ -139,7 +139,7 @@ h3 {
   min-height: 22px;
   padding: 1px 8px;
 }
-.calendar-filters select:disabled {
+.calendar-filters :is(select, .select-trigger):disabled {
   opacity: 1;
   color: var(--color-muted);
   -webkit-text-fill-color: var(--color-muted);

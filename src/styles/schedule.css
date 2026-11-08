@@ -99,8 +99,8 @@
   gap: 8px;
   padding: 0 16px 12px;
 }
-.calendar-filters select,
-.calendar-more select {
+.calendar-filters :is(select, .select-trigger),
+.calendar-more :is(select, .select-trigger) {
   color: var(--color-text);
   background-color: var(--color-surface);
   border: 1px solid var(--color-line);
@@ -457,7 +457,7 @@
   gap: 14px;
 }
 .calendar-form-grid input,
-.calendar-form-grid select {
+.calendar-form-grid :is(select, .select-trigger) {
   width: 100%;
   min-width: 0;
 }
@@ -557,7 +557,7 @@
     flex: 1;
     min-width: 120px;
   }
-  .calendar-filters select {
+  .calendar-filters :is(select, .select-trigger) {
     width: 100%;
     min-height: 40px;
   }
