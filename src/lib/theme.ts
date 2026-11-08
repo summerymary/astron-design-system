@@ -25,7 +25,7 @@ export const ASTRON_TOKENS = {
   '--color-text': '#3D4652',
   '--color-muted': '#606A5C',
   '--color-subtle': '#606A5C',
-  '--color-canvas': '#FAF9F6',
+  '--color-canvas': '#FDFDFC',
   '--color-stage': '#F1EFEA',
   '--color-surface': '#FFFFFF',
   '--color-surface-subtle': '#FDFCF9',
