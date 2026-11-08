@@ -57,6 +57,7 @@ import { AdminOverview } from './pages/AdminOverview';
 import { AdminSection } from './pages/AdminSection';
 import { ClientProfile } from './pages/ClientProfile';
 import { RoleOverview } from './pages/RoleOverview';
+import { AccountingHome } from './pages/AccountingHome';
 import { BartenderHome, TrainerHome } from './pages/StaffWorkspace';
 import { canOpenModule, isManagementRole } from './lib/staff-rules';
 import { managementNavigationGroups } from './data/management-navigation';
@@ -192,10 +193,7 @@ export function App() {
       ? { title: selectedMember?.name ?? 'Карточка клиента', caption: 'Сведения о клиенте' }
       : page === 'admin-section'
         ? {
-            title:
-              managingRole && adminSection === 'trainer-clients'
-                ? 'Персональные клиенты'
-                : adminSections.find((s) => s.id === adminSection)!.label,
+            title: adminSections.find((s) => s.id === adminSection)!.label,
             caption: adminSections.find((s) => s.id === adminSection)!.caption,
           }
         : page === 'overview'
@@ -678,9 +676,35 @@ export function App() {
                     {n.id === 'members' && <span className="nav-count">{members.length}</span>}
                   </button>
                 ))}
+                {role === 'marketer' && (
+                  <button
+                    onClick={() => openModule('crm')}
+                    className={page === 'admin-section' && adminSection === 'crm' ? 'active' : ''}
+                    aria-current={
+                      page === 'admin-section' && adminSection === 'crm' ? 'page' : undefined
+                    }
+                    title={sidebarCollapsed ? 'CRM' : undefined}
+                    aria-label={sidebarCollapsed ? 'CRM' : undefined}
+                  >
+                    <Users size={18} />
+                    <span className="nav-item-label">CRM</span>
+                  </button>
+                )}
               </nav>
               {managingRole && (
                 <nav className="side-nav management-module-nav" aria-label="Разделы управления">
+                  <button
+                    className={`management-statistics-link ${page === 'admin-section' && adminSection === 'statistics' ? 'active' : ''}`}
+                    title={sidebarCollapsed ? 'Статистика' : undefined}
+                    aria-label={sidebarCollapsed ? 'Статистика' : undefined}
+                    aria-current={
+                      page === 'admin-section' && adminSection === 'statistics' ? 'page' : undefined
+                    }
+                    onClick={() => openModule('statistics')}
+                  >
+                    <ChartNoAxesCombined size={18} strokeWidth={1.75} />
+                    <span className="nav-item-label">Статистика</span>
+                  </button>
                   {managementNavigationGroups.map((group) => (
                     <details
                       className="management-nav-group nav-accordion"
@@ -690,8 +714,7 @@ export function App() {
                       <summary className="nav-label ws-nav-separator">{group.label}</summary>
                       {group.items.map((id) => {
                         const section = adminSections.find((section) => section.id === id)!;
-                        const label =
-                          id === 'trainer-clients' ? 'Персональные клиенты' : section.label;
+                        const label = section.label;
                         const Icon =
                           managementIcons[id as keyof typeof managementIcons] || BookOpen;
                         return (
@@ -767,17 +790,39 @@ export function App() {
                   </button>
                 </nav>
               )}
-              {(role === 'trainer' || role === 'bartender') && (
+              {(role === 'trainer' ||
+                role === 'bartender' ||
+                role === 'accountant' ||
+                role === 'marketer') && (
                 <nav className="side-nav ws-module-nav" aria-label="Рабочие разделы">
-                  {(role === 'trainer'
+                  {(role === 'accountant'
                     ? [
-                        { id: 'schedule' as const, label: 'Моё расписание', icon: CalendarDays },
-                        { id: 'trainer-clients' as const, label: 'Мои клиенты', icon: Users },
+                        { id: 'cash' as const, label: 'Касса', icon: CreditCard },
+                        { id: 'statistics' as const, label: 'Отчёты', icon: ChartNoAxesCombined },
+                        { id: 'services' as const, label: 'Продажи', icon: CreditCard },
+                        { id: 'payroll' as const, label: 'Расчёт зарплаты', icon: BadgeDollarSign },
+                        { id: 'inventory' as const, label: 'Склад ресепшена', icon: Package },
                       ]
-                    : [
-                        { id: 'bar-catalog' as const, label: 'Каталог бара', icon: CupSoda },
-                        { id: 'bar-sales' as const, label: 'Продажи бара', icon: CreditCard },
-                      ]
+                    : role === 'marketer'
+                      ? [
+                          { id: 'leads' as const, label: 'Заявки', icon: Users },
+                          { id: 'pipelines' as const, label: 'Сценарии заявок', icon: GitBranch },
+                          { id: 'segments' as const, label: 'Группы клиентов', icon: Tags },
+                          { id: 'statistics' as const, label: 'Отчёты', icon: ChartNoAxesCombined },
+                        ]
+                      : role === 'trainer'
+                        ? [
+                            {
+                              id: 'schedule' as const,
+                              label: 'Моё расписание',
+                              icon: CalendarDays,
+                            },
+                            { id: 'trainer-clients' as const, label: 'Мои клиенты', icon: Users },
+                          ]
+                        : [
+                            { id: 'bar-catalog' as const, label: 'Каталог бара', icon: CupSoda },
+                            { id: 'bar-sales' as const, label: 'Продажи бара', icon: CreditCard },
+                          ]
                   ).map((n) => (
                     <button
                       key={n.id}
@@ -962,7 +1007,8 @@ export function App() {
                       visits={visits.filter((v) => v.memberId === selectedMember.id)}
                       bookings={selectedMember.id === 1001 ? initialProfileBookings : []}
                       canOperate={role === 'administrator' || managingRole}
-                      showQuickLinks={role !== 'administrator'}
+                      canSell={role === 'accountant'}
+                      showQuickLinks={managingRole}
                       scenario={scenario}
                       onReset={() => setScenario('default')}
                       onBack={() => goTo(memberReturnPage)}
@@ -1043,6 +1089,8 @@ export function App() {
                     />
                   ) : role === 'bartender' ? (
                     <BartenderHome clubName={club.name} navigate={openModule} />
+                  ) : role === 'accountant' ? (
+                    <AccountingHome navigate={openModule} clubName={club.name} />
                   ) : role !== 'administrator' ? (
                     <RoleOverview user={currentUser} />
                   ) : (
@@ -1085,6 +1133,31 @@ export function App() {
                   <span>{n.id === 'overview' ? 'Главная' : n.label}</span>
                 </button>
               ))}
+              {(role === 'marketer' || role === 'accountant') && (
+                <>
+                  <button
+                    className={
+                      page === 'admin-section' &&
+                      adminSection === (role === 'marketer' ? 'crm' : 'cash')
+                        ? 'active'
+                        : ''
+                    }
+                    onClick={() => openModule(role === 'marketer' ? 'crm' : 'cash')}
+                  >
+                    <Users size={20} />
+                    <span>{role === 'marketer' ? 'CRM' : 'Касса'}</span>
+                  </button>
+                  <button
+                    className={
+                      page === 'admin-section' && adminSection === 'statistics' ? 'active' : ''
+                    }
+                    onClick={() => openModule('statistics')}
+                  >
+                    <ChartNoAxesCombined size={20} />
+                    <span>Отчёты</span>
+                  </button>
+                </>
+              )}
               {(role === 'trainer' || role === 'bartender') && (
                 <>
                   <button
@@ -1263,12 +1336,12 @@ export function App() {
         <Modal title="Все разделы" onClose={() => setSectionsOpen(false)}>
           <div className="ws-stack">
             <LinkCards
-              labels={managingRole ? { 'trainer-clients': 'Персональные клиенты' } : undefined}
               ids={
                 managingRole
                   ? adminSections
                       .filter(
                         (section) =>
+                          canOpenModule(role, section.id) &&
                           ![
                             'bar',
                             'bar-catalog',

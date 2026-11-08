@@ -20,6 +20,7 @@ export type UserRole =
   | 'club-director'
   | 'network-director'
   | 'marketer'
+  | 'accountant'
   | 'fitness-director'
   | 'operations-director'
   | 'sysadmin';
