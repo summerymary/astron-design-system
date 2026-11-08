@@ -712,8 +712,8 @@ export const initialExtra: Record<string, DemoRecord[]> = {
       format: 'Персональное',
       description: 'Силовая работа с контролем техники',
     },
-    // Fictional busy day: eighteen classes in ONE room, without overlaps.
-    ...Array.from({ length: 18 }, (_, index): DemoRecord => {
+    // Keep 14 of the former 21 daily classes (about 65%), with gaps throughout the day.
+    ...[0, 1, 3, 5, 6, 8, 10, 11, 13, 15, 17].map((index): DemoRecord => {
       const names = [
         'Пилатес',
         'Функциональная тренировка',
@@ -1121,6 +1121,7 @@ export const initialExtra: Record<string, DemoRecord[]> = {
     {
       id: 'pipeline-1',
       name: 'Пробное занятие',
+      description: 'От заявки на пробное занятие до выбора абонемента.',
       stages: 'Новая\nСвязались\nНет ответа\nПробное назначено\nПробное пройдено\nПокупка',
       status: 'Активна',
     },
@@ -1242,6 +1243,10 @@ export const initialExtra: Record<string, DemoRecord[]> = {
   ledger: [
     {
       id: 'sale-1',
+      time: '09:30',
+      memberId: '1001',
+      cashier: 'Александра Крылова',
+      receiptNumber: 'DEMO-001',
       name: 'Безлимит',
       category: 'Абонементы',
       date: '2026-11-06',
@@ -1388,10 +1393,81 @@ export const initialExtra: Record<string, DemoRecord[]> = {
   ],
 };
 
+const demoCashMovements: DemoRecord[] = [
+  {
+    id: 'cash-demo-deposit',
+    name: 'Разменные деньги',
+    date: '2026-11-06',
+    time: '08:05',
+    club: 'Центральный',
+    amount: '3000',
+    method: 'Наличные',
+    kind: 'deposit',
+    cashier: 'Александра Крылова',
+    comment: 'Внесение размена в начале демосмены.',
+  },
+  {
+    id: 'cash-demo-retail',
+    name: 'Носки для тренировок · 1 пара',
+    date: '2026-11-06',
+    time: '10:20',
+    club: 'Центральный',
+    amount: '250',
+    method: 'Наличные',
+    kind: 'sale',
+    client: 'Гость',
+    cashier: 'Александра Крылова',
+    receiptNumber: 'DEMO-002',
+    comment: 'Продажа товара ресепшена.',
+  },
+  {
+    id: 'cash-demo-web',
+    name: 'Групповые тренировки · 4 занятия',
+    date: '2026-11-06',
+    time: '11:15',
+    club: 'Центральный',
+    amount: '1800',
+    method: 'Сайт',
+    kind: 'sale',
+    client: 'Мария Лебедева',
+    memberId: '1005',
+    cashier: 'Онлайн-продажа',
+    receiptNumber: 'DEMO-003',
+  },
+  {
+    id: 'cash-demo-refund',
+    name: 'Возврат разового посещения',
+    date: '2026-11-06',
+    time: '12:10',
+    club: 'Центральный',
+    amount: '600',
+    method: 'Наличные',
+    kind: 'refund',
+    client: 'Михаил Волков',
+    memberId: '1002',
+    cashier: 'Александра Крылова',
+    receiptNumber: 'DEMO-004',
+    comment: 'Пример возврата в журнале. Оформление возврата в прототипе недоступно.',
+  },
+  {
+    id: 'cash-demo-withdrawal',
+    name: 'Инкассация',
+    date: '2026-11-06',
+    time: '13:00',
+    club: 'Центральный',
+    amount: '1000',
+    method: 'Наличные',
+    kind: 'withdrawal',
+    cashier: 'Александра Крылова',
+    comment: 'Часть наличных передана на хранение.',
+  },
+];
+
 export function createWorkspaceData(): Record<string, DemoRecord[]> {
   return structuredClone({
     ...Object.fromEntries(Object.entries(resources).map(([key, value]) => [key, value.rows])),
     ...initialExtra,
+    'cash-events': demoCashMovements,
   });
 }
 export const money = (value: string | number) => `${Number(value || 0).toLocaleString('ru-RU')} ₽`;

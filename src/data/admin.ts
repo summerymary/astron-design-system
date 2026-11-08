@@ -181,10 +181,14 @@ export const adminSections = [
   { id: 'rbac', label: 'Роли и права', caption: 'Возможности сотрудников' },
   { id: 'security', label: 'Безопасность', caption: 'События, правила и группы доступа' },
   { id: 'event-logs', label: 'Журнал событий', caption: 'История действий и системных событий' },
-  { id: 'leads', label: 'Заявки CRM', caption: 'Обращения и следующие шаги' },
-  { id: 'segments', label: 'Сегменты CRM', caption: 'Работа с выбранными группами клиентов' },
-  { id: 'pipelines', label: 'Воронки CRM', caption: 'Этапы работы с обращениями' },
-  { id: 'retention', label: 'Удержание', caption: 'Клиенты, которым нужно внимание' },
+  { id: 'leads', label: 'Заявки', caption: 'Обращения и следующие действия' },
+  {
+    id: 'segments',
+    label: 'Группы клиентов',
+    caption: 'Нужная аудитория для работы и предложений',
+  },
+  { id: 'pipelines', label: 'Сценарии заявок', caption: 'Порядок работы с обращениями' },
+  { id: 'retention', label: 'Вернуть клиентов', caption: 'Кому нужно помочь вернуться к занятиям' },
   { id: 'external-messages', label: 'Внешние обращения', caption: 'Сообщения из социальных сетей' },
 ] as const;
 export type AdminSectionId = (typeof adminSections)[number]['id'];

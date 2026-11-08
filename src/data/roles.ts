@@ -83,9 +83,24 @@ export const roles: RoleDefinition[] = [
     canViewMembers: true,
     canAddMembers: false,
   },
+  {
+    id: 'accountant',
+    label: 'Бухгалтер',
+    scope: 'network',
+    canViewMembers: true,
+    canAddMembers: false,
+  },
 ];
 
 export const demoUsers: DemoUser[] = [
+  {
+    id: 'user-accountant',
+    name: 'Екатерина Белова',
+    email: 'accounting@example.com',
+    role: 'accountant',
+    networkId: 'astron',
+    clubIds: ['central', 'park', 'river'],
+  },
   {
     id: 'user-fitness-director',
     name: 'Дарья Миронова',
@@ -161,13 +176,27 @@ export const demoUsers: DemoUser[] = [
 ];
 
 export const roleHomes: Record<UserRole, RoleHomeData> = {
+  accountant: {
+    title: 'Финансы',
+    caption: 'Касса, продажи и расчёты сети.',
+    summaryTitle: 'Финансовое рабочее место',
+    summaryText: 'Операции и отчёты клубов «Астрон».',
+    metrics: [],
+    itemsTitle: 'Финансовые задачи',
+    itemsCaption: 'Демонстрационные данные.',
+    items: [],
+    noteTitle: 'Работа с финансами',
+    noteText: 'Кассовые операции, продажи, склад и зарплата доступны в меню.',
+    emptyTitle: 'Операций пока нет',
+    emptyDescription: 'Здесь появится финансовая сводка выбранного клуба.',
+  },
   'fitness-director': {
     title: 'Фитнес-направление',
     caption: 'Тренеры, занятия и качество тренировочного процесса.',
     summaryTitle: 'Расписание и команда тренеров',
     summaryText: 'Обзор фитнес-направления Центрального клуба.',
     metrics: [
-      { label: 'Занятий сегодня', value: '18', detail: 'В групповом зале' },
+      { label: 'Занятий сегодня', value: '14', detail: 'Во всех залах клуба' },
       { label: 'Тренеров', value: '6', detail: 'В демокоманде клуба' },
       { label: 'Заполняемость', value: '76%', detail: 'Пример показателя за неделю' },
     ],
