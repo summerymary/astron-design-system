@@ -2,12 +2,20 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import ts from 'typescript';
 
-async function load(path) {
-  const source = await readFile(new URL(path, import.meta.url), 'utf8');
-  const compiled = ts.transpileModule(source, {
+async function moduleURL(path) {
+  const url = path instanceof URL ? path : new URL(path, import.meta.url);
+  const source = await readFile(url, 'utf8');
+  let compiled = ts.transpileModule(source, {
     compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
   }).outputText;
-  return import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
+  for (const match of [...compiled.matchAll(/from ['"]([^'"]+)['"]/g)]) {
+    const dependency = await moduleURL(new URL(match[1] + '.ts', url));
+    compiled = compiled.replace(match[0], `from '${dependency}'`);
+  }
+  return `data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`;
+}
+async function load(path) {
+  return import(await moduleURL(path));
 }
 const { matchesSearch, searchDirectories, directorySnippet } = await load(
   '../src/lib/directory-search.ts',
@@ -58,7 +66,7 @@ assert.equal(
 assert.equal(directorySnippet('А · Б · В · Г', 'нет'), 'А · Б · В…');
 
 const data = createWorkspaceData();
-assert.equal(data.plans.length, 5);
+assert.equal(data.plans.filter((plan) => !plan.corporate && !plan.saleSection).length, 5);
 assert.equal(new Set(data.plans.map((plan) => plan.kindId)).size, 5);
 for (const kind of membershipKinds) {
   const plan = data.plans.find((plan) => plan.kindId === kind.id);
@@ -84,4 +92,41 @@ assert.equal(getMembershipKind('Тренажерный зал · 1 месяц').
 assert.equal(membershipKinds.find((kind) => kind.id === 'guest').background, 'transparent');
 console.log(
   'Catalog checks passed: word search, record isolation, ё/е, five membership types, valid demo terms and readable category colours.',
+);
+const { saleCatalog, searchSaleCatalog, saleSections } = await load('../src/lib/sale-catalog.ts');
+const original = structuredClone(data);
+const catalog = saleCatalog(data);
+assert.equal(saleSections.length, 5);
+assert.equal(new Set(catalog.map((item) => item.record.id)).size, catalog.length);
+assert.equal(catalog.filter((item) => item.sectionId === 'personal').length, 1);
+assert.equal(catalog.filter((item) => item.sectionId === 'corporate').length, 1);
+assert.equal(catalog.filter((item) => item.sectionId === 'exceptions').length, 2);
+assert.equal(searchSaleCatalog(catalog, 'ЖЕЛЕЗНАЯ', null).length, 2);
+assert.equal(searchSaleCatalog(catalog, 'железная', 'memberships').length, 1);
+assert.equal(searchSaleCatalog(catalog, 'корпоративная', 'personal').length, 0);
+assert.equal(
+  searchSaleCatalog(catalog, 'волос резинки', 'goods-services')[0].record.id,
+  'retail-bands',
+);
+assert.equal(searchSaleCatalog(catalog, 'полотенца', null)[0].type, 'service');
+assert.equal(searchSaleCatalog(catalog, 'нет совпадений', null).length, 0);
+assert.ok(!catalog.some((entry) => data.products.some((bar) => bar.id === entry.record.id)));
+assert.equal(searchSaleCatalog(catalog, 'коктейль', null).length, 0);
+assert.equal(
+  saleCatalog({ ...data, plans: data.plans.map((row) => ({ ...row, status: 'Черновик' })) }).some(
+    (item) => item.type === 'plan',
+  ),
+  false,
+);
+assert.equal(
+  saleCatalog({
+    ...data,
+    'retail-products': data['retail-products'].map((row) => ({ ...row, status: 'В архиве' })),
+  }).some((item) => item.type === 'product'),
+  false,
+);
+for (const plan of data.plans) assert.equal(validatePlan(plan, true), null);
+assert.deepEqual(data, original, 'Catalog browsing and search must not change source records');
+console.log(
+  'Sale catalog checks passed: section isolation, name search, published/active records and bar exclusion.',
 );
