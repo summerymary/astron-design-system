@@ -17,7 +17,8 @@
     "test:staff": "node scripts/check-staff.mjs",
     "test:messages": "node scripts/check-client-messages.mjs",
     "test:catalog": "node scripts/check-catalog.mjs",
-    "test:registration": "node scripts/check-registration.mjs"
+    "test:registration": "node scripts/check-registration.mjs",
+    "test:checkout": "node scripts/check-checkout.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
