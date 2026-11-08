@@ -1,0 +1,367 @@
+/* Keep role home pages within a desktop window. Small windows retain document scrolling. */
+.visitor-filters .filter-form-actions {
+  flex-wrap: wrap;
+}
+.modal .visitor-filters {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.modal .visitor-filters :is(.filter-date-group, .filter-details-group) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.modal .visitor-filters .filter-form-actions > span {
+  width: 100%;
+}
+.home-records:focus-visible,
+.visitor-table-scroll:focus-visible,
+.ws-cart-items:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -3px;
+}
+@media (max-width: 600px) {
+  .modal .visitor-filters .filter-details-group {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (min-width: 1000px) and (min-height: 650px) {
+  .prototype-content.fits-home {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+  }
+  .fits-home > .workspace-toolbar {
+    flex-shrink: 0;
+  }
+  .fits-home > .preview-stage,
+  .fits-home .app-shell.is-desktop,
+  .fits-home .app-shell.is-desktop .app-workspace {
+    min-height: 0;
+  }
+  .fits-home > .preview-stage {
+    flex: 1;
+  }
+  .fits-home .app-shell.is-desktop {
+    height: 100%;
+  }
+  .fits-home .app-shell .sidebar-navigation {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+  .fits-home .app-shell .sidebar-navigation > * {
+    flex-shrink: 0;
+  }
+  .fits-home .app-shell .sidebar-bottom {
+    flex-shrink: 0;
+    padding-top: 8px;
+  }
+  .fits-home .app-shell .sandbox-card {
+    display: none;
+  }
+  .fits-home .app-shell .app-content.home-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 12px 24px 16px;
+    overflow: auto;
+  }
+  .fits-home .home-content .work-page-toolbar {
+    flex-shrink: 0;
+    margin-bottom: 8px;
+  }
+  .fits-home .home-content :is(.empty-state, .loading-layout) {
+    flex: 1;
+    min-height: 0;
+    padding: 20px;
+  }
+  .fits-home .home-content .state-illustration {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+  }
+  .fits-home .home-content .state-demo-note {
+    margin-top: 16px;
+  }
+  .fits-home .home-content .loading-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0;
+  }
+  .fits-home .home-content .skeleton-stats {
+    flex-shrink: 0;
+    margin: 0;
+  }
+  .fits-home .home-content .skeleton-card {
+    padding: 16px;
+  }
+  .fits-home .home-content .skeleton-card b {
+    margin-block: 12px;
+  }
+  .fits-home .home-content .skeleton-panel {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    padding: 20px;
+    gap: 12px;
+  }
+  .fits-home .home-content .skeleton-line {
+    flex: 1;
+    min-height: 12px;
+    margin: 0;
+  }
+  .fits-home .home-content :is(.home-records, .visitor-table-scroll, .ws-cart-items) {
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+  }
+  .fits-home .home-content :is(.ws-stats, .role-metrics) {
+    flex-shrink: 0;
+    margin: 0;
+    padding-block: 4px;
+  }
+  .fits-home .home-content .ws-stats > div,
+  .fits-home .home-content .role-metrics .stat-card {
+    padding-block: 0;
+    padding-inline: 16px;
+  }
+  .fits-home .home-content :is(.ws-stats, .role-metrics) > :first-child {
+    padding-inline-start: 0;
+  }
+  .fits-home .home-content .role-metric-value {
+    margin: 6px 0 4px;
+    font-size: 28px;
+  }
+  .fits-home .home-content :is(.ws-panel-heading, .section-heading) {
+    flex-shrink: 0;
+    padding: 14px 16px;
+  }
+  .fits-home .home-content :is(.role-overview, .trainer-home, .bartender-home) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    gap: 16px;
+  }
+  .fits-home .home-content :is(.role-items, .trainer-home > .ws-panel) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    margin: 0;
+  }
+  .fits-home .home-content .home-records {
+    flex: 1;
+  }
+  .fits-home .home-content .role-item,
+  .fits-home .home-content .staff-session-list > button {
+    padding: 12px 16px;
+  }
+  .fits-home .home-content .staff-session-list {
+    border-radius: 0 0 var(--radius-card) var(--radius-card);
+  }
+  .fits-home .home-content .staff-session-list > button {
+    flex-wrap: nowrap;
+  }
+  .fits-home .home-content .staff-session-list > button > span:nth-child(2) {
+    min-width: 0;
+  }
+  /* Reception: toolbar and totals stay visible while records scroll. */
+  .fits-home .home-content .admin-page-layout {
+    flex: 1;
+    min-height: 0;
+    align-items: stretch;
+    grid-template-columns: minmax(0, 1fr) 216px;
+    gap: 20px;
+  }
+  .fits-home .home-content .admin-page-main,
+  .fits-home .home-content .reception-home {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .fits-home .home-content .reception-home {
+    flex: 1;
+    gap: 12px;
+  }
+  .fits-home .home-content .ws-home-shift {
+    flex-shrink: 0;
+    margin: 0;
+    padding-bottom: 8px;
+  }
+  .fits-home .home-content .ws-home-shift > span {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .fits-home .home-content .ws-home-shift small {
+    margin: 0;
+  }
+  .fits-home .home-content .admin-home-grid {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    align-items: stretch;
+  }
+  .fits-home .home-content .visitor-panel {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+  .fits-home .home-content .visitor-panel > :not(.visitor-table-scroll):not(.visitor-no-results) {
+    flex-shrink: 0;
+  }
+  .fits-home .home-content .visitor-heading {
+    padding: 12px 16px 8px;
+  }
+  .fits-home .home-content .visitor-toolbar {
+    padding: 0 16px 8px;
+  }
+  .fits-home .home-content .visitor-table-controls {
+    padding: 4px 16px;
+  }
+  .fits-home .home-content .visitor-sort .select-trigger {
+    width: auto;
+    min-width: 164px;
+    max-width: none;
+  }
+  .fits-home .home-content .visitor-table-scroll {
+    flex: 1;
+  }
+  .fits-home .home-content .visitor-table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding-block: 8px;
+  }
+  .fits-home .home-content .visitor-footer {
+    padding: 8px 16px;
+  }
+  .fits-home .home-content .visitor-hint {
+    padding: 8px 16px;
+  }
+  .fits-home .home-content .visitor-no-results {
+    flex: 1;
+    min-height: 0;
+    padding: 16px;
+    overflow: auto;
+  }
+  .fits-home .home-content .global-admin-quick.admin-quick-panel {
+    position: static;
+    max-height: 100%;
+  }
+  /* Financial summary beside the journal, rather than above a long page. */
+  .fits-home .home-content .accounting-home {
+    display: grid;
+    flex: 1;
+    min-height: 0;
+    gap: 12px 20px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+  }
+  .fits-home .home-content .accounting-home > :is(.ws-muted, .ws-stats) {
+    grid-column: 1 / -1;
+  }
+  .fits-home .home-content .accounting-home > .crm-home-links {
+    grid-column: 1;
+    grid-row: 3;
+    align-content: start;
+    gap: 10px;
+  }
+  .fits-home .home-content .accounting-home .crm-home-links button {
+    padding: 14px;
+    gap: 6px;
+  }
+  .fits-home .home-content .accounting-home > .ws-links {
+    grid-column: 1;
+    grid-row: 4;
+  }
+  .fits-home .home-content .accounting-recent {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    grid-column: 2;
+    grid-row: 3 / 5;
+  }
+  .fits-home .home-content .accounting-recent .home-records {
+    padding: 0 16px 12px;
+    gap: 0;
+  }
+  .fits-home .home-content .accounting-recent .ws-list-line {
+    padding-block: 12px;
+    flex-shrink: 0;
+  }
+  /* Bar catalog and order each have their own scrollable records. */
+  .fits-home .home-content .bartender-home > .ws-stack {
+    flex: 1;
+    min-height: 0;
+    gap: 12px;
+  }
+  .fits-home .home-content .ws-shift-gate {
+    padding: 24px;
+    gap: 12px;
+  }
+  .fits-home .home-content .bartender-home .ws-pos {
+    flex: 1;
+    min-height: 0;
+    align-items: stretch;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 16px;
+  }
+  .fits-home .home-content .ws-pos > .ws-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .fits-home .home-content .ws-pos :is(.ws-toolbar, .ws-tabs, .ws-panel-heading) {
+    flex-shrink: 0;
+  }
+  .fits-home .home-content .ws-pos .ws-toolbar {
+    padding: 10px 16px;
+  }
+  .fits-home .home-content .ws-product-grid {
+    min-height: 0;
+    flex: 1;
+    overflow: auto;
+    overscroll-behavior: contain;
+    align-content: start;
+    padding: 12px;
+    gap: 10px;
+  }
+  .fits-home .home-content .ws-product-grid > button {
+    padding: 12px;
+    gap: 8px;
+  }
+  .fits-home .home-content .ws-check > .ws-panel-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    flex: 1;
+    padding: 0 16px 16px;
+    gap: 12px;
+  }
+  .fits-home .home-content .ws-check .ws-cart-items {
+    flex: 1;
+  }
+  .fits-home .home-content .ws-check .ws-cart-items .ws-empty {
+    padding: 16px 0;
+    min-height: 0;
+  }
+  .fits-home .home-content .ws-check :is(.form-field, .ws-total, .button) {
+    flex-shrink: 0;
+  }
+  @container workspace (max-width: 1100px) {
+    .fits-home .home-content .admin-page-layout {
+      grid-template-columns: minmax(0, 1fr) 64px;
+      gap: 16px;
+    }
+  }
+}
