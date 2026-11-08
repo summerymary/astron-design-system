@@ -61,6 +61,7 @@ import { canOpenModule, isManagementRole } from './lib/staff-rules';
 import { managementNavigationGroups } from './data/management-navigation';
 import { membershipKinds } from './data/membership-kinds';
 import { AdminPageLayout } from './components/AdminPageLayout';
+import { ScreenLock, screenIsLocked, rememberScreenLock } from './components/ScreenLock';
 import type { Device, Member, Page, Scenario, UserRole, Visit, VisitKind } from './types';
 
 const navigation = [
@@ -155,6 +156,7 @@ export function App() {
   const [device, setDevice] = useState<Device>(options.device);
   const [scenario, setScenario] = useState<Scenario>(options.scenario);
   const [role, setRole] = useState<UserRole>(options.role);
+  const [screenLocked, setScreenLocked] = useState(screenIsLocked);
   const [members, setMembers] = useState<Member[]>(initialMembers);
   const [resetVersion, setResetVersion] = useState(0);
   const [visits, setVisits] = useState<Visit[]>(initialVisits);
@@ -173,6 +175,7 @@ export function App() {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const contentRef = useRef<HTMLElement>(null);
   const sidebarNavigationRef = useRef<HTMLDivElement>(null);
+  const expandedManagementGroupsRef = useRef<Set<string> | null>(null);
   const sectionHistory = useRef<
     { page: Page; section: AdminSectionId; clientId: number | null; member: Member | null }[]
   >([]);
@@ -227,12 +230,27 @@ export function App() {
     [],
   );
   useEffect(() => {
-    if (!managingRole) return;
+    if (!managingRole) {
+      expandedManagementGroupsRef.current = null;
+      return;
+    }
     const menu = sidebarNavigationRef.current;
-    if (sidebarCollapsed)
-      menu?.querySelectorAll('details').forEach((group) => {
+    if (!menu) return;
+    const groups = Array.from(menu.querySelectorAll<HTMLDetailsElement>('.management-nav-group'));
+    if (sidebarCollapsed) {
+      if (expandedManagementGroupsRef.current === null)
+        expandedManagementGroupsRef.current = new Set(
+          groups.filter((group) => group.open).map((group) => group.dataset.navGroup || ''),
+        );
+      groups.forEach((group) => {
         group.open = true;
       });
+    } else if (expandedManagementGroupsRef.current !== null) {
+      groups.forEach((group) => {
+        group.open = expandedManagementGroupsRef.current!.has(group.dataset.navGroup || '');
+      });
+      expandedManagementGroupsRef.current = null;
+    }
     const active = menu?.querySelector<HTMLElement>('button[aria-current="page"]');
     if (!menu || !active) return;
     const activeGroup = active.closest('details');
@@ -429,7 +447,7 @@ export function App() {
   };
 
   return (
-    <>
+    <div className="prototype-content" inert={screenLocked} aria-hidden={screenLocked || undefined}>
       <header className="workspace-toolbar">
         <a
           href="#/overview"
@@ -662,7 +680,11 @@ export function App() {
               {managingRole && (
                 <nav className="side-nav management-module-nav" aria-label="Разделы управления">
                   {managementNavigationGroups.map((group) => (
-                    <details className="management-nav-group nav-accordion" key={group.label}>
+                    <details
+                      className="management-nav-group nav-accordion"
+                      data-nav-group={group.label}
+                      key={group.label}
+                    >
                       <summary className="nav-label ws-nav-separator">{group.label}</summary>
                       {group.items.map((id) => {
                         const section = adminSections.find((section) => section.id === id)!;
@@ -802,6 +824,10 @@ export function App() {
                   onMember={openMember}
                   onAction={openAdminAction}
                   name={currentUser.name}
+                  onLock={() => {
+                    rememberScreenLock(true);
+                    setScreenLocked(true);
+                  }}
                 />
               ) : (
                 <>
@@ -891,32 +917,28 @@ export function App() {
                 }
               >
                 {page !== 'client-profile' && (
-                  <div className="page-heading">
-                    <div>
+                  <div className="page-heading work-page-toolbar">
+                    <div className="page-title-group">
                       {page === 'admin-section' && (
-                        <button className="page-back" onClick={backFromSection}>
-                          <ArrowLeft size={14} />
-                          Назад
+                        <button
+                          className="page-back icon-button"
+                          aria-label="Назад"
+                          title="Назад"
+                          onClick={backFromSection}
+                        >
+                          <ArrowLeft size={18} />
                         </button>
                       )}
-                      <div className="page-eyebrow">
-                        {`${currentRole.label.toUpperCase()} / 6 НОЯБРЯ 2026`}
-                      </div>
-                      <h1>
-                        {currentPage.title}
-                        <span className="heading-dot">.</span>
-                      </h1>
-                      {currentPage.caption && <p>{currentPage.caption}</p>}
+                      <h1>{currentPage.title}</h1>
+                      {page === 'members' && <span className="count-badge">{members.length}</span>}
                     </div>
                     <div className="page-actions">
-                      {page === 'overview' && role === 'administrator' && (
-                        <span className="date-chip">
-                          <CalendarDays size={15} />
-                          Сегодня, 6 ноября
-                        </span>
-                      )}
                       {(page === 'overview' || page === 'members') && currentRole.canAddMembers && (
-                        <Button onClick={() => setModal('add')}>
+                        <Button
+                          aria-label="Добавить клиента"
+                          title="Добавить клиента"
+                          onClick={() => setModal('add')}
+                        >
                           <Plus size={16} />
                           <span>Добавить клиента</span>
                         </Button>
@@ -1269,7 +1291,16 @@ export function App() {
           </div>
         </Modal>
       )}
-    </>
+      {screenLocked && (
+        <ScreenLock
+          name={currentUser.name}
+          onUnlock={() => {
+            rememberScreenLock(false);
+            setScreenLocked(false);
+          }}
+        />
+      )}
+    </div>
   );
 }
 
