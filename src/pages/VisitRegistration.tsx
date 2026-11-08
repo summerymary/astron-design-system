@@ -42,7 +42,7 @@ export function RegistrationWorkspace({
   return (
     <div className="ws-stack registration-workspace">
       {!selected && (
-        <section className="panel ws-panel">
+        <section className="panel ws-panel client-picker-panel">
           <div className="ws-panel-heading">
             <div>
               <h2>Найдите клиента</h2>
@@ -137,6 +137,7 @@ export function RegistrationWorkspace({
                           }}
                         >
                           <MembershipCard
+                            compact
                             name={item.name}
                             kindId={item.kindId}
                             detail={

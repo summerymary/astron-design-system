@@ -483,7 +483,11 @@ export function StatisticsWorkspace() {
   const [compare, setCompare] = useState('Без сравнения');
   const [group, setGroup] = useState('По дням');
   const filtered = data.ledger.filter(
-    (row) => row.date >= from && row.date <= to && (club === 'Все клубы' || row.club === club),
+    (row) =>
+      row.category !== 'Бар' &&
+      row.date >= from &&
+      row.date <= to &&
+      (club === 'Все клубы' || row.club === club),
   );
   const total = filtered.reduce((sum, row) => sum + Number(row.amount), 0);
   const grouped = new Map<string, number>();
@@ -496,6 +500,7 @@ export function StatisticsWorkspace() {
   const previous = data.ledger
     .filter(
       (row) =>
+        row.category !== 'Бар' &&
         row.date >= datePlus(from, -days) &&
         row.date < from &&
         (club === 'Все клубы' || row.club === club),
@@ -680,7 +685,11 @@ export function BarWorkspace({
     return (
       <div className="ws-stack">
         <SectionLinks
-          ids={limited ? ['bar-catalog', 'bar-sales'] : ['products', 'inventory']}
+          ids={
+            limited
+              ? ['bar-catalog', 'bar-sales']
+              : ['bar-catalog', 'bar-sales', 'bar-categories', 'bar-collections', 'bar-inventory']
+          }
           navigate={navigate}
         />
         <section className="panel ws-shift-gate">
@@ -699,7 +708,11 @@ export function BarWorkspace({
       <div className="ws-subheading">
         <Status>Смена открыта</Status>
         <SectionLinks
-          ids={limited ? ['bar-catalog', 'bar-sales'] : ['products', 'inventory']}
+          ids={
+            limited
+              ? ['bar-catalog', 'bar-sales']
+              : ['bar-catalog', 'bar-sales', 'bar-categories', 'bar-collections', 'bar-inventory']
+          }
           navigate={navigate}
         />
         <Button variant="ghost" onClick={() => setClosing(true)}>
@@ -844,8 +857,16 @@ export function BarWorkspace({
   );
 }
 
-export function InventoryWorkspace({ navigate }: { navigate: Navigate }) {
+export function InventoryWorkspace({
+  navigate,
+  bar = false,
+}: {
+  navigate: Navigate;
+  bar?: boolean;
+}) {
   const { data, put } = useWorkspace();
+  const productsCollection = bar ? 'products' : 'retail-products';
+  const documentsCollection = bar ? 'inventory' : 'retail-inventory';
   const [form, setForm] = useState<DemoRecord | 'new' | null>(null);
   const [opened, setOpened] = useState<DemoRecord | null>(null);
   const [posting, setPosting] = useState(false);
@@ -868,30 +889,35 @@ export function InventoryWorkspace({ navigate }: { navigate: Navigate }) {
     {
       key: 'from',
       label: 'Откуда',
-      options: ['Центральный · Бар', 'Центральный · Склад', 'Парк · Бар'],
+      options: bar
+        ? ['Центральный · Бар', 'Центральный · Склад', 'Парк · Бар']
+        : ['Центральный · Ресепшен', 'Центральный · Склад', 'Парк · Ресепшен'],
     },
     {
       key: 'to',
       label: 'Куда',
-      options: ['Центральный · Бар', 'Центральный · Склад', 'Парк · Бар'],
+      options: bar
+        ? ['Центральный · Бар', 'Центральный · Склад', 'Парк · Бар']
+        : ['Центральный · Ресепшен', 'Центральный · Склад', 'Парк · Ресепшен'],
     },
     {
       key: 'product',
       label: 'Товар',
-      options: data.products.map((row) => row.name),
+      options: data[productsCollection].map((row) => row.name),
       required: true,
     },
     { key: 'qty', label: 'Количество в базовых единицах', type: 'number', min: 1, required: true },
     { key: 'cost', label: 'Закупочная цена, ₽', type: 'number', min: 0 },
     { key: 'batch', label: 'Партия' },
   ];
-  const viewRows = data.inventory.map((row) => ({
+  const viewRows = data[documentsCollection].map((row) => ({
     ...row,
-    product: data.products.find((product) => product.id === row.product)?.name || row.product,
+    product:
+      data[productsCollection].find((product) => product.id === row.product)?.name || row.product,
   }));
   const post = () => {
     if (!opened || opened.status === 'Проведён') return;
-    const product = data.products.find(
+    const product = data[productsCollection].find(
       (row) => row.id === opened.product || row.name === opened.product,
     );
     if (!product) {
@@ -906,8 +932,8 @@ export function InventoryWorkspace({ navigate }: { navigate: Navigate }) {
       close();
       return;
     }
-    put('products', { ...product, stock: String(nextStock) });
-    put('inventory', { ...opened, product: product.id, status: 'Проведён' });
+    put(productsCollection, { ...product, stock: String(nextStock) });
+    put(documentsCollection, { ...opened, product: product.id, status: 'Проведён' });
     close();
     setMessage(
       opened.type === 'Перемещение'
@@ -917,7 +943,10 @@ export function InventoryWorkspace({ navigate }: { navigate: Navigate }) {
   };
   return (
     <div className="ws-stack">
-      <SectionLinks ids={['products', 'bar']} navigate={navigate} />
+      <SectionLinks
+        ids={bar ? ['bar-catalog', 'bar'] : ['products', 'services']}
+        navigate={navigate}
+      />
       {message && <Notice>{message}</Notice>}
       <section className="panel ws-panel">
         <div className="ws-panel-heading">
@@ -941,7 +970,9 @@ export function InventoryWorkspace({ navigate }: { navigate: Navigate }) {
             { key: 'qty', label: 'Количество' },
             { key: 'status', label: 'Статус' },
           ]}
-          onOpen={(row) => setOpened(data.inventory.find((record) => record.id === row.id)!)}
+          onOpen={(row) =>
+            setOpened(data[documentsCollection].find((record) => record.id === row.id)!)
+          }
         />
       </section>
       {form && (
@@ -954,16 +985,18 @@ export function InventoryWorkspace({ navigate }: { navigate: Navigate }) {
               : {
                   ...form,
                   product:
-                    data.products.find((row) => row.id === form.product)?.name || form.product,
+                    data[productsCollection].find((row) => row.id === form.product)?.name ||
+                    form.product,
                 }
           }
           onClose={closeForm}
           submit="Сохранить черновик"
           onSave={(record) => {
-            put('inventory', {
+            put(documentsCollection, {
               ...record,
               product:
-                data.products.find((row) => row.name === record.product)?.id || record.product,
+                data[productsCollection].find((row) => row.name === record.product)?.id ||
+                record.product,
               status: 'Черновик',
             });
             closeForm();
@@ -976,7 +1009,9 @@ export function InventoryWorkspace({ navigate }: { navigate: Navigate }) {
           title={opened.name}
           record={{
             ...opened,
-            product: data.products.find((row) => row.id === opened.product)?.name || opened.product,
+            product:
+              data[productsCollection].find((row) => row.id === opened.product)?.name ||
+              opened.product,
           }}
           fields={fields}
           onClose={close}
@@ -1019,10 +1054,10 @@ export function InventoryWorkspace({ navigate }: { navigate: Navigate }) {
 
 export function CashWorkspace({ navigate }: { navigate: Navigate }) {
   const { data } = useWorkspace();
-  const rows = data.ledger.filter((row) => row.date === TODAY);
+  const rows = data.ledger.filter((row) => row.category !== 'Бар' && row.date === TODAY);
   return (
     <div className="ws-stack">
-      <SectionLinks ids={['services', 'bar', 'statistics']} navigate={navigate} />
+      <SectionLinks ids={['services', 'products', 'statistics']} navigate={navigate} />
       <Stats
         items={[
           { label: 'Продажи сегодня', value: rows.length },
@@ -1030,17 +1065,25 @@ export function CashWorkspace({ navigate }: { navigate: Navigate }) {
           {
             label: 'Наличными',
             value: money(
-              rows
-                .filter((row) => row.method === 'Наличные')
-                .reduce((sum, row) => sum + Number(row.amount), 0),
+              rows.reduce(
+                (sum, row) =>
+                  sum + Number(row.cashAmount ?? (row.method === 'Наличные' ? row.amount : 0)),
+                0,
+              ),
             ),
           },
           {
             label: 'Картой',
             value: money(
-              rows
-                .filter((row) => row.method === 'Карта')
-                .reduce((sum, row) => sum + Number(row.amount), 0),
+              rows.reduce(
+                (sum, row) =>
+                  sum +
+                  Number(
+                    row.cardAmount ??
+                      (['Карта', 'Безналичная оплата'].includes(row.method) ? row.amount : 0),
+                  ),
+                0,
+              ),
             ),
           },
         ]}
@@ -1049,7 +1092,7 @@ export function CashWorkspace({ navigate }: { navigate: Navigate }) {
         <div className="ws-panel-heading">
           <div>
             <h2>Операции смены</h2>
-            <p>Продажи услуг и бара из единого набора демоданных.</p>
+            <p>Продажи ресепшена, услуг и абонементов.</p>
           </div>
         </div>
         <DataTable

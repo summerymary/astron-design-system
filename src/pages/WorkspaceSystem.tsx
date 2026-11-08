@@ -53,14 +53,33 @@ export function DirectoriesWorkspace({ navigate }: { navigate: Navigate }) {
   const [opened, setOpened] = useState<{ section: AdminSectionId; row: DemoRecord } | null>(null);
   const close = useCallback(() => setOpened(null), []);
   const fieldsFor = (id: string) =>
-    id === 'memberships' ? membershipSearchFields : (resources[id]?.fields ?? []);
+    id === 'products'
+      ? [
+          { key: 'name', label: 'Название' },
+          { key: 'sku', label: 'Артикул' },
+          { key: 'price', label: 'Цена' },
+          { key: 'stock', label: 'Остаток' },
+          { key: 'status', label: 'Статус' },
+        ]
+      : id === 'memberships'
+        ? membershipSearchFields
+        : (resources[id]?.fields ?? []);
   const recordsFor = (id: string): DemoRecord[] =>
     id === 'memberships'
       ? data.plans.map((plan) => ({
           ...plan,
           visitSummary: plan.type === 'Безлимитный' ? 'Без ограничений' : plan.visits,
         }))
-      : (data[id] ?? []);
+      : id === 'inventory'
+        ? (data['retail-inventory'] || []).map((row) => ({
+            ...row,
+            product:
+              data['retail-products'].find((product) => product.id === row.product)?.name ||
+              row.product,
+          }))
+        : (data[
+            id === 'products' ? 'retail-products' : id === 'inventory' ? 'retail-inventory' : id
+          ] ?? []);
   const index = useMemo(
     () =>
       directoryGroups.flatMap((group) =>
@@ -71,7 +90,14 @@ export function DirectoriesWorkspace({ navigate }: { navigate: Navigate }) {
           return {
             id,
             title: meta.label,
-            description: [meta.caption, config?.description].filter(Boolean).join('. '),
+            description: [
+              meta.caption,
+              id === 'products'
+                ? 'Товары ресепшена: носки, резинки и тапочки.'
+                : config?.description,
+            ]
+              .filter(Boolean)
+              .join('. '),
             group: group.label,
             keywords: fields.map((field) => field.label).join(' '),
             records: recordsFor(id).map((row) => ({
@@ -268,7 +294,9 @@ export function PayrollWorkspace({ navigate }: { navigate: Navigate }) {
                   </p>
                   <h3>Оплаченные продажи за день</h3>
                   <DataTable
-                    rows={data.ledger.filter((row) => row.date === shift.start.split('T')[0])}
+                    rows={data.ledger.filter(
+                      (row) => row.category !== 'Бар' && row.date === shift.start.split('T')[0],
+                    )}
                     columns={[
                       { key: 'name', label: 'Позиция' },
                       { key: 'amount', label: 'Сумма' },

@@ -65,6 +65,18 @@ export function AdminSection({
     );
   if (section === 'bar-catalog') return <BarCatalog navigate={navigate} />;
   if (section === 'bar-sales') return <BarSales clubName={clubName} />;
+  if (section === 'products')
+    return (
+      <SaleWorkspace
+        key="retail-sale"
+        initialSection="goods-services"
+        members={members}
+        initialMember={member}
+        navigate={navigate}
+        clubName={clubName}
+      />
+    );
+  if (section === 'bar-inventory') return <InventoryWorkspace key="bar" bar navigate={navigate} />;
   if (resources[section])
     return (
       <ResourcePage
@@ -107,7 +119,7 @@ export function AdminSection({
       <BarWorkspace navigate={navigate} clubName={clubName} />
     );
   if (section === 'cash') return <CashWorkspace navigate={navigate} />;
-  if (section === 'inventory') return <InventoryWorkspace navigate={navigate} />;
+  if (section === 'inventory') return <InventoryWorkspace key="retail" navigate={navigate} />;
   if (['crm', 'leads', 'requests', 'segments', 'pipelines', 'retention'].includes(section))
     return <CRMWorkspace key={section} section={section} navigate={navigate} />;
   if (section === 'messages' || section === 'external-messages')

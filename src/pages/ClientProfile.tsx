@@ -28,7 +28,7 @@ import { visitKinds } from '../data/admin';
 import { demoClubs } from '../data/roles';
 import { profileBookingOptions } from '../data/profileBookings';
 import { findClientChat, readChatMessages } from '../lib/client-messages';
-import { MembershipCard } from '../components/MembershipCard';
+import { MembershipTag } from '../components/MembershipTag';
 import type { Member, Scenario, Visit } from '../types';
 
 const subscriptionLabels: Record<SubscriptionStatus, string> = {
@@ -74,6 +74,7 @@ export function ClientProfile({
   onRegistration,
   onAction,
   onUpdate,
+  showQuickLinks = true,
 }: {
   member: Member;
   visits: Visit[];
@@ -85,6 +86,7 @@ export function ClientProfile({
   onRegistration: () => void;
   onAction: (id: AdminSectionId) => void;
   onUpdate: (member: Member) => void;
+  showQuickLinks?: boolean;
 }) {
   const { data, put } = useWorkspace();
   const profile = getClientProfile(member, data);
@@ -92,7 +94,8 @@ export function ClientProfile({
   const [form, setForm] = useState<'edit' | 'comment' | null>(null);
   const closeForm = useCallback(() => setForm(null), []);
   const clientSales = data.ledger.filter(
-    (row) => row.memberId === String(member.id) || row.client === member.name,
+    (row) =>
+      row.category !== 'Бар' && (row.memberId === String(member.id) || row.client === member.name),
   );
   const notes = (data.comments || []).filter((row) => row.memberId === String(member.id));
   const eventBookings = data.events.filter((row) =>
@@ -363,21 +366,30 @@ export function ClientProfile({
                         ))}
                       </div>
                       {shownSubscriptions.length ? (
-                        <div className="plastic-card-grid">
+                        <ul className="client-membership-list" aria-label="Абонементы клиента">
                           {shownSubscriptions.map((sub) => (
-                            <div key={sub.id} className="client-pass-item">
-                              <MembershipCard
-                                name={sub.name}
-                                kindId={sub.kindId}
-                                detail={subscriptionLabels[sub.status]}
-                                footer={
-                                  sub.remaining === null
-                                    ? 'Без ограничений'
-                                    : `Осталось посещений: ${sub.remaining}`
-                                }
-                              />
-                              <details className="ws-disclosure">
-                                <summary>Подробности абонемента</summary>
+                            <li key={sub.id}>
+                              <div className="client-membership-row">
+                                <div className="client-membership-name" title={sub.name}>
+                                  <MembershipTag name={sub.name} kindId={sub.kindId} textOnly />
+                                </div>
+                                <span className={`subscription-status status-${sub.status}`}>
+                                  <i aria-hidden="true" />
+                                  {subscriptionLabels[sub.status]}
+                                </span>
+                                <div>
+                                  <small>{sub.endsAt ? 'Действует до' : 'Активация'}</small>
+                                  <strong>{sub.endsAt || 'Ожидается'}</strong>
+                                </div>
+                                <div>
+                                  <small>Остаток</small>
+                                  <strong>
+                                    {sub.remaining === null ? 'Безлимит' : sub.remaining}
+                                  </strong>
+                                </div>
+                              </div>
+                              <details className="client-membership-details ws-disclosure">
+                                <summary>Подробнее</summary>
                                 <dl className="ws-facts">
                                   <Fact label="Покупка">{sub.boughtAt}</Fact>
                                   <Fact label="Активация">
@@ -390,9 +402,9 @@ export function ClientProfile({
                                   <Fact label="Номер">{sub.id}</Fact>
                                 </dl>
                               </details>
-                            </div>
+                            </li>
                           ))}
-                        </div>
+                        </ul>
                       ) : (
                         <EmptyTab
                           title="Нет абонементов в этой категории"
@@ -556,9 +568,11 @@ export function ClientProfile({
                       <DataTable
                         rows={clientSales}
                         columns={[
-                          { key: 'name', label: 'Услуга' },
+                          { key: 'name', label: 'Покупка' },
                           { key: 'date', label: 'Дата' },
-                          { key: 'amount', label: 'Сумма' },
+                          { key: 'amount', label: 'Оплачено, ₽' },
+                          { key: 'creditAmount', label: 'В долг, ₽' },
+                          { key: 'status', label: 'Статус' },
                           { key: 'method', label: 'Оплата' },
                         ]}
                       />
@@ -700,7 +714,7 @@ export function ClientProfile({
             </div>
           </section>
         </div>
-        {canOperate && <AdminQuickLinks onAction={onAction} />}
+        {canOperate && showQuickLinks && <AdminQuickLinks onAction={onAction} />}
       </div>
       {previewAction && (
         <Modal title={previewAction} subtitle={member.name} onClose={closePreview}>

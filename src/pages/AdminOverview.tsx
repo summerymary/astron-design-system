@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 import { MembershipTag } from '../components/MembershipTag';
 import { ArrowDownWideNarrow, ArrowUpRight, CreditCard, ListFilter, Search, X } from 'lucide-react';
 import { Avatar, Button } from '../components/ui';
-import { AdminQuickLinks } from '../components/AdminQuickLinks';
 import { memberDemographics, visitKinds } from '../data/admin';
 import type { AdminSectionId } from '../data/admin';
 import { demoClubs } from '../data/roles';
@@ -440,7 +439,6 @@ export function AdminOverview({
             <span>Нажмите на карту или имя, чтобы открыть карточку клиента.</span>
           </div>
         </section>
-        <AdminQuickLinks onAction={onAction} />
       </div>
     </>
   );
