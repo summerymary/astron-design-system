@@ -12,6 +12,7 @@ import {
   Bell,
   UserRound,
   CupSoda,
+  LockKeyhole,
   X,
 } from 'lucide-react';
 import { demoClubs } from '../data/roles';
@@ -25,6 +26,7 @@ export function AdminHeader({
   onMember,
   onAction,
   name,
+  onLock,
 }: {
   workstationId: string;
   onWorkstation: (id: string) => void;
@@ -32,6 +34,7 @@ export function AdminHeader({
   onMember: (member: Member) => void;
   onAction: (id: AdminSectionId) => void;
   name: string;
+  onLock: () => void;
 }) {
   const [open, setOpen] = useState(false);
   const { data } = useWorkspace();
@@ -145,6 +148,14 @@ export function AdminHeader({
           <UserRound size={17} />
         </button>
       </div>
+      <button
+        className="icon-button admin-lock-button"
+        aria-label="Заблокировать экран"
+        title="Заблокировать экран"
+        onClick={onLock}
+      >
+        <LockKeyhole size={18} />
+      </button>
     </div>
   );
 }
