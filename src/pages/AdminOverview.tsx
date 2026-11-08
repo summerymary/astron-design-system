@@ -1,8 +1,8 @@
 import { Select } from '../components/Select';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { MembershipTag } from '../components/MembershipTag';
 import { ArrowDownWideNarrow, ArrowUpRight, CreditCard, ListFilter, Search, X } from 'lucide-react';
-import { Avatar, Button } from '../components/ui';
+import { Avatar, Button, Modal } from '../components/ui';
 import { memberDemographics, visitKinds } from '../data/admin';
 import type { AdminSectionId } from '../data/admin';
 import { demoClubs } from '../data/roles';
@@ -44,6 +44,7 @@ export function AdminOverview({
   const [unique, setUnique] = useState(false);
   const [sort, setSort] = useState('time');
   const [filterError, setFilterError] = useState('');
+  const closeFilters = useCallback(() => setExpanded(false), []);
   const memberMap = useMemo(() => new Map(members.map((m) => [m.id, m])), [members]);
   const filtered = useMemo(() => {
     const found = visits
@@ -102,7 +103,7 @@ export function AdminOverview({
   const field = (name: keyof typeof filters, value: string) =>
     setDraft((prev) => ({ ...prev, [name]: value }));
   return (
-    <>
+    <div className="reception-home">
       <div className="panel ws-home-shift">
         <span>
           <strong>Моя смена</strong>
@@ -152,154 +153,172 @@ export function AdminOverview({
             <button
               className={`visitor-filter-button ${expanded || activeCount ? 'active' : ''}`}
               aria-expanded={expanded}
-              onClick={() => setExpanded(!expanded)}
+              aria-haspopup="dialog"
+              onClick={() => {
+                setDraft(filters);
+                setFilterError('');
+                setExpanded(true);
+              }}
             >
               <ListFilter size={16} />
               Фильтры{activeCount > 0 && <b>{activeCount}</b>}
             </button>
           </div>
           {expanded && (
-            <form
-              className="visitor-filters"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const form = new FormData(e.currentTarget);
-                const next = {
-                  fromDate: String(form.get('fromDate')),
-                  fromTime: String(form.get('fromTime') || '00:00'),
-                  toDate: String(form.get('toDate')),
-                  toTime: String(form.get('toTime') || '23:59'),
-                  clubId: String(form.get('clubId')),
-                  kind: String(form.get('kind')),
-                  gender: String(form.get('gender')),
-                  age: String(form.get('age') || ''),
-                };
-                if (`${next.fromDate}T${next.fromTime}` > `${next.toDate}T${next.toTime}`) {
-                  setFilterError('Начало периода должно быть раньше конца.');
-                  return;
-                }
-                setDraft(next);
-                setFilters(next);
-                setFilterError('');
-              }}
-            >
-              <div className="filter-date-group">
-                <label>
-                  С даты
-                  <input
-                    aria-label="Посещения с даты"
-                    name="fromDate"
-                    type="date"
-                    required
-                    value={draft.fromDate}
-                    onChange={(e) => field('fromDate', e.target.value)}
-                  />
-                </label>
-                <label>
-                  Время
-                  <input
-                    aria-label="Посещения с времени"
-                    name="fromTime"
-                    type="time"
-                    value={draft.fromTime}
-                    onChange={(e) => field('fromTime', e.target.value)}
-                  />
-                </label>
-                <label>
-                  По дату
-                  <input
-                    aria-label="Посещения по дату"
-                    name="toDate"
-                    type="date"
-                    required
-                    value={draft.toDate}
-                    onChange={(e) => field('toDate', e.target.value)}
-                  />
-                </label>
-                <label>
-                  Время
-                  <input
-                    aria-label="Посещения по время"
-                    name="toTime"
-                    type="time"
-                    value={draft.toTime}
-                    onChange={(e) => field('toTime', e.target.value)}
-                  />
-                </label>
-              </div>
-              <div className="filter-details-group">
-                <label>
-                  Клуб
-                  <Select
-                    aria-label="Клуб посетителей"
-                    name="clubId"
-                    value={draft.clubId}
-                    onChange={(e) => field('clubId', e.target.value)}
+            <Modal title="Фильтры посещений" onClose={closeFilters}>
+              <form
+                className="visitor-filters"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const form = new FormData(e.currentTarget);
+                  const next = {
+                    fromDate: String(form.get('fromDate')),
+                    fromTime: String(form.get('fromTime') || '00:00'),
+                    toDate: String(form.get('toDate')),
+                    toTime: String(form.get('toTime') || '23:59'),
+                    clubId: String(form.get('clubId')),
+                    kind: String(form.get('kind')),
+                    gender: String(form.get('gender')),
+                    age: String(form.get('age') || ''),
+                  };
+                  if (`${next.fromDate}T${next.fromTime}` > `${next.toDate}T${next.toTime}`) {
+                    setFilterError('Начало периода должно быть раньше конца.');
+                    return;
+                  }
+                  setDraft(next);
+                  setFilters(next);
+                  setFilterError('');
+                  setExpanded(false);
+                }}
+              >
+                <div className="filter-date-group">
+                  <label>
+                    С даты
+                    <input
+                      aria-label="Посещения с даты"
+                      name="fromDate"
+                      type="date"
+                      required
+                      value={draft.fromDate}
+                      onChange={(e) => field('fromDate', e.target.value)}
+                    />
+                  </label>
+                  <label>
+                    Время
+                    <input
+                      aria-label="Посещения с времени"
+                      name="fromTime"
+                      type="time"
+                      value={draft.fromTime}
+                      onChange={(e) => field('fromTime', e.target.value)}
+                    />
+                  </label>
+                  <label>
+                    По дату
+                    <input
+                      aria-label="Посещения по дату"
+                      name="toDate"
+                      type="date"
+                      required
+                      value={draft.toDate}
+                      onChange={(e) => field('toDate', e.target.value)}
+                    />
+                  </label>
+                  <label>
+                    Время
+                    <input
+                      aria-label="Посещения по время"
+                      name="toTime"
+                      type="time"
+                      value={draft.toTime}
+                      onChange={(e) => field('toTime', e.target.value)}
+                    />
+                  </label>
+                </div>
+                <div className="filter-details-group">
+                  <label>
+                    Клуб
+                    <Select
+                      aria-label="Клуб посетителей"
+                      name="clubId"
+                      value={draft.clubId}
+                      onChange={(e) => field('clubId', e.target.value)}
+                    >
+                      <option value="all">Все клубы</option>
+                      {demoClubs.map((c) => (
+                        <option key={c.id} value={c.id}>
+                          {c.name}
+                        </option>
+                      ))}
+                    </Select>
+                  </label>
+                  <label>
+                    Посещение
+                    <Select
+                      aria-label="Тип посещения"
+                      name="kind"
+                      value={draft.kind}
+                      onChange={(e) => field('kind', e.target.value)}
+                    >
+                      <option value="all">Все посещения</option>
+                      {Object.entries(visitKinds).map(([id, label]) => (
+                        <option key={id} value={id}>
+                          {label}
+                        </option>
+                      ))}
+                    </Select>
+                  </label>
+                  <label>
+                    Пол
+                    <Select
+                      aria-label="Пол посетителей"
+                      name="gender"
+                      value={draft.gender}
+                      onChange={(e) => field('gender', e.target.value)}
+                    >
+                      <option value="all">Любой</option>
+                      <option value="male">Мужчины</option>
+                      <option value="female">Женщины</option>
+                    </Select>
+                  </label>
+                  <label>
+                    Возраст, лет
+                    <input
+                      aria-label="Возраст посетителя"
+                      name="age"
+                      type="number"
+                      min="0"
+                      max="120"
+                      placeholder="Любой"
+                      value={draft.age}
+                      onChange={(e) => field('age', e.target.value)}
+                    />
+                  </label>
+                </div>
+                {filterError && (
+                  <p role="alert" className="filter-error">
+                    {filterError}
+                  </p>
+                )}
+                <div className="filter-form-actions">
+                  <span>Фильтры применяются к журналу посещений</span>
+                  <Button type="button" variant="ghost" onClick={closeFilters}>
+                    Отмена
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={() => {
+                      setDraft(initialFilters(clubId));
+                      setFilterError('');
+                    }}
                   >
-                    <option value="all">Все клубы</option>
-                    {demoClubs.map((c) => (
-                      <option key={c.id} value={c.id}>
-                        {c.name}
-                      </option>
-                    ))}
-                  </Select>
-                </label>
-                <label>
-                  Посещение
-                  <Select
-                    aria-label="Тип посещения"
-                    name="kind"
-                    value={draft.kind}
-                    onChange={(e) => field('kind', e.target.value)}
-                  >
-                    <option value="all">Все посещения</option>
-                    {Object.entries(visitKinds).map(([id, label]) => (
-                      <option key={id} value={id}>
-                        {label}
-                      </option>
-                    ))}
-                  </Select>
-                </label>
-                <label>
-                  Пол
-                  <Select
-                    aria-label="Пол посетителей"
-                    name="gender"
-                    value={draft.gender}
-                    onChange={(e) => field('gender', e.target.value)}
-                  >
-                    <option value="all">Любой</option>
-                    <option value="male">Мужчины</option>
-                    <option value="female">Женщины</option>
-                  </Select>
-                </label>
-                <label>
-                  Возраст, лет
-                  <input
-                    aria-label="Возраст посетителя"
-                    name="age"
-                    type="number"
-                    min="0"
-                    max="120"
-                    placeholder="Любой"
-                    value={draft.age}
-                    onChange={(e) => field('age', e.target.value)}
-                  />
-                </label>
-              </div>
-              {filterError && (
-                <p role="alert" className="filter-error">
-                  {filterError}
-                </p>
-              )}
-              <div className="filter-form-actions">
-                <span>Фильтры применяются к журналу посещений</span>
-                <Button type="button" variant="ghost" onClick={resetFilters}>
-                  Сбросить
-                </Button>
-                <Button type="submit">Показать</Button>
-              </div>
-            </form>
+                    Сбросить
+                  </Button>
+                  <Button type="submit">Показать</Button>
+                </div>
+              </form>
+            </Modal>
           )}
           <div className="visitor-table-controls">
             <label>
@@ -324,7 +343,12 @@ export function AdminOverview({
           </div>
           {filtered.length ? (
             <>
-              <div className="visitor-table-scroll">
+              <div
+                className="visitor-table-scroll"
+                role="region"
+                aria-label="Журнал посетителей"
+                tabIndex={0}
+              >
                 <table className="visitor-table">
                   <thead>
                     <tr>
@@ -441,6 +465,6 @@ export function AdminOverview({
           </div>
         </section>
       </div>
-    </>
+    </div>
   );
 }

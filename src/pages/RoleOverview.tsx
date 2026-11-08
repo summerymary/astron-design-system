@@ -25,7 +25,7 @@ export function RoleOverview({ user }: { user: DemoUser }) {
           subtitle={home.itemsCaption}
           action={<span className="count-badge">{home.items.length}</span>}
         />
-        <div>
+        <div className="home-records" role="region" aria-label={home.itemsTitle} tabIndex={0}>
           {home.items.map((item) => (
             <div className="role-item" key={item.id}>
               <span className="role-item-time">{item.time}</span>

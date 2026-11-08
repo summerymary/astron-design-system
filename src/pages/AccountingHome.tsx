@@ -17,10 +17,9 @@ export function AccountingHome({ navigate, clubName }: { navigate: Navigate; clu
   );
   const totals = cashTotals(rows);
   return (
-    <div className="ws-stack">
+    <div className="ws-stack accounting-home">
       <p className="ws-muted">
-        {prettyDate(TODAY)} · {club}. Кассовые операции, продажи и расчёты на демонстрационных
-        данных.
+        {prettyDate(TODAY)} · {club}
       </p>
       <Stats
         items={[
@@ -32,30 +31,35 @@ export function AccountingHome({ navigate, clubName }: { navigate: Navigate; clu
       <div className="crm-home-links">
         <button onClick={() => navigate('cash')}>
           <strong>Касса и операции</strong>
-          <span>Журнал, внесение и снятие наличных, демосмена ККМ и терминал.</span>
+          <span>Журнал, наличные, ККМ и терминал.</span>
         </button>
         <button onClick={() => navigate('statistics')}>
           <strong>Финансовые отчёты</strong>
-          <span>Продажи, способы оплаты и клубы за выбранный период.</span>
+          <span>Продажи и способы оплаты по клубам.</span>
         </button>
         <button onClick={() => navigate('services')}>
           <strong>Оформить продажу</strong>
-          <span>Клиент, покупка, скидка и способ оплаты.</span>
+          <span>Клиент, покупка и оплата.</span>
         </button>
         <button onClick={() => navigate('payroll')}>
           <strong>Расчёт зарплаты</strong>
-          <span>Рабочие дни, проверка часов и демонстрационные начисления.</span>
+          <span>Смены, часы и начисления.</span>
         </button>
       </div>
       <SectionLinks ids={['inventory', 'memberships']} navigate={navigate} />
-      <section className="panel ws-panel">
+      <section className="panel ws-panel accounting-recent">
         <div className="ws-panel-heading">
           <h2>Последние операции</h2>
           <Button variant="ghost" onClick={() => navigate('cash')}>
             Весь журнал
           </Button>
         </div>
-        <div className="ws-panel-body ws-stack">
+        <div
+          className="ws-panel-body ws-stack home-records"
+          role="region"
+          aria-label="Последние кассовые операции"
+          tabIndex={0}
+        >
           {rows.slice(0, 5).map((row) => {
             const flow = cashFlow(row);
             return (

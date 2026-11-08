@@ -879,31 +879,33 @@ export function BarWorkspace({
             <h2>Текущий заказ</h2>
           </div>
           <div className="ws-panel-body ws-stack">
-            {!lines.length && <Empty title="Заказ пуст" text="Выберите товар в каталоге." />}
-            {lines.map(({ product, quantity }) => (
-              <div className="ws-cart-line" key={product.id}>
-                <strong>
-                  {product.name}
-                  <small>{money(Number(product.price) * quantity)}</small>
-                </strong>
-                <div className="ws-quantity">
-                  <button
-                    aria-label={`Уменьшить: ${product.name}`}
-                    onClick={() => setCart({ ...cart, [product.id]: quantity - 1 })}
-                  >
-                    −
-                  </button>
-                  <span>{quantity}</span>
-                  <button
-                    aria-label={`Увеличить: ${product.name}`}
-                    disabled={quantity >= Number(product.stock)}
-                    onClick={() => setCart({ ...cart, [product.id]: quantity + 1 })}
-                  >
-                    +
-                  </button>
+            <div className="ws-cart-items" role="region" aria-label="Товары в заказе" tabIndex={0}>
+              {!lines.length && <Empty title="Заказ пуст" text="Выберите товар в каталоге." />}
+              {lines.map(({ product, quantity }) => (
+                <div className="ws-cart-line" key={product.id}>
+                  <strong>
+                    {product.name}
+                    <small>{money(Number(product.price) * quantity)}</small>
+                  </strong>
+                  <div className="ws-quantity">
+                    <button
+                      aria-label={`Уменьшить: ${product.name}`}
+                      onClick={() => setCart({ ...cart, [product.id]: quantity - 1 })}
+                    >
+                      −
+                    </button>
+                    <span>{quantity}</span>
+                    <button
+                      aria-label={`Увеличить: ${product.name}`}
+                      disabled={quantity >= Number(product.stock)}
+                      onClick={() => setCart({ ...cart, [product.id]: quantity + 1 })}
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
             <label className="form-field">
               <span>Оплата</span>
               <Select value={method} onChange={(e) => setMethod(e.target.value)}>

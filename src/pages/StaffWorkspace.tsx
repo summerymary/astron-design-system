@@ -231,7 +231,7 @@ export function TrainerHome({
     .filter((e) => e.trainer === user.name && e.day === TODAY && e.status !== 'Отменено')
     .sort((a, b) => a.time.localeCompare(b.time));
   return (
-    <div className="ws-stack staff-workspace">
+    <div className="ws-stack staff-workspace trainer-home">
       <section className="staff-actions" aria-label="Действия тренера">
         <div className="ws-actions">
           <Button
@@ -272,7 +272,12 @@ export function TrainerHome({
             <ArrowRight size={15} />
           </Button>
         </div>
-        <div className="staff-session-list">
+        <div
+          className="staff-session-list home-records"
+          role="region"
+          aria-label="Ближайшие занятия тренера"
+          tabIndex={0}
+        >
           {sessions.slice(0, 5).map((event) => (
             <button key={event.id} onClick={() => navigate('schedule')}>
               <time>{eventTime(event)}</time>
@@ -642,7 +647,7 @@ export function BartenderHome({ clubName, navigate }: { clubName: string; naviga
     (r) => r.category === 'Бар' && r.club === club && r.date === TODAY,
   );
   return (
-    <div className="ws-stack staff-workspace">
+    <div className="ws-stack staff-workspace bartender-home">
       <Stats
         items={[
           {
