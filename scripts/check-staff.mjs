@@ -25,6 +25,22 @@ const data = createWorkspaceData();
 const trainer = { id: 'user-trainer', name: 'Алина Белова', role: 'trainer', clubIds: ['central'] };
 const admin = { id: 'user-admin', name: 'Александра Крылова', role: 'administrator' };
 const bartender = { id: 'user-bartender', name: 'Никита Романов', role: 'bartender' };
+for (const section of ['crm', 'leads', 'pipelines', 'segments', 'retention', 'statistics'])
+  assert.ok(canOpenModule('marketer', section), `Marketing: ${section}`);
+for (const section of [
+  'cash',
+  'services',
+  'products',
+  'statistics',
+  'payroll',
+  'inventory',
+  'memberships',
+])
+  assert.ok(canOpenModule('accountant', section), `Accounting: ${section}`);
+for (const section of ['cash', 'payroll', 'services', 'rbac'])
+  assert.equal(canOpenModule('marketer', section), false);
+for (const section of ['crm', 'trainer-clients', 'schedule', 'bar', 'rbac', 'registration'])
+  assert.equal(canOpenModule('accountant', section), false);
 assert.ok(canOpenModule('trainer', 'schedule'));
 assert.ok(canOpenModule('trainer', 'trainer-clients'));
 for (const section of [
@@ -52,6 +68,12 @@ for (const section of [
 assert.equal(canOpenModule('administrator', 'collagen'), false);
 assert.ok(canOpenModule('administrator', 'crm'));
 const managerSections = managementNavigationGroups.flatMap((group) => group.items);
+assert.equal(managerSections.includes('trainer-clients'), false);
+assert.equal(
+  managerSections.includes('statistics'),
+  false,
+  'Statistics is a separate sidebar item',
+);
 const omitted = ['members', 'bar', 'bar-catalog', 'bar-sales', 'bar-categories', 'bar-collections'];
 assert.ok(
   managerSections.length <= 18,
@@ -80,6 +102,11 @@ for (const role of managementRoles) {
   for (const section of managerSections)
     assert.ok(canOpenModule(role, section), `${role}: ${section}`);
   assert.ok(canOpenModule(role, 'members'));
+  assert.equal(
+    canOpenModule(role, 'trainer-clients'),
+    false,
+    'Only trainers see their own personal clients',
+  );
   assert.equal(canOpenModule(role, 'collagen'), false);
 }
 for (const role of ['administrator', 'trainer', 'bartender', 'marketer'])

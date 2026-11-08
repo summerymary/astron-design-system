@@ -13,14 +13,27 @@ const rules = await load('../src/lib/schedule.ts');
 const { createWorkspaceData } = await load('../src/data/workspace.ts');
 const data = createWorkspaceData();
 const events = data.events;
-const busyDay = events.filter((e) => e.day === '2026-11-06' && e.room === 'Большой зал');
-assert.equal(busyDay.length, 18, 'Busy fixture must have 18 classes in one room on one day');
+const displayedDay = events.filter((e) => e.day === '2026-11-06' && e.room === 'Большой зал');
+assert.equal(displayedDay.length, 11);
+assert.equal(
+  events.filter((e) => e.day === '2026-11-06' && e.club === 'Центральный').length,
+  14,
+  'Default day keeps approximately 65% of the former 21 classes',
+);
+// Capacity is still checked against a separate dense day, not the default demo data.
+const busyDay = Array.from({ length: 18 }, (_, index) => ({
+  ...displayedDay[0],
+  id: `stress-${index}`,
+  time: rules.clock(360 + index * 55),
+  trainer: index % 2 ? 'Максим Ветров' : 'Алина Белова',
+}));
+for (const event of busyDay) assert.equal(rules.validateEvent(event, busyDay, data.rooms), null);
 for (const event of events)
   assert.equal(rules.validateEvent(event, events, data.rooms), null, event.name);
 assert.equal(rules.layoutEvents(busyDay).length, 18, 'No classes may be collapsed or hidden');
 assert.ok(rules.layoutEvents(busyDay).every((e) => e.lanes === 1));
 
-const original = { ...busyDay[0], attendees: '1001,1002' };
+const original = { ...displayedDay[0], attendees: '1001,1002' };
 const before = structuredClone(original);
 const target = { day: '2026-11-07', time: '08:00', room: 'Сайкл-студия', club: 'Центральный' };
 const moved = rules.moveEvent(original, target, data.rooms);
@@ -155,7 +168,7 @@ const free = rules.nextFreeTime(
   50,
   'Алина Белова',
 );
-assert.equal(free, '22:25');
+assert.equal(free, '07:45');
 assert.equal(rules.validateEvent({ ...original, time: free }, events, data.rooms), null);
 console.log(
   'Schedule checks passed: 18/day, overlaps, moves, capacities, snapping, dates and full template autofill.',

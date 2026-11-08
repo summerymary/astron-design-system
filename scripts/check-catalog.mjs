@@ -66,8 +66,6 @@ assert.equal(
 assert.equal(directorySnippet('А · Б · В · Г', 'нет'), 'А · Б · В…');
 
 const data = createWorkspaceData();
-assert.equal(data.plans.filter((plan) => !plan.corporate && !plan.saleSection).length, 5);
-assert.equal(new Set(data.plans.map((plan) => plan.kindId)).size, 5);
 for (const kind of membershipKinds) {
   const plan = data.plans.find((plan) => plan.kindId === kind.id);
   assert.ok(plan, `Missing ${kind.id} example`);
@@ -91,9 +89,11 @@ assert.equal(getMembershipKind('Прокат полотенца'), undefined);
 assert.equal(getMembershipKind('Тренажерный зал · 1 месяц').id, 'gym');
 assert.equal(membershipKinds.find((kind) => kind.id === 'guest').background, 'transparent');
 console.log(
-  'Catalog checks passed: word search, record isolation, ё/е, five membership types, valid demo terms and readable category colours.',
+  'Catalog checks passed: word search, record isolation, ё/е, valid demo terms and readable colour groups.',
 );
-const { saleCatalog, searchSaleCatalog, saleSections } = await load('../src/lib/sale-catalog.ts');
+const { saleCatalog, searchSaleCatalog, saleSections, planSaleSection } = await load(
+  '../src/lib/sale-catalog.ts',
+);
 const original = structuredClone(data);
 const catalog = saleCatalog(data);
 assert.equal(saleSections.length, 5);
@@ -126,6 +126,37 @@ assert.equal(
   false,
 );
 for (const plan of data.plans) assert.equal(validatePlan(plan, true), null);
+const customPlan = {
+  ...data.plans[0],
+  id: 'custom-unlimited-type',
+  name: 'Плавание · квартал',
+  kind: 'Бассейн и аквааэробика',
+  saleSection: 'corporate',
+  corporate: 'Нет',
+  kindId: 'group',
+};
+assert.equal(
+  validatePlan(customPlan, true),
+  null,
+  'Arbitrary tariff names and purposes are supported',
+);
+assert.equal(planSaleSection(customPlan), 'corporate');
+assert.equal(
+  planSaleSection({ ...customPlan, kindId: 'personal' }),
+  'corporate',
+  'Colour does not change catalog section',
+);
+assert.equal(
+  planSaleSection({ ...customPlan, saleSection: 'memberships', corporate: 'Да' }),
+  'memberships',
+);
+assert.equal(planSaleSection({ ...customPlan, saleSection: 'exceptions' }), 'exceptions');
+assert.equal(
+  saleCatalog({ ...data, plans: [...data.plans, customPlan] }).filter(
+    (entry) => entry.sectionId === 'corporate',
+  ).length,
+  2,
+);
 assert.deepEqual(data, original, 'Catalog browsing and search must not change source records');
 console.log(
   'Sale catalog checks passed: section isolation, name search, published/active records and bar exclusion.',
