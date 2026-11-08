@@ -615,3 +615,162 @@ button.membership-kind-card {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* The catalog uses the same business sections as checkout; colours fill the entire tile. */
+.catalog-section-card.section-memberships {
+  --section-bg: #edf0f3;
+  --section-ink: #465462;
+  --section-line: #cdd4dc;
+}
+.catalog-section-card.section-personal {
+  --section-bg: #f8eeee;
+  --section-ink: #914b50;
+  --section-line: #e8cfd1;
+}
+.catalog-section-card.section-corporate {
+  --section-bg: #e8f0ff;
+  --section-ink: #204da8;
+  --section-line: #b8cdf3;
+}
+.catalog-section-card.section-exceptions {
+  --section-bg: #fff2e5;
+  --section-ink: #8a450d;
+  --section-line: #eac5a2;
+}
+.catalog-section-card.section-goods-services {
+  --section-bg: #f5f4ed;
+  --section-ink: #606a5c;
+  --section-line: #ccd2c8;
+}
+.sale-section-link.catalog-section-card {
+  background: var(--section-bg);
+  color: var(--section-ink);
+  border-color: var(--section-line);
+}
+.catalog-section-card :is(small, b, svg) {
+  color: inherit;
+}
+.sale-section-link.catalog-section-card:hover {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  background: var(--section-bg);
+}
+.membership-kind-card > p,
+.app-shell .membership-kind-card > p {
+  color: inherit;
+}
+.membership-section-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.membership-section-grid .catalog-section-card {
+  min-height: 112px;
+}
+.membership-workspace {
+  --layout-section-gap: 16px;
+}
+.membership-category-toolbar {
+  align-items: end;
+  gap: 12px;
+}
+.membership-category-toolbar .form-field {
+  flex: 1;
+  min-width: 180px;
+}
+.membership-category-toolbar .select-trigger {
+  width: 100%;
+}
+.membership-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 228px), 1fr));
+  gap: 20px 16px;
+}
+.membership-catalog-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  color: var(--color-ink);
+  cursor: pointer;
+  border-radius: 12px;
+}
+.membership-catalog-card:hover .membership-plastic {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.membership-catalog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+  color: var(--color-muted);
+  padding: 0 2px;
+}
+.membership-service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr));
+  gap: 12px;
+}
+.membership-service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-surface-subtle);
+}
+@container workspace (max-width: 700px) {
+  .membership-section-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .membership-section-grid .catalog-section-card {
+    min-height: 96px;
+  }
+}
+.membership-navigation-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+.membership-navigation-row .ws-search {
+  flex: 1 1 240px;
+  width: 100%;
+  max-width: none;
+}
+.app-shell .membership-workspace .ws-panel-heading,
+.app-shell .membership-workspace .ws-panel-body {
+  padding: 16px 20px;
+}
+.app-shell .membership-workspace .ws-panel-heading h2 {
+  font-size: 18px;
+}
+.membership-workspace .ws-tabs > button {
+  padding: 10px 12px;
+  min-height: 44px;
+}
+.membership-category-filter.ws-disclosure {
+  margin: 0 20px;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+}
+.membership-category-filter.ws-disclosure > summary {
+  min-height: 44px;
+  padding-block: 10px;
+  padding-left: 0;
+}
+.membership-category-filter .membership-category-toolbar {
+  padding: 8px 0 16px;
+  border: 0;
+}

@@ -1,0 +1,204 @@
+.crm-section-intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.crm-section-intro > p {
+  flex: 1 1 420px;
+  margin: 0;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+.crm-scenario-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  padding: 0 24px 16px;
+  color: var(--color-muted);
+}
+.crm-caption {
+  margin: 6px 0 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.crm-step-flow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+  gap: 12px;
+}
+.crm-step-flow > li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+.crm-step-number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: 16px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.crm-step-flow h4 {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.crm-step-flow p {
+  color: var(--color-muted);
+  line-height: 1.55;
+  margin: 0;
+  font-size: 15px;
+}
+.crm-step-flow .button {
+  margin-top: auto;
+  align-self: stretch;
+  justify-content: space-between;
+  padding-inline: 0;
+  min-height: 44px;
+  color: var(--color-accent);
+}
+.crm-exception-states > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.crm-exception-states article {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-line);
+}
+.crm-exception-states article > div {
+  flex: 1 1 180px;
+}
+.crm-exception-states article p {
+  margin: 6px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+.crm-scenario-form {
+  padding: 20px;
+}
+.crm-stage-editor {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.crm-stage-editor > li {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.crm-stage-editor .form-field {
+  flex: 1 1 150px;
+  min-width: 0;
+}
+.crm-stage-editor input {
+  width: 100%;
+  min-width: 0;
+}
+.crm-stage-controls {
+  display: flex;
+  gap: 2px;
+}
+.crm-stage-controls .icon-button {
+  width: 44px;
+  height: 44px;
+}
+.crm-home-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.crm-home-links > button {
+  padding: 20px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-surface);
+  text-align: left;
+  cursor: pointer;
+  color: var(--color-ink);
+}
+.crm-home-links strong {
+  display: block;
+  font-size: 18px;
+}
+.crm-home-links span {
+  display: block;
+  margin-top: 6px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.crm-home-links > button:hover {
+  border-color: var(--color-accent-line);
+  background: var(--color-accent-soft);
+}
+.crm-lead-explanation {
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-line);
+  line-height: 1.5;
+}
+@container workspace (max-width:700px) {
+  .crm-home-links {
+    grid-template-columns: 1fr;
+  }
+  .crm-stage-controls {
+    margin-left: 38px;
+  }
+  .crm-step-flow {
+    grid-template-columns: 1fr;
+  }
+}
+.crm-scenarios {
+  --layout-section-gap: 16px;
+}
+.crm-scenarios > .ws-search {
+  width: 100%;
+  max-width: none;
+}
+.app-shell .crm-scenario > .ws-panel-heading,
+.app-shell .crm-scenario > .ws-panel-body {
+  padding: 16px 20px;
+}
+.crm-scenario-meta {
+  padding-inline: 20px;
+  padding-bottom: 8px;
+}
+.crm-scenario > .ws-panel-body {
+  --layout-section-gap: 16px;
+}
+.crm-scenario h3 {
+  font-size: 18px;
+}

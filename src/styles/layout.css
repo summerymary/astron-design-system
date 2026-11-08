@@ -740,14 +740,14 @@
 
 /* Facts remain paired with their labels and are grouped by everyday tasks. */
 .app-shell .client-info-groups {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 0 20px;
   padding: 0 24px 28px;
 }
 .app-shell .client-info-groups > .ws-client-overview {
-  flex: 1 1 100%;
+  grid-column: 1 / -1;
   width: 100%;
 }
 .app-shell .client-info-summary-footer {
@@ -756,19 +756,24 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--color-line);
+  padding: 12px 0 0;
 }
 .app-shell .client-info-card {
-  flex: 1 1 calc(50% - 12px);
-  min-width: min(100%, 340px);
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 6;
+  min-width: 0;
+  margin-top: 20px;
   border: 1px solid var(--color-line);
   border-radius: 14px;
   overflow: hidden;
 }
+.app-shell .client-info-card:nth-last-child(-n + 2) {
+  grid-row: span 5;
+}
 .app-shell .client-info-card h3 {
   margin: 0;
-  padding: 18px 20px;
+  padding: 14px 18px;
   background: var(--color-surface-subtle);
   border-bottom: 1px solid var(--color-line);
   color: var(--color-ink);
@@ -777,13 +782,16 @@
 }
 .app-shell .client-info-card dl {
   margin: 0;
+  display: contents;
 }
 .app-shell .client-info-card dl > div {
   display: grid;
-  grid-template-columns: minmax(110px, 0.9fr) minmax(0, 1.2fr);
-  gap: 20px;
+  grid-template-columns: minmax(110px, 42%) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 16px;
   margin: 0;
-  padding: 16px 20px;
+  padding: 12px 18px;
+  min-height: 52px;
 }
 .app-shell .client-info-card dl > div + div {
   border-top: 1px solid var(--color-divider);
@@ -1083,5 +1091,48 @@
     justify-content: center;
     min-height: 52px;
     padding: 12px;
+  }
+}
+
+.app-shell .management-module-nav > .management-statistics-link {
+  margin-block: 4px 8px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  background: var(--color-surface-subtle);
+  color: var(--color-ink);
+}
+.app-shell .management-module-nav > .management-statistics-link.active {
+  border-color: var(--color-accent-line);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+@container workspace (max-width: 1000px) {
+  .app-shell .client-info-groups {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0;
+  }
+  .app-shell .client-info-card,
+  .app-shell .client-info-card:nth-last-child(-n + 2) {
+    display: block;
+    grid-row: auto;
+  }
+  .app-shell .client-info-card dl {
+    display: block;
+  }
+}
+@media (max-height: 760px) {
+  .app-shell .has-management-menu .management-module-nav {
+    gap: 2px;
+    margin-top: 0;
+  }
+  .app-shell .management-module-nav > .management-statistics-link {
+    margin-block: 0;
+  }
+  .app-shell .has-management-menu .sidebar-navigation {
+    gap: 2px;
+    padding-block: 2px;
+  }
+  .app-shell .has-management-menu .sidebar-navigation > .side-nav:not(.management-module-nav) {
+    gap: 4px;
   }
 }

@@ -138,6 +138,18 @@ h3 {
 .calendar-scale-fit .calendar-event {
   min-height: 22px;
   padding: 1px 8px;
+  display: grid;
+  grid-template-columns: max-content minmax(72px, 1fr) minmax(0, 0.6fr) max-content;
+  gap: 6px;
+  line-height: 18px;
+}
+.calendar-scale-fit .calendar-event time,
+.calendar-scale-fit .calendar-event strong,
+.calendar-scale-fit .calendar-event-trainer,
+.calendar-scale-fit .calendar-places {
+  width: auto;
+  min-width: 0;
+  line-height: 18px;
 }
 .calendar-filters :is(select, .select-trigger):disabled {
   opacity: 1;

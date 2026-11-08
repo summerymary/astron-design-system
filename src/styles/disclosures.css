@@ -182,6 +182,7 @@
   border: 1px solid var(--color-line);
   border-radius: 12px;
   box-shadow: var(--shadow-popup);
+  overflow-y: auto;
 }
 .calendar-context-menu small {
   padding: 10px;
@@ -205,6 +206,22 @@
   background: var(--color-accent-soft);
   outline: 2px solid var(--color-accent-line);
   outline-offset: -2px;
+}
+.calendar-context-menu .calendar-delete-action,
+.calendar-workspace .calendar-delete-action,
+.modal .calendar-delete-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-accent-line);
+}
+.calendar-context-menu .calendar-delete-action {
+  margin-top: 4px;
+}
+.calendar-delete-summary {
+  padding: 20px;
 }
 @media (prefers-reduced-motion: reduce) {
   .ws-disclosure > summary::after {

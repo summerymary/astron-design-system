@@ -137,6 +137,21 @@
   padding: 0 12px;
   white-space: nowrap;
 }
+.app-shell .client-primary-actions .client-sell-button {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-surface);
+}
+.app-shell .client-primary-actions .client-sell-button:hover {
+  border-color: var(--color-accent-hover);
+  color: var(--color-accent-hover);
+  background: var(--color-accent-soft);
+}
+.app-shell .client-primary-actions .client-sell-button:active {
+  border-color: var(--color-accent-pressed);
+  color: var(--color-accent-pressed);
+  background: var(--color-accent-soft-hover);
+}
 .client-more {
   position: relative;
 }
