@@ -13,6 +13,7 @@ import {
   UserRound,
   CupSoda,
   LockKeyhole,
+  ShoppingBag,
   X,
 } from 'lucide-react';
 import { demoClubs } from '../data/roles';
@@ -49,7 +50,8 @@ export function AdminHeader({
           className="workstation-button"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
-          aria-label="Рабочая зона"
+          aria-label={`Рабочая зона: ${club.name}, ${workplace.name}`}
+          title={`${club.name} · ${workplace.name}`}
         >
           <ClubLogo brand={club.brand} variant="compact" decorative />
           <span>
@@ -106,6 +108,10 @@ export function AdminHeader({
         <button className="header-bar-action" onClick={() => onAction('bar')}>
           <CupSoda size={16} />
           <span>Бар</span>
+        </button>
+        <button className="header-sale-action" onClick={() => onAction('services')}>
+          <ShoppingBag size={16} />
+          <span>Продать</span>
         </button>
       </div>
       <div className="admin-header-indicators">

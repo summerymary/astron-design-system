@@ -1,3 +1,4 @@
+import { Select } from './Select';
 import { useCallback, useId, useRef, useState } from 'react';
 import type { FormEvent, ReactNode } from 'react';
 import {
@@ -229,7 +230,7 @@ export function FieldControl({
         {field.required && <em> *</em>}
       </span>
       {field.options ? (
-        <select
+        <Select
           id={id}
           required={field.required}
           value={value}
@@ -239,7 +240,7 @@ export function FieldControl({
           {field.options.map((option) => (
             <option key={option}>{option}</option>
           ))}
-        </select>
+        </Select>
       ) : field.type === 'textarea' ? (
         <textarea
           id={id}
@@ -585,7 +586,7 @@ export function ResourcePage({
           {!!statuses.length && (
             <label className="ws-inline-field">
               <span className="sr-only">Статус записей</span>
-              <select
+              <Select
                 aria-label="Статус записей"
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
@@ -594,11 +595,11 @@ export function ResourcePage({
                 {statuses.map((value) => (
                   <option key={value}>{value}</option>
                 ))}
-              </select>
+              </Select>
             </label>
           )}
           {!!clubs.length && (
-            <select
+            <Select
               aria-label="Клуб записей"
               value={club}
               onChange={(e) => setClub(e.target.value)}
@@ -609,7 +610,7 @@ export function ResourcePage({
                 .map((value) => (
                   <option key={value}>{value}</option>
                 ))}
-            </select>
+            </Select>
           )}
         </div>
         <DataTable

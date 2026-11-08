@@ -1,4 +1,5 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { Button, Modal } from './ui';
 import { createPortal } from 'react-dom';
 import {
   CalendarDays,
@@ -25,11 +26,19 @@ export function AdminQuickLinks({
   persistent = false,
   activeId,
   pageKey,
+  mobileMode = false,
+  mobileOpen = false,
+  onMobileOpenChange,
+  onAllSections,
 }: {
   onAction: (id: AdminSectionId) => void;
   persistent?: boolean;
   activeId?: AdminSectionId;
   pageKey?: string;
+  mobileMode?: boolean;
+  mobileOpen?: boolean;
+  onMobileOpenChange?: (open: boolean) => void;
+  onAllSections?: () => void;
 }) {
   const [shortcutsExpanded, setShortcutsExpanded] = useState(false);
   const [smallViewport, setSmallViewport] = useState(
@@ -44,6 +53,46 @@ export function AdminQuickLinks({
     return () => query.removeEventListener('change', update);
   }, []);
   useEffect(() => setShortcutsExpanded(false), [pageKey]);
+  const closeMobile = useCallback(() => onMobileOpenChange?.(false), [onMobileOpenChange]);
+  if (persistent && (mobileMode || smallViewport)) {
+    if (!mobileOpen) return null;
+    return createPortal(
+      <Modal title="Быстрые действия" onClose={closeMobile}>
+        <nav className="mobile-quick-actions" aria-label="Быстрые переходы администратора">
+          {shortcuts.map(({ id, icon: Icon }) => {
+            const section = adminSections.find((item) => item.id === id)!;
+            return (
+              <button
+                key={id}
+                aria-current={activeId === id ? 'page' : undefined}
+                onClick={() => {
+                  closeMobile();
+                  onAction(id);
+                }}
+              >
+                <Icon size={20} aria-hidden="true" />
+                <span>{section.label}</span>
+                <ChevronRight size={16} aria-hidden="true" />
+              </button>
+            );
+          })}
+        </nav>
+        {onAllSections && (
+          <Button
+            variant="secondary"
+            className="mobile-all-sections"
+            onClick={() => {
+              closeMobile();
+              onAllSections();
+            }}
+          >
+            Все разделы
+          </Button>
+        )}
+      </Modal>,
+      document.body,
+    );
+  }
   const panel = (
     <>
       {persistent && shortcutsExpanded && (

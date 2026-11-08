@@ -164,7 +164,10 @@ export function Modal({
         el.querySelectorAll<HTMLElement>(
           'button, input, select, textarea, a[href], [tabindex="0"]',
         ),
-      ).filter((n) => !n.hasAttribute('disabled'));
+      ).filter(
+        (n) =>
+          !n.hasAttribute('disabled') && n.getClientRects().length > 0 && !n.closest('[inert]'),
+      );
     focusable()[0]?.focus();
     const handle = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
