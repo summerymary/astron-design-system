@@ -1,3 +1,4 @@
+import { Select } from './components/Select';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import {
@@ -171,6 +172,8 @@ export function App() {
   const [toast, setToast] = useState('');
   const [mobileStateOpen, setMobileStateOpen] = useState(false);
   const [sectionsOpen, setSectionsOpen] = useState(false);
+  const [mobileQuickOpen, setMobileQuickOpen] = useState(false);
+  useEffect(() => setMobileQuickOpen(false), [page, role, adminSection, device]);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(options.role === 'administrator');
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const contentRef = useRef<HTMLElement>(null);
@@ -499,7 +502,7 @@ export function App() {
           </a>
           <label className="role-select role-select-desktop">
             <span>Роль</span>
-            <select
+            <Select
               aria-label="Роль в прототипе"
               value={role}
               onChange={(e) => changeRole(e.target.value as UserRole)}
@@ -509,12 +512,12 @@ export function App() {
                   {r.label}
                 </option>
               ))}
-            </select>
+            </Select>
           </label>
           <label className="scenario-select">
             <span className="scenario-label">Состояние</span>
             <span className={`scenario-dot scenario-${scenario}`} />
-            <select
+            <Select
               aria-label="Состояние экрана"
               value={scenario}
               onChange={(e) => setScenario(e.target.value as Scenario)}
@@ -524,8 +527,7 @@ export function App() {
                   {s.label}
                 </option>
               ))}
-            </select>
-            <ChevronDown size={13} />
+            </Select>
           </label>
           <button
             className="icon-button reset-button"
@@ -548,7 +550,7 @@ export function App() {
       <div className="workspace-role-mobile">
         <label className="role-select">
           <span>Смотреть как</span>
-          <select
+          <Select
             aria-label="Роль в прототипе на телефоне"
             value={role}
             onChange={(e) => changeRole(e.target.value as UserRole)}
@@ -558,7 +560,7 @@ export function App() {
                 {r.label}
               </option>
             ))}
-          </select>
+          </Select>
         </label>
         <span>Демопользователь</span>
       </div>
@@ -566,7 +568,7 @@ export function App() {
         <div className="mobile-state-menu">
           <label>
             Состояние экрана
-            <select
+            <Select
               aria-label="Состояние на телефоне"
               value={scenario}
               onChange={(e) => setScenario(e.target.value as Scenario)}
@@ -576,7 +578,7 @@ export function App() {
                   {s.label}
                 </option>
               ))}
-            </select>
+            </Select>
           </label>
           <Button
             variant="ghost"
@@ -822,7 +824,9 @@ export function App() {
                   }}
                   members={members}
                   onMember={openMember}
-                  onAction={openAdminAction}
+                  onAction={(id) =>
+                    openAdminAction(id, page === 'client-profile' ? selectedMember : undefined)
+                  }
                   name={currentUser.name}
                   onLock={() => {
                     rememberScreenLock(true);
@@ -904,6 +908,10 @@ export function App() {
             >
               <AdminPageLayout
                 enabled={role === 'administrator'}
+                mobileMode={device === 'mobile'}
+                mobileOpen={mobileQuickOpen}
+                onMobileOpenChange={setMobileQuickOpen}
+                onAllSections={() => setSectionsOpen(true)}
                 pageKey={`${page}-${adminSection}-${selectedMemberId}`}
                 activeId={
                   page === 'client-profile' || page === 'members'
@@ -1116,9 +1124,15 @@ export function App() {
                     <CalendarDays size={20} />
                     <span>Расписание</span>
                   </button>
-                  <button aria-expanded={sectionsOpen} onClick={() => setSectionsOpen(true)}>
+                  <button
+                    aria-expanded={role === 'administrator' ? mobileQuickOpen : sectionsOpen}
+                    aria-haspopup="dialog"
+                    onClick={() =>
+                      role === 'administrator' ? setMobileQuickOpen(true) : setSectionsOpen(true)
+                    }
+                  >
                     <Menu size={20} />
-                    <span>Все разделы</span>
+                    <span>{role === 'administrator' ? 'Действия' : 'Все разделы'}</span>
                   </button>
                 </>
               )}
@@ -1130,7 +1144,7 @@ export function App() {
         )}
       </div>
       {modal === 'add' && (
-        <Modal title="Новый клиент" subtitle="Первый шаг к новым достижениям." onClose={closeModal}>
+        <Modal title="Новый клиент" onClose={closeModal}>
           <form onSubmit={addMember} className="member-form">
             <label className="form-field">
               <span>
@@ -1167,11 +1181,11 @@ export function App() {
             </label>
             <label className="form-field">
               <span>Абонемент</span>
-              <select name="plan">
+              <Select name="plan">
                 {membershipKinds.map((kind) => (
                   <option key={kind.id}>{kind.name}</option>
                 ))}
-              </select>
+              </Select>
             </label>
             <p className="form-note">Данные сохранятся в памяти до обновления страницы.</p>
             <div className="modal-actions">
