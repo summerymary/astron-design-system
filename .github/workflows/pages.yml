@@ -32,6 +32,8 @@ jobs:
       - run: pnpm test:catalog
       - run: pnpm test:registration
       - run: pnpm test:checkout
+      - run: pnpm test:cash
+      - run: pnpm test:crm
       - run: pnpm build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
