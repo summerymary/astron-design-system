@@ -1,3 +1,4 @@
+import { Select } from '../components/Select';
 import { useCallback, useState } from 'react';
 import { ArrowLeft, ArrowRight, ChevronRight, CupSoda, Plus } from 'lucide-react';
 import { Button, Modal } from '../components/ui';
@@ -566,26 +567,26 @@ export function StatisticsWorkspace() {
           </label>
           <label className="form-field">
             <span>Клуб</span>
-            <select value={club} onChange={(e) => setClub(e.target.value)}>
+            <Select value={club} onChange={(e) => setClub(e.target.value)}>
               {['Все клубы', 'Центральный', 'Парк', 'Речной'].map((value) => (
                 <option key={value}>{value}</option>
               ))}
-            </select>
+            </Select>
           </label>
           <label className="form-field">
             <span>Сравнение</span>
-            <select value={compare} onChange={(e) => setCompare(e.target.value)}>
+            <Select value={compare} onChange={(e) => setCompare(e.target.value)}>
               <option>Без сравнения</option>
               <option>Предыдущий период</option>
-            </select>
+            </Select>
           </label>
           <label className="form-field">
             <span>Детализация</span>
-            <select value={group} onChange={(e) => setGroup(e.target.value)}>
+            <Select value={group} onChange={(e) => setGroup(e.target.value)}>
               <option>По дням</option>
               <option>По клубам</option>
               <option>По категориям</option>
-            </select>
+            </Select>
           </label>
         </div>
       </section>
@@ -792,10 +793,10 @@ export function BarWorkspace({
             ))}
             <label className="form-field">
               <span>Оплата</span>
-              <select value={method} onChange={(e) => setMethod(e.target.value)}>
+              <Select value={method} onChange={(e) => setMethod(e.target.value)}>
                 <option>Карта</option>
                 <option>Наличные</option>
-              </select>
+              </Select>
             </label>
             <div className="ws-total">
               <span>Итого</span>

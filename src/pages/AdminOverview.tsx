@@ -1,3 +1,4 @@
+import { Select } from '../components/Select';
 import { useMemo, useState } from 'react';
 import { MembershipTag } from '../components/MembershipTag';
 import { ArrowDownWideNarrow, ArrowUpRight, CreditCard, ListFilter, Search, X } from 'lucide-react';
@@ -229,7 +230,7 @@ export function AdminOverview({
               <div className="filter-details-group">
                 <label>
                   Клуб
-                  <select
+                  <Select
                     aria-label="Клуб посетителей"
                     name="clubId"
                     value={draft.clubId}
@@ -241,11 +242,11 @@ export function AdminOverview({
                         {c.name}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </label>
                 <label>
                   Посещение
-                  <select
+                  <Select
                     aria-label="Тип посещения"
                     name="kind"
                     value={draft.kind}
@@ -257,11 +258,11 @@ export function AdminOverview({
                         {label}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </label>
                 <label>
                   Пол
-                  <select
+                  <Select
                     aria-label="Пол посетителей"
                     name="gender"
                     value={draft.gender}
@@ -270,7 +271,7 @@ export function AdminOverview({
                     <option value="all">Любой</option>
                     <option value="male">Мужчины</option>
                     <option value="female">Женщины</option>
-                  </select>
+                  </Select>
                 </label>
                 <label>
                   Возраст, лет
@@ -311,14 +312,14 @@ export function AdminOverview({
             </label>
             <label className="visitor-sort">
               <ArrowDownWideNarrow size={13} />
-              <select
+              <Select
                 aria-label="Сортировка посетителей"
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
               >
                 <option value="time">Сначала новые</option>
                 <option value="name">По фамилии</option>
-              </select>
+              </Select>
             </label>
           </div>
           {filtered.length ? (

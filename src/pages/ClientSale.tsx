@@ -1,3 +1,4 @@
+import { Select } from '../components/Select';
 import { useCallback, useEffect, useState } from 'react';
 import {
   ArrowLeft,
@@ -421,7 +422,7 @@ export function SaleWorkspace({
                 )}
                 <label className="form-field">
                   <span>Применить скидку</span>
-                  <select
+                  <Select
                     value={discount}
                     disabled={done}
                     onChange={(e) => {
@@ -433,7 +434,7 @@ export function SaleWorkspace({
                     <option value="5">5% · пример</option>
                     <option value="10">10% · пример</option>
                     <option value="15">15% · пример</option>
-                  </select>
+                  </Select>
                 </label>
               </div>
               <label className="ws-checkbox">
@@ -531,7 +532,7 @@ export function SaleWorkspace({
                 (method === 'Составная оплата' && parts.gift > 0)) && (
                 <label className="form-field">
                   <span>Подарочная карта</span>
-                  <select
+                  <Select
                     value={giftId}
                     disabled={done}
                     onChange={(e) => {
@@ -547,7 +548,7 @@ export function SaleWorkspace({
                           {row.name} · остаток {money(row.balance)}
                         </option>
                       ))}
-                  </select>
+                  </Select>
                 </label>
               )}
               {(method === 'В кредит' || (method === 'Составная оплата' && parts.credit > 0)) && (

@@ -1,3 +1,5 @@
+import { Select } from '../components/Select';
+import { quantityLabel } from '../data/membership-kinds';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from 'react';
 import { createPortal } from 'react-dom';
@@ -626,7 +628,7 @@ export function ScheduleWorkspace({
         >
           <label>
             <span className="sr-only">Клуб расписания</span>
-            <select
+            <Select
               value={club}
               disabled={isTrainer}
               onChange={(e) => {
@@ -640,11 +642,11 @@ export function ScheduleWorkspace({
               <option>Центральный</option>
               <option>Парк</option>
               <option>Речной</option>
-            </select>
+            </Select>
           </label>
           <label>
             <span className="sr-only">Зал расписания</span>
-            <select
+            <Select
               value={room}
               onChange={(e) => {
                 setRoom(e.target.value);
@@ -655,11 +657,11 @@ export function ScheduleWorkspace({
               {activeRooms.map((r) => (
                 <option key={r.id}>{r.name}</option>
               ))}
-            </select>
+            </Select>
           </label>
           <label>
             <span className="sr-only">Тренер расписания</span>
-            <select
+            <Select
               value={trainer}
               disabled={isTrainer}
               onChange={(e) => setTrainer(e.target.value)}
@@ -668,11 +670,11 @@ export function ScheduleWorkspace({
               {trainers.map((t) => (
                 <option key={t}>{t}</option>
               ))}
-            </select>
+            </Select>
           </label>
           <label className="calendar-scale">
             <span className="sr-only">Масштаб расписания</span>
-            <select
+            <Select
               value={scale}
               onChange={(e) => {
                 setScale(e.target.value);
@@ -682,7 +684,7 @@ export function ScheduleWorkspace({
               <option>Комфортно</option>
               <option>Весь день</option>
               <option>Крупнее</option>
-            </select>
+            </Select>
           </label>
           <span className="calendar-count">
             Занятий: <b>{events.length}</b>
@@ -695,7 +697,7 @@ export function ScheduleWorkspace({
               <div>
                 <label>
                   Шаг переноса
-                  <select
+                  <Select
                     aria-label="Шаг переноса"
                     value={step}
                     onChange={(e) => setStep(e.target.value)}
@@ -703,7 +705,7 @@ export function ScheduleWorkspace({
                     <option value="5">5 минут</option>
                     <option value="15">15 минут</option>
                     <option value="30">30 минут</option>
-                  </select>
+                  </Select>
                 </label>
                 <Button variant="ghost" onClick={() => setCopying(true)}>
                   <Copy size={14} />
@@ -797,12 +799,12 @@ export function ScheduleWorkspace({
                 <div className="calendar-column-heading" key={column.key}>
                   <b>{column.label}</b>
                   <span>
-                    {
+                    {quantityLabel(
                       events.filter(
                         (e) => e.day === column.day && (!column.room || e.room === column.room),
-                      ).length
-                    }{' '}
-                    занятий
+                      ).length,
+                      'training',
+                    )}
                   </span>
                 </div>
               ))}
@@ -1197,14 +1199,14 @@ export function ScheduleWorkspace({
                       <>
                         <label className="form-field">
                           <span>Клиент для записи</span>
-                          <select value={booking} onChange={(e) => setBooking(e.target.value)}>
+                          <Select value={booking} onChange={(e) => setBooking(e.target.value)}>
                             <option value="">Выберите клиента</option>
                             {members.map((m) => (
                               <option key={m.id} value={m.id}>
                                 {m.name}
                               </option>
                             ))}
-                          </select>
+                          </Select>
                         </label>
                         <Button
                           disabled={
@@ -1393,7 +1395,7 @@ function EventForm({
         {required ? ' *' : ''}
       </span>
       {options ? (
-        <select
+        <Select
           name={key}
           value={draft[key] || ''}
           required={required}
@@ -1403,7 +1405,7 @@ function EventForm({
           {options.map((value) => (
             <option key={value}>{value}</option>
           ))}
-        </select>
+        </Select>
       ) : type === 'textarea' ? (
         <textarea
           name={key}
@@ -1445,7 +1447,7 @@ function EventForm({
       >
         <label className="form-field">
           <span>Шаблон тренировки</span>
-          <select
+          <Select
             value={draft.templateId || ''}
             onChange={(e) => {
               const template = templates.find((t) => t.id === e.target.value);
@@ -1460,7 +1462,7 @@ function EventForm({
                   {t.name}
                 </option>
               ))}
-          </select>
+          </Select>
         </label>
         {field('name', 'Название')}
         <div className="calendar-form-grid">
@@ -1470,7 +1472,7 @@ function EventForm({
           {field('trainer', 'Тренер', 'text', trainers)}
           <label className="form-field">
             <span>Клуб *</span>
-            <select
+            <Select
               name="club"
               value={draft.club}
               onChange={(e) => {
@@ -1488,11 +1490,11 @@ function EventForm({
               <option>Центральный</option>
               <option>Парк</option>
               <option>Речной</option>
-            </select>
+            </Select>
           </label>
           <label className="form-field">
             <span>Зал *</span>
-            <select
+            <Select
               name="room"
               value={draft.room}
               required
@@ -1514,7 +1516,7 @@ function EventForm({
                 .map((r) => (
                   <option key={r.id}>{r.name}</option>
                 ))}
-            </select>
+            </Select>
           </label>
           {field('capacity', 'Количество мест', 'number')}
           {field('color', 'Цвет отметки', 'color')}

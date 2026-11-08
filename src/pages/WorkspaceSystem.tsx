@@ -1,3 +1,4 @@
+import { Select } from '../components/Select';
 import { useCallback, useMemo, useState } from 'react';
 import {
   ArrowRight,
@@ -271,13 +272,13 @@ export function PayrollWorkspace({ navigate }: { navigate: Navigate }) {
             <>
               <label className="form-field">
                 <span>Смена</span>
-                <select value={selected} onChange={(e) => setSelected(e.target.value)}>
+                <Select value={selected} onChange={(e) => setSelected(e.target.value)}>
                   {data.shifts.map((row) => (
                     <option key={row.id} value={row.id}>
                       {row.name} · {prettyDate(row.start)}
                     </option>
                   ))}
-                </select>
+                </Select>
               </label>
               {shift ? (
                 <>
@@ -677,7 +678,7 @@ export function EventLogsWorkspace() {
           onChange={setQuery}
           placeholder="Событие, сотрудник или номер запроса"
         />
-        <select
+        <Select
           aria-label="Раздел журнала"
           value={service}
           onChange={(e) => setService(e.target.value)}
@@ -686,7 +687,7 @@ export function EventLogsWorkspace() {
           {[...new Set(data.logs.map((row) => row.service))].map((value) => (
             <option key={value}>{value}</option>
           ))}
-        </select>
+        </Select>
         <label className="form-field">
           <span>С даты</span>
           <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} />
@@ -755,12 +756,12 @@ export function CamerasWorkspace() {
         Здесь схемы камер, без реального видео и записи людей. Подключение камер не выполняется.
       </Notice>
       <div className="ws-toolbar">
-        <select aria-label="Зона камер" value={zone} onChange={(e) => setZone(e.target.value)}>
+        <Select aria-label="Зона камер" value={zone} onChange={(e) => setZone(e.target.value)}>
           <option>Все зоны</option>
           {cameras.map((value) => (
             <option key={value}>{value}</option>
           ))}
-        </select>
+        </Select>
         <span className="ws-muted">Превью запускается по запросу · звук выключен</span>
       </div>
       <div className="ws-camera-grid">

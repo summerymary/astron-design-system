@@ -1,3 +1,4 @@
+import { Select } from '../components/Select';
 import { useMemo, useState } from 'react';
 import { ArrowDown, ArrowUpRight, Search, SlidersHorizontal, X } from 'lucide-react';
 import type { Member, MemberStatus } from '../types';
@@ -102,7 +103,7 @@ export function Members({
             <SlidersHorizontal size={15} />
             Фильтры{plan !== 'all' && <span className="filter-dot" />}
           </Button>
-          <select
+          <Select
             aria-label="Статус клиента"
             value={clientState}
             onChange={(event) => setClientState(event.target.value)}
@@ -110,17 +111,17 @@ export function Members({
             <option>Активные клиенты</option>
             <option>Все клиенты</option>
             <option>В архиве</option>
-          </select>
+          </Select>
         </div>
         {filtersOpen && (
           <div className="extra-filters">
             <label htmlFor="plan-filter">Абонемент</label>
-            <select id="plan-filter" value={plan} onChange={(e) => setPlan(e.target.value)}>
+            <Select id="plan-filter" value={plan} onChange={(e) => setPlan(e.target.value)}>
               <option value="all">Все абонементы</option>
               {[...new Set(members.map((member) => member.plan))].map((name) => (
                 <option key={name}>{name}</option>
               ))}
-            </select>
+            </Select>
             <Button
               variant="ghost"
               onClick={() => {

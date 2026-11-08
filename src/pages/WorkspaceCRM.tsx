@@ -1,3 +1,4 @@
+import { Select } from '../components/Select';
 import { useCallback, useState } from 'react';
 import { ArrowRight, Check, Plus, Send } from 'lucide-react';
 import { Button } from '../components/ui';
@@ -253,7 +254,7 @@ export function CRMWorkspace({
         />
         <div className="ws-toolbar">
           <SearchBox value={query} onChange={setQuery} placeholder="Имя или телефон" />
-          <select
+          <Select
             aria-label="Воронка заявок"
             value={pipeline}
             onChange={(e) => {
@@ -265,14 +266,14 @@ export function CRMWorkspace({
             {data.pipelines.map((row) => (
               <option key={row.id}>{row.name}</option>
             ))}
-          </select>
-          <select aria-label="Этап заявок" value={stage} onChange={(e) => setStage(e.target.value)}>
+          </Select>
+          <Select aria-label="Этап заявок" value={stage} onChange={(e) => setStage(e.target.value)}>
             <option>Все этапы</option>
             {stages.map((value) => (
               <option key={value}>{value}</option>
             ))}
             <option>Отказ</option>
-          </select>
+          </Select>
         </div>
         <div className="ws-split">
           <div className="ws-master-list">
@@ -424,7 +425,7 @@ function SegmentsWorkspace({ navigate }: { navigate: Navigate }) {
         </div>
         <div className="ws-toolbar">
           <SearchBox value={query} onChange={setQuery} placeholder="Имя или телефон" />
-          <select
+          <Select
             aria-label="Сохранённый сегмент"
             value={segmentId}
             onChange={(e) => setSegmentId(e.target.value)}
@@ -435,7 +436,7 @@ function SegmentsWorkspace({ navigate }: { navigate: Navigate }) {
                 {row.name}
               </option>
             ))}
-          </select>
+          </Select>
           <span>{selected.length} выбрано</span>
         </div>
         <div className="ws-panel-body">
@@ -548,7 +549,7 @@ export function MessagesWorkspace({
         <div className="ws-toolbar">
           <SearchBox value={query} onChange={setQuery} placeholder="Имя клиента" />
           {external && (
-            <select
+            <Select
               aria-label="Канал обращений"
               value={channel}
               onChange={(e) => setChannel(e.target.value)}
@@ -556,7 +557,7 @@ export function MessagesWorkspace({
               {['Все каналы', 'Telegram', 'ВКонтакте', 'WhatsApp'].map((value) => (
                 <option key={value}>{value}</option>
               ))}
-            </select>
+            </Select>
           )}
         </div>
         <div className="ws-split">

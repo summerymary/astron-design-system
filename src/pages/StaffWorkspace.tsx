@@ -1,3 +1,4 @@
+import { Select } from '../components/Select';
 import { useCallback, useRef, useState } from 'react';
 import { ArrowRight, CalendarDays, Edit3, NotebookPen, Plus, CupSoda } from 'lucide-react';
 import { Avatar, Button, Modal } from '../components/ui';
@@ -113,7 +114,7 @@ export function PersonalTrainingForm({
       >
         <label className="form-field">
           <span>Персональный клиент *</span>
-          <select
+          <Select
             name="memberId"
             value={draft.memberId || ''}
             required
@@ -125,7 +126,7 @@ export function PersonalTrainingForm({
                 {member.name}
               </option>
             ))}
-          </select>
+          </Select>
         </label>
         {!clients.length && (
           <Notice tone="warning">За этим тренером пока нет закреплённых клиентов.</Notice>
@@ -169,7 +170,7 @@ export function PersonalTrainingForm({
           </label>
           <label className="form-field">
             <span>Зал *</span>
-            <select
+            <Select
               name="room"
               required
               value={draft.room}
@@ -179,7 +180,7 @@ export function PersonalTrainingForm({
               {rooms.map((room) => (
                 <option key={room.id}>{room.name}</option>
               ))}
-            </select>
+            </Select>
           </label>
         </div>
         <p className="staff-form-context">

@@ -1,3 +1,4 @@
+import { Select } from '../components/Select';
 import { useState } from 'react';
 import {
   ArrowRight,
@@ -426,11 +427,12 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
               </label>
               <label className="form-field">
                 <span>Абонемент</span>
-                <select value={selectedPlan} onChange={(e) => setSelectedPlan(e.target.value)}>
+                <Select value={selectedPlan} onChange={(e) => setSelectedPlan(e.target.value)}>
                   {membershipKinds.map((kind) => (
                     <option key={kind.id}>{kind.name}</option>
                   ))}
-                </select>
+                </Select>
+                <small>Стрелки — выбор, Enter — подтвердить, Escape — закрыть. В длинных списках появляется поиск.</small>
               </label>
               <label className="form-field field-error">
                 <span>Email</span>
@@ -594,6 +596,10 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                 [
                   'Формы',
                   'Подпись поля остаётся видимой. Для даты, числа и выбора используются подходящие поля. Ошибка появляется после проверки, рядом с формой. Отмена не сохраняет изменения.',
+                ],
+                [
+                  'Выпадающие списки',
+                  'Открываются в светлой панели с мягким бордовым выделением и галочкой у выбранного пункта. Пункты от 44 px. В списках длиннее семи вариантов есть поиск; при отсутствии совпадений выводится подсказка. Панель располагается в пределах экрана и не обрезается соседними блоками. Стрелки перемещают выбор, Enter подтверждает, Escape закрывает без изменения. Tab переводит к следующему полю.',
                 ],
                 [
                   'Статусы',
