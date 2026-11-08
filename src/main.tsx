@@ -18,6 +18,7 @@ import './styles/workspace.css';
 import './styles/typography.css';
 import './styles/layout.css';
 import './styles/memberships.css';
+import './styles/home.css';
 
 function redirectLegacyGuide() {
   if (!/^#\/design-system(?:\?|$)/.test(window.location.hash)) return false;

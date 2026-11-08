@@ -448,7 +448,11 @@ export function App() {
   };
 
   return (
-    <div className="prototype-content" inert={screenLocked} aria-hidden={screenLocked || undefined}>
+    <div
+      className={`prototype-content${page === 'overview' && device === 'desktop' ? ' fits-home' : ''}`}
+      inert={screenLocked}
+      aria-hidden={screenLocked || undefined}
+    >
       <header className="workspace-toolbar">
         <a
           href="#/overview"
@@ -946,7 +950,7 @@ export function App() {
               )}
             </header>
             <main
-              className={`app-content ${page === 'admin-section' && adminSection === 'schedule' ? 'has-calendar' : ''}`}
+              className={`app-content ${page === 'overview' ? 'home-content' : ''} ${page === 'admin-section' && adminSection === 'schedule' ? 'has-calendar' : ''}`}
               ref={contentRef}
               id="main-content"
               key={resetVersion}
