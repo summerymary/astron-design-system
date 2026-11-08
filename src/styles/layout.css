@@ -179,24 +179,85 @@
   font-weight: 500;
 }
 .app-shell .app-content:not(.has-calendar) {
-  padding: 40px var(--layout-page-padding) 32px;
+  padding: 16px var(--layout-page-padding) 32px;
 }
-.app-shell .page-heading {
-  margin-bottom: 32px;
-  align-items: flex-start;
+/* One functional row replaces decorative page intros on every role and route. */
+.app-shell .page-heading.work-page-toolbar {
+  min-height: 44px;
+  margin: 0 0 12px;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
-.app-shell .page-eyebrow {
-  letter-spacing: 0.8px;
-  margin-bottom: 12px;
+.app-shell .work-page-toolbar .page-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
 }
-.app-shell .page-heading h1 {
-  line-height: 1.2;
+.app-shell .work-page-toolbar h1 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+  overflow-wrap: anywhere;
 }
-.app-shell .page-heading p {
-  color: var(--color-muted);
-  margin-top: 12px;
-  max-width: 720px;
-  line-height: 1.65;
+.app-shell .work-page-toolbar .page-back,
+.app-shell .client-identity-top > .client-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0;
+}
+.app-shell .work-page-toolbar .page-actions:empty {
+  display: none;
+}
+.app-shell .work-page-toolbar .page-actions {
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+}
+.app-shell .app-content.has-calendar {
+  padding-top: 16px;
+}
+.app-shell .client-identity {
+  padding-top: 16px;
+}
+.app-shell .client-identity-top {
+  gap: 12px;
+}
+.app-shell .client-name-block h1 {
+  font-size: 24px;
+  line-height: 1.3;
+  margin: 0 0 6px;
+  letter-spacing: -0.3px;
+}
+.app-shell .client-photo > .avatar {
+  width: 48px;
+  height: 52px;
+  font-size: 20px;
+}
+.app-shell .client-section-heading {
+  min-height: 44px;
+  padding: 8px 20px;
+  font-size: 14px;
+}
+@media (min-width: 761px) {
+  body .workspace-toolbar {
+    height: 64px;
+  }
+}
+@container workspace (min-width: 701px) {
+  .app-shell .app-topbar.admin-topbar {
+    min-height: 72px;
+    padding-block: 10px;
+  }
 }
 .app-shell .sidebar {
   width: 240px;
@@ -309,6 +370,14 @@
 .app-shell .ws-panel-heading,
 .app-shell .ws-panel-body {
   padding: var(--layout-panel-padding);
+}
+.app-shell .ws-panel-heading + .ws-panel-body {
+  padding-top: 0;
+}
+.app-shell .sale-workspace,
+.app-shell .registration-workspace {
+  --layout-panel-padding: 20px;
+  --layout-section-gap: 20px;
 }
 .app-shell .ws-toolbar,
 .app-shell .ws-panel-footer {
@@ -480,13 +549,17 @@
   position: sticky;
   top: 0;
   align-self: flex-start;
-  height: calc(100dvh - 72px);
-  min-height: 500px;
-  padding: 20px 16px 0;
+  height: calc(100dvh - 64px);
+  min-height: 0;
+  overflow: hidden;
+  padding: 12px 12px 0;
 }
 .app-shell .has-management-menu .sidebar-head .brand,
 .app-shell .has-management-menu .sidebar-head .club-logo {
   height: 48px;
+}
+.app-shell .has-management-menu .sidebar-head .brand {
+  min-height: 48px;
 }
 .app-shell .has-management-menu .sidebar-head .club-logo {
   padding: 4px 8px;
@@ -497,7 +570,7 @@
   flex-shrink: 0;
 }
 .app-shell .has-management-menu .club-switch {
-  margin: 8px 0 16px;
+  margin: 4px 0 8px;
   padding: 8px 4px;
 }
 .app-shell .has-management-menu .club-switch > .club-logo {
@@ -517,16 +590,20 @@
   padding: 4px;
   margin-inline: -4px;
 }
-.app-shell .management-nav-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.app-shell .has-management-menu .sidebar-navigation > .nav-label {
+  display: none;
 }
-.app-shell .management-nav-group + .management-nav-group {
-  margin-top: 16px;
+.app-shell .has-management-menu .management-module-nav {
+  gap: 4px;
+  margin-top: 4px;
 }
-.app-shell .management-nav-group .nav-label {
-  margin: 12px 0 8px;
+.app-shell .has-management-menu .management-nav-group {
+  display: block;
+  flex: none;
+  margin: 0;
+}
+.app-shell .has-management-menu .management-nav-group > summary {
+  margin: 0;
   line-height: 1.5;
 }
 .app-shell .has-management-menu .side-nav button {
@@ -534,17 +611,32 @@
   text-align: left;
 }
 .app-shell .has-management-menu .sidebar-bottom {
-  padding-top: 12px;
+  padding-top: 8px;
 }
 .app-shell .has-management-menu .sandbox-card {
   display: none;
 }
 .app-shell .has-management-menu .user-block {
-  padding-block: 16px;
+  padding-block: 12px;
 }
 .app-shell .has-management-menu .user-block small {
   white-space: normal;
   line-height: 1.5;
+}
+@media (max-height: 700px) {
+  .app-shell .sidebar.has-management-menu {
+    padding-top: 8px;
+  }
+  .app-shell .has-management-menu .club-switch {
+    margin-block: 2px 4px;
+    padding-block: 4px;
+  }
+  .app-shell .has-management-menu .sidebar-bottom {
+    padding-top: 4px;
+  }
+  .app-shell .has-management-menu .user-block {
+    padding-block: 8px;
+  }
 }
 .workspace-toolbar .role-select select,
 .workspace-role-mobile .role-select select {
@@ -712,13 +804,26 @@
     padding: 14px 18px;
   }
   .app-shell .app-content:not(.has-calendar) {
-    padding: 28px 20px 24px;
+    padding: 12px 20px 24px;
   }
   .app-shell .app-topbar:not(.admin-topbar) {
     padding-inline: 20px;
   }
-  .app-shell .page-heading {
-    margin-bottom: 28px;
+  .app-shell .work-page-toolbar .page-actions .button {
+    width: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    padding-inline: 12px;
+  }
+  .app-shell .work-page-toolbar .page-actions .button > span {
+    display: none;
+  }
+  .app-shell .client-photo > .avatar {
+    width: 40px;
+    height: 44px;
+  }
+  .app-shell .client-name-block h1 {
+    font-size: 20px;
   }
   .app-shell .ws-stack {
     --layout-panel-padding: 20px;

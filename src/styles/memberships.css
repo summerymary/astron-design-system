@@ -248,26 +248,6 @@ button.membership-kind-card {
   background: var(--color-surface);
   color: var(--color-ink);
 }
-.app-shell .nav-accordion > summary {
-  padding: 12px;
-  color: var(--color-text);
-  background: var(--color-surface-subtle);
-  border: 1px solid var(--color-divider);
-  font-size: 14px;
-  letter-spacing: 0;
-}
-.app-shell .nav-accordion[open] > summary {
-  color: var(--color-accent);
-  background: var(--color-accent-soft);
-  border-color: var(--color-accent-line);
-}
-.app-shell .nav-accordion > button {
-  width: calc(100% - 8px);
-  margin-left: 8px;
-  padding-left: 12px;
-  border-left: 1px solid var(--color-line);
-  border-radius: 0 8px 8px 0;
-}
 .app-shell.is-sidebar-collapsed .nav-accordion > button {
   width: 100%;
   margin-left: 0;
