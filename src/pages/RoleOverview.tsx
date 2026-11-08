@@ -1,5 +1,5 @@
-import { CalendarDays, MapPin, Sparkles } from 'lucide-react';
-import { Avatar, SectionTitle } from '../components/ui';
+import { CalendarDays, Sparkles } from 'lucide-react';
+import { SectionTitle } from '../components/ui';
 import { roleHomes } from '../data/roles';
 import type { DemoUser } from '../types';
 
@@ -7,14 +7,6 @@ export function RoleOverview({ user }: { user: DemoUser }) {
   const home = roleHomes[user.role];
   return (
     <div className="role-overview">
-      <section className="role-welcome">
-        <div>
-          <span className="eyebrow">ВАШ РАБОЧИЙ ДЕНЬ</span>
-          <h2>{home.summaryTitle}</h2>
-          <p>{home.summaryText}</p>
-        </div>
-        <Avatar member={{ name: user.name, color: 'sage' }} />
-      </section>
       <div className="role-metrics">
         {home.metrics.map((metric, index) => (
           <section className={`stat-card ${index === 0 ? 'stat-accent' : ''}`} key={metric.label}>
@@ -46,18 +38,6 @@ export function RoleOverview({ user }: { user: DemoUser }) {
           ))}
         </div>
       </section>
-      <aside className="role-note">
-        <MapPin size={20} />
-        <div>
-          <strong>{home.noteTitle}</strong>
-          <p>{home.noteText}</p>
-        </div>
-      </aside>
-      <div className="prototype-footnote">
-        <span className="live-dot" />
-        Демоданные · {user.name}
-        <span>Роль переключается в панели прототипа</span>
-      </div>
     </div>
   );
 }

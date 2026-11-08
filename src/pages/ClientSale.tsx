@@ -227,17 +227,15 @@ export function SaleWorkspace({
   };
   return (
     <div className="ws-stack sale-workspace">
-      <div className="ws-actions">
-        <Button variant="secondary" onClick={() => navigate('registration', member)}>
-          К регистрации посещения
-        </Button>
-      </div>
       <section className="panel ws-panel client-picker-panel">
         <div className="ws-panel-heading">
           <div>
             <h2>1. Клиент</h2>
             <p>Найдите клиента по карте, ФИО или номеру телефона.</p>
           </div>
+          <Button variant="secondary" onClick={() => navigate('registration', member)}>
+            К регистрации посещения
+          </Button>
         </div>
         <div className="ws-panel-body ws-stack">
           <ClientSearch

@@ -111,7 +111,6 @@ export function ClientProfile({
   );
   const sortedVisits = [...visits].sort((a, b) => b.enteredAt.localeCompare(a.enteredAt));
   const activeCount = profile.subscriptions.filter((s) => s.status === 'active').length;
-  const currentTab = clientTabs.find((t) => t.id === tab)!;
   const maskedPhone = member.phone.startsWith('+7')
     ? `+7 ••• •••-••-${member.phone.replace(/\D/g, '').slice(-2)}`
     : member.phone;
@@ -123,20 +122,18 @@ export function ClientProfile({
   );
   return (
     <div className="client-page">
-      <div className="client-page-topline">
-        <button className="client-back" onClick={onBack}>
-          <ArrowLeft size={15} />
-          Назад
-        </button>
-        <span>
-          Клиенты <span>/</span> Карточка клиента
-        </span>
-        <span className="client-demo-label">Демоданные</span>
-      </div>
       <div className="client-page-grid">
         <div className="client-main">
           <section className="client-identity" aria-label="Основные сведения клиента">
             <div className="client-identity-top">
+              <button
+                className="client-back icon-button"
+                aria-label="К списку клиентов"
+                title="К списку клиентов"
+                onClick={onBack}
+              >
+                <ArrowLeft size={18} />
+              </button>
               <div className="client-photo">
                 <Avatar member={member} />
                 {canOperate && (
@@ -149,11 +146,7 @@ export function ClientProfile({
                 )}
               </div>
               <div className="client-name-block">
-                <span className="eyebrow">КЛИЕНТ КЛУБА · #{member.id}</span>
-                <h1>
-                  {member.name}
-                  <span>.</span>
-                </h1>
+                <h1>{member.name}</h1>
                 <div className="client-name-meta">
                   <Badge status={member.status} />
                   <span>
@@ -313,32 +306,16 @@ export function ClientProfile({
                 />
               ) : (
                 <>
-                  <div className="client-section-heading">
-                    <div>
-                      <h2>
-                        {currentTab.label}
-                        {tab === 'subscriptions' && <span>{activeCount} действующих</span>}
-                      </h2>
-                      <p>
-                        {tab === 'subscriptions'
-                          ? 'Абонементы, услуги и покупки клиента.'
-                          : tab === 'visits'
-                            ? 'Последние посещения во всех клубах сети.'
-                            : tab === 'finances'
-                              ? 'Операции по лицевому счёту клиента.'
-                              : tab === 'info'
-                                ? 'Контакты, предпочтения и сведения о клиенте.'
-                                : tab === 'bookings'
-                                  ? 'Ближайшие занятия, на которые записан клиент.'
-                                  : 'История взаимодействий с клиентом.'}
-                      </p>
+                  {tab === 'subscriptions' && (
+                    <div className="client-section-heading">
+                      <span>{activeCount} действующих</span>
+                      {canOperate && (
+                        <button className="client-text-action" onClick={() => onAction('services')}>
+                          Продать услугу <ArrowUpRight size={14} />
+                        </button>
+                      )}
                     </div>
-                    {tab === 'subscriptions' && canOperate && (
-                      <button className="client-text-action" onClick={() => onAction('services')}>
-                        Продать услугу <ArrowUpRight size={14} />
-                      </button>
-                    )}
-                  </div>
+                  )}
                   {tab === 'subscriptions' && (
                     <>
                       <div className="client-sub-filters" aria-label="Фильтр абонементов">

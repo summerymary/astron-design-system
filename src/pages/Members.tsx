@@ -49,10 +49,6 @@ export function Members({
   ] as const;
   return (
     <>
-      <div className="members-summary">
-        <span>Клиентов в базе</span>
-        <strong>{members.length}</strong>
-      </div>
       <section className="panel clients-panel">
         <Tabs
           items={['Контакты', 'Абонементы']}
