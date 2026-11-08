@@ -357,6 +357,23 @@ export function RecordForm({
 }
 export function recordValue(value: string, key = ''): ReactNode {
   if (!value) return '—';
+  if (key === 'stages')
+    return (
+      <ol className="pipeline-stages" aria-label="Этапы обработки заявки">
+        {value
+          .split(/\r?\n/)
+          .map((stage) => stage.trim())
+          .filter(Boolean)
+          .map((stage, index) => (
+            <li key={`${index}-${stage}`}>
+              <span className="pipeline-stage-number" aria-hidden="true">
+                {index + 1}
+              </span>
+              <span>{stage}</span>
+            </li>
+          ))}
+      </ol>
+    );
   if (key === 'status' || key === 'risk') return <Status>{value}</Status>;
   if (key === 'color')
     return (
