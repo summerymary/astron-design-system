@@ -29,6 +29,20 @@ export const saleSections = [
   },
 ] as const;
 export type SaleSectionId = (typeof saleSections)[number]['id'];
+export type PlanSectionId = Exclude<SaleSectionId, 'goods-services'>;
+export function planSaleSection(record: DemoRecord): PlanSectionId {
+  if (
+    saleSections.some(
+      (section) => section.id === record.saleSection && section.id !== 'goods-services',
+    )
+  )
+    return record.saleSection as PlanSectionId;
+  return record.corporate === 'Да'
+    ? 'corporate'
+    : record.kindId === 'personal'
+      ? 'personal'
+      : 'memberships';
+}
 export type SaleCatalogItem = {
   record: DemoRecord;
   sectionId: SaleSectionId;
@@ -40,14 +54,7 @@ export function saleCatalog(data: Record<string, DemoRecord[]>): SaleCatalogItem
       .filter((row) => row.status === 'Опубликован')
       .map((record): SaleCatalogItem => ({
         record,
-        sectionId:
-          record.saleSection === 'exceptions'
-            ? 'exceptions'
-            : record.corporate === 'Да'
-              ? 'corporate'
-              : record.kindId === 'personal'
-                ? 'personal'
-                : 'memberships',
+        sectionId: planSaleSection(record),
         type: 'plan',
       })),
     ...(data['retail-products'] || [])

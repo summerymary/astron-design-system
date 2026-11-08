@@ -13,11 +13,38 @@ export function isManagementRole(role: UserRole): boolean {
 }
 
 export function canOpenModule(role: UserRole, section: string): boolean {
-  if (isManagementRole(role)) return section !== 'collagen';
+  if (isManagementRole(role)) return !['collagen', 'trainer-clients'].includes(section);
   if (role === 'administrator') return !['trainer-clients', 'collagen'].includes(section);
   if (role === 'trainer') return ['schedule', 'trainer-clients', 'settings'].includes(section);
   if (role === 'bartender')
     return ['bar', 'bar-catalog', 'bar-sales', 'settings'].includes(section);
+  if (role === 'marketer')
+    return [
+      'crm',
+      'leads',
+      'segments',
+      'pipelines',
+      'retention',
+      'statistics',
+      'requests',
+      'messages',
+      'external-messages',
+      'reviews',
+      'notifications',
+      'calls',
+      'settings',
+    ].includes(section);
+  if (role === 'accountant')
+    return [
+      'cash',
+      'statistics',
+      'services',
+      'products',
+      'memberships',
+      'inventory',
+      'payroll',
+      'settings',
+    ].includes(section);
   return false;
 }
 export function personalClients(

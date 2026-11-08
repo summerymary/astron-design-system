@@ -1,10 +1,5 @@
 import type { DemoRecord } from '../data/workspace';
 
-const nextStages: Record<string, string> = {
-  Связались: 'Пробное назначено',
-  'Пробное назначено': 'Пробное пройдено',
-  'Пробное пройдено': 'Покупка',
-};
 const tasks: Record<string, string> = {
   Связались: 'Подобрать пробное занятие',
   'Нет ответа': 'Повторный звонок',
@@ -13,11 +8,14 @@ const tasks: Record<string, string> = {
 };
 export function leadTransitions(stage: string, stages: string[]): string[] {
   if (['Покупка', 'Отказ'].includes(stage) || !stages.includes(stage)) return [];
-  if (stage === 'Новая' || stage === 'Нет ответа')
-    return ['Связались', 'Нет ответа'].filter((value) => value !== stage && stages.includes(value));
-  const next = stages.includes(nextStages[stage])
-    ? nextStages[stage]
-    : stages[stages.indexOf(stage) + 1];
+  const mainStages = stages.filter((value) => !['Нет ответа', 'Отказ'].includes(value));
+  if (stage === 'Нет ответа') {
+    const recovery = mainStages.includes('Связались') ? 'Связались' : mainStages[1];
+    return recovery ? [recovery] : [];
+  }
+  const next = mainStages[mainStages.indexOf(stage) + 1];
+  if (stage === mainStages[0])
+    return [next, 'Нет ответа'].filter((value) => value && stages.includes(value));
   return next ? [next] : [];
 }
 export function leadTask(stage: string, previous: string) {
