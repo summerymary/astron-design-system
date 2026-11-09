@@ -1095,7 +1095,7 @@ html {
   top: 150px;
   align-self: start;
   min-width: 0;
-  padding-block-start: 16px;
+  padding-block-start: 80px;
   max-height: calc(100dvh - 220px);
   overflow-y: auto;
   overscroll-behavior: contain;
