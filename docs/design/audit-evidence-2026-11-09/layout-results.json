@@ -1,0 +1,1438 @@
+{
+  "desktop": [
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Клиенты",
+      "url": "#/members?device=desktop&state=default&role=administrator",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Регистрация посещения",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=registration",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Расписание",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=schedule",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Абонементы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=memberships",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Продажа услуг",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=services",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Продажа товаров",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=products",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Касса",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=cash",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Склад",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=inventory",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Сообщения",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=messages",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Звонки",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=calls",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Уведомления",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=notifications",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "CRM",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=crm",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Заявки",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=leads",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Онлайн-заявки",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=requests",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Группы клиентов",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=segments",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Сценарии заявок",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=pipelines",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Вернуть клиентов",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=retention",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Внешние обращения",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=external-messages",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Отзывы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=reviews",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Персонал",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=employees",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Должности",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=positions",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Отсутствия",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=absences",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Расчёт зарплаты",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=payroll",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Клубы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=clubs",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Залы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=rooms",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Ресепшены",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=receptions",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Шаблоны занятий",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=training-templates",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Группы занятий",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=training-groups",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Календарь клуба",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=schedule-calendar",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Справочники",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=directories",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Бар",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Каталог бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-catalog",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Продажи бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-sales",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Склад бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-inventory",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Категории бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-categories",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Витрины бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-collections",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Мой профиль",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=settings",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Настройки системы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=service-settings",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Роли и права",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=rbac",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Безопасность",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=security",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Журнал событий",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=event-logs",
+      "width": 1280
+    },
+    {
+      "height": 720,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Камеры",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=cameras",
+      "width": 1280
+    }
+  ],
+  "laptop": [
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Клиенты",
+      "url": "#/members?device=desktop&state=default&role=administrator",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Регистрация посещения",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=registration",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Расписание",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=schedule",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Абонементы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=memberships",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Продажа услуг",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=services",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Продажа товаров",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=products",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Касса",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=cash",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Склад",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=inventory",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Сообщения",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=messages",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Звонки",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=calls",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Уведомления",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=notifications",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "CRM",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=crm",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Заявки",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=leads",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Онлайн-заявки",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=requests",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Группы клиентов",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=segments",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Сценарии заявок",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=pipelines",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Вернуть клиентов",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=retention",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Внешние обращения",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=external-messages",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Отзывы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=reviews",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Персонал",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=employees",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Должности",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=positions",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Отсутствия",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=absences",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Расчёт зарплаты",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=payroll",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Клубы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=clubs",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Залы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=rooms",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Ресепшены",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=receptions",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Шаблоны занятий",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=training-templates",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Группы занятий",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=training-groups",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Календарь клуба",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=schedule-calendar",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Справочники",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=directories",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Бар",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Каталог бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-catalog",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Продажи бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-sales",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Склад бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-inventory",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Категории бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-categories",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Витрины бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-collections",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Мой профиль",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=settings",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Настройки системы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=service-settings",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Роли и права",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=rbac",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Безопасность",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=security",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Журнал событий",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=event-logs",
+      "width": 1024
+    },
+    {
+      "height": 650,
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Камеры",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=cameras",
+      "width": 1024
+    }
+  ],
+  "mobile": [
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Клиенты",
+      "url": "#/members?device=desktop&state=default&role=administrator",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Регистрация посещения",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=registration",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Расписание",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=schedule",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Абонементы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=memberships",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Продажа услуг",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=services",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Продажа товаров",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=products",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Касса",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=cash",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Склад",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=inventory",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Сообщения",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=messages",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Звонки",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=calls",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Уведомления",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=notifications",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "CRM",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=crm",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Заявки",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=leads",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Онлайн-заявки",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=requests",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Группы клиентов",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=segments",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Сценарии заявок",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=pipelines",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Вернуть клиентов",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=retention",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Внешние обращения",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=external-messages",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Отзывы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=reviews",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Персонал",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=employees",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Должности",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=positions",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Отсутствия",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=absences",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Расчёт зарплаты",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=payroll",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Клубы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=clubs",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Залы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=rooms",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Ресепшены",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=receptions",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Шаблоны занятий",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=training-templates",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Группы занятий",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=training-groups",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Календарь клуба",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=schedule-calendar",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Справочники",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=directories",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Бар",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Каталог бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-catalog",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Продажи бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-sales",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Склад бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-inventory",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Категории бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-categories",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Витрины бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-collections",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Мой профиль",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=settings",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Настройки системы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=service-settings",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Роли и права",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=rbac",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Безопасность",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=security",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Журнал событий",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=event-logs",
+      "width": 390
+    },
+    {
+      "height": 844,
+      "overflow": false,
+      "title": "Камеры",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=cameras",
+      "width": 390
+    }
+  ],
+  "narrow320": [
+    {
+      "overflow": false,
+      "title": "Клиенты",
+      "url": "#/members?device=desktop&state=default&role=administrator",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Регистрация посещения",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=registration",
+      "width": 320
+    },
+    {
+      "overflow": true,
+      "title": "Расписание",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=schedule",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Абонементы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=memberships",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Продажа услуг",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=services",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Продажа товаров",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=products",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Касса",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=cash",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Склад",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=inventory",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Сообщения",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=messages",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Звонки",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=calls",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Уведомления",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=notifications",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "CRM",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=crm",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Заявки",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=leads",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Онлайн-заявки",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=requests",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Группы клиентов",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=segments",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Сценарии заявок",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=pipelines",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Вернуть клиентов",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=retention",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Внешние обращения",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=external-messages",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Отзывы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=reviews",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Персонал",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=employees",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Должности",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=positions",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Отсутствия",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=absences",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Расчёт зарплаты",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=payroll",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Клубы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=clubs",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Залы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=rooms",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Ресепшены",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=receptions",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Шаблоны занятий",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=training-templates",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Группы занятий",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=training-groups",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Календарь клуба",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=schedule-calendar",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Справочники",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=directories",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Бар",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Каталог бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-catalog",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Продажи бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-sales",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Склад бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-inventory",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Категории бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-categories",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Витрины бара",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=bar-collections",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Мой профиль",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=settings",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Настройки системы",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=service-settings",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Роли и права",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=rbac",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Безопасность",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=security",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Журнал событий",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=event-logs",
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "title": "Камеры",
+      "url": "#/admin-section?device=desktop&state=default&role=administrator&section=cameras",
+      "width": 320
+    }
+  ],
+  "homesLaptop": [
+    {
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Ресепшен",
+      "url": "#/overview?device=desktop&state=default&role=administrator",
+      "width": 1024
+    },
+    {
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Мой тренировочный день",
+      "url": "#/overview?device=desktop&state=default&role=trainer",
+      "width": 1024
+    },
+    {
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Бар",
+      "url": "#/overview?device=desktop&state=default&role=bartender",
+      "width": 1024
+    },
+    {
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Пульс клуба",
+      "url": "#/overview?device=desktop&state=default&role=club-director",
+      "width": 1024
+    },
+    {
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Обзор сети",
+      "url": "#/overview?device=desktop&state=default&role=network-director",
+      "width": 1024
+    },
+    {
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Маркетинг сети",
+      "url": "#/overview?device=desktop&state=default&role=marketer",
+      "width": 1024
+    },
+    {
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Финансы",
+      "url": "#/overview?device=desktop&state=default&role=accountant",
+      "width": 1024
+    },
+    {
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Фитнес-направление",
+      "url": "#/overview?device=desktop&state=default&role=fitness-director",
+      "width": 1024
+    },
+    {
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Операционная работа",
+      "url": "#/overview?device=desktop&state=default&role=operations-director",
+      "width": 1024
+    },
+    {
+      "outerScroll": false,
+      "overflow": false,
+      "title": "Системное управление",
+      "url": "#/overview?device=desktop&state=default&role=sysadmin",
+      "width": 1024
+    }
+  ],
+  "homesMobile": [
+    {
+      "overflow": false,
+      "title": "Ресепшен",
+      "url": "#/overview?device=desktop&state=default&role=administrator",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "title": "Мой тренировочный день",
+      "url": "#/overview?device=desktop&state=default&role=trainer",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "title": "Бар",
+      "url": "#/overview?device=desktop&state=default&role=bartender",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "title": "Пульс клуба",
+      "url": "#/overview?device=desktop&state=default&role=club-director",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "title": "Обзор сети",
+      "url": "#/overview?device=desktop&state=default&role=network-director",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "title": "Маркетинг сети",
+      "url": "#/overview?device=desktop&state=default&role=marketer",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "title": "Финансы",
+      "url": "#/overview?device=desktop&state=default&role=accountant",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "title": "Фитнес-направление",
+      "url": "#/overview?device=desktop&state=default&role=fitness-director",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "title": "Операционная работа",
+      "url": "#/overview?device=desktop&state=default&role=operations-director",
+      "width": 390
+    },
+    {
+      "overflow": false,
+      "title": "Системное управление",
+      "url": "#/overview?device=desktop&state=default&role=sysadmin",
+      "width": 390
+    }
+  ],
+  "guideDesktop": [
+    {
+      "heading": "Дизайн-система",
+      "overflow": false,
+      "width": 1280
+    },
+    {
+      "heading": "Дизайн-система",
+      "overflow": false,
+      "width": 1280
+    },
+    {
+      "heading": "Дизайн-система",
+      "overflow": false,
+      "width": 1280
+    },
+    {
+      "heading": "Дизайн-система",
+      "overflow": false,
+      "width": 1280
+    }
+  ],
+  "guide320": [
+    {
+      "overflow": true,
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "width": 320
+    },
+    {
+      "overflow": false,
+      "width": 320
+    }
+  ],
+  "guards": [
+    {
+      "route": "http://127.0.0.1:4173/#/overview?device=desktop&state=default&role=trainer",
+      "heading": "Мой тренировочный день"
+    },
+    {
+      "route": "http://127.0.0.1:4173/#/overview?device=desktop&state=default&role=bartender",
+      "heading": "Бар"
+    },
+    {
+      "route": "http://127.0.0.1:4173/#/overview?device=desktop&state=default&role=marketer",
+      "heading": "Маркетинг сети"
+    },
+    {
+      "route": "http://127.0.0.1:4173/#/overview?device=desktop&state=default&role=accountant",
+      "heading": "Финансы"
+    },
+    {
+      "route": "http://127.0.0.1:4173/#/overview?device=desktop&state=default&role=administrator",
+      "heading": "Ресепшен"
+    }
+  ],
+  "states": [
+    {
+      "state": "empty",
+      "text": "Клиенты\n6\nНАЧНЁМ С ПЕРВОГО ШАГА\nЗдесь пока нет клиентов\n\nДобавьте первого клиента — и пространство начнёт оживать.\n\nДобавить клиента\nДемонстрационное состояние"
+    },
+    {
+      "state": "loading",
+      "text": "Клиенты\n6\nЗагружаем данные…\n\nПредпросмотр состояния загрузки"
+    },
+    {
+      "state": "error",
+      "text": "Клиенты\n6\nЧТО-ТО ПОШЛО НЕ ТАК\nНе удалось загрузить данные\n\nПопробуйте ещё раз. Ваши данные останутся на месте.\n\nПопробовать снова\nДемонстрационное состояние"
+    }
+  ]
+}
