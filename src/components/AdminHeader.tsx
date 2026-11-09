@@ -56,7 +56,7 @@ export function AdminHeader({
           <ClubLogo brand={club.brand} variant="compact" decorative />
           <span>
             <strong>{club.name}</strong>
-            <small>{workplace.name} · Рабочая зона</small>
+            <small>{workplace.name}</small>
           </span>
           <ChevronDown size={14} />
         </button>
