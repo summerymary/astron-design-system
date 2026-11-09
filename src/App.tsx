@@ -1,3 +1,4 @@
+import { DEMO_DAY, demoStamp, nextDemoNow, resetDemoClock } from './lib/demo-clock';
 import { Select } from './components/Select';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
@@ -185,6 +186,8 @@ export function App() {
   const sectionHistory = useRef<
     { page: Page; section: AdminSectionId; clientId: number | null; member: Member | null }[]
   >([]);
+  const memberCount =
+    scenario === 'empty' ? 0 : scenario === 'default' ? members.length : undefined;
   const currentRole = roles.find((r) => r.id === role)!;
   const managingRole = isManagementRole(role);
   const currentUser = demoUsers.find((u) => u.role === role)!;
@@ -269,33 +272,55 @@ export function App() {
     if (item.top < bounds.top + 8) menu.scrollTop += item.top - bounds.top - 8;
     else if (item.bottom > bounds.bottom - 8) menu.scrollTop += item.bottom - bounds.bottom + 8;
   }, [managingRole, role, page, adminSection, sidebarCollapsed]);
+  const routeKey = `${page}:${role}:${page === 'admin-section' ? adminSection : ''}:${page === 'client-profile' ? selectedMemberId : ''}`;
+  const previousRouteKey = useRef(routeKey);
+  const navigationRole = useRef(role);
+  const navigationMembers = useRef(members);
+  navigationMembers.current = members;
+  navigationRole.current = role;
   useEffect(() => {
-    window.history.replaceState(
-      null,
-      '',
-      `#/${page}?device=${device}&state=${scenario}&role=${role}${page === 'admin-section' ? `&section=${adminSection}` : ''}${page === 'client-profile' && selectedMemberId ? `&clientId=${selectedMemberId}` : ''}`,
-    );
+    const hash = `#/${page}?device=${device}&state=${scenario}&role=${role}${page === 'admin-section' ? `&section=${adminSection}` : ''}${page === 'client-profile' && selectedMemberId ? `&clientId=${selectedMemberId}` : ''}`;
+    const entry = window.history.state || {};
+    const index = Number(entry.astronIndex) || 0;
+    const context = {
+      sectionMemberId: page === 'admin-section' ? sectionMember?.id : null,
+      memberReturnPage,
+    };
+    if (window.location.hash !== hash && previousRouteKey.current !== routeKey) {
+      window.history.pushState({ ...context, astronIndex: index + 1 }, '', hash);
+    } else {
+      window.history.replaceState({ ...entry, ...context, astronIndex: index }, '', hash);
+    }
+    previousRouteKey.current = routeKey;
     document.title = `${currentPage.title} · Астрон`;
-  }, [page, device, scenario, role, adminSection, selectedMemberId, currentPage.title]);
+  }, [page, device, scenario, role, adminSection, selectedMemberId, currentPage.title, routeKey]);
   useEffect(() => {
     const onHashChange = () => {
       sectionHistory.current = [];
       const next = initialOptions();
       setRole(next.role);
-      setSidebarCollapsed(next.role === 'administrator');
+      if (navigationRole.current !== next.role) setSidebarCollapsed(next.role === 'administrator');
       setPage(next.page);
       setDevice(next.device);
       setScenario(next.scenario);
       setAdminSection(next.section);
-      setSectionMember(null);
+      setSectionMember(
+        navigationMembers.current.find(
+          (member) => member.id === window.history.state?.sectionMemberId,
+        ) || null,
+      );
       setNotificationOpen(false);
       setSelectedMemberId(next.clientId);
-      setMemberReturnPage('overview');
+      setMemberReturnPage(window.history.state?.memberReturnPage || 'overview');
       setSelectedClass(null);
       setModal(null);
     };
     window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
+    window.addEventListener('popstate', onHashChange);
+    return () => {
+      window.removeEventListener('hashchange', onHashChange);
+      window.removeEventListener('popstate', onHashChange);
+    };
   }, []);
   const goTo = (next: Page) => {
     setPage(
@@ -330,6 +355,16 @@ export function App() {
     setSelectedMemberId(member.id);
     setScenario('default');
     goTo('client-profile');
+  };
+  const changeWorkingClub = (name: string) => {
+    const next = demoClubs.find((item) => item.shortName === name || item.id === name);
+    if (!next) return;
+    if (role === 'administrator') {
+      const workplace = workstations.find((item) => item.clubId === next.id);
+      if (workplace) setWorkstationId(workplace.id);
+    } else if (currentUser.clubIds.includes(next.id)) {
+      setWorkingClubs((previous) => ({ ...previous, [role]: next.id }));
+    }
   };
   const openSections = () => {
     setMobileQuickOpen(false);
@@ -379,6 +414,10 @@ export function App() {
     goTo('admin-section');
   };
   const backFromSection = () => {
+    if (Number(window.history.state?.astronIndex) > 0) {
+      window.history.back();
+      return;
+    }
     const previous = sectionHistory.current.pop();
     if (previous) {
       setAdminSection(previous.section);
@@ -389,9 +428,7 @@ export function App() {
   };
   const createVisit = (member: Member, kind: VisitKind, passName?: string, passId?: string) => {
     if (!canOpenModule(role, 'registration')) return;
-    const time = new Date(Date.UTC(2026, 10, 6, 14, 35 + visits.length - initialVisits.length))
-      .toISOString()
-      .slice(0, 16);
+    const time = demoStamp(nextDemoNow());
     const visit: Visit = {
       id: `demo-${Date.now()}`,
       memberId: member.id,
@@ -437,7 +474,7 @@ export function App() {
       phone: String(data.get('phone')).trim() || 'Не указан',
       plan: String(data.get('plan')),
       status: 'active',
-      joined: '01.11.2026',
+      joined: DEMO_DAY.split('-').reverse().join('.'),
       expires: '01.12.2026',
       visits: 0,
       color: 'sage',
@@ -451,6 +488,7 @@ export function App() {
   const reset = () => {
     sectionHistory.current = [];
     workspace.reset();
+    resetDemoClock();
     setResetVersion((value) => value + 1);
     setMembers(initialMembers);
     setVisits(initialVisits);
@@ -687,7 +725,9 @@ export function App() {
                     >
                       <n.icon size={18} strokeWidth={1.75} />
                       <span className="nav-item-label">{n.label}</span>
-                      {n.id === 'members' && <span className="nav-count">{members.length}</span>}
+                      {n.id === 'members' && memberCount !== undefined && (
+                        <span className="nav-count">{memberCount}</span>
+                      )}
                     </button>
                   ))}
                 {role === 'marketer' && (
@@ -1013,7 +1053,9 @@ export function App() {
                         </button>
                       )}
                       <h1>{currentPage.title}</h1>
-                      {page === 'members' && <span className="count-badge">{members.length}</span>}
+                      {page === 'members' && memberCount !== undefined && (
+                        <span className="count-badge">{memberCount}</span>
+                      )}
                     </div>
                     <div className="page-actions">
                       {(page === 'overview' || page === 'members') && currentRole.canAddMembers && (
@@ -1048,7 +1090,11 @@ export function App() {
                         showQuickLinks={managingRole}
                         scenario={scenario}
                         onReset={() => setScenario('default')}
-                        onBack={() => goTo(memberReturnPage)}
+                        onBack={() =>
+                          Number(window.history.state?.astronIndex) > 0
+                            ? window.history.back()
+                            : goTo(memberReturnPage)
+                        }
                         backLabel={
                           memberReturnPage === 'admin-section' &&
                           ['messages', 'external-messages'].includes(adminSection)
@@ -1123,6 +1169,7 @@ export function App() {
                       member={sectionMember}
                       members={members}
                       clubName={club.name}
+                      onClubChange={changeWorkingClub}
                       employeeName={currentUser.name}
                       user={currentUser}
                       navigate={openModule}

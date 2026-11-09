@@ -37,3 +37,5 @@ if (!redirectLegacyGuide())
       </ThemeProvider>
     </React.StrictMode>,
   );
+
+import './styles/checkout.css';
