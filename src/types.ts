@@ -1,4 +1,4 @@
-export type Page = 'overview' | 'members' | 'admin-section' | 'client-profile';
+export type Page = 'sections' | 'overview' | 'members' | 'admin-section' | 'client-profile';
 export type Scenario = 'default' | 'empty' | 'loading' | 'error';
 export type Device = 'desktop' | 'mobile';
 export type MemberStatus = 'active' | 'expiring' | 'paused';

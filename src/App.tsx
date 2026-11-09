@@ -51,7 +51,7 @@ import { demoClubs, demoNetworks, demoUsers, roleHomes, roles } from './data/rol
 import { initialProfileBookings } from './data/profileBookings';
 import { useTheme } from './components/ThemeProvider';
 import { useWorkspace } from './components/WorkspaceProvider';
-import { LinkCards } from './components/WorkspaceUI';
+import { SectionsPage } from './pages/SectionsPage';
 import { Members } from './pages/Members';
 import { AdminOverview } from './pages/AdminOverview';
 import { AdminSection } from './pages/AdminSection';
@@ -163,14 +163,14 @@ export function App() {
   const [workstationId, setWorkstationId] = useState('central-01');
   const [adminSection, setAdminSection] = useState<AdminSectionId>(options.section);
   const [sectionMember, setSectionMember] = useState<Member | null>(null);
-  const [modal, setModal] = useState<'add' | 'reset' | null>(null);
+  const [modal, setModal] = useState<'add' | 'reset' | 'club' | null>(null);
+  const [workingClubs, setWorkingClubs] = useState<Partial<Record<UserRole, string>>>({});
   const [selectedMemberId, setSelectedMemberId] = useState<number | null>(options.clientId);
   const [memberReturnPage, setMemberReturnPage] = useState<Page>('overview');
   const [selectedClass, setSelectedClass] = useState<number | null>(null);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [toast, setToast] = useState('');
   const [mobileStateOpen, setMobileStateOpen] = useState(false);
-  const [sectionsOpen, setSectionsOpen] = useState(false);
   const [mobileQuickOpen, setMobileQuickOpen] = useState(false);
   useEffect(() => setMobileQuickOpen(false), [page, role, adminSection, device]);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(options.role === 'administrator');
@@ -207,9 +207,15 @@ export function App() {
     .slice(0, 2)
     .join('');
   const workstation = workstations.find((w) => w.id === workstationId)!;
-  const club = demoClubs.find(
-    (c) => c.id === (role === 'administrator' ? workstation.clubId : currentUser.clubIds[0]),
-  )!;
+  const availableClubs = demoClubs.filter(
+    (club) => club.networkId === currentUser.networkId && currentUser.clubIds.includes(club.id),
+  );
+  const workingClub =
+    availableClubs.find((club) => club.id === workingClubs[role]) || availableClubs[0];
+  const club =
+    role === 'administrator'
+      ? demoClubs.find((club) => club.id === workstation.clubId)!
+      : workingClub;
   const network = demoNetworks.find((n) => n.id === currentUser.networkId)!;
   const visibleNavigation = navigation
     .filter((n) => n.id !== 'members' || currentRole.canViewMembers)
@@ -325,6 +331,11 @@ export function App() {
     setScenario('default');
     goTo('client-profile');
   };
+  const openSections = () => {
+    setMobileQuickOpen(false);
+    setScenario('default');
+    goTo('sections');
+  };
   const openRegistration = (member?: Member) => openModule('registration', member);
   const openModule = (section: AdminSectionId, member?: Member) => {
     if (!canOpenModule(role, section)) return;
@@ -341,7 +352,6 @@ export function App() {
       });
     setAdminSection(section);
     setSectionMember(member || null);
-    setSectionsOpen(false);
     setScenario('default');
     goTo('admin-section');
   };
@@ -390,7 +400,7 @@ export function App() {
       kind,
       plan: passName || member.plan,
       passId,
-      clubId: workstation.clubId,
+      clubId: club.id,
     };
     setVisits((prev) => [visit, ...prev]);
     workspace.put('logs', {
@@ -629,18 +639,21 @@ export function App() {
               </a>
             </div>
             {role !== 'administrator' && (
-              <div className="club-switch">
+              <button
+                type="button"
+                className="club-switch club-context-button"
+                onClick={() => setModal('club')}
+                aria-label={`Выбрать клуб: ${club.name}`}
+                aria-haspopup="dialog"
+                title={`Рабочий клуб: ${club.name}`}
+              >
                 <ClubLogo brand={club.brand} variant="compact" decorative />
                 <span>
-                  <strong>{currentRole.scope === 'network' ? network.name : club.name}</strong>
-                  <small>
-                    {currentRole.scope === 'network'
-                      ? `${currentUser.clubIds.length} клуба · ${club.city}`
-                      : `${club.city} · Ваш клуб`}
-                  </small>
+                  <strong>{club.name}</strong>
+                  <small>{club.city}</small>
                 </span>
-                <ChevronDown size={14} />
-              </div>
+                <ChevronDown size={16} aria-hidden="true" />
+              </button>
             )}
             <div
               id="workspace-navigation"
@@ -739,7 +752,9 @@ export function App() {
                     </details>
                   ))}
                   <button
-                    onClick={() => setSectionsOpen(true)}
+                    onClick={openSections}
+                    aria-current={page === 'sections' ? 'page' : undefined}
+                    className={page === 'sections' ? 'active' : ''}
                     title={sidebarCollapsed ? 'Каталог разделов' : undefined}
                     aria-label={sidebarCollapsed ? 'Каталог разделов' : undefined}
                   >
@@ -782,7 +797,9 @@ export function App() {
                     </button>
                   ))}
                   <button
-                    onClick={() => setSectionsOpen(true)}
+                    onClick={openSections}
+                    aria-current={page === 'sections' ? 'page' : undefined}
+                    className={page === 'sections' ? 'active' : ''}
                     title={sidebarCollapsed ? 'Все разделы' : undefined}
                     aria-label={sidebarCollapsed ? 'Все разделы' : undefined}
                   >
@@ -969,7 +986,7 @@ export function App() {
                 mobileMode={device === 'mobile'}
                 mobileOpen={mobileQuickOpen}
                 onMobileOpenChange={setMobileQuickOpen}
-                onAllSections={() => setSectionsOpen(true)}
+                onAllSections={openSections}
                 pageKey={`${page}-${adminSection}-${selectedMemberId}`}
                 activeId={
                   page === 'client-profile' || page === 'members'
@@ -1057,7 +1074,7 @@ export function App() {
                     <StateContent
                       scenario={scenario}
                       onAdd={() =>
-                        page === 'admin-section'
+                        page === 'admin-section' || page === 'sections'
                           ? setScenario('default')
                           : role === 'administrator' && page === 'overview'
                             ? openRegistration()
@@ -1082,18 +1099,26 @@ export function App() {
                                   ? 'Добавить клиента'
                                   : 'Показать демоданные',
                               }
-                            : page === 'admin-section'
+                            : page === 'sections'
                               ? {
-                                  title: 'В этом разделе пока нет записей',
-                                  description: 'Записи появятся после начала работы с разделом.',
-                                  actionLabel: 'Показать демоданные',
+                                  title: 'Разделы пока недоступны',
+                                  description: 'Здесь будут разделы выбранной роли.',
+                                  actionLabel: 'Показать разделы',
                                 }
-                              : undefined
+                              : page === 'admin-section'
+                                ? {
+                                    title: 'В этом разделе пока нет записей',
+                                    description: 'Записи появятся после начала работы с разделом.',
+                                    actionLabel: 'Показать демоданные',
+                                  }
+                                : undefined
                       }
                     />
+                  ) : page === 'sections' ? (
+                    <SectionsPage role={role} navigate={openModule} />
                   ) : page === 'admin-section' ? (
                     <AdminSection
-                      key={`${adminSection}-${currentUser.id}`}
+                      key={`${adminSection}-${currentUser.id}-${club.id}`}
                       section={adminSection}
                       member={sectionMember}
                       members={members}
@@ -1225,10 +1250,14 @@ export function App() {
                     <span>Расписание</span>
                   </button>
                   <button
-                    aria-expanded={role === 'administrator' ? mobileQuickOpen : sectionsOpen}
-                    aria-haspopup="dialog"
+                    aria-expanded={role === 'administrator' ? mobileQuickOpen : undefined}
+                    aria-current={
+                      role !== 'administrator' && page === 'sections' ? 'page' : undefined
+                    }
+                    className={role !== 'administrator' && page === 'sections' ? 'active' : ''}
+                    aria-haspopup={role === 'administrator' ? 'dialog' : undefined}
                     onClick={() =>
-                      role === 'administrator' ? setMobileQuickOpen(true) : setSectionsOpen(true)
+                      role === 'administrator' ? setMobileQuickOpen(true) : openSections()
                     }
                   >
                     <Menu size={20} />
@@ -1243,6 +1272,36 @@ export function App() {
           <p className="mobile-preview-hint">Мобильный вид тех же экранов.</p>
         )}
       </div>
+      {modal === 'club' && (
+        <Modal title="Рабочий клуб" subtitle={network.name} onClose={closeModal}>
+          <p className="club-context-note">
+            {availableClubs.length === 1
+              ? 'Для этой роли доступен один клуб.'
+              : 'Выберите клуб для расписания и операций. Сводка сети остаётся общей.'}
+          </p>
+          <div className="club-context-options" role="group" aria-label="Доступные клубы">
+            {availableClubs.map((item) => (
+              <button
+                type="button"
+                key={item.id}
+                aria-pressed={item.id === club.id}
+                onClick={() => {
+                  setWorkingClubs((previous) => ({ ...previous, [role]: item.id }));
+                  setScenario('default');
+                  setModal(null);
+                }}
+              >
+                <ClubLogo brand={item.brand} variant="compact" decorative />
+                <span>
+                  <strong>{item.name}</strong>
+                  <small>{item.city}</small>
+                </span>
+                {item.id === club.id && <Check size={18} aria-label="Текущий клуб" />}
+              </button>
+            ))}
+          </div>
+        </Modal>
+      )}
       {modal === 'add' && (
         <Modal title="Новый клиент" onClose={closeModal}>
           <form onSubmit={addMember} className="member-form">
@@ -1359,52 +1418,6 @@ export function App() {
         </Modal>
       )}
       {toast && <Toast message={toast} />}
-      {sectionsOpen && (
-        <Modal title="Все разделы" onClose={() => setSectionsOpen(false)}>
-          <div className="ws-stack">
-            <LinkCards
-              ids={
-                managingRole
-                  ? adminSections
-                      .filter(
-                        (section) =>
-                          canOpenModule(role, section.id) &&
-                          ![
-                            'bar',
-                            'bar-catalog',
-                            'bar-sales',
-                            'bar-categories',
-                            'bar-collections',
-                            'bar-inventory',
-                          ].includes(section.id),
-                      )
-                      .map((section) => section.id)
-                  : [
-                      'schedule',
-                      'memberships',
-                      'registration',
-                      'crm',
-                      'calls',
-                      'messages',
-                      'notifications',
-                      'bar',
-                      'cash',
-                      'employees',
-                      'clubs',
-                      'directories',
-                      'cameras',
-                      'rbac',
-                      'security',
-                      'event-logs',
-                      'settings',
-                      'service-settings',
-                    ]
-              }
-              navigate={openModule}
-            />
-          </div>
-        </Modal>
-      )}
       {screenLocked && (
         <ScreenLock
           name={currentUser.name}
