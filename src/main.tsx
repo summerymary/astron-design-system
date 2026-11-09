@@ -19,6 +19,7 @@ import './styles/typography.css';
 import './styles/layout.css';
 import './styles/memberships.css';
 import './styles/home.css';
+import './styles/workspace-frame.css';
 
 function redirectLegacyGuide() {
   if (!/^#\/design-system(?:\?|$)/.test(window.location.hash)) return false;

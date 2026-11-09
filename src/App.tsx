@@ -1,5 +1,5 @@
 import { Select } from './components/Select';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import {
   ArrowLeft,
@@ -178,6 +178,10 @@ export function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(options.role === 'administrator');
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const contentRef = useRef<HTMLElement>(null);
+  const pageBodyRef = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    pageBodyRef.current?.scrollTo(0, 0);
+  }, [page, adminSection, selectedMemberId]);
   const sidebarNavigationRef = useRef<HTMLDivElement>(null);
   const expandedManagementGroupsRef = useRef<Set<string> | null>(null);
   const sectionHistory = useRef<
@@ -449,7 +453,7 @@ export function App() {
 
   return (
     <div
-      className={`prototype-content${page === 'overview' && device === 'desktop' ? ' fits-home' : ''}`}
+      className={`prototype-content${device === 'desktop' ? ' fits-workspace' : ''}${page === 'overview' && device === 'desktop' ? ' fits-home' : ''}`}
       inert={screenLocked}
       aria-hidden={screenLocked || undefined}
     >
@@ -614,17 +618,6 @@ export function App() {
             aria-label="Боковое меню"
           >
             <div className="sidebar-head">
-              <a
-                className="brand"
-                title={sidebarCollapsed ? club.name : undefined}
-                href="#/overview"
-                onClick={(e) => {
-                  e.preventDefault();
-                  goTo('overview');
-                }}
-              >
-                <ClubLogo brand={club.brand} variant={sidebarCollapsed ? 'compact' : 'wide'} />
-              </a>
               <button
                 type="button"
                 className="icon-button sidebar-toggle"
@@ -636,6 +629,17 @@ export function App() {
               >
                 {sidebarCollapsed ? <PanelLeftOpen size={19} /> : <PanelLeftClose size={19} />}
               </button>
+              <a
+                className="brand"
+                title={sidebarCollapsed ? club.name : undefined}
+                href="#/overview"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goTo('overview');
+                }}
+              >
+                <ClubLogo brand={club.brand} variant={sidebarCollapsed ? 'compact' : 'wide'} />
+              </a>
             </div>
             <div className="club-switch">
               <ClubLogo brand={club.brand} variant="compact" decorative />
@@ -1003,118 +1007,132 @@ export function App() {
                     </div>
                   </div>
                 )}
-                {page === 'client-profile' ? (
-                  selectedMember ? (
-                    <ClientProfile
-                      key={selectedMember.id}
-                      member={selectedMember}
-                      visits={visits.filter((v) => v.memberId === selectedMember.id)}
-                      bookings={selectedMember.id === 1001 ? initialProfileBookings : []}
-                      canOperate={role === 'administrator' || managingRole}
-                      canSell={role === 'accountant'}
-                      showQuickLinks={managingRole}
+                <div
+                  className="workspace-page-body"
+                  ref={pageBodyRef}
+                  role="region"
+                  aria-label="Рабочая область страницы"
+                  tabIndex={0}
+                >
+                  {page === 'client-profile' ? (
+                    selectedMember ? (
+                      <ClientProfile
+                        key={selectedMember.id}
+                        member={selectedMember}
+                        visits={visits.filter((v) => v.memberId === selectedMember.id)}
+                        bookings={selectedMember.id === 1001 ? initialProfileBookings : []}
+                        canOperate={role === 'administrator' || managingRole}
+                        canSell={role === 'accountant'}
+                        showQuickLinks={managingRole}
+                        scenario={scenario}
+                        onReset={() => setScenario('default')}
+                        onBack={() => goTo(memberReturnPage)}
+                        backLabel={
+                          memberReturnPage === 'admin-section' &&
+                          ['messages', 'external-messages'].includes(adminSection)
+                            ? 'Вернуться в чат'
+                            : 'Назад'
+                        }
+                        onRegistration={() => openRegistration(selectedMember)}
+                        onAction={(id) => openAdminAction(id, selectedMember)}
+                        onUpdate={(updated) =>
+                          setMembers((previous) =>
+                            previous.map((member) => (member.id === updated.id ? updated : member)),
+                          )
+                        }
+                      />
+                    ) : (
+                      <div className="empty-state">
+                        <h1>Клиент не найден</h1>
+                        <p>Этой карты нет в демонстрационных данных.</p>
+                        <Button onClick={() => goTo('members')}>К списку клиентов</Button>
+                      </div>
+                    )
+                  ) : scenario !== 'default' ? (
+                    <StateContent
                       scenario={scenario}
+                      onAdd={() =>
+                        page === 'admin-section'
+                          ? setScenario('default')
+                          : role === 'administrator' && page === 'overview'
+                            ? openRegistration()
+                            : currentRole.canAddMembers
+                              ? setModal('add')
+                              : setScenario('default')
+                      }
                       onReset={() => setScenario('default')}
-                      onBack={() => goTo(memberReturnPage)}
-                      onRegistration={() => openRegistration(selectedMember)}
-                      onAction={(id) => openAdminAction(id, selectedMember)}
-                      onUpdate={(updated) =>
-                        setMembers((previous) =>
-                          previous.map((member) => (member.id === updated.id ? updated : member)),
-                        )
+                      emptyState={
+                        page === 'overview' && role === 'administrator'
+                          ? {
+                              title: 'Посещений пока нет',
+                              description:
+                                'Новые посещения появятся в журнале после регистрации клиента.',
+                              actionLabel: 'Зарегистрировать посещение',
+                            }
+                          : page === 'overview' && role !== 'administrator'
+                            ? {
+                                title: roleHome.emptyTitle,
+                                description: roleHome.emptyDescription,
+                                actionLabel: currentRole.canAddMembers
+                                  ? 'Добавить клиента'
+                                  : 'Показать демоданные',
+                              }
+                            : page === 'admin-section'
+                              ? {
+                                  title: 'В этом разделе пока нет записей',
+                                  description: 'Записи появятся после начала работы с разделом.',
+                                  actionLabel: 'Показать демоданные',
+                                }
+                              : undefined
                       }
                     />
-                  ) : (
-                    <div className="empty-state">
-                      <h1>Клиент не найден</h1>
-                      <p>Этой карты нет в демонстрационных данных.</p>
-                      <Button onClick={() => goTo('members')}>К списку клиентов</Button>
-                    </div>
-                  )
-                ) : scenario !== 'default' ? (
-                  <StateContent
-                    scenario={scenario}
-                    onAdd={() =>
-                      page === 'admin-section'
-                        ? setScenario('default')
-                        : role === 'administrator' && page === 'overview'
-                          ? openRegistration()
-                          : currentRole.canAddMembers
-                            ? setModal('add')
-                            : setScenario('default')
-                    }
-                    onReset={() => setScenario('default')}
-                    emptyState={
-                      page === 'overview' && role === 'administrator'
-                        ? {
-                            title: 'Посещений пока нет',
-                            description:
-                              'Новые посещения появятся в журнале после регистрации клиента.',
-                            actionLabel: 'Зарегистрировать посещение',
-                          }
-                        : page === 'overview' && role !== 'administrator'
-                          ? {
-                              title: roleHome.emptyTitle,
-                              description: roleHome.emptyDescription,
-                              actionLabel: currentRole.canAddMembers
-                                ? 'Добавить клиента'
-                                : 'Показать демоданные',
-                            }
-                          : page === 'admin-section'
-                            ? {
-                                title: 'В этом разделе пока нет записей',
-                                description: 'Записи появятся после начала работы с разделом.',
-                                actionLabel: 'Показать демоданные',
-                              }
-                            : undefined
-                    }
-                  />
-                ) : page === 'admin-section' ? (
-                  <AdminSection
-                    key={`${adminSection}-${currentUser.id}`}
-                    section={adminSection}
-                    member={sectionMember}
-                    members={members}
-                    clubName={club.name}
-                    employeeName={currentUser.name}
-                    user={currentUser}
-                    navigate={openModule}
-                    onMember={openMember}
-                    onRegister={createVisit}
-                    onBack={backFromSection}
-                  />
-                ) : page === 'overview' ? (
-                  role === 'trainer' ? (
-                    <TrainerHome
-                      user={currentUser}
+                  ) : page === 'admin-section' ? (
+                    <AdminSection
+                      key={`${adminSection}-${currentUser.id}`}
+                      section={adminSection}
+                      member={sectionMember}
                       members={members}
                       clubName={club.name}
+                      employeeName={currentUser.name}
+                      user={currentUser}
                       navigate={openModule}
-                    />
-                  ) : role === 'bartender' ? (
-                    <BartenderHome clubName={club.name} navigate={openModule} />
-                  ) : role === 'accountant' ? (
-                    <AccountingHome navigate={openModule} clubName={club.name} />
-                  ) : role !== 'administrator' ? (
-                    <RoleOverview user={currentUser} />
-                  ) : (
-                    <AdminOverview
-                      key={workstationId}
-                      visits={visits}
-                      members={members}
-                      clubId={workstation.clubId}
                       onMember={openMember}
-                      onAction={openAdminAction}
+                      onRegister={createVisit}
+                      onBack={backFromSection}
                     />
-                  )
-                ) : (
-                  <Members
-                    key={members.length}
-                    members={members}
-                    onMember={openMember}
-                    onAdd={() => setModal('add')}
-                  />
-                )}
+                  ) : page === 'overview' ? (
+                    role === 'trainer' ? (
+                      <TrainerHome
+                        user={currentUser}
+                        members={members}
+                        clubName={club.name}
+                        navigate={openModule}
+                      />
+                    ) : role === 'bartender' ? (
+                      <BartenderHome clubName={club.name} navigate={openModule} />
+                    ) : role === 'accountant' ? (
+                      <AccountingHome navigate={openModule} clubName={club.name} />
+                    ) : role !== 'administrator' ? (
+                      <RoleOverview user={currentUser} />
+                    ) : (
+                      <AdminOverview
+                        key={workstationId}
+                        visits={visits}
+                        members={members}
+                        clubId={workstation.clubId}
+                        onMember={openMember}
+                        onAction={openAdminAction}
+                      />
+                    )
+                  ) : (
+                    <Members
+                      key={members.length}
+                      members={members}
+                      onMember={openMember}
+                      onAdd={() => setModal('add')}
+                    />
+                  )}
+                </div>
               </AdminPageLayout>
             </main>
             <nav className="mobile-nav" aria-label="Мобильная навигация">
