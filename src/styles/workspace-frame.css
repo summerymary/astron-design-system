@@ -1,0 +1,96 @@
+/* The page chrome stays still. Each route owns the scroll inside its work area. */
+.workspace-page-body {
+  position: relative;
+  min-width: 0;
+}
+.workspace-page-body:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -3px;
+}
+@media (min-width: 1000px) and (min-height: 650px) {
+  .prototype-content.fits-workspace {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+  }
+  .fits-workspace > .workspace-toolbar {
+    flex-shrink: 0;
+  }
+  .fits-workspace > .preview-stage,
+  .fits-workspace .app-shell.is-desktop,
+  .fits-workspace .app-shell.is-desktop .app-workspace {
+    min-height: 0;
+  }
+  .fits-workspace > .preview-stage {
+    flex: 1;
+  }
+  .fits-workspace .app-shell.is-desktop {
+    height: 100%;
+  }
+  .fits-workspace .app-shell .sidebar {
+    min-height: 0;
+    height: 100%;
+  }
+  .fits-workspace .app-shell .sidebar-navigation {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+  .fits-workspace .app-shell .sidebar-navigation > * {
+    flex-shrink: 0;
+  }
+  .fits-workspace .app-shell .sidebar-bottom {
+    flex-shrink: 0;
+    padding-top: 8px;
+  }
+  .fits-workspace .app-shell .sandbox-card {
+    display: none;
+  }
+  .fits-workspace .app-shell .app-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding-bottom: 16px;
+    overflow: hidden;
+  }
+  .fits-workspace .app-shell .admin-page-layout {
+    flex: 1;
+    min-height: 0;
+    align-items: stretch;
+  }
+  .fits-workspace .app-shell .admin-page-main {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .fits-workspace .app-shell .work-page-toolbar {
+    flex-shrink: 0;
+  }
+  .fits-workspace .workspace-page-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+  }
+  .fits-workspace .global-admin-quick.admin-quick-panel {
+    position: static;
+    max-height: 100%;
+  }
+  .fits-workspace .workspace-page-body > .messenger-workspace {
+    flex: 1;
+    min-height: 0;
+  }
+  .fits-workspace .messenger-workspace > .ws-links {
+    flex-shrink: 0;
+  }
+  .fits-workspace .messenger-shell {
+    flex: 1;
+    min-height: 0;
+    height: auto;
+  }
+}

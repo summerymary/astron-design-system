@@ -179,7 +179,14 @@
   font-weight: 500;
 }
 .app-shell .app-content:not(.has-calendar) {
-  padding: 16px var(--layout-page-padding) 32px;
+  padding: 16px 24px 32px;
+}
+.app-shell .app-content {
+  max-width: none;
+  margin-inline: 0;
+}
+html {
+  scrollbar-gutter: stable;
 }
 /* One functional row replaces decorative page intros on every role and route. */
 .app-shell .page-heading.work-page-toolbar {
@@ -261,7 +268,7 @@
 }
 .app-shell .sidebar {
   width: 240px;
-  padding: 32px 20px 0;
+  padding: 12px 12px 0;
   border-color: var(--color-divider);
 }
 .app-shell .club-switch {
@@ -561,17 +568,31 @@
 
 /* Desktop navigation can collapse without hiding destinations or their names. */
 .app-shell .sidebar-head {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
+  height: 64px;
+  min-height: 64px;
+  flex-shrink: 0;
+  padding-inline-start: 56px;
+  margin-bottom: 12px;
 }
 .app-shell .sidebar-head .brand {
   flex: 1;
   min-width: 0;
+  min-height: 64px;
+}
+.app-shell .sidebar-head .club-logo {
+  height: 64px;
+  padding: 6px 0;
 }
 .app-shell .sidebar-toggle {
-  width: 36px;
-  height: 36px;
+  position: absolute;
+  inset-inline-start: 6px;
+  top: 10px;
+  width: 44px;
+  height: 44px;
   color: var(--color-muted);
 }
 .app-shell .sidebar-navigation {
@@ -587,16 +608,6 @@
   min-height: 0;
   overflow: hidden;
   padding: 12px 12px 0;
-}
-.app-shell .has-management-menu .sidebar-head .brand,
-.app-shell .has-management-menu .sidebar-head .club-logo {
-  height: 48px;
-}
-.app-shell .has-management-menu .sidebar-head .brand {
-  min-height: 48px;
-}
-.app-shell .has-management-menu .sidebar-head .club-logo {
-  padding: 4px 8px;
 }
 .app-shell .has-management-menu .sidebar-head,
 .app-shell .has-management-menu .club-switch,
@@ -658,9 +669,6 @@
   line-height: 1.5;
 }
 @media (max-height: 700px) {
-  .app-shell .sidebar.has-management-menu {
-    padding-top: 8px;
-  }
   .app-shell .has-management-menu .club-switch {
     margin-block: 2px 4px;
     padding-block: 4px;
@@ -687,26 +695,13 @@
 }
 .app-shell.is-sidebar-collapsed .sidebar {
   width: 80px;
-  padding: 20px 12px 0;
+  padding: 12px 12px 0;
 }
 .app-shell.is-sidebar-collapsed .sidebar-head {
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
+  padding-inline-start: 0;
 }
 .app-shell.is-sidebar-collapsed .sidebar-head .brand {
-  min-height: 44px;
-  flex: none;
-}
-.app-shell.is-sidebar-collapsed .sidebar-head .club-logo {
-  width: 44px;
-  height: 44px;
-  padding: 5px;
-  background: transparent;
-}
-.app-shell.is-sidebar-collapsed .sidebar-toggle {
-  width: 44px;
-  height: 44px;
+  display: none;
 }
 .app-shell.is-sidebar-collapsed .club-switch,
 .app-shell.is-sidebar-collapsed .nav-item-label,
@@ -829,10 +824,10 @@
 @container workspace (max-width: 1000px) and (min-width: 701px) {
   .app-shell .sidebar {
     width: 220px;
-    padding-inline: 16px;
+    padding-inline: 12px;
   }
   .app-shell .app-content:not(.has-calendar) {
-    padding-inline: 28px;
+    padding-inline: 24px;
   }
 }
 @container workspace (max-width: 700px) {
@@ -884,7 +879,7 @@
     padding: 14px 18px;
   }
   .app-shell .app-content:not(.has-calendar) {
-    padding: 12px 20px 24px;
+    padding: 12px 16px 24px;
   }
   .app-shell .app-topbar:not(.admin-topbar) {
     padding-inline: 20px;
