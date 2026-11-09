@@ -1,3 +1,4 @@
+import { TODAY } from './workspace';
 import { memberCards, memberDemographics } from './admin';
 import type { Member } from '../types';
 import { getMembershipKind } from './membership-kinds';
@@ -109,8 +110,7 @@ export function getClientProfile(member: Member, data: Record<string, DemoRecord
     }
     if (
       sub.status !== 'paused' &&
-      (sub.remaining === 0 ||
-        (sub.endsAt && sub.endsAt.split('.').reverse().join('-') < '2026-11-06'))
+      (sub.remaining === 0 || (sub.endsAt && sub.endsAt.split('.').reverse().join('-') < TODAY))
     )
       sub.status = 'expired';
   }
