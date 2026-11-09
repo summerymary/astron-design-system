@@ -282,6 +282,83 @@ html {
   overflow: visible;
   text-overflow: clip;
 }
+.app-shell .club-context-button {
+  width: 100%;
+  min-width: 0;
+  margin: 8px 0 16px;
+  padding: 10px 8px;
+  border-radius: 10px;
+  background: transparent;
+  text-align: left;
+  color: var(--color-ink);
+}
+.app-shell .club-context-button > .club-logo {
+  flex-shrink: 0;
+}
+.app-shell .club-context-button > span:nth-child(2) {
+  min-width: 0;
+}
+.app-shell .club-context-button strong,
+.app-shell .club-context-button small {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-shell .club-context-button > svg {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.app-shell .club-context-button:hover {
+  background: var(--color-surface-muted);
+}
+.app-shell .club-context-button:focus-visible {
+  outline: 2px solid var(--color-accent);
+}
+.club-context-note {
+  color: var(--color-muted);
+  margin: 0 0 16px;
+}
+.club-context-options {
+  display: grid;
+  gap: 8px;
+}
+.club-context-options > button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  background: var(--color-surface);
+  text-align: left;
+  color: var(--color-ink);
+}
+.club-context-options > button > .club-logo {
+  width: 32px;
+  height: 36px;
+  flex-shrink: 0;
+}
+.club-context-options > button > span:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+.club-context-options small {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-muted);
+}
+.club-context-options > button[aria-pressed='true'],
+.club-context-options > button:hover {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent-line);
+}
+.club-context-options > button > svg {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
 .app-shell .nav-label {
   letter-spacing: 0.6px;
 }

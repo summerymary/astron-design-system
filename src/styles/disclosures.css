@@ -30,6 +30,25 @@
   flex-shrink: 0;
   margin-left: auto;
 }
+.app-shell .workstation-button {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 16px;
+  gap: 9px;
+  padding-inline-end: 8px;
+}
+.app-shell .workstation-button > svg {
+  width: 16px;
+  height: 16px;
+  margin: 4px 0 0;
+  align-self: start;
+}
+.app-shell .workstation-button small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-shell .workstation-button[aria-expanded='true'] > svg {
+  transform: rotate(180deg);
+}
 .club-switch {
   padding-inline-end: var(--disclosure-inset);
 }
