@@ -3,6 +3,7 @@ import type { Member, MemberStatus, Page, Scenario } from '../types';
 export const pages: { id: Page; title: string; caption: string }[] = [
   { id: 'overview', title: 'Обзор клуба', caption: 'Всё, что происходит в клубе сегодня.' },
   { id: 'members', title: 'Клиенты', caption: '' },
+  { id: 'sections', title: 'Все разделы', caption: '' },
 ];
 
 export const scenarios: { id: Scenario; label: string }[] = [
