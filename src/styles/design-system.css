@@ -203,3 +203,18 @@
   line-height: 1.75;
   color: var(--color-muted);
 }
+
+@media (max-width: 480px) {
+  .design-system .ds-two-columns > .ds-section {
+    min-width: 0;
+  }
+  .design-system .radius-examples {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-width: 0;
+    gap: 16px;
+  }
+  .design-system .radius-examples > div {
+    min-width: 0;
+  }
+}

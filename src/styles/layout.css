@@ -1095,6 +1095,7 @@ html {
   top: 150px;
   align-self: start;
   min-width: 0;
+  padding-block-start: 16px;
   max-height: calc(100dvh - 220px);
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -1230,5 +1231,102 @@ html {
   }
   .app-shell .has-management-menu .sidebar-navigation > .side-nav:not(.management-module-nav) {
     gap: 4px;
+  }
+}
+
+/* Compact reception on phones; the complete shift and filters remain available. */
+.reception-mobile-shift {
+  display: none;
+}
+.visitor-mobile-controls {
+  display: grid;
+  gap: 12px;
+}
+@media (max-width: 700px) {
+  .app-shell .app-topbar.admin-topbar {
+    padding: 8px 16px;
+    min-height: 0;
+  }
+  .app-shell .admin-header-content {
+    gap: 8px;
+  }
+  .app-shell .admin-header-actions > button {
+    min-height: 36px;
+    padding: 6px 10px;
+  }
+  .app-shell .quick-card {
+    height: 44px;
+  }
+  .app-shell .reception-home > .ws-home-shift {
+    display: none;
+  }
+  .reception-mobile-shift {
+    display: block;
+    padding: 0 0 12px;
+  }
+  .reception-mobile-shift > summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 36px;
+    cursor: pointer;
+  }
+  .reception-mobile-shift > summary span {
+    color: var(--color-muted);
+  }
+  .app-shell .visitor-table-controls {
+    display: none;
+  }
+  .visitor-mobile-controls {
+    display: grid;
+    gap: 12px;
+  }
+  .app-shell .visitor-heading {
+    padding: 14px 16px 8px;
+  }
+  .app-shell .visitor-toolbar {
+    padding: 8px 16px 14px;
+  }
+}
+@container workspace (max-width: 700px) {
+  .app-shell .app-topbar.admin-topbar {
+    padding: 8px 16px;
+    min-height: 0;
+  }
+  .app-shell .admin-header-content {
+    gap: 8px;
+  }
+  .app-shell .admin-header-actions > button {
+    min-height: 36px;
+    padding: 6px 10px;
+  }
+  .app-shell .quick-card {
+    height: 44px;
+  }
+  .app-shell .reception-home > .ws-home-shift {
+    display: none;
+  }
+  .reception-mobile-shift {
+    display: block;
+    padding: 0 0 12px;
+  }
+  .reception-mobile-shift > summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 36px;
+    cursor: pointer;
+  }
+  .reception-mobile-shift > summary span {
+    color: var(--color-muted);
+  }
+  .app-shell .visitor-table-controls {
+    display: none;
+  }
+  .app-shell .visitor-heading {
+    padding: 14px 16px 8px;
+  }
+  .app-shell .visitor-toolbar {
+    padding: 8px 16px 14px;
   }
 }

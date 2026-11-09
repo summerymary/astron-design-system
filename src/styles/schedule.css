@@ -629,3 +629,31 @@
     font-size: var(--text-body);
   }
 }
+
+/* Compact controls remain inside a narrow phone, independently of the calendar grid. */
+@container calendar (max-width: 320px) {
+  .calendar-date-nav {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+    min-width: 0;
+  }
+  .calendar-date {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+  .calendar-date input {
+    width: 100%;
+  }
+  .calendar-create {
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+  .calendar-create .button {
+    flex: 1 1 110px;
+    min-width: 0;
+    white-space: normal;
+  }
+  .calendar-create .icon-button {
+    flex-shrink: 0;
+  }
+}
