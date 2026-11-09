@@ -71,9 +71,7 @@ const navigation = [
   { id: 'members' as const, label: 'Клиенты', icon: Users },
 ];
 const workNavigation = [
-  { id: 'schedule', label: 'Расписание', icon: CalendarDays },
   { id: 'memberships', label: 'Абонементы', icon: CreditCard },
-  { id: 'registration', label: 'Посещения', icon: Check },
   { id: 'calls', label: 'Звонки', icon: Phone },
   { id: 'messages', label: 'Сообщения', icon: MessageSquare },
   { id: 'bar', label: 'Бар', icon: CupSoda },
@@ -618,17 +616,6 @@ export function App() {
             aria-label="Боковое меню"
           >
             <div className="sidebar-head">
-              <button
-                type="button"
-                className="icon-button sidebar-toggle"
-                aria-label={sidebarCollapsed ? 'Развернуть меню' : 'Свернуть меню'}
-                title={sidebarCollapsed ? 'Развернуть меню' : 'Свернуть меню'}
-                aria-expanded={!sidebarCollapsed}
-                aria-controls="workspace-navigation"
-                onClick={() => setSidebarCollapsed((value) => !value)}
-              >
-                {sidebarCollapsed ? <PanelLeftOpen size={19} /> : <PanelLeftClose size={19} />}
-              </button>
               <a
                 className="brand"
                 title={sidebarCollapsed ? club.name : undefined}
@@ -641,49 +628,55 @@ export function App() {
                 <ClubLogo brand={club.brand} variant={sidebarCollapsed ? 'compact' : 'wide'} />
               </a>
             </div>
-            <div className="club-switch">
-              <ClubLogo brand={club.brand} variant="compact" decorative />
-              <span>
-                <strong>{currentRole.scope === 'network' ? network.name : club.name}</strong>
-                <small>
-                  {currentRole.scope === 'network'
-                    ? `${currentUser.clubIds.length} клуба · ${club.city}`
-                    : `${club.city} · Ваш клуб`}
-                </small>
-              </span>
-              <ChevronDown size={14} />
-            </div>
+            {role !== 'administrator' && (
+              <div className="club-switch">
+                <ClubLogo brand={club.brand} variant="compact" decorative />
+                <span>
+                  <strong>{currentRole.scope === 'network' ? network.name : club.name}</strong>
+                  <small>
+                    {currentRole.scope === 'network'
+                      ? `${currentUser.clubIds.length} клуба · ${club.city}`
+                      : `${club.city} · Ваш клуб`}
+                  </small>
+                </span>
+                <ChevronDown size={14} />
+              </div>
+            )}
             <div
               id="workspace-navigation"
               className="sidebar-navigation"
               ref={sidebarNavigationRef}
             >
-              <span className="nav-label">
-                {currentRole.scope === 'network' ? 'УПРАВЛЕНИЕ СЕТЬЮ' : 'ВАШ КЛУБ'}
-              </span>
+              {role !== 'administrator' && (
+                <span className="nav-label">
+                  {currentRole.scope === 'network' ? 'УПРАВЛЕНИЕ СЕТЬЮ' : 'ВАШ КЛУБ'}
+                </span>
+              )}
               <nav className="side-nav" aria-label="Основная навигация">
-                {visibleNavigation.map((n) => (
-                  <button
-                    key={n.id}
-                    title={sidebarCollapsed ? n.label : undefined}
-                    aria-label={sidebarCollapsed ? n.label : undefined}
-                    aria-current={
-                      page === n.id || (n.id === 'members' && page === 'client-profile')
-                        ? 'page'
-                        : undefined
-                    }
-                    className={
-                      page === n.id || (n.id === 'members' && page === 'client-profile')
-                        ? 'active'
-                        : ''
-                    }
-                    onClick={() => goTo(n.id)}
-                  >
-                    <n.icon size={18} strokeWidth={1.75} />
-                    <span className="nav-item-label">{n.label}</span>
-                    {n.id === 'members' && <span className="nav-count">{members.length}</span>}
-                  </button>
-                ))}
+                {visibleNavigation
+                  .filter((n) => role !== 'administrator' || n.id !== 'members')
+                  .map((n) => (
+                    <button
+                      key={n.id}
+                      title={sidebarCollapsed ? n.label : undefined}
+                      aria-label={sidebarCollapsed ? n.label : undefined}
+                      aria-current={
+                        page === n.id || (n.id === 'members' && page === 'client-profile')
+                          ? 'page'
+                          : undefined
+                      }
+                      className={
+                        page === n.id || (n.id === 'members' && page === 'client-profile')
+                          ? 'active'
+                          : ''
+                      }
+                      onClick={() => goTo(n.id)}
+                    >
+                      <n.icon size={18} strokeWidth={1.75} />
+                      <span className="nav-item-label">{n.label}</span>
+                      {n.id === 'members' && <span className="nav-count">{members.length}</span>}
+                    </button>
+                  ))}
                 {role === 'marketer' && (
                   <button
                     onClick={() => openModule('crm')}
@@ -865,6 +858,18 @@ export function App() {
                 </span>
                 <span className="user-online" />
               </div>
+              <button
+                type="button"
+                className="icon-button sidebar-toggle"
+                aria-label={sidebarCollapsed ? 'Развернуть меню' : 'Свернуть меню'}
+                title={sidebarCollapsed ? 'Развернуть меню' : 'Свернуть меню'}
+                aria-expanded={!sidebarCollapsed}
+                aria-controls="workspace-navigation"
+                onClick={() => setSidebarCollapsed((value) => !value)}
+              >
+                {sidebarCollapsed ? <PanelLeftOpen size={19} /> : <PanelLeftClose size={19} />}
+                <span className="sidebar-toggle-label">Свернуть меню</span>
+              </button>
             </div>
           </aside>
           <div className="app-workspace">
