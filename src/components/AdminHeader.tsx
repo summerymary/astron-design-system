@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { ClubLogo } from './ClubLogo';
 import { ClientSearch } from './ClientSearch';
 import { useWorkspace } from './WorkspaceProvider';
@@ -38,6 +38,16 @@ export function AdminHeader({
   onLock: () => void;
 }) {
   const [open, setOpen] = useState(false);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const options = useRef<HTMLDivElement>(null);
+  const listId = useId();
+  const close = () => {
+    setOpen(false);
+    trigger.current?.focus();
+  };
+  useEffect(() => {
+    if (open) options.current?.querySelector<HTMLButtonElement>('[aria-selected="true"]')?.focus();
+  }, [open]);
   const { data } = useWorkspace();
   const newLeads = data.leads.filter((row) => row.stage === 'Новая').length;
   const unread = data.notifications.filter((row) => row.status === 'Новое').length;
@@ -45,9 +55,28 @@ export function AdminHeader({
   const club = demoClubs.find((c) => c.id === workplace.clubId)!;
   return (
     <div className="admin-header-content">
-      <div className="workstation-control">
+      <div
+        className="workstation-control"
+        onKeyDown={(event) => {
+          if (event.key === 'Tab' && open) close();
+          if (event.key === 'Escape' && open) {
+            event.preventDefault();
+            event.stopPropagation();
+            close();
+          }
+        }}
+      >
         <button
           className="workstation-button"
+          ref={trigger}
+          aria-haspopup="listbox"
+          aria-controls={open ? listId : undefined}
+          onKeyDown={(event) => {
+            if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
+              event.preventDefault();
+              setOpen(true);
+            }
+          }}
           onClick={() => setOpen(!open)}
           aria-expanded={open}
           aria-label={`Рабочая зона: ${club.name}, ${workplace.name}`}
@@ -65,36 +94,56 @@ export function AdminHeader({
             <button
               className="workstation-dismiss"
               aria-label="Закрыть выбор рабочей зоны"
-              onClick={() => setOpen(false)}
+              tabIndex={-1}
+              onClick={close}
             />
             <div className="workstation-menu">
               <div>
                 <strong>Рабочая зона</strong>
                 <button
                   className="icon-button"
-                  onClick={() => setOpen(false)}
+                  onClick={close}
                   aria-label="Закрыть список рабочих мест"
                 >
                   <X size={15} />
                 </button>
               </div>
               <p>Клуб и ресепшен для текущей работы</p>
-              {workstations.map((w) => (
-                <button
-                  key={w.id}
-                  className={w.id === workstationId ? 'selected' : ''}
-                  onClick={() => {
-                    onWorkstation(w.id);
-                    setOpen(false);
-                  }}
-                >
-                  <span>
-                    {demoClubs.find((c) => c.id === w.clubId)!.name}
-                    <small>{w.name}</small>
-                  </span>
-                  <i />
-                </button>
-              ))}
+              <div id={listId} role="listbox" aria-label="Рабочие места" ref={options}>
+                {workstations.map((w, index) => (
+                  <button
+                    key={w.id}
+                    role="option"
+                    aria-selected={w.id === workstationId}
+                    tabIndex={w.id === workstationId ? 0 : -1}
+                    onKeyDown={(event) => {
+                      if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+                      event.preventDefault();
+                      const next =
+                        event.key === 'Home'
+                          ? 0
+                          : event.key === 'End'
+                            ? workstations.length - 1
+                            : (index + (event.key === 'ArrowDown' ? 1 : -1) + workstations.length) %
+                              workstations.length;
+                      options.current
+                        ?.querySelectorAll<HTMLButtonElement>('[role="option"]')
+                        [next]?.focus();
+                    }}
+                    className={w.id === workstationId ? 'selected' : ''}
+                    onClick={() => {
+                      onWorkstation(w.id);
+                      close();
+                    }}
+                  >
+                    <span>
+                      {demoClubs.find((c) => c.id === w.clubId)!.name}
+                      <small>{w.name}</small>
+                    </span>
+                    <i />
+                  </button>
+                ))}
+              </div>
             </div>
           </>
         )}
