@@ -1,0 +1,475 @@
+/* Shared comparison control; original product styles remain untouched. */
+.visual-style-switch {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  background: var(--color-surface-muted);
+}
+.visual-style-switch > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.visual-style-switch > button:hover {
+  background: var(--color-surface);
+}
+.visual-style-switch > button[aria-pressed='true'] {
+  background: var(--color-surface);
+  border-color: var(--color-control-border);
+  color: var(--color-ink);
+}
+.visual-style-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.astron-style-dot {
+  background: #8a332c;
+}
+.spectrum-style-dot {
+  background: #6b2737;
+}
+.guide-appearance-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.spectrum-style-intro > p {
+  max-width: 800px;
+  color: var(--color-text);
+  margin: 12px 0;
+  line-height: 1.6;
+}
+.spectrum-style-intro > .button {
+  margin-top: 8px;
+}
+/* Make room for a third comparison control without increasing the work chrome. */
+@media (min-width: 761px) and (max-width: 1550px) {
+  .workspace-toolbar {
+    gap: 12px;
+    padding-inline: 20px;
+  }
+  .workspace-toolbar .workspace-brand {
+    min-width: 0;
+  }
+  .workspace-toolbar .workspace-version {
+    display: none;
+  }
+  .workspace-toolbar .device-switch button {
+    min-width: 36px;
+    width: 36px;
+  }
+  .workspace-toolbar .device-switch button > span {
+    display: none;
+  }
+  .workspace-toolbar .workspace-actions {
+    min-width: 0;
+    gap: 10px;
+  }
+  .workspace-toolbar .role-select-desktop > span,
+  .workspace-toolbar .scenario-label {
+    display: none;
+  }
+  .workspace-toolbar .scenario-dot {
+    left: 10px;
+  }
+  .workspace-toolbar .workspace-guide-link > span,
+  .workspace-toolbar .workspace-guide-link > svg:last-child {
+    display: none;
+  }
+}
+@media (min-width: 761px) and (max-width: 1120px) {
+  .workspace-toolbar .workspace-brand > span:nth-child(2) {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .workspace-toolbar {
+    height: auto;
+    min-height: 64px;
+    flex-wrap: wrap;
+    padding-block: 10px;
+    gap: 8px;
+  }
+  .workspace-toolbar .workspace-brand {
+    flex: 1;
+  }
+  .workspace-toolbar .workspace-actions {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  .workspace-toolbar .visual-style-switch {
+    margin-right: auto;
+  }
+  .visual-style-switch > button {
+    min-height: 38px;
+  }
+  .guide-header-inner {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .guide-appearance-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .guide-appearance-actions .guide-open-prototype {
+    font-size: 14px;
+    padding-inline: 10px;
+  }
+}
+@media (max-width: 370px) {
+  .guide-appearance-actions {
+    flex-wrap: wrap;
+  }
+}
+
+/* Airy Spectrum-inspired alternative. Every rule is scoped; Astron keeps its original forms.
+   Keep status/membership colours, table density, calendar geometry and the 80px rail offset. */
+:root[data-visual-style='spectrum'] {
+  --radius-sm: 6px;
+  --radius-control: 10px;
+  --radius-card: 16px;
+  --shadow-popup: 0 8px 32px #241e211a;
+  --color-divider: #e7e2e4;
+}
+:root[data-visual-style='spectrum'] .workspace-toolbar {
+  background: #fcfafb;
+  border-bottom-color: var(--color-line);
+}
+:root[data-visual-style='spectrum'] .workspace-icon {
+  background: var(--color-action);
+  border-color: var(--color-action);
+  color: #fff;
+  border-radius: 10px;
+}
+:root[data-visual-style='spectrum'] :is(.device-switch, .visual-style-switch) {
+  background: var(--color-surface-muted);
+  border-color: transparent;
+  border-radius: 10px;
+}
+:root[data-visual-style='spectrum']
+  :is(.device-switch button.selected, .visual-style-switch button[aria-pressed='true']) {
+  box-shadow: none;
+  border-color: transparent;
+  background: #fff;
+  color: var(--color-accent);
+}
+:root[data-visual-style='spectrum'] .app-shell :is(.sidebar, .sidebar-bottom) {
+  background: #fcfafb;
+}
+:root[data-visual-style='spectrum'] .app-shell .sidebar {
+  border-right-color: var(--color-line);
+}
+:root[data-visual-style='spectrum'] .app-shell .app-topbar {
+  background: #fff;
+  border-bottom: 1px solid var(--color-line);
+}
+:root[data-visual-style='spectrum'] .app-shell .app-content {
+  background: var(--color-canvas);
+}
+:root[data-visual-style='spectrum'] .app-shell :is(.side-nav, .management-module-nav) button {
+  border-radius: 10px;
+  color: var(--color-text);
+  font-weight: 400;
+}
+:root[data-visual-style='spectrum']
+  .app-shell
+  :is(.side-nav, .management-module-nav)
+  button.active {
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  box-shadow: none;
+  font-weight: 600;
+}
+:root[data-visual-style='spectrum']
+  .app-shell
+  :is(.side-nav, .management-module-nav)
+  button:hover:not(.active) {
+  background: var(--color-surface-muted);
+}
+:root[data-visual-style='spectrum'] .app-shell .management-nav-group > summary {
+  border-radius: 10px;
+  font-weight: 500;
+}
+:root[data-visual-style='spectrum'] .app-shell .work-page-toolbar h1 {
+  letter-spacing: -0.3px;
+  font-weight: 600;
+}
+:root[data-visual-style='spectrum']
+  .app-shell
+  :is(
+    .panel,
+    .ws-panel,
+    .visitor-panel,
+    .members-panel,
+    .members-preview,
+    .calendar-panel,
+    .client-identity,
+    .client-history,
+    .client-info-card,
+    .attendance-panel,
+    .schedule-panel,
+    .messenger-shell,
+    .staff-note,
+    .ws-empty
+  ) {
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: none;
+}
+:root[data-visual-style='spectrum'] .app-shell :is(.ws-panel-heading, .client-info-card h3) {
+  background: transparent;
+  border-bottom: 0;
+}
+:root[data-visual-style='spectrum'] .app-shell .ws-panel > .ws-panel-heading {
+  padding: 20px 24px 12px;
+}
+:root[data-visual-style='spectrum'] .app-shell .ws-panel > .ws-panel-body {
+  padding-inline: 24px;
+}
+:root[data-visual-style='spectrum'] .app-shell .client-info-card {
+  overflow: hidden;
+}
+:root[data-visual-style='spectrum'] .app-shell .client-info-card h3 {
+  margin: 0;
+}
+:root[data-visual-style='spectrum'] .app-shell .client-info-card dl > div + div {
+  border-top-color: #f1edef;
+}
+:root[data-visual-style='spectrum'] .app-shell :is(.members-table, .visitor-table, .ws-table) th {
+  background: #fff;
+  color: var(--color-muted);
+  font-weight: 500;
+  border-bottom-color: var(--color-line);
+}
+:root[data-visual-style='spectrum']
+  .app-shell
+  :is(.members-table, .visitor-table, .ws-table)
+  tbody
+  tr:hover {
+  background: #fcf8fa;
+}
+:root[data-visual-style='spectrum'] .app-shell :is(.members-table, .visitor-table, .ws-table) td {
+  border-bottom-color: #f1edef;
+}
+:root[data-visual-style='spectrum']
+  .app-shell
+  :is(.members-table, .visitor-table, .ws-table)
+  td
+  strong {
+  font-weight: 500;
+}
+:root[data-visual-style='spectrum'] .button {
+  border-radius: 10px;
+  font-weight: 500;
+  letter-spacing: 0;
+  box-shadow: none;
+}
+:root[data-visual-style='spectrum'] .button-secondary {
+  background: var(--color-surface);
+  border-color: var(--color-line);
+  color: var(--color-text);
+}
+:root[data-visual-style='spectrum'] .button-secondary:hover {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent-line);
+  color: var(--color-accent);
+}
+:root[data-visual-style='spectrum'] .app-shell .client-sell-button {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+:root[data-visual-style='spectrum']
+  :is(.select-trigger, .icon-button, .ws-disclosure, .sections-search) {
+  border-radius: 10px;
+}
+:root[data-visual-style='spectrum']
+  :is(input, textarea):not([type='checkbox']):not([type='radio']):not([type='color']) {
+  border-radius: 10px;
+}
+:root[data-visual-style='spectrum']
+  .app-shell
+  :is(.client-search-field, .visitor-search, .table-search, .search-box) {
+  background: #fff;
+  border-color: var(--color-control-border);
+  border-radius: 10px;
+}
+:root[data-visual-style='spectrum'] .app-shell .ws-fields {
+  gap: 20px 24px;
+}
+:root[data-visual-style='spectrum'] .app-shell .form-field > span {
+  font-weight: 500;
+  color: var(--color-text);
+}
+:root[data-visual-style='spectrum'] .app-shell .form-field :is(input, .select-trigger, textarea) {
+  min-height: 44px;
+  background: #fff;
+  border-color: var(--color-control-border);
+}
+:root[data-visual-style='spectrum']
+  .app-shell
+  .form-field
+  input:is([type='checkbox'], [type='radio']) {
+  min-height: 0;
+}
+:root[data-visual-style='spectrum']
+  .app-shell
+  :is(.ws-link-card, .sections-group .ws-link-card, .sale-category-card) {
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: var(--color-surface);
+  box-shadow: none;
+}
+:root[data-visual-style='spectrum'] .app-shell :is(.ws-link-card, .sale-category-card):hover {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent-line);
+}
+:root[data-visual-style='spectrum'] .app-shell .quick-card {
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid var(--color-line);
+}
+:root[data-visual-style='spectrum'] .global-admin-quick.admin-quick-panel nav {
+  gap: 8px;
+}
+:root[data-visual-style='spectrum'] .global-admin-quick.admin-quick-panel nav > button {
+  background: #fff;
+  border-color: var(--color-line);
+  border-radius: 12px;
+  box-shadow: none;
+  padding-inline: 14px;
+}
+:root[data-visual-style='spectrum'] .global-admin-quick.admin-quick-panel nav strong {
+  font-weight: 500;
+}
+:root[data-visual-style='spectrum'] .global-admin-quick.admin-quick-panel nav > button:hover {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent-line);
+}
+:root[data-visual-style='spectrum']
+  .global-admin-quick.admin-quick-panel
+  nav
+  > button[aria-current='page'] {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent-line);
+  box-shadow: none;
+}
+:root[data-visual-style='spectrum'] :is(.ws-tabs, .client-tabs, .table-tabs) {
+  background: transparent;
+  border-radius: 0;
+}
+:root[data-visual-style='spectrum'] :is(.ws-tabs, .client-tabs, .table-tabs) > button {
+  border-radius: 0;
+  box-shadow: none;
+}
+:root[data-visual-style='spectrum']
+  :is(.ws-tabs, .client-tabs, .table-tabs)
+  > button:is(.selected, [aria-selected='true']) {
+  background: transparent;
+  color: var(--color-accent);
+  box-shadow: inset 0 -2px var(--color-accent);
+}
+:root[data-visual-style='spectrum'] .app-shell .calendar-workspace .calendar-week-strip button {
+  border-radius: 10px;
+}
+:root[data-visual-style='spectrum'] .app-shell .calendar-workspace .calendar-column-heading {
+  background: #fcfafb;
+}
+:root[data-visual-style='spectrum'] .app-shell .calendar-event {
+  border-radius: 8px;
+  box-shadow: none;
+}
+:root[data-visual-style='spectrum']
+  :is(.modal, .select-popover, .calendar-context-menu, .workstation-menu, .client-search-results) {
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--shadow-popup);
+}
+:root[data-visual-style='spectrum'] .modal-backdrop {
+  background: #241e214d;
+  backdrop-filter: blur(3px);
+}
+:root[data-visual-style='spectrum'] .select-option {
+  border-radius: 8px;
+}
+:root[data-visual-style='spectrum'] .select-option.is-active {
+  background: var(--color-surface-muted);
+}
+:root[data-visual-style='spectrum'] .select-option[aria-selected='true'] {
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+:root[data-visual-style='spectrum'] .app-shell .message-bubble {
+  border-radius: 14px 14px 14px 4px;
+}
+:root[data-visual-style='spectrum'] .app-shell .message-own .message-bubble {
+  background: var(--color-accent-soft);
+  border-radius: 14px 14px 4px 14px;
+}
+:root[data-visual-style='spectrum'] .app-shell .checkout-total {
+  background: var(--color-surface-subtle);
+  border-radius: 12px;
+}
+:root[data-visual-style='spectrum'] .app-shell .checkout-panel > .ws-panel-heading {
+  padding: 16px 12px 8px;
+}
+:root[data-visual-style='spectrum'] .app-shell .checkout-panel > .ws-panel-body {
+  padding: 0 12px 12px;
+}
+:root[data-visual-style='spectrum'] .app-shell .checkout-panel .ws-fields {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+:root[data-visual-style='spectrum'] .app-shell .ws-home-shift {
+  border: 0;
+  border-bottom: 1px solid var(--color-line);
+  border-radius: 0;
+  background: transparent;
+}
+:root[data-visual-style='spectrum'] .guide-page .ds-section {
+  border-radius: 16px;
+}
+:root[data-visual-style='spectrum'] :is(.ds-categories > button, .ws-disclosure > summary) {
+  border-radius: 10px;
+}
+:root[data-visual-style='spectrum'] .mobile-nav {
+  background: #fff;
+  border-top-color: var(--color-line);
+}
+:root[data-visual-style='spectrum'] :is(button, a, summary, input, textarea):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+@container workspace (max-width: 700px) {
+  :root[data-visual-style='spectrum'] .app-shell .ws-panel > .ws-panel-heading {
+    padding: 16px 16px 10px;
+  }
+  :root[data-visual-style='spectrum'] .app-shell .ws-panel > .ws-panel-body {
+    padding-inline: 16px;
+  }
+  :root[data-visual-style='spectrum'] .app-shell .checkout-panel > .ws-panel-heading {
+    padding: 16px 12px 8px;
+  }
+  :root[data-visual-style='spectrum'] .app-shell .checkout-panel > .ws-panel-body {
+    padding: 0 12px 12px;
+  }
+}
