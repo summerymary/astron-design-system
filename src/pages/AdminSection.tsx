@@ -17,7 +17,9 @@ import {
   SaleWorkspace,
   StatisticsWorkspace,
 } from './WorkspaceOperations';
-import { CRMWorkspace, MessagesWorkspace, NotificationsWorkspace } from './WorkspaceCRM';
+import { CRMWorkspace, NotificationsWorkspace } from './WorkspaceCRM';
+import { MessagesWorkspace } from './MessengerWorkspace';
+import { roles } from '../data/roles';
 import {
   CamerasWorkspace,
   DirectoriesWorkspace,
@@ -135,6 +137,9 @@ export function AdminSection({
         navigate={navigate}
         initialMember={member}
         members={members}
+        onMember={
+          roles.find((role) => role.id === user.role)?.canViewMembers ? onMember : undefined
+        }
       />
     );
   if (section === 'notifications') return <NotificationsWorkspace navigate={navigate} />;

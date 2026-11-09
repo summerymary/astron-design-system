@@ -28,6 +28,7 @@ import { visitKinds } from '../data/admin';
 import { demoClubs } from '../data/roles';
 import { profileBookingOptions } from '../data/profileBookings';
 import { findClientChat, readChatMessages } from '../lib/client-messages';
+import { ChatHistory } from '../components/ChatHistory';
 import { MembershipTag } from '../components/MembershipTag';
 import type { Member, Scenario, Visit } from '../types';
 
@@ -72,6 +73,7 @@ export function ClientProfile({
   scenario,
   onReset,
   onBack,
+  backLabel = 'К списку клиентов',
   onRegistration,
   onAction,
   onUpdate,
@@ -85,6 +87,7 @@ export function ClientProfile({
   scenario: Scenario;
   onReset: () => void;
   onBack: () => void;
+  backLabel?: string;
   onRegistration: () => void;
   onAction: (id: AdminSectionId) => void;
   onUpdate: (member: Member) => void;
@@ -130,8 +133,8 @@ export function ClientProfile({
             <div className="client-identity-top">
               <button
                 className="client-back icon-button"
-                aria-label="К списку клиентов"
-                title="К списку клиентов"
+                aria-label={backLabel}
+                title={backLabel}
                 onClick={onBack}
               >
                 <ArrowLeft size={18} />
@@ -669,16 +672,10 @@ export function ClientProfile({
                       {data.chats
                         .filter((row) => row.memberId === String(member.id))
                         .map((row) => (
-                          <div className="ws-chat-history" key={row.id}>
-                            {readChatMessages(row).map((entry, index) => (
-                              <p key={index} className={entry.sender === 'club' ? 'from-club' : ''}>
-                                <span className="sr-only">
-                                  {entry.sender === 'club' ? 'Клуб: ' : 'Клиент: '}
-                                </span>
-                                {entry.text}
-                              </p>
-                            ))}
-                          </div>
+                          <section key={row.id} aria-label={`Канал: ${row.channel}`}>
+                            <h3>{row.channel}</h3>
+                            <ChatHistory entries={readChatMessages(row)} name={member.name} />
+                          </section>
                         ))}
                       {!data.chats.some((row) => row.memberId === String(member.id)) && (
                         <p>Переписка пока не начата.</p>
