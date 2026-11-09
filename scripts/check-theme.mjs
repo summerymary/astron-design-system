@@ -26,6 +26,48 @@ assert.equal(contrastRatio('#000', '#fff'), 21);
 assert.equal(contrastRatio('#fff', '#000'), 21);
 assert.equal(contrastRatio('#123456', '#123456'), 1);
 assert.deepEqual(generatePalette(DEFAULT_PRIMARY).tokens, ASTRON_TOKENS);
+// The alternative skin must never mutate the saved club palette or repurpose statuses.
+const styleSource = await readFile(new URL('../src/lib/visual-style.ts', import.meta.url), 'utf8');
+const styleCompiled = ts.transpileModule(styleSource, {
+  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
+}).outputText;
+const { visualStyleTokens, readVisualStyle, appearanceSearch } = await import(
+  `data:text/javascript;base64,${Buffer.from(styleCompiled).toString('base64')}`
+);
+assert.equal(readVisualStyle(''), 'astron');
+assert.equal(readVisualStyle('?style=unknown'), 'astron');
+assert.equal(readVisualStyle('?theme=F0FC03&style=spectrum'), 'spectrum');
+for (const preset of THEME_PRESETS) {
+  const original = generatePalette(preset.color).tokens;
+  const snapshot = { ...original };
+  const alternative = visualStyleTokens(original, 'spectrum');
+  assert.equal(alternative['--color-action'], '#6B2737', 'Alternative must use dark burgundy');
+  assert.deepEqual(original, snapshot, 'Alternative mutated the original palette');
+  assert.deepEqual(
+    visualStyleTokens(original, 'astron'),
+    snapshot,
+    'Original palette did not restore',
+  );
+  for (const key of Object.keys(original).filter((key) =>
+    /success|warning|danger|paused|info/.test(key),
+  )) {
+    assert.equal(alternative[key], original[key], `${key}: status semantics changed`);
+  }
+  for (const surface of ['--color-surface', '--color-canvas', '--color-surface-muted']) {
+    assert.ok(contrastRatio(alternative['--color-muted'], alternative[surface]) >= 4.5);
+    assert.ok(contrastRatio(alternative['--color-ink'], alternative[surface]) >= 4.5);
+  }
+  assert.ok(contrastRatio(alternative['--color-on-action'], alternative['--color-action']) >= 4.5);
+  assert.ok(
+    contrastRatio(alternative['--color-control-border'], alternative['--color-surface']) >= 3,
+  );
+  const url = new URL(`https://example.com/${appearanceSearch(preset.color, 'spectrum')}`);
+  assert.equal(readVisualStyle(url.search), 'spectrum');
+  assert.equal(url.searchParams.get('theme'), preset.color.slice(1));
+}
+console.log(
+  'Alternative visual style: contrast, original palette, status semantics and shared URLs passed.',
+);
 const fallback = await readFile(new URL('../src/styles/tokens.css', import.meta.url), 'utf8');
 for (const [key, value] of Object.entries(ASTRON_TOKENS)) {
   const css = fallback.match(new RegExp(`${key}:\\s*([^;]+);`))?.[1];
