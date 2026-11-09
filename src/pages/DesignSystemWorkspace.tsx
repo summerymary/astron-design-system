@@ -5,9 +5,11 @@ import { Toast } from '../components/ui';
 import { useTheme } from '../components/ThemeProvider';
 import { astronBrand } from '../data/branding';
 import { DesignSystem } from './DesignSystem';
+import { VisualStyleSwitch } from '../components/VisualStyleSwitch';
+import { appearanceSearch } from '../lib/visual-style';
 
 export function DesignSystemWorkspace() {
-  const { palette } = useTheme();
+  const { palette, visualStyle } = useTheme();
   const [toast, setToast] = useState('');
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const notify = useCallback((text: string) => {
@@ -35,15 +37,18 @@ export function DesignSystemWorkspace() {
               Дизайн-система
             </span>
           </div>
-          <a
-            className="button button-secondary guide-open-prototype"
-            href={`./?theme=${palette.primary.slice(1)}#/overview?device=desktop&state=default&role=administrator`}
-            target="_blank"
-            rel="noopener"
-          >
-            Открыть прототип
-            <ArrowUpRight size={15} />
-          </a>
+          <div className="guide-appearance-actions">
+            <VisualStyleSwitch />
+            <a
+              className="button button-secondary guide-open-prototype"
+              href={`./${appearanceSearch(palette.primary, visualStyle)}#/overview?device=desktop&state=default&role=administrator`}
+              target="_blank"
+              rel="noopener"
+            >
+              Открыть прототип
+              <ArrowUpRight size={15} />
+            </a>
+          </div>
         </div>
       </header>
       <main className="guide-main" id="guide-content">
