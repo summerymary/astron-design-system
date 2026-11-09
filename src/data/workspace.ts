@@ -1165,6 +1165,41 @@ export const initialExtra: Record<string, DemoRecord[]> = {
       time: '12:42',
       status: 'Ожидает ответа',
       messages: 'Клиент: Подскажите, как заморозить абонемент?',
+      entries: JSON.stringify([
+        {
+          id: 'anna-1',
+          sender: 'client',
+          text: 'Здравствуйте! Подскажите, как заморозить абонемент?',
+          createdAt: '2026-11-06T12:35:00+03:00',
+        },
+        {
+          id: 'anna-2',
+          sender: 'club',
+          text: 'Анна, добрый день! Можно оформить заморозку на удобные даты. На какой период планируете?',
+          createdAt: '2026-11-06T12:38:00+03:00',
+          delivery: 'read',
+        },
+        {
+          id: 'anna-3',
+          sender: 'client',
+          text: 'С 10 по 17 ноября. Буду в поездке.',
+          createdAt: '2026-11-06T12:42:00+03:00',
+        },
+        {
+          id: 'anna-4',
+          sender: 'club',
+          text: 'Спасибо, проверю условия вашей карты и вернусь с ответом.',
+          createdAt: '2026-11-06T12:43:00+03:00',
+          delivery: 'delivered',
+        },
+        {
+          id: 'anna-5',
+          sender: 'club',
+          text: 'После проверки подскажем, как оформить заморозку.',
+          createdAt: '2026-11-06T12:44:00+03:00',
+          delivery: 'sent',
+        },
+      ]),
     },
     {
       id: 'chat-2',
@@ -1175,6 +1210,21 @@ export const initialExtra: Record<string, DemoRecord[]> = {
       time: '11:10',
       status: 'Решено',
       messages: 'Клуб: Расписание доступно в личном кабинете.\nКлиент: Спасибо за помощь!',
+      entries: JSON.stringify([
+        {
+          id: 'mikhail-1',
+          sender: 'club',
+          text: 'Расписание доступно в личном кабинете.',
+          createdAt: '2026-11-06T11:05:00+03:00',
+          delivery: 'read',
+        },
+        {
+          id: 'mikhail-2',
+          sender: 'client',
+          text: 'Спасибо за помощь!',
+          createdAt: '2026-11-06T11:10:00+03:00',
+        },
+      ]),
     },
     {
       id: 'chat-3',
@@ -1184,6 +1234,14 @@ export const initialExtra: Record<string, DemoRecord[]> = {
       time: '10:35',
       status: 'Ожидает ответа',
       messages: 'Клиент: Есть ли пробная тренировка?',
+      entries: JSON.stringify([
+        {
+          id: 'olga-1',
+          sender: 'client',
+          text: 'Есть ли пробная тренировка?',
+          createdAt: '2026-11-06T10:35:00+03:00',
+        },
+      ]),
     },
     {
       id: 'chat-4',
@@ -1193,6 +1251,44 @@ export const initialExtra: Record<string, DemoRecord[]> = {
       time: '09:20',
       status: 'В работе',
       messages: 'Клиент: Хочу узнать об абонементах.',
+      entries: JSON.stringify([
+        {
+          id: 'ilya-1',
+          sender: 'client',
+          text: 'Хочу узнать об абонементах.',
+          createdAt: '2026-11-06T09:20:00+03:00',
+        },
+      ]),
+    },
+    {
+      id: 'chat-5',
+      memberId: '1003',
+      name: 'Елена Козлова',
+      channel: 'Telegram',
+      preview: 'Отлично, спасибо!',
+      time: '13:10',
+      status: 'Решено',
+      entries: JSON.stringify([
+        {
+          id: 'elena-1',
+          sender: 'client',
+          text: 'Здравствуйте! Подскажите, во сколько сегодня йога?',
+          createdAt: '2026-11-06T13:00:00+03:00',
+        },
+        {
+          id: 'elena-2',
+          sender: 'club',
+          text: 'Елена, занятие в 18:00 в большом зале. Будем рады видеть!',
+          createdAt: '2026-11-06T13:05:00+03:00',
+          delivery: 'read',
+        },
+        {
+          id: 'elena-3',
+          sender: 'client',
+          text: 'Отлично, спасибо!',
+          createdAt: '2026-11-06T13:10:00+03:00',
+        },
+      ]),
     },
   ],
   notifications: [
