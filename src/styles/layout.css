@@ -568,14 +568,13 @@ html {
 
 /* Desktop navigation can collapse without hiding destinations or their names. */
 .app-shell .sidebar-head {
-  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
   height: 64px;
   min-height: 64px;
   flex-shrink: 0;
-  padding-inline-start: 56px;
+  justify-content: center;
   margin-bottom: 12px;
 }
 .app-shell .sidebar-head .brand {
@@ -588,12 +587,27 @@ html {
   padding: 6px 0;
 }
 .app-shell .sidebar-toggle {
-  position: absolute;
-  inset-inline-start: 6px;
-  top: 10px;
-  width: 44px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
   height: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  margin: 4px 0 8px;
+  border-radius: 8px;
   color: var(--color-muted);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  flex-shrink: 0;
+}
+.app-shell .sidebar-toggle > svg {
+  flex-shrink: 0;
+}
+.app-shell .sidebar-toggle:hover {
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
 }
 .app-shell .sidebar-navigation {
   display: flex;
@@ -698,9 +712,19 @@ html {
   padding: 12px 12px 0;
 }
 .app-shell.is-sidebar-collapsed .sidebar-head {
-  padding-inline-start: 0;
+  justify-content: center;
 }
 .app-shell.is-sidebar-collapsed .sidebar-head .brand {
+  display: flex;
+  flex: none;
+  min-height: 44px;
+}
+.app-shell.is-sidebar-collapsed .sidebar-head .club-logo {
+  width: 44px;
+  height: 44px;
+  padding: 5px;
+}
+.app-shell.is-sidebar-collapsed .sidebar-toggle-label {
   display: none;
 }
 .app-shell.is-sidebar-collapsed .club-switch,
