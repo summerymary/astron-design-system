@@ -1,3 +1,4 @@
+import { nextDemoNow } from './demo-clock';
 import type { DemoRecord } from '../data/workspace';
 import type { Member } from '../types';
 
@@ -134,7 +135,11 @@ function withMessages(chat: DemoRecord, entries: ChatMessage[]): DemoRecord {
     time: last?.createdAt ? messageTime(last.createdAt) : chat.time || '',
   };
 }
-export function appendClientMessage(chat: DemoRecord, text: string, now = new Date()): DemoRecord {
+export function appendClientMessage(
+  chat: DemoRecord,
+  text: string,
+  now = nextDemoNow(),
+): DemoRecord {
   const body = checkedText(text);
   return {
     ...withMessages(chat, [
@@ -161,7 +166,7 @@ export function editClientMessage(
   chat: DemoRecord,
   id: string,
   text: string,
-  now = new Date(),
+  now = nextDemoNow(),
 ): DemoRecord {
   const entries = readChatMessages(chat);
   editableMessage(entries, id);
@@ -173,7 +178,7 @@ export function editClientMessage(
     ),
   );
 }
-export function deleteClientMessage(chat: DemoRecord, id: string, now = new Date()): DemoRecord {
+export function deleteClientMessage(chat: DemoRecord, id: string, now = nextDemoNow()): DemoRecord {
   const entries = readChatMessages(chat);
   editableMessage(entries, id);
   return withMessages(
