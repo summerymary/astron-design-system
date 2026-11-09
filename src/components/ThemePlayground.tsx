@@ -11,7 +11,7 @@ import {
 } from '../lib/theme';
 
 export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void }) {
-  const { palette, setPrimary } = useTheme();
+  const { palette, setPrimary, visualStyle, setVisualStyle } = useTheme();
   const [draft, setDraft] = useState(palette.primary);
   const [error, setError] = useState('');
   const colors = palette.tokens;
@@ -40,6 +40,27 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
       onNotify('Не удалось скопировать палитру. Разрешите доступ к буферу обмена.');
     }
   };
+  if (visualStyle === 'spectrum')
+    return (
+      <section className="ds-section spectrum-style-intro">
+        <SectionTitle
+          title="Альтернативный стиль · Spectrum"
+          subtitle="Те же экраны и действия, другое оформление."
+        />
+        <p>
+          Почти белые поверхности, тёмный бордовый акцент, больше свободного пространства и мягкие
+          формы. Цвета статусов, виды абонементов и логотип клуба сохраняют свой смысл.
+        </p>
+        <p>
+          Это самостоятельный вариант в духе Adobe Spectrum, выполненный на существующих бесплатных
+          компонентах и системном шрифте. Фирменная палитра Астрона сохранена отдельно и вернётся
+          при переключении.
+        </p>
+        <Button variant="secondary" onClick={() => setVisualStyle('astron')}>
+          Вернуться к цветам Астрона
+        </Button>
+      </section>
+    );
   return (
     <section className="ds-section theme-playground" aria-labelledby="theme-title">
       <SectionTitle
