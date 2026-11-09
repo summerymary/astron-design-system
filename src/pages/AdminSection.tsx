@@ -35,6 +35,7 @@ export function AdminSection({
   member,
   members,
   clubName,
+  onClubChange,
   employeeName,
   user,
   navigate,
@@ -46,6 +47,7 @@ export function AdminSection({
   member: Member | null;
   members: Member[];
   clubName: string;
+  onClubChange: (name: string) => void;
   employeeName: string;
   user: DemoUser;
   navigate: Navigate;
@@ -84,7 +86,13 @@ export function AdminSection({
     );
   if (section === 'schedule')
     return (
-      <ScheduleWorkspace members={members} navigate={navigate} clubName={clubName} user={user} />
+      <ScheduleWorkspace
+        members={members}
+        navigate={navigate}
+        clubName={clubName}
+        onClubChange={onClubChange}
+        user={user}
+      />
     );
   if (section === 'memberships') return <MembershipWorkspace navigate={navigate} />;
   if (section === 'registration')

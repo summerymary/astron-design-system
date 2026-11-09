@@ -1,3 +1,4 @@
+import { TODAY } from '../data/workspace';
 import { Select } from '../components/Select';
 import { useCallback, useMemo, useState } from 'react';
 import { MembershipTag } from '../components/MembershipTag';
@@ -14,9 +15,9 @@ const initialFilters = (clubId: string) => ({
   kind: 'all',
   gender: 'all',
   age: '',
-  fromDate: '2026-11-06',
+  fromDate: TODAY,
   fromTime: '00:00',
-  toDate: '2026-11-06',
+  toDate: TODAY,
   toTime: '23:59',
 });
 
@@ -43,6 +44,8 @@ export function AdminOverview({
   const [draft, setDraft] = useState(filters);
   const [unique, setUnique] = useState(false);
   const [sort, setSort] = useState('time');
+  const [draftUnique, setDraftUnique] = useState(unique);
+  const [draftSort, setDraftSort] = useState(sort);
   const [filterError, setFilterError] = useState('');
   const closeFilters = useCallback(() => setExpanded(false), []);
   const memberMap = useMemo(() => new Map(members.map((m) => [m.id, m])), [members]);
@@ -82,13 +85,15 @@ export function AdminOverview({
       : rows;
   }, [visits, memberMap, filters, query, unique, sort]);
   const activeCount =
+    Number(unique) +
+    Number(sort !== 'time') +
     Number(filters.kind !== 'all') +
     Number(filters.gender !== 'all') +
     Number(!!filters.age) +
     Number(filters.clubId !== clubId) +
     Number(
-      filters.fromDate !== '2026-11-06' ||
-        filters.toDate !== '2026-11-06' ||
+      filters.fromDate !== TODAY ||
+        filters.toDate !== TODAY ||
         filters.fromTime !== '00:00' ||
         filters.toTime !== '23:59',
     );
@@ -98,6 +103,7 @@ export function AdminOverview({
     setDraft(next);
     setQuery('');
     setUnique(false);
+    setSort('time');
     setFilterError('');
   };
   const field = (name: keyof typeof filters, value: string) =>
@@ -118,6 +124,20 @@ export function AdminOverview({
           <ArrowUpRight size={14} />
         </Button>
       </div>
+      <details className="reception-mobile-shift">
+        <summary>
+          Моя смена{' '}
+          <span>
+            {currentShift
+              ? `${currentShift.start.split('T')[1]}–${currentShift.end.split('T')[1]}`
+              : 'Не запланирована'}
+          </span>
+        </summary>
+        <span>{currentShift?.status}</span>
+        <Button variant="ghost" onClick={() => onAction('payroll')}>
+          Открыть рабочий день <ArrowUpRight size={14} />
+        </Button>
+      </details>
       <div className="admin-home-grid">
         <section className="panel visitor-panel">
           <div className="visitor-heading">
@@ -156,6 +176,8 @@ export function AdminOverview({
               aria-haspopup="dialog"
               onClick={() => {
                 setDraft(filters);
+                setDraftUnique(unique);
+                setDraftSort(sort);
                 setFilterError('');
                 setExpanded(true);
               }}
@@ -187,6 +209,8 @@ export function AdminOverview({
                   }
                   setDraft(next);
                   setFilters(next);
+                  setUnique(draftUnique);
+                  setSort(draftSort);
                   setFilterError('');
                   setExpanded(false);
                 }}
@@ -295,6 +319,27 @@ export function AdminOverview({
                     />
                   </label>
                 </div>
+                <div className="visitor-mobile-controls">
+                  <label className="ws-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={draftUnique}
+                      onChange={(event) => setDraftUnique(event.target.checked)}
+                    />
+                    Только уникальные клиенты
+                  </label>
+                  <label>
+                    Порядок посетителей
+                    <Select
+                      aria-label="Порядок посетителей в фильтрах"
+                      value={draftSort}
+                      onChange={(event) => setDraftSort(event.target.value)}
+                    >
+                      <option value="time">Сначала новые</option>
+                      <option value="name">По фамилии</option>
+                    </Select>
+                  </label>
+                </div>
                 {filterError && (
                   <p role="alert" className="filter-error">
                     {filterError}
@@ -310,6 +355,8 @@ export function AdminOverview({
                     variant="ghost"
                     onClick={() => {
                       setDraft(initialFilters(clubId));
+                      setDraftUnique(false);
+                      setDraftSort('time');
                       setFilterError('');
                     }}
                   >
@@ -369,7 +416,7 @@ export function AdminOverview({
                           <td>{String(i + 1).padStart(2, '0')}</td>
                           <td>
                             <time dateTime={v.enteredAt}>{v.enteredAt.slice(11)}</time>
-                            {v.enteredAt.slice(0, 10) !== '2026-11-06' && (
+                            {v.enteredAt.slice(0, 10) !== TODAY && (
                               <small>
                                 {v.enteredAt.slice(8, 10)}.{v.enteredAt.slice(5, 7)}
                               </small>

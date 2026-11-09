@@ -1,3 +1,4 @@
+import { demoStamp, nextDemoNow } from '../lib/demo-clock';
 import { useCallback, useEffect, useState } from 'react';
 import {
   ArrowDownLeft,
@@ -117,7 +118,7 @@ export function CashWorkspace({
       id: demoId('cash'),
       name: movement === 'deposit' ? 'Внесение наличных' : 'Инкассация',
       date: TODAY,
-      time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+      time: demoStamp(nextDemoNow()).slice(11),
       club,
       amount: String(Number(amount)),
       method: 'Наличные',

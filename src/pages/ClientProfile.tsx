@@ -1,3 +1,4 @@
+import { daysInClub as countDaysInClub, demoStamp, nextDemoNow } from '../lib/demo-clock';
 import { useCallback, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import {
@@ -111,20 +112,31 @@ export function ClientProfile({
   const [previewAction, setPreviewAction] = useState<string | null>(null);
   const closePreview = useCallback(() => setPreviewAction(null), []);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const shownSubscriptions = profile.subscriptions.filter(
-    (s) => filter === 'all' || s.status === filter,
-  );
+  const subscriptions = profile.subscriptions.filter((subscription) => subscription.kindId);
+  const additionalServices = [
+    ...profile.subscriptions
+      .filter((subscription) => !subscription.kindId)
+      .map((subscription) => ({
+        id: subscription.id,
+        name: subscription.name,
+        boughtAt: subscription.boughtAt,
+      })),
+    ...(data['issued-services'] || [])
+      .filter((row) => row.memberId === String(member.id))
+      .map((row) => ({
+        id: row.id,
+        name: row.name,
+        boughtAt: row.issued.split('-').reverse().join('.'),
+      })),
+  ];
+  const shownSubscriptions = subscriptions.filter((s) => filter === 'all' || s.status === filter);
   const sortedVisits = [...visits].sort((a, b) => b.enteredAt.localeCompare(a.enteredAt));
-  const activeCount = profile.subscriptions.filter((s) => s.status === 'active').length;
+  const activeCount = subscriptions.filter((s) => s.status === 'active').length;
   const maskedPhone = member.phone.startsWith('+7')
     ? `+7 ••• •••-••-${member.phone.replace(/\D/g, '').slice(-2)}`
     : member.phone;
   const upcoming = profileBookingOptions.filter((item) => bookings.includes(item.id));
-  const [joinDay, joinMonth, joinYear] = member.joined.split('.').map(Number);
-  const daysInClub = Math.max(
-    0,
-    Math.floor((Date.UTC(2026, 10, 1) - Date.UTC(joinYear, joinMonth - 1, joinDay)) / 86400000),
-  );
+  const daysInClub = countDaysInClub(member.joined);
   return (
     <div className="client-page">
       <div className="client-page-grid">
@@ -308,7 +320,7 @@ export function ClientProfile({
                   }}
                 >
                   {item.label}
-                  {item.id === 'subscriptions' && <span>{profile.subscriptions.length}</span>}
+                  {item.id === 'subscriptions' && <span>{subscriptions.length}</span>}
                 </button>
               ))}
             </div>
@@ -359,7 +371,7 @@ export function ClientProfile({
                             {item.label}
                             <span>
                               {
-                                profile.subscriptions.filter(
+                                subscriptions.filter(
                                   (s) => item.id === 'all' || s.status === item.id,
                                 ).length
                               }
@@ -415,7 +427,7 @@ export function ClientProfile({
                       )}
                       <div className="client-table-footer">
                         <span>
-                          Записей: {shownSubscriptions.length} из {profile.subscriptions.length}
+                          Записей: {shownSubscriptions.length} из {subscriptions.length}
                         </span>
                         <span>Архив сохраняется в истории клиента</span>
                       </div>
@@ -564,6 +576,19 @@ export function ClientProfile({
                         ]}
                       />
                     </div>
+                  )}
+                  {tab === 'finances' && additionalServices.length > 0 && (
+                    <section className="ws-panel-body" aria-label="Дополнительные услуги клиента">
+                      <h3>Дополнительные услуги</h3>
+                      <ul className="client-service-list">
+                        {additionalServices.map((service) => (
+                          <li key={service.id}>
+                            <strong>{service.name}</strong>
+                            <span>Куплено {service.boughtAt}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
                   )}
                   {tab === 'comments' &&
                     (profile.note ? (
@@ -763,7 +788,7 @@ export function ClientProfile({
               id: demoId('log'),
               name: 'Изменение карточки клиента',
               memberId: String(member.id),
-              date: '2026-11-06T14:40',
+              date: demoStamp(nextDemoNow()),
               user: 'Александра Крылова',
               service: 'Клиенты',
               type: 'Аудит',

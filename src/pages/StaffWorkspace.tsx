@@ -1,3 +1,4 @@
+import { nextDemoNow } from '../lib/demo-clock';
 import { Select } from '../components/Select';
 import { useCallback, useRef, useState } from 'react';
 import { ArrowRight, CalendarDays, Edit3, NotebookPen, Plus, CupSoda } from 'lucide-react';
@@ -539,14 +540,15 @@ export function TrainerClients({
                     return;
                   }
                   const original = notes.find((n) => n.id === draft.editingId);
+                  const noteTime = nextDemoNow().toISOString();
                   put('trainer-notes', {
                     id: original?.id || demoId('trainer-note'),
                     trainerId: user.id,
                     memberId: String(selected.id),
                     text: draft.text.trim(),
                     author: user.name,
-                    createdAt: original?.createdAt || new Date().toISOString(),
-                    updatedAt: new Date().toISOString(),
+                    createdAt: original?.createdAt || noteTime,
+                    updatedAt: noteTime,
                   });
                   setDraft({ text: '', editingId: '' });
                   setMessage('Заметка сохранена.');

@@ -1,3 +1,4 @@
+import { demoClubs } from '../data/roles';
 import { Select } from '../components/Select';
 import { quantityLabel } from '../data/membership-kinds';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
@@ -68,20 +69,25 @@ export function ScheduleWorkspace({
   members,
   navigate,
   clubName,
+  onClubChange,
   user,
 }: {
   members: Member[];
   navigate: Navigate;
   clubName: string;
+  onClubChange: (club: string) => void;
   user: DemoUser;
 }) {
   const { data, put, remove } = useWorkspace();
   const isTrainer = user.role === 'trainer';
   const canEdit = (event: DemoRecord) => canManageEvent(event, user);
-  const saved = data['calendar-view']?.find((r) => r.id === user.id);
+  const club = clubName.split(' · ').at(-1) || 'Центральный';
+  const setClub = onClubChange;
+  const saved =
+    data['calendar-view']?.find((r) => r.id === `${user.id}:${club}`) ||
+    data['calendar-view']?.find((r) => r.id === user.id && r.club === club);
   const [day, setDay] = useState(saved?.day || TODAY);
   const [view, setView] = useState(saved?.view || 'День');
-  const [club, setClub] = useState(saved?.club || clubName.split(' · ').at(-1) || 'Центральный');
   const [room, setRoom] = useState(saved?.room || 'Все залы');
   const [trainer, setTrainer] = useState(isTrainer ? user.name : saved?.trainer || 'Все тренеры');
   const [scale, setScale] = useState(saved?.scale || 'Комфортно');
@@ -200,7 +206,7 @@ export function ScheduleWorkspace({
 
   // View preferences live in the same resettable memory as the prototype data.
   useEffect(() => {
-    put('calendar-view', { id: user.id, day, view, club, room, trainer, scale, step });
+    put('calendar-view', { id: `${user.id}:${club}`, day, view, club, room, trainer, scale, step });
     // put is intentionally not a dependency: provider creates it on every update.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [day, view, club, room, trainer, scale, step]);
@@ -686,9 +692,11 @@ export function ScheduleWorkspace({
                 );
               }}
             >
-              <option>Центральный</option>
-              <option>Парк</option>
-              <option>Речной</option>
+              {demoClubs
+                .filter((item) => user.role === 'administrator' || user.clubIds.includes(item.id))
+                .map((item) => (
+                  <option key={item.id}>{item.shortName}</option>
+                ))}
             </Select>
           </label>
           <label>
@@ -1574,9 +1582,9 @@ function EventForm({
                 }));
               }}
             >
-              <option>Центральный</option>
-              <option>Парк</option>
-              <option>Речной</option>
+              {demoClubs.map((item) => (
+                <option key={item.id}>{item.shortName}</option>
+              ))}
             </Select>
           </label>
           <label className="form-field">
