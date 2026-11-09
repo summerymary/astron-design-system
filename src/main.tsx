@@ -39,3 +39,4 @@ if (!redirectLegacyGuide())
   );
 
 import './styles/checkout.css';
+import './styles/visual-style.css';

@@ -1,5 +1,7 @@
 import { DEMO_DAY, demoStamp, nextDemoNow, resetDemoClock } from './lib/demo-clock';
 import { Select } from './components/Select';
+import { VisualStyleSwitch } from './components/VisualStyleSwitch';
+import { appearanceSearch } from './lib/visual-style';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import {
@@ -149,9 +151,9 @@ function initialOptions() {
 }
 
 export function App() {
-  const { palette } = useTheme();
+  const { palette, visualStyle } = useTheme();
   const workspace = useWorkspace();
-  const guideHref = `./design-system.html?theme=${palette.primary.slice(1)}`;
+  const guideHref = `./design-system.html${appearanceSearch(palette.primary, visualStyle)}`;
   const [options] = useState(initialOptions);
   const [page, setPage] = useState<Page>(options.page);
   const [device, setDevice] = useState<Device>(options.device);
@@ -541,6 +543,7 @@ export function App() {
           </button>
         </div>
         <div className="workspace-actions">
+          <VisualStyleSwitch />
           <a
             className="workspace-guide-link"
             href={guideHref}

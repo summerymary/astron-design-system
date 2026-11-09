@@ -12,6 +12,7 @@ import './styles/guide.css';
 import './styles/typography.css';
 import './styles/layout.css';
 import './styles/memberships.css';
+import './styles/visual-style.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
