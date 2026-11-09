@@ -83,3 +83,14 @@ assert.equal(
 console.log(
   'Registration checks passed: selected pass usage, independent balances, activation, expiry, unavailable passes and immutable history.',
 );
+
+const clock = await import(await load(new URL('../src/lib/demo-clock.ts', import.meta.url)));
+assert.equal(clock.daysInClub('12.09.2026'), 55);
+assert.equal(clock.daysInClub('01.12.2026'), 0);
+assert.equal(clock.daysInClub('invalid'), 0);
+clock.resetDemoClock();
+assert.equal(clock.demoStamp(clock.nextDemoNow()), '2026-11-06T14:35');
+assert.equal(clock.demoStamp(clock.nextDemoNow()), '2026-11-06T14:36');
+clock.resetDemoClock();
+assert.equal(clock.demoStamp(clock.nextDemoNow()), '2026-11-06T14:35');
+console.log('Demo clock checks passed: Moscow timestamps, shared day, elapsed days and reset.');

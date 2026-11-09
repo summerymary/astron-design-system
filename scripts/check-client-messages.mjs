@@ -2,10 +2,15 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import ts from 'typescript';
 
-const source = await readFile(new URL('../src/lib/client-messages.ts', import.meta.url), 'utf8');
-const compiled = ts.transpileModule(source, {
-  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
-}).outputText;
+async function moduleURL(url) {
+  let code = ts.transpileModule(await readFile(url, 'utf8'), {
+    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
+  }).outputText;
+  for (const match of [...code.matchAll(/from ['"]([^'"]+)['"]/g)]) {
+    code = code.replace(match[0], `from '${await moduleURL(new URL(match[1] + '.ts', url))}'`);
+  }
+  return `data:text/javascript;base64,${Buffer.from(code).toString('base64')}`;
+}
 const {
   findClientChat,
   clientChatDraft,
@@ -14,7 +19,7 @@ const {
   editClientMessage,
   deleteClientMessage,
   messageTime,
-} = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
+} = await import(await moduleURL(new URL('../src/lib/client-messages.ts', import.meta.url)));
 const original = {
   id: 'chat-1',
   memberId: '1001',
