@@ -134,16 +134,18 @@
 :root[data-visual-style='vivid'] {
   --shadow-popup: 0 18px 52px #25151c26;
   --vivid-nav: #25151c;
+  --vivid-panel-border: #8e687a;
+  --color-divider: var(--color-line);
 }
 :root[data-visual-style='vivid'] .workspace-toolbar,
 :root[data-visual-style='vivid'] .guide-header {
   background: #fff;
-  border-bottom: 1px solid #c9c6d0;
+  border-bottom: 1px solid var(--color-line);
 }
 :root[data-visual-style='vivid'] .visual-style-switch > button[aria-pressed='true'] {
   color: #942235;
   background: #fdedf0;
-  border-color: #d692a0;
+  border-color: var(--color-accent-line);
 }
 :root[data-visual-style='vivid'] .app-shell .sidebar {
   background: linear-gradient(165deg, #321c28 0%, #21171f 75%);
@@ -194,7 +196,9 @@
 :root[data-visual-style='vivid'] .sidebar .side-nav button[aria-current='page'] {
   background: #b32d3d;
   color: #fff;
-  box-shadow: 0 4px 14px #0c050a30;
+  box-shadow:
+    inset 3px 0 #ff8eae,
+    0 4px 14px #0c050a30;
 }
 :root[data-visual-style='vivid'] .sidebar .side-nav button.active svg {
   color: #fff;
@@ -220,19 +224,28 @@
 }
 :root[data-visual-style='vivid'] .app-shell .app-topbar {
   background: #fff;
-  border-bottom-color: #c9c6d0;
+  border-bottom-color: var(--vivid-panel-border);
 }
-:root[data-visual-style='vivid'] .app-shell .panel {
-  border-color: #d2d3dc;
+:root[data-visual-style='vivid']
+  .app-shell
+  :is(
+    .panel,
+    .directory-search-panel,
+    .client-info-card,
+    .client-identity,
+    .client-history,
+    .messenger-shell
+  ) {
+  border-color: var(--vivid-panel-border);
   background: #fff;
-  box-shadow: 0 3px 14px #25151c05;
+  box-shadow: 0 3px 12px #25314912;
 }
 :root[data-visual-style='vivid'] .app-shell :is(.page-heading h1, .client-name-block h1) {
   font-weight: 700;
   letter-spacing: -0.7px;
 }
 :root[data-visual-style='vivid'] .button-primary {
-  background: linear-gradient(135deg, #bb3045, #a72538);
+  background: linear-gradient(135deg, #c42d54, #ab2543);
   color: #fff;
   border-color: #942235;
   box-shadow: 0 3px 8px #94223520;
@@ -245,7 +258,7 @@
   box-shadow: none;
 }
 :root[data-visual-style='vivid'] .button-secondary {
-  border-color: #a7a8b4;
+  border-color: var(--color-control-border);
   background: #fff;
   color: #303947;
 }
@@ -259,30 +272,10 @@
   border-color: #b32d3d;
   background: #fff7f9;
 }
-:root[data-visual-style='vivid'] .global-admin-quick.admin-quick-panel nav > button {
-  border-color: #c9c6d0;
-  box-shadow: 0 2px 8px #25151c04;
-  background: #fff;
-}
-:root[data-visual-style='vivid'] .global-admin-quick.admin-quick-panel nav > button:hover,
-:root[data-visual-style='vivid']
-  .global-admin-quick.admin-quick-panel
-  nav
-  > button[aria-current='page'] {
-  background: #fdedf0;
-  border-color: #b32d3d;
-  box-shadow: inset 3px 0 #b32d3d;
-}
-:root[data-visual-style='vivid'] .global-admin-quick .quick-nav-icon {
-  color: #a72538;
-}
-:root[data-visual-style='vivid'] .global-admin-quick nav strong {
-  font-weight: 600;
-}
 :root[data-visual-style='vivid'] .app-shell :is(.ws-table, .members-table, .visitor-table) th {
-  background: #f4eef2;
+  background: var(--color-surface-muted);
   color: #303947;
-  border-bottom-color: #c9c6d0;
+  border-bottom-color: var(--vivid-panel-border);
 }
 :root[data-visual-style='vivid'] .app-shell .is-openable:hover {
   background: #fff5f7;
@@ -291,7 +284,7 @@
   background: #fff5f7;
 }
 :root[data-visual-style='vivid'] .select-popover {
-  border-color: #c9c6d0;
+  border-color: var(--vivid-panel-border);
   background: #fff;
   box-shadow: var(--shadow-popup);
 }
@@ -315,23 +308,74 @@
   font-weight: 600;
 }
 :root[data-visual-style='vivid'] .calendar-workspace .calendar-column-heading {
-  background: #f4eef2;
+  background: var(--color-surface-muted);
   color: #303947;
 }
 :root[data-visual-style='vivid'] .message-own .message-bubble {
-  border-color: #d692a0;
+  border-color: var(--color-accent-line);
   background: #fdedf0;
   color: #151922;
 }
 :root[data-visual-style='vivid'] .mobile-nav {
   background: #fff;
-  border-top-color: #c9c6d0;
+  border-top-color: var(--vivid-panel-border);
 }
 :root[data-visual-style='vivid'] .mobile-nav > button.active {
   color: #942235;
 }
 :root[data-visual-style='vivid'] .sidebar :is(button, a, summary):focus-visible {
   outline-color: #f5a6b5;
+}
+
+/* Background, surfaces and controls form three distinct visual layers. */
+:root[data-visual-style='vivid'] .app-shell .app-content {
+  background: var(--color-canvas);
+}
+:root[data-visual-style='vivid'] .app-shell .client-info-card h3 {
+  background: var(--color-surface-muted);
+  border-color: var(--vivid-panel-border);
+}
+:root[data-visual-style='vivid'] .app-shell .ws-home-shift {
+  background: transparent;
+  box-shadow: none;
+}
+:root[data-visual-style='vivid']
+  .app-shell
+  :is(.visitor-table, .members-table, .ws-table)
+  tbody
+  tr:nth-child(even) {
+  background: var(--color-surface-subtle);
+}
+:root[data-visual-style='vivid'] .app-shell .visitor-table tbody tr:hover {
+  background: var(--color-accent-soft);
+}
+:root[data-visual-style='vivid'] .app-shell .admin-topbar {
+  box-shadow: 0 2px 8px #25314912;
+}
+
+/* Small, vivid anchors; keep statuses and service colours calm. */
+:root[data-visual-style='vivid'] .app-shell .visitor-heading h2 > span,
+:root[data-visual-style='vivid'] .app-shell .count-badge {
+  background: #b32d3d;
+  border-color: #b32d3d;
+  color: #fff;
+}
+:root[data-visual-style='vivid'] .client-tabs > button[aria-selected='true'],
+:root[data-visual-style='vivid'] .app-shell .ws-tabs > button[aria-selected='true'] {
+  background: #fce3eb;
+  color: #942235;
+  box-shadow: inset 0 -2px #b32d3d;
+}
+:root[data-visual-style='vivid'] .app-shell .visitor-panel {
+  box-shadow:
+    inset 0 3px #c42d54,
+    0 3px 12px #25314912;
+}
+:root[data-visual-style='vivid'] .button:disabled {
+  background: #f0edf2;
+  color: #68707c;
+  border-color: var(--color-line);
+  box-shadow: none;
 }
 @media (prefers-reduced-motion: no-preference) {
   :root[data-visual-style='vivid'] .button {
