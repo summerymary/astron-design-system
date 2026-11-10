@@ -13,6 +13,7 @@ import {
 import type { LucideIcon } from 'lucide-react';
 import { adminSections } from '../data/admin';
 import type { AdminSectionId } from '../data/admin';
+import { useTheme } from './ThemeProvider';
 const shortcuts = [
   { id: 'schedule', icon: CalendarDays },
   { id: 'registration', icon: CreditCard },
@@ -40,6 +41,7 @@ export function AdminQuickLinks({
   onMobileOpenChange?: (open: boolean) => void;
   onAllSections?: () => void;
 }) {
+  const { visualStyle } = useTheme();
   const [shortcutsExpanded, setShortcutsExpanded] = useState(false);
   const [smallViewport, setSmallViewport] = useState(
     () => window.matchMedia('(max-width: 700px)').matches,
@@ -127,7 +129,7 @@ export function AdminQuickLinks({
           <ChevronRight size={14} />
         </button>
         <div className="quick-panel-heading">
-          <h2>Быстрый переход</h2>
+          <h2>{visualStyle === 'spectrum' ? 'Рабочие действия' : 'Быстрый переход'}</h2>
         </div>
         <nav id={linksId} aria-label="Быстрые переходы администратора">
           {shortcuts.map(({ id, icon: Icon }) => {

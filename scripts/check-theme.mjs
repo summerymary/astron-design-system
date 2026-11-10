@@ -37,11 +37,16 @@ const { visualStyleTokens, readVisualStyle, appearanceSearch } = await import(
 assert.equal(readVisualStyle(''), 'astron');
 assert.equal(readVisualStyle('?style=unknown'), 'astron');
 assert.equal(readVisualStyle('?theme=F0FC03&style=spectrum'), 'spectrum');
+assert.equal(readVisualStyle('?style=minimal'), 'spectrum');
 for (const preset of THEME_PRESETS) {
   const original = generatePalette(preset.color).tokens;
   const snapshot = { ...original };
   const alternative = visualStyleTokens(original, 'spectrum');
-  assert.equal(alternative['--color-action'], '#6B2737', 'Alternative must use dark burgundy');
+  assert.equal(
+    alternative['--color-action'],
+    '#1D1D1F',
+    'Minimal interface must use graphite actions',
+  );
   assert.deepEqual(original, snapshot, 'Alternative mutated the original palette');
   assert.deepEqual(
     visualStyleTokens(original, 'astron'),
