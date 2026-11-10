@@ -3,37 +3,38 @@ import type { ThemeTokens } from './theme';
 export type VisualStyle = 'astron' | 'spectrum';
 
 export function readVisualStyle(search: string): VisualStyle {
-  return new URLSearchParams(search).get('style') === 'spectrum' ? 'spectrum' : 'astron';
+  const value = new URLSearchParams(search).get('style');
+  return value === 'minimal' || value === 'spectrum' ? 'spectrum' : 'astron';
 }
 
 // An original, Spectrum-inspired skin. Semantic statuses and club branding stay independent.
 export const SPECTRUM_OVERRIDES = {
-  '--color-accent': '#6B2737',
-  '--color-accent-hover': '#541D2B',
-  '--color-accent-pressed': '#3D1420',
-  '--color-accent-soft': '#F6EFF1',
-  '--color-accent-soft-hover': '#EFE2E6',
-  '--color-accent-line': '#D8B9C0',
+  '--color-accent': '#1D1D1F',
+  '--color-accent-hover': '#343438',
+  '--color-accent-pressed': '#000000',
+  '--color-accent-soft': '#F0F0F2',
+  '--color-accent-soft-hover': '#E4E4E7',
+  '--color-accent-line': '#B8B8BE',
   '--color-on-accent': '#FFFFFF',
-  '--color-action': '#6B2737',
-  '--color-action-hover': '#541D2B',
-  '--color-action-pressed': '#3D1420',
-  '--color-action-border': '#6B2737',
+  '--color-action': '#1D1D1F',
+  '--color-action-hover': '#343438',
+  '--color-action-pressed': '#000000',
+  '--color-action-border': '#1D1D1F',
   '--color-on-action': '#FFFFFF',
-  '--color-ink': '#241E21',
-  '--color-text': '#494145',
-  '--color-muted': '#686064',
-  '--color-subtle': '#686064',
-  '--color-canvas': '#F8F7F7',
-  '--color-stage': '#F0EDEE',
+  '--color-ink': '#1D1D1F',
+  '--color-text': '#424245',
+  '--color-muted': '#6E6E73',
+  '--color-subtle': '#6E6E73',
+  '--color-canvas': '#FFFFFF',
+  '--color-stage': '#F5F5F7',
   '--color-surface': '#FFFFFF',
-  '--color-surface-subtle': '#FCFAFB',
-  '--color-surface-muted': '#F1EDEF',
-  '--color-line': '#E7E2E4',
-  '--color-control-border': '#90848A',
-  '--color-chart': '#6B2737',
-  '--color-skeleton': '#E7E2E4',
-  '--color-skeleton-highlight': '#FCFAFB',
+  '--color-surface-subtle': '#FAFAFC',
+  '--color-surface-muted': '#F2F2F4',
+  '--color-line': '#E8E8ED',
+  '--color-control-border': '#89898F',
+  '--color-chart': '#536B60',
+  '--color-skeleton': '#E8E8ED',
+  '--color-skeleton-highlight': '#FAFAFC',
 } satisfies Partial<ThemeTokens>;
 
 export function visualStyleTokens(tokens: ThemeTokens, style: VisualStyle): ThemeTokens {
@@ -42,6 +43,6 @@ export function visualStyleTokens(tokens: ThemeTokens, style: VisualStyle): Them
 
 export function appearanceSearch(primary: string, style: VisualStyle) {
   const params = new URLSearchParams({ theme: primary.slice(1) });
-  if (style === 'spectrum') params.set('style', style);
+  if (style === 'spectrum') params.set('style', 'minimal');
   return `?${params}`;
 }
