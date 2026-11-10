@@ -1,0 +1,182 @@
+/* Main reception actions live beside lookup, leaving the work area at full width. */
+.app-shell .admin-topbar .admin-header-content {
+  flex-wrap: nowrap;
+  gap: 8px;
+}
+.app-shell .admin-topbar .workstation-control {
+  flex: 0 1 200px;
+  min-width: 180px;
+}
+.app-shell .admin-topbar .quick-card.client-search {
+  flex: 1 1 220px;
+  min-width: 140px;
+  max-width: none;
+}
+.app-shell .admin-topbar .admin-header-actions {
+  gap: 6px;
+}
+.app-shell .admin-topbar .admin-header-actions > button {
+  order: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: auto;
+  min-width: max-content;
+  flex: 0 0 auto;
+  min-height: 40px;
+  height: 40px;
+  padding: 0 9px;
+  border: 1px solid var(--color-control-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 14px;
+  line-height: 1.3;
+}
+.app-shell .admin-topbar .admin-header-actions > button > span {
+  display: inline;
+}
+.app-shell .admin-topbar .admin-header-actions > button > svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+.app-shell .admin-topbar .admin-header-actions > button:hover,
+.app-shell .admin-topbar .admin-header-actions > button[aria-current='page'] {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+.app-shell .admin-topbar .admin-header-actions > .header-add-client-action {
+  background: var(--color-action);
+  border-color: var(--color-action-border);
+  color: var(--color-on-action);
+}
+.app-shell .admin-topbar .admin-header-actions > .header-add-client-action:hover {
+  background: var(--color-action-hover);
+}
+.app-shell .admin-topbar .admin-header-actions > .header-sale-action {
+  display: none;
+}
+@container workspace (min-width: 701px) and (max-width: 1600px) {
+  .app-shell .admin-topbar :is(.system-health, .header-call-button, .admin-user-avatar) {
+    display: none;
+  }
+  .app-shell .admin-topbar .admin-header-indicators {
+    gap: 2px;
+    margin-left: 0;
+  }
+  .app-shell .admin-topbar .header-inbox > span {
+    display: none;
+  }
+  .app-shell .admin-topbar .admin-header-actions > .header-visit-action {
+    width: 40px;
+    padding: 0;
+  }
+  .app-shell .admin-topbar .admin-header-actions > .header-visit-action > span {
+    display: none;
+  }
+}
+@container workspace (min-width: 701px) and (max-width: 1150px) {
+  .app-shell .admin-topbar .admin-header-actions > button {
+    width: 36px;
+    min-width: 36px;
+    padding: 0;
+  }
+  .app-shell .admin-topbar .admin-header-actions > button > span {
+    display: none;
+  }
+}
+@container workspace (min-width: 701px) and (max-width: 999px) {
+  .app-shell .admin-topbar .admin-header-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 8px;
+  }
+  .app-shell .admin-topbar .workstation-control {
+    grid-row: 1;
+    grid-column: 1;
+    max-width: 220px;
+  }
+  .app-shell .admin-topbar .admin-header-indicators {
+    display: flex;
+    grid-row: 1;
+    grid-column: 2;
+  }
+  .app-shell .admin-topbar .admin-lock-button {
+    grid-row: 1;
+    grid-column: 3;
+  }
+  .app-shell .admin-topbar .quick-card.client-search {
+    grid-row: 2;
+    grid-column: 1;
+    width: 100%;
+  }
+  .app-shell .admin-topbar .admin-header-actions {
+    grid-row: 2;
+    grid-column: 2 / 4;
+  }
+}
+@container workspace (max-width: 700px) {
+  .app-shell .admin-topbar .admin-header-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 8px;
+  }
+  .app-shell .admin-topbar .workstation-control {
+    grid-row: 1;
+    grid-column: 1;
+    min-width: 0;
+    max-width: none;
+  }
+  .app-shell .admin-topbar .admin-header-indicators {
+    grid-row: 1;
+    grid-column: 2;
+    margin: 0;
+  }
+  .app-shell .admin-topbar .admin-lock-button {
+    grid-row: 1;
+    grid-column: 3;
+  }
+  .app-shell .admin-topbar .quick-card.client-search {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-top: 0;
+  }
+  .app-shell .admin-topbar .admin-header-actions {
+    grid-row: 3;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+  }
+  .app-shell .admin-topbar .admin-header-actions > button {
+    grid-column: span 2;
+    min-width: 0;
+    width: 100%;
+    height: 44px;
+    min-height: 44px;
+    padding: 4px 6px;
+  }
+  .app-shell .admin-topbar .admin-header-actions > button > span {
+    white-space: normal;
+  }
+  .app-shell .admin-topbar .admin-header-actions > :is(.header-visit-action, .header-sale-action) {
+    grid-column: span 3;
+  }
+  .app-shell .admin-topbar .admin-header-actions > .header-sale-action {
+    display: inline-flex;
+  }
+}
+
+@container workspace (max-width: 380px) {
+  .app-shell
+    .admin-topbar
+    .admin-header-actions
+    > :is(.header-schedule-action, .header-add-client-action, .header-products-action)
+    > svg {
+    display: none;
+  }
+}

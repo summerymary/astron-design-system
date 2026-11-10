@@ -11,7 +11,8 @@ import {
   ShieldCheck,
   Bell,
   UserRound,
-  CupSoda,
+  CalendarDays,
+  CreditCard,
   LockKeyhole,
   ShoppingBag,
   X,
@@ -28,6 +29,8 @@ export function AdminHeader({
   onAction,
   name,
   onLock,
+  onAddClient,
+  activeSection,
 }: {
   workstationId: string;
   onWorkstation: (id: string) => void;
@@ -36,6 +39,8 @@ export function AdminHeader({
   onAction: (id: AdminSectionId) => void;
   name: string;
   onLock: () => void;
+  onAddClient: () => void;
+  activeSection?: AdminSectionId;
 }) {
   const [open, setOpen] = useState(false);
   const trigger = useRef<HTMLButtonElement>(null);
@@ -151,22 +156,44 @@ export function AdminHeader({
       <ClientSearch key={workstationId} members={members} onMember={onMember} />
       <div className="admin-header-actions">
         <button
+          className="header-schedule-action"
+          aria-label="Расписание"
+          title="Расписание"
+          aria-current={activeSection === 'schedule' ? 'page' : undefined}
+          onClick={() => onAction('schedule')}
+        >
+          <CalendarDays size={16} />
+          <span>Расписание</span>
+        </button>
+        <button
+          className="header-add-client-action"
+          aria-label="Добавить клиента"
+          title="Добавить нового клиента"
+          aria-haspopup="dialog"
+          onClick={onAddClient}
+        >
+          <Plus size={16} />
+          <span>Новый клиент</span>
+        </button>
+        <button
+          className="header-products-action"
+          aria-label="Продажа товаров"
+          title="Продажа товаров"
+          aria-current={activeSection === 'products' ? 'page' : undefined}
+          onClick={() => onAction('products')}
+        >
+          <ShoppingBag size={16} />
+          <span>Товары</span>
+        </button>
+        <button
           className="header-visit-action"
           aria-label="Посещение"
           title="Посещение"
+          aria-current={activeSection === 'registration' ? 'page' : undefined}
           onClick={() => onAction('registration')}
         >
-          <Plus size={15} />
+          <CreditCard size={16} />
           <span>Посещение</span>
-        </button>
-        <button
-          className="header-bar-action"
-          aria-label="Бар"
-          title="Бар"
-          onClick={() => onAction('bar')}
-        >
-          <CupSoda size={16} />
-          <span>Бар</span>
         </button>
         <button className="header-sale-action" onClick={() => onAction('services')}>
           <ShoppingBag size={16} />

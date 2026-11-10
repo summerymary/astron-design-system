@@ -42,6 +42,7 @@ import {
   GitBranch,
   CalendarX2,
   BadgeDollarSign,
+  Wallet,
   Globe,
 } from 'lucide-react';
 import { Button, Modal, StateContent, Toast } from './components/ui';
@@ -73,6 +74,8 @@ const navigation = [
   { id: 'members' as const, label: 'Клиенты', icon: Users },
 ];
 const workNavigation = [
+  { id: 'services', label: 'Продажа услуг', icon: BadgeDollarSign },
+  { id: 'cash', label: 'Касса', icon: Wallet },
   { id: 'memberships', label: 'Абонементы', icon: CreditCard },
   { id: 'calls', label: 'Звонки', icon: Phone },
   { id: 'messages', label: 'Сообщения', icon: MessageSquare },
@@ -173,8 +176,6 @@ export function App() {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [toast, setToast] = useState('');
   const [mobileStateOpen, setMobileStateOpen] = useState(false);
-  const [mobileQuickOpen, setMobileQuickOpen] = useState(false);
-  useEffect(() => setMobileQuickOpen(false), [page, role, adminSection, device]);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(options.role === 'administrator');
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const contentRef = useRef<HTMLElement>(null);
@@ -379,7 +380,6 @@ export function App() {
     }
   };
   const openSections = () => {
-    setMobileQuickOpen(false);
     setScenario('default');
     goTo('sections');
   };
@@ -719,32 +719,30 @@ export function App() {
                 </span>
               )}
               <nav className="side-nav" aria-label="Основная навигация">
-                {visibleNavigation
-                  .filter((n) => role !== 'administrator' || n.id !== 'members')
-                  .map((n) => (
-                    <button
-                      key={n.id}
-                      title={sidebarCollapsed ? n.label : undefined}
-                      aria-label={sidebarCollapsed ? n.label : undefined}
-                      aria-current={
-                        page === n.id || (n.id === 'members' && page === 'client-profile')
-                          ? 'page'
-                          : undefined
-                      }
-                      className={
-                        page === n.id || (n.id === 'members' && page === 'client-profile')
-                          ? 'active'
-                          : ''
-                      }
-                      onClick={() => goTo(n.id)}
-                    >
-                      <n.icon size={18} strokeWidth={1.75} />
-                      <span className="nav-item-label">{n.label}</span>
-                      {n.id === 'members' && memberCount !== undefined && (
-                        <span className="nav-count">{memberCount}</span>
-                      )}
-                    </button>
-                  ))}
+                {visibleNavigation.map((n) => (
+                  <button
+                    key={n.id}
+                    title={sidebarCollapsed ? n.label : undefined}
+                    aria-label={sidebarCollapsed ? n.label : undefined}
+                    aria-current={
+                      page === n.id || (n.id === 'members' && page === 'client-profile')
+                        ? 'page'
+                        : undefined
+                    }
+                    className={
+                      page === n.id || (n.id === 'members' && page === 'client-profile')
+                        ? 'active'
+                        : ''
+                    }
+                    onClick={() => goTo(n.id)}
+                  >
+                    <n.icon size={18} strokeWidth={1.75} />
+                    <span className="nav-item-label">{n.label}</span>
+                    {n.id === 'members' && memberCount !== undefined && (
+                      <span className="nav-count">{memberCount}</span>
+                    )}
+                  </button>
+                ))}
                 {role === 'marketer' && (
                   <button
                     onClick={() => openModule('crm')}
@@ -966,6 +964,8 @@ export function App() {
                     openAdminAction(id, page === 'client-profile' ? selectedMember : undefined)
                   }
                   name={currentUser.name}
+                  onAddClient={() => setModal('add')}
+                  activeSection={page === 'admin-section' ? adminSection : undefined}
                   onLock={() => {
                     rememberScreenLock(true);
                     setScreenLocked(true);
@@ -1044,24 +1044,7 @@ export function App() {
               id="main-content"
               key={resetVersion}
             >
-              <AdminPageLayout
-                enabled={role === 'administrator'}
-                mobileMode={device === 'mobile'}
-                mobileOpen={mobileQuickOpen}
-                onMobileOpenChange={setMobileQuickOpen}
-                onAllSections={openSections}
-                pageKey={`${page}-${adminSection}-${selectedMemberId}`}
-                activeId={
-                  page === 'client-profile' || page === 'members'
-                    ? 'members'
-                    : page === 'admin-section'
-                      ? adminSection
-                      : undefined
-                }
-                onAction={(id) =>
-                  openAdminAction(id, page === 'client-profile' ? selectedMember : undefined)
-                }
-              >
+              <AdminPageLayout enabled={role === 'administrator'}>
                 {page !== 'client-profile' && (
                   <div className="page-heading work-page-toolbar">
                     <div className="page-title-group">
@@ -1081,16 +1064,18 @@ export function App() {
                       )}
                     </div>
                     <div className="page-actions">
-                      {(page === 'overview' || page === 'members') && currentRole.canAddMembers && (
-                        <Button
-                          aria-label="Добавить клиента"
-                          title="Добавить клиента"
-                          onClick={() => setModal('add')}
-                        >
-                          <Plus size={16} />
-                          <span>Добавить клиента</span>
-                        </Button>
-                      )}
+                      {(page === 'overview' || page === 'members') &&
+                        currentRole.canAddMembers &&
+                        role !== 'administrator' && (
+                          <Button
+                            aria-label="Добавить клиента"
+                            title="Добавить клиента"
+                            onClick={() => setModal('add')}
+                          >
+                            <Plus size={16} />
+                            <span>Добавить клиента</span>
+                          </Button>
+                        )}
                     </div>
                   </div>
                 )}
@@ -1110,7 +1095,6 @@ export function App() {
                         bookings={selectedMember.id === 1001 ? initialProfileBookings : []}
                         canOperate={role === 'administrator' || managingRole}
                         canSell={role === 'accountant'}
-                        showQuickLinks={managingRole}
                         scenario={scenario}
                         onReset={() => setScenario('default')}
                         onBack={() =>
@@ -1322,18 +1306,12 @@ export function App() {
                     <span>Расписание</span>
                   </button>
                   <button
-                    aria-expanded={role === 'administrator' ? mobileQuickOpen : undefined}
-                    aria-current={
-                      role !== 'administrator' && page === 'sections' ? 'page' : undefined
-                    }
-                    className={role !== 'administrator' && page === 'sections' ? 'active' : ''}
-                    aria-haspopup={role === 'administrator' ? 'dialog' : undefined}
-                    onClick={() =>
-                      role === 'administrator' ? setMobileQuickOpen(true) : openSections()
-                    }
+                    aria-current={page === 'sections' ? 'page' : undefined}
+                    className={page === 'sections' ? 'active' : ''}
+                    onClick={openSections}
                   >
                     <Menu size={20} />
-                    <span>{role === 'administrator' ? 'Действия' : 'Все разделы'}</span>
+                    <span>Все разделы</span>
                   </button>
                 </>
               )}
