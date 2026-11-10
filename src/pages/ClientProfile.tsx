@@ -21,7 +21,6 @@ import {
 import { Avatar, Badge, Button, Modal, StateContent } from '../components/ui';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { DataTable, RecordForm } from '../components/WorkspaceUI';
-import { AdminQuickLinks } from '../components/AdminQuickLinks';
 import { clientTabs, getClientProfile } from '../data/clientProfile';
 import type { ClientTabId, SubscriptionStatus } from '../data/clientProfile';
 import type { AdminSectionId } from '../data/admin';
@@ -75,7 +74,6 @@ export function ClientProfile({
   onRegistration,
   onAction,
   onUpdate,
-  showQuickLinks = true,
 }: {
   member: Member;
   visits: Visit[];
@@ -89,7 +87,6 @@ export function ClientProfile({
   onRegistration: () => void;
   onAction: (id: AdminSectionId) => void;
   onUpdate: (member: Member) => void;
-  showQuickLinks?: boolean;
 }) {
   const { data, put } = useWorkspace();
   const profile = getClientProfile(member, data);
@@ -720,7 +717,6 @@ export function ClientProfile({
             </div>
           </section>
         </div>
-        {canOperate && showQuickLinks && <AdminQuickLinks onAction={onAction} />}
       </div>
       {previewAction && (
         <Modal title={previewAction} subtitle={member.name} onClose={closePreview}>
