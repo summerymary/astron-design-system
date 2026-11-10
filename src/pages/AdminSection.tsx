@@ -32,6 +32,8 @@ import {
 
 export function AdminSection({
   section,
+  recordId,
+  onRecord,
   member,
   members,
   clubName,
@@ -44,6 +46,8 @@ export function AdminSection({
   onBack,
 }: {
   section: AdminSectionId;
+  recordId: string | null;
+  onRecord: (id: string | null) => void;
   member: Member | null;
   members: Member[];
   clubName: string;
@@ -82,6 +86,8 @@ export function AdminSection({
         collection={section}
         config={resources[section]}
         navigate={navigate}
+        recordId={recordId}
+        onRecord={onRecord}
       />
     );
   if (section === 'schedule')

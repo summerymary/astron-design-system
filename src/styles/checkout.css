@@ -244,3 +244,89 @@
     font-size: 14px;
   }
 }
+
+/* One task per step at every width: no empty payment column before a purchase exists. */
+.sale-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.sale-step-nav {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  padding-bottom: 12px;
+}
+.sale-step-nav > button {
+  flex: 1;
+  min-height: 44px;
+  padding: 10px 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  text-align: left;
+}
+.sale-step-nav > button[aria-current='step'] {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+.sale-step-nav > button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.sale-step-client .sale-catalog,
+.sale-step-catalog .client-picker-panel,
+.sale-step-payment .sale-main {
+  display: none;
+}
+.sale-next {
+  display: inline-flex;
+}
+.fits-workspace .sale-main {
+  flex: 1;
+}
+.sale-step-payment .checkout-panel {
+  flex: 1;
+}
+.sale-step-payment .checkout-options {
+  flex: 1;
+}
+.app-shell .checkout-panel .ws-fields {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@container sale (max-width: 520px) {
+  .app-shell .checkout-panel .ws-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Payment settings stay visible; the whole form scrolls rather than hiding controls in a tiny list. */
+.fits-workspace .checkout-panel > .ws-panel-body {
+  overflow: auto;
+  scrollbar-width: thin;
+}
+.fits-workspace .checkout-options,
+.sale-step-payment .checkout-options {
+  flex: none;
+  overflow: visible;
+  padding-bottom: 0;
+}
+.checkout-review.ws-stack,
+.checkout-settings.ws-stack {
+  gap: 12px;
+}
+.checkout-submit {
+  position: static;
+}
+@container sale (min-width: 640px) {
+  .checkout-options {
+    display: grid;
+    grid-template-columns: minmax(200px, 0.9fr) minmax(250px, 1.1fr);
+    gap: 28px;
+    align-items: start;
+  }
+}
+.checkout-submit .form-note {
+  padding: 0;
+  background: none;
+}

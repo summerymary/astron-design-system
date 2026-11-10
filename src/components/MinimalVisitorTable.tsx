@@ -30,7 +30,13 @@ export function MinimalVisitorTable({
         {visits.map((visit) => {
           const member = members.get(visit.memberId)!;
           return (
-            <tr key={visit.id}>
+            <tr
+              key={visit.id}
+              className="is-openable"
+              onClick={(event) => {
+                if (!(event.target as HTMLElement).closest('button, a')) onMember(member);
+              }}
+            >
               <td>
                 <button
                   className="minimal-person-link"

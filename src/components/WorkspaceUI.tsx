@@ -443,7 +443,22 @@ export function DataTable({
           </thead>
           <tbody>
             {ordered.map((row) => (
-              <tr key={row.id}>
+              <tr
+                key={row.id}
+                className={onOpen ? 'is-openable' : undefined}
+                onClick={
+                  onOpen
+                    ? (event) => {
+                        if (
+                          !(event.target as HTMLElement).closest(
+                            'button, a, input, select, textarea',
+                          )
+                        )
+                          onOpen(row);
+                      }
+                    : undefined
+                }
+              >
                 {columns.map((column, index) => (
                   <td key={column.key}>
                     {index === 0 && onOpen ? (
@@ -477,7 +492,20 @@ export function DataTable({
       </div>
       <div className="ws-mobile-records">
         {ordered.map((row) => (
-          <div className="ws-mobile-record" key={row.id}>
+          <div
+            className={`ws-mobile-record ${onOpen ? 'is-openable' : ''}`}
+            key={row.id}
+            onClick={
+              onOpen
+                ? (event) => {
+                    if (
+                      !(event.target as HTMLElement).closest('button, a, input, select, textarea')
+                    )
+                      onOpen(row);
+                  }
+                : undefined
+            }
+          >
             <strong>
               {columns[0]?.render ? columns[0].render(row) : row.name || row[columns[0].key]}
             </strong>
@@ -514,6 +542,7 @@ export function RecordDetails({
   onClose,
   actions,
   children,
+  page = false,
 }: {
   title: string;
   record: DemoRecord;
@@ -521,19 +550,35 @@ export function RecordDetails({
   onClose: () => void;
   actions?: ReactNode;
   children?: ReactNode;
+  page?: boolean;
 }) {
-  return (
-    <Modal title={title} onClose={onClose}>
-      <dl className="ws-facts">
-        {fields.map((field) => (
-          <div key={field.key}>
-            <dt>{field.label}</dt>
-            <dd>{recordValue(record[field.key], field.key)}</dd>
-          </div>
-        ))}
-      </dl>
-      {children}
+  const content = (
+    <>
+      <div className={page ? 'record-page-grid' : undefined}>
+        <section className={page ? 'panel ws-panel-body' : undefined}>
+          {page && <h3>Сведения сотрудника</h3>}
+          <dl className="ws-facts">
+            {fields.map((field) => (
+              <div key={field.key}>
+                <dt>{field.label}</dt>
+                <dd>{recordValue(record[field.key], field.key)}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+        {children && <div className={page ? 'panel ws-panel-body' : undefined}>{children}</div>}
+      </div>
       {actions && <div className="ws-actions">{actions}</div>}
+    </>
+  );
+  return page ? (
+    <article className="record-page ws-stack" aria-label={title}>
+      <Back onClick={onClose}>Все сотрудники</Back>
+      {content}
+    </article>
+  ) : (
+    <Modal title={title} onClose={onClose}>
+      {content}
     </Modal>
   );
 }
@@ -541,23 +586,32 @@ export function ResourcePage({
   collection,
   config,
   navigate,
+  recordId,
+  onRecord,
 }: {
   collection: string;
   config: Resource;
   navigate: Navigate;
+  recordId?: string | null;
+  onRecord?: (id: string | null) => void;
 }) {
   const { data, put, remove } = useWorkspace();
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('Все статусы');
   const [club, setClub] = useState('Все клубы');
-  const [opened, setOpened] = useState<DemoRecord | null>(null);
+  const [openedRecord, setOpened] = useState<DemoRecord | null>(null);
+  const employeePage = collection === 'employees' && !!onRecord;
+  const opened = employeePage
+    ? (data[collection] || []).find((row) => row.id === recordId) || null
+    : openedRecord;
   const [editing, setEditing] = useState<DemoRecord | 'new' | null>(null);
   const [confirm, setConfirm] = useState(false);
   const [message, setMessage] = useState('');
   const closeDetails = useCallback(() => {
     setOpened(null);
+    if (employeePage) onRecord?.(null);
     setConfirm(false);
-  }, []);
+  }, [employeePage, onRecord]);
   const closeForm = useCallback(() => setEditing(null), []);
   const rows = data[collection] ?? [];
   const statuses = [...new Set(rows.map((row) => row.status).filter(Boolean))];
@@ -573,93 +627,96 @@ export function ResourcePage({
   );
   return (
     <div className="ws-stack">
-      {config.links && <SectionLinks ids={config.links} navigate={navigate} />}
+      {!opened && config.links && <SectionLinks ids={config.links} navigate={navigate} />}
       {message && <Notice tone="success">{message}</Notice>}
-      <section className="panel ws-panel">
-        <div className="ws-panel-heading">
-          <div>
-            <h2>{config.title}</h2>
-            <p>{config.description}</p>
+      {!(employeePage && opened) && (
+        <section className="panel ws-panel">
+          <div className="ws-panel-heading">
+            <div>
+              <h2>{config.title}</h2>
+              <p>{config.description}</p>
+            </div>
+            {!config.readonly && (
+              <Button onClick={() => setEditing('new')}>
+                <Plus size={15} />
+                Добавить
+              </Button>
+            )}
           </div>
-          {!config.readonly && (
-            <Button onClick={() => setEditing('new')}>
-              <Plus size={15} />
-              Добавить
-            </Button>
-          )}
-        </div>
-        <div className="ws-toolbar">
-          <SearchBox
-            value={query}
-            onChange={setQuery}
-            placeholder={
-              collection === 'employees'
-                ? 'ФИО, телефон или email'
-                : collection === 'products'
-                  ? 'Название, артикул или штрихкод'
-                  : 'Поиск по записям'
-            }
-          />
-          {!!statuses.length && (
-            <label className="ws-inline-field">
-              <span className="sr-only">Статус записей</span>
-              <Select
-                aria-label="Статус записей"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option>Все статусы</option>
-                {statuses.map((value) => (
-                  <option key={value}>{value}</option>
-                ))}
-              </Select>
-            </label>
-          )}
-          {!!clubs.length && (
-            <Select
-              aria-label="Клуб записей"
-              value={club}
-              onChange={(e) => setClub(e.target.value)}
-            >
-              <option>Все клубы</option>
-              {clubs
-                .filter((value) => value !== 'Все клубы')
-                .map((value) => (
-                  <option key={value}>{value}</option>
-                ))}
-            </Select>
-          )}
-        </div>
-        <DataTable
-          columns={config.columns.map((key) => ({
-            key,
-            label: config.fields.find((field) => field.key === key)?.label ?? key,
-          }))}
-          rows={shown}
-          onOpen={setOpened}
-          empty={
-            <Empty
-              action={
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    setQuery('');
-                    setStatus('Все статусы');
-                    setClub('Все клубы');
-                  }}
-                >
-                  Сбросить фильтры
-                </Button>
+          <div className="ws-toolbar">
+            <SearchBox
+              value={query}
+              onChange={setQuery}
+              placeholder={
+                collection === 'employees'
+                  ? 'ФИО, телефон или email'
+                  : collection === 'products'
+                    ? 'Название, артикул или штрихкод'
+                    : 'Поиск по записям'
               }
             />
-          }
-        />
-        <div className="ws-table-footer">
-          Показано {shown.length} из {rows.length}
-        </div>
-      </section>
+            {!!statuses.length && (
+              <label className="ws-inline-field">
+                <span className="sr-only">Статус записей</span>
+                <Select
+                  aria-label="Статус записей"
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                >
+                  <option>Все статусы</option>
+                  {statuses.map((value) => (
+                    <option key={value}>{value}</option>
+                  ))}
+                </Select>
+              </label>
+            )}
+            {!!clubs.length && (
+              <Select
+                aria-label="Клуб записей"
+                value={club}
+                onChange={(e) => setClub(e.target.value)}
+              >
+                <option>Все клубы</option>
+                {clubs
+                  .filter((value) => value !== 'Все клубы')
+                  .map((value) => (
+                    <option key={value}>{value}</option>
+                  ))}
+              </Select>
+            )}
+          </div>
+          <DataTable
+            columns={config.columns.map((key) => ({
+              key,
+              label: config.fields.find((field) => field.key === key)?.label ?? key,
+            }))}
+            rows={shown}
+            onOpen={(row) => (employeePage ? onRecord?.(row.id) : setOpened(row))}
+            empty={
+              <Empty
+                action={
+                  <Button
+                    variant="secondary"
+                    onClick={() => {
+                      setQuery('');
+                      setStatus('Все статусы');
+                      setClub('Все клубы');
+                    }}
+                  >
+                    Сбросить фильтры
+                  </Button>
+                }
+              />
+            }
+          />
+          <div className="ws-table-footer">
+            Показано {shown.length} из {rows.length}
+          </div>
+        </section>
+      )}
       {opened && (
         <RecordDetails
+          page={employeePage}
           title={opened.name || config.singular}
           record={opened}
           fields={config.fields}
@@ -671,7 +728,7 @@ export function ResourcePage({
                   variant="secondary"
                   onClick={() => {
                     setEditing(opened);
-                    closeDetails();
+                    if (!employeePage) closeDetails();
                   }}
                 >
                   <Edit3 size={14} />

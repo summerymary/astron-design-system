@@ -49,7 +49,13 @@ export function MinimalMembersTable({
       </thead>
       <tbody>
         {members.map((member) => (
-          <tr key={member.id}>
+          <tr
+            key={member.id}
+            className="is-openable"
+            onClick={(event) => {
+              if (!(event.target as HTMLElement).closest('button, a')) onMember(member);
+            }}
+          >
             <td>
               <button
                 className="minimal-person-link"

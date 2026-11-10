@@ -94,3 +94,83 @@
     height: auto;
   }
 }
+
+/* Stable menu chrome: scrolling belongs to navigation, never to its footer. */
+.app-shell.is-desktop .sidebar {
+  flex-shrink: 0;
+}
+.app-shell .sidebar-head {
+  flex: 0 0 64px;
+}
+.app-shell .sidebar-bottom,
+.app-shell.is-sidebar-collapsed .sidebar-bottom {
+  flex-shrink: 0;
+  padding-top: 8px;
+}
+.app-shell .sidebar .user-block {
+  height: 72px;
+  min-height: 72px;
+  padding-block: 8px;
+}
+.app-shell .sidebar .user-block small {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-shell .sidebar-toggle {
+  align-items: center;
+}
+.is-openable {
+  cursor: pointer;
+}
+.is-openable:hover {
+  background: var(--color-surface-muted);
+}
+.is-openable:focus-within {
+  box-shadow: inset 2px 0 var(--color-accent);
+}
+.record-page {
+  padding: 0 0 20px;
+}
+.record-page > h2 {
+  margin: 0;
+}
+.record-page-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+.record-page-grid .ws-facts > div {
+  grid-template-columns: minmax(120px, 40%) minmax(0, 1fr);
+}
+@container workspace (max-width: 1000px) {
+  .record-page-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@container workspace (min-width: 1000px) and (max-width: 1400px) {
+  .app-shell .admin-header-content {
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+  .app-shell .admin-header-content .workstation-control {
+    flex: 0 1 180px;
+    min-width: 130px;
+  }
+  .app-shell .admin-header-content .quick-card {
+    min-width: 140px;
+    max-width: none;
+  }
+  .app-shell .admin-header-actions > button {
+    width: 36px;
+    min-width: 36px;
+    padding-inline: 0;
+    justify-content: center;
+  }
+  .app-shell .admin-header-actions > button > span,
+  .app-shell .system-health > span,
+  .app-shell .header-inbox > span {
+    display: none;
+  }
+}

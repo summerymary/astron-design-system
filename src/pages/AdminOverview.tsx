@@ -466,7 +466,14 @@ export function AdminOverview({
                       {filtered.map((v, i) => {
                         const member = memberMap.get(v.memberId)!;
                         return (
-                          <tr key={v.id}>
+                          <tr
+                            key={v.id}
+                            className="is-openable"
+                            onClick={(event) => {
+                              if (!(event.target as HTMLElement).closest('button, a'))
+                                onMember(member);
+                            }}
+                          >
                             <td>{String(i + 1).padStart(2, '0')}</td>
                             <td>
                               <time dateTime={v.enteredAt}>{v.enteredAt.slice(11)}</time>

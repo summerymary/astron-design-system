@@ -402,273 +402,280 @@ export function SaleWorkspace({
             </div>
           </section>
         </div>
-        <section className="panel ws-panel checkout-panel">
-          <div className="ws-panel-heading">
-            <h2>3. Оплата</h2>
-            <Button
-              className="sale-next"
-              variant="ghost"
-              onClick={() => {
-                setSaleStep('catalog');
-                saleRoot.current?.scrollIntoView({ block: 'start' });
-              }}
-            >
-              <ArrowLeft size={16} /> К покупке
-            </Button>
-          </div>
-          <div className="ws-panel-body ws-stack">
-            {member && item ? (
-              <>
-                <div className="checkout-options ws-stack">
-                  <div className="checkout-summary">
-                    <strong>{item.name}</strong>
-                    <span>
-                      {member.name} · карта {memberCards[member.id] || String(member.id + 99000)}
-                    </span>
-                    <span>За единицу: {money(item.price)}</span>
-                  </div>
-                  <details className="checkout-contact-details">
-                    <summary>Контакты и описание покупки</summary>
-                    <dl className="ws-facts checkout-facts">
-                      <div>
-                        <dt>ФИО</dt>
-                        <dd>{member.fullName || member.name}</dd>
+        {saleStep === 'payment' && member && item && (
+          <section className="panel ws-panel checkout-panel">
+            <div className="ws-panel-heading">
+              <h2>3. Оплата</h2>
+              <Button
+                className="sale-next"
+                variant="ghost"
+                onClick={() => {
+                  setSaleStep('catalog');
+                  saleRoot.current?.scrollIntoView({ block: 'start' });
+                }}
+              >
+                <ArrowLeft size={16} /> К покупке
+              </Button>
+            </div>
+            <div className="ws-panel-body ws-stack">
+              {member && item ? (
+                <>
+                  <div className="checkout-options ws-stack">
+                    <div className="checkout-review ws-stack">
+                      <div className="checkout-summary">
+                        <strong>{item.name}</strong>
+                        <span>
+                          {member.name} · карта{' '}
+                          {memberCards[member.id] || String(member.id + 99000)}
+                        </span>
+                        <span>За единицу: {money(item.price)}</span>
                       </div>
-                      <div>
-                        <dt>Номер карты</dt>
-                        <dd>{memberCards[member.id] || String(member.id + 99000)}</dd>
+                      <details className="checkout-contact-details">
+                        <summary>Контакты и описание покупки</summary>
+                        <dl className="ws-facts checkout-facts">
+                          <div>
+                            <dt>ФИО</dt>
+                            <dd>{member.fullName || member.name}</dd>
+                          </div>
+                          <div>
+                            <dt>Номер карты</dt>
+                            <dd>{memberCards[member.id] || String(member.id + 99000)}</dd>
+                          </div>
+                          <div>
+                            <dt>Контакты</dt>
+                            <dd>
+                              {member.phone} · {member.email}
+                            </dd>
+                          </div>
+                          <div>
+                            <dt>Наименование покупки</dt>
+                            <dd>{item.name}</dd>
+                          </div>
+                          <div>
+                            <dt>Описание</dt>
+                            <dd>{item.short || item.description || item.name}</dd>
+                          </div>
+                          <div>
+                            <dt>Цена за единицу</dt>
+                            <dd>{money(item.price)}</dd>
+                          </div>
+                        </dl>
+                      </details>
+                    </div>
+                    <div className="checkout-settings ws-stack">
+                      <div className="ws-fields">
+                        {category === 'Товары' && (
+                          <label className="form-field">
+                            <span>Количество</span>
+                            <input
+                              type="number"
+                              min="1"
+                              max="999"
+                              step="1"
+                              value={quantity}
+                              disabled={done}
+                              onChange={(e) => {
+                                setQuantity(e.target.value);
+                                setError('');
+                              }}
+                            />
+                          </label>
+                        )}
+                        <label className="form-field">
+                          <span>Применить скидку</span>
+                          <Select
+                            value={discount}
+                            disabled={done}
+                            onChange={(e) => {
+                              setDiscount(e.target.value);
+                              setError('');
+                            }}
+                          >
+                            <option value="0">Без скидки</option>
+                            <option value="5">5% · пример</option>
+                            <option value="10">10% · пример</option>
+                            <option value="15">15% · пример</option>
+                          </Select>
+                        </label>
                       </div>
-                      <div>
-                        <dt>Контакты</dt>
-                        <dd>
-                          {member.phone} · {member.email}
-                        </dd>
-                      </div>
-                      <div>
-                        <dt>Наименование покупки</dt>
-                        <dd>{item.name}</dd>
-                      </div>
-                      <div>
-                        <dt>Описание</dt>
-                        <dd>{item.short || item.description || item.name}</dd>
-                      </div>
-                      <div>
-                        <dt>Цена за единицу</dt>
-                        <dd>{money(item.price)}</dd>
-                      </div>
-                    </dl>
-                  </details>
-                  <div className="ws-fields">
-                    {category === 'Товары' && (
-                      <label className="form-field">
-                        <span>Количество</span>
+                      <label className="ws-checkbox">
                         <input
-                          type="number"
-                          min="1"
-                          max="999"
-                          step="1"
-                          value={quantity}
+                          type="checkbox"
+                          checked={printReceipt}
                           disabled={done}
-                          onChange={(e) => {
-                            setQuantity(e.target.value);
-                            setError('');
-                          }}
+                          onChange={(e) => setPrintReceipt(e.target.checked)}
                         />
+                        Печатать чек
                       </label>
-                    )}
-                    <label className="form-field">
-                      <span>Применить скидку</span>
-                      <Select
-                        value={discount}
-                        disabled={done}
-                        onChange={(e) => {
-                          setDiscount(e.target.value);
-                          setError('');
-                        }}
-                      >
-                        <option value="0">Без скидки</option>
-                        <option value="5">5% · пример</option>
-                        <option value="10">10% · пример</option>
-                        <option value="15">15% · пример</option>
-                      </Select>
-                    </label>
-                  </div>
-                  <label className="ws-checkbox">
-                    <input
-                      type="checkbox"
-                      checked={printReceipt}
-                      disabled={done}
-                      onChange={(e) => setPrintReceipt(e.target.checked)}
-                    />
-                    Печатать чек
-                  </label>
 
-                  <label className="form-field mobile-payment-method">
-                    <span>Способ оплаты</span>
-                    <Select
-                      value={method}
-                      disabled={done}
-                      onChange={(event) => {
-                        setMethod(event.target.value as PaymentMethod);
-                        setError('');
-                      }}
-                    >
-                      {paymentMethods.map((value) => (
-                        <option key={value}>{value}</option>
-                      ))}
-                    </Select>
-                  </label>
-                  <div className="payment-methods" role="radiogroup" aria-label="Способ оплаты">
-                    {paymentMethods.map((value, index) => {
-                      const Icon = methodIcons[index];
-                      return (
-                        <button
-                          role="radio"
-                          aria-checked={method === value}
+                      <label className="form-field mobile-payment-method">
+                        <span>Способ оплаты</span>
+                        <Select
+                          value={method}
                           disabled={done}
-                          key={value}
-                          onKeyDown={(event) => {
-                            const direction = ['ArrowRight', 'ArrowDown'].includes(event.key)
-                              ? 1
-                              : ['ArrowLeft', 'ArrowUp'].includes(event.key)
-                                ? -1
-                                : 0;
-                            if (!direction) return;
-                            event.preventDefault();
-                            const next =
-                              (index + direction + paymentMethods.length) % paymentMethods.length;
-                            setMethod(paymentMethods[next]);
-                            setError('');
-                            event.currentTarget.parentElement
-                              ?.querySelectorAll<HTMLButtonElement>('[role="radio"]')
-                              [next]?.focus();
-                          }}
-                          tabIndex={method === value ? 0 : -1}
-                          onClick={() => {
-                            setMethod(value);
+                          onChange={(event) => {
+                            setMethod(event.target.value as PaymentMethod);
                             setError('');
                           }}
                         >
-                          <Icon size={22} />
-                          <strong>{value}</strong>
-                          <small>
-                            {value === 'Составная оплата'
-                              ? 'Несколько способов в одной покупке'
-                              : value === 'В кредит'
-                                ? 'Зафиксировать задолженность'
-                                : value === 'Подарочная карта'
-                                  ? 'Списать с демонстрационного остатка'
-                                  : 'Зачисление и подготовка чека'}
-                          </small>
-                        </button>
-                      );
-                    })}
-                  </div>
-                  {method === 'Составная оплата' && (
-                    <div className="ws-fields">
-                      {(['cash', 'card', 'gift', 'credit'] as const).map((key, index) => (
-                        <label className="form-field" key={key}>
-                          <span>
-                            {
-                              [
-                                'Наличными, ₽',
-                                'Безналично, ₽',
-                                'Подарочной картой, ₽',
-                                'В долг, ₽',
-                              ][index]
-                            }
-                          </span>
-                          <input
-                            type="number"
-                            min="0"
-                            step="0.01"
+                          {paymentMethods.map((value) => (
+                            <option key={value}>{value}</option>
+                          ))}
+                        </Select>
+                      </label>
+                      <div className="payment-methods" role="radiogroup" aria-label="Способ оплаты">
+                        {paymentMethods.map((value, index) => {
+                          const Icon = methodIcons[index];
+                          return (
+                            <button
+                              role="radio"
+                              aria-checked={method === value}
+                              disabled={done}
+                              key={value}
+                              onKeyDown={(event) => {
+                                const direction = ['ArrowRight', 'ArrowDown'].includes(event.key)
+                                  ? 1
+                                  : ['ArrowLeft', 'ArrowUp'].includes(event.key)
+                                    ? -1
+                                    : 0;
+                                if (!direction) return;
+                                event.preventDefault();
+                                const next =
+                                  (index + direction + paymentMethods.length) %
+                                  paymentMethods.length;
+                                setMethod(paymentMethods[next]);
+                                setError('');
+                                event.currentTarget.parentElement
+                                  ?.querySelectorAll<HTMLButtonElement>('[role="radio"]')
+                                  [next]?.focus();
+                              }}
+                              tabIndex={method === value ? 0 : -1}
+                              onClick={() => {
+                                setMethod(value);
+                                setError('');
+                              }}
+                            >
+                              <Icon size={22} />
+                              <strong>{value}</strong>
+                              <small>
+                                {value === 'Составная оплата'
+                                  ? 'Несколько способов в одной покупке'
+                                  : value === 'В кредит'
+                                    ? 'Зафиксировать задолженность'
+                                    : value === 'Подарочная карта'
+                                      ? 'Списать с демонстрационного остатка'
+                                      : 'Зачисление и подготовка чека'}
+                              </small>
+                            </button>
+                          );
+                        })}
+                      </div>
+                      {method === 'Составная оплата' && (
+                        <div className="ws-fields">
+                          {(['cash', 'card', 'gift', 'credit'] as const).map((key, index) => (
+                            <label className="form-field" key={key}>
+                              <span>
+                                {
+                                  [
+                                    'Наличными, ₽',
+                                    'Безналично, ₽',
+                                    'Подарочной картой, ₽',
+                                    'В долг, ₽',
+                                  ][index]
+                                }
+                              </span>
+                              <input
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                disabled={done}
+                                value={parts[key]}
+                                onChange={(e) => {
+                                  setParts({ ...parts, [key]: Number(e.target.value) });
+                                  setError('');
+                                }}
+                              />
+                            </label>
+                          ))}
+                        </div>
+                      )}
+                      {(method === 'Подарочная карта' ||
+                        (method === 'Составная оплата' && parts.gift > 0)) && (
+                        <label className="form-field">
+                          <span>Подарочная карта</span>
+                          <Select
+                            value={giftId}
                             disabled={done}
-                            value={parts[key]}
                             onChange={(e) => {
-                              setParts({ ...parts, [key]: Number(e.target.value) });
+                              setGiftId(e.target.value);
                               setError('');
                             }}
-                          />
+                          >
+                            <option value="">Выберите демокарту</option>
+                            {(data['gift-cards'] || [])
+                              .filter((row) => row.status === 'Активна')
+                              .map((row) => (
+                                <option key={row.id} value={row.id}>
+                                  {row.name} · остаток {money(row.balance)}
+                                </option>
+                              ))}
+                          </Select>
                         </label>
-                      ))}
-                    </div>
-                  )}
-                  {(method === 'Подарочная карта' ||
-                    (method === 'Составная оплата' && parts.gift > 0)) && (
-                    <label className="form-field">
-                      <span>Подарочная карта</span>
-                      <Select
-                        value={giftId}
-                        disabled={done}
-                        onChange={(e) => {
-                          setGiftId(e.target.value);
-                          setError('');
-                        }}
-                      >
-                        <option value="">Выберите демокарту</option>
-                        {(data['gift-cards'] || [])
-                          .filter((row) => row.status === 'Активна')
-                          .map((row) => (
-                            <option key={row.id} value={row.id}>
-                              {row.name} · остаток {money(row.balance)}
-                            </option>
-                          ))}
-                      </Select>
-                    </label>
-                  )}
-                  {(method === 'В кредит' ||
-                    (method === 'Составная оплата' && parts.credit > 0)) && (
-                    <Notice>
-                      Неоплаченная часть будет записана как задолженность выбранного клиента. Это
-                      демонстрационный сценарий.
-                    </Notice>
-                  )}
+                      )}
+                      {(method === 'В кредит' ||
+                        (method === 'Составная оплата' && parts.credit > 0)) && (
+                        <Notice>
+                          Неоплаченная часть будет записана как задолженность выбранного клиента.
+                          Это демонстрационный сценарий.
+                        </Notice>
+                      )}
 
-                  {(error || calculationError) && (
-                    <p className="ws-error" role="alert">
-                      {error || calculationError}
-                    </p>
-                  )}
-                </div>
-                <div className="checkout-submit" ref={submitArea}>
-                  <span className="checkout-method-summary">Оплата: {method}</span>
-                  <div className="checkout-total">
-                    <span>Итого к оплате</span>
-                    <strong>{money(pricing.total)}</strong>
-                    {pricing.discount > 0 && (
-                      <small>
-                        Скидка: {money(pricing.discount)} · до скидки {money(pricing.base)}
-                      </small>
-                    )}
+                      {(error || calculationError) && (
+                        <p className="ws-error" role="alert">
+                          {error || calculationError}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                  <div className="ws-actions">
-                    <Button disabled={done || !!calculationError} onClick={confirm}>
-                      {done ? 'Продажа сохранена' : 'Подтвердить демопродажу'}
-                    </Button>
-                    {done && receipt && (
-                      <Button variant="secondary" onClick={() => setReceiptOpen(true)}>
-                        Показать чек
+                  <div className="checkout-submit" ref={submitArea}>
+                    <div className="checkout-total">
+                      <span>Итого к оплате</span>
+                      <strong>{money(pricing.total)}</strong>
+                      {pricing.discount > 0 && (
+                        <small>
+                          Скидка: {money(pricing.discount)} · до скидки {money(pricing.base)}
+                        </small>
+                      )}
+                    </div>
+                    <div className="ws-actions">
+                      <Button disabled={done || !!calculationError} onClick={confirm}>
+                        {done ? 'Продажа сохранена' : 'Подтвердить демопродажу'}
                       </Button>
+                      {done && receipt && (
+                        <Button variant="secondary" onClick={() => setReceiptOpen(true)}>
+                          Показать чек
+                        </Button>
+                      )}
+                    </div>
+                    <small className="form-note">Без реальной оплаты и печати</small>
+                    {done && (
+                      <Notice tone="success">
+                        Продажа сохранена в кассе и финансах клиента.
+                        {isPlan && ' Карта добавлена клиенту.'}
+                        {debt > 0 && ` Задолженность: ${money(debt)}.`}
+                      </Notice>
                     )}
                   </div>
-                  <small className="form-note">Без реальной оплаты и печати</small>
-                  {done && (
-                    <Notice tone="success">
-                      Продажа сохранена в кассе и финансах клиента.
-                      {isPlan && ' Карта добавлена клиенту.'}
-                      {debt > 0 && ` Задолженность: ${money(debt)}.`}
-                    </Notice>
-                  )}
-                </div>
-              </>
-            ) : (
-              <Empty
-                title="Выберите клиента и покупку"
-                text="Затем здесь появятся данные и варианты оплаты."
-              />
-            )}
-          </div>
-        </section>
+                </>
+              ) : (
+                <Empty
+                  title="Выберите клиента и покупку"
+                  text="Затем здесь появятся данные и варианты оплаты."
+                />
+              )}
+            </div>
+          </section>
+        )}
       </div>
       {receiptOpen && receipt && (
         <Modal

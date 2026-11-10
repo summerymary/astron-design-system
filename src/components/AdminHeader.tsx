@@ -150,11 +150,21 @@ export function AdminHeader({
       </div>
       <ClientSearch key={workstationId} members={members} onMember={onMember} />
       <div className="admin-header-actions">
-        <button className="header-visit-action" onClick={() => onAction('registration')}>
+        <button
+          className="header-visit-action"
+          aria-label="Посещение"
+          title="Посещение"
+          onClick={() => onAction('registration')}
+        >
           <Plus size={15} />
           <span>Посещение</span>
         </button>
-        <button className="header-bar-action" onClick={() => onAction('bar')}>
+        <button
+          className="header-bar-action"
+          aria-label="Бар"
+          title="Бар"
+          onClick={() => onAction('bar')}
+        >
           <CupSoda size={16} />
           <span>Бар</span>
         </button>
