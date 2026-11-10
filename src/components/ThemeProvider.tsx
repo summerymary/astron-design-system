@@ -47,7 +47,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const url = new URL(window.location.href);
     if (palette.primary === DEFAULT_PRIMARY) url.searchParams.delete('theme');
     else url.searchParams.set('theme', palette.primary.slice(1));
-    if (visualStyle === 'spectrum') url.searchParams.set('style', visualStyle);
+    if (visualStyle === 'spectrum') url.searchParams.set('style', 'minimal');
     else url.searchParams.delete('style');
     window.history.replaceState(window.history.state, '', url);
     const root = document.documentElement;

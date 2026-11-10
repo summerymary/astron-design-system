@@ -17,10 +17,10 @@ export function VisualStyleSwitch() {
         type="button"
         aria-pressed={visualStyle === 'spectrum'}
         onClick={() => setVisualStyle('spectrum')}
-        title="Воздушный минималистичный вариант в духе Spectrum"
+        title="Минимал — новый интерфейс"
       >
         <span className="visual-style-dot spectrum-style-dot" aria-hidden="true" />
-        Spectrum
+        Минимал
       </button>
     </div>
   );
