@@ -144,6 +144,7 @@ function initialOptions() {
     role: role.id,
     clientId: Number(params.get('clientId')) || null,
     section,
+    recordId: params.get('recordId'),
     device: params.get('device') === 'mobile' ? ('mobile' as Device) : ('desktop' as Device),
     scenario: scenarios.some((s) => s.id === params.get('state'))
       ? (params.get('state') as Scenario)
@@ -167,6 +168,7 @@ export function App() {
   const [visits, setVisits] = useState<Visit[]>(initialVisits);
   const [workstationId, setWorkstationId] = useState('central-01');
   const [adminSection, setAdminSection] = useState<AdminSectionId>(options.section);
+  const [recordId, setRecordId] = useState<string | null>(options.recordId);
   const [sectionMember, setSectionMember] = useState<Member | null>(null);
   const [modal, setModal] = useState<'add' | 'reset' | 'club' | null>(null);
   const [workingClubs, setWorkingClubs] = useState<Partial<Record<UserRole, string>>>({});
@@ -202,7 +204,10 @@ export function App() {
       ? { title: selectedMember?.name ?? 'Карточка клиента', caption: 'Сведения о клиенте' }
       : page === 'admin-section'
         ? {
-            title: adminSections.find((s) => s.id === adminSection)!.label,
+            title:
+              (adminSection === 'employees' && recordId
+                ? workspace.data.employees.find((row) => row.id === recordId)?.name
+                : null) || adminSections.find((s) => s.id === adminSection)!.label,
             caption: adminSections.find((s) => s.id === adminSection)!.caption,
           }
         : page === 'overview'
@@ -276,14 +281,14 @@ export function App() {
     if (item.top < bounds.top + 8) menu.scrollTop += item.top - bounds.top - 8;
     else if (item.bottom > bounds.bottom - 8) menu.scrollTop += item.bottom - bounds.bottom + 8;
   }, [managingRole, role, page, adminSection, sidebarCollapsed]);
-  const routeKey = `${page}:${role}:${page === 'admin-section' ? adminSection : ''}:${page === 'client-profile' ? selectedMemberId : ''}`;
+  const routeKey = `${page}:${role}:${page === 'admin-section' ? `${adminSection}:${recordId || ''}` : ''}:${page === 'client-profile' ? selectedMemberId : ''}`;
   const previousRouteKey = useRef(routeKey);
   const navigationRole = useRef(role);
   const navigationMembers = useRef(members);
   navigationMembers.current = members;
   navigationRole.current = role;
   useEffect(() => {
-    const hash = `#/${page}?device=${device}&state=${scenario}&role=${role}${page === 'admin-section' ? `&section=${adminSection}` : ''}${page === 'client-profile' && selectedMemberId ? `&clientId=${selectedMemberId}` : ''}`;
+    const hash = `#/${page}?device=${device}&state=${scenario}&role=${role}${page === 'admin-section' ? `&section=${adminSection}${recordId ? `&recordId=${encodeURIComponent(recordId)}` : ''}` : ''}${page === 'client-profile' && selectedMemberId ? `&clientId=${selectedMemberId}` : ''}`;
     const entry = window.history.state || {};
     const index = Number(entry.astronIndex) || 0;
     const context = {
@@ -310,6 +315,7 @@ export function App() {
       setDevice(next.device);
       setScenario(next.scenario);
       setAdminSection(next.section);
+      setRecordId(next.recordId);
       setSectionMember(
         navigationMembers.current.find(
           (member) => member.id === window.history.state?.sectionMemberId,
@@ -380,6 +386,7 @@ export function App() {
   const openRegistration = (member?: Member) => openModule('registration', member);
   const openModule = (section: AdminSectionId, member?: Member) => {
     if (!canOpenModule(role, section)) return;
+    setRecordId(null);
     if (section === 'members') {
       goTo('members');
       return;
@@ -398,6 +405,7 @@ export function App() {
   };
   const openAdminAction = (section: AdminSectionId, member?: Member) => {
     if (!canOpenModule(role, section)) return;
+    setRecordId(null);
     if (section === 'registration') {
       openRegistration(member);
       return;
@@ -1213,6 +1221,8 @@ export function App() {
                     <AdminSection
                       key={`${adminSection}-${currentUser.id}-${club.id}`}
                       section={adminSection}
+                      recordId={recordId}
+                      onRecord={setRecordId}
                       member={sectionMember}
                       members={members}
                       clubName={club.name}
