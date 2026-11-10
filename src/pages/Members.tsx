@@ -184,7 +184,13 @@ export function Members({
                   </thead>
                   <tbody>
                     {filtered.map((m) => (
-                      <tr key={m.id}>
+                      <tr
+                        key={m.id}
+                        className="is-openable"
+                        onClick={(event) => {
+                          if (!(event.target as HTMLElement).closest('button, a')) onMember(m);
+                        }}
+                      >
                         <td>
                           <button className="member-name-button" onClick={() => onMember(m)}>
                             <Avatar member={m} />

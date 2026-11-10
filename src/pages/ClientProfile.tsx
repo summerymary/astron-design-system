@@ -141,6 +141,23 @@ export function ClientProfile({
     : member.phone;
   const upcoming = profileBookingOptions.filter((item) => bookings.includes(item.id));
   const daysInClub = countDaysInClub(member.joined);
+  const balanceBlock = (
+    <div className="client-balance">
+      <span>
+        <Wallet size={14} />
+        Лицевой счёт
+      </span>
+      <strong>{money(profile.balance)}</strong>
+      {canOperate && (
+        <div>
+          <button onClick={() => setPreviewAction('Пополнение счёта')}>
+            Пополнить <Plus size={12} />
+          </button>
+          <button onClick={() => setPreviewAction('Возврат средств')}>Возврат</button>
+        </div>
+      )}
+    </div>
+  );
   return (
     <div className="client-page">
       <div className="client-page-grid">
@@ -245,6 +262,7 @@ export function ClientProfile({
               )}
             </div>
             <div className="client-facts-row">
+              {minimal && balanceBlock}
               <dl className="client-contact-facts">
                 <Fact label="Телефон">
                   <span className="client-phone">
@@ -262,21 +280,7 @@ export function ClientProfile({
                 <Fact label="Пол">{profile.gender}</Fact>
                 <Fact label="Организация">{profile.organization}</Fact>
               </dl>
-              <div className="client-balance">
-                <span>
-                  <Wallet size={14} />
-                  Лицевой счёт
-                </span>
-                <strong>{money(profile.balance)}</strong>
-                {canOperate && (
-                  <div>
-                    <button onClick={() => setPreviewAction('Пополнение счёта')}>
-                      Пополнить <Plus size={12} />
-                    </button>
-                    <button onClick={() => setPreviewAction('Возврат средств')}>Возврат</button>
-                  </div>
-                )}
-              </div>
+              {!minimal && balanceBlock}
             </div>
             <div className="client-context-row">
               <div>
