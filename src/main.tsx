@@ -40,3 +40,4 @@ if (!redirectLegacyGuide())
 
 import './styles/checkout.css';
 import './styles/visual-style.css';
+import './styles/header-actions.css';
