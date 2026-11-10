@@ -67,6 +67,16 @@ for (const preset of THEME_PRESETS) {
   assert.ok(
     contrastRatio(alternative['--color-control-border'], alternative['--color-surface']) >= 3,
   );
+  for (const surface of ['--color-canvas', '--color-surface-muted']) {
+    assert.ok(
+      contrastRatio(alternative['--color-control-border'], alternative[surface]) >= 3,
+      `Contrast: controls blend into ${surface}`,
+    );
+  }
+  assert.ok(
+    contrastRatio(alternative['--color-canvas'], alternative['--color-surface']) >= 1.15,
+    'Contrast: the workspace background is too close to white panels',
+  );
   const url = new URL(`https://example.com/${appearanceSearch(preset.color, 'vivid')}`);
   assert.equal(readVisualStyle(url.search), 'vivid');
   assert.equal(url.searchParams.get('theme'), preset.color.slice(1));
@@ -76,7 +86,7 @@ for (const text of ['#F1E8ED', '#CBBBC4']) {
     assert.ok(contrastRatio(text, background) >= 4.5, 'Dark navigation text is too faint');
   }
 }
-for (const background of ['#B32D3D', '#BB3045', '#A72538']) {
+for (const background of ['#B32D3D', '#C42D54', '#AB2543']) {
   assert.ok(contrastRatio('#FFFFFF', background) >= 4.5, 'Bright action text is too faint');
 }
 console.log(
