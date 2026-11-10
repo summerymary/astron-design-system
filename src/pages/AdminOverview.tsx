@@ -9,6 +9,8 @@ import type { AdminSectionId } from '../data/admin';
 import { demoClubs } from '../data/roles';
 import type { Member, Visit } from '../types';
 import { useWorkspace } from '../components/WorkspaceProvider';
+import { useTheme } from '../components/ThemeProvider';
+import { MinimalVisitorTable } from '../components/MinimalVisitorTable';
 
 const initialFilters = (clubId: string) => ({
   clubId,
@@ -35,6 +37,8 @@ export function AdminOverview({
   onAction: (id: AdminSectionId) => void;
 }) {
   const { data } = useWorkspace();
+  const { visualStyle } = useTheme();
+  const minimal = visualStyle === 'spectrum';
   const currentShift = data.shifts.find(
     (row) => row.club === demoClubs.find((club) => club.id === clubId)?.shortName,
   );
@@ -84,6 +88,7 @@ export function AdminOverview({
         )
       : rows;
   }, [visits, memberMap, filters, query, unique, sort]);
+  const showVisitClubs = !minimal || filtered.some((visit) => visit.clubId !== clubId);
   const activeCount =
     Number(unique) +
     Number(sort !== 'time') +
@@ -110,6 +115,26 @@ export function AdminOverview({
     setDraft((prev) => ({ ...prev, [name]: value }));
   return (
     <div className="reception-home">
+      {minimal && (
+        <div className="minimal-reception-summary">
+          <div>
+            <strong>{filtered.length}</strong>
+            <span>посещений</span>
+          </div>
+          <button
+            title={currentShift?.status ? `Статус смены: ${currentShift.status}` : undefined}
+            onClick={() => onAction('payroll')}
+          >
+            <span>Смена</span>
+            <strong>
+              {currentShift
+                ? `${currentShift.start.split('T')[1]}–${currentShift.end.split('T')[1]}`
+                : 'Не запланирована'}{' '}
+              <ArrowUpRight size={15} />
+            </strong>
+          </button>
+        </div>
+      )}
       <div className="panel ws-home-shift">
         <span>
           <strong>Моя смена</strong>
@@ -140,17 +165,19 @@ export function AdminOverview({
       </details>
       <div className="admin-home-grid">
         <section className="panel visitor-panel">
-          <div className="visitor-heading">
-            <div>
-              <h2>
-                Недавние посетители <span>{filtered.length}</span>
-              </h2>
+          {!minimal && (
+            <div className="visitor-heading">
+              <div>
+                <h2>
+                  Недавние посетители <span>{filtered.length}</span>
+                </h2>
+              </div>
+              <span className="visitor-live">
+                <i />
+                Обновлено в 14:35
+              </span>
             </div>
-            <span className="visitor-live">
-              <i />
-              Обновлено в 14:35
-            </span>
-          </div>
+          )}
           <div className="visitor-toolbar">
             <label className="visitor-search">
               <Search size={17} />
@@ -185,6 +212,25 @@ export function AdminOverview({
               <ListFilter size={16} />
               Фильтры{activeCount > 0 && <b>{activeCount}</b>}
             </button>
+            {minimal && (
+              <div className="minimal-journal-options">
+                <button
+                  className="minimal-unique-toggle"
+                  aria-pressed={unique}
+                  onClick={() => setUnique(!unique)}
+                >
+                  Без повторов
+                </button>
+                <Select
+                  aria-label="Сортировка посетителей"
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value)}
+                >
+                  <option value="time">Сначала новые</option>
+                  <option value="name">По фамилии</option>
+                </Select>
+              </div>
+            )}
           </div>
           {expanded && (
             <Modal title="Фильтры посещений" onClose={closeFilters}>
@@ -396,62 +442,74 @@ export function AdminOverview({
                 aria-label="Журнал посетителей"
                 tabIndex={0}
               >
-                <table className="visitor-table">
-                  <thead>
-                    <tr>
-                      <th>№</th>
-                      <th>Время входа</th>
-                      <th>Карта</th>
-                      <th>Клиент</th>
-                      <th>Посещение</th>
-                      <th>Абонемент</th>
-                      <th>Клуб</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filtered.map((v, i) => {
-                      const member = memberMap.get(v.memberId)!;
-                      return (
-                        <tr key={v.id}>
-                          <td>{String(i + 1).padStart(2, '0')}</td>
-                          <td>
-                            <time dateTime={v.enteredAt}>{v.enteredAt.slice(11)}</time>
-                            {v.enteredAt.slice(0, 10) !== TODAY && (
-                              <small>
-                                {v.enteredAt.slice(8, 10)}.{v.enteredAt.slice(5, 7)}
-                              </small>
-                            )}
-                          </td>
-                          <td>
-                            <button className="visitor-card-link" onClick={() => onMember(member)}>
-                              {v.card}
-                            </button>
-                          </td>
-                          <td>
-                            <button
-                              className="visitor-member-button"
-                              onClick={() => onMember(member)}
-                            >
-                              <Avatar member={member} />
-                              <span>
-                                <strong>{member.name}</strong>
+                {minimal ? (
+                  <MinimalVisitorTable
+                    visits={filtered}
+                    members={memberMap}
+                    onMember={onMember}
+                    currentClubId={clubId}
+                  />
+                ) : (
+                  <table className="visitor-table">
+                    <thead>
+                      <tr>
+                        <th>№</th>
+                        <th>Время входа</th>
+                        <th>Карта</th>
+                        <th>Клиент</th>
+                        <th>Посещение</th>
+                        <th>Абонемент</th>
+                        <th>Клуб</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filtered.map((v, i) => {
+                        const member = memberMap.get(v.memberId)!;
+                        return (
+                          <tr key={v.id}>
+                            <td>{String(i + 1).padStart(2, '0')}</td>
+                            <td>
+                              <time dateTime={v.enteredAt}>{v.enteredAt.slice(11)}</time>
+                              {v.enteredAt.slice(0, 10) !== TODAY && (
+                                <small>
+                                  {v.enteredAt.slice(8, 10)}.{v.enteredAt.slice(5, 7)}
+                                </small>
+                              )}
+                            </td>
+                            <td>
+                              <button
+                                className="visitor-card-link"
+                                onClick={() => onMember(member)}
+                              >
+                                {v.card}
+                              </button>
+                            </td>
+                            <td>
+                              <button
+                                className="visitor-member-button"
+                                onClick={() => onMember(member)}
+                              >
+                                {!minimal && <Avatar member={member} />}
+                                <span>
+                                  <strong>{member.name}</strong>
+                                </span>
+                              </button>
+                            </td>
+                            <td>
+                              <span className={`visit-kind visit-kind-${v.kind}`}>
+                                {visitKinds[v.kind]}
                               </span>
-                            </button>
-                          </td>
-                          <td>
-                            <span className={`visit-kind visit-kind-${v.kind}`}>
-                              {visitKinds[v.kind]}
-                            </span>
-                          </td>
-                          <td>
-                            <MembershipTag name={v.plan} textOnly />
-                          </td>
-                          <td>{demoClubs.find((c) => c.id === v.clubId)?.shortName}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+                            </td>
+                            <td>
+                              <MembershipTag name={v.plan} textOnly />
+                            </td>
+                            <td>{demoClubs.find((c) => c.id === v.clubId)?.shortName}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                )}
               </div>
               <div className="visitor-mobile-list">
                 {filtered.map((v) => {
@@ -459,12 +517,12 @@ export function AdminOverview({
                   return (
                     <article key={v.id} className="visitor-mobile-card">
                       <div>
-                        <Avatar member={member} />
+                        {!minimal && <Avatar member={member} />}
                         <button onClick={() => onMember(member)}>
                           <strong>{member.name}</strong>
                           <span>
-                            Карта {v.card}
-                            <ArrowUpRight size={11} />
+                            {minimal ? v.card : `Карта ${v.card}`}
+                            {!minimal && <ArrowUpRight size={11} />}
                           </span>
                         </button>
                         <time>{v.enteredAt.slice(11)}</time>
@@ -480,10 +538,12 @@ export function AdminOverview({
                             <MembershipTag name={v.plan} textOnly />
                           </dd>
                         </div>
-                        <div>
-                          <dt>Клуб</dt>
-                          <dd>{demoClubs.find((c) => c.id === v.clubId)?.shortName}</dd>
-                        </div>
+                        {showVisitClubs && (
+                          <div>
+                            <dt>Клуб</dt>
+                            <dd>{demoClubs.find((c) => c.id === v.clubId)?.shortName}</dd>
+                          </div>
+                        )}
                       </dl>
                     </article>
                   );
