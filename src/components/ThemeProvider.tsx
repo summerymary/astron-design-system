@@ -47,7 +47,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const url = new URL(window.location.href);
     if (palette.primary === DEFAULT_PRIMARY) url.searchParams.delete('theme');
     else url.searchParams.set('theme', palette.primary.slice(1));
-    if (visualStyle === 'spectrum') url.searchParams.set('style', 'minimal');
+    if (visualStyle === 'vivid') url.searchParams.set('style', 'vivid');
     else url.searchParams.delete('style');
     window.history.replaceState(window.history.state, '', url);
     const root = document.documentElement;
@@ -63,8 +63,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     if (meta) meta.content = tokens['--color-action'];
     const icon = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
     const oldIcon = icon?.getAttribute('href');
-    if (icon && palette.primary !== DEFAULT_PRIMARY) {
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><title>Астрон</title><rect width="64" height="64" rx="18" fill="${palette.tokens['--color-action']}"/><text x="32" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="${palette.tokens['--color-on-action']}">А</text></svg>`;
+    if (icon && (palette.primary !== DEFAULT_PRIMARY || visualStyle === 'vivid')) {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><title>Астрон</title><rect width="64" height="64" rx="18" fill="${tokens['--color-action']}"/><text x="32" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="${tokens['--color-on-action']}">А</text></svg>`;
       icon.href = `data:image/svg+xml,${encodeURIComponent(svg)}`;
     }
     return () => {

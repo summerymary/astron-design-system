@@ -1,48 +1,48 @@
 import type { ThemeTokens } from './theme';
 
-export type VisualStyle = 'astron' | 'spectrum';
+export type VisualStyle = 'astron' | 'vivid';
 
 export function readVisualStyle(search: string): VisualStyle {
-  const value = new URLSearchParams(search).get('style');
-  return value === 'minimal' || value === 'spectrum' ? 'spectrum' : 'astron';
+  // The retired Minimal/Spectrum routes return to Astron; its source is archived separately.
+  return new URLSearchParams(search).get('style') === 'vivid' ? 'vivid' : 'astron';
 }
 
-// An original, Spectrum-inspired skin. Semantic statuses and club branding stay independent.
-export const SPECTRUM_OVERRIDES = {
-  '--color-accent': '#1D1D1F',
-  '--color-accent-hover': '#343438',
-  '--color-accent-pressed': '#000000',
-  '--color-accent-soft': '#F0F0F2',
-  '--color-accent-soft-hover': '#E4E4E7',
-  '--color-accent-line': '#B8B8BE',
+// A brighter Astron palette. Layout, semantic statuses and membership colours stay shared.
+export const VIVID_OVERRIDES = {
+  '--color-accent': '#B32D3D',
+  '--color-accent-hover': '#942235',
+  '--color-accent-pressed': '#761A2B',
+  '--color-accent-soft': '#FDEDF0',
+  '--color-accent-soft-hover': '#F8DCE3',
+  '--color-accent-line': '#D692A0',
   '--color-on-accent': '#FFFFFF',
-  '--color-action': '#1D1D1F',
-  '--color-action-hover': '#343438',
-  '--color-action-pressed': '#000000',
-  '--color-action-border': '#1D1D1F',
+  '--color-action': '#B32D3D',
+  '--color-action-hover': '#942235',
+  '--color-action-pressed': '#761A2B',
+  '--color-action-border': '#942235',
   '--color-on-action': '#FFFFFF',
-  '--color-ink': '#1D1D1F',
-  '--color-text': '#424245',
-  '--color-muted': '#6E6E73',
-  '--color-subtle': '#6E6E73',
-  '--color-canvas': '#FFFFFF',
-  '--color-stage': '#F5F5F7',
+  '--color-ink': '#151922',
+  '--color-text': '#303947',
+  '--color-muted': '#4D5966',
+  '--color-subtle': '#4D5966',
+  '--color-canvas': '#F5F4F7',
+  '--color-stage': '#EBE8EF',
   '--color-surface': '#FFFFFF',
-  '--color-surface-subtle': '#FAFAFC',
-  '--color-surface-muted': '#F2F2F4',
-  '--color-line': '#E8E8ED',
-  '--color-control-border': '#89898F',
-  '--color-chart': '#536B60',
-  '--color-skeleton': '#E8E8ED',
-  '--color-skeleton-highlight': '#FAFAFC',
+  '--color-surface-subtle': '#FAF8FA',
+  '--color-surface-muted': '#F0EDF2',
+  '--color-line': '#D2D3DC',
+  '--color-control-border': '#747E8C',
+  '--color-chart': '#B32D3D',
+  '--color-skeleton': '#DAD6DF',
+  '--color-skeleton-highlight': '#F9F7FA',
 } satisfies Partial<ThemeTokens>;
 
 export function visualStyleTokens(tokens: ThemeTokens, style: VisualStyle): ThemeTokens {
-  return style === 'spectrum' ? { ...tokens, ...SPECTRUM_OVERRIDES } : tokens;
+  return style === 'vivid' ? { ...tokens, ...VIVID_OVERRIDES } : tokens;
 }
 
 export function appearanceSearch(primary: string, style: VisualStyle) {
   const params = new URLSearchParams({ theme: primary.slice(1) });
-  if (style === 'spectrum') params.set('style', 'minimal');
+  if (style === 'vivid') params.set('style', 'vivid');
   return `?${params}`;
 }

@@ -32,9 +32,6 @@ import { findClientChat, readChatMessages } from '../lib/client-messages';
 import { ChatHistory } from '../components/ChatHistory';
 import { MembershipTag } from '../components/MembershipTag';
 import type { Member, Scenario, Visit } from '../types';
-import { useTheme } from '../components/ThemeProvider';
-import { Select } from '../components/Select';
-
 const subscriptionLabels: Record<SubscriptionStatus, string> = {
   active: 'Действует',
   expired: 'Завершён',
@@ -46,7 +43,6 @@ const dateTime = (value: string) => {
   const [date, time] = value.split('T');
   return `${date.split('-').reverse().join('.')} · ${time}`;
 };
-
 function Fact({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div>
@@ -66,7 +62,6 @@ function EmptyTab({ title, description }: { title: string; description: string }
     </div>
   );
 }
-
 export function ClientProfile({
   member,
   visits,
@@ -97,8 +92,6 @@ export function ClientProfile({
   showQuickLinks?: boolean;
 }) {
   const { data, put } = useWorkspace();
-  const { visualStyle } = useTheme();
-  const minimal = visualStyle === 'spectrum';
   const profile = getClientProfile(member, data);
   const [tab, setTab] = useState<ClientTabId>('info');
   const [form, setForm] = useState<'edit' | 'comment' | null>(null);
@@ -262,7 +255,6 @@ export function ClientProfile({
               )}
             </div>
             <div className="client-facts-row">
-              {minimal && balanceBlock}
               <dl className="client-contact-facts">
                 <Fact label="Телефон">
                   <span className="client-phone">
@@ -280,7 +272,7 @@ export function ClientProfile({
                 <Fact label="Пол">{profile.gender}</Fact>
                 <Fact label="Организация">{profile.organization}</Fact>
               </dl>
-              {!minimal && balanceBlock}
+              {balanceBlock}
             </div>
             <div className="client-context-row">
               <div>
@@ -301,60 +293,41 @@ export function ClientProfile({
           </section>
 
           <section className="client-history" aria-label="Данные клиента">
-            {minimal ? (
-              <div className="minimal-client-sections">
-                <span>Раздел карточки</span>
-                <Select
-                  id="minimal-client-section"
-                  aria-label="Раздел карточки клиента"
-                  value={tab}
-                  onChange={(e) => setTab(e.target.value as ClientTabId)}
+            <div className="client-tabs" role="tablist" aria-label="Разделы карточки клиента">
+              {clientTabs.map((item, i) => (
+                <button
+                  key={item.id}
+                  id={`client-tab-${item.id}`}
+                  role="tab"
+                  aria-selected={tab === item.id}
+                  aria-controls="client-tab-panel"
+                  tabIndex={tab === item.id ? 0 : -1}
+                  ref={(el) => {
+                    tabRefs.current[i] = el;
+                  }}
+                  onClick={() => setTab(item.id)}
+                  onKeyDown={(event) => {
+                    let next = i;
+                    if (event.key === 'ArrowRight') next = (i + 1) % clientTabs.length;
+                    else if (event.key === 'ArrowLeft')
+                      next = (i - 1 + clientTabs.length) % clientTabs.length;
+                    else if (event.key === 'Home') next = 0;
+                    else if (event.key === 'End') next = clientTabs.length - 1;
+                    else return;
+                    event.preventDefault();
+                    setTab(clientTabs[next].id);
+                    tabRefs.current[next]?.focus();
+                  }}
                 >
-                  {clientTabs.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.label}
-                      {item.id === 'subscriptions' ? ` · ${subscriptions.length}` : ''}
-                    </option>
-                  ))}
-                </Select>
-              </div>
-            ) : (
-              <div className="client-tabs" role="tablist" aria-label="Разделы карточки клиента">
-                {clientTabs.map((item, i) => (
-                  <button
-                    key={item.id}
-                    id={`client-tab-${item.id}`}
-                    role="tab"
-                    aria-selected={tab === item.id}
-                    aria-controls="client-tab-panel"
-                    tabIndex={tab === item.id ? 0 : -1}
-                    ref={(el) => {
-                      tabRefs.current[i] = el;
-                    }}
-                    onClick={() => setTab(item.id)}
-                    onKeyDown={(event) => {
-                      let next = i;
-                      if (event.key === 'ArrowRight') next = (i + 1) % clientTabs.length;
-                      else if (event.key === 'ArrowLeft')
-                        next = (i - 1 + clientTabs.length) % clientTabs.length;
-                      else if (event.key === 'Home') next = 0;
-                      else if (event.key === 'End') next = clientTabs.length - 1;
-                      else return;
-                      event.preventDefault();
-                      setTab(clientTabs[next].id);
-                      tabRefs.current[next]?.focus();
-                    }}
-                  >
-                    {item.label}
-                    {item.id === 'subscriptions' && <span>{subscriptions.length}</span>}
-                  </button>
-                ))}
-              </div>
-            )}
+                  {item.label}
+                  {item.id === 'subscriptions' && <span>{subscriptions.length}</span>}
+                </button>
+              ))}
+            </div>
             <div
               id="client-tab-panel"
               role="tabpanel"
-              aria-labelledby={minimal ? 'minimal-client-section' : `client-tab-${tab}`}
+              aria-labelledby={`client-tab-${tab}`}
               tabIndex={0}
             >
               {scenario !== 'default' ? (
@@ -464,9 +437,7 @@ export function ClientProfile({
                     <div className="client-info-groups">
                       <section className="ws-client-overview">
                         <div className="client-info-summary-footer">
-                          {(!minimal || member.tags) && (
-                            <p className="ws-muted">Теги: {member.tags || 'Не добавлены'}</p>
-                          )}
+                          <p className="ws-muted">Теги: {member.tags || 'Не добавлены'}</p>
                           {canOperate && (
                             <Button variant="secondary" onClick={() => setForm('edit')}>
                               Редактировать сведения

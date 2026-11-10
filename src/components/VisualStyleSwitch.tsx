@@ -15,12 +15,12 @@ export function VisualStyleSwitch() {
       </button>
       <button
         type="button"
-        aria-pressed={visualStyle === 'spectrum'}
-        onClick={() => setVisualStyle('spectrum')}
-        title="Минимал — новый интерфейс"
+        aria-pressed={visualStyle === 'vivid'}
+        onClick={() => setVisualStyle('vivid')}
+        title="Астрон Контраст — яркая палитра с привычной компоновкой"
       >
-        <span className="visual-style-dot spectrum-style-dot" aria-hidden="true" />
-        Минимал
+        <span className="visual-style-dot vivid-style-dot" aria-hidden="true" />
+        Контраст
       </button>
     </div>
   );

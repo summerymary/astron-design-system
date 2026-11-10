@@ -36,16 +36,17 @@ const { visualStyleTokens, readVisualStyle, appearanceSearch } = await import(
 );
 assert.equal(readVisualStyle(''), 'astron');
 assert.equal(readVisualStyle('?style=unknown'), 'astron');
-assert.equal(readVisualStyle('?theme=F0FC03&style=spectrum'), 'spectrum');
-assert.equal(readVisualStyle('?style=minimal'), 'spectrum');
+assert.equal(readVisualStyle('?theme=F0FC03&style=vivid'), 'vivid');
+assert.equal(readVisualStyle('?style=spectrum'), 'astron');
+assert.equal(readVisualStyle('?style=minimal'), 'astron');
 for (const preset of THEME_PRESETS) {
   const original = generatePalette(preset.color).tokens;
   const snapshot = { ...original };
-  const alternative = visualStyleTokens(original, 'spectrum');
+  const alternative = visualStyleTokens(original, 'vivid');
   assert.equal(
     alternative['--color-action'],
-    '#1D1D1F',
-    'Minimal interface must use graphite actions',
+    '#B32D3D',
+    'Contrast variant must use vivid burgundy actions',
   );
   assert.deepEqual(original, snapshot, 'Alternative mutated the original palette');
   assert.deepEqual(
@@ -66,9 +67,17 @@ for (const preset of THEME_PRESETS) {
   assert.ok(
     contrastRatio(alternative['--color-control-border'], alternative['--color-surface']) >= 3,
   );
-  const url = new URL(`https://example.com/${appearanceSearch(preset.color, 'spectrum')}`);
-  assert.equal(readVisualStyle(url.search), 'spectrum');
+  const url = new URL(`https://example.com/${appearanceSearch(preset.color, 'vivid')}`);
+  assert.equal(readVisualStyle(url.search), 'vivid');
   assert.equal(url.searchParams.get('theme'), preset.color.slice(1));
+}
+for (const text of ['#F1E8ED', '#CBBBC4']) {
+  for (const background of ['#25151C', '#321C28', '#21171F']) {
+    assert.ok(contrastRatio(text, background) >= 4.5, 'Dark navigation text is too faint');
+  }
+}
+for (const background of ['#B32D3D', '#BB3045', '#A72538']) {
+  assert.ok(contrastRatio('#FFFFFF', background) >= 4.5, 'Bright action text is too faint');
 }
 console.log(
   'Alternative visual style: contrast, original palette, status semantics and shared URLs passed.',
