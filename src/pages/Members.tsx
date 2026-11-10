@@ -7,9 +7,6 @@ import { Status, Tabs } from '../components/WorkspaceUI';
 import { memberCards } from '../data/admin';
 import { searchMembers } from '../lib/member-search';
 import { MembershipTag } from '../components/MembershipTag';
-import { MinimalMembersTable } from '../components/MinimalMembersTable';
-import { useTheme } from '../components/ThemeProvider';
-
 export function Members({
   members,
   onMember,
@@ -19,7 +16,6 @@ export function Members({
   onMember: (m: Member) => void;
   onAdd: () => void;
 }) {
-  const { visualStyle } = useTheme();
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState<MemberStatus | 'all'>('all');
   const [plan, setPlan] = useState('all');
@@ -140,104 +136,94 @@ export function Members({
         {filtered.length ? (
           <>
             <div className="table-scroll">
-              {visualStyle === 'spectrum' ? (
-                <MinimalMembersTable
-                  members={filtered}
-                  contacts={view === 'Контакты'}
-                  ascending={ascending}
-                  onSort={() => setAscending(!ascending)}
-                  onMember={onMember}
-                />
-              ) : (
-                <table className="members-table">
-                  <thead>
-                    <tr>
-                      <th>
-                        <button className="sort-button" onClick={() => setAscending(!ascending)}>
-                          Клиент
-                          <ArrowDown
-                            size={13}
-                            style={{ transform: ascending ? undefined : 'rotate(180deg)' }}
-                          />
+              <table className="members-table">
+                <thead>
+                  <tr>
+                    <th>
+                      <button className="sort-button" onClick={() => setAscending(!ascending)}>
+                        Клиент
+                        <ArrowDown
+                          size={13}
+                          style={{ transform: ascending ? undefined : 'rotate(180deg)' }}
+                        />
+                      </button>
+                    </th>
+                    {view === 'Контакты' ? (
+                      <>
+                        <th>Телефон</th>
+                        <th>Email</th>
+                        <th>Карта</th>
+                        <th>Статус клиента</th>
+                        <th>Теги</th>
+                      </>
+                    ) : (
+                      <>
+                        <th>Абонемент</th>
+                        <th>Статус абонемента</th>
+                        <th>Действует до</th>
+                        <th>Посещения</th>
+                      </>
+                    )}
+                    <th>
+                      <span className="sr-only">Открыть</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.map((m) => (
+                    <tr
+                      key={m.id}
+                      className="is-openable"
+                      onClick={(event) => {
+                        if (!(event.target as HTMLElement).closest('button, a')) onMember(m);
+                      }}
+                    >
+                      <td>
+                        <button className="member-name-button" onClick={() => onMember(m)}>
+                          <Avatar member={m} />
+                          <span>
+                            <strong>{m.name}</strong>
+                            {view === 'Абонементы' && <small>{m.email}</small>}
+                          </span>
                         </button>
-                      </th>
+                      </td>
                       {view === 'Контакты' ? (
                         <>
-                          <th>Телефон</th>
-                          <th>Email</th>
-                          <th>Карта</th>
-                          <th>Статус клиента</th>
-                          <th>Теги</th>
+                          <td>{m.phone}</td>
+                          <td>{m.email || '—'}</td>
+                          <td>
+                            <code>{memberCards[m.id] || String(m.id + 99000)}</code>
+                          </td>
+                          <td>
+                            <Status>{m.archived ? 'В архиве' : 'Активен'}</Status>
+                          </td>
+                          <td>{m.tags || '—'}</td>
                         </>
                       ) : (
                         <>
-                          <th>Абонемент</th>
-                          <th>Статус абонемента</th>
-                          <th>Действует до</th>
-                          <th>Посещения</th>
+                          <td>
+                            <MembershipTag name={m.plan} />
+                          </td>
+                          <td>
+                            <Badge status={m.status} />
+                          </td>
+                          <td>{m.expires}</td>
+                          <td>{m.visits}</td>
                         </>
                       )}
-                      <th>
-                        <span className="sr-only">Открыть</span>
-                      </th>
+                      <td>
+                        <button
+                          className="icon-button"
+                          aria-label={`Открыть: ${m.name}`}
+                          onClick={() => onMember(m)}
+                        >
+                          <ArrowUpRight size={17} />
+                        </button>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {filtered.map((m) => (
-                      <tr
-                        key={m.id}
-                        className="is-openable"
-                        onClick={(event) => {
-                          if (!(event.target as HTMLElement).closest('button, a')) onMember(m);
-                        }}
-                      >
-                        <td>
-                          <button className="member-name-button" onClick={() => onMember(m)}>
-                            <Avatar member={m} />
-                            <span>
-                              <strong>{m.name}</strong>
-                              {view === 'Абонементы' && <small>{m.email}</small>}
-                            </span>
-                          </button>
-                        </td>
-                        {view === 'Контакты' ? (
-                          <>
-                            <td>{m.phone}</td>
-                            <td>{m.email || '—'}</td>
-                            <td>
-                              <code>{memberCards[m.id] || String(m.id + 99000)}</code>
-                            </td>
-                            <td>
-                              <Status>{m.archived ? 'В архиве' : 'Активен'}</Status>
-                            </td>
-                            <td>{m.tags || '—'}</td>
-                          </>
-                        ) : (
-                          <>
-                            <td>
-                              <MembershipTag name={m.plan} />
-                            </td>
-                            <td>
-                              <Badge status={m.status} />
-                            </td>
-                            <td>{m.expires}</td>
-                            <td>{m.visits}</td>
-                          </>
-                        )}
-                        <td>
-                          <button
-                            className="icon-button"
-                            aria-label={`Открыть: ${m.name}`}
-                            onClick={() => onMember(m)}
-                          >
-                            <ArrowUpRight size={17} />
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
+                  ))}
+                </tbody>
+              </table>
             </div>
             <div className="mobile-member-list">
               {filtered.map((m) => (
