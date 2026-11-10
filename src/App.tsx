@@ -1,7 +1,6 @@
 import { DEMO_DAY, demoStamp, nextDemoNow, resetDemoClock } from './lib/demo-clock';
 import { Select } from './components/Select';
 import { VisualStyleSwitch } from './components/VisualStyleSwitch';
-import { MinimalNavigation } from './components/MinimalNavigation';
 import { appearanceSearch } from './lib/visual-style';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
@@ -69,7 +68,6 @@ import { membershipKinds } from './data/membership-kinds';
 import { AdminPageLayout } from './components/AdminPageLayout';
 import { ScreenLock, screenIsLocked, rememberScreenLock } from './components/ScreenLock';
 import type { Device, Member, Page, Scenario, UserRole, Visit, VisitKind } from './types';
-
 const navigation = [
   { id: 'overview' as const, label: 'Ресепшен', icon: LayoutDashboard },
   { id: 'members' as const, label: 'Клиенты', icon: Users },
@@ -124,7 +122,6 @@ const managementIcons = {
   'service-settings': Settings2,
   settings: Settings2,
 };
-
 function initialOptions() {
   const [path, query] = window.location.hash.replace('#/', '').split('?');
   const params = new URLSearchParams(query);
@@ -151,13 +148,11 @@ function initialOptions() {
       : ('default' as Scenario),
   };
 }
-
 export function App() {
   const { palette, visualStyle } = useTheme();
   const workspace = useWorkspace();
   const guideHref = `./design-system.html${appearanceSearch(palette.primary, visualStyle)}`;
   const [options] = useState(initialOptions);
-  const [minimalNavCollapsed, setMinimalNavCollapsed] = useState(false);
   const [page, setPage] = useState<Page>(options.page);
   const [device, setDevice] = useState<Device>(options.device);
   const [scenario, setScenario] = useState<Scenario>(options.scenario);
@@ -190,7 +185,12 @@ export function App() {
   const sidebarNavigationRef = useRef<HTMLDivElement>(null);
   const expandedManagementGroupsRef = useRef<Set<string> | null>(null);
   const sectionHistory = useRef<
-    { page: Page; section: AdminSectionId; clientId: number | null; member: Member | null }[]
+    {
+      page: Page;
+      section: AdminSectionId;
+      clientId: number | null;
+      member: Member | null;
+    }[]
   >([]);
   const memberCount =
     scenario === 'empty' ? 0 : scenario === 'default' ? members.length : undefined;
@@ -303,7 +303,7 @@ export function App() {
     previousRouteKey.current = routeKey;
   }, [page, device, scenario, role, adminSection, selectedMemberId, currentPage.title, routeKey]);
   useEffect(() => {
-    document.title = `${currentPage.title} · ${visualStyle === 'spectrum' ? 'Минимал · ' : ''}Астрон`;
+    document.title = `${currentPage.title} · ${visualStyle === 'vivid' ? 'Контраст · ' : ''}Астрон`;
   }, [currentPage.title, visualStyle]);
   useEffect(() => {
     const onHashChange = () => {
@@ -510,7 +510,6 @@ export function App() {
     setModal(null);
     notify('Демоданные восстановлены');
   };
-
   return (
     <div
       className={`prototype-content${device === 'desktop' ? ' fits-workspace' : ''}${page === 'overview' && device === 'desktop' ? ' fits-home' : ''}`}
@@ -530,7 +529,7 @@ export function App() {
             <LayoutDashboard size={16} />
           </span>
           <span>
-            {visualStyle === 'spectrum' ? 'Астрон' : 'Макет системы'}
+            Макет системы
             <small>Астрон · прототип приложения</small>
           </span>
           <span className="workspace-version">v0.1</span>
@@ -674,316 +673,285 @@ export function App() {
             Мобильная версия<span>390 × 844</span>
           </div>
         )}
-        <div
-          className={`app-shell is-${device}${(visualStyle === 'spectrum' ? minimalNavCollapsed : sidebarCollapsed) ? ' is-sidebar-collapsed' : ''}`}
-        >
-          {visualStyle === 'spectrum' ? (
-            <MinimalNavigation
-              role={role}
-              name={currentUser.name}
-              roleLabel={currentRole.label}
-              brand={club.brand}
-              clubName={club.name}
-              canViewMembers={currentRole.canViewMembers}
-              page={page}
-              section={adminSection}
-              collapsed={minimalNavCollapsed}
-              onToggle={() => setMinimalNavCollapsed((value) => !value)}
-              onPage={goTo}
-              onSection={openModule}
-              onAllSections={openSections}
-              onClub={() => setModal('club')}
-            />
-          ) : (
-            <aside
-              className={`sidebar ${managingRole ? 'has-management-menu' : ''}`}
-              aria-label="Боковое меню"
-            >
-              <div className="sidebar-head">
-                <a
-                  className="brand"
-                  title={sidebarCollapsed ? club.name : undefined}
-                  href="#/overview"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    goTo('overview');
-                  }}
-                >
-                  <ClubLogo brand={club.brand} variant={sidebarCollapsed ? 'compact' : 'wide'} />
-                </a>
-              </div>
-              {role !== 'administrator' && (
-                <button
-                  type="button"
-                  className="club-switch club-context-button"
-                  onClick={() => setModal('club')}
-                  aria-label={`Выбрать клуб: ${club.name}`}
-                  aria-haspopup="dialog"
-                  title={`Рабочий клуб: ${club.name}`}
-                >
-                  <ClubLogo brand={club.brand} variant="compact" decorative />
-                  <span>
-                    <strong>{club.name}</strong>
-                    <small>{club.city}</small>
-                  </span>
-                  <ChevronDown size={16} aria-hidden="true" />
-                </button>
-              )}
-              <div
-                id="workspace-navigation"
-                className="sidebar-navigation"
-                ref={sidebarNavigationRef}
+        <div className={`app-shell is-${device}${sidebarCollapsed ? ' is-sidebar-collapsed' : ''}`}>
+          <aside
+            className={`sidebar ${managingRole ? 'has-management-menu' : ''}`}
+            aria-label="Боковое меню"
+          >
+            <div className="sidebar-head">
+              <a
+                className="brand"
+                title={sidebarCollapsed ? club.name : undefined}
+                href="#/overview"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goTo('overview');
+                }}
               >
-                {role !== 'administrator' && (
-                  <span className="nav-label">
-                    {currentRole.scope === 'network' ? 'УПРАВЛЕНИЕ СЕТЬЮ' : 'ВАШ КЛУБ'}
-                  </span>
-                )}
-                <nav className="side-nav" aria-label="Основная навигация">
-                  {visibleNavigation
-                    .filter((n) => role !== 'administrator' || n.id !== 'members')
-                    .map((n) => (
-                      <button
-                        key={n.id}
-                        title={sidebarCollapsed ? n.label : undefined}
-                        aria-label={sidebarCollapsed ? n.label : undefined}
-                        aria-current={
-                          page === n.id || (n.id === 'members' && page === 'client-profile')
-                            ? 'page'
-                            : undefined
-                        }
-                        className={
-                          page === n.id || (n.id === 'members' && page === 'client-profile')
-                            ? 'active'
-                            : ''
-                        }
-                        onClick={() => goTo(n.id)}
-                      >
-                        <n.icon size={18} strokeWidth={1.75} />
-                        <span className="nav-item-label">{n.label}</span>
-                        {n.id === 'members' && memberCount !== undefined && (
-                          <span className="nav-count">{memberCount}</span>
-                        )}
-                      </button>
-                    ))}
-                  {role === 'marketer' && (
+                <ClubLogo brand={club.brand} variant={sidebarCollapsed ? 'compact' : 'wide'} />
+              </a>
+            </div>
+            {role !== 'administrator' && (
+              <button
+                type="button"
+                className="club-switch club-context-button"
+                onClick={() => setModal('club')}
+                aria-label={`Выбрать клуб: ${club.name}`}
+                aria-haspopup="dialog"
+                title={`Рабочий клуб: ${club.name}`}
+              >
+                <ClubLogo brand={club.brand} variant="compact" decorative />
+                <span>
+                  <strong>{club.name}</strong>
+                  <small>{club.city}</small>
+                </span>
+                <ChevronDown size={16} aria-hidden="true" />
+              </button>
+            )}
+            <div
+              id="workspace-navigation"
+              className="sidebar-navigation"
+              ref={sidebarNavigationRef}
+            >
+              {role !== 'administrator' && (
+                <span className="nav-label">
+                  {currentRole.scope === 'network' ? 'УПРАВЛЕНИЕ СЕТЬЮ' : 'ВАШ КЛУБ'}
+                </span>
+              )}
+              <nav className="side-nav" aria-label="Основная навигация">
+                {visibleNavigation
+                  .filter((n) => role !== 'administrator' || n.id !== 'members')
+                  .map((n) => (
                     <button
-                      onClick={() => openModule('crm')}
-                      className={page === 'admin-section' && adminSection === 'crm' ? 'active' : ''}
+                      key={n.id}
+                      title={sidebarCollapsed ? n.label : undefined}
+                      aria-label={sidebarCollapsed ? n.label : undefined}
                       aria-current={
-                        page === 'admin-section' && adminSection === 'crm' ? 'page' : undefined
-                      }
-                      title={sidebarCollapsed ? 'CRM' : undefined}
-                      aria-label={sidebarCollapsed ? 'CRM' : undefined}
-                    >
-                      <Users size={18} />
-                      <span className="nav-item-label">CRM</span>
-                    </button>
-                  )}
-                </nav>
-                {managingRole && (
-                  <nav className="side-nav management-module-nav" aria-label="Разделы управления">
-                    <button
-                      className={`management-statistics-link ${page === 'admin-section' && adminSection === 'statistics' ? 'active' : ''}`}
-                      title={sidebarCollapsed ? 'Статистика' : undefined}
-                      aria-label={sidebarCollapsed ? 'Статистика' : undefined}
-                      aria-current={
-                        page === 'admin-section' && adminSection === 'statistics'
+                        page === n.id || (n.id === 'members' && page === 'client-profile')
                           ? 'page'
                           : undefined
                       }
-                      onClick={() => openModule('statistics')}
+                      className={
+                        page === n.id || (n.id === 'members' && page === 'client-profile')
+                          ? 'active'
+                          : ''
+                      }
+                      onClick={() => goTo(n.id)}
                     >
-                      <ChartNoAxesCombined size={18} strokeWidth={1.75} />
-                      <span className="nav-item-label">Статистика</span>
+                      <n.icon size={18} strokeWidth={1.75} />
+                      <span className="nav-item-label">{n.label}</span>
+                      {n.id === 'members' && memberCount !== undefined && (
+                        <span className="nav-count">{memberCount}</span>
+                      )}
                     </button>
-                    {managementNavigationGroups.map((group) => (
-                      <details
-                        className="management-nav-group nav-accordion"
-                        data-nav-group={group.label}
-                        key={group.label}
-                      >
-                        <summary className="nav-label ws-nav-separator">{group.label}</summary>
-                        {group.items.map((id) => {
-                          const section = adminSections.find((section) => section.id === id)!;
-                          const label = section.label;
-                          const Icon =
-                            managementIcons[id as keyof typeof managementIcons] || BookOpen;
-                          return (
-                            <button
-                              key={id}
-                              title={sidebarCollapsed ? label : undefined}
-                              aria-label={sidebarCollapsed ? label : undefined}
-                              aria-current={
-                                page === 'admin-section' && adminSection === id ? 'page' : undefined
-                              }
-                              className={
-                                page === 'admin-section' && adminSection === id ? 'active' : ''
-                              }
-                              onClick={() => openModule(id)}
-                            >
-                              <Icon size={18} strokeWidth={1.75} />
-                              <span className="nav-item-label">{label}</span>
-                            </button>
-                          );
-                        })}
-                      </details>
-                    ))}
-                    <button
-                      onClick={openSections}
-                      aria-current={page === 'sections' ? 'page' : undefined}
-                      className={page === 'sections' ? 'active' : ''}
-                      title={sidebarCollapsed ? 'Каталог разделов' : undefined}
-                      aria-label={sidebarCollapsed ? 'Каталог разделов' : undefined}
-                    >
-                      <Menu size={18} />
-                      <span className="nav-item-label">Каталог разделов</span>
-                    </button>
-                  </nav>
+                  ))}
+                {role === 'marketer' && (
+                  <button
+                    onClick={() => openModule('crm')}
+                    className={page === 'admin-section' && adminSection === 'crm' ? 'active' : ''}
+                    aria-current={
+                      page === 'admin-section' && adminSection === 'crm' ? 'page' : undefined
+                    }
+                    title={sidebarCollapsed ? 'CRM' : undefined}
+                    aria-label={sidebarCollapsed ? 'CRM' : undefined}
+                  >
+                    <Users size={18} />
+                    <span className="nav-item-label">CRM</span>
+                  </button>
                 )}
-                {role === 'administrator' && (
-                  <nav className="side-nav ws-module-nav" aria-label="Рабочие разделы">
-                    {workNavigation.map((n) => (
-                      <button
-                        key={n.id}
-                        title={sidebarCollapsed ? n.label : undefined}
-                        aria-label={sidebarCollapsed ? n.label : undefined}
-                        aria-current={
-                          page === 'admin-section' && adminSection === n.id ? 'page' : undefined
-                        }
-                        className={
-                          page === 'admin-section' && adminSection === n.id ? 'active' : ''
-                        }
-                        onClick={() => openModule(n.id)}
-                      >
-                        <n.icon size={18} strokeWidth={1.75} />
-                        <span className="nav-item-label">{n.label}</span>
-                      </button>
-                    ))}
-                    <span className="nav-label ws-nav-separator">УПРАВЛЕНИЕ</span>
-                    {managementNavigation.map((n) => (
-                      <button
-                        key={n.id}
-                        title={sidebarCollapsed ? n.label : undefined}
-                        aria-label={sidebarCollapsed ? n.label : undefined}
-                        aria-current={
-                          page === 'admin-section' && adminSection === n.id ? 'page' : undefined
-                        }
-                        className={
-                          page === 'admin-section' && adminSection === n.id ? 'active' : ''
-                        }
-                        onClick={() => openModule(n.id)}
-                      >
-                        <n.icon size={18} strokeWidth={1.75} />
-                        <span className="nav-item-label">{n.label}</span>
-                      </button>
-                    ))}
-                    <button
-                      onClick={openSections}
-                      aria-current={page === 'sections' ? 'page' : undefined}
-                      className={page === 'sections' ? 'active' : ''}
-                      title={sidebarCollapsed ? 'Все разделы' : undefined}
-                      aria-label={sidebarCollapsed ? 'Все разделы' : undefined}
+              </nav>
+              {managingRole && (
+                <nav className="side-nav management-module-nav" aria-label="Разделы управления">
+                  <button
+                    className={`management-statistics-link ${page === 'admin-section' && adminSection === 'statistics' ? 'active' : ''}`}
+                    title={sidebarCollapsed ? 'Статистика' : undefined}
+                    aria-label={sidebarCollapsed ? 'Статистика' : undefined}
+                    aria-current={
+                      page === 'admin-section' && adminSection === 'statistics' ? 'page' : undefined
+                    }
+                    onClick={() => openModule('statistics')}
+                  >
+                    <ChartNoAxesCombined size={18} strokeWidth={1.75} />
+                    <span className="nav-item-label">Статистика</span>
+                  </button>
+                  {managementNavigationGroups.map((group) => (
+                    <details
+                      className="management-nav-group nav-accordion"
+                      data-nav-group={group.label}
+                      key={group.label}
                     >
-                      <Menu size={18} />
-                      <span className="nav-item-label">Все разделы</span>
+                      <summary className="nav-label ws-nav-separator">{group.label}</summary>
+                      {group.items.map((id) => {
+                        const section = adminSections.find((section) => section.id === id)!;
+                        const label = section.label;
+                        const Icon =
+                          managementIcons[id as keyof typeof managementIcons] || BookOpen;
+                        return (
+                          <button
+                            key={id}
+                            title={sidebarCollapsed ? label : undefined}
+                            aria-label={sidebarCollapsed ? label : undefined}
+                            aria-current={
+                              page === 'admin-section' && adminSection === id ? 'page' : undefined
+                            }
+                            className={
+                              page === 'admin-section' && adminSection === id ? 'active' : ''
+                            }
+                            onClick={() => openModule(id)}
+                          >
+                            <Icon size={18} strokeWidth={1.75} />
+                            <span className="nav-item-label">{label}</span>
+                          </button>
+                        );
+                      })}
+                    </details>
+                  ))}
+                  <button
+                    onClick={openSections}
+                    aria-current={page === 'sections' ? 'page' : undefined}
+                    className={page === 'sections' ? 'active' : ''}
+                    title={sidebarCollapsed ? 'Каталог разделов' : undefined}
+                    aria-label={sidebarCollapsed ? 'Каталог разделов' : undefined}
+                  >
+                    <Menu size={18} />
+                    <span className="nav-item-label">Каталог разделов</span>
+                  </button>
+                </nav>
+              )}
+              {role === 'administrator' && (
+                <nav className="side-nav ws-module-nav" aria-label="Рабочие разделы">
+                  {workNavigation.map((n) => (
+                    <button
+                      key={n.id}
+                      title={sidebarCollapsed ? n.label : undefined}
+                      aria-label={sidebarCollapsed ? n.label : undefined}
+                      aria-current={
+                        page === 'admin-section' && adminSection === n.id ? 'page' : undefined
+                      }
+                      className={page === 'admin-section' && adminSection === n.id ? 'active' : ''}
+                      onClick={() => openModule(n.id)}
+                    >
+                      <n.icon size={18} strokeWidth={1.75} />
+                      <span className="nav-item-label">{n.label}</span>
                     </button>
-                  </nav>
-                )}
-                {(role === 'trainer' ||
-                  role === 'bartender' ||
-                  role === 'accountant' ||
-                  role === 'marketer') && (
-                  <nav className="side-nav ws-module-nav" aria-label="Рабочие разделы">
-                    {(role === 'accountant'
+                  ))}
+                  <span className="nav-label ws-nav-separator">УПРАВЛЕНИЕ</span>
+                  {managementNavigation.map((n) => (
+                    <button
+                      key={n.id}
+                      title={sidebarCollapsed ? n.label : undefined}
+                      aria-label={sidebarCollapsed ? n.label : undefined}
+                      aria-current={
+                        page === 'admin-section' && adminSection === n.id ? 'page' : undefined
+                      }
+                      className={page === 'admin-section' && adminSection === n.id ? 'active' : ''}
+                      onClick={() => openModule(n.id)}
+                    >
+                      <n.icon size={18} strokeWidth={1.75} />
+                      <span className="nav-item-label">{n.label}</span>
+                    </button>
+                  ))}
+                  <button
+                    onClick={openSections}
+                    aria-current={page === 'sections' ? 'page' : undefined}
+                    className={page === 'sections' ? 'active' : ''}
+                    title={sidebarCollapsed ? 'Все разделы' : undefined}
+                    aria-label={sidebarCollapsed ? 'Все разделы' : undefined}
+                  >
+                    <Menu size={18} />
+                    <span className="nav-item-label">Все разделы</span>
+                  </button>
+                </nav>
+              )}
+              {(role === 'trainer' ||
+                role === 'bartender' ||
+                role === 'accountant' ||
+                role === 'marketer') && (
+                <nav className="side-nav ws-module-nav" aria-label="Рабочие разделы">
+                  {(role === 'accountant'
+                    ? [
+                        { id: 'cash' as const, label: 'Касса', icon: CreditCard },
+                        { id: 'statistics' as const, label: 'Отчёты', icon: ChartNoAxesCombined },
+                        { id: 'services' as const, label: 'Продажи', icon: CreditCard },
+                        {
+                          id: 'payroll' as const,
+                          label: 'Расчёт зарплаты',
+                          icon: BadgeDollarSign,
+                        },
+                        { id: 'inventory' as const, label: 'Склад ресепшена', icon: Package },
+                      ]
+                    : role === 'marketer'
                       ? [
-                          { id: 'cash' as const, label: 'Касса', icon: CreditCard },
-                          { id: 'statistics' as const, label: 'Отчёты', icon: ChartNoAxesCombined },
-                          { id: 'services' as const, label: 'Продажи', icon: CreditCard },
+                          { id: 'leads' as const, label: 'Заявки', icon: Users },
+                          { id: 'pipelines' as const, label: 'Сценарии заявок', icon: GitBranch },
+                          { id: 'segments' as const, label: 'Группы клиентов', icon: Tags },
                           {
-                            id: 'payroll' as const,
-                            label: 'Расчёт зарплаты',
-                            icon: BadgeDollarSign,
+                            id: 'statistics' as const,
+                            label: 'Отчёты',
+                            icon: ChartNoAxesCombined,
                           },
-                          { id: 'inventory' as const, label: 'Склад ресепшена', icon: Package },
                         ]
-                      : role === 'marketer'
+                      : role === 'trainer'
                         ? [
-                            { id: 'leads' as const, label: 'Заявки', icon: Users },
-                            { id: 'pipelines' as const, label: 'Сценарии заявок', icon: GitBranch },
-                            { id: 'segments' as const, label: 'Группы клиентов', icon: Tags },
                             {
-                              id: 'statistics' as const,
-                              label: 'Отчёты',
-                              icon: ChartNoAxesCombined,
+                              id: 'schedule' as const,
+                              label: 'Моё расписание',
+                              icon: CalendarDays,
                             },
+                            { id: 'trainer-clients' as const, label: 'Мои клиенты', icon: Users },
                           ]
-                        : role === 'trainer'
-                          ? [
-                              {
-                                id: 'schedule' as const,
-                                label: 'Моё расписание',
-                                icon: CalendarDays,
-                              },
-                              { id: 'trainer-clients' as const, label: 'Мои клиенты', icon: Users },
-                            ]
-                          : [
-                              { id: 'bar-catalog' as const, label: 'Каталог бара', icon: CupSoda },
-                              { id: 'bar-sales' as const, label: 'Продажи бара', icon: CreditCard },
-                            ]
-                    ).map((n) => (
-                      <button
-                        key={n.id}
-                        title={sidebarCollapsed ? n.label : undefined}
-                        aria-label={sidebarCollapsed ? n.label : undefined}
-                        className={
-                          page === 'admin-section' && adminSection === n.id ? 'active' : ''
-                        }
-                        onClick={() => openModule(n.id)}
-                      >
-                        <n.icon size={18} />
-                        <span className="nav-item-label">{n.label}</span>
-                      </button>
-                    ))}
-                  </nav>
-                )}
+                        : [
+                            { id: 'bar-catalog' as const, label: 'Каталог бара', icon: CupSoda },
+                            { id: 'bar-sales' as const, label: 'Продажи бара', icon: CreditCard },
+                          ]
+                  ).map((n) => (
+                    <button
+                      key={n.id}
+                      title={sidebarCollapsed ? n.label : undefined}
+                      aria-label={sidebarCollapsed ? n.label : undefined}
+                      className={page === 'admin-section' && adminSection === n.id ? 'active' : ''}
+                      onClick={() => openModule(n.id)}
+                    >
+                      <n.icon size={18} />
+                      <span className="nav-item-label">{n.label}</span>
+                    </button>
+                  ))}
+                </nav>
+              )}
+            </div>
+            <div className="sidebar-bottom">
+              <div className="sandbox-card">
+                <span>
+                  <i />
+                  Режим прототипа
+                </span>
+                <p>Демонстрационные данные хранятся в памяти приложения.</p>
               </div>
-              <div className="sidebar-bottom">
-                <div className="sandbox-card">
-                  <span>
-                    <i />
-                    Режим прототипа
-                  </span>
-                  <p>Демонстрационные данные хранятся в памяти приложения.</p>
-                </div>
-                <div
-                  className="user-block"
-                  title={
-                    sidebarCollapsed ? `${currentUser.name} · ${currentRole.label}` : undefined
-                  }
-                >
-                  <span className="user-avatar">{userInitials}</span>
-                  <span>
-                    <strong>{currentUser.name.split(' ')[0]}</strong>
-                    <small>{currentRole.label}</small>
-                  </span>
-                  <span className="user-online" />
-                </div>
-                <button
-                  type="button"
-                  className="icon-button sidebar-toggle"
-                  aria-label={sidebarCollapsed ? 'Развернуть меню' : 'Свернуть меню'}
-                  title={sidebarCollapsed ? 'Развернуть меню' : 'Свернуть меню'}
-                  aria-expanded={!sidebarCollapsed}
-                  aria-controls="workspace-navigation"
-                  onClick={() => setSidebarCollapsed((value) => !value)}
-                >
-                  {sidebarCollapsed ? <PanelLeftOpen size={19} /> : <PanelLeftClose size={19} />}
-                  <span className="sidebar-toggle-label">Свернуть меню</span>
-                </button>
+              <div
+                className="user-block"
+                title={sidebarCollapsed ? `${currentUser.name} · ${currentRole.label}` : undefined}
+              >
+                <span className="user-avatar">{userInitials}</span>
+                <span>
+                  <strong>{currentUser.name.split(' ')[0]}</strong>
+                  <small>{currentRole.label}</small>
+                </span>
+                <span className="user-online" />
               </div>
-            </aside>
-          )}
+              <button
+                type="button"
+                className="icon-button sidebar-toggle"
+                aria-label={sidebarCollapsed ? 'Развернуть меню' : 'Свернуть меню'}
+                title={sidebarCollapsed ? 'Развернуть меню' : 'Свернуть меню'}
+                aria-expanded={!sidebarCollapsed}
+                aria-controls="workspace-navigation"
+                onClick={() => setSidebarCollapsed((value) => !value)}
+              >
+                {sidebarCollapsed ? <PanelLeftOpen size={19} /> : <PanelLeftClose size={19} />}
+                <span className="sidebar-toggle-label">Свернуть меню</span>
+              </button>
+            </div>
+          </aside>
           <div className="app-workspace">
             <header className={`app-topbar ${role === 'administrator' ? 'admin-topbar' : ''}`}>
               {role === 'administrator' ? (
@@ -1534,7 +1502,6 @@ export function App() {
     </div>
   );
 }
-
 function SlidersIcon() {
   return (
     <>
