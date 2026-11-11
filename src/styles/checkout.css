@@ -1,3 +1,4 @@
+@layer legacy {
 /* Checkout stays inside the existing work area; drafts still belong to the page. */
 .sale-workspace {
   container: sale / inline-size;
@@ -329,4 +330,6 @@
 .checkout-submit .form-note {
   padding: 0;
   background: none;
+}
+
 }

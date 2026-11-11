@@ -1,3 +1,4 @@
+@layer legacy {
 * {
   box-sizing: border-box;
 }
@@ -2998,7 +2999,11 @@ code {
   }
   .mobile-nav > button.active {
     color: var(--color-accent);
-    background: var(--color-accent-soft);
+    background: transparent;
+    font-weight: 650;
+  }
+  .mobile-nav > button.active > svg {
+    stroke-width: 2.4;
   }
   .members-summary {
     padding: 20px;
@@ -4337,4 +4342,6 @@ code {
   background-size: 300% 200%;
   background-repeat: no-repeat;
   background-color: var(--color-surface-muted);
+}
+
 }

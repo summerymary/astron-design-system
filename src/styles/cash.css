@@ -1,3 +1,4 @@
+@layer legacy {
 .cash-workspace {
   min-width: 0;
   --layout-section-gap: 12px;
@@ -360,4 +361,6 @@
     gap: 4px;
     padding-block: 14px;
   }
+}
+
 }

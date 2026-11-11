@@ -1,62 +1,21 @@
-/* Two Astron finishes share every layout and component. Minimal lives only in the source archive. */
-.visual-style-switch {
+@layer legacy {
+/* Themes share every layout and component. Minimal lives only in the source archive. */
+.theme-select {
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
-  gap: 2px;
-  padding: 3px;
-  border: 1px solid var(--color-line);
-  border-radius: 8px;
-  background: var(--color-surface-muted);
-}
-.visual-style-switch > button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  min-height: 34px;
-  padding: 6px 10px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  background: transparent;
-  color: var(--color-text);
+  gap: 8px;
+  color: var(--color-muted);
   font-size: 14px;
-  font-weight: 600;
-  white-space: nowrap;
 }
-.visual-style-switch > button:hover {
-  background: var(--color-surface);
-}
-.visual-style-switch > button[aria-pressed='true'] {
-  background: var(--color-surface);
-  border-color: var(--color-control-border);
-  color: var(--color-ink);
-}
-.visual-style-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.astron-style-dot {
-  background: #8a332c;
-}
-.vivid-style-dot {
-  background: #b32d3d;
+.theme-select .select-trigger.select-trigger {
+  width: 132px;
+  font-size: 14px;
 }
 .guide-appearance-actions {
   display: flex;
   align-items: center;
   gap: 16px;
-}
-.vivid-style-intro > p {
-  max-width: 800px;
-  color: var(--color-text);
-  margin: 12px 0;
-  line-height: 1.6;
-}
-.vivid-style-intro > .button {
-  margin-top: 8px;
 }
 @media (min-width: 761px) and (max-width: 1550px) {
   .workspace-toolbar {
@@ -113,11 +72,8 @@
     justify-content: flex-end;
     gap: 8px;
   }
-  .workspace-toolbar .visual-style-switch {
+  .workspace-toolbar .theme-select {
     margin-right: auto;
-  }
-  .visual-style-switch > button {
-    min-height: 38px;
   }
   .guide-header-inner {
     flex-wrap: wrap;
@@ -141,11 +97,6 @@
 :root[data-visual-style='vivid'] .guide-header {
   background: #fff;
   border-bottom: 1px solid var(--color-line);
-}
-:root[data-visual-style='vivid'] .visual-style-switch > button[aria-pressed='true'] {
-  color: #942235;
-  background: #fdedf0;
-  border-color: var(--color-accent-line);
 }
 :root[data-visual-style='vivid'] .app-shell .sidebar {
   background: linear-gradient(165deg, #321c28 0%, #21171f 75%);
@@ -383,4 +334,15 @@
       background 0.15s,
       box-shadow 0.15s;
   }
+}
+
+:root[data-visual-style='vivid']
+  .app-shell
+  .management-module-nav
+  > .management-statistics-link:not(.active) {
+  color: #f1e8ed;
+  background: #3a2c36;
+  border-color: #977887;
+}
+
 }

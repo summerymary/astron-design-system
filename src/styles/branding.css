@@ -1,3 +1,4 @@
+@layer legacy {
 .club-logo {
   display: inline-flex;
   align-items: center;
@@ -293,4 +294,6 @@
   .logo-setup-note {
     padding: 17px;
   }
+}
+
 }

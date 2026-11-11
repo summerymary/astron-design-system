@@ -1,3 +1,4 @@
+@layer legacy {
 .client-search {
   max-width: 340px;
   min-width: 215px;
@@ -130,4 +131,6 @@
   .client-search [role='option'] small {
     font-size: var(--text-caption);
   }
+}
+
 }

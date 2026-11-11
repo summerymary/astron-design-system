@@ -1,3 +1,4 @@
+@layer legacy {
 /* Client lookup is the primary reception tool. Keep it wide and centered. */
 .app-shell .app-topbar.admin-topbar {
   padding: 12px 24px;
@@ -50,55 +51,19 @@
   margin: 0;
 }
 .app-shell .admin-topbar .admin-header-actions > button {
-  order: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
   width: auto;
   min-width: 0;
   flex: 0 0 auto;
-  height: 48px;
-  min-height: 48px;
-  padding: 0 12px;
-  border: 1px solid var(--color-control-border);
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-size: 15px;
-  line-height: 1.3;
 }
-.app-shell .admin-topbar .admin-header-actions > button > span {
-  display: inline;
-}
-.app-shell .admin-topbar .admin-header-actions > button > svg {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-}
-.app-shell .admin-topbar .admin-header-actions > button:hover,
-.app-shell .admin-topbar .admin-header-actions > button[aria-current='page'] {
+.app-shell .admin-topbar .admin-header-actions > button > span { display: inline; }
+.app-shell .admin-topbar .admin-header-actions > button[aria-current='page']:not(.button-primary) {
   background: var(--color-accent-soft);
   color: var(--color-accent);
   border-color: var(--color-accent);
 }
-.app-shell .admin-topbar .admin-header-actions > .header-add-client-action {
-  background: var(--color-action);
-  border-color: var(--color-action-border);
-  color: var(--color-on-action);
-}
-.app-shell .admin-topbar .admin-header-actions > .header-add-client-action:hover {
-  background: var(--color-action-hover);
-}
-.app-shell .admin-topbar .admin-header-actions > .header-sale-action {
-  display: none;
-}
 @container workspace (max-width: 1100px) and (min-width: 701px) {
   .app-shell .admin-topbar .header-inbox > span {
     display: none;
-  }
-  .app-shell .admin-topbar .admin-header-actions > button {
-    padding-inline: 9px;
-    font-size: 14px;
   }
 }
 @container workspace (max-width: 700px) {
@@ -128,15 +93,13 @@
   }
   .app-shell .admin-topbar .admin-header-actions > button {
     width: 100%;
-    height: 44px;
-    min-height: 44px;
-    padding: 4px 6px;
-    font-size: 14px;
   }
   .app-shell .admin-topbar .admin-header-actions > button > span {
     white-space: normal;
   }
-  .app-shell .admin-topbar .admin-header-actions > .header-sale-action {
-    display: inline-flex;
+  .app-shell .admin-topbar .admin-header-actions > .header-add-client-action {
+    grid-column: 1 / -1;
   }
+}
+
 }

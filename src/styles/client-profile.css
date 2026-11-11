@@ -1,3 +1,4 @@
+@layer legacy {
 .client-page {
   min-width: 0;
   color: var(--color-ink);
@@ -1013,4 +1014,6 @@
 }
 .client-service-list span {
   color: var(--color-muted);
+}
+
 }
