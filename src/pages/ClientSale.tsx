@@ -1,3 +1,4 @@
+import { clientName, hiddenPhone } from '../lib/client-display';
 import { demoStamp, nextDemoNow } from '../lib/demo-clock';
 import { Select } from '../components/Select';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -28,6 +29,7 @@ export function SaleWorkspace({
   employeeName,
   allowRegistration = true,
   initialSection = null,
+  hidePhones = false,
 }: {
   members: Member[];
   initialMember: Member | null;
@@ -36,6 +38,7 @@ export function SaleWorkspace({
   employeeName: string;
   allowRegistration?: boolean;
   initialSection?: SaleSectionId | null;
+  hidePhones?: boolean;
 }) {
   const { data, put } = useWorkspace();
   const saleRoot = useRef<HTMLDivElement>(null);
@@ -259,6 +262,7 @@ export function SaleWorkspace({
             <div className="ws-panel-body ws-stack">
               {(!member || clientSearchOpen) && (
                 <ClientSearch
+                  hidePhones={hidePhones}
                   mode="selection"
                   purpose="покупки"
                   members={members}
@@ -277,7 +281,7 @@ export function SaleWorkspace({
                   <strong>{member.fullName || member.name}</strong>
                   <span>Карта {memberCards[member.id] || String(member.id + 99000)}</span>
                   <span>
-                    {member.phone} · {member.email}
+                    {hidePhones ? hiddenPhone(member.phone) : member.phone} · {member.email}
                   </span>
                 </div>
               )}
@@ -425,7 +429,7 @@ export function SaleWorkspace({
                       <div className="checkout-summary">
                         <strong>{item.name}</strong>
                         <span>
-                          {member.name} · карта{' '}
+                          {clientName(member)} · карта{' '}
                           {memberCards[member.id] || String(member.id + 99000)}
                         </span>
                         <span>За единицу: {money(item.price)}</span>
@@ -444,7 +448,8 @@ export function SaleWorkspace({
                           <div>
                             <dt>Контакты</dt>
                             <dd>
-                              {member.phone} · {member.email}
+                              {hidePhones ? hiddenPhone(member.phone) : member.phone} ·{' '}
+                              {member.email}
                             </dd>
                           </div>
                           <div>

@@ -1,3 +1,4 @@
+import { clientName } from '../lib/client-display';
 import { useState } from 'react';
 import { MembershipTag } from '../components/MembershipTag';
 import {
@@ -231,7 +232,7 @@ export function Overview({
                     <button className="member-name-button" onClick={() => onMember(m)}>
                       <Avatar member={m} />
                       <span>
-                        <strong>{m.name}</strong>
+                        <strong>{clientName(m)}</strong>
                         <small>#{m.id}</small>
                       </span>
                     </button>
@@ -246,7 +247,7 @@ export function Overview({
                   <td>
                     <button
                       className="icon-button"
-                      aria-label={`Открыть: ${m.name}`}
+                      aria-label={`Открыть: ${clientName(m)}`}
                       onClick={() => onMember(m)}
                     >
                       <ArrowUpRight size={17} />
@@ -262,7 +263,7 @@ export function Overview({
             <button key={m.id} className="mobile-member" onClick={() => onMember(m)}>
               <Avatar member={m} />
               <span>
-                <strong>{m.name}</strong>
+                <strong>{clientName(m)}</strong>
                 <small>{m.plan}</small>
               </span>
               <Badge status={m.status} />

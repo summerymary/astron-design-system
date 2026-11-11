@@ -19,22 +19,22 @@ import {
   Users,
 } from 'lucide-react';
 import { Button, Modal } from '../components/ui';
-import {
-  DataTable,
-  Empty,
-  Notice,
-  SearchBox,
-  Stats,
-  Status,
-  Tabs,
-} from '../components/WorkspaceUI';
+import { ScheduleAttendees } from '../components/ScheduleAttendees';
+import { clientName } from '../lib/client-display';
+import { DataTable, Empty, Notice, SearchBox, Status, Tabs } from '../components/WorkspaceUI';
 import type { Navigate } from '../components/WorkspaceUI';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { TODAY } from '../data/workspace';
 import type { DemoRecord } from '../data/workspace';
 import type { DemoUser, Member } from '../types';
 import { PersonalTrainingForm, personalDraft } from './StaffWorkspace';
-import { canManageEvent, personalScopeError } from '../lib/staff-rules';
+import {
+  canManageEvent,
+  canCreateEvent,
+  canCancelEvent,
+  isManagementRole,
+  personalScopeError,
+} from '../lib/staff-rules';
 import {
   addDays,
   calendarBounds,
@@ -71,18 +71,26 @@ export function ScheduleWorkspace({
   clubName,
   onClubChange,
   user,
+  onMember,
 }: {
   members: Member[];
   navigate: Navigate;
   clubName: string;
   onClubChange: (club: string) => void;
   user: DemoUser;
+  onMember: (member: Member) => void;
 }) {
   const { data, put, remove } = useWorkspace();
   const isTrainer = user.role === 'trainer';
+  const isAdmin = user.role === 'administrator';
+  const canCreate = canCreateEvent(user);
+  const [scheduleClub, setScheduleClub] = useState(
+    clubName.split(' \u00b7 ').at(-1) ||
+      '\u0426\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u044b\u0439',
+  );
   const canEdit = (event: DemoRecord) => canManageEvent(event, user);
-  const club = clubName.split(' · ').at(-1) || 'Центральный';
-  const setClub = onClubChange;
+  const club = isAdmin ? scheduleClub : clubName.split(' \u00b7 ').at(-1)!;
+  const setClub = isAdmin ? setScheduleClub : onClubChange;
   const saved =
     data['calendar-view']?.find((r) => r.id === `${user.id}:${club}`) ||
     data['calendar-view']?.find((r) => r.id === user.id && r.club === club);
@@ -90,7 +98,7 @@ export function ScheduleWorkspace({
   const [view, setView] = useState(saved?.view || 'День');
   const [room, setRoom] = useState(saved?.room || 'Все залы');
   const [trainer, setTrainer] = useState(isTrainer ? user.name : saved?.trainer || 'Все тренеры');
-  const [scale, setScale] = useState(saved?.scale || 'Комфортно');
+  const [scale, setScale] = useState(saved?.scale || 'Весь день');
   const [step, setStep] = useState(
     saved?.step || data.preferences?.find((r) => r.id === 'schedule')?.step || '5',
   );
@@ -104,7 +112,7 @@ export function ScheduleWorkspace({
   const [deleting, setDeleting] = useState<DemoRecord | null>(null);
   const [undo, setUndo] = useState<PendingMove | null>(null);
   const [copying, setCopying] = useState(false);
-  const [booking, setBooking] = useState('');
+  const [cancelling, setCancelling] = useState<DemoRecord | null>(null);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [ghost, setGhost] = useState<DemoRecord | null>(null);
@@ -124,7 +132,7 @@ export function ScheduleWorkspace({
   const drag = useRef<Drag | null>(null);
   const suppressClick = useRef(false);
   const dialog = Boolean(
-    openedId || editing || library || pending || deleting || copying || context,
+    openedId || editing || library || pending || deleting || copying || context || cancelling,
   );
   const activeRooms = data.rooms.filter((r) => r.club === club && r.status !== 'В архиве');
   const trainers = [
@@ -146,6 +154,10 @@ export function ScheduleWorkspace({
       (trainer === 'Все тренеры' || e.trainer === trainer) &&
       (view === 'Неделя' ? dates.includes(e.day) : e.day === day),
   );
+  const participantName = (id: string) => {
+    const member = members.find((m) => String(m.id) === id);
+    return member ? clientName(member) : 'Клиент';
+  };
   const opened = data.events.find((e) => e.id === openedId);
   const columns: ScheduleColumn[] =
     view === 'Неделя'
@@ -190,7 +202,6 @@ export function ScheduleWorkspace({
   ).filter((t) => t <= end);
   const closeDetails = useCallback(() => {
     setOpenedId('');
-    setBooking('');
   }, []);
   const closeEditing = useCallback(() => setEditing(null), []);
   const closeLibrary = useCallback(() => setLibrary(null), []);
@@ -330,6 +341,7 @@ export function ScheduleWorkspace({
     status: 'Запись открыта',
   });
   const openLibrary = (initial = seed()) => {
+    if (!canCreate) return;
     if (isTrainer) {
       setEditing(
         personalDraft(
@@ -361,6 +373,7 @@ export function ScheduleWorkspace({
     setEditing(draft);
   };
   const requestMove = (before: DemoRecord, after: DemoRecord) => {
+    if (!canEdit(before)) return;
     if (sameSlot(before, after)) return;
     setError('');
     setPending({ before: { ...before }, after });
@@ -462,6 +475,8 @@ export function ScheduleWorkspace({
     if (current.active && current.target) requestMove(current.event, current.target);
   };
   const saveRecord = (record: DemoRecord): string | void => {
+    if (!canCreate)
+      return '\u042d\u0442\u0430 \u0440\u043e\u043b\u044c \u043d\u0435 \u0434\u043e\u0431\u0430\u0432\u043b\u044f\u0435\u0442 \u0438 \u043d\u0435 \u043f\u0435\u0440\u0435\u043d\u043e\u0441\u0438\u0442 \u0442\u0440\u0435\u043d\u0438\u0440\u043e\u0432\u043a\u0438.';
     if (isTrainer && record.kind !== 'personal')
       return 'Тренер может добавлять только свои персональные тренировки.';
     const before = data.events.find((e) => e.id === record.id);
@@ -558,15 +573,29 @@ export function ScheduleWorkspace({
                   Перенести / изменить
                 </button>
               )}
-              <button
-                role="menuitem"
-                onClick={() => {
-                  openLibrary(context.slot);
-                  setContext(null);
-                }}
-              >
-                Добавить тренировку{context.event?.status === 'Отменено' ? ' на это время' : ''}
-              </button>
+              {context.event && canCancelEvent(context.event, user) && (
+                <button
+                  role="menuitem"
+                  className="calendar-delete-action"
+                  onClick={() => {
+                    setCancelling(context.event!);
+                    setContext(null);
+                  }}
+                >
+                  Отменить занятие
+                </button>
+              )}
+              {canCreate && (
+                <button
+                  role="menuitem"
+                  onClick={() => {
+                    openLibrary(context.slot);
+                    setContext(null);
+                  }}
+                >
+                  Добавить тренировку{context.event?.status === 'Отменено' ? ' на это время' : ''}
+                </button>
+              )}
               {context.event && canEdit(context.event) && (
                 <button
                   role="menuitem"
@@ -618,17 +647,21 @@ export function ScheduleWorkspace({
             label="Вид расписания"
           />
           <div className="calendar-create">
-            <Button
-              variant="secondary"
-              onClick={() => (isTrainer ? navigate('trainer-clients') : openLibrary())}
-            >
-              <BookOpen size={15} />
-              {isTrainer ? 'Мои клиенты' : 'База тренировок'}
-            </Button>
-            <Button onClick={() => openLibrary()}>
-              <Plus size={15} />
-              {isTrainer ? 'Персональная тренировка' : 'Занятие'}
-            </Button>
+            {canCreate && (
+              <>
+                <Button
+                  variant="secondary"
+                  onClick={() => (isTrainer ? navigate('trainer-clients') : openLibrary())}
+                >
+                  <BookOpen size={15} />
+                  {isTrainer ? 'Мои клиенты' : 'База тренировок'}
+                </Button>
+                <Button onClick={() => openLibrary()}>
+                  <Plus size={15} />
+                  {isTrainer ? 'Персональная тренировка' : 'Занятие'}
+                </Button>
+              </>
+            )}
             <button
               className="icon-button"
               aria-label={fullscreen ? 'Свернуть расписание' : 'Расписание на весь экран'}
@@ -686,10 +719,8 @@ export function ScheduleWorkspace({
               disabled={isTrainer}
               onChange={(e) => {
                 setClub(e.target.value);
-                setRoom(
-                  data.rooms.find((r) => r.club === e.target.value && r.status !== 'В архиве')
-                    ?.name || 'Все залы',
-                );
+                setRoom('Все залы');
+                setTrainer(isTrainer ? user.name : 'Все тренеры');
               }}
             >
               {demoClubs
@@ -744,7 +775,7 @@ export function ScheduleWorkspace({
           <span className="calendar-count">
             Занятий: <b>{events.length}</b>
           </span>
-          {!isTrainer && (
+          {canCreate && !isTrainer && (
             <details className="calendar-more">
               <summary aria-label="Другие действия с расписанием">
                 <Settings2 size={16} />
@@ -883,6 +914,7 @@ export function ScheduleWorkspace({
                   onContextMenu={(e) => {
                     if (e.target !== e.currentTarget) return;
                     e.preventDefault();
+                    if (!canCreate) return;
                     const rect = e.currentTarget.getBoundingClientRect();
                     setContext({
                       slot: seed(
@@ -897,6 +929,7 @@ export function ScheduleWorkspace({
                   onKeyDown={(e) => {
                     if (
                       e.target !== e.currentTarget ||
+                      !canCreate ||
                       !(e.key === 'ContextMenu' || (e.shiftKey && e.key === 'F10'))
                     )
                       return;
@@ -909,7 +942,7 @@ export function ScheduleWorkspace({
                     });
                   }}
                   onDoubleClick={(e) => {
-                    if (e.target !== e.currentTarget) return;
+                    if (e.target !== e.currentTarget || !canCreate) return;
                     const rect = e.currentTarget.getBoundingClientRect();
                     openLibrary(
                       seed(
@@ -945,7 +978,7 @@ export function ScheduleWorkspace({
                           '--event-color': event.color || 'var(--color-accent)',
                         } as CSSProperties
                       }
-                      aria-label={`${event.name}${event.kind === 'personal' ? ', ' + members.find((m) => String(m.id) === event.memberId)?.name : ''}, ${dayText(event.day)}, ${eventTime(event)}, ${event.trainer}, ${event.room}, записано ${event.booked} из ${event.capacity}${!canEdit(event) ? ', ' + event.status : ''}`}
+                      aria-label={`${event.name}${event.kind === 'personal' ? ', ' + participantName(event.memberId) : ''}, ${dayText(event.day)}, ${eventTime(event)}, ${event.trainer}, ${event.room}, записано ${event.booked} из ${event.capacity}${!canEdit(event) ? ', ' + event.status : ''}`}
                       title={`${eventTime(event)} · ${event.name}\n${event.trainer} · ${event.room}\n${event.booked} из ${event.capacity} мест. Нажмите для подробностей${canEdit(event) ? ' или перетащите для переноса' : ''}.`}
                       onPointerDown={(e) => startDrag(e, event)}
                       onContextMenu={(e) => {
@@ -982,15 +1015,14 @@ export function ScheduleWorkspace({
                           suppressClick.current = false;
                           return;
                         }
-                        if (event.status === 'Отменено')
+                        if (event.status === 'Отменено' && canCreate)
                           openLibrary(seed(event.time, event.room, event.day));
                         else show(event);
                       }}
                     >
-                      <time>{eventTime(event)}</time>
                       <strong>
                         {event.kind === 'personal'
-                          ? `ПТ · ${members.find((m) => String(m.id) === event.memberId)?.name || 'Клиент'}`
+                          ? `ПТ · ${participantName(event.memberId)}`
                           : event.name}
                       </strong>
                       <span className="calendar-event-trainer">
@@ -1040,12 +1072,17 @@ export function ScheduleWorkspace({
           />
         )}
         <footer className="calendar-footer">
+          {canCreate && (
+            <span>
+              <Move size={13} />
+              Перетаскивание — с подтверждением
+            </span>
+          )}
           <span>
-            <Move size={13} />
-            Перетаскивание — с подтверждением
+            {isAdmin
+              ? 'Нажмите на занятие, чтобы посмотреть клиентов и управлять записью'
+              : 'Нажмите занятие для подробностей'}
           </span>
-          <span>Нажмите занятие для подробностей</span>
-          <span>Двойной щелчок по свободному месту — добавить</span>
         </footer>
       </section>
     </div>
@@ -1175,7 +1212,7 @@ export function ScheduleWorkspace({
           {pending && (
             <Modal
               title="Перенести занятие?"
-              subtitle={`${pending.after.kind === 'personal' ? members.find((m) => String(m.id) === pending.after.memberId)?.name || 'Клиент' : pending.after.name} · ${pending.after.trainer}`}
+              subtitle={`${pending.after.kind === 'personal' ? participantName(pending.after.memberId) : pending.after.name} · ${pending.after.trainer}`}
               onClose={closePending}
             >
               <div className="calendar-move-summary">
@@ -1220,57 +1257,44 @@ export function ScheduleWorkspace({
           )}
           {opened && (
             <Modal
-              title={
-                opened.kind === 'personal'
-                  ? `ПТ · ${members.find((m) => String(m.id) === opened.memberId)?.name || 'Клиент'}`
-                  : opened.name
-              }
-              subtitle={`${dayText(opened.day)} · ${eventTime(opened)} · ${opened.room}`}
+              title={opened.name}
+              subtitle={`${dayText(opened.day)} · ${eventTime(opened)} · ${opened.room} · ${opened.club}`}
               onClose={closeDetails}
             >
-              <div className="ws-stack">
-                <Stats
-                  items={[
-                    { label: 'Длительность', value: `${opened.duration} мин` },
-                    { label: 'Участники', value: `${opened.booked} / ${opened.capacity}` },
-                  ]}
-                />
+              <div className="training-details">
+                <div className="training-details-summary">
+                  <p>
+                    <span>Тренер</span>
+                    <strong>{opened.trainer}</strong>
+                  </p>
+                  <p>
+                    <span>Длительность</span>
+                    <strong>{opened.duration} мин</strong>
+                  </p>
+                  <Status>{opened.status}</Status>
+                </div>
                 <p>
-                  Тренер: <strong>{opened.trainer}</strong>
+                  {opened.description ||
+                    `${opened.format || 'Групповое занятие'} в клубе «${opened.club}».`}
                 </p>
-                {opened.description && <p>{opened.description}</p>}
-                <Status>{opened.status}</Status>
-                {opened.status === 'Отменено' && (
-                  <Button
-                    onClick={() => {
-                      const initial = seed(opened.time, opened.room, opened.day);
-                      closeDetails();
-                      openLibrary(initial);
-                    }}
-                  >
-                    <Plus size={16} />
-                    Добавить тренировку на это время
-                  </Button>
-                )}
-                {isTrainer && opened.kind !== 'personal' && (
-                  <Notice>Групповое занятие доступно тренеру только для просмотра.</Notice>
-                )}
-                {isTrainer && opened.kind === 'personal' && (
-                  <Button
-                    variant="secondary"
-                    onClick={() => {
-                      const member = members.find((m) => String(m.id) === opened.memberId);
-                      closeDetails();
-                      setFullscreen(false);
-                      navigate('trainer-clients', member);
-                    }}
-                  >
-                    Заметки о клиенте
-                  </Button>
-                )}
-                {canEdit(opened) && (
-                  <>
-                    <div className="ws-actions">
+                <ScheduleAttendees
+                  key={opened.id}
+                  event={opened}
+                  members={members}
+                  editable={isAdmin || isManagementRole(user.role)}
+                  onMember={
+                    isAdmin || isManagementRole(user.role)
+                      ? (member) => {
+                          closeDetails();
+                          setFullscreen(false);
+                          onMember(member);
+                        }
+                      : undefined
+                  }
+                />
+                <div className="ws-actions">
+                  {canEdit(opened) && (
+                    <>
                       <Button
                         variant="secondary"
                         onClick={() => {
@@ -1278,7 +1302,7 @@ export function ScheduleWorkspace({
                           closeDetails();
                         }}
                       >
-                        <Move size={15} />
+                        <Move size={16} />
                         Перенести / изменить
                       </Button>
                       <Button
@@ -1286,94 +1310,78 @@ export function ScheduleWorkspace({
                         className="calendar-delete-action"
                         onClick={() => requestDelete(opened)}
                       >
-                        <Trash2 size={17} />
+                        <Trash2 size={16} />
                         Удалить тренировку
                       </Button>
-                    </div>
-                    {user.role === 'administrator' && opened.kind !== 'personal' && (
-                      <>
-                        <label className="form-field">
-                          <span>Клиент для записи</span>
-                          <Select value={booking} onChange={(e) => setBooking(e.target.value)}>
-                            <option value="">Выберите клиента</option>
-                            {members.map((m) => (
-                              <option key={m.id} value={m.id}>
-                                {m.name}
-                              </option>
-                            ))}
-                          </Select>
-                        </label>
-                        <Button
-                          disabled={
-                            !booking ||
-                            (opened.attendees || '').split(',').includes(booking) ||
-                            Number(opened.booked) >= Number(opened.capacity)
-                          }
-                          onClick={() => {
-                            const next = {
-                              ...opened,
-                              booked: String(Number(opened.booked) + 1),
-                              status:
-                                Number(opened.booked) + 1 >= Number(opened.capacity)
-                                  ? 'Мест нет'
-                                  : 'Запись открыта',
-                              attendees: [opened.attendees, booking].filter(Boolean).join(','),
-                            };
-                            put('events', next);
-                            setBooking('');
-                            setMessage('Клиент записан на занятие.');
-                          }}
-                        >
-                          Записать клиента
-                        </Button>
-                        {Number(opened.booked) >= Number(opened.capacity) && (
-                          <Notice tone="warning">
-                            Все места заняты. Правила работы листа ожидания требуют уточнения.
-                          </Notice>
-                        )}
-                        {opened.attendees
-                          ?.split(',')
-                          .filter(Boolean)
-                          .map((id) => (
-                            <div className="ws-list-line" key={id}>
-                              <span>
-                                {members.find((m) => String(m.id) === id)?.name || 'Клиент'}
-                              </span>
-                              <Button
-                                variant="ghost"
-                                onClick={() =>
-                                  put('events', {
-                                    ...opened,
-                                    booked: String(Math.max(0, Number(opened.booked) - 1)),
-                                    status: 'Запись открыта',
-                                    attendees: opened.attendees
-                                      .split(',')
-                                      .filter((value) => value !== id)
-                                      .join(','),
-                                  })
-                                }
-                              >
-                                Снять запись
-                              </Button>
-                            </div>
-                          ))}
-                      </>
-                    )}
-                    <details className="ws-disclosure">
-                      <summary>Другие действия</summary>
-                      <Button
-                        variant="ghost"
-                        onClick={() => put('events', { ...opened, status: 'Отменено' })}
-                      >
-                        Отменить это демозанятие
-                      </Button>
-                    </details>
-                  </>
-                )}
+                    </>
+                  )}
+                  {canCancelEvent(opened, user) && (
+                    <Button
+                      variant="secondary"
+                      className="calendar-delete-action"
+                      onClick={() => setCancelling(opened)}
+                    >
+                      Отменить занятие
+                    </Button>
+                  )}
+                  {opened.status === 'Отменено' && canCreate && (
+                    <Button
+                      onClick={() => {
+                        const initial = seed(opened.time, opened.room, opened.day);
+                        closeDetails();
+                        openLibrary(initial);
+                      }}
+                    >
+                      Добавить тренировку на это время
+                    </Button>
+                  )}
+                  {isTrainer && opened.kind === 'personal' && (
+                    <Button
+                      variant="secondary"
+                      onClick={() => {
+                        const member = members.find((m) => String(m.id) === opened.memberId);
+                        closeDetails();
+                        setFullscreen(false);
+                        navigate('trainer-clients', member);
+                      }}
+                    >
+                      Заметки о клиенте
+                    </Button>
+                  )}
+                </div>
               </div>
             </Modal>
           )}
-          {copying && (
+          {cancelling && (
+            <Modal
+              title="Отменить занятие?"
+              subtitle={`${cancelling.name} · ${eventTime(cancelling)} · ${cancelling.club}`}
+              onClose={() => setCancelling(null)}
+            >
+              <p>
+                Занятие останется в расписании с отметкой «Отменено». Записи и отметки присутствия
+                сохранятся в истории.
+              </p>
+              <div className="modal-actions">
+                <Button variant="secondary" onClick={() => setCancelling(null)}>
+                  Оставить занятие
+                </Button>
+                <Button
+                  onClick={() => {
+                    const current = data.events.find((row) => row.id === cancelling.id);
+                    if (current && canCancelEvent(current, user)) {
+                      put('events', { ...current, status: 'Отменено' });
+                      setMessage('Занятие отменено.');
+                    }
+                    setCancelling(null);
+                  }}
+                >
+                  Отменить занятие
+                </Button>
+              </div>
+            </Modal>
+          )}
+          {copying && canCreate && (
             <Modal
               title="Добавить занятия из прошлой недели?"
               subtitle="Только для выбранного клуба. Записи участников не копируются."

@@ -1,3 +1,4 @@
+import { clientName } from '../lib/client-display';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ArrowLeft,
@@ -54,7 +55,7 @@ export function MessagesWorkspace({
     const last = readChatMessages(row).at(-1);
     return {
       ...row,
-      name: member?.name || row.name,
+      name: member ? clientName(member) : row.name,
       preview: last ? (last.deletedAt ? 'Сообщение удалено' : last.text) : row.preview,
       time: last?.createdAt ? messageTime(last.createdAt) : row.time,
     };

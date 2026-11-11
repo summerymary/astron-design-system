@@ -75,6 +75,7 @@ export function AdminSection({
         navigate={navigate}
         clubName={clubName}
         employeeName={employeeName}
+        hidePhones={user.role === 'administrator'}
         allowRegistration={canOpenModule(user.role, 'registration')}
       />
     );
@@ -97,6 +98,7 @@ export function AdminSection({
         navigate={navigate}
         clubName={clubName}
         onClubChange={onClubChange}
+        onMember={onMember}
         user={user}
       />
     );
@@ -108,6 +110,7 @@ export function AdminSection({
         initialMember={member}
         clubName={clubName}
         onRegister={onRegister}
+        hidePhones={user.role === 'administrator'}
         navigate={navigate}
         onMember={onMember}
       />
@@ -120,6 +123,7 @@ export function AdminSection({
         navigate={navigate}
         clubName={clubName}
         employeeName={employeeName}
+        hidePhones={user.role === 'administrator'}
         allowRegistration={canOpenModule(user.role, 'registration')}
       />
     );
