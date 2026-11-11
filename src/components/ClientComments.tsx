@@ -3,15 +3,7 @@ import { Button } from './ui';
 import type { DemoRecord } from '../data/workspace';
 import { prettyDate } from '../data/workspace';
 
-export function PinnedClientComment({
-  note,
-  onHistory,
-  onAdd,
-}: {
-  note?: DemoRecord;
-  onHistory: () => void;
-  onAdd?: () => void;
-}) {
+export function PinnedClientComment({ note, onAdd }: { note?: DemoRecord; onAdd?: () => void }) {
   return (
     <section
       className={`client-pinned-note ${note ? 'has-note' : ''}`}
@@ -24,9 +16,12 @@ export function PinnedClientComment({
             <strong>Закреплённый комментарий</strong>
             <p>{note.text}</p>
           </div>
-          <Button variant="ghost" onClick={onHistory}>
-            Все комментарии
-          </Button>
+          {onAdd && (
+            <Button variant="secondary" onClick={onAdd}>
+              <Plus size={16} />
+              Написать комментарий
+            </Button>
+          )}
         </>
       ) : (
         <>
@@ -34,7 +29,7 @@ export function PinnedClientComment({
           <span>Важный комментарий можно закрепить в карточке</span>
           {onAdd && (
             <Button variant="ghost" onClick={onAdd}>
-              Добавить
+              Написать комментарий
             </Button>
           )}
         </>

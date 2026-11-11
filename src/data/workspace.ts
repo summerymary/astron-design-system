@@ -27,7 +27,6 @@ const name: Field = { key: 'name', label: 'Название', required: true };
 const state = f('status', 'Статус', ['Активен', 'В архиве']);
 const club = f('club', 'Клуб', ['Центральный', 'Парк', 'Речной']);
 const description: Field = { key: 'description', label: 'Описание', type: 'textarea' };
-const color: Field = { key: 'color', label: 'Цвет', type: 'color' };
 const price: Field = { key: 'price', label: 'Цена, ₽', type: 'number', min: 0, required: true };
 export const resources: Record<string, Resource> = {
   clubs: {
@@ -157,8 +156,8 @@ export const resources: Record<string, Resource> = {
     title: 'Группы занятий',
     singular: 'Группа занятий',
     description: 'Общие направления помогают быстрее читать расписание.',
-    fields: [name, description, color, state],
-    columns: ['name', 'description', 'color', 'status'],
+    fields: [name, description, state],
+    columns: ['name', 'description', 'status'],
     rows: [
       {
         id: 'group-1',
@@ -202,10 +201,10 @@ export const resources: Record<string, Resource> = {
       f('booking', 'Способ записи', ['Обычная запись', 'По приглашению']),
       f('seats', 'Выбор места', ['Не требуется', 'По схеме зала']),
       f('waitlist', 'Лист ожидания', ['Выключен', 'Включён']),
-      color,
+      f('intensity', 'Интенсивность', ['Низкая', 'Средняя', 'Высокая']),
       state,
     ],
-    columns: ['name', 'duration', 'group', 'format', 'payment', 'status'],
+    columns: ['name', 'duration', 'group', 'intensity', 'format', 'payment', 'status'],
     rows: [
       {
         id: 'tpl-1',
@@ -1565,6 +1564,75 @@ export function createWorkspaceData(): Record<string, DemoRecord[]> {
     ...initialExtra,
     'cash-events': demoCashMovements,
   });
+  // Fill the reference week with coherent small-group examples; Friday retains its 14 sessions.
+  const weekDays = [
+    '2026-11-02',
+    '2026-11-03',
+    '2026-11-04',
+    '2026-11-05',
+    '2026-11-07',
+    '2026-11-08',
+  ];
+  const weekTimes = ['09:00', '10:30', '12:00', '13:30', '15:00', '16:30', '19:00', '20:30'];
+  const weekNames = [
+    'Пилатес',
+    'Функциональная тренировка',
+    'Здоровая спина',
+    'Силовая тренировка',
+  ];
+  const weekCapacities = [20, 8, 6, 6, 6, 12, 6, 6];
+  const weekBookings = [0, 2, 3, 5, 6, 2, 4, 6];
+  for (const [dayIndex, day] of weekDays.entries()) {
+    for (const [slot, time] of weekTimes.entries()) {
+      const cycle = slot % 2 === 1;
+      const capacity = weekCapacities[(slot + dayIndex) % weekCapacities.length];
+      data.events.push({
+        id: 'event-week-' + day + '-' + slot,
+        demoWeek: 'true',
+        name: cycle ? 'Сайкл' : weekNames[(slot / 2 + dayIndex) % weekNames.length],
+        day,
+        time,
+        duration: cycle ? '45' : '50',
+        trainer: cycle ? 'Денис Орлов' : dayIndex % 2 ? 'Максим Ветров' : 'Алина Белова',
+        room: cycle ? 'Сайкл-студия' : 'Большой зал',
+        club: 'Центральный',
+        capacity: String(Math.min(capacity, cycle ? 12 : 20)),
+        booked: String(
+          Math.min(weekBookings[(slot + dayIndex * 2) % weekBookings.length], capacity),
+        ),
+        attendees: '',
+        capacityMode: 'Своя вместимость',
+        minimum: '1',
+        format: 'Групповое',
+        payment: 'Включено в абонемент',
+        booking: 'Обычная запись',
+        seats: 'Не требуется',
+        waitlist: 'Включён',
+        status:
+          day === '2026-11-07' && slot === 2
+            ? 'Отменено'
+            : day < TODAY
+              ? 'Завершено'
+              : 'Запись открыта',
+      });
+    }
+  }
+  // Demonstration intensity is explicit and editable; colour never represents booking status.
+  const low = ['Пилатес', 'Здоровая спина', 'Стретчинг', 'Мягкая йога'];
+  const high = ['Функциональная тренировка', 'Сайкл'];
+  for (const item of [...data.events, ...data['training-templates']]) {
+    item.intensity ||= low.includes(item.name)
+      ? 'Низкая'
+      : high.includes(item.name)
+        ? 'Высокая'
+        : 'Средняя';
+    item.color =
+      item.intensity === 'Низкая'
+        ? '#26804A'
+        : item.intensity === 'Высокая'
+          ? '#CE3F3F'
+          : '#D4AE17';
+  }
   const ids = ['1001', '1002', '1003', '1004', '1005', '1006'];
   const minute = (time: string) => {
     const [h, m] = time.split(':').map(Number);
@@ -1603,7 +1671,7 @@ export function createWorkspaceData(): Record<string, DemoRecord[]> {
         Math.min(
           Number(event.booked),
           Number(event.capacity),
-          2 + (data.events.indexOf(event) % 4),
+          event.demoWeek === 'true' ? ids.length : 2 + (data.events.indexOf(event) % 4),
         ),
       )
       .join(',');

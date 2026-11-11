@@ -2,12 +2,12 @@ import { daysInClub as countDaysInClub, demoStamp, nextDemoNow } from '../lib/de
 import { useCallback, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import {
-  ArrowLeft,
   ArrowUpRight,
   CalendarDays,
   Camera,
   Check,
   CreditCard,
+  Edit3,
   Phone,
   FileText,
   MessageSquare,
@@ -16,7 +16,7 @@ import {
   ShoppingBag,
   Wallet,
 } from 'lucide-react';
-import { Avatar, Badge, Button, Modal, StateContent } from '../components/ui';
+import { Avatar, Button, Modal, StateContent } from '../components/ui';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { DataTable, RecordForm } from '../components/WorkspaceUI';
 import { clientTabs, getClientProfile } from '../data/clientProfile';
@@ -153,18 +153,13 @@ export function ClientProfile({
   );
   return (
     <div className="client-page">
+      <button className="client-return-link" onClick={onBack}>
+        {backLabel === 'Назад' ? 'Вернуться' : backLabel}
+      </button>
       <div className="client-page-grid">
         <div className="client-main">
           <section className="client-identity" aria-label="Основные сведения клиента">
             <div className="client-identity-top">
-              <button
-                className="client-back icon-button"
-                aria-label={backLabel}
-                title={backLabel}
-                onClick={onBack}
-              >
-                <ArrowLeft size={18} />
-              </button>
               <div className="client-photo">
                 <Avatar member={member} />
                 {canOperate && (
@@ -179,11 +174,7 @@ export function ClientProfile({
               <div className="client-name-block">
                 <h1>{clientName(member)}</h1>
                 <div className="client-name-meta">
-                  {member.archived ? (
-                    <span className="client-info-status">В архиве</span>
-                  ) : (
-                    <Badge status={member.status} />
-                  )}
+                  {member.archived && <span className="client-info-status">В архиве</span>}
                   <span>
                     <CreditCard size={13} />
                     Карта <b>{profile.card}</b>
@@ -216,13 +207,9 @@ export function ClientProfile({
                     <ShoppingBag size={15} />
                     Продать
                   </Button>
-                  <Button
-                    variant="secondary"
-                    onClick={() => setForm('comment')}
-                    aria-label="Добавить комментарий"
-                  >
-                    <MessageSquare size={15} />
-                    Добавить комментарий
+                  <Button variant="ghost" onClick={() => setForm('edit')}>
+                    <Edit3 size={16} />
+                    Редактировать
                   </Button>
                   <details className="client-more">
                     <summary aria-label="Другие действия">
@@ -230,7 +217,6 @@ export function ClientProfile({
                     </summary>
                     <div>
                       {[
-                        'Редактировать данные',
                         'Зачислить нулём',
                         'Продать подарочную',
                         'Добавить комментарий',
@@ -252,35 +238,34 @@ export function ClientProfile({
                   </details>
                 </div>
               )}
-            </div>
-            <div className="client-facts-row">
-              <dl className="client-contact-facts">
-                <Fact label="Телефон">
-                  <span className="client-phone">
-                    {phoneHidden ? hiddenPhone(member.phone) : member.phone}
-                    <button
-                      aria-label="Позвонить клиенту"
-                      title="Позвонить клиенту"
-                      onClick={() => {
-                        setCallActive(false);
-                        setPreviewAction('Звонок клиенту');
-                      }}
-                    >
-                      <Phone size={18} />
-                    </button>
-                  </span>
-                </Fact>
-                <Fact label="Дата рождения">{profile.birthDate}</Fact>
-                <Fact label="Пол">{profile.gender}</Fact>
-                <Fact label="Организация">{profile.organization}</Fact>
-              </dl>
+              <div className="client-facts-row">
+                <dl className="client-contact-facts">
+                  <Fact label="Телефон">
+                    <span className="client-phone">
+                      {phoneHidden ? hiddenPhone(member.phone) : member.phone}
+                      <button
+                        aria-label="Позвонить клиенту"
+                        title="Позвонить клиенту"
+                        onClick={() => {
+                          setCallActive(false);
+                          setPreviewAction('Звонок клиенту');
+                        }}
+                      >
+                        <Phone size={18} />
+                      </button>
+                    </span>
+                  </Fact>
+                  <Fact label="Дата рождения">{profile.birthDate}</Fact>
+                  <Fact label="Пол">{profile.gender}</Fact>
+                  <Fact label="Организация">{profile.organization}</Fact>
+                </dl>
+              </div>
               {balanceBlock}
             </div>
           </section>
 
           <PinnedClientComment
             note={pinnedNote}
-            onHistory={() => setTab('comments')}
             onAdd={canOperate ? () => setForm('comment') : undefined}
           />
           <section className="client-history" aria-label="Данные клиента">
@@ -757,32 +742,46 @@ export function ClientProfile({
         <RecordForm
           title="Сведения о клиенте"
           fields={[
-            { key: 'name', label: 'Имя и фамилия', required: true },
-            { key: 'fullName', label: 'Полное ФИО' },
-            ...(phoneHidden ? [] : [{ key: 'phone', label: 'Телефон', type: 'tel' as const }]),
-            { key: 'email', label: 'Email', type: 'email' },
+            { key: 'fullName', label: 'Фамилия, имя, отчество', required: true },
+            { key: 'phone', label: 'Телефон', type: 'tel', required: true },
+            { key: 'birthDate', label: 'Дата рождения', type: 'date' },
+            { key: 'gender', label: 'Пол', options: ['Не указан', 'Женский', 'Мужской'] },
+            { key: 'organization', label: 'Организация' },
+            { key: 'email', label: 'Электронная почта', type: 'email' },
             { key: 'tags', label: 'Теги через запятую' },
-            { key: 'clientState', label: 'Статус клиента', options: ['Активен', 'В архиве'] },
           ]}
           initial={{
             id: String(member.id),
-            name: member.name,
             fullName: member.fullName || member.name,
-            phone: phoneHidden ? '' : member.phone,
+            phone: member.phone,
+            birthDate:
+              member.birthDate ??
+              (profile.birthDate === 'Не указана'
+                ? ''
+                : profile.birthDate.split('.').reverse().join('-')),
+            gender: profile.gender,
+            organization: profile.organization === 'Не привязан' ? '' : profile.organization,
             email: member.email,
             tags: member.tags || '',
-            clientState: member.archived ? 'В архиве' : 'Активен',
           }}
           onClose={closeForm}
           onSave={(record) => {
+            if (!record.fullName.trim()) return 'Укажите фамилию, имя и отчество.';
+            if (
+              !/^\+?[\d\s()−-]+$/.test(record.phone) ||
+              !/^\d{10,15}$/.test(record.phone.replace(/\D/g, ''))
+            )
+              return 'Укажите телефон: от 10 до 15 цифр.';
             onUpdate({
               ...member,
-              name: record.name,
-              fullName: record.fullName,
-              phone: phoneHidden ? member.phone : record.phone,
-              email: record.email,
+              name: record.fullName.trim(),
+              fullName: record.fullName.trim(),
+              phone: record.phone.trim(),
+              birthDate: record.birthDate,
+              gender: record.gender,
+              organization: record.organization.trim(),
+              email: record.email.trim(),
               tags: record.tags,
-              archived: record.clientState === 'В архиве',
             });
             put('logs', {
               id: demoId('log'),

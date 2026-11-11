@@ -11,12 +11,10 @@ import { clientName, hiddenPhone } from '../lib/client-display';
 export function Members({
   members,
   onMember,
-  onAdd,
   hidePhones = false,
 }: {
   members: Member[];
   onMember: (m: Member) => void;
-  onAdd: () => void;
   hidePhones?: boolean;
 }) {
   const [query, setQuery] = useState('');
@@ -278,11 +276,6 @@ export function Members({
           <span>Все данные в памяти</span>
         </div>
       </section>
-      <div className="clients-bottom-note">
-        <button onClick={onAdd}>
-          Добавить ещё одного клиента <ArrowUpRight size={14} />
-        </button>
-      </div>
     </>
   );
 }

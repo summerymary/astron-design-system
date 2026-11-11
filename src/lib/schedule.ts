@@ -1,5 +1,59 @@
 import type { DemoRecord } from '../data/workspace';
 
+export const TRAINING_INTENSITIES = [
+  { value: 'Низкая', color: '#26804A', label: 'Низкая интенсивность' },
+  { value: 'Средняя', color: '#D4AE17', label: 'Средняя интенсивность' },
+  { value: 'Высокая', color: '#CE3F3F', label: 'Высокая интенсивность' },
+] as const;
+export function trainingIntensity(event: DemoRecord) {
+  return (
+    TRAINING_INTENSITIES.find((item) => item.value === event.intensity) || TRAINING_INTENSITIES[1]
+  );
+}
+
+export const OCCUPANCY_SCALE = [
+  { min: 0, label: '0–24%', background: '#F5EEF2', foreground: '#3E2533', line: '#D9C1CF' },
+  { min: 25, label: '25–49%', background: '#EACBD8', foreground: '#3E2533', line: '#BF8BA3' },
+  { min: 50, label: '50–74%', background: '#D596B0', foreground: '#3E1829', line: '#A55E7D' },
+  { min: 75, label: '75–99%', background: '#8A3F61', foreground: '#FFFFFF', line: '#6C2D4A' },
+  { min: 100, label: '100% и выше', background: '#4E1F35', foreground: '#FFFFFF', line: '#4E1F35' },
+] as const;
+export function eventOccupancy(event: DemoRecord) {
+  const capacity = Number(event.capacity);
+  const rawBooked = Number(event.booked);
+  const booked = Number.isFinite(rawBooked) ? Math.max(0, rawBooked) : 0;
+  const valid = event.status !== 'Отменено' && Number.isFinite(capacity) && capacity > 0;
+  const percent = valid ? Math.round((booked / capacity) * 100) : null;
+  const band =
+    [...OCCUPANCY_SCALE].reverse().find((item) => percent !== null && percent >= item.min) ||
+    OCCUPANCY_SCALE[0];
+  return {
+    booked,
+    capacity: valid ? capacity : 0,
+    percent,
+    label:
+      event.status === 'Отменено'
+        ? 'Отменено'
+        : percent === null
+          ? 'Нет вместимости'
+          : percent + '%',
+    background: valid ? band.background : '#F0F1F3',
+    foreground: valid ? band.foreground : '#60646D',
+    line: valid ? band.line : '#C9CDD3',
+  };
+}
+export function occupancySummary(events: DemoRecord[]) {
+  const valid = events.map(eventOccupancy).filter((item) => item.percent !== null);
+  const capacity = valid.reduce((sum, item) => sum + item.capacity, 0);
+  const booked = valid.reduce((sum, item) => sum + item.booked, 0);
+  return {
+    count: valid.length,
+    booked,
+    capacity,
+    percent: capacity ? Math.round((booked / capacity) * 100) : null,
+  };
+}
+
 export type ScheduleColumn = { key: string; day: string; room: string; label: string };
 export type EventPlacement = { event: DemoRecord; lane: number; lanes: number };
 export type ScheduleTarget = { day: string; time: string; room: string; club: string };
@@ -147,7 +201,8 @@ export function templateEvent(
     capacity: String(capacity),
     capacityMode: template.capacityMode || 'По залу',
     group: template.group || '',
-    color: template.color || '#8A332C',
+    intensity: template.intensity || 'Средняя',
+    color: trainingIntensity(template).color,
     format: template.format || 'Групповое',
     payment: template.payment || 'Включено в абонемент',
     booking: template.booking || 'Обычная запись',

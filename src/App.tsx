@@ -201,7 +201,10 @@ export function App() {
   const selectedMember = members.find((m) => m.id === selectedMemberId);
   const currentPage =
     page === 'client-profile'
-      ? { title: selectedMember?.fullName || selectedMember?.name || 'Карточка клиента', caption: 'Сведения о клиенте' }
+      ? {
+          title: selectedMember?.fullName || selectedMember?.name || 'Карточка клиента',
+          caption: 'Сведения о клиенте',
+        }
       : page === 'admin-section'
         ? {
             title:
@@ -1208,7 +1211,6 @@ export function App() {
                       key={members.length}
                       members={members}
                       onMember={openMember}
-                      onAdd={() => setModal('add')}
                       hidePhones={role === 'administrator'}
                     />
                   )}
