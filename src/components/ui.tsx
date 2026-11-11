@@ -33,19 +33,28 @@ export function Avatar({
   member,
   small = false,
 }: {
-  member: Pick<Member, 'name' | 'color'>;
+  member: Pick<Member, 'name' | 'color' | 'photoIndex'>;
   small?: boolean;
 }) {
   return (
     <span
-      className={`avatar avatar-${member.color} ${small ? 'avatar-small' : ''}`}
+      className={`avatar avatar-${member.color} ${small ? 'avatar-small' : ''} ${member.photoIndex !== undefined ? 'avatar-photo' : ''}`}
+      style={
+        member.photoIndex !== undefined
+          ? {
+              backgroundImage: 'url("./demo/client-portraits.png")',
+              backgroundPosition: `${(member.photoIndex % 3) * 50}% ${Math.floor(member.photoIndex / 3) * 100}%`,
+            }
+          : undefined
+      }
       aria-hidden="true"
     >
-      {member.name
-        .split(' ')
-        .slice(0, 2)
-        .map((n) => n[0])
-        .join('')}
+      {member.photoIndex === undefined &&
+        member.name
+          .split(' ')
+          .slice(0, 2)
+          .map((n) => n[0])
+          .join('')}
     </span>
   );
 }
@@ -170,6 +179,10 @@ export function Modal({
       );
     focusable()[0]?.focus();
     const handle = (e: KeyboardEvent) => {
+      const dialogs = Array.from(
+        document.querySelectorAll<HTMLElement>('[role="dialog"][aria-modal="true"]'),
+      ).filter((dialog) => dialog.getClientRects().length);
+      if (dialogs.at(-1) !== el) return;
       if (e.key === 'Escape') onClose();
       if (e.key === 'Tab') {
         const items = focusable();

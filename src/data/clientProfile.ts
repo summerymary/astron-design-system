@@ -5,16 +5,16 @@ import { getMembershipKind } from './membership-kinds';
 import type { DemoRecord } from './workspace';
 
 export const clientTabs = [
-  { id: 'info', label: 'Обзор' },
-  { id: 'visits', label: 'Посещения' },
   { id: 'subscriptions', label: 'Абонементы' },
-  { id: 'comments', label: 'Комментарии' },
-  { id: 'actions', label: 'Активность' },
-  { id: 'messages', label: 'Переписка' },
+  { id: 'visits', label: 'Посещения' },
   { id: 'finances', label: 'Финансы' },
+  { id: 'comments', label: 'Комментарии' },
+  { id: 'info', label: 'Информация' },
   { id: 'bookings', label: 'Предзапись' },
-  { id: 'reviews', label: 'Отзывы' },
+  { id: 'messages', label: 'Переписка' },
+  { id: 'actions', label: 'Активность' },
   { id: 'calls', label: 'Звонки' },
+  { id: 'reviews', label: 'Отзывы' },
 ] as const;
 export type ClientTabId = (typeof clientTabs)[number]['id'];
 export type SubscriptionStatus = 'active' | 'expired' | 'pending' | 'paused';

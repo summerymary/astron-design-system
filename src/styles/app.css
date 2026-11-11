@@ -4331,3 +4331,10 @@ code {
     font-size: var(--text-caption);
   }
 }
+
+/* Shared fictional member portrait atlas. */
+.avatar.avatar-photo {
+  background-size: 300% 200%;
+  background-repeat: no-repeat;
+  background-color: var(--color-surface-muted);
+}

@@ -7,14 +7,17 @@ import { Status, Tabs } from '../components/WorkspaceUI';
 import { memberCards } from '../data/admin';
 import { searchMembers } from '../lib/member-search';
 import { MembershipTag } from '../components/MembershipTag';
+import { clientName, hiddenPhone } from '../lib/client-display';
 export function Members({
   members,
   onMember,
   onAdd,
+  hidePhones = false,
 }: {
   members: Member[];
   onMember: (m: Member) => void;
   onAdd: () => void;
+  hidePhones?: boolean;
 }) {
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState<MemberStatus | 'all'>('all');
@@ -37,7 +40,9 @@ export function Members({
               m.email.toLowerCase().includes(query.toLowerCase())),
         )
         .sort((a, b) =>
-          ascending ? a.name.localeCompare(b.name, 'ru') : b.name.localeCompare(a.name, 'ru'),
+          ascending
+            ? clientName(a).localeCompare(clientName(b), 'ru')
+            : clientName(b).localeCompare(clientName(a), 'ru'),
         ),
     [members, query, filter, plan, ascending, clientState],
   );
@@ -182,14 +187,14 @@ export function Members({
                         <button className="member-name-button" onClick={() => onMember(m)}>
                           <Avatar member={m} />
                           <span>
-                            <strong>{m.name}</strong>
+                            <strong>{clientName(m)}</strong>
                             {view === 'Абонементы' && <small>{m.email}</small>}
                           </span>
                         </button>
                       </td>
                       {view === 'Контакты' ? (
                         <>
-                          <td>{m.phone}</td>
+                          <td>{hidePhones ? hiddenPhone(m.phone) : m.phone}</td>
                           <td>{m.email || '—'}</td>
                           <td>
                             <code>{memberCards[m.id] || String(m.id + 99000)}</code>
@@ -214,7 +219,7 @@ export function Members({
                       <td>
                         <button
                           className="icon-button"
-                          aria-label={`Открыть: ${m.name}`}
+                          aria-label={`Открыть: ${clientName(m)}`}
                           onClick={() => onMember(m)}
                         >
                           <ArrowUpRight size={17} />
@@ -230,8 +235,14 @@ export function Members({
                 <button className="mobile-member" key={m.id} onClick={() => onMember(m)}>
                   <Avatar member={m} />
                   <span>
-                    <strong>{m.name}</strong>
-                    <small>{view === 'Контакты' ? m.phone : `${m.plan} · до ${m.expires}`}</small>
+                    <strong>{clientName(m)}</strong>
+                    <small>
+                      {view === 'Контакты'
+                        ? hidePhones
+                          ? hiddenPhone(m.phone)
+                          : m.phone
+                        : `${m.plan} · до ${m.expires}`}
+                    </small>
                   </span>
                   {view === 'Контакты' ? (
                     <Status>{m.archived ? 'В архиве' : 'Активен'}</Status>

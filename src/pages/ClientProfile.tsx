@@ -8,14 +8,12 @@ import {
   Camera,
   Check,
   CreditCard,
-  Eye,
-  EyeOff,
+  Phone,
   FileText,
   MessageSquare,
   MoreHorizontal,
   Plus,
   ShoppingBag,
-  Smartphone,
   Wallet,
 } from 'lucide-react';
 import { Avatar, Badge, Button, Modal, StateContent } from '../components/ui';
@@ -30,7 +28,9 @@ import { profileBookingOptions } from '../data/profileBookings';
 import { findClientChat, readChatMessages } from '../lib/client-messages';
 import { ChatHistory } from '../components/ChatHistory';
 import { MembershipTag } from '../components/MembershipTag';
-import type { Member, Scenario, Visit } from '../types';
+import { clientName, hiddenPhone } from '../lib/client-display';
+import { ClientComments, PinnedClientComment } from '../components/ClientComments';
+import type { DemoUser, Member, Scenario, Visit } from '../types';
 const subscriptionLabels: Record<SubscriptionStatus, string> = {
   active: 'Действует',
   expired: 'Завершён',
@@ -67,6 +67,7 @@ export function ClientProfile({
   bookings,
   canOperate,
   canSell = false,
+  user,
   scenario,
   onReset,
   onBack,
@@ -80,6 +81,7 @@ export function ClientProfile({
   bookings: string[];
   canOperate: boolean;
   canSell?: boolean;
+  user: DemoUser;
   scenario: Scenario;
   onReset: () => void;
   onBack: () => void;
@@ -90,7 +92,7 @@ export function ClientProfile({
 }) {
   const { data, put } = useWorkspace();
   const profile = getClientProfile(member, data);
-  const [tab, setTab] = useState<ClientTabId>('info');
+  const [tab, setTab] = useState<ClientTabId>('subscriptions');
   const [form, setForm] = useState<'edit' | 'comment' | null>(null);
   const closeForm = useCallback(() => setForm(null), []);
   const clientSales = data.ledger.filter(
@@ -102,7 +104,11 @@ export function ClientProfile({
     (row.attendees || '').split(',').includes(String(member.id)),
   );
   const [filter, setFilter] = useState('all');
-  const [phoneVisible, setPhoneVisible] = useState(false);
+  const [callActive, setCallActive] = useState(false);
+  const phoneHidden = user.role === 'administrator';
+  const pinnedId =
+    data['client-pins']?.find((row) => row.id === String(member.id))?.commentId || '';
+  const pinnedNote = notes.find((row) => row.id === pinnedId);
   const [previewAction, setPreviewAction] = useState<string | null>(null);
   const closePreview = useCallback(() => setPreviewAction(null), []);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -126,9 +132,6 @@ export function ClientProfile({
   const shownSubscriptions = subscriptions.filter((s) => filter === 'all' || s.status === filter);
   const sortedVisits = [...visits].sort((a, b) => b.enteredAt.localeCompare(a.enteredAt));
   const activeCount = subscriptions.filter((s) => s.status === 'active').length;
-  const maskedPhone = member.phone.startsWith('+7')
-    ? `+7 ••• •••-••-${member.phone.replace(/\D/g, '').slice(-2)}`
-    : member.phone;
   const upcoming = profileBookingOptions.filter((item) => bookings.includes(item.id));
   const daysInClub = countDaysInClub(member.joined);
   const balanceBlock = (
@@ -174,7 +177,7 @@ export function ClientProfile({
                 )}
               </div>
               <div className="client-name-block">
-                <h1>{member.name}</h1>
+                <h1>{clientName(member)}</h1>
                 <div className="client-name-meta">
                   {member.archived ? (
                     <span className="client-info-status">В архиве</span>
@@ -185,7 +188,6 @@ export function ClientProfile({
                     <CreditCard size={13} />
                     Карта <b>{profile.card}</b>
                   </span>
-                  <span>В клубе с {member.joined}</span>
                 </div>
               </div>
               {!canOperate && canSell && (
@@ -216,11 +218,11 @@ export function ClientProfile({
                   </Button>
                   <Button
                     variant="secondary"
-                    onClick={() => onAction('messages')}
-                    aria-label="Написать сообщение"
+                    onClick={() => setForm('comment')}
+                    aria-label="Добавить комментарий"
                   >
                     <MessageSquare size={15} />
-                    Написать
+                    Добавить комментарий
                   </Button>
                   <details className="client-more">
                     <summary aria-label="Другие действия">
@@ -255,13 +257,16 @@ export function ClientProfile({
               <dl className="client-contact-facts">
                 <Fact label="Телефон">
                   <span className="client-phone">
-                    {phoneVisible ? member.phone : maskedPhone}
+                    {phoneHidden ? hiddenPhone(member.phone) : member.phone}
                     <button
-                      aria-label={phoneVisible ? 'Скрыть телефон' : 'Показать телефон'}
-                      aria-pressed={phoneVisible}
-                      onClick={() => setPhoneVisible(!phoneVisible)}
+                      aria-label="Позвонить клиенту"
+                      title="Позвонить клиенту"
+                      onClick={() => {
+                        setCallActive(false);
+                        setPreviewAction('Звонок клиенту');
+                      }}
                     >
-                      {phoneVisible ? <EyeOff size={14} /> : <Eye size={14} />}
+                      <Phone size={18} />
                     </button>
                   </span>
                 </Fact>
@@ -271,24 +276,13 @@ export function ClientProfile({
               </dl>
               {balanceBlock}
             </div>
-            <div className="client-context-row">
-              <div>
-                <span className={profile.personalAccount ? 'connected' : ''}>
-                  <Check size={12} />
-                  Личный кабинет: {profile.personalAccount ? 'есть' : 'нет'}
-                </span>
-                <span className={profile.mobileApp ? 'connected' : ''}>
-                  <Smartphone size={12} />
-                  Приложение: {profile.mobileApp ? 'есть' : 'нет'}
-                </span>
-              </div>
-              <p>
-                <MessageSquare size={13} />
-                {profile.note || 'Комментарий к карточке пока не добавлен'}
-              </p>
-            </div>
           </section>
 
+          <PinnedClientComment
+            note={pinnedNote}
+            onHistory={() => setTab('comments')}
+            onAdd={canOperate ? () => setForm('comment') : undefined}
+          />
           <section className="client-history" aria-label="Данные клиента">
             <div className="client-tabs" role="tablist" aria-label="Разделы карточки клиента">
               {clientTabs.map((item, i) => (
@@ -475,6 +469,10 @@ export function ClientProfile({
                       <section className="client-info-card" aria-labelledby="client-consents-title">
                         <h3 id="client-consents-title">Связь и доступ</h3>
                         <dl>
+                          <Fact label="Личный кабинет">
+                            {profile.personalAccount ? 'Есть' : 'Нет'}
+                          </Fact>
+                          <Fact label="Приложение">{profile.mobileApp ? 'Есть' : 'Нет'}</Fact>
                           <Fact label="Получать СМС">
                             <span className="client-info-status">
                               {profile.smsConsent ? <Check size={15} aria-hidden="true" /> : null}
@@ -587,42 +585,17 @@ export function ClientProfile({
                       </ul>
                     </section>
                   )}
-                  {tab === 'comments' &&
-                    (profile.note ? (
-                      <div className="client-comment">
-                        <span className="client-comment-avatar">АК</span>
-                        <div>
-                          <strong>
-                            Александра Крылова <small>Администратор · 28 октября, 18:45</small>
-                          </strong>
-                          <p>{profile.note}</p>
-                        </div>
-                      </div>
-                    ) : (
-                      <EmptyTab
-                        title="Комментариев пока нет"
-                        description="Здесь будут заметки сотрудников о клиенте."
-                      />
-                    ))}
                   {tab === 'comments' && (
-                    <div className="ws-panel-body ws-stack">
-                      {notes.map((row) => (
-                        <div className="client-comment" key={row.id}>
-                          <div>
-                            <strong>
-                              Александра Крылова <small>Сегодня</small>
-                            </strong>
-                            <p>{row.text}</p>
-                          </div>
-                        </div>
-                      ))}
-                      {canOperate && (
-                        <Button variant="secondary" onClick={() => setForm('comment')}>
-                          <Plus size={14} />
-                          Добавить заметку
-                        </Button>
-                      )}
-                    </div>
+                    <ClientComments
+                      notes={notes}
+                      pinnedId={pinnedId}
+                      onPin={
+                        canOperate
+                          ? (commentId) => put('client-pins', { id: String(member.id), commentId })
+                          : undefined
+                      }
+                      onAdd={canOperate ? () => setForm('comment') : undefined}
+                    />
                   )}
                   {tab === 'actions' && (
                     <DataTable
@@ -696,7 +669,10 @@ export function ClientProfile({
                         .map((row) => (
                           <section key={row.id} aria-label={`Канал: ${row.channel}`}>
                             <h3>{row.channel}</h3>
-                            <ChatHistory entries={readChatMessages(row)} name={member.name} />
+                            <ChatHistory
+                              entries={readChatMessages(row)}
+                              name={clientName(member)}
+                            />
                           </section>
                         ))}
                       {!data.chats.some((row) => row.memberId === String(member.id)) && (
@@ -719,31 +695,59 @@ export function ClientProfile({
         </div>
       </div>
       {previewAction && (
-        <Modal title={previewAction} subtitle={member.name} onClose={closePreview}>
-          <div className="client-action-preview">
-            <span>
-              <FileText size={27} />
-            </span>
-            <h3>Экран в разработке</h3>
-            <p>
-              Экран и доступные действия будут разработаны на следующем этапе. Операции пока не
-              выполняются.
-            </p>
-            <Button variant="secondary" onClick={closePreview}>
-              К карточке клиента
-            </Button>
-          </div>
+        <Modal title={previewAction} subtitle={clientName(member)} onClose={closePreview}>
+          {previewAction === 'Звонок клиенту' ? (
+            <div className="client-call-panel">
+              <Phone size={28} />
+              <h3>{clientName(member)}</h3>
+              <p>{phoneHidden ? hiddenPhone(member.phone) : member.phone}</p>
+              <p role="status">
+                {callActive
+                  ? 'Демонстрационный звонок идёт'
+                  : 'В прототипе звонок будет имитирован, без внешнего соединения.'}
+              </p>
+              <Button
+                onClick={() => {
+                  if (callActive) closePreview();
+                  else setCallActive(true);
+                }}
+              >
+                {callActive ? 'Завершить звонок' : 'Начать демозвонок'}
+              </Button>
+            </div>
+          ) : (
+            <div className="client-action-preview">
+              <span>
+                <FileText size={27} />
+              </span>
+              <h3>Экран в разработке</h3>
+              <p>
+                Экран и доступные действия будут разработаны на следующем этапе. Операции пока не
+                выполняются.
+              </p>
+              <Button variant="secondary" onClick={closePreview}>
+                К карточке клиента
+              </Button>
+            </div>
+          )}
         </Modal>
       )}
       {form === 'comment' && (
         <RecordForm
-          title="Новая заметка"
+          title="Добавить комментарий"
           fields={[
             { key: 'text', label: 'Комментарий для сотрудников', type: 'textarea', required: true },
           ]}
           onClose={closeForm}
           onSave={(record) => {
-            put('comments', { ...record, memberId: String(member.id) });
+            if (!record.text.trim()) return 'Напишите комментарий.';
+            put('comments', {
+              ...record,
+              text: record.text.trim(),
+              memberId: String(member.id),
+              author: user.name,
+              createdAt: demoStamp(nextDemoNow()),
+            });
             closeForm();
             setTab('comments');
           }}
@@ -755,7 +759,7 @@ export function ClientProfile({
           fields={[
             { key: 'name', label: 'Имя и фамилия', required: true },
             { key: 'fullName', label: 'Полное ФИО' },
-            { key: 'phone', label: 'Телефон', type: 'tel' },
+            ...(phoneHidden ? [] : [{ key: 'phone', label: 'Телефон', type: 'tel' as const }]),
             { key: 'email', label: 'Email', type: 'email' },
             { key: 'tags', label: 'Теги через запятую' },
             { key: 'clientState', label: 'Статус клиента', options: ['Активен', 'В архиве'] },
@@ -764,7 +768,7 @@ export function ClientProfile({
             id: String(member.id),
             name: member.name,
             fullName: member.fullName || member.name,
-            phone: member.phone,
+            phone: phoneHidden ? '' : member.phone,
             email: member.email,
             tags: member.tags || '',
             clientState: member.archived ? 'В архиве' : 'Активен',
@@ -775,7 +779,7 @@ export function ClientProfile({
               ...member,
               name: record.name,
               fullName: record.fullName,
-              phone: record.phone,
+              phone: phoneHidden ? member.phone : record.phone,
               email: record.email,
               tags: record.tags,
               archived: record.clientState === 'В архиве',

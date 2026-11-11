@@ -60,6 +60,7 @@ export interface Member {
   id: number;
   name: string;
   fullName?: string;
+  photoIndex?: number;
   email: string;
   phone: string;
   plan: string;

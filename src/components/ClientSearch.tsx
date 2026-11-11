@@ -4,17 +4,20 @@ import { Avatar } from './ui';
 import { memberCards } from '../data/admin';
 import { clientCard, searchMembers } from '../lib/member-search';
 import type { Member } from '../types';
+import { hiddenPhone } from '../lib/client-display';
 
 export function ClientSearch({
   members,
   onMember,
   mode = 'profile',
   purpose = 'посещения',
+  hidePhones = false,
 }: {
   members: Member[];
   onMember: (member: Member) => void;
   mode?: 'profile' | 'selection';
-  purpose?: 'посещения' | 'покупки';
+  purpose?: 'посещения' | 'покупки' | 'занятия';
+  hidePhones?: boolean;
 }) {
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
@@ -164,7 +167,7 @@ export function ClientSearch({
                 <span>
                   <strong>{member.fullName ?? member.name}</strong>
                   <small>
-                    {member.phone}
+                    {hidePhones ? hiddenPhone(member.phone) : member.phone}
                     <i />
                     Карта {clientCard(member, memberCards)}
                   </small>
@@ -182,7 +185,9 @@ export function ClientSearch({
           <p className="client-search-help">
             {mode === 'profile'
               ? 'Поиск открывает карточку. Посещение оформляется отдельно.'
-              : 'Выбор клиента не создаёт посещение. Для этого нужна кнопка подтверждения.'}
+              : purpose === 'занятия'
+                ? 'Выбор клиента не записывает на занятие. Нажмите «Записать клиента».'
+                : 'Выбор клиента не создаёт посещение. Для этого нужна кнопка подтверждения.'}
           </p>
         </div>
       )}

@@ -1,3 +1,4 @@
+import { clientName } from '../lib/client-display';
 import { demoStamp, nextDemoNow } from '../lib/demo-clock';
 import { useCallback, useEffect, useState } from 'react';
 import {
@@ -161,7 +162,7 @@ export function CashWorkspace({
     if (member)
       return (
         <button className="cash-text-button" onClick={() => onMember(member)}>
-          {row.client}
+          {clientName(member)}
         </button>
       );
     return row.client;

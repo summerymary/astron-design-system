@@ -22,6 +22,7 @@ export const statusLabels: Record<MemberStatus, string> = {
 export const initialMembers: Member[] = [
   {
     id: 1001,
+    photoIndex: 0,
     name: 'Анна Смирнова',
     fullName: 'Смирнова Анна Андреевна',
     email: 'anna.smirnova@example.com',
@@ -35,6 +36,7 @@ export const initialMembers: Member[] = [
   },
   {
     id: 1002,
+    photoIndex: 1,
     name: 'Михаил Волков',
     fullName: 'Волков Михаил Сергеевич',
     email: 'm.volkov@example.com',
@@ -48,6 +50,7 @@ export const initialMembers: Member[] = [
   },
   {
     id: 1003,
+    photoIndex: 2,
     name: 'Елена Козлова',
     fullName: 'Козлова Елена Викторовна',
     email: 'elena.k@example.com',
@@ -61,6 +64,7 @@ export const initialMembers: Member[] = [
   },
   {
     id: 1004,
+    photoIndex: 3,
     name: 'Дмитрий Соколов',
     fullName: 'Соколов Дмитрий Алексеевич',
     email: 'd.sokolov@example.com',
@@ -74,6 +78,7 @@ export const initialMembers: Member[] = [
   },
   {
     id: 1005,
+    photoIndex: 4,
     name: 'Мария Лебедева',
     fullName: 'Лебедева Мария Игоревна',
     email: 'maria.l@example.com',
@@ -87,6 +92,7 @@ export const initialMembers: Member[] = [
   },
   {
     id: 1006,
+    photoIndex: 5,
     name: 'Алексей Морозов',
     fullName: 'Морозов Алексей Николаевич',
     email: 'alex.m@example.com',

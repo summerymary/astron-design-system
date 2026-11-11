@@ -1,3 +1,4 @@
+import { clientName, hiddenPhone } from '../lib/client-display';
 import { useState } from 'react';
 import type { Member, VisitKind } from '../types';
 import type { Navigate } from '../components/WorkspaceUI';
@@ -18,6 +19,7 @@ export function RegistrationWorkspace({
   onRegister,
   onMember,
   navigate,
+  hidePhones = false,
 }: {
   members: Member[];
   initialMember: Member | null;
@@ -25,6 +27,7 @@ export function RegistrationWorkspace({
   onRegister: (member: Member, kind: VisitKind, passName?: string, passId?: string) => void;
   onMember: (member: Member) => void;
   navigate: Navigate;
+  hidePhones?: boolean;
 }) {
   const { data, put } = useWorkspace();
   const [selected, setSelected] = useState<Member | null>(initialMember);
@@ -51,6 +54,7 @@ export function RegistrationWorkspace({
           </div>
           <div className="ws-panel-body">
             <ClientSearch
+              hidePhones={hidePhones}
               mode="selection"
               members={members}
               onMember={(member) => {
@@ -68,9 +72,9 @@ export function RegistrationWorkspace({
         <section className="panel ws-panel">
           <div className="ws-panel-heading">
             <div>
-              <h2>{selected.name}</h2>
+              <h2>{clientName(selected)}</h2>
               <p>
-                {selected.phone} · {clubName}
+                {hidePhones ? hiddenPhone(selected.phone) : selected.phone} · {clubName}
               </p>
             </div>
             <div className="ws-actions">

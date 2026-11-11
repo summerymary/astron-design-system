@@ -1,3 +1,4 @@
+import { clientName } from '../lib/client-display';
 import { nextDemoNow } from '../lib/demo-clock';
 import { Select } from '../components/Select';
 import { useCallback, useRef, useState } from 'react';
@@ -124,7 +125,7 @@ export function PersonalTrainingForm({
             <option value="">Выберите клиента</option>
             {clients.map((member) => (
               <option key={member.id} value={member.id}>
-                {member.name}
+                {clientName(member)}
               </option>
             ))}
           </Select>
@@ -285,7 +286,9 @@ export function TrainerHome({
               <span>
                 <strong>
                   {event.kind === 'personal'
-                    ? members.find((m) => String(m.id) === event.memberId)?.name
+                    ? members.find((m) => String(m.id) === event.memberId)
+                      ? clientName(members.find((m) => String(m.id) === event.memberId)!)
+                      : ''
                     : event.name}
                 </strong>
                 <small>
@@ -464,7 +467,9 @@ export function TrainerClients({
         </div>
         <div className="staff-client-list">
           {clients
-            .filter((m) => m.name.toLocaleLowerCase('ru').includes(query.toLocaleLowerCase('ru')))
+            .filter((m) =>
+              clientName(m).toLocaleLowerCase('ru').includes(query.toLocaleLowerCase('ru')),
+            )
             .map((member) => (
               <button
                 key={member.id}
@@ -492,7 +497,7 @@ export function TrainerClients({
               >
                 <Avatar member={member} small />
                 <span>
-                  <strong>{member.name}</strong>
+                  <strong>{clientName(member)}</strong>
                   <small>
                     Заметок:{' '}
                     {
@@ -512,7 +517,7 @@ export function TrainerClients({
           <section className="panel ws-panel">
             <div className="ws-panel-heading">
               <div>
-                <h2>{selected.name}</h2>
+                <h2>{clientName(selected)}</h2>
                 <p>
                   {
                     (data['personal-clients'] || []).find(
