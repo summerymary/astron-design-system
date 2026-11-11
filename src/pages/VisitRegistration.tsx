@@ -6,11 +6,21 @@ import { Button } from '../components/ui';
 import { ClientSearch } from '../components/ClientSearch';
 import { MembershipCard } from '../components/MembershipCard';
 import { Empty, Notice } from '../components/WorkspaceUI';
-import { useWorkspace } from '../components/WorkspaceProvider';
+import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { getClientProfile } from '../data/clientProfile';
 import { membershipKinds, quantityLabel } from '../data/membership-kinds';
 import { TODAY } from '../data/workspace';
-import { passUnavailable, usePass } from '../lib/registration';
+import {
+  accessWindowLabel,
+  ageOnDate,
+  minorVisitProblem,
+  bookingPassProblem,
+  passUnavailable,
+  recommendedPassIds,
+  registrationBookings,
+  usePass,
+} from '../lib/registration';
+import { demoStamp, registrationNow } from '../lib/demo-clock';
 
 export function RegistrationWorkspace({
   members,
@@ -31,8 +41,9 @@ export function RegistrationWorkspace({
 }) {
   const { data, put } = useWorkspace();
   const [selected, setSelected] = useState<Member | null>(initialMember);
-  const [choosing, setChoosing] = useState(false);
-  const [passId, setPassId] = useState('');
+  const [passId, setPassId] = useState<string | null>(null);
+  const [bookingId, setBookingId] = useState<string | null>(null);
+  const [supervisionAcknowledged, setSupervisionAcknowledged] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState('');
   const passes = selected
@@ -41,7 +52,44 @@ export function RegistrationWorkspace({
         data,
       ).subscriptions.filter((pass) => pass.kindId)
     : [];
-  const pass = passes.find((pass) => pass.id === passId);
+  const now = demoStamp(registrationNow());
+  const birthDate = selected
+    ? getClientProfile(members.find((member) => member.id === selected.id) || selected, data)
+        .birthDate
+    : '';
+  const club = clubName.split(' · ').at(-1)!;
+  const bookings = selected ? registrationBookings(data.events, selected.id, club, now) : [];
+  const selectedBookingId = bookingId ?? (bookings.length === 1 ? bookings[0].id : '');
+  const needsBookingChoice = bookingId === null && bookings.length > 1;
+  const booking = bookings.find((event) => event.id === selectedBookingId);
+  const clientAge = ageOnDate(birthDate, now.split('T')[0]);
+  const trainerVerified =
+    !!booking &&
+    booking.kind === 'personal' &&
+    data.employees.some(
+      (employee) =>
+        employee.name === booking.trainer &&
+        employee.position?.toLocaleLowerCase('ru').includes('тренер') &&
+        employee.status === 'Активен',
+    );
+  const supervisionProblem = minorVisitProblem(birthDate, now.split('T')[0], {
+    trainerVerified,
+    acknowledged: supervisionAcknowledged,
+  });
+  const alreadyRegistered =
+    !!booking &&
+    (data['visit-bookings'] || []).some(
+      (row) => row.memberId === String(selected?.id) && row.eventId === booking.id,
+    );
+  const unavailable = (item: (typeof passes)[number]) =>
+    passUnavailable(item, now, birthDate) ||
+    (needsBookingChoice ? 'Выберите занятие или самостоятельное посещение' : null) ||
+    bookingPassProblem(item, booking) ||
+    (alreadyRegistered ? 'Посещение по этой записи уже зарегистрировано' : null);
+  const availablePasses = passes.filter((pass) => !unavailable(pass));
+  const recommended = recommendedPassIds(passes, booking, now, birthDate);
+  const selectedPassId = passId ?? (availablePasses.length === 1 ? availablePasses[0].id : '');
+  const pass = passes.find((pass) => pass.id === selectedPassId);
   return (
     <div className="ws-stack registration-workspace">
       {!selected && (
@@ -59,8 +107,9 @@ export function RegistrationWorkspace({
               members={members}
               onMember={(member) => {
                 setSelected(member);
-                setChoosing(false);
-                setPassId('');
+                setSupervisionAcknowledged(false);
+                setPassId(null);
+                setBookingId(null);
                 setDone(false);
                 setError('');
               }}
@@ -82,9 +131,11 @@ export function RegistrationWorkspace({
                 variant="ghost"
                 onClick={() => {
                   setSelected(null);
-                  setChoosing(false);
-                  setPassId('');
+                  setSupervisionAcknowledged(false);
+                  setPassId(null);
+                  setBookingId(null);
                   setDone(false);
+                  setError('');
                 }}
               >
                 Другой клиент
@@ -92,6 +143,11 @@ export function RegistrationWorkspace({
               <Button variant="secondary" onClick={() => onMember(selected)}>
                 Карточка клиента
               </Button>
+              {!done && (
+                <Button variant="secondary" onClick={() => navigate('services', selected)}>
+                  Продать
+                </Button>
+              )}
             </div>
           </div>
           <div className="ws-panel-body ws-stack">
@@ -100,41 +156,111 @@ export function RegistrationWorkspace({
                 Посещение зарегистрировано по абонементу «{pass?.name}». Оно появилось в журнале и
                 карточке клиента.
               </Notice>
-            ) : (
-              <div className="ws-actions">
-                {!choosing && (
-                  <Button
-                    onClick={() => {
-                      setChoosing(true);
-                      const available = passes.filter((pass) => !passUnavailable(pass));
-                      setPassId(available.length === 1 ? available[0].id : '');
-                    }}
-                  >
-                    Зарегистрировать посещение
-                  </Button>
-                )}
-                <Button variant="secondary" onClick={() => navigate('services', selected)}>
-                  Продать
-                </Button>
-              </div>
-            )}
-            {choosing && !done && (
+            ) : null}
+            {!done && (
               <>
+                {(clientAge === null || clientAge < 14) && (
+                  <Notice tone="warning">
+                    <strong>
+                      {clientAge === null
+                        ? 'Не указана дата рождения.'
+                        : `Клиенту ${clientAge} лет — требуется сопровождение.`}
+                    </strong>
+                    {trainerVerified ? (
+                      <p>
+                        Есть запись к тренеру {booking?.trainer} в {booking?.time}.
+                      </p>
+                    ) : (
+                      <>
+                        <p>
+                          До 14 лет занятия разрешены только с тренером или ответственным взрослым.
+                        </p>
+                        {clientAge !== null && (
+                          <label className="registration-supervision-check">
+                            <input
+                              type="checkbox"
+                              checked={supervisionAcknowledged}
+                              onChange={(event) => setSupervisionAcknowledged(event.target.checked)}
+                            />
+                            Подтверждаю, что клиент будет заниматься с тренером или ответственным
+                            взрослым
+                          </label>
+                        )}
+                        {clientAge === null && (
+                          <p>Укажите дату рождения в карточке клиента перед регистрацией.</p>
+                        )}
+                      </>
+                    )}
+                  </Notice>
+                )}
                 <div>
                   <h3>Выберите абонемент для посещения</h3>
                   <p className="form-note">
-                    Будет использовано одно посещение выбранной карты. Подтвердите регистрацию ниже.
+                    Время посещения: {now.split('T')[0].split('-').reverse().join('.')}{' '}
+                    {now.slice(11)} · МСК. Условия карты проверяются перед списанием.
                   </p>
                 </div>
+                {!!bookings.length && (
+                  <fieldset className="registration-bookings">
+                    <legend>Клиент пришёл на занятие?</legend>
+                    <p>
+                      Предзапись учитывается за 60 минут до начала и 30 минут после начала.
+                      Подходящие карты выделены.
+                    </p>
+                    <div className="ws-actions">
+                      <Button
+                        variant="secondary"
+                        aria-pressed={!selectedBookingId && !needsBookingChoice}
+                        onClick={() => {
+                          setBookingId('');
+                          setPassId(null);
+                          setError('');
+                        }}
+                      >
+                        Самостоятельное посещение
+                      </Button>
+                      {bookings.map((event) => (
+                        <Button
+                          key={event.id}
+                          variant="secondary"
+                          aria-pressed={selectedBookingId === event.id}
+                          onClick={() => {
+                            setBookingId(event.id);
+                            setPassId(null);
+                            setError('');
+                          }}
+                        >
+                          {event.time} · {event.name} ·{' '}
+                          {event.kind === 'personal' ? 'Персональная' : 'Групповая'}
+                        </Button>
+                      ))}
+                    </div>
+                  </fieldset>
+                )}
+                {alreadyRegistered && (
+                  <Notice>
+                    Посещение по выбранной записи уже зарегистрировано. Повторного списания не
+                    будет.
+                  </Notice>
+                )}
                 <div className="plastic-card-grid">
                   {passes.map((item) => {
-                    const unavailable = passUnavailable(item);
+                    const problem = unavailable(item);
+                    const isRecommended = recommended.includes(item.id) && !problem;
                     return (
                       <div key={item.id}>
+                        {booking && (
+                          <span
+                            className="registration-recommendation"
+                            aria-hidden={!isRecommended}
+                          >
+                            {isRecommended ? 'Подходит к предзаписи' : ''}
+                          </span>
+                        )}
                         <button
-                          className="plastic-choice"
-                          disabled={!!unavailable}
-                          aria-pressed={passId === item.id}
+                          className={`plastic-choice ${isRecommended ? 'is-recommended' : ''}`}
+                          disabled={!!problem}
+                          aria-pressed={selectedPassId === item.id}
                           onClick={() => {
                             setPassId(item.id);
                             setError('');
@@ -145,44 +271,65 @@ export function RegistrationWorkspace({
                             name={item.name}
                             kindId={item.kindId}
                             detail={
-                              unavailable ||
+                              (problem ? 'Недоступен для этого посещения' : '') ||
                               (item.status === 'pending'
                                 ? 'Активируется при посещении'
                                 : 'Действует')
                             }
                             footer={
                               item.remaining === null
-                                ? 'Без ограничений'
+                                ? 'Безлимит посещений'
                                 : `Осталось: ${quantityLabel(item.remaining, 'visit')}`
                             }
                           />
                         </button>
+                        {accessWindowLabel(item) && (
+                          <p className="pass-access-note">{accessWindowLabel(item)}</p>
+                        )}
+                        {item.ageMin && item.ageMax && (
+                          <p className="pass-access-note">
+                            Возраст {item.ageMin}–{item.ageMax} лет включительно
+                          </p>
+                        )}
+                        {problem && (
+                          <p className="pass-access-note pass-access-problem">{problem}</p>
+                        )}
                       </div>
                     );
                   })}
                 </div>
-                {!passes.some((item) => !passUnavailable(item)) && (
+                {!availablePasses.length && !alreadyRegistered && (
                   <Empty
-                    title="Нет доступных абонементов"
-                    text="Можно продать клиенту новую карту."
+                    title={
+                      booking
+                        ? 'Нет подходящего абонемента для занятия'
+                        : 'Нет доступных сейчас абонементов'
+                    }
+                    text="Проверьте часы доступа и назначение карты. Можно продать новый абонемент."
                     action={<Button onClick={() => navigate('services', selected)}>Продать</Button>}
                   />
                 )}
                 <div className="ws-actions">
-                  <Button
-                    variant="secondary"
-                    onClick={() => {
-                      setChoosing(false);
-                      setPassId('');
-                    }}
-                  >
+                  <Button variant="secondary" onClick={() => onMember(selected)}>
                     Отмена
                   </Button>
                   <Button
-                    disabled={!pass || !!passUnavailable(pass)}
+                    disabled={!pass || !!unavailable(pass) || !!supervisionProblem}
                     onClick={() => {
                       if (!pass || done) return;
                       try {
+                        const actualNow = demoStamp(registrationNow());
+                        if (
+                          selectedBookingId &&
+                          !registrationBookings(data.events, selected.id, club, actualNow).some(
+                            (event) => event.id === selectedBookingId,
+                          )
+                        )
+                          throw new Error(
+                            'Предзапись изменилась или время занятия прошло. Выберите посещение заново.',
+                          );
+                        const problem = unavailable(pass);
+                        if (problem) throw new Error(problem);
                         const kind = membershipKinds.find((kind) => kind.id === pass.kindId);
                         const issued = (data['issued-plans'] || []).find(
                           (row) => row.id === pass.id,
@@ -192,18 +339,45 @@ export function RegistrationWorkspace({
                           pass,
                           Number(issued?.duration || kind?.duration || 30),
                           TODAY,
+                          actualNow.slice(11, 16),
+                          booking,
+                          { trainerVerified, acknowledged: supervisionAcknowledged },
                         );
+                        setPassId(pass.id);
                         put('pass-usage', usage);
                         onRegister(
                           selected,
-                          kind?.id === 'group'
-                            ? 'group'
-                            : kind?.id === 'personal'
+                          booking
+                            ? booking.kind === 'personal'
                               ? 'personal'
-                              : 'gym',
+                              : 'group'
+                            : kind?.id === 'group'
+                              ? 'group'
+                              : kind?.id === 'personal'
+                                ? 'personal'
+                                : 'gym',
                           pass.name,
                           pass.id,
                         );
+                        if (booking)
+                          put('visit-bookings', {
+                            id: `${selected.id}:${booking.id}`,
+                            memberId: String(selected.id),
+                            eventId: booking.id,
+                            passId: pass.id,
+                            date: actualNow,
+                          });
+                        if (clientAge !== null && clientAge < 14)
+                          put('visit-supervision', {
+                            id: demoId('supervision'),
+                            memberId: String(selected.id),
+                            date: actualNow,
+                            type: trainerVerified
+                              ? 'Запись к тренеру'
+                              : 'Подтверждение администратора',
+                            trainer: trainerVerified ? booking?.trainer || '' : '',
+                            acknowledged: String(supervisionAcknowledged),
+                          });
                         setDone(true);
                       } catch (err) {
                         setError(err instanceof Error ? err.message : 'Проверьте абонемент');
@@ -222,9 +396,11 @@ export function RegistrationWorkspace({
                   variant="secondary"
                   onClick={() => {
                     setSelected(null);
-                    setChoosing(false);
-                    setPassId('');
+                    setSupervisionAcknowledged(false);
+                    setPassId(null);
+                    setBookingId(null);
                     setDone(false);
+                    setError('');
                   }}
                 >
                   Следующий клиент

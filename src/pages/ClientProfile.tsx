@@ -1,5 +1,6 @@
+import { accessWindowLabel, ageOnDate } from '../lib/registration';
 import { daysInClub as countDaysInClub, demoStamp, nextDemoNow } from '../lib/demo-clock';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import type { ReactNode } from 'react';
 import {
   ArrowUpRight,
@@ -16,9 +17,10 @@ import {
   ShoppingBag,
   Wallet,
 } from 'lucide-react';
-import { Avatar, Button, Modal, StateContent } from '../components/ui';
+import { Avatar, Button, IconButton, Modal, StateContent, StatusBadge } from '../components/ui';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
-import { DataTable, RecordForm } from '../components/WorkspaceUI';
+import { Back, DataTable, Empty, Notice, RecordForm, Tabs } from '../components/WorkspaceUI';
+import { TODAY } from '../data/workspace';
 import { clientTabs, getClientProfile } from '../data/clientProfile';
 import type { ClientTabId, SubscriptionStatus } from '../data/clientProfile';
 import type { AdminSectionId } from '../data/admin';
@@ -51,15 +53,7 @@ function Fact({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 function EmptyTab({ title, description }: { title: string; description: string }) {
-  return (
-    <div className="client-tab-empty">
-      <span>
-        <FileText size={23} />
-      </span>
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </div>
-  );
+  return <Empty title={title} text={description} />;
 }
 export function ClientProfile({
   member,
@@ -92,6 +86,7 @@ export function ClientProfile({
 }) {
   const { data, put } = useWorkspace();
   const profile = getClientProfile(member, data);
+  const clientAge = ageOnDate(profile.birthDate, TODAY);
   const [tab, setTab] = useState<ClientTabId>('subscriptions');
   const [form, setForm] = useState<'edit' | 'comment' | null>(null);
   const closeForm = useCallback(() => setForm(null), []);
@@ -111,7 +106,6 @@ export function ClientProfile({
   const pinnedNote = notes.find((row) => row.id === pinnedId);
   const [previewAction, setPreviewAction] = useState<string | null>(null);
   const closePreview = useCallback(() => setPreviewAction(null), []);
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const subscriptions = profile.subscriptions.filter((subscription) => subscription.kindId);
   const additionalServices = [
     ...profile.subscriptions
@@ -143,48 +137,89 @@ export function ClientProfile({
       <strong>{money(profile.balance)}</strong>
       {canOperate && (
         <div>
-          <button onClick={() => setPreviewAction('Пополнение счёта')}>
+          <Button variant="ghost" onClick={() => setPreviewAction('Пополнение счёта')}>
             Пополнить <Plus size={12} />
-          </button>
-          <button onClick={() => setPreviewAction('Возврат средств')}>Возврат</button>
+          </Button>
+          <Button variant="ghost" onClick={() => setPreviewAction('Возврат средств')}>
+            Возврат
+          </Button>
         </div>
       )}
     </div>
   );
   return (
     <div className="client-page">
-      <button className="client-return-link" onClick={onBack}>
+      <Back hideIcon className="client-return-link" onClick={onBack}>
         {backLabel === 'Назад' ? 'Вернуться' : backLabel}
-      </button>
+      </Back>
       <div className="client-page-grid">
         <div className="client-main">
           <section className="client-identity" aria-label="Основные сведения клиента">
             <div className="client-identity-top">
               <div className="client-photo">
-                <Avatar member={member} />
+                <Avatar member={member} portrait />
                 {canOperate && (
-                  <button
-                    aria-label="Сфотографировать клиента"
+                  <IconButton
+                    variant="secondary"
+                    label="Сфотографировать клиента"
                     onClick={() => setPreviewAction('Фотография клиента')}
                   >
                     <Camera size={14} />
-                  </button>
+                  </IconButton>
                 )}
               </div>
               <div className="client-name-block">
-                <h1>{clientName(member)}</h1>
-                <div className="client-name-meta">
-                  {member.archived && <span className="client-info-status">В архиве</span>}
-                  <span>
-                    <CreditCard size={13} />
-                    Карта <b>{profile.card}</b>
-                  </span>
+                <div className="client-name-copy">
+                  <h1>{clientName(member)}</h1>
+                  <div className="client-name-meta">
+                    {member.archived && <span className="client-info-status">В архиве</span>}
+                    <span>
+                      <CreditCard size={13} />
+                      Карта <b>{profile.card}</b>
+                    </span>
+                  </div>
                 </div>
+                {canOperate && (
+                  <div className="client-profile-tools">
+                    <IconButton
+                      variant="secondary"
+                      label="Редактировать клиента"
+                      onClick={() => setForm('edit')}
+                    >
+                      <Edit3 size={18} />
+                    </IconButton>
+                    <details className="client-more">
+                      <summary aria-label="Другие действия" title="Другие действия">
+                        <MoreHorizontal size={19} />
+                      </summary>
+                      <div>
+                        {[
+                          'Зачислить нулём',
+                          'Продать подарочную',
+                          'Добавить комментарий',
+                          'Добавить отзыв',
+                        ].map((action) => (
+                          <button
+                            key={action}
+                            type="button"
+                            onClick={(e) => {
+                              e.currentTarget.closest('details')?.removeAttribute('open');
+                              if (action === 'Добавить комментарий') setForm('comment');
+                              else setPreviewAction(action);
+                            }}
+                          >
+                            {action}
+                          </button>
+                        ))}
+                      </div>
+                    </details>
+                  </div>
+                )}
               </div>
               {!canOperate && canSell && (
                 <div className="client-primary-actions">
                   <Button
-                    variant="secondary"
+                    variant="accent"
                     className="client-sell-button"
                     onClick={() => onAction('services')}
                   >
@@ -200,42 +235,13 @@ export function ClientProfile({
                     Отметить посещение
                   </Button>
                   <Button
-                    variant="secondary"
+                    variant="accent"
                     className="client-sell-button"
                     onClick={() => onAction('services')}
                   >
                     <ShoppingBag size={15} />
                     Продать
                   </Button>
-                  <Button variant="ghost" onClick={() => setForm('edit')}>
-                    <Edit3 size={16} />
-                    Редактировать
-                  </Button>
-                  <details className="client-more">
-                    <summary aria-label="Другие действия">
-                      <MoreHorizontal size={19} />
-                    </summary>
-                    <div>
-                      {[
-                        'Зачислить нулём',
-                        'Продать подарочную',
-                        'Добавить комментарий',
-                        'Добавить отзыв',
-                      ].map((action) => (
-                        <button
-                          key={action}
-                          onClick={(e) => {
-                            e.currentTarget.closest('details')?.removeAttribute('open');
-                            if (action === 'Редактировать данные') setForm('edit');
-                            else if (action === 'Добавить комментарий') setForm('comment');
-                            else setPreviewAction(action);
-                          }}
-                        >
-                          {action}
-                        </button>
-                      ))}
-                    </div>
-                  </details>
                 </div>
               )}
               <div className="client-facts-row">
@@ -243,8 +249,9 @@ export function ClientProfile({
                   <Fact label="Телефон">
                     <span className="client-phone">
                       {phoneHidden ? hiddenPhone(member.phone) : member.phone}
-                      <button
-                        aria-label="Позвонить клиенту"
+                      <IconButton
+                        variant="secondary"
+                        label="Позвонить клиенту"
                         title="Позвонить клиенту"
                         onClick={() => {
                           setCallActive(false);
@@ -252,7 +259,7 @@ export function ClientProfile({
                         }}
                       >
                         <Phone size={18} />
-                      </button>
+                      </IconButton>
                     </span>
                   </Fact>
                   <Fact label="Дата рождения">{profile.birthDate}</Fact>
@@ -263,43 +270,29 @@ export function ClientProfile({
               {balanceBlock}
             </div>
           </section>
-
+          {canOperate && clientAge !== null && clientAge < 14 && (
+            <Notice tone="warning">
+              Клиенту {clientAge} лет. Занятия разрешены только с тренером или ответственным
+              взрослым.
+            </Notice>
+          )}
           <PinnedClientComment
             note={pinnedNote}
             onAdd={canOperate ? () => setForm('comment') : undefined}
           />
           <section className="client-history" aria-label="Данные клиента">
-            <div className="client-tabs" role="tablist" aria-label="Разделы карточки клиента">
-              {clientTabs.map((item, i) => (
-                <button
-                  key={item.id}
-                  id={`client-tab-${item.id}`}
-                  role="tab"
-                  aria-selected={tab === item.id}
-                  aria-controls="client-tab-panel"
-                  tabIndex={tab === item.id ? 0 : -1}
-                  ref={(el) => {
-                    tabRefs.current[i] = el;
-                  }}
-                  onClick={() => setTab(item.id)}
-                  onKeyDown={(event) => {
-                    let next = i;
-                    if (event.key === 'ArrowRight') next = (i + 1) % clientTabs.length;
-                    else if (event.key === 'ArrowLeft')
-                      next = (i - 1 + clientTabs.length) % clientTabs.length;
-                    else if (event.key === 'Home') next = 0;
-                    else if (event.key === 'End') next = clientTabs.length - 1;
-                    else return;
-                    event.preventDefault();
-                    setTab(clientTabs[next].id);
-                    tabRefs.current[next]?.focus();
-                  }}
-                >
-                  {item.label}
-                  {item.id === 'subscriptions' && <span>{subscriptions.length}</span>}
-                </button>
-              ))}
-            </div>
+            <Tabs
+              className="client-tabs"
+              items={clientTabs.map((item) => ({
+                ...item,
+                count: item.id === 'subscriptions' ? subscriptions.length : undefined,
+              }))}
+              value={tab}
+              onChange={(value) => setTab(value as ClientTabId)}
+              label="Разделы карточки клиента"
+              idPrefix="client-tab"
+              panelId="client-tab-panel"
+            />
             <div
               id="client-tab-panel"
               role="tabpanel"
@@ -362,11 +355,16 @@ export function ClientProfile({
                               <div className="client-membership-row">
                                 <div className="client-membership-name" title={sub.name}>
                                   <MembershipTag name={sub.name} kindId={sub.kindId} textOnly />
+                                  {accessWindowLabel(sub) && (
+                                    <small>{accessWindowLabel(sub)}</small>
+                                  )}
+                                  {sub.ageMin && (
+                                    <small>
+                                      Возраст {sub.ageMin}–{sub.ageMax} лет
+                                    </small>
+                                  )}
                                 </div>
-                                <span className={`subscription-status status-${sub.status}`}>
-                                  <i aria-hidden="true" />
-                                  {subscriptionLabels[sub.status]}
-                                </span>
+                                <StatusBadge>{subscriptionLabels[sub.status]}</StatusBadge>
                                 <div>
                                   <small>{sub.endsAt ? 'Действует до' : 'Активация'}</small>
                                   <strong>{sub.endsAt || 'Ожидается'}</strong>

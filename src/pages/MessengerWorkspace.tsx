@@ -10,9 +10,9 @@ import {
   UserRound,
   X,
 } from 'lucide-react';
-import { Button, Modal } from '../components/ui';
+import { CountBadge, Button, ConfirmDialog } from '../components/ui';
 import { Select } from '../components/Select';
-import { SearchBox, SectionLinks, Tabs } from '../components/WorkspaceUI';
+import { Empty, SearchBox, SectionLinks } from '../components/WorkspaceUI';
 import type { Navigate } from '../components/WorkspaceUI';
 import { AttentionFlags } from '../components/AttentionFlags';
 import { ChatHistory } from '../components/ChatHistory';
@@ -119,7 +119,7 @@ export function MessagesWorkspace({
         <aside className="messenger-inbox" aria-label="Список диалогов">
           <div className="messenger-inbox-heading">
             <h2>{external ? 'Мессенджеры' : 'Диалоги'}</h2>
-            <span className="count-badge">{rows.length}</span>
+            <CountBadge>{rows.length}</CountBadge>
           </div>
           <div className="messenger-search">
             <SearchBox
@@ -139,13 +139,16 @@ export function MessagesWorkspace({
                 ))}
               </Select>
             )}
+            <Select
+              aria-label="Отметки чатов"
+              value={attention}
+              onChange={(event) => setAttention(event.target.value)}
+            >
+              {['Все', 'Важные', 'Не просмотрены'].map((value) => (
+                <option key={value}>{value}</option>
+              ))}
+            </Select>
           </div>
-          <Tabs
-            items={['Все', 'Важные', 'Не просмотрены']}
-            value={attention}
-            onChange={setAttention}
-            label="Отметки чатов"
-          />
           <div className="messenger-chat-list">
             {rows.map((row) => (
               <button
@@ -176,10 +179,7 @@ export function MessagesWorkspace({
               </button>
             ))}
             {!rows.length && (
-              <div className="messenger-empty">
-                <strong>Диалогов не найдено</strong>
-                <p>Измените поиск или фильтры.</p>
-              </div>
+              <Empty title="Диалогов не найдено" text="Измените поиск или фильтры." />
             )}
           </div>
         </aside>
@@ -339,44 +339,38 @@ export function MessagesWorkspace({
             </>
           ) : (
             <div className="messenger-empty messenger-start">
-              <MessageCircle size={38} strokeWidth={1.5} />
-              <h2>Выберите диалог</h2>
-              <p>Сообщения и действия появятся здесь.</p>
+              <Empty
+                icon={<MessageCircle size={24} />}
+                title="Выберите диалог"
+                text="Сообщения и действия появятся здесь."
+              />
             </div>
           )}
         </div>
       </section>
       {pendingDelete && chat && (
-        <Modal
+        <ConfirmDialog
           title="Удалить сообщение клуба?"
-          subtitle="В демочате останется отметка об удалении. Текст сообщения будет убран из переписки."
+          description="В демочате останется отметка об удалении. Текст сообщения будет убран из переписки."
+          confirmLabel="Удалить сообщение"
           onClose={closeDelete}
+          onConfirm={() => {
+            try {
+              put('chats', deleteClientMessage(chat, pendingDelete.id));
+              if (editing?.id === pendingDelete.id) setEditing(null);
+              closeDelete();
+              setAnnouncement('Сообщение удалено.');
+              setError('');
+            } catch (problem) {
+              closeDelete();
+              setError(
+                problem instanceof Error ? problem.message : 'Не удалось удалить сообщение.',
+              );
+            }
+          }}
         >
           <blockquote className="message-delete-preview">{pendingDelete.text}</blockquote>
-          <div className="modal-actions">
-            <Button variant="secondary" onClick={closeDelete}>
-              Отмена
-            </Button>
-            <Button
-              onClick={() => {
-                try {
-                  put('chats', deleteClientMessage(chat, pendingDelete.id));
-                  if (editing?.id === pendingDelete.id) setEditing(null);
-                  closeDelete();
-                  setAnnouncement('Сообщение удалено.');
-                  setError('');
-                } catch (problem) {
-                  closeDelete();
-                  setError(
-                    problem instanceof Error ? problem.message : 'Не удалось удалить сообщение.',
-                  );
-                }
-              }}
-            >
-              Удалить сообщение
-            </Button>
-          </div>
-        </Modal>
+        </ConfirmDialog>
       )}
     </div>
   );

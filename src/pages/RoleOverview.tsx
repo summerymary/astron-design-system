@@ -1,5 +1,5 @@
-import { CalendarDays, Sparkles } from 'lucide-react';
-import { SectionTitle } from '../components/ui';
+import { Stats } from '../components/WorkspaceUI';
+import { CountBadge, SectionTitle, StatusBadge } from '../components/ui';
 import { roleHomes } from '../data/roles';
 import type { DemoUser } from '../types';
 
@@ -7,23 +7,18 @@ export function RoleOverview({ user }: { user: DemoUser }) {
   const home = roleHomes[user.role];
   return (
     <div className="role-overview">
-      <div className="role-metrics">
-        {home.metrics.map((metric, index) => (
-          <section className={`stat-card ${index === 0 ? 'stat-accent' : ''}`} key={metric.label}>
-            <div className="stat-label">
-              {metric.label}
-              {index === 0 ? <Sparkles size={16} /> : <CalendarDays size={16} />}
-            </div>
-            <div className="role-metric-value">{metric.value}</div>
-            <p>{metric.detail}</p>
-          </section>
-        ))}
-      </div>
+      <Stats
+        items={home.metrics.map((metric) => ({
+          label: metric.label,
+          value: metric.value,
+          note: metric.detail,
+        }))}
+      />
       <section className="panel role-items">
         <SectionTitle
           title={home.itemsTitle}
           subtitle={home.itemsCaption}
-          action={<span className="count-badge">{home.items.length}</span>}
+          action={<CountBadge>{home.items.length}</CountBadge>}
         />
         <div className="home-records" role="region" aria-label={home.itemsTitle} tabIndex={0}>
           {home.items.map((item) => (
@@ -33,7 +28,7 @@ export function RoleOverview({ user }: { user: DemoUser }) {
                 <strong>{item.title}</strong>
                 <p>{item.subtitle}</p>
               </div>
-              <span className="role-item-status">{item.status}</span>
+              <StatusBadge>{item.status}</StatusBadge>
             </div>
           ))}
         </div>

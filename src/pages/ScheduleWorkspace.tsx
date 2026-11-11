@@ -18,7 +18,7 @@ import {
   Trash2,
   Users,
 } from 'lucide-react';
-import { Button, Modal } from '../components/ui';
+import { Button, ConfirmDialog, Modal } from '../components/ui';
 import { ScheduleAttendees } from '../components/ScheduleAttendees';
 import { clientName } from '../lib/client-display';
 import { DataTable, Empty, Notice, SearchBox, Status, Tabs } from '../components/WorkspaceUI';
@@ -43,6 +43,7 @@ import {
   trainingIntensity,
   addDays,
   calendarBounds,
+  calendarGeometry,
   clock,
   dayText,
   eventTime,
@@ -77,6 +78,8 @@ export function ScheduleWorkspace({
   onClubChange,
   user,
   onMember,
+  recordId,
+  onRecord,
 }: {
   members: Member[];
   navigate: Navigate;
@@ -84,6 +87,8 @@ export function ScheduleWorkspace({
   onClubChange: (club: string) => void;
   user: DemoUser;
   onMember: (member: Member) => void;
+  recordId?: string | null;
+  onRecord?: (id: string | null) => void;
 }) {
   const { data, put, remove } = useWorkspace();
   const isTrainer = user.role === 'trainer';
@@ -140,7 +145,7 @@ export function ScheduleWorkspace({
   useEffect(() => {
     if (context) contextRef.current?.querySelector<HTMLButtonElement>('button')?.focus();
   }, [context]);
-  const [available, setAvailable] = useState({ height: 580, width: 900, heading: 40 });
+  const [available, setAvailable] = useState({ height: 580, width: 900, heading: 40, inset: 2 });
   const root = useRef<HTMLDivElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
   const drag = useRef<Drag | null>(null);
@@ -160,13 +165,14 @@ export function ScheduleWorkspace({
   ];
   const week = weekStart(day);
   const dates = Array.from({ length: 7 }, (_, i) => addDays(week, i));
-  const events = data.events.filter(
+  const rangeEvents = data.events.filter(
+    (e) => e.club === club && (view === 'Неделя' ? dates.includes(e.day) : e.day === day),
+  );
+  const events = rangeEvents.filter(
     (e) =>
-      e.club === club &&
       (!isTrainer || e.trainer === user.name) &&
       (room === 'Все залы' || e.room === room) &&
-      (trainer === 'Все тренеры' || e.trainer === trainer) &&
-      (view === 'Неделя' ? dates.includes(e.day) : e.day === day),
+      (trainer === 'Все тренеры' || e.trainer === trainer),
   );
   const occupancy = occupancySummary(events);
   const participantName = (id: string) => {
@@ -192,35 +198,38 @@ export function ScheduleWorkspace({
               events.some((e) => e.room === r.name),
           )
           .map((r) => ({ key: r.id, day, room: r.name, label: r.name }));
-  const { start, end } = calendarBounds(events);
-  const shortest = Math.min(50, ...events.map((e) => Number(e.duration)));
-  const minTarget =
-    scale === 'Весь день'
-      ? available.width < 540
-        ? 64
-        : view === 'Неделя'
-          ? 60
-          : 20
-      : view === 'Неделя'
-        ? 72
-        : available.width < 540
-          ? 64
-          : 52;
-  const gridHeight =
-    fullscreen && scale === 'Весь день' && available.width >= 900
-      ? available.height
-      : Math.max(
-          available.height,
-          ((end - start) / shortest) * minTarget,
-          scale === 'Крупнее' ? (end - start) * 1.4 : 0,
-        );
+  const { start, end } = calendarBounds(rangeEvents);
+  const { height: gridHeight, hourStep } = calendarGeometry(
+    rangeEvents,
+    scale,
+    available.height,
+    view === 'Неделя',
+  );
   const hours = Array.from(
     { length: Math.ceil((end - start) / 60) + 1 },
     (_, i) => start + i * 60,
   ).filter((t) => t <= end);
+  const axisHours = hours
+    .filter((_, i) => i % hourStep === 0 || i === hours.length - 1)
+    .filter(
+      (time, i, labels) =>
+        i === 0 || i === labels.length - 1 || ((end - time) / (end - start)) * gridHeight >= 26,
+    );
   const closeDetails = useCallback(() => {
     setOpenedId('');
-  }, []);
+    onRecord?.(null);
+  }, [onRecord]);
+  useEffect(() => {
+    if (!recordId) return;
+    const event = data.events.find((item) => item.id === recordId);
+    if (!event || (isTrainer && event.trainer !== user.name)) return;
+    setClub(event.club);
+    setDay(event.day);
+    setRoom(event.room);
+    setOpenedId(event.id);
+    // The URL target is a navigation request; later event updates remain live in the modal.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recordId, user.id]);
   const closeEditing = useCallback(() => setEditing(null), []);
   const closeLibrary = useCallback(() => setLibrary(null), []);
   const closePending = useCallback(() => {
@@ -252,41 +261,56 @@ export function ScheduleWorkspace({
     const measure = () => {
       if (!scroller.current || !root.current) return;
       const rect = scroller.current.getBoundingClientRect();
-      const viewportBottom =
-        root.current.closest('.app-main')?.getBoundingClientRect().bottom || window.innerHeight;
-      const heading =
-        root.current.querySelector('.calendar-time-heading')?.getBoundingClientRect().height || 40;
+      const workspace = root.current.closest('.workspace-page-body');
+      const viewportBottom = Math.min(
+        window.innerHeight,
+        workspace?.getBoundingClientRect().bottom || window.innerHeight,
+      );
+      const heading = Math.max(
+        ...Array.from(
+          root.current.querySelectorAll('.calendar-time-heading, .calendar-column-heading'),
+        ).map((el) => el.getBoundingClientRect().height),
+        0,
+      );
       const footer =
-        root.current.querySelector('.calendar-footer')?.getBoundingClientRect().height || 36;
+        root.current.querySelector('.calendar-footer')?.getBoundingClientRect().height || 0;
       const legend =
         root.current
           .querySelector('.calendar-occupancy-legend, .calendar-intensity-legend')
           ?.getBoundingClientRect().height || 0;
-      setAvailable({
-        height: Math.max(
-          280,
-          Math.min(window.innerHeight, viewportBottom) -
-            rect.top -
-            heading -
-            footer -
-            legend -
-            (fullscreen ? 28 : 8),
-        ),
-        width: root.current.clientWidth,
-        heading,
-      });
+      const scrollbar = scroller.current.offsetHeight - scroller.current.clientHeight;
+      const remaining =
+        viewportBottom - rect.top - heading - footer - legend - scrollbar - (fullscreen ? 16 : 6);
+      // On phones the page may scroll, but the calendar still shows the complete day.
+      const height = Math.max(
+        !fullscreen && window.innerWidth < 1000 ? 360 : 100,
+        Math.floor(remaining),
+      );
+      const next = { height, width: root.current.clientWidth, heading, inset: scrollbar };
+      setAvailable((previous) =>
+        previous.height === next.height &&
+        previous.width === next.width &&
+        previous.heading === next.heading &&
+        previous.inset === next.inset
+          ? previous
+          : next,
+      );
     };
     measure();
     const observer = new ResizeObserver(measure);
     if (root.current) observer.observe(root.current);
     const panel = root.current?.querySelector('.calendar-panel');
     if (panel) observer.observe(panel);
+    for (const el of root.current?.querySelectorAll(
+      '.calendar-toolbar, .calendar-filters, .calendar-footer, .calendar-color-mode, .calendar-occupancy-legend, .calendar-intensity-legend',
+    ) || [])
+      observer.observe(el);
     window.addEventListener('resize', measure);
     return () => {
       observer.disconnect();
       window.removeEventListener('resize', measure);
     };
-  }, [fullscreen, view, heatmap]);
+  }, [fullscreen, view, heatmap, filtersOpen, message, columns.length]);
   useEffect(() => {
     if (!fullscreen || dialog) return;
     const before = document.activeElement as HTMLElement | null;
@@ -534,7 +558,7 @@ export function ScheduleWorkspace({
   const content = (
     <div
       ref={root}
-      className={`calendar-workspace ${isTrainer ? 'calendar-is-trainer' : ''} calendar-scale-${scale === 'Весь день' ? 'fit' : 'comfortable'} ${fullscreen ? 'calendar-fullscreen' : ''}`}
+      className={`calendar-workspace ${isTrainer ? 'calendar-is-trainer' : ''} calendar-scale-${scale === 'Весь день' ? 'fit' : scale === 'Крупнее' ? 'large' : 'comfortable'} ${fullscreen ? 'calendar-fullscreen' : ''} ${view !== 'Список' && gridHeight > available.height ? 'calendar-needs-scroll' : ''}`}
       role={fullscreen ? 'dialog' : undefined}
       aria-modal={fullscreen ? true : undefined}
       aria-label={fullscreen ? 'Расписание на весь экран' : undefined}
@@ -682,6 +706,7 @@ export function ScheduleWorkspace({
               value={view}
               onChange={setView}
               label="Вид расписания"
+              variant="segmented"
             />
           )}
           <div className="calendar-create">
@@ -710,28 +735,30 @@ export function ScheduleWorkspace({
             </button>
           </div>
         </div>
-        <div className="calendar-week-strip" aria-label="Дни недели">
-          {dates.map((date) => (
-            <button
-              key={date}
-              aria-pressed={date === day}
-              onClick={() => {
-                setDay(date);
-                if (view === 'Список') setView('День');
-              }}
-              className={date === day ? 'selected' : ''}
-            >
-              <span>
-                {new Date(`${date}T12:00:00Z`).toLocaleDateString('ru-RU', {
-                  weekday: 'short',
-                  timeZone: 'Europe/Moscow',
-                })}
-              </span>
-              <b>{Number(date.slice(-2))}</b>
-              {date === TODAY && <i aria-label="Сегодня" />}
-            </button>
-          ))}
-        </div>
+        {view !== 'Неделя' && (
+          <div className="calendar-week-strip" aria-label="Дни недели">
+            {dates.map((date) => (
+              <button
+                key={date}
+                aria-pressed={date === day}
+                onClick={() => {
+                  setDay(date);
+                  if (view === 'Список') setView('День');
+                }}
+                className={date === day ? 'selected' : ''}
+              >
+                <span>
+                  {new Date(`${date}T12:00:00Z`).toLocaleDateString('ru-RU', {
+                    weekday: 'short',
+                    timeZone: 'Europe/Moscow',
+                  })}
+                </span>
+                <b>{Number(date.slice(-2))}</b>
+                {date === TODAY && <i aria-label="Сегодня" />}
+              </button>
+            ))}
+          </div>
+        )}
         <button
           className="calendar-filter-toggle"
           aria-label="Фильтры расписания"
@@ -796,20 +823,22 @@ export function ScheduleWorkspace({
               ))}
             </Select>
           </label>
-          <label className="calendar-scale">
-            <span className="sr-only">Масштаб расписания</span>
-            <Select
-              value={scale}
-              onChange={(e) => {
-                setScale(e.target.value);
-                setFiltersOpen(false);
-              }}
-            >
-              <option>Комфортно</option>
-              <option>Весь день</option>
-              <option>Крупнее</option>
-            </Select>
-          </label>
+          {view !== 'Список' && (
+            <label className="calendar-scale">
+              <span className="sr-only">Масштаб расписания</span>
+              <Select
+                value={scale}
+                onChange={(e) => {
+                  setScale(e.target.value);
+                  setFiltersOpen(false);
+                }}
+              >
+                <option>Комфортно</option>
+                <option>Весь день</option>
+                <option>Крупнее</option>
+              </Select>
+            </label>
+          )}
           <span className="calendar-count">
             Занятий: <b>{events.length}</b>
           </span>
@@ -925,6 +954,7 @@ export function ScheduleWorkspace({
               { key: 'room', label: 'Зал' },
               { key: 'booked', label: 'Записано' },
               { key: 'capacity', label: 'Мест' },
+              { key: 'status', label: 'Состояние' },
               ...(heatmap ? [{ key: 'occupancy', label: 'Заполняемость' }] : []),
             ]}
             onOpen={show}
@@ -933,7 +963,7 @@ export function ScheduleWorkspace({
           <div
             className="calendar-scroll"
             ref={scroller}
-            style={{ maxHeight: `${available.height + available.heading}px` }}
+            style={{ height: `${available.height + available.heading + available.inset}px` }}
           >
             <div
               className={`calendar-grid ${columns.length === 1 ? 'calendar-single' : ''}`}
@@ -954,7 +984,7 @@ export function ScheduleWorkspace({
                 </div>
               ))}
               <div className="calendar-time-axis" style={{ height: gridHeight }}>
-                {hours.map((time) => (
+                {axisHours.map((time) => (
                   <span key={time} style={{ top: `${((time - start) / (end - start)) * 100}%` }}>
                     {clock(time)}
                   </span>
@@ -1012,13 +1042,15 @@ export function ScheduleWorkspace({
                     );
                   }}
                 >
-                  {hours.map((time) => (
-                    <i
-                      className="calendar-hour-line"
-                      key={time}
-                      style={{ top: `${((time - start) / (end - start)) * 100}%` }}
-                    />
-                  ))}
+                  {hours
+                    .filter((time) => time < end)
+                    .map((time) => (
+                      <i
+                        className="calendar-hour-line"
+                        key={time}
+                        style={{ top: `${((time - start) / (end - start)) * 100}%` }}
+                      />
+                    ))}
                   {layoutEvents(
                     events.filter(
                       (event) =>
@@ -1027,7 +1059,7 @@ export function ScheduleWorkspace({
                   ).map(({ event, lane, lanes }) => (
                     <button
                       key={event.id}
-                      className={`calendar-event ${canEdit(event) ? 'is-editable' : 'is-readonly'} ${event.status === 'Отменено' ? 'is-cancelled' : ''} ${ghost?.id === event.id ? 'is-dragging' : ''}`}
+                      className={`calendar-event ${canEdit(event) ? 'is-editable' : 'is-readonly'} ${event.status === 'Отменено' ? 'is-cancelled' : ''} ${ghost?.id === event.id ? 'is-dragging' : ''} ${scale === 'Весь день' && (Number(event.duration) / (end - start)) * gridHeight < 23 ? 'is-compact' : ''} ${(available.width - 56) / columns.length / lanes < 360 ? 'is-narrow' : ''} ${(available.width - 56) / columns.length / lanes < 250 ? 'is-title-only' : ''}`}
                       style={
                         {
                           top: `${((minutes(event.time) - start) / (end - start)) * 100}%`,
@@ -1145,38 +1177,41 @@ export function ScheduleWorkspace({
             }
           />
         )}
-        {heatmap ? (
-          <div className="calendar-occupancy-legend" aria-label="Шкала заполняемости">
-            <span>Меньше записей</span>
-            {OCCUPANCY_SCALE.map((item) => (
-              <span key={item.min}>
-                <i style={{ background: item.background, borderColor: item.line }} />
-                {item.label}
-              </span>
-            ))}
-            <span>Больше записей</span>
-          </div>
-        ) : (
-          <div className="calendar-intensity-legend" aria-label="Цвета интенсивности занятий">
-            {TRAINING_INTENSITIES.map((item) => (
-              <span key={item.value}>
-                <i style={{ background: item.color }} />
-                {item.label}
-              </span>
-            ))}
-          </div>
-        )}
+        {view !== 'Список' &&
+          (heatmap ? (
+            <div className="calendar-occupancy-legend" aria-label="Шкала заполняемости">
+              <span>Меньше записей</span>
+              {OCCUPANCY_SCALE.map((item) => (
+                <span key={item.min}>
+                  <i style={{ background: item.background, borderColor: item.line }} />
+                  {item.label}
+                </span>
+              ))}
+              <span>Больше записей</span>
+            </div>
+          ) : (
+            <div className="calendar-intensity-legend" aria-label="Цвета интенсивности занятий">
+              {TRAINING_INTENSITIES.map((item) => (
+                <span key={item.value}>
+                  <i style={{ background: item.color }} />
+                  {item.label}
+                </span>
+              ))}
+            </div>
+          ))}
         <footer className="calendar-footer">
-          {canCreate && (
+          {canCreate && view !== 'Список' && (
             <span>
               <Move size={13} />
               Перетаскивание — с подтверждением
             </span>
           )}
           <span>
-            {isAdmin
-              ? 'Нажмите на занятие, чтобы посмотреть клиентов и управлять записью'
-              : 'Нажмите занятие для подробностей'}
+            {scale === 'Весь день' && view !== 'Список' && gridHeight > available.height
+              ? 'Названия сохранены · прокрутите календарь или разверните на весь экран'
+              : isAdmin
+                ? 'Нажмите на занятие, чтобы посмотреть клиентов и управлять записью'
+                : 'Нажмите занятие для подробностей'}
           </span>
         </footer>
       </section>
@@ -1189,10 +1224,13 @@ export function ScheduleWorkspace({
       {createPortal(
         <>
           {deleting && (
-            <Modal
+            <ConfirmDialog
               title="Удалить тренировку?"
-              subtitle={`${dayText(deleting.day)} · ${eventTime(deleting)} · ${deleting.room}`}
+              subject={`${dayText(deleting.day)} · ${eventTime(deleting)} · ${deleting.room}`}
               onClose={closeDelete}
+              confirmLabel="Удалить тренировку"
+              cancelLabel="Оставить тренировку"
+              onConfirm={deleteTraining}
             >
               <div className="ws-stack calendar-delete-summary">
                 <h3>{deleting.name}</h3>
@@ -1208,17 +1246,8 @@ export function ScheduleWorkspace({
                     {error}
                   </p>
                 )}
-                <div className="modal-actions">
-                  <Button variant="secondary" onClick={closeDelete}>
-                    Оставить тренировку
-                  </Button>
-                  <Button onClick={deleteTraining}>
-                    <Trash2 size={17} />
-                    Удалить тренировку
-                  </Button>
-                </div>
               </div>
-            </Modal>
+            </ConfirmDialog>
           )}
           {library && (
             <Modal
@@ -1463,33 +1492,22 @@ export function ScheduleWorkspace({
             </Modal>
           )}
           {cancelling && (
-            <Modal
+            <ConfirmDialog
               title="Отменить занятие?"
-              subtitle={`${cancelling.name} · ${eventTime(cancelling)} · ${cancelling.club}`}
+              subject={`${cancelling.name} · ${dayText(cancelling.day)} · ${eventTime(cancelling)} · ${cancelling.club}`}
+              description="Занятие останется в расписании с отметкой «Отменено». Записи и отметки присутствия сохранятся в истории."
+              confirmLabel="Отменить занятие"
+              cancelLabel="Оставить занятие"
               onClose={() => setCancelling(null)}
-            >
-              <p>
-                Занятие останется в расписании с отметкой «Отменено». Записи и отметки присутствия
-                сохранятся в истории.
-              </p>
-              <div className="modal-actions">
-                <Button variant="secondary" onClick={() => setCancelling(null)}>
-                  Оставить занятие
-                </Button>
-                <Button
-                  onClick={() => {
-                    const current = data.events.find((row) => row.id === cancelling.id);
-                    if (current && canCancelEvent(current, user)) {
-                      put('events', { ...current, status: 'Отменено' });
-                      setMessage('Занятие отменено.');
-                    }
-                    setCancelling(null);
-                  }}
-                >
-                  Отменить занятие
-                </Button>
-              </div>
-            </Modal>
+              onConfirm={() => {
+                const current = data.events.find((row) => row.id === cancelling.id);
+                if (current && canCancelEvent(current, user)) {
+                  put('events', { ...current, status: 'Отменено' });
+                  setMessage('Занятие отменено.');
+                }
+                setCancelling(null);
+              }}
+            />
           )}
           {copying && canCreate && (
             <Modal

@@ -4,7 +4,8 @@ import { adminSections } from '../data/admin';
 import type { AdminSectionId } from '../data/admin';
 import type { UserRole } from '../types';
 import { canOpenModule, isManagementRole } from '../lib/staff-rules';
-import { LinkCards } from '../components/WorkspaceUI';
+import { Empty, LinkCards } from '../components/WorkspaceUI';
+import { Button } from '../components/ui';
 import '../styles/sections.css';
 
 const groups: { title: string; ids: AdminSectionId[] }[] = [
@@ -112,14 +113,15 @@ export function SectionsPage({
           </section>
         ))
       ) : (
-        <div className="empty-state">
-          <Search size={28} aria-hidden="true" />
-          <h2>Ничего не найдено</h2>
-          <p>Попробуйте другое название или задачу, например «смена» или «клиенты».</p>
-          <button className="button button-secondary" onClick={() => setQuery('')}>
-            Сбросить поиск
-          </button>
-        </div>
+        <Empty
+          title="Ничего не найдено"
+          text="Попробуйте другое название или задачу, например «смена» или «клиенты»."
+          action={
+            <Button variant="secondary" onClick={() => setQuery('')}>
+              Сбросить поиск
+            </Button>
+          }
+        />
       )}
     </div>
   );

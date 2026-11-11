@@ -5,7 +5,7 @@ import { Toast } from '../components/ui';
 import { useTheme } from '../components/ThemeProvider';
 import { astronBrand } from '../data/branding';
 import { DesignSystem } from './DesignSystem';
-import { VisualStyleSwitch } from '../components/VisualStyleSwitch';
+import { ThemeSelect } from '../components/ThemeSelect';
 import { appearanceSearch } from '../lib/visual-style';
 
 export function DesignSystemWorkspace() {
@@ -38,7 +38,7 @@ export function DesignSystemWorkspace() {
             </span>
           </div>
           <div className="guide-appearance-actions">
-            <VisualStyleSwitch />
+            <ThemeSelect />
             <a
               className="button button-secondary guide-open-prototype"
               href={`./${appearanceSearch(palette.primary, visualStyle)}#/overview?device=desktop&state=default&role=administrator`}

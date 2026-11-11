@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { classes, weeklyVisits } from '../data/mock';
 import type { Member } from '../types';
-import { Avatar, Badge, SectionTitle, TextLink } from '../components/ui';
+import { CountBadge, Avatar, Badge, SectionTitle, TextLink } from '../components/ui';
 
 export function Overview({
   members,
@@ -174,7 +174,7 @@ export function Overview({
         </section>
 
         <section className="panel schedule-panel">
-          <SectionTitle title="Занятия сегодня" action={<span className="count-badge">3</span>} />
+          <SectionTitle title="Занятия сегодня" action={<CountBadge>3</CountBadge>} />
           <p className="panel-subtitle">Воскресенье, 1 ноября</p>
           <div className="class-list">
             {classes.map((item, index) => (

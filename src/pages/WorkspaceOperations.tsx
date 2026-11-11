@@ -1,3 +1,4 @@
+import { accessWindowLabel } from '../lib/registration';
 import { Select } from '../components/Select';
 import { useCallback, useState } from 'react';
 import { ArrowLeft, ArrowRight, ChevronRight, CupSoda, Plus } from 'lucide-react';
@@ -83,10 +84,28 @@ const planFields: Field[][] = [
       key: 'hours',
       label: 'Часы посещения',
       type: 'textarea',
-      hint: 'Информация для клиента. Эти часы сами по себе не ограничивают проход.',
+      hint: 'Описание для клиента. Проверяемые часы доступа задаются отдельно на шаге «Доступ».',
     },
   ],
   [
+    {
+      key: 'accessWeekdays',
+      label: 'Часы доступа: понедельник–пятница',
+      hint: 'Например: 06:30–16:00, 20:00–23:10. Несколько интервалов — через запятую.',
+    },
+    {
+      key: 'accessWeekends',
+      label: 'Часы доступа: суббота–воскресенье',
+      hint: 'Например: 07:00–22:10. Для закрытых дней — «нет». Оба поля пустые — без ограничения по времени.',
+    },
+    { key: 'ageMin', label: 'Возраст от, включительно', type: 'number', min: 0 },
+    {
+      key: 'ageMax',
+      label: 'Возраст до, включительно',
+      type: 'number',
+      min: 0,
+      hint: 'Оба поля пустые — без возрастного ограничения.',
+    },
     { key: 'club', label: 'Клубы', options: ['Все клубы', 'Центральный', 'Парк', 'Речной'] },
     {
       key: 'direction',
@@ -383,9 +402,17 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
             compact
             name={row.name}
             kindId={row.kindId}
-            detail={`${quantityLabel(row.duration, 'day')} · ${row.type === 'Безлимитный' ? 'без ограничений' : quantityLabel(row.visits, 'visit')}`}
+            detail={`${quantityLabel(row.duration, 'day')} · ${row.type === 'Безлимитный' ? 'безлимит посещений' : quantityLabel(row.visits, 'visit')}`}
             footer={money(row.price)}
           />
+          {accessWindowLabel(row) && (
+            <span className="pass-access-note">{accessWindowLabel(row)}</span>
+          )}
+          {row.ageMin && (
+            <span className="pass-access-note">
+              Возраст {row.ageMin}–{row.ageMax} лет
+            </span>
+          )}
           <span className="membership-catalog-meta">
             <Status>{row.status}</Status>
             <span>{row.online === 'Доступен' ? 'Доступен онлайн' : 'В клубе'}</span>
