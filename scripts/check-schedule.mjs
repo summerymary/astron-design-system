@@ -173,3 +173,49 @@ assert.equal(rules.validateEvent({ ...original, time: free }, events, data.rooms
 console.log(
   'Schedule checks passed: 18/day, overlaps, moves, capacities, snapping, dates and full template autofill.',
 );
+
+// Booking, presence and removal are separate, immutable transitions.
+const { changeAttendance, rosterIds } = await load('../src/lib/schedule-attendance.ts');
+const participant = { id: 2001, name: 'Test participant' };
+const emptyClass = {
+  ...displayedDay[0],
+  id: 'booking-test',
+  attendees: '',
+  booked: '0',
+  present: '',
+  capacity: '1',
+  status: 'Запись открыта',
+};
+const booked = changeAttendance(emptyClass, participant, 'book');
+assert.equal(typeof booked, 'object');
+assert.equal(booked.booked, '1');
+assert.deepEqual(rosterIds(booked.attendees), ['2001']);
+assert.equal(booked.status, 'Мест нет');
+assert.match(changeAttendance(booked, participant, 'book'), /уже записан/);
+assert.match(changeAttendance(booked, { ...participant, id: 2002 }, 'book'), /мест нет/);
+assert.match(
+  changeAttendance({ ...emptyClass, status: 'Отменено' }, participant, 'book'),
+  /отменено/,
+);
+assert.match(changeAttendance(emptyClass, participant, 'present'), /не записан/);
+const attended = changeAttendance(booked, participant, 'present');
+assert.equal(attended.present, '2001');
+assert.equal(booked.present, '');
+assert.equal(changeAttendance(attended, participant, 'present').present, '2001');
+assert.equal(changeAttendance(attended, participant, 'absent').present, '');
+const removed = changeAttendance(attended, participant, 'remove');
+assert.equal(removed.booked, '0');
+assert.equal(removed.present, '');
+assert.equal(removed.status, 'Запись открыта');
+assert.equal(emptyClass.booked, '0');
+const overlap = { ...booked, id: 'other-class', club: 'Другой клуб' };
+assert.match(changeAttendance(emptyClass, participant, 'book', [overlap]), /уже записан/);
+for (const event of data.events)
+  assert.equal(
+    Number(event.booked),
+    rosterIds(event.attendees).length,
+    'Roster count: ' + event.id,
+  );
+console.log(
+  'Attendance checks passed: capacity, duplicate booking, cross-club overlap, attendance, removal, cancellation and immutable updates.',
+);

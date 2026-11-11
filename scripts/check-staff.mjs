@@ -14,6 +14,8 @@ const {
   isManagementRole,
   personalClients,
   canManageEvent,
+  canCreateEvent,
+  canCancelEvent,
   personalScopeError,
   noteError,
 } = await load('../src/lib/staff-rules.ts');
@@ -132,7 +134,11 @@ assert.equal(
 );
 const session = data.events.find((e) => e.id === 'personal-demo-1');
 assert.ok(canManageEvent(session, trainer));
-assert.ok(canManageEvent(session, admin));
+assert.equal(canManageEvent(session, admin), false);
+assert.equal(canCreateEvent(admin), false);
+assert.ok(canCancelEvent(session, admin));
+assert.equal(canCancelEvent({ ...session, status: 'Отменено' }, admin), false);
+assert.match(personalScopeError(session, admin, data['personal-clients']), /не добавляет/);
 for (const role of managementRoles) {
   const manager = { ...admin, role };
   assert.ok(canManageEvent(session, manager));
