@@ -577,7 +577,10 @@ export function NotificationsWorkspace({ navigate }: { navigate: Navigate }) {
               />
             </div>
             <div className="ws-actions">
-              <Button variant="secondary" onClick={() => navigate(row.section as AdminSectionId)}>
+              <Button
+                variant="secondary"
+                onClick={() => navigate(row.section as AdminSectionId, undefined, row.eventId)}
+              >
                 Открыть
                 <ArrowRight size={14} />
               </Button>

@@ -3,7 +3,7 @@ import { nextDemoNow } from '../lib/demo-clock';
 import { Select } from '../components/Select';
 import { useCallback, useRef, useState } from 'react';
 import { ArrowRight, CalendarDays, Edit3, NotebookPen, Plus, CupSoda } from 'lucide-react';
-import { Avatar, Button, Modal } from '../components/ui';
+import { CountBadge, Avatar, Button, Modal } from '../components/ui';
 import {
   DataTable,
   Empty,
@@ -478,11 +478,11 @@ export function TrainerClients({
       <section className="panel ws-panel">
         <div className="ws-panel-heading">
           <h2>
-            Мои клиенты <span className="count-badge">{clients.length}</span>
+            Мои клиенты <CountBadge>{clients.length}</CountBadge>
           </h2>
         </div>
         <div className="ws-panel-body">
-          <SearchBox value={query} onChange={setQuery} placeholder="Имя клиента" />
+          <SearchBox value={query} onChange={setQuery} placeholder="ФИО клиента" />
         </div>
         <div className="staff-client-list">
           {clients
@@ -591,7 +591,7 @@ export function TrainerClients({
                   />
                 </label>
                 <div className="ws-actions">
-                  <Button disabled={!draft.text.trim()}>
+              <Button type="submit" disabled={!draft.text.trim()}>
                     <NotebookPen size={15} />
                     {draft.editingId ? 'Сохранить изменения' : 'Сохранить заметку'}
                   </Button>

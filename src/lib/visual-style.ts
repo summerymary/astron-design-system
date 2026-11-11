@@ -2,6 +2,13 @@ import type { ThemeTokens } from './theme';
 
 export type VisualStyle = 'astron' | 'vivid';
 
+export const THEME_OPTIONS = [
+  { id: 'astron', name: 'Астрон', color: '#8A332C', style: 'astron' },
+  { id: 'graphite', name: 'Графит', color: '#111111', style: 'astron' },
+  { id: 'contrast', name: 'Контраст', color: '#B32D3D', style: 'vivid' },
+] as const;
+export type ThemeId = (typeof THEME_OPTIONS)[number]['id'];
+
 export function readVisualStyle(search: string): VisualStyle {
   // The retired Minimal/Spectrum routes return to Astron; its source is archived separately.
   return new URLSearchParams(search).get('style') === 'vivid' ? 'vivid' : 'astron';

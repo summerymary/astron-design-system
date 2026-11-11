@@ -1,3 +1,4 @@
+@layer legacy {
 /* Category colours remain independent of the current club theme and of statuses. */
 .ds-membership-colors {
   display: grid;
@@ -773,4 +774,56 @@ button.membership-kind-card {
 .membership-category-filter .membership-category-toolbar {
   padding: 8px 0 16px;
   border: 0;
+}
+.registration-bookings {
+  min-width: 0;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+.registration-bookings legend {
+  padding-inline: 6px;
+  font-weight: 600;
+}
+.registration-bookings p {
+  margin: 0 0 12px;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+.registration-bookings button[aria-pressed='true'] {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+.registration-recommendation {
+  min-height: 21px;
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+.plastic-choice.is-recommended:not([aria-pressed='true']) {
+  outline: 2px dashed var(--color-accent);
+  outline-offset: 3px;
+}
+.client-membership-name > small {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+.pass-access-note {
+  display: block;
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-ink);
+  text-align: left;
+}
+.pass-access-problem {
+  color: var(--color-muted);
+}
+
 }

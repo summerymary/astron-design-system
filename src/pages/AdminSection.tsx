@@ -94,6 +94,8 @@ export function AdminSection({
   if (section === 'schedule')
     return (
       <ScheduleWorkspace
+        recordId={recordId}
+        onRecord={onRecord}
         members={members}
         navigate={navigate}
         clubName={clubName}

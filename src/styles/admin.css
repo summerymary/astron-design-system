@@ -1,3 +1,4 @@
+@layer legacy {
 /* Administrator reception: workspace, client lookup, visit journal and shortcuts. */
 .app-topbar.admin-topbar {
   height: auto;
@@ -1555,4 +1556,6 @@
 .workstation-menu > [role='listbox'] {
   display: block;
   padding-left: 0;
+}
+
 }

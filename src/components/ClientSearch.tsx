@@ -107,8 +107,9 @@ export function ClientSearch({
           setSubmitted(false);
         }}
         onKeyDown={(event) => {
-          if (event.key === 'Escape') {
+          if (event.key === 'Escape' && visible) {
             event.preventDefault();
+            event.stopPropagation();
             setOpen(false);
             setActive(-1);
           }
@@ -186,7 +187,7 @@ export function ClientSearch({
             {mode === 'profile'
               ? 'Поиск открывает карточку. Посещение оформляется отдельно.'
               : purpose === 'занятия'
-                ? 'Выбор клиента не записывает на занятие. Нажмите «Записать клиента».'
+                ? 'После выбора подтвердите запись на занятие или добавление в резерв.'
                 : 'Выбор клиента не создаёт посещение. Для этого нужна кнопка подтверждения.'}
           </p>
         </div>

@@ -1,3 +1,4 @@
+@layer legacy {
 .staff-muted,
 .staff-form-context {
   color: var(--color-muted);
@@ -107,4 +108,6 @@
   .staff-session-list .ws-status {
     margin-left: auto;
   }
+}
+
 }

@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { Check, CheckCheck, MoreHorizontal, Pencil, Trash2 } from 'lucide-react';
 import { deliveryLabels, messageDate, messageTime } from '../lib/client-messages';
 import type { ChatMessage } from '../lib/client-messages';
+import { Empty } from './WorkspaceUI';
 import '../styles/messenger.css';
 
 export function ChatHistory({
@@ -46,10 +47,7 @@ export function ChatHistory({
       onScroll={() => setMenu(null)}
     >
       {!entries.length && (
-        <div className="messenger-empty">
-          <strong>Начните разговор</strong>
-          <p>Напишите первое сообщение клиенту.</p>
-        </div>
+        <Empty title="Начните разговор" text="Напишите первое сообщение клиенту." />
       )}
       {entries.map((entry, index) => {
         const own = entry.sender === 'club';
@@ -94,6 +92,8 @@ export function ChatHistory({
                   className="message-actions"
                   onKeyDown={(event) => {
                     if (event.key === 'Escape') {
+                      event.preventDefault();
+                      event.stopPropagation();
                       setMenu(null);
                       event.currentTarget.querySelector('button')?.focus();
                     }
@@ -129,6 +129,7 @@ export function ChatHistory({
                         onKeyDown={(event) => {
                           if (event.key === 'Escape') {
                             event.preventDefault();
+                            event.stopPropagation();
                             setMenu(null);
                             trigger.current?.focus();
                           }

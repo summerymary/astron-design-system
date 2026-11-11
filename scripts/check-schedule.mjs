@@ -51,6 +51,46 @@ for (const event of events)
 assert.equal(rules.layoutEvents(busyDay).length, 18, 'No classes may be collapsed or hidden');
 assert.ok(rules.layoutEvents(busyDay).every((e) => e.lanes === 1));
 
+// Overview fits the frame unless doing so would hide class titles.
+for (const samples of [busyDay, events, displayedDay, [], [displayedDay[0]]]) {
+  for (const height of [100, 238, 360, 580, 820]) {
+    for (const weekly of [false, true]) {
+      const fit = rules.calendarGeometry(samples, 'Весь день', height, weekly);
+      const comfortable = rules.calendarGeometry(samples, 'Комфортно', height, weekly);
+      const larger = rules.calendarGeometry(samples, 'Крупнее', height, weekly);
+      assert.ok(fit.height >= height);
+      assert.ok(fit.height <= comfortable.height, 'Overview remains denser than Comfortable');
+      const shortest = Math.min(50, ...samples.map((e) => Number(e.duration)));
+      const readableHeight = samples.length
+        ? ((rules.calendarBounds(samples).end - rules.calendarBounds(samples).start) / shortest) *
+          16
+        : 0;
+      assert.equal(
+        fit.height,
+        Math.max(height, readableHeight),
+        'Fit uses the available frame, reserving only enough height to keep every title readable',
+      );
+      assert.ok(comfortable.height >= height);
+      assert.ok(
+        larger.height >= comfortable.height * 1.5,
+        'Larger must visibly differ from Comfortable',
+      );
+      const range = rules.calendarBounds(samples);
+      assert.ok(
+        (fit.height * 60 * fit.hourStep) / (range.end - range.start) >= 26,
+        'Axis labels must remain readable without overlapping',
+      );
+      for (const { event } of rules.layoutEvents(samples)) {
+        const bottom =
+          ((rules.minutes(event.time) + Number(event.duration) - range.start) /
+            (range.end - range.start)) *
+          fit.height;
+        assert.ok(bottom <= fit.height + 0.01, 'The last class must stay inside the fit overview');
+      }
+    }
+  }
+}
+
 const original = { ...displayedDay[0], attendees: '1001,1002' };
 const before = structuredClone(original);
 const target = { day: '2026-11-07', time: '08:00', room: 'Сайкл-студия', club: 'Центральный' };
@@ -194,7 +234,9 @@ console.log(
 );
 
 // Booking, presence and removal are separate, immutable transitions.
-const { changeAttendance, rosterIds } = await load('../src/lib/schedule-attendance.ts');
+const { changeAttendance, changeReserve, reserveSeatNotification, rosterIds } = await load(
+  '../src/lib/schedule-attendance.ts',
+);
 const participant = { id: 2001, name: 'Test participant' };
 const emptyClass = {
   ...displayedDay[0],
@@ -266,6 +308,61 @@ console.log(
 );
 
 const { contrastRatio } = await load('../src/lib/theme.ts');
+const fullEvent = {
+  ...displayedDay[0],
+  id: 'reserve-test',
+  attendees: '1001',
+  booked: '1',
+  capacity: '1',
+  present: '',
+  status: 'Мест нет',
+};
+const waitingMember = { id: 1002, name: 'Waiting client', visits: 20 };
+const waitingOriginal = structuredClone(waitingMember);
+const withReserve = changeReserve(fullEvent, waitingMember, 'join');
+assert.equal(withReserve.reserve, '1002');
+assert.equal(withReserve.booked, '1', 'Reserve never occupies an actual seat');
+assert.deepEqual(waitingMember, waitingOriginal, 'Joining reserve never consumes a pass');
+assert.equal(fullEvent.reserve, undefined, 'Reserve updates are immutable');
+assert.equal(typeof changeReserve(withReserve, waitingMember, 'join'), 'string');
+assert.equal(typeof changeReserve(fullEvent, { id: 1001 }, 'join'), 'string');
+assert.equal(
+  typeof changeReserve({ ...fullEvent, attendees: '', booked: '0' }, waitingMember, 'join'),
+  'string',
+);
+assert.equal(
+  typeof changeReserve({ ...fullEvent, status: 'Отменено' }, waitingMember, 'join'),
+  'string',
+);
+const freed = changeAttendance(withReserve, { id: 1001 }, 'remove', [withReserve]);
+const notice = reserveSeatNotification(withReserve, freed, 1);
+assert.ok(
+  notice &&
+    notice.unread === 'true' &&
+    notice.eventId === fullEvent.id &&
+    notice.section === 'schedule',
+);
+assert.equal(
+  reserveSeatNotification(freed, freed, 2),
+  null,
+  'Repeated saving must not duplicate the notification',
+);
+assert.equal(
+  reserveSeatNotification({ ...withReserve, reserve: '' }, { ...freed, reserve: '' }, 2),
+  null,
+);
+assert.equal(reserveSeatNotification(withReserve, { ...freed, status: 'Отменено' }, 2), null);
+const promoted = changeAttendance(freed, waitingMember, 'book', [freed]);
+assert.equal(promoted.attendees, '1002');
+assert.equal(promoted.reserve, '');
+assert.equal(reserveSeatNotification(freed, promoted, 2), null);
+assert.equal(changeReserve(withReserve, waitingMember, 'leave').reserve, '');
+const reserveSeed = data.events.find((event) => event.reserve);
+assert.ok(reserveSeed, 'Demo schedule includes a full class with a reserve');
+assert.equal(rosterIds(reserveSeed.attendees).length, Number(reserveSeed.capacity));
+console.log(
+  'Reserve checks passed: full capacity, duplicate protection, no pass usage, vacancy notifications, promotion and immutable records.',
+);
 for (const band of rules.OCCUPANCY_SCALE)
   assert.ok(
     contrastRatio(band.foreground, band.background) >= 4.5,

@@ -1,3 +1,4 @@
+@layer legacy {
 /* Keep role home pages within a desktop window. Small windows retain document scrolling. */
 .visitor-filters .filter-form-actions {
   flex-wrap: wrap;
@@ -356,4 +357,6 @@
   .fits-home .home-content .ws-check :is(.form-field, .ws-total, .button) {
     flex-shrink: 0;
   }
+}
+
 }

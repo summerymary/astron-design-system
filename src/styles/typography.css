@@ -1,3 +1,4 @@
+@layer legacy {
 /* Shared readable type scale. Never shrink text to make a layout fit. */
 body {
   font-size: var(--text-body);
@@ -57,6 +58,15 @@ h3 {
 .mobile-nav > button > span {
   min-height: 36px;
   line-height: 1.25;
+}
+@container workspace (max-width: 380px) {
+  .mobile-nav {
+    padding-inline: 4px;
+    gap: 2px;
+  }
+  .mobile-nav > .mobile-nav-schedule {
+    flex: 1.5;
+  }
 }
 .calendar-event {
   line-height: 1.25;
@@ -258,4 +268,6 @@ h3 {
   .app-content.has-calendar {
     padding: 16px;
   }
+}
+
 }

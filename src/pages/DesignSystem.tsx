@@ -14,10 +14,11 @@ import {
   Sparkles,
   Users,
 } from 'lucide-react';
-import { Avatar, Badge, Button, SectionTitle } from '../components/ui';
+import { Avatar, Badge, Button, SectionTitle, Switch } from '../components/ui';
 import { initialMembers } from '../data/mock';
 import { LogoGuidelines } from '../components/LogoGuidelines';
 import { ThemePlayground } from '../components/ThemePlayground';
+import { DesignRules } from '../components/DesignRules';
 import { useTheme } from '../components/ThemeProvider';
 import { contrastRatio } from '../lib/theme';
 import { OCCUPANCY_SCALE, TRAINING_INTENSITIES } from '../lib/schedule';
@@ -117,6 +118,7 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
           { id: 'branding', label: 'Логотипы', number: '02' },
           { id: 'components', label: 'Кнопки и поля', number: '03' },
           { id: 'patterns', label: 'Готовые блоки', number: '04' },
+          { id: 'rules', label: 'Единые правила', number: '05' },
         ].map((c) => (
           <button
             key={c.id}
@@ -131,6 +133,7 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
         ))}
       </div>
       {category === 'branding' && <LogoGuidelines />}
+      {category === 'rules' && <DesignRules />}
       {category === 'foundations' && (
         <>
           <ThemePlayground onNotify={onNotify} />
@@ -233,6 +236,12 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                 ))}
               </div>
               <h3>Карты для выбора абонемента</h3>
+              <p>
+                Часы доступа и возраст показываются словами рядом с картой. Вне разрешённого времени
+                или возраста карта недоступна; рядом указана причина. Для предзаписи подходящий
+                абонемент выделяется рамкой и подписью, а окончательное списание требует
+                подтверждения.
+              </p>
               <p>
                 Крупная карта помогает выбрать абонемент: на ней название, назначение, срок или
                 остаток посещений. В карточке клиента абонементы показаны компактным списком:
@@ -475,13 +484,13 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
             />
             <div className="component-panel inputs-showcase">
               <label className="form-field">
-                <span>Имя клиента</span>
+                <span>Фамилия, имя, отчество</span>
                 <input
-                  placeholder="Например, Анна Смирнова"
+                  placeholder="Смирнова Анна Андреевна"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                 />
-                <small>Имя и фамилия, как удобно клиенту.</small>
+                <small>Полное ФИО клиента.</small>
               </label>
               <label className="form-field">
                 <span>Абонемент</span>
@@ -501,15 +510,7 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                 <small id="ds-email-error">Пример ошибки: проверьте адрес почты.</small>
               </label>
               <div className="selection-examples">
-                <button
-                  className="toggle-field"
-                  role="switch"
-                  aria-checked={toggle}
-                  onClick={() => setToggle(!toggle)}
-                >
-                  <span className={`toggle ${toggle ? 'on' : ''}`} />
-                  Уведомления
-                </button>
+                <Switch checked={toggle} onChange={setToggle} label="Уведомления" />
                 <label className="checkbox-field">
                   <input
                     type="checkbox"
@@ -632,11 +633,23 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                 ],
                 [
                   'Действия в шапке',
-                  'Крупный поиск — основная зона администратора. Рядом по порядку находятся новый клиент, расписание и товары; отдельной кнопки посещения в шапке нет. На телефоне есть «Продать». Касса, клиенты и продажа услуг доступны слева. Левое меню администратора открыто по умолчанию; иконки сохраняют положение при сворачивании.',
+                  'Крупный поиск — основная зона администратора. Рядом по порядку находятся новый клиент, расписание и товары; отдельных кнопок посещения и продажи в шапке нет. На телефоне новый клиент занимает отдельную строку, расписание и товары расположены рядом ниже. Продажа доступна в карточке клиента и каталоге разделов. Левое меню администратора открыто по умолчанию; иконки сохраняют положение при сворачивании.',
+                ],
+                [
+                  'Меню на телефоне',
+                  'Текущий раздел выделяется акцентным цветом, более жирной подписью и утолщённой иконкой. Цветная подложка не используется. Размер и положение пунктов при переходе сохраняются.',
                 ],
                 [
                   'Поиск клиента',
                   'Карта, ФИО и телефон ищутся в одном поле. Поиск в шапке открывает карточку. Посещение создаётся только после отдельного подтверждения.',
+                ],
+                [
+                  'Резерв занятия',
+                  'Когда места закончились, клиента можно добавить в отдельный резерв. Абонемент при этом не списывается. Если место освободилось, администратор сразу видит уведомление и открывает нужное занятие. Перевод из резерва подтверждается вручную.',
+                ],
+                [
+                  'Клиенты младше 14 лет',
+                  'В карточке и при регистрации показано предупреждение о сопровождении. Подходящая персональная запись проверяется по базе тренеров. Если её нет, администратор подтверждает, что клиент занимается с тренером или ответственным взрослым. Возрастные ограничения абонемента сохраняются.',
                 ],
                 [
                   'Списки и таблицы',

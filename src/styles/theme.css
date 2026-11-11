@@ -1,3 +1,4 @@
+@layer legacy {
 .theme-editor {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
@@ -61,6 +62,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-block: 16px;
+}
+.theme-custom-settings {
+  margin-block: 20px;
+  color: var(--color-muted);
+  font-size: var(--text-caption);
+  line-height: 1.6;
+}
+.theme-custom-settings > p {
+  margin-bottom: 12px;
 }
 .theme-presets button {
   display: flex;
@@ -280,4 +291,6 @@
   .theme-actions .button {
     font-size: var(--text-caption);
   }
+}
+
 }

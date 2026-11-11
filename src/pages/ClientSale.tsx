@@ -1,3 +1,4 @@
+import { accessWindowLabel } from '../lib/registration';
 import { clientName, hiddenPhone } from '../lib/client-display';
 import { demoStamp, nextDemoNow } from '../lib/demo-clock';
 import { Select } from '../components/Select';
@@ -209,7 +210,7 @@ export function SaleWorkspace({
             kindId={row.kindId}
             detail={
               row.type === 'Безлимитный'
-                ? `${quantityLabel(row.duration, 'day')} · без ограничений`
+                ? `${quantityLabel(row.duration, 'day')} · безлимит посещений`
                 : `${quantityLabel(row.visits, 'visit')} · ${quantityLabel(row.duration, 'day')}`
             }
             footer={money(row.price)}
@@ -224,6 +225,14 @@ export function SaleWorkspace({
                 Остаток ({row.unit}): {row.stock}
               </small>
             )}
+          </span>
+        )}
+        {entry.type === 'plan' && accessWindowLabel(row) && (
+          <span className="pass-access-note">{accessWindowLabel(row)}</span>
+        )}
+        {entry.type === 'plan' && row.ageMin && (
+          <span className="pass-access-note">
+            Возраст {row.ageMin}–{row.ageMax} лет
           </span>
         )}
       </button>

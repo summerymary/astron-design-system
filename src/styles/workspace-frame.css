@@ -1,3 +1,4 @@
+@layer legacy {
 /* The page chrome stays still. Each route owns the scroll inside its work area. */
 .workspace-page-body {
   position: relative;
@@ -173,4 +174,6 @@
   .app-shell .header-inbox > span {
     display: none;
   }
+}
+
 }

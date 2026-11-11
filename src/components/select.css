@@ -1,3 +1,4 @@
+@layer legacy {
 .select-native.select-native {
   display: none !important;
 }
@@ -133,4 +134,6 @@
   padding: 10px 12px;
   font-size: 14px;
   color: var(--color-muted);
+}
+
 }

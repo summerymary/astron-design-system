@@ -28,6 +28,11 @@ export interface DemoSubscription {
   activatedAt: string | null;
   endsAt: string | null;
   status: SubscriptionStatus;
+  accessWeekdays?: string;
+  accessWeekends?: string;
+  training?: string;
+  ageMin?: string;
+  ageMax?: string;
 }
 
 export function getClientProfile(member: Member, data: Record<string, DemoRecord[]> = {}) {
@@ -91,6 +96,11 @@ export function getClientProfile(member: Member, data: Record<string, DemoRecord
       used: 0,
       remaining: row.type === 'Безлимитный' ? null : Number(row.visits),
       boughtAt: row.issued.split('-').reverse().join('.'),
+      accessWeekdays: row.accessWeekdays,
+      accessWeekends: row.accessWeekends,
+      training: row.training,
+      ageMin: row.ageMin,
+      ageMax: row.ageMax,
       activatedAt: null,
       endsAt: null,
       status: 'pending',

@@ -1,3 +1,4 @@
+@layer legacy {
 .app-shell .messenger-workspace {
   gap: 16px;
 }
@@ -449,4 +450,6 @@
   .message-menu {
     min-width: 190px;
   }
+}
+
 }

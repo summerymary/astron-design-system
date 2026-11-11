@@ -122,6 +122,35 @@ export function calendarBounds(events: DemoRecord[]): { start: number; end: numb
   return { start, end };
 }
 
+// Fit is an overview of the entire time range, independent of role and fullscreen.
+// Larger scales deliberately scroll inside the calendar and preserve readable tiles.
+export function calendarGeometry(
+  events: DemoRecord[],
+  scale: string,
+  availableHeight: number,
+  weekly: boolean,
+): { height: number; hourStep: number } {
+  const { start, end } = calendarBounds(events);
+  const viewport = Math.max(1, Math.floor(availableHeight));
+  const shortest = Math.min(
+    50,
+    ...events
+      .map((event) => Number(event.duration))
+      .filter((duration) => Number.isFinite(duration) && duration > 0),
+  );
+  const comfortable = Math.max(viewport, ((end - start) / shortest) * (weekly ? 72 : 52));
+  const titleHeight = events.length ? ((end - start) / shortest) * 16 : 0;
+  const height =
+    scale === 'Весь день'
+      ? Math.max(viewport, titleHeight)
+      : scale === 'Крупнее'
+        ? comfortable * 1.5
+        : comfortable;
+  // Keep axis labels apart at overview scale without reducing their font size.
+  const hourStep = Math.max(1, Math.ceil(26 / ((height * 60) / (end - start))));
+  return { height, hourStep };
+}
+
 // Preserve every event, including overlapping examples, by assigning parallel lanes.
 export function layoutEvents(events: DemoRecord[]): EventPlacement[] {
   const sorted = [...events].sort(

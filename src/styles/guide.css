@@ -1,3 +1,4 @@
+@layer legacy {
 .guide-header {
   border-bottom: 1px solid var(--color-line);
   background: var(--color-surface);
@@ -118,4 +119,6 @@
     min-width: 32px;
     padding: 8px;
   }
+}
+
 }

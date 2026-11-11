@@ -1,3 +1,4 @@
+@layer legacy {
 /* Edit these tokens to update the entire prototype and its component library. */
 :root {
   --color-accent: #8a332c;
@@ -64,9 +65,26 @@
   --radius-control: 10px;
   --radius-card: 16px;
   --radius-pill: 999px;
+  --control-height: 44px;
+  --control-height-compact: 36px;
+  --control-icon-size: 18px;
+  --control-padding-x: 14px;
+  --control-font-size: var(--text-body);
+  --focus-width: 2px;
+  --focus-offset: 2px;
+  --panel-padding: 24px;
+  --panel-gap: 24px;
+  --field-gap: 8px;
+  --form-gap: 16px;
+  --status-radius: 6px;
+  --surface-border: var(--color-line);
+  --button-primary-fill: var(--color-action);
+  --button-primary-shadow: none;
   --shadow-popup: 0 16px 56px #181c2416;
   --color-divider: color-mix(in srgb, var(--color-line) 60%, var(--color-surface));
   --layout-page-padding: clamp(28px, 3cqi, 48px);
   --layout-panel-padding: 28px;
   --layout-section-gap: 28px;
+}
+
 }

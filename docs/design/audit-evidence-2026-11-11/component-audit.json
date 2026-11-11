@@ -1,0 +1,7128 @@
+{
+  "main": [
+    {
+      "section": "schedule",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расписание",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "trainer-clients",
+      "role": "trainer",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мои клиенты",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-catalog",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Каталог бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-sales",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажи бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-inventory",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Склад бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "registration",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Регистрация посещения",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "services",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа услуг",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "members",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Клиенты",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "products",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа товаров",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "cash",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Касса",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "crm",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "CRM",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Бар",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "requests",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Онлайн-заявки",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сообщения",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "reviews",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Отзывы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "memberships",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Абонементы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "calls",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Звонки",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "notifications",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Уведомления",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "directories",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Справочники",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "statistics",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Статистика",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "settings",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мой профиль",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "employees",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 5,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Персонал",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "positions",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Должности",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "absences",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Отсутствия",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "payroll",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расчёт зарплаты",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "clubs",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Клубы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "rooms",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Залы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "receptions",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Ресепшены",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "training-templates",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Шаблоны занятий",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "training-groups",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Группы занятий",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "schedule-calendar",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Календарь клуба",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "service-settings",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Настройки системы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-categories",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Категории бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-collections",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Витрины бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "inventory",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Склад",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "cameras",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Камеры",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "rbac",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Роли и права",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "security",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Безопасность",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "event-logs",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Журнал событий",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "leads",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Заявки",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "segments",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Группы клиентов",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "pipelines",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сценарии заявок",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "retention",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Вернуть клиентов",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "external-messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Внешние обращения",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "administrator",
+      "path": "overview",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Ресепшен",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "trainer",
+      "path": "overview",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мой тренировочный день",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "bartender",
+      "path": "overview",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Бар",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "club-director",
+      "path": "overview",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Пульс клуба",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "network-director",
+      "path": "overview",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Обзор сети",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "marketer",
+      "path": "overview",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Маркетинг сети",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "fitness-director",
+      "path": "overview",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Фитнес-направление",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "operations-director",
+      "path": "overview",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Операционная работа",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "sysadmin",
+      "path": "overview",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Системное управление",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "accountant",
+      "path": "overview",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Финансы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "client-profile",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Смирнова Анна Андреевна",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "employee-detail",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=employees&recordId=emp-1",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Александра Крылова",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "sections",
+      "role": "sysadmin",
+      "path": "sections",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Все разделы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "schedule",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расписание",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "trainer-clients",
+      "role": "trainer",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мои клиенты",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-catalog",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Каталог бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-sales",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажи бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-inventory",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Склад бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "registration",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Регистрация посещения",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "services",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа услуг",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "members",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Клиенты",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "products",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа товаров",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "cash",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Касса",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "crm",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "CRM",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Бар",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "requests",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Онлайн-заявки",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сообщения",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "reviews",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Отзывы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "memberships",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Абонементы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "calls",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Звонки",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "notifications",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Уведомления",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "directories",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Справочники",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "statistics",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Статистика",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "settings",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мой профиль",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "employees",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 5,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Персонал",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "positions",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Должности",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "absences",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Отсутствия",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "payroll",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расчёт зарплаты",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "clubs",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Клубы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "rooms",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Залы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "receptions",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Ресепшены",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "training-templates",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Шаблоны занятий",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "training-groups",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Группы занятий",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "schedule-calendar",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Календарь клуба",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "service-settings",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Настройки системы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-categories",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Категории бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-collections",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Витрины бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "inventory",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Склад",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "cameras",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Камеры",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "rbac",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Роли и права",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "security",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Безопасность",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "event-logs",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Журнал событий",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "leads",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Заявки",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "segments",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Группы клиентов",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "pipelines",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сценарии заявок",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "retention",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Вернуть клиентов",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "external-messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Внешние обращения",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "administrator",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Ресепшен",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "trainer",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мой тренировочный день",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "bartender",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Бар",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "club-director",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Пульс клуба",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "network-director",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Обзор сети",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "marketer",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Маркетинг сети",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "fitness-director",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Фитнес-направление",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "operations-director",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Операционная работа",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "sysadmin",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Системное управление",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "accountant",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Финансы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "client-profile",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Смирнова Анна Андреевна",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "employee-detail",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=employees&recordId=emp-1",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Александра Крылова",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "sections",
+      "role": "sysadmin",
+      "path": "sections",
+      "theme": "graphite",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Все разделы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "schedule",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расписание",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "trainer-clients",
+      "role": "trainer",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мои клиенты",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-catalog",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Каталог бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-sales",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажи бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-inventory",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Склад бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "registration",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Регистрация посещения",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "services",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа услуг",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "members",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Клиенты",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "products",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа товаров",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "cash",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Касса",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "crm",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "CRM",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Бар",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "requests",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Онлайн-заявки",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сообщения",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "reviews",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Отзывы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "memberships",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Абонементы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "calls",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Звонки",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "notifications",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Уведомления",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "directories",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Справочники",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "statistics",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Статистика",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "settings",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мой профиль",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "employees",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 5,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Персонал",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "positions",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Должности",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "absences",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Отсутствия",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "payroll",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расчёт зарплаты",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "clubs",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Клубы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "rooms",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Залы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "receptions",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Ресепшены",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "training-templates",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Шаблоны занятий",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "training-groups",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Группы занятий",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "schedule-calendar",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Календарь клуба",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "service-settings",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Настройки системы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-categories",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Категории бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "bar-collections",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Витрины бара",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "inventory",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Склад",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "cameras",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Камеры",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "rbac",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Роли и права",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "security",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Безопасность",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "event-logs",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Журнал событий",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "leads",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Заявки",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "segments",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Группы клиентов",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "pipelines",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сценарии заявок",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "retention",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Вернуть клиентов",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "external-messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Внешние обращения",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "administrator",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Ресепшен",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "trainer",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мой тренировочный день",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "bartender",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Бар",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "club-director",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Пульс клуба",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "network-director",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Обзор сети",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "marketer",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Маркетинг сети",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "fitness-director",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Фитнес-направление",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "operations-director",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Операционная работа",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "sysadmin",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Системное управление",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "accountant",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Финансы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "client-profile",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Смирнова Анна Андреевна",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "employee-detail",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=employees&recordId=emp-1",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Александра Крылова",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "sections",
+      "role": "sysadmin",
+      "path": "sections",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Все разделы",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "section": "schedule",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расписание",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "trainer-clients",
+      "role": "trainer",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мои клиенты",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-catalog",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Каталог бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-sales",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажи бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-inventory",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Склад бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "registration",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Регистрация посещения",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "services",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа услуг",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "members",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Клиенты",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "products",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа товаров",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "cash",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Касса",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "crm",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "CRM",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Бар",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "requests",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Онлайн-заявки",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сообщения",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "reviews",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Отзывы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "memberships",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Абонементы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "calls",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Звонки",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "notifications",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Уведомления",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "directories",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Справочники",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "statistics",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Статистика",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "settings",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мой профиль",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "employees",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Персонал",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "positions",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 5,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Должности",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "absences",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Отсутствия",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "payroll",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расчёт зарплаты",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "clubs",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 7,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Клубы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "rooms",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 5,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Залы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "receptions",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Ресепшены",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "training-templates",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Шаблоны занятий",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "training-groups",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Группы занятий",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "schedule-calendar",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Календарь клуба",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "service-settings",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Настройки системы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-categories",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Категории бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-collections",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Витрины бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "inventory",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Склад",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "cameras",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Камеры",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "rbac",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Роли и права",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "security",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Безопасность",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "event-logs",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Журнал событий",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "leads",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Заявки",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "segments",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Группы клиентов",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "pipelines",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сценарии заявок",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "retention",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Вернуть клиентов",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "external-messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Внешние обращения",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "administrator",
+      "path": "overview",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Ресепшен",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "trainer",
+      "path": "overview",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мой тренировочный день",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "bartender",
+      "path": "overview",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Бар",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "club-director",
+      "path": "overview",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Пульс клуба",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "network-director",
+      "path": "overview",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Обзор сети",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "marketer",
+      "path": "overview",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Маркетинг сети",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "fitness-director",
+      "path": "overview",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Фитнес-направление",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "operations-director",
+      "path": "overview",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Операционная работа",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "sysadmin",
+      "path": "overview",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Системное управление",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "accountant",
+      "path": "overview",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Финансы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "client-profile",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Смирнова Анна Андреевна",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "employee-detail",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=employees&recordId=emp-1",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Александра Крылова",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "sections",
+      "role": "sysadmin",
+      "path": "sections",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Все разделы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "schedule",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расписание",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "trainer-clients",
+      "role": "trainer",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мои клиенты",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-catalog",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Каталог бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-sales",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажи бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-inventory",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Склад бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "registration",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Регистрация посещения",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "services",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа услуг",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "members",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Клиенты",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "products",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа товаров",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "cash",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Касса",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "crm",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "CRM",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Бар",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "requests",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Онлайн-заявки",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сообщения",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "reviews",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Отзывы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "memberships",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Абонементы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "calls",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Звонки",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "notifications",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Уведомления",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "directories",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Справочники",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "statistics",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Статистика",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "settings",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мой профиль",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "employees",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Персонал",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "positions",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 5,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Должности",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "absences",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Отсутствия",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "payroll",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расчёт зарплаты",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "clubs",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 7,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Клубы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "rooms",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 5,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Залы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "receptions",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Ресепшены",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "training-templates",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Шаблоны занятий",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "training-groups",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Группы занятий",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "schedule-calendar",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Календарь клуба",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "service-settings",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Настройки системы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-categories",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Категории бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-collections",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Витрины бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "inventory",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Склад",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "cameras",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Камеры",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "rbac",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Роли и права",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "security",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Безопасность",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "event-logs",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Журнал событий",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "leads",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Заявки",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "segments",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Группы клиентов",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "pipelines",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сценарии заявок",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "retention",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Вернуть клиентов",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "external-messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Внешние обращения",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "administrator",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Ресепшен",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "trainer",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мой тренировочный день",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "bartender",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Бар",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "club-director",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Пульс клуба",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "network-director",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Обзор сети",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "marketer",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Маркетинг сети",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "fitness-director",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Фитнес-направление",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "operations-director",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Операционная работа",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "sysadmin",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Системное управление",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "accountant",
+      "path": "overview",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Финансы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "client-profile",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Смирнова Анна Андреевна",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "employee-detail",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=employees&recordId=emp-1",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Александра Крылова",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "sections",
+      "role": "sysadmin",
+      "path": "sections",
+      "theme": "graphite",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Все разделы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "schedule",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расписание",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "trainer-clients",
+      "role": "trainer",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мои клиенты",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-catalog",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Каталог бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-sales",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажи бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-inventory",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Склад бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "registration",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Регистрация посещения",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "services",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа услуг",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "members",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Клиенты",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "products",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа товаров",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "cash",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Касса",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "crm",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "CRM",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar",
+      "role": "bartender",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Бар",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "requests",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Онлайн-заявки",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сообщения",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "reviews",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Отзывы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "memberships",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Абонементы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "calls",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Звонки",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "notifications",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Уведомления",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "directories",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Справочники",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "statistics",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Статистика",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "settings",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мой профиль",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "employees",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Персонал",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "positions",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 5,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Должности",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "absences",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Отсутствия",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "payroll",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расчёт зарплаты",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "clubs",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 7,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Клубы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "rooms",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 5,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Залы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "receptions",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Ресепшены",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "training-templates",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Шаблоны занятий",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "training-groups",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Группы занятий",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "schedule-calendar",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Календарь клуба",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "service-settings",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Настройки системы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-categories",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Категории бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "bar-collections",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Витрины бара",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "inventory",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Склад",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "cameras",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Камеры",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "rbac",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Роли и права",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "security",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Безопасность",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "event-logs",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Журнал событий",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "leads",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Заявки",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "segments",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Группы клиентов",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "pipelines",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сценарии заявок",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "retention",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Вернуть клиентов",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "external-messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Внешние обращения",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "administrator",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Ресепшен",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "trainer",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Мой тренировочный день",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "bartender",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Бар",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "club-director",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 1,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Пульс клуба",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "network-director",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Обзор сети",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "marketer",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Маркетинг сети",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "fitness-director",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Фитнес-направление",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "operations-director",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Операционная работа",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "sysadmin",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Системное управление",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "overview",
+      "role": "accountant",
+      "path": "overview",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Финансы",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "client-profile",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Смирнова Анна Андреевна",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "employee-detail",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=employees&recordId=emp-1",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Александра Крылова",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "section": "sections",
+      "role": "sysadmin",
+      "path": "sections",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Все разделы",
+      "viewport": [
+        390,
+        844
+      ]
+    }
+  ],
+  "narrow": [
+    {
+      "section": "schedule",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расписание",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "services",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа услуг",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "cash",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Касса",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сообщения",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "memberships",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Абонементы",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "employees",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 5,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Персонал",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "client-profile",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Смирнова Анна Андреевна",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "sections",
+      "role": "sysadmin",
+      "path": "sections",
+      "theme": "astron",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Все разделы",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "schedule",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 6,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расписание",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "services",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа услуг",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "cash",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 4,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Касса",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сообщения",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "memberships",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Абонементы",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "employees",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 5,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Персонал",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "client-profile",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Смирнова Анна Андреевна",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "sections",
+      "role": "sysadmin",
+      "path": "sections",
+      "theme": "contrast",
+      "device": "desktop",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Все разделы",
+      "viewport": [
+        1024,
+        768
+      ]
+    },
+    {
+      "section": "schedule",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расписание",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "services",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа услуг",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "cash",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Касса",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сообщения",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "memberships",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Абонементы",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "employees",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Персонал",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "client-profile",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Смирнова Анна Андреевна",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "sections",
+      "role": "sysadmin",
+      "path": "sections",
+      "theme": "astron",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Все разделы",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "schedule",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Расписание",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "services",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Продажа услуг",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "cash",
+      "role": "administrator",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 3,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Касса",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "messages",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Сообщения",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "memberships",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 2,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Абонементы",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "employees",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Персонал",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "client-profile",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 9,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Смирнова Анна Андреевна",
+      "viewport": [
+        320,
+        780
+      ]
+    },
+    {
+      "section": "sections",
+      "role": "sysadmin",
+      "path": "sections",
+      "theme": "contrast",
+      "device": "mobile",
+      "badButtons": [],
+      "badFields": [],
+      "badPanels": [],
+      "badStatuses": [],
+      "buttons": 0,
+      "outsideButtons": [],
+      "overflow": false,
+      "title": "Все разделы",
+      "viewport": [
+        320,
+        780
+      ]
+    }
+  ]
+}

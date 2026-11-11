@@ -1,20 +1,6 @@
-import { Search, ArrowUpRight } from 'lucide-react';
-import { Button } from '../components/ui';
-import { useWorkspace } from '../components/WorkspaceProvider';
-import { demoClubs } from '../data/roles';
-import type { AdminSectionId } from '../data/admin';
+import { Search } from 'lucide-react';
 
-export function AdminOverview({
-  clubId,
-  onAction,
-}: {
-  clubId: string;
-  onAction: (id: AdminSectionId) => void;
-}) {
-  const { data } = useWorkspace();
-  const shift = data.shifts.find(
-    (row) => row.club === demoClubs.find((c) => c.id === clubId)?.shortName,
-  );
+export function AdminOverview() {
   return (
     <div className="reception-focus">
       <section className="reception-ready" aria-label="Работа с клиентом">
@@ -26,17 +12,6 @@ export function AdminOverview({
           Также можно найти по ФИО или телефону.
         </p>
       </section>
-      <div className="reception-shift-line">
-        <span>
-          Моя смена{' '}
-          <strong>
-            {shift ? `${shift.start.split('T')[1]}–${shift.end.split('T')[1]}` : 'Не запланирована'}
-          </strong>
-        </span>
-        <Button variant="ghost" onClick={() => onAction('payroll')}>
-          Рабочий день <ArrowUpRight size={14} />
-        </Button>
-      </div>
     </div>
   );
 }

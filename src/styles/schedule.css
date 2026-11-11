@@ -1,3 +1,4 @@
+@layer legacy {
 .calendar-workspace {
   container: calendar / inline-size;
   min-width: 0;
@@ -656,4 +657,85 @@
   .calendar-create .icon-button {
     flex-shrink: 0;
   }
+}
+.schedule-reserve {
+  margin-top: 20px;
+  border-top: 1px solid var(--color-line);
+  padding-top: 16px;
+}
+.schedule-reserve h4 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+.schedule-reserve-available {
+  padding: 10px;
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border-radius: 8px;
+}
+.reserve-position {
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+.schedule-reserve .schedule-roster-row {
+  grid-template-columns: 20px 32px minmax(0, 1fr) auto auto;
+}
+@media (max-width: 600px) {
+  .schedule-reserve .schedule-roster-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+.registration-supervision-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.registration-supervision-check input {
+  margin-top: 4px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.reserve-admin-alert {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 65;
+  max-width: 380px;
+  width: calc(100vw - 40px);
+  padding: 16px 42px 16px 16px;
+  border: 1px solid var(--color-accent);
+  border-radius: 12px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: 0 8px 28px #181c2420;
+}
+.reserve-admin-alert p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.reserve-admin-alert > button:not(.icon-button) {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+.reserve-admin-alert > .icon-button {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+}
+.header-reserve-notice-count {
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+@media (max-width: 700px) {
+  .reserve-admin-alert {
+    bottom: 96px;
+    right: 12px;
+  }
+}
+
 }

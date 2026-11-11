@@ -1,3 +1,4 @@
+@layer legacy {
 /* Prototype controls and role-specific home examples. */
 .role-select {
   display: flex;
@@ -402,4 +403,6 @@
     font-size: var(--text-caption);
     line-height: 1.45;
   }
+}
+
 }

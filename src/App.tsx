@@ -1,6 +1,6 @@
 import { DEMO_DAY, demoStamp, nextDemoNow, resetDemoClock } from './lib/demo-clock';
 import { Select } from './components/Select';
-import { VisualStyleSwitch } from './components/VisualStyleSwitch';
+import { ThemeSelect } from './components/ThemeSelect';
 import { appearanceSearch } from './lib/visual-style';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
@@ -45,7 +45,7 @@ import {
   Wallet,
   Globe,
 } from 'lucide-react';
-import { Button, Modal, StateContent, Toast } from './components/ui';
+import { CountBadge, Button, Modal, StateContent, Toast } from './components/ui';
 import { AdminHeader } from './components/AdminHeader';
 import { ClubLogo } from './components/ClubLogo';
 import { adminSections, initialVisits, memberCards, workstations } from './data/admin';
@@ -58,6 +58,7 @@ import { useWorkspace } from './components/WorkspaceProvider';
 import { SectionsPage } from './pages/SectionsPage';
 import { Members } from './pages/Members';
 import { AdminOverview } from './pages/AdminOverview';
+import { ReceptionShift } from './components/ReceptionShift';
 import { AdminSection } from './pages/AdminSection';
 import { ClientProfile } from './pages/ClientProfile';
 import { RoleOverview } from './pages/RoleOverview';
@@ -288,8 +289,8 @@ export function App() {
     previousRouteKey.current = routeKey;
   }, [page, device, scenario, role, adminSection, selectedMemberId, currentPage.title, routeKey]);
   useEffect(() => {
-    document.title = `${currentPage.title} · ${visualStyle === 'vivid' ? 'Контраст · ' : ''}Астрон`;
-  }, [currentPage.title, visualStyle]);
+    document.title = `${currentPage.title} · Астрон`;
+  }, [currentPage.title]);
   useEffect(() => {
     const onHashChange = () => {
       sectionHistory.current = [];
@@ -368,9 +369,9 @@ export function App() {
     goTo('sections');
   };
   const openRegistration = (member?: Member) => openModule('registration', member);
-  const openModule = (section: AdminSectionId, member?: Member) => {
+  const openModule = (section: AdminSectionId, member?: Member, targetRecord?: string) => {
     if (!canOpenModule(role, section)) return;
-    setRecordId(null);
+    setRecordId(targetRecord || null);
     if (section === 'members') {
       goTo('members');
       return;
@@ -540,7 +541,7 @@ export function App() {
           </button>
         </div>
         <div className="workspace-actions">
-          <VisualStyleSwitch />
+          <ThemeSelect />
           <a
             className="workspace-guide-link"
             href={guideHref}
@@ -1055,10 +1056,16 @@ export function App() {
                       )}
                       <h1>{currentPage.title}</h1>
                       {page === 'members' && memberCount !== undefined && (
-                        <span className="count-badge">{memberCount}</span>
+                        <CountBadge>{memberCount}</CountBadge>
                       )}
                     </div>
                     <div className="page-actions">
+                      {page === 'overview' && role === 'administrator' && (
+                        <ReceptionShift
+                          shift={workspace.data.shifts.find((row) => row.club === club.shortName)}
+                          onOpen={() => openAdminAction('payroll')}
+                        />
+                      )}
                       {(page === 'overview' || page === 'members') &&
                         currentRole.canAddMembers &&
                         role !== 'administrator' && (
@@ -1200,11 +1207,7 @@ export function App() {
                     ) : role !== 'administrator' ? (
                       <RoleOverview user={currentUser} />
                     ) : (
-                      <AdminOverview
-                        key={workstationId}
-                        clubId={workstation.clubId}
-                        onAction={openAdminAction}
-                      />
+                      <AdminOverview key={workstationId} />
                     )
                   ) : (
                     <Members
@@ -1265,12 +1268,12 @@ export function App() {
               {(role === 'trainer' || role === 'bartender') && (
                 <>
                   <button
-                    className={
+                    className={`${role === 'trainer' ? 'mobile-nav-schedule ' : ''}${
                       page === 'admin-section' &&
                       adminSection === (role === 'trainer' ? 'schedule' : 'bar-catalog')
                         ? 'active'
                         : ''
-                    }
+                    }`}
                     onClick={() => openModule(role === 'trainer' ? 'schedule' : 'bar-catalog')}
                   >
                     {role === 'trainer' ? <CalendarDays size={20} /> : <CupSoda size={20} />}
@@ -1293,9 +1296,9 @@ export function App() {
               {(role === 'administrator' || managingRole) && (
                 <>
                   <button
-                    className={
+                    className={`mobile-nav-schedule ${
                       page === 'admin-section' && adminSection === 'schedule' ? 'active' : ''
-                    }
+                    }`}
                     onClick={() => openModule('schedule')}
                   >
                     <CalendarDays size={20} />

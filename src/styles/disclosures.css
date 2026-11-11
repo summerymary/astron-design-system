@@ -1,3 +1,4 @@
+@layer legacy {
 /* Keep every disclosure arrow inside a predictable end inset. */
 :root {
   --disclosure-inset: 12px;
@@ -320,4 +321,6 @@
 }
 .app-shell.is-sidebar-collapsed .nav-accordion > summary {
   display: none;
+}
+
 }

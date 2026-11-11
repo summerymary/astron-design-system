@@ -41,11 +41,59 @@ export function inventoryStock(document: DemoRecord, product: DemoRecord): numbe
   return next;
 }
 
+export function parseAccessHours(value: string): [string, string][] | null {
+  if (value.trim().toLocaleLowerCase('ru') === 'нет') return [];
+  const windows: [string, string][] = [];
+  for (const part of value.split(/[,;]/)) {
+    const match = part
+      .trim()
+      .match(/^([01]\d|2[0-3]):([0-5]\d)\s*[-–—]\s*([01]\d|2[0-3]):([0-5]\d)$/);
+    if (!match) return null;
+    const start = `${match[1]}:${match[2]}`,
+      end = `${match[3]}:${match[4]}`;
+    if (start >= end) return null;
+    windows.push([start, end]);
+  }
+  windows.sort((a, b) => a[0].localeCompare(b[0]));
+  return windows.some((window, i) => i > 0 && window[0] < windows[i - 1][1]) ? null : windows;
+}
+export function accessWindowError(window: {
+  accessWeekdays?: string;
+  accessWeekends?: string;
+}): string | null {
+  if (!window.accessWeekdays && !window.accessWeekends) return null;
+  return parseAccessHours(window.accessWeekdays || '') &&
+    parseAccessHours(window.accessWeekends || '')
+    ? null
+    : 'Заполните будни и выходные в формате 06:30–16:00, 20:00–23:10. Для дней без доступа укажите «нет». Интервалы не должны пересекаться.';
+}
+
 export function validatePlan(
   plan: DemoRecord,
   publish: boolean,
 ): { step: string; message: string } | null {
   if (!plan.name?.trim()) return { step: 'Основное', message: 'Укажите название карты.' };
+  const accessError = accessWindowError({
+    accessWeekdays: plan.accessWeekdays,
+    accessWeekends: plan.accessWeekends,
+  });
+  if (accessError) return { step: 'Доступ', message: accessError };
+  if (
+    (plan.ageMin || plan.ageMax) &&
+    (![plan.ageMin, plan.ageMax].every(
+      (value) =>
+        value !== '' &&
+        value !== undefined &&
+        Number.isInteger(Number(value)) &&
+        Number(value) >= 0 &&
+        Number(value) <= 120,
+    ) ||
+      Number(plan.ageMin) > Number(plan.ageMax))
+  )
+    return {
+      step: 'Доступ',
+      message: 'Укажите корректный возраст от и до включительно (0–120 лет).',
+    };
   if (
     plan.price !== '' &&
     plan.price !== undefined &&

@@ -1,3 +1,4 @@
+@layer legacy {
 /* Shared spacing and card geometry for the styleguide. */
 .design-system {
   --ds-card-padding: 24px;
@@ -217,4 +218,6 @@
   .design-system .radius-examples > div {
     min-width: 0;
   }
+}
+
 }

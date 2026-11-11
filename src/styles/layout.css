@@ -1,3 +1,4 @@
+@layer legacy {
 /* Shared layout and surface hierarchy. Product selectors are scoped because
    Vite may load shared CSS before prototype-specific CSS in production. */
 .app-shell .directory-search-panel {
@@ -396,9 +397,6 @@ html {
 }
 .app-shell .admin-header-content {
   flex-wrap: wrap;
-}
-.admin-header-actions > .header-sale-action {
-  display: none;
 }
 .mobile-quick-actions {
   display: grid;
@@ -940,13 +938,6 @@ html {
     min-height: 44px;
     height: auto;
   }
-  .app-shell .admin-header-actions > .header-sale-action {
-    display: flex;
-    order: -1;
-    background: var(--color-action);
-    color: var(--color-on-action);
-    border: 1px solid var(--color-action-border);
-  }
   .app-shell .clients-panel .table-toolbar {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
@@ -1237,4 +1228,6 @@ html {
   .app-shell .visitor-toolbar {
     padding: 8px 16px 14px;
   }
+}
+
 }

@@ -1,20 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowRight, Check, Copy, RotateCcw } from 'lucide-react';
 import { Button, SectionTitle } from './ui';
 import { useTheme } from './ThemeProvider';
-import {
-  contrastRatio,
-  DEFAULT_PRIMARY,
-  normalizeHex,
-  paletteToCss,
-  THEME_PRESETS,
-} from '../lib/theme';
+import { contrastRatio, DEFAULT_PRIMARY, normalizeHex, paletteToCss } from '../lib/theme';
+import { THEME_OPTIONS } from '../lib/visual-style';
 
 export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void }) {
-  const { palette, setPrimary, visualStyle, setVisualStyle } = useTheme();
+  const { palette, tokens, setPrimary, visualStyle, setVisualStyle, theme, setTheme } = useTheme();
   const [draft, setDraft] = useState(palette.primary);
   const [error, setError] = useState('');
-  const colors = palette.tokens;
+  const colors = tokens;
+  useEffect(() => {
+    setDraft(palette.primary);
+    setError('');
+  }, [palette.primary, theme]);
   const swatches = [
     { label: 'Главный', value: colors['--color-action'] },
     { label: 'Дополнительный', value: colors['--color-accent'] },
@@ -34,99 +33,93 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
   };
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(paletteToCss(palette));
+      await navigator.clipboard.writeText(paletteToCss({ ...palette, tokens }));
       onNotify('Палитра скопирована в формате CSS');
     } catch {
       onNotify('Не удалось скопировать палитру. Разрешите доступ к буферу обмена.');
     }
   };
-  if (visualStyle === 'vivid')
-    return (
-      <section className="ds-section vivid-style-intro">
-        <SectionTitle
-          title="Астрон · Контраст"
-          subtitle="Привычная система, более выразительные цвета."
-        />
-        <p>
-          Бордово-графитовое меню, насыщенные бордовые кнопки, белые карточки и более контрастные
-          подписи. Расположение разделов, таблицы, формы и рабочие действия совпадают с Астроном.
-          Цвета статусов и абонементов сохраняют свой смысл.
-        </p>
-        <p>
-          Эта альтернативная палитра подготовлена для сравнения. Цвет вашего клуба можно настроить в
-          исходном Астроне; при переключении он сохранится. Библиотеки и шрифты общие и бесплатные.
-        </p>
-        <Button variant="secondary" onClick={() => setVisualStyle('astron')}>
-          Вернуться к цветам Астрона
-        </Button>
-      </section>
-    );
   return (
     <section className="ds-section theme-playground" aria-labelledby="theme-title">
       <SectionTitle
-        title="Цвета вашего клуба"
-        subtitle="Один фирменный цвет — согласованная палитра для всех экранов."
+        title="Темы и цвета"
+        subtitle="Готовая тема или свой фирменный цвет — для всех экранов системы."
         action={<span className="ds-section-number">ПРЕДПРОСМОТР</span>}
       />
       <div className="theme-editor">
         <div className="theme-settings">
-          <h3 id="theme-title">Выберите основной цвет</h3>
+          <h3 id="theme-title">Выберите тему</h3>
           <p>
-            Кнопки, выделения, фоны, границы и текст подстроятся автоматически. Образцы ниже
-            обновятся сразу.
+            Астрон, Графит и Контраст — темы одного интерфейса. Меняются цвета, а страницы,
+            расположение элементов и данные сохраняются.
           </p>
-          <form
-            className="theme-color-form"
-            onSubmit={(event) => {
-              event.preventDefault();
-              apply(draft);
-            }}
-          >
-            <label className="theme-picker">
-              <span className="sr-only">Выбрать основной цвет клуба</span>
-              <input
-                type="color"
-                value={palette.primary}
-                onChange={(event) => apply(event.target.value)}
-              />
-            </label>
-            <label className="form-field theme-hex-field">
-              <span>Основной цвет · HEX</span>
-              <input
-                aria-label="Основной цвет HEX"
-                value={draft}
-                onChange={(event) => {
-                  setDraft(event.target.value);
-                  setError('');
-                }}
-                spellCheck={false}
-                maxLength={16}
-                aria-invalid={!!error}
-                aria-describedby={error ? 'theme-color-error' : undefined}
-              />
-            </label>
-            <Button type="submit">
-              Применить <ArrowRight size={14} />
-            </Button>
-          </form>
-          {error && (
-            <p id="theme-color-error" className="theme-error" role="alert">
-              {error}
-            </p>
-          )}
-          <div className="theme-presets" aria-label="Примеры фирменных цветов">
-            {THEME_PRESETS.map((preset) => (
+          <div className="theme-presets" aria-label="Темы интерфейса">
+            {THEME_OPTIONS.map((preset) => (
               <button
-                key={preset.name}
+                key={preset.id}
                 type="button"
-                aria-pressed={palette.primary === preset.color}
-                onClick={() => apply(preset.color)}
+                aria-pressed={theme === preset.id}
+                onClick={() => setTheme(preset.id)}
               >
                 <i style={{ background: preset.color }} />
                 {preset.name}
               </button>
             ))}
           </div>
+          {visualStyle === 'vivid' ? (
+            <div className="theme-custom-settings">
+              <p>
+                Контраст: тёмное меню, яркие бордовые действия и заметные границы белых панелей.
+                Палитра этой темы фиксирована.
+              </p>
+              <Button variant="secondary" onClick={() => setVisualStyle('astron')}>
+                Настроить свой цвет
+              </Button>
+            </div>
+          ) : (
+            <>
+              <p>Свой основной цвет автоматически подстроит кнопки, фоны, границы и подписи.</p>
+              <form
+                className="theme-color-form"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  apply(draft);
+                }}
+              >
+                <label className="theme-picker">
+                  <span className="sr-only">Выбрать основной цвет клуба</span>
+                  <input
+                    type="color"
+                    value={palette.primary}
+                    onChange={(event) => apply(event.target.value)}
+                  />
+                </label>
+                <label className="form-field theme-hex-field">
+                  <span>Основной цвет · HEX</span>
+                  <input
+                    aria-label="Основной цвет HEX"
+                    value={draft}
+                    onChange={(event) => {
+                      setDraft(event.target.value);
+                      setError('');
+                    }}
+                    spellCheck={false}
+                    maxLength={16}
+                    aria-invalid={!!error}
+                    aria-describedby={error ? 'theme-color-error' : undefined}
+                  />
+                </label>
+                <Button type="submit">
+                  Применить <ArrowRight size={14} />
+                </Button>
+              </form>
+              {error && (
+                <p id="theme-color-error" className="theme-error" role="alert">
+                  {error}
+                </p>
+              )}
+            </>
+          )}
           <div className="theme-swatch-strip" aria-label="Рассчитанная палитра с HEX">
             {swatches.map(({ label, value }) => (
               <button
@@ -149,7 +142,7 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
             ))}
           </div>
           <div className="theme-actions">
-            <Button variant="secondary" onClick={() => apply(DEFAULT_PRIMARY)}>
+            <Button variant="secondary" onClick={() => setTheme('astron')}>
               <RotateCcw size={14} />
               Вернуть «Астрон»
             </Button>
@@ -172,7 +165,7 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
               Активен
             </span>
           </div>
-          <p>Анна Смирнова</p>
+          <p>Смирнова Анна Андреевна</p>
           <small>Подписи остаются читаемыми на светлом фоне.</small>
           <label className="form-field">
             <span>Абонемент</span>
@@ -202,13 +195,15 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
         </div>
       </div>
       <p className="theme-adjustment" role="status">
-        {palette.primary === DEFAULT_PRIMARY
-          ? 'Палитра «Астрона»: тёплый бордовый, графитовый текст, белые карточки и едва тёплый белый фон. Серо-зелёные подписи сохраняют читаемость.'
-          : palette.appearance === 'citrus'
-            ? `Яркий цвет ${palette.primary} сочетается с холодным графитовым ${colors['--color-accent']}. На главной кнопке — тёмный текст, в подписях и фонах — спокойные холодные оттенки.`
-            : palette.adjusted
-              ? `Выбран ${palette.primary}. Для кнопок подобран ${colors['--color-accent']}, чтобы белый текст и выделения оставались хорошо видны.`
-              : `Выбран ${palette.primary}. Этот цвет подходит для кнопок без дополнительного изменения яркости.`}
+        {visualStyle === 'vivid'
+          ? 'Тема «Контраст»: тёмное меню, насыщенный бордовый, светло-серый фон и белые панели с заметными границами. Статусы и цвета абонементов сохраняют свой смысл.'
+          : palette.primary === DEFAULT_PRIMARY
+            ? 'Палитра «Астрона»: тёплый бордовый, графитовый текст, белые карточки и едва тёплый белый фон. Серо-зелёные подписи сохраняют читаемость.'
+            : palette.appearance === 'citrus'
+              ? `Яркий цвет ${palette.primary} сочетается с холодным графитовым ${colors['--color-accent']}. На главной кнопке — тёмный текст, в подписях и фонах — спокойные холодные оттенки.`
+              : palette.adjusted
+                ? `Выбран ${palette.primary}. Для кнопок подобран ${colors['--color-accent']}, чтобы белый текст и выделения оставались хорошо видны.`
+                : `Выбран ${palette.primary}. Этот цвет подходит для кнопок без дополнительного изменения яркости.`}
       </p>
       <div className="theme-rules">
         <div>

@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { ClubLogo } from './ClubLogo';
 import { ClientSearch } from './ClientSearch';
 import { useWorkspace } from './WorkspaceProvider';
+import { Button } from './ui';
 import type { Member } from '../types';
 import {
   ChevronDown,
@@ -53,12 +54,37 @@ export function AdminHeader({
     if (open) options.current?.querySelector<HTMLButtonElement>('[aria-selected="true"]')?.focus();
   }, [open]);
   const { data } = useWorkspace();
+  const [dismissedReserveNotice, setDismissedReserveNotice] = useState('');
+  const reserveNotice = [...data.notifications]
+    .reverse()
+    .find((row) => row.type === 'Резерв' && row.status === 'Новое');
   const newLeads = data.leads.filter((row) => row.stage === 'Новая').length;
   const unread = data.notifications.filter((row) => row.status === 'Новое').length;
   const workplace = workstations.find((w) => w.id === workstationId)!;
   const club = demoClubs.find((c) => c.id === workplace.clubId)!;
   return (
     <div className="admin-header-content">
+      {reserveNotice && dismissedReserveNotice !== reserveNotice.id && (
+        <aside className="reserve-admin-alert" role="alert">
+          <strong>{reserveNotice.name}</strong>
+          <p>{reserveNotice.text}</p>
+          <button
+            onClick={() => {
+              setDismissedReserveNotice(reserveNotice.id);
+              onAction('notifications');
+            }}
+          >
+            Открыть уведомление
+          </button>
+          <button
+            className="icon-button"
+            aria-label="Скрыть уведомление о резерве"
+            onClick={() => setDismissedReserveNotice(reserveNotice.id)}
+          >
+            <X size={16} />
+          </button>
+        </aside>
+      )}
       <div
         className="workstation-control"
         onKeyDown={(event) => {
@@ -154,7 +180,7 @@ export function AdminHeader({
       </div>
       <ClientSearch key={workstationId} members={members} onMember={onMember} hidePhones />
       <div className="admin-header-actions">
-        <button
+        <Button
           className="header-add-client-action"
           aria-label="Добавить клиента"
           title="Добавить нового клиента"
@@ -163,8 +189,9 @@ export function AdminHeader({
         >
           <Plus size={16} />
           <span>Новый клиент</span>
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="secondary"
           className="header-schedule-action"
           aria-label="Расписание"
           title="Расписание"
@@ -173,8 +200,9 @@ export function AdminHeader({
         >
           <CalendarDays size={16} />
           <span>Расписание</span>
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="secondary"
           className="header-products-action"
           aria-label="Продажа товаров"
           title="Продажа товаров"
@@ -183,11 +211,7 @@ export function AdminHeader({
         >
           <ShoppingBag size={16} />
           <span>Товары</span>
-        </button>
-        <button className="header-sale-action" onClick={() => onAction('services')}>
-          <ShoppingBag size={16} />
-          <span>Продать</span>
-        </button>
+        </Button>
       </div>
       <div className="admin-header-indicators">
         <button
@@ -219,6 +243,7 @@ export function AdminHeader({
           onClick={() => onAction('notifications')}
         >
           <Bell size={16} />
+          {unread > 0 && <span className="header-reserve-notice-count">{unread}</span>}
         </button>
         <button
           className="admin-user-avatar"
