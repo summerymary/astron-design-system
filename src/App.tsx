@@ -176,7 +176,7 @@ export function App() {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [toast, setToast] = useState('');
   const [mobileStateOpen, setMobileStateOpen] = useState(false);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(options.role === 'administrator');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const contentRef = useRef<HTMLElement>(null);
   const pageBodyRef = useRef<HTMLDivElement>(null);
@@ -184,7 +184,6 @@ export function App() {
     pageBodyRef.current?.scrollTo(0, 0);
   }, [page, adminSection, selectedMemberId]);
   const sidebarNavigationRef = useRef<HTMLDivElement>(null);
-  const expandedManagementGroupsRef = useRef<Set<string> | null>(null);
   const sectionHistory = useRef<
     {
       page: Page;
@@ -202,7 +201,7 @@ export function App() {
   const selectedMember = members.find((m) => m.id === selectedMemberId);
   const currentPage =
     page === 'client-profile'
-      ? { title: selectedMember?.name ?? 'Карточка клиента', caption: 'Сведения о клиенте' }
+      ? { title: selectedMember?.fullName || selectedMember?.name || 'Карточка клиента', caption: 'Сведения о клиенте' }
       : page === 'admin-section'
         ? {
             title:
@@ -252,27 +251,9 @@ export function App() {
     [],
   );
   useEffect(() => {
-    if (!managingRole) {
-      expandedManagementGroupsRef.current = null;
-      return;
-    }
+    if (!managingRole) return;
     const menu = sidebarNavigationRef.current;
     if (!menu) return;
-    const groups = Array.from(menu.querySelectorAll<HTMLDetailsElement>('.management-nav-group'));
-    if (sidebarCollapsed) {
-      if (expandedManagementGroupsRef.current === null)
-        expandedManagementGroupsRef.current = new Set(
-          groups.filter((group) => group.open).map((group) => group.dataset.navGroup || ''),
-        );
-      groups.forEach((group) => {
-        group.open = true;
-      });
-    } else if (expandedManagementGroupsRef.current !== null) {
-      groups.forEach((group) => {
-        group.open = expandedManagementGroupsRef.current!.has(group.dataset.navGroup || '');
-      });
-      expandedManagementGroupsRef.current = null;
-    }
     const active = menu?.querySelector<HTMLElement>('button[aria-current="page"]');
     if (!menu || !active) return;
     const activeGroup = active.closest('details');
@@ -311,7 +292,7 @@ export function App() {
       sectionHistory.current = [];
       const next = initialOptions();
       setRole(next.role);
-      if (navigationRole.current !== next.role) setSidebarCollapsed(next.role === 'administrator');
+      if (navigationRole.current !== next.role) setSidebarCollapsed(false);
       setPage(next.page);
       setDevice(next.device);
       setScenario(next.scenario);
@@ -348,7 +329,7 @@ export function App() {
   const changeRole = (next: UserRole) => {
     sectionHistory.current = [];
     setRole(next);
-    setSidebarCollapsed(next === 'administrator');
+    setSidebarCollapsed(false);
     setPage('overview');
     setScenario('default');
     setNotificationOpen(false);
@@ -484,6 +465,7 @@ export function App() {
     const newMember: Member = {
       id: Math.max(1000, ...members.map((m) => m.id)) + 1,
       name,
+      fullName: name,
       email: String(data.get('email')).trim(),
       phone: String(data.get('phone')).trim() || 'Не указан',
       plan: String(data.get('plan')),
@@ -673,7 +655,10 @@ export function App() {
             Мобильная версия<span>390 × 844</span>
           </div>
         )}
-        <div className={`app-shell is-${device}${sidebarCollapsed ? ' is-sidebar-collapsed' : ''}`}>
+        <div
+          data-role={role}
+          className={`app-shell is-${device}${sidebarCollapsed ? ' is-sidebar-collapsed' : ''}`}
+        >
           <aside
             className={`sidebar ${managingRole ? 'has-management-menu' : ''}`}
             aria-label="Боковое меню"
@@ -778,7 +763,14 @@ export function App() {
                       data-nav-group={group.label}
                       key={group.label}
                     >
-                      <summary className="nav-label ws-nav-separator">{group.label}</summary>
+                      <summary
+                        className="nav-label ws-nav-separator"
+                        aria-label={group.label}
+                        title={sidebarCollapsed ? group.label : undefined}
+                      >
+                        <BookOpen size={18} />
+                        <span className="nav-item-label">{group.label}</span>
+                      </summary>
                       {group.items.map((id) => {
                         const section = adminSections.find((section) => section.id === id)!;
                         const label = section.label;
@@ -1095,6 +1087,7 @@ export function App() {
                         bookings={selectedMember.id === 1001 ? initialProfileBookings : []}
                         canOperate={role === 'administrator' || managingRole}
                         canSell={role === 'accountant'}
+                        user={currentUser}
                         scenario={scenario}
                         onReset={() => setScenario('default')}
                         onBack={() =>
@@ -1130,7 +1123,11 @@ export function App() {
                         page === 'admin-section' || page === 'sections'
                           ? setScenario('default')
                           : role === 'administrator' && page === 'overview'
-                            ? openRegistration()
+                            ? document
+                                .querySelector<HTMLInputElement>(
+                                  '.admin-topbar .client-search input',
+                                )
+                                ?.focus()
                             : currentRole.canAddMembers
                               ? setModal('add')
                               : setScenario('default')
@@ -1139,10 +1136,9 @@ export function App() {
                       emptyState={
                         page === 'overview' && role === 'administrator'
                           ? {
-                              title: 'Посещений пока нет',
-                              description:
-                                'Новые посещения появятся в журнале после регистрации клиента.',
-                              actionLabel: 'Зарегистрировать посещение',
+                              title: 'Клиент пока не выбран',
+                              description: 'Найдите клиента по карте, ФИО или телефону.',
+                              actionLabel: 'Найти клиента',
                             }
                           : page === 'overview' && role !== 'administrator'
                             ? {
@@ -1203,10 +1199,7 @@ export function App() {
                     ) : (
                       <AdminOverview
                         key={workstationId}
-                        visits={visits}
-                        members={members}
                         clubId={workstation.clubId}
-                        onMember={openMember}
                         onAction={openAdminAction}
                       />
                     )
@@ -1216,6 +1209,7 @@ export function App() {
                       members={members}
                       onMember={openMember}
                       onAdd={() => setModal('add')}
+                      hidePhones={role === 'administrator'}
                     />
                   )}
                 </div>
@@ -1357,11 +1351,11 @@ export function App() {
           <form onSubmit={addMember} className="member-form">
             <label className="form-field">
               <span>
-                Имя и фамилия <em>*</em>
+                Фамилия, имя, отчество <em>*</em>
               </span>
               <input
                 name="name"
-                placeholder="Анна Смирнова"
+                placeholder="Смирнова Анна Андреевна"
                 required
                 maxLength={80}
                 autoComplete="name"
