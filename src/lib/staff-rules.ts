@@ -62,7 +62,6 @@ export function personalClients(
 export function canManageEvent(event: DemoRecord, user: DemoUser): boolean {
   if (['Завершено', 'Отменено'].includes(event.status)) return false;
   return (
-    user.role === 'administrator' ||
     isManagementRole(user.role) ||
     (user.role === 'trainer' &&
       event.kind === 'personal' &&
@@ -70,13 +69,19 @@ export function canManageEvent(event: DemoRecord, user: DemoUser): boolean {
       event.trainer === user.name)
   );
 }
+export function canCreateEvent(user: DemoUser): boolean {
+  return isManagementRole(user.role) || user.role === 'trainer';
+}
+export function canCancelEvent(event: DemoRecord, user: DemoUser): boolean {
+  if (['Завершено', 'Отменено'].includes(event.status)) return false;
+  return user.role === 'administrator' || canManageEvent(event, user);
+}
 export function personalScopeError(
   event: DemoRecord,
   user: DemoUser,
   assignments: DemoRecord[],
 ): string | null {
-  if (!['administrator', 'trainer'].includes(user.role) && !isManagementRole(user.role))
-    return 'Эта роль не добавляет тренировки.';
+  if (!canCreateEvent(user)) return 'Эта роль не добавляет тренировки.';
   if (user.role === 'trainer' && (event.trainerId !== user.id || event.trainer !== user.name))
     return 'Можно записывать тренировки только от своего имени.';
   if (
