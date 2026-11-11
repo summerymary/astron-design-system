@@ -2,8 +2,8 @@ import { createContext, useContext, useEffect, useLayoutEffect, useMemo, useStat
 import type { ReactNode } from 'react';
 import { DEFAULT_PRIMARY, generatePalette } from '../lib/theme';
 import type { ThemePalette } from '../lib/theme';
-import { readVisualStyle, visualStyleTokens } from '../lib/visual-style';
-import type { VisualStyle } from '../lib/visual-style';
+import { readVisualStyle, visualStyleTokens, THEME_OPTIONS } from '../lib/visual-style';
+import type { VisualStyle, ThemeId } from '../lib/visual-style';
 import type { ThemeTokens } from '../lib/theme';
 
 const ThemeContext = createContext<{
@@ -12,6 +12,8 @@ const ThemeContext = createContext<{
   tokens: ThemeTokens;
   visualStyle: VisualStyle;
   setVisualStyle: (style: VisualStyle) => void;
+  theme: ThemeId | 'custom';
+  setTheme: (theme: ThemeId | 'custom') => void;
 } | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -28,15 +30,32 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     () => visualStyleTokens(palette.tokens, visualStyle),
     [palette, visualStyle],
   );
+  const theme: ThemeId | 'custom' =
+    visualStyle === 'vivid'
+      ? 'contrast'
+      : THEME_OPTIONS.find(
+          (option) => option.style === 'astron' && option.color === palette.primary,
+        )?.id || 'custom';
   const value = useMemo(
     () => ({
       palette,
       tokens,
       visualStyle,
       setVisualStyle,
-      setPrimary: (hex: string) => setPalette(generatePalette(hex)),
+      theme,
+      setTheme: (id: ThemeId | 'custom') => {
+        if (id === 'custom') return setVisualStyle('astron');
+        const option = THEME_OPTIONS.find((item) => item.id === id)!;
+        if (option.style === 'astron') setPalette(generatePalette(option.color));
+        setVisualStyle(option.style);
+      },
+      setPrimary: (hex: string) => {
+        const next = generatePalette(hex);
+        setPalette(next);
+        setVisualStyle('astron');
+      },
     }),
-    [palette, tokens, visualStyle],
+    [palette, tokens, visualStyle, theme],
   );
   useEffect(() => {
     const restoreStyle = () => setVisualStyle(readVisualStyle(window.location.search));

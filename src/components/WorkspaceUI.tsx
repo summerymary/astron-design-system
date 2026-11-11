@@ -1,4 +1,5 @@
 import { Select } from './Select';
+import '../styles/workspace.css';
 import { useCallback, useId, useRef, useState } from 'react';
 import type { FormEvent, ReactNode } from 'react';
 import {
@@ -12,7 +13,8 @@ import {
   Search,
   X,
 } from 'lucide-react';
-import { Button, Modal } from './ui';
+import { Button, ConfirmDialog, Modal, StatusBadge } from './ui';
+import type { StatusTone } from '../lib/ui-semantics';
 import { adminSections } from '../data/admin';
 import type { Member } from '../types';
 import type { AdminSectionId } from '../data/admin';
@@ -20,29 +22,46 @@ import type { DemoRecord, Field, Resource } from '../data/workspace';
 import { money, prettyDate } from '../data/workspace';
 import { demoId, useWorkspace } from './WorkspaceProvider';
 
-export type Navigate = (section: AdminSectionId, member?: Member) => void;
+export type Navigate = (section: AdminSectionId, member?: Member, recordId?: string) => void;
 export function Tabs({
   items,
   value,
   onChange,
   label = 'Разделы',
+  className = '',
+  variant = 'line',
+  idPrefix,
+  panelId,
 }: {
-  items: (string | { id: string; label: string })[];
+  items: (string | { id: string; label: string; count?: number })[];
   value: string;
   onChange: (value: string) => void;
   label?: string;
+  className?: string;
+  variant?: 'line' | 'segmented';
+  idPrefix?: string;
+  panelId?: string;
 }) {
+  const generatedId = useId();
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const normalized = items.map((item) =>
     typeof item === 'string' ? { id: item, label: item } : item,
   );
   return (
-    <div className="ws-tabs" role="tablist" aria-label={label}>
+    <div
+      className={`ws-tabs ui-tabs ${className}`}
+      data-ui="tabs"
+      data-variant={variant}
+      role="tablist"
+      aria-label={label}
+    >
       {normalized.map((item, index) => (
         <button
           key={item.id}
           type="button"
           role="tab"
+          id={`${idPrefix || generatedId}-${item.id}`}
+          aria-controls={panelId}
           aria-selected={value === item.id}
           tabIndex={value === item.id ? 0 : -1}
           className={value === item.id ? 'selected' : ''}
@@ -59,43 +78,40 @@ export function Tabs({
             else return;
             event.preventDefault();
             refs.current[next]?.focus();
+            refs.current[next]?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
             onChange(normalized[next].id);
           }}
         >
           {item.label}
+          {'count' in item && item.count !== undefined && (
+            <span className="ui-tab-count">{item.count}</span>
+          )}
         </button>
       ))}
     </div>
   );
 }
-export function Status({ children }: { children: ReactNode }) {
-  const text = String(children);
-  const tone = /архив|ошибка|отмен|пропущ|высокий/i.test(text)
-    ? 'danger'
-    : /нов|ожида|чернов|средний|провер/i.test(text)
-      ? 'warning'
-      : /актив|действ|выполн|оплачен|опублик|подтверж|решено|заверш/i.test(text)
-        ? 'success'
-        : 'neutral';
+export function Status({ children, tone }: { children: ReactNode; tone?: StatusTone }) {
   return (
-    <span className={`ws-status ws-status-${tone}`}>
-      <i />
+    <StatusBadge className="ws-status" tone={tone}>
       {children}
-    </span>
+    </StatusBadge>
   );
 }
 export function Empty({
   title = 'Ничего не найдено',
   text = 'Измените запрос или сбросьте фильтры.',
   action,
+  icon,
 }: {
   title?: string;
   text?: string;
   action?: ReactNode;
+  icon?: ReactNode;
 }) {
   return (
     <div className="ws-empty">
-      <Search size={24} />
+      {icon ?? <Search size={24} />}
       <h3>{title}</h3>
       <p>{text}</p>
       {action}
@@ -199,9 +215,9 @@ export function Stats({
   items: { label: string; value: string | number; note?: string }[];
 }) {
   return (
-    <div className="ws-stats">
+    <div className="ws-stats" data-ui="stats">
       {items.map((item) => (
-        <div className="panel" key={item.label}>
+        <div key={item.label}>
           <span>{item.label}</span>
           <strong>{item.value}</strong>
           {item.note && <small>{item.note}</small>}
@@ -259,6 +275,11 @@ export function FieldControl({
           min={field.min}
           maxLength={field.type === 'number' ? undefined : 240}
           value={value}
+          onInput={
+            ['date', 'time', 'datetime-local'].includes(field.type || '')
+              ? (e) => onChange(e.currentTarget.value)
+              : undefined
+          }
           onChange={(e) => onChange(e.target.value)}
         />
       )}
@@ -734,26 +755,23 @@ export function ResourcePage({
                   <Edit3 size={14} />
                   Редактировать
                 </Button>
-                {!confirm ? (
-                  <Button variant="ghost" onClick={() => setConfirm(true)}>
-                    Удалить…
-                  </Button>
-                ) : (
-                  <div className="ws-confirm">
-                    <p>Удалить «{opened.name}» из демоданных?</p>
-                    <Button variant="secondary" onClick={() => setConfirm(false)}>
-                      Оставить
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        remove(collection, opened.id);
-                        closeDetails();
-                        setMessage('Запись удалена из прототипа.');
-                      }}
-                    >
-                      Удалить
-                    </Button>
-                  </div>
+                <Button variant="danger-ghost" onClick={() => setConfirm(true)}>
+                  Удалить…
+                </Button>
+                {confirm && (
+                  <ConfirmDialog
+                    title="Удалить запись?"
+                    subject={opened.name}
+                    description="Запись будет удалена из демоданных."
+                    confirmLabel="Удалить запись"
+                    cancelLabel="Оставить запись"
+                    onClose={() => setConfirm(false)}
+                    onConfirm={() => {
+                      remove(collection, opened.id);
+                      closeDetails();
+                      setMessage('Запись удалена из прототипа.');
+                    }}
+                  />
                 )}
               </>
             )
@@ -873,13 +891,17 @@ function EmployeeExtras({ employee }: { employee: DemoRecord }) {
 export function Back({
   onClick,
   children = 'Назад',
+  hideIcon = false,
+  className = '',
 }: {
   onClick: () => void;
   children?: ReactNode;
+  hideIcon?: boolean;
+  className?: string;
 }) {
   return (
-    <button className="ws-back" onClick={onClick}>
-      <ArrowLeft size={15} />
+    <button type="button" className={`ws-back ${className}`} onClick={onClick}>
+      {!hideIcon && <ArrowLeft size={18} />}
       {children}
     </button>
   );

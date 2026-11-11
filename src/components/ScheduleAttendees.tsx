@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { createPortal } from 'react-dom';
 import { Check, Plus, UserMinus } from 'lucide-react';
-import { Avatar, Button, Modal } from './ui';
+import { Avatar, Button, ConfirmDialog, IconButton } from './ui';
 import { ClientSearch } from './ClientSearch';
 import { useWorkspace } from './WorkspaceProvider';
 import { clientName } from '../lib/client-display';
-import { changeAttendance, rosterIds } from '../lib/schedule-attendance';
+import { changeAttendance, changeReserve, rosterIds } from '../lib/schedule-attendance';
 import { memberCards } from '../data/admin';
 import type { Member } from '../types';
 import type { DemoRecord } from '../data/workspace';
@@ -24,27 +23,40 @@ export function ScheduleAttendees({
   const { data, put } = useWorkspace();
   const [selected, setSelected] = useState<Member | null>(null);
   const [removing, setRemoving] = useState<Member | null>(null);
+  const [removingReserve, setRemovingReserve] = useState(false);
   const [feedback, setFeedback] = useState('');
   const ids = rosterIds(event.attendees);
   const present = rosterIds(event.present);
+  const reserve = rosterIds(event.reserve);
+  const full = ids.length >= Number(event.capacity);
   const mutable = editable && event.status !== 'Отменено';
-  const change = (member: Member, action: 'book' | 'remove' | 'present' | 'absent') => {
+  const change = (
+    member: Member,
+    action: 'book' | 'remove' | 'present' | 'absent' | 'reserve' | 'unreserve',
+  ) => {
     if (!editable) return;
     const current = data.events.find((row) => row.id === event.id);
     if (!current) return setFeedback('Занятие больше недоступно.');
-    const next = changeAttendance(current, member, action, data.events);
+    const next =
+      action === 'reserve' || action === 'unreserve'
+        ? changeReserve(current, member, action === 'reserve' ? 'join' : 'leave')
+        : changeAttendance(current, member, action, data.events);
     if (typeof next === 'string') return setFeedback(next);
     put('events', next);
     setFeedback(
-      action === 'book'
-        ? 'Клиент записан.'
-        : action === 'remove'
-          ? 'Запись снята.'
-          : action === 'present'
-            ? 'Присутствие отмечено.'
-            : 'Отметка присутствия снята.',
+      action === 'reserve'
+        ? 'Клиент добавлен в резерв. Посещение не списывается.'
+        : action === 'unreserve'
+          ? 'Клиент удалён из резерва.'
+          : action === 'book'
+            ? 'Клиент записан.'
+            : action === 'remove'
+              ? 'Запись снята.'
+              : action === 'present'
+                ? 'Присутствие отмечено.'
+                : 'Отметка присутствия снята.',
     );
-    if (action === 'book') setSelected(null);
+    if (action === 'book' || action === 'reserve') setSelected(null);
     if (action === 'remove') setRemoving(null);
   };
   return (
@@ -70,15 +82,17 @@ export function ScheduleAttendees({
               <Avatar member={selected} />
               <strong>{clientName(selected)}</strong>
               <Button
-                disabled={ids.includes(String(selected.id)) || ids.length >= Number(event.capacity)}
-                onClick={() => change(selected, 'book')}
+                disabled={
+                  ids.includes(String(selected.id)) || reserve.includes(String(selected.id))
+                }
+                onClick={() => change(selected, full ? 'reserve' : 'book')}
               >
                 <Plus size={16} />
-                Записать клиента
+                {full ? 'Добавить в резерв' : 'Записать клиента'}
               </Button>
             </div>
           )}
-          {ids.length >= Number(event.capacity) && <p>Все места заняты.</p>}
+          {full && <p>Все места заняты. Можно записать клиента в резерв.</p>}
         </div>
       )}
       {feedback && <p role="status">{feedback}</p>}
@@ -110,14 +124,17 @@ export function ScheduleAttendees({
                     <Check size={15} />
                     {present.includes(id) ? 'Присутствует' : 'Отметить'}
                   </Button>
-                  <button
-                    className="icon-button"
-                    aria-label={`Снять запись: ${clientName(member)}`}
+                  <IconButton
+                    tone="danger"
+                    label={`Снять запись: ${clientName(member)}`}
                     title="Снять запись"
-                    onClick={() => setRemoving(member)}
+                    onClick={() => {
+                      setRemovingReserve(false);
+                      setRemoving(member);
+                    }}
                   >
                     <UserMinus size={17} />
-                  </button>
+                  </IconButton>
                 </>
               ) : (
                 <span>{present.includes(id) ? 'Присутствовал' : 'Записан'}</span>
@@ -126,23 +143,76 @@ export function ScheduleAttendees({
           );
         })}
       </div>
-      {removing &&
-        createPortal(
-          <Modal
-            title="Снять запись клиента?"
-            subtitle={clientName(removing)}
-            onClose={() => setRemoving(null)}
-          >
-            <p>Клиент будет удалён из списка этого занятия. Абонемент сохраняется.</p>
-            <div className="modal-actions">
-              <Button variant="secondary" onClick={() => setRemoving(null)}>
-                Оставить запись
-              </Button>
-              <Button onClick={() => change(removing, 'remove')}>Снять запись</Button>
-            </div>
-          </Modal>,
-          document.body,
-        )}
+      {!!reserve.length && (
+        <section className="schedule-reserve" aria-label="Резерв занятия">
+          <h4>Резерв · {reserve.length}</h4>
+          {!full && mutable && (
+            <p className="schedule-reserve-available" role="status">
+              Освободилось мест: {Number(event.capacity) - ids.length}. Можно записать клиента из
+              резерва.
+            </p>
+          )}
+          {reserve.map((id, index) => {
+            const member = members.find((item) => String(item.id) === id);
+            if (!member) return null;
+            return (
+              <div className="schedule-roster-row" key={id}>
+                <span className="reserve-position">{index + 1}</span>
+                <Avatar member={member} />
+                <div>
+                  <button
+                    className="schedule-client-name"
+                    disabled={!onMember}
+                    onClick={() => onMember?.(member)}
+                  >
+                    {clientName(member)}
+                  </button>
+                  <small>Ожидает свободное место</small>
+                </div>
+                {mutable && event.status !== 'Завершено' && (
+                  <>
+                    <Button
+                      variant="secondary"
+                      disabled={full}
+                      onClick={() => change(member, 'book')}
+                    >
+                      Записать из резерва
+                    </Button>
+                    <IconButton
+                      tone="danger"
+                      label={`Убрать из резерва: ${clientName(member)}`}
+                      onClick={() => {
+                        setRemovingReserve(true);
+                        setRemoving(member);
+                      }}
+                    >
+                      <UserMinus size={17} />
+                    </IconButton>
+                  </>
+                )}
+              </div>
+            );
+          })}
+        </section>
+      )}
+      {removing && (
+        <ConfirmDialog
+          title={removingReserve ? 'Убрать клиента из резерва?' : 'Снять запись клиента?'}
+          subject={clientName(removing)}
+          description={
+            removingReserve
+              ? 'Клиент будет удалён из резерва этого занятия. Абонемент сохраняется.'
+              : 'Клиент будет удалён из списка этого занятия. Абонемент сохраняется.'
+          }
+          confirmLabel={removingReserve ? 'Убрать из резерва' : 'Снять запись'}
+          cancelLabel="Оставить запись"
+          onClose={() => setRemoving(null)}
+          onConfirm={() => {
+            change(removing, removingReserve ? 'unreserve' : 'remove');
+            setRemoving(null);
+          }}
+        />
+      )}
     </section>
   );
 }
