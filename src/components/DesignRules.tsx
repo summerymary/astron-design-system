@@ -82,7 +82,7 @@ export function DesignRules() {
       <div className="panel ws-panel-body ws-stack">
         <h3>Смена ресепшена</h3>
         <ReceptionShift
-          clubId="central"
+          shift={{ start: '2026-11-06T08:00', end: '2026-11-06T20:00' }}
           onOpen={() => setResult('В приложении откроется рабочий день сотрудника.')}
         />
       </div>
