@@ -116,10 +116,24 @@ export function getClientProfile(member: Member, data: Record<string, DemoRecord
   }
   return {
     card: memberCards[member.id] ?? String(member.id + 99000),
-    birthDate: birthYear ? `12.04.${birthYear}` : 'Не указана',
-    gender: demographic ? (demographic.gender === 'male' ? 'Мужской' : 'Женский') : 'Не указан',
+    birthDate:
+      member.birthDate !== undefined
+        ? member.birthDate
+          ? member.birthDate.split('-').reverse().join('.')
+          : 'Не указана'
+        : birthYear
+          ? `12.04.${birthYear}`
+          : 'Не указана',
+    gender:
+      member.gender ||
+      (demographic ? (demographic.gender === 'male' ? 'Мужской' : 'Женский') : 'Не указан'),
     balance: hasDemoProfile ? (member.id === 1001 ? 2400 : 1200) : 0,
-    organization: member.id === 1001 ? 'ООО «Север»' : 'Не привязан',
+    organization:
+      member.organization !== undefined
+        ? member.organization || 'Не привязан'
+        : member.id === 1001
+          ? 'ООО «Север»'
+          : 'Не привязан',
     personalAccount: hasDemoProfile,
     mobileApp: hasDemoProfile && member.id % 2 === 1,
     note: hasDemoProfile ? 'Предпочитает вечерние занятия.' : '',
