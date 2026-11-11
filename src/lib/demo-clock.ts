@@ -4,6 +4,7 @@ const origin = Date.parse(`${DEMO_DAY}T14:35:00+03:00`);
 let tick = 0;
 
 export const demoNow = () => new Date(origin);
+export const registrationNow = () => new Date(origin + tick * 60_000);
 export const nextDemoNow = () => new Date(origin + tick++ * 60_000);
 export const resetDemoClock = () => {
   tick = 0;
