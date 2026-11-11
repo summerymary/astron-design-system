@@ -12,6 +12,24 @@ async function load(path) {
 const rules = await load('../src/lib/schedule.ts');
 const { createWorkspaceData } = await load('../src/data/workspace.ts');
 const data = createWorkspaceData();
+for (const record of [...data.events, ...data['training-templates']]) {
+  assert.ok(['Низкая', 'Средняя', 'Высокая'].includes(record.intensity));
+  assert.equal(record.color, rules.trainingIntensity(record).color);
+}
+assert.equal(rules.trainingIntensity({ intensity: 'Низкая', color: '#FF0000' }).color, '#26804A');
+assert.equal(rules.trainingIntensity({ intensity: 'Средняя' }).color, '#D4AE17');
+assert.equal(rules.trainingIntensity({ intensity: 'Высокая' }).color, '#CE3F3F');
+assert.equal(rules.trainingIntensity({}).value, 'Средняя');
+assert.equal(
+  rules.templateEvent(
+    { ...data['training-templates'][0], intensity: 'Высокая' },
+    { id: 'new', club: 'Центральный', intensity: 'Низкая' },
+    data.rooms,
+    'Тренер',
+  ).intensity,
+  'Высокая',
+  'Template intensity overrides stale draft values',
+);
 const events = data.events;
 const displayedDay = events.filter((e) => e.day === '2026-11-06' && e.room === 'Большой зал');
 assert.equal(displayedDay.length, 11);
@@ -125,6 +143,7 @@ for (const template of data['training-templates']) {
     'seats',
     'waitlist',
     'color',
+    'intensity',
     'description',
   ])
     assert.ok(draft[field], `Autofill ${field} for ${template.name}`);
@@ -219,3 +238,36 @@ for (const event of data.events)
 console.log(
   'Attendance checks passed: capacity, duplicate booking, cross-club overlap, attendance, removal, cancellation and immutable updates.',
 );
+
+// Heatmap measures occupied capacity, not an average of class percentages.
+const sample = (booked, capacity, status = 'Запись открыта') => ({
+  id: 'occupancy',
+  booked: String(booked),
+  capacity: String(capacity),
+  status,
+});
+for (const pct of [0, 24, 25, 49, 50, 74, 75, 99, 100, 120]) {
+  const actual = rules.eventOccupancy(sample(pct, 100));
+  assert.equal(actual.percent, pct);
+  const band = [...rules.OCCUPANCY_SCALE].reverse().find((b) => pct >= b.min);
+  assert.equal(actual.background, band.background);
+}
+assert.equal(rules.eventOccupancy(sample(1, 0)).percent, null);
+assert.equal(rules.eventOccupancy(sample(5, 10, 'Отменено')).percent, null);
+assert.equal(rules.eventOccupancy(sample(-2, 10)).percent, 0);
+assert.equal(rules.eventOccupancy(sample(Infinity, 10)).percent, 0);
+assert.deepEqual(
+  rules.occupancySummary([sample(1, 1), sample(1, 9), sample(5, 10, 'Отменено'), sample(2, 0)]),
+  { count: 2, booked: 2, capacity: 10, percent: 20 },
+);
+assert.equal(rules.occupancySummary([]).percent, null);
+console.log(
+  'Occupancy checks passed: thresholds, invalid capacity, cancellation, overbooking and weighted summary.',
+);
+
+const { contrastRatio } = await load('../src/lib/theme.ts');
+for (const band of rules.OCCUPANCY_SCALE)
+  assert.ok(
+    contrastRatio(band.foreground, band.background) >= 4.5,
+    'Readable heatmap text: ' + band.label,
+  );
