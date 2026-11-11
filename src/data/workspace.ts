@@ -1560,11 +1560,74 @@ const demoCashMovements: DemoRecord[] = [
 ];
 
 export function createWorkspaceData(): Record<string, DemoRecord[]> {
-  return structuredClone({
+  const data: Record<string, DemoRecord[]> = structuredClone({
     ...Object.fromEntries(Object.entries(resources).map(([key, value]) => [key, value.rows])),
     ...initialExtra,
     'cash-events': demoCashMovements,
   });
+  const ids = ['1001', '1002', '1003', '1004', '1005', '1006'];
+  const minute = (time: string) => {
+    const [h, m] = time.split(':').map(Number);
+    return h * 60 + m;
+  };
+  for (const event of data.events) {
+    if (event.kind === 'personal') continue;
+    event.description ||=
+      data['training-templates'].find((template) => template.name === event.name)?.description ||
+      (
+        {
+          Пилатес: 'Плавные упражнения на контроль движений и укрепление мышц корпуса.',
+          'Мягкая йога': 'Спокойная практика с акцентом на дыхание, баланс и подвижность.',
+          'Силовая тренировка': 'Силовые упражнения с небольшим оборудованием и контролем техники.',
+          'Здоровая спина': 'Мягкие упражнения на подвижность и осанку.',
+          Стретчинг: 'Упражнения на растяжку и развитие гибкости.',
+          Сайкл: 'Кардиотренировка на велотренажёрах в темпе музыки.',
+        } as Record<string, string>
+      )[event.name] ||
+      'Групповая тренировка под руководством тренера.';
+    const available = ids.filter(
+      (id) =>
+        !data.events.some(
+          (other) =>
+            other.id !== event.id &&
+            other.day === event.day &&
+            other.status !== 'Отменено' &&
+            (other.attendees || '').split(',').includes(id) &&
+            minute(other.time) < minute(event.time) + Number(event.duration) &&
+            minute(event.time) < minute(other.time) + Number(other.duration),
+        ),
+    );
+    event.attendees = available
+      .slice(
+        0,
+        Math.min(
+          Number(event.booked),
+          Number(event.capacity),
+          2 + (data.events.indexOf(event) % 4),
+        ),
+      )
+      .join(',');
+    event.booked = String(event.attendees.split(',').filter(Boolean).length);
+    event.present = '';
+    if (!['Отменено', 'Завершено'].includes(event.status))
+      event.status = Number(event.booked) >= Number(event.capacity) ? 'Мест нет' : 'Запись открыта';
+  }
+  data.comments = ids.map((memberId, i) => ({
+    id: 'seed-comment-' + memberId,
+    memberId,
+    text: [
+      'Предпочитает вечерние занятия.',
+      'По вопросам продления удобнее связаться после 18:00.',
+      'Интересуется групповыми занятиями по выходным.',
+      'Уточнить удобное время для возобновления занятий.',
+      'Первое знакомство с клубом, помочь с выбором занятий.',
+      'Напомнить о продлении при следующем визите.',
+    ][i],
+    author: 'Александра Крылова',
+    createdAt: '2026-10-28T18:45',
+  }));
+  data['client-pins'] = [{ id: '1001', commentId: 'seed-comment-1001' }];
+  return data;
 }
 export const money = (value: string | number) => `${Number(value || 0).toLocaleString('ru-RU')} ₽`;
 export const prettyDate = (value: string) =>
