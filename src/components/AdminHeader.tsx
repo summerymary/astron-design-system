@@ -12,7 +12,6 @@ import {
   Bell,
   UserRound,
   CalendarDays,
-  CreditCard,
   LockKeyhole,
   ShoppingBag,
   X,
@@ -153,18 +152,8 @@ export function AdminHeader({
           </>
         )}
       </div>
-      <ClientSearch key={workstationId} members={members} onMember={onMember} />
+      <ClientSearch key={workstationId} members={members} onMember={onMember} hidePhones />
       <div className="admin-header-actions">
-        <button
-          className="header-schedule-action"
-          aria-label="Расписание"
-          title="Расписание"
-          aria-current={activeSection === 'schedule' ? 'page' : undefined}
-          onClick={() => onAction('schedule')}
-        >
-          <CalendarDays size={16} />
-          <span>Расписание</span>
-        </button>
         <button
           className="header-add-client-action"
           aria-label="Добавить клиента"
@@ -176,6 +165,16 @@ export function AdminHeader({
           <span>Новый клиент</span>
         </button>
         <button
+          className="header-schedule-action"
+          aria-label="Расписание"
+          title="Расписание"
+          aria-current={activeSection === 'schedule' ? 'page' : undefined}
+          onClick={() => onAction('schedule')}
+        >
+          <CalendarDays size={16} />
+          <span>Расписание</span>
+        </button>
+        <button
           className="header-products-action"
           aria-label="Продажа товаров"
           title="Продажа товаров"
@@ -184,16 +183,6 @@ export function AdminHeader({
         >
           <ShoppingBag size={16} />
           <span>Товары</span>
-        </button>
-        <button
-          className="header-visit-action"
-          aria-label="Посещение"
-          title="Посещение"
-          aria-current={activeSection === 'registration' ? 'page' : undefined}
-          onClick={() => onAction('registration')}
-        >
-          <CreditCard size={16} />
-          <span>Посещение</span>
         </button>
         <button className="header-sale-action" onClick={() => onAction('services')}>
           <ShoppingBag size={16} />
