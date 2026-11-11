@@ -36,6 +36,11 @@ import {
   personalScopeError,
 } from '../lib/staff-rules';
 import {
+  OCCUPANCY_SCALE,
+  eventOccupancy,
+  occupancySummary,
+  TRAINING_INTENSITIES,
+  trainingIntensity,
   addDays,
   calendarBounds,
   clock,
@@ -83,6 +88,14 @@ export function ScheduleWorkspace({
   const { data, put, remove } = useWorkspace();
   const isTrainer = user.role === 'trainer';
   const isAdmin = user.role === 'administrator';
+  const isDirector = [
+    'club-director',
+    'network-director',
+    'fitness-director',
+    'operations-director',
+  ].includes(user.role);
+  const [colorMode, setColorMode] = useState('Заполняемость');
+  const heatmap = isDirector && colorMode === 'Заполняемость';
   const canCreate = canCreateEvent(user);
   const [scheduleClub, setScheduleClub] = useState(
     clubName.split(' \u00b7 ').at(-1) ||
@@ -95,7 +108,8 @@ export function ScheduleWorkspace({
     data['calendar-view']?.find((r) => r.id === `${user.id}:${club}`) ||
     data['calendar-view']?.find((r) => r.id === user.id && r.club === club);
   const [day, setDay] = useState(saved?.day || TODAY);
-  const [view, setView] = useState(saved?.view || 'День');
+  const [viewPreference, setView] = useState(saved?.view || 'День');
+  const view = heatmap ? 'Неделя' : viewPreference;
   const [room, setRoom] = useState(saved?.room || 'Все залы');
   const [trainer, setTrainer] = useState(isTrainer ? user.name : saved?.trainer || 'Все тренеры');
   const [scale, setScale] = useState(saved?.scale || 'Весь день');
@@ -154,6 +168,7 @@ export function ScheduleWorkspace({
       (trainer === 'Все тренеры' || e.trainer === trainer) &&
       (view === 'Неделя' ? dates.includes(e.day) : e.day === day),
   );
+  const occupancy = occupancySummary(events);
   const participantName = (id: string) => {
     const member = members.find((m) => String(m.id) === id);
     return member ? clientName(member) : 'Клиент';
@@ -191,11 +206,14 @@ export function ScheduleWorkspace({
         : available.width < 540
           ? 64
           : 52;
-  const gridHeight = Math.max(
-    available.height,
-    ((end - start) / shortest) * minTarget,
-    scale === 'Крупнее' ? (end - start) * 1.4 : 0,
-  );
+  const gridHeight =
+    fullscreen && scale === 'Весь день' && available.width >= 900
+      ? available.height
+      : Math.max(
+          available.height,
+          ((end - start) / shortest) * minTarget,
+          scale === 'Крупнее' ? (end - start) * 1.4 : 0,
+        );
   const hours = Array.from(
     { length: Math.ceil((end - start) / 60) + 1 },
     (_, i) => start + i * 60,
@@ -217,10 +235,19 @@ export function ScheduleWorkspace({
 
   // View preferences live in the same resettable memory as the prototype data.
   useEffect(() => {
-    put('calendar-view', { id: `${user.id}:${club}`, day, view, club, room, trainer, scale, step });
+    put('calendar-view', {
+      id: `${user.id}:${club}`,
+      day,
+      view: viewPreference,
+      club,
+      room,
+      trainer,
+      scale,
+      step,
+    });
     // put is intentionally not a dependency: provider creates it on every update.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [day, view, club, room, trainer, scale, step]);
+  }, [day, viewPreference, club, room, trainer, scale, step]);
   useLayoutEffect(() => {
     const measure = () => {
       if (!scroller.current || !root.current) return;
@@ -231,6 +258,10 @@ export function ScheduleWorkspace({
         root.current.querySelector('.calendar-time-heading')?.getBoundingClientRect().height || 40;
       const footer =
         root.current.querySelector('.calendar-footer')?.getBoundingClientRect().height || 36;
+      const legend =
+        root.current
+          .querySelector('.calendar-occupancy-legend, .calendar-intensity-legend')
+          ?.getBoundingClientRect().height || 0;
       setAvailable({
         height: Math.max(
           280,
@@ -238,6 +269,7 @@ export function ScheduleWorkspace({
             rect.top -
             heading -
             footer -
+            legend -
             (fullscreen ? 28 : 8),
         ),
         width: root.current.clientWidth,
@@ -254,7 +286,7 @@ export function ScheduleWorkspace({
       observer.disconnect();
       window.removeEventListener('resize', measure);
     };
-  }, [fullscreen, view]);
+  }, [fullscreen, view, heatmap]);
   useEffect(() => {
     if (!fullscreen || dialog) return;
     const before = document.activeElement as HTMLElement | null;
@@ -610,7 +642,7 @@ export function ScheduleWorkspace({
           </>,
           document.body,
         )}
-      <section className="calendar-panel panel">
+      <section className={`calendar-panel panel ${heatmap ? 'calendar-heatmap' : ''}`}>
         <div className="calendar-toolbar">
           <div className="calendar-date-nav">
             <button
@@ -640,12 +672,18 @@ export function ScheduleWorkspace({
               />
             </label>
           </div>
-          <Tabs
-            items={['День', 'Неделя', 'Список']}
-            value={view}
-            onChange={setView}
-            label="Вид расписания"
-          />
+          {heatmap ? (
+            <strong className="calendar-week-label">
+              Неделя · {dayText(week)} — {dayText(dates[6])}
+            </strong>
+          ) : (
+            <Tabs
+              items={['День', 'Неделя', 'Список']}
+              value={view}
+              onChange={setView}
+              label="Вид расписания"
+            />
+          )}
           <div className="calendar-create">
             {canCreate && (
               <>
@@ -854,11 +892,31 @@ export function ScheduleWorkspace({
             </button>
           </div>
         )}
+        {isDirector && (
+          <div className="calendar-color-mode">
+            <Tabs
+              items={['Заполняемость', 'Интенсивность']}
+              value={colorMode}
+              onChange={setColorMode}
+              label="Цвет занятий"
+            />
+            {heatmap && (
+              <p>
+                Заполненность:{' '}
+                <strong>{occupancy.percent === null ? '—' : occupancy.percent + '%'}</strong>
+                <span>
+                  Записано {occupancy.booked} из {occupancy.capacity} мест · отменённые не
+                  учитываются
+                </span>
+              </p>
+            )}
+          </div>
+        )}
         {view === 'Список' ? (
           <DataTable
-            rows={[...events].sort((a, b) =>
-              `${a.day}${a.time}`.localeCompare(`${b.day}${b.time}`),
-            )}
+            rows={[...events]
+              .map((event): DemoRecord => ({ ...event, occupancy: eventOccupancy(event).label }))
+              .sort((a, b) => `${a.day}${a.time}`.localeCompare(`${b.day}${b.time}`))}
             columns={[
               { key: 'day', label: 'Дата' },
               { key: 'time', label: 'Начало' },
@@ -867,6 +925,7 @@ export function ScheduleWorkspace({
               { key: 'room', label: 'Зал' },
               { key: 'booked', label: 'Записано' },
               { key: 'capacity', label: 'Мест' },
+              ...(heatmap ? [{ key: 'occupancy', label: 'Заполняемость' }] : []),
             ]}
             onOpen={show}
           />
@@ -975,11 +1034,16 @@ export function ScheduleWorkspace({
                           height: `${(Number(event.duration) / (end - start)) * 100}%`,
                           left: `calc(${(lane / lanes) * 100}% + 3px)`,
                           width: `calc(${100 / lanes}% - 6px)`,
-                          '--event-color': event.color || 'var(--color-accent)',
+                          '--event-color': heatmap
+                            ? eventOccupancy(event).line
+                            : trainingIntensity(event).color,
+                          '--event-background': eventOccupancy(event).background,
+                          '--event-foreground': eventOccupancy(event).foreground,
                         } as CSSProperties
                       }
-                      aria-label={`${event.name}${event.kind === 'personal' ? ', ' + participantName(event.memberId) : ''}, ${dayText(event.day)}, ${eventTime(event)}, ${event.trainer}, ${event.room}, записано ${event.booked} из ${event.capacity}${!canEdit(event) ? ', ' + event.status : ''}`}
-                      title={`${eventTime(event)} · ${event.name}\n${event.trainer} · ${event.room}\n${event.booked} из ${event.capacity} мест. Нажмите для подробностей${canEdit(event) ? ' или перетащите для переноса' : ''}.`}
+                      data-intensity={trainingIntensity(event).value}
+                      aria-label={`${heatmap ? 'Заполняемость ' + eventOccupancy(event).label : trainingIntensity(event).label}, ${event.name}${event.kind === 'personal' ? ', ' + participantName(event.memberId) : ''}, ${dayText(event.day)}, ${eventTime(event)}, ${event.trainer}, ${event.room}, записано ${event.booked} из ${event.capacity}${!canEdit(event) ? ', ' + event.status : ''}`}
+                      title={`${eventTime(event)} · ${event.name} · ${heatmap ? 'Заполняемость ' + eventOccupancy(event).label : trainingIntensity(event).label}\n${event.trainer} · ${event.room}\n${event.booked} из ${event.capacity} мест. Нажмите для подробностей${canEdit(event) ? ' или перетащите для переноса' : ''}.`}
                       onPointerDown={(e) => startDrag(e, event)}
                       onContextMenu={(e) => {
                         e.preventDefault();
@@ -1033,7 +1097,17 @@ export function ScheduleWorkspace({
                         className={`calendar-places ${event.kind !== 'personal' && Number(event.booked) >= Number(event.capacity) ? 'is-full' : ''}`}
                       >
                         <Users size={12} />
-                        {event.kind === 'personal' ? (
+                        {heatmap ? (
+                          <>
+                            {eventOccupancy(event).label}
+                            {event.status !== 'Отменено' && lanes === 1 && (
+                              <>
+                                {' '}
+                                · {event.booked}/{event.capacity}
+                              </>
+                            )}
+                          </>
+                        ) : event.kind === 'personal' ? (
                           '1 клиент'
                         ) : (
                           <>
@@ -1070,6 +1144,27 @@ export function ScheduleWorkspace({
               </Button>
             }
           />
+        )}
+        {heatmap ? (
+          <div className="calendar-occupancy-legend" aria-label="Шкала заполняемости">
+            <span>Меньше записей</span>
+            {OCCUPANCY_SCALE.map((item) => (
+              <span key={item.min}>
+                <i style={{ background: item.background, borderColor: item.line }} />
+                {item.label}
+              </span>
+            ))}
+            <span>Больше записей</span>
+          </div>
+        ) : (
+          <div className="calendar-intensity-legend" aria-label="Цвета интенсивности занятий">
+            {TRAINING_INTENSITIES.map((item) => (
+              <span key={item.value}>
+                <i style={{ background: item.color }} />
+                {item.label}
+              </span>
+            ))}
+          </div>
         )}
         <footer className="calendar-footer">
           {canCreate && (
@@ -1148,7 +1243,7 @@ export function ScheduleWorkspace({
                         key={template.id}
                         onClick={() => applyTemplate(template)}
                       >
-                        <i style={{ background: template.color }} />
+                        <i style={{ background: trainingIntensity(template).color }} />
                         <span>
                           <strong>{template.name}</strong>
                           <small>
@@ -1271,6 +1366,21 @@ export function ScheduleWorkspace({
                     <span>Длительность</span>
                     <strong>{opened.duration} мин</strong>
                   </p>
+                  <p>
+                    <span>Интенсивность</span>
+                    <strong className="training-intensity-value">
+                      <i style={{ background: trainingIntensity(opened).color }} />
+                      {trainingIntensity(opened).value}
+                    </strong>
+                  </p>
+                  {heatmap && (
+                    <p>
+                      <span>Заполняемость</span>
+                      <strong>
+                        {eventOccupancy(opened).label} · {opened.booked}/{opened.capacity}
+                      </strong>
+                    </p>
+                  )}
                   <Status>{opened.status}</Status>
                 </div>
                 <p>
@@ -1463,6 +1573,7 @@ function EventForm({
   onSave: (record: DemoRecord) => string | void;
 }) {
   const [draft, setDraft] = useState<DemoRecord>({
+    intensity: initial.intensity || 'Средняя',
     format: 'Групповое',
     payment: 'Включено в абонемент',
     capacityMode: 'По залу',
@@ -1622,7 +1733,12 @@ function EventForm({
             </Select>
           </label>
           {field('capacity', 'Количество мест', 'number')}
-          {field('color', 'Цвет отметки', 'color')}
+          {field(
+            'intensity',
+            'Интенсивность',
+            'text',
+            TRAINING_INTENSITIES.map((item) => item.value),
+          )}
         </div>
         <details className="ws-disclosure">
           <summary>Условия записи и описание</summary>

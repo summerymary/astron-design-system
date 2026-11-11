@@ -20,6 +20,7 @@ import { LogoGuidelines } from '../components/LogoGuidelines';
 import { ThemePlayground } from '../components/ThemePlayground';
 import { useTheme } from '../components/ThemeProvider';
 import { contrastRatio } from '../lib/theme';
+import { OCCUPANCY_SCALE, TRAINING_INTENSITIES } from '../lib/schedule';
 import type { ThemeToken } from '../lib/theme';
 import { membershipKinds, quantityLabel } from '../data/membership-kinds';
 import { MembershipTag } from '../components/MembershipTag';
@@ -168,6 +169,39 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                 </span>
               ))}
             </div>
+            <div className="ds-training-colors">
+              <h3>Интенсивность занятий</h3>
+              <p>
+                Зелёный — низкая нагрузка, жёлтый — средняя, красный — высокая. Цвет не обозначает
+                наличие мест или отмену. В окне занятия интенсивность написана словами; в календаре
+                есть легенда.
+              </p>
+              <div className="calendar-intensity-legend">
+                {TRAINING_INTENSITIES.map((item) => (
+                  <span key={item.value}>
+                    <i style={{ background: item.color }} />
+                    {item.label}
+                    <code>{item.color}</code>
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="ds-occupancy-colors">
+              <h3>Заполняемость у директоров</h3>
+              <p>
+                Чем темнее занятие, тем больше мест занято. Рядом всегда указан процент и число
+                записанных. Отменённые занятия не входят в сводку. Интенсивность можно включить
+                отдельно.
+              </p>
+              <div className="calendar-occupancy-legend">
+                {OCCUPANCY_SCALE.map((item) => (
+                  <span key={item.min}>
+                    <i style={{ background: item.background, borderColor: item.line }} />
+                    {item.label}
+                  </span>
+                ))}
+              </div>
+            </div>
             <div className="ds-membership-colors">
               <h3>Цвета карточек абонементов</h3>
               <p>
@@ -241,7 +275,7 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                 <h3>Главная кнопка</h3>
                 <p>
                   {
-                    'Главные кнопки используют фирменный цвет или его читаемый оттенок. Для яркого лайма предусмотрен тёмный текст и графитовый дополнительный цвет.'
+                    'Главные кнопки используют фирменный цвет или его читаемый оттенок. Для светлых ярких кнопок подбирается тёмный текст.'
                   }
                 </p>
               </div>

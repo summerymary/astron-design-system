@@ -19,7 +19,13 @@ import { money, resources, TODAY } from '../data/workspace';
 import { demoUsers } from '../data/roles';
 import type { DemoRecord } from '../data/workspace';
 import type { DemoUser, Member } from '../types';
-import { dayText, eventTime, nextFreeTime, validateEvent } from '../lib/schedule';
+import {
+  TRAINING_INTENSITIES,
+  dayText,
+  eventTime,
+  nextFreeTime,
+  validateEvent,
+} from '../lib/schedule';
 import { noteError, personalClients, personalScopeError } from '../lib/staff-rules';
 import { BarWorkspace } from './WorkspaceOperations';
 import '../styles/staff.css';
@@ -39,6 +45,7 @@ export function personalDraft(
   return {
     id: demoId('personal'),
     kind: 'personal',
+    intensity: 'Средняя',
     name: 'Персональная тренировка',
     trainerId: user.id,
     trainer: user.name,
@@ -185,6 +192,18 @@ export function PersonalTrainingForm({
             </Select>
           </label>
         </div>
+        <label className="form-field">
+          <span>Интенсивность</span>
+          <Select
+            name="intensity"
+            value={draft.intensity || 'Средняя'}
+            onChange={(e) => set('intensity', e.target.value)}
+          >
+            {TRAINING_INTENSITIES.map((item) => (
+              <option key={item.value}>{item.value}</option>
+            ))}
+          </Select>
+        </label>
         <p className="staff-form-context">
           Клуб: {draft.club} · Тренер: {initial.trainer || user.name}
         </p>
