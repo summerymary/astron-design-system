@@ -42,3 +42,4 @@ import './styles/checkout.css';
 import './styles/visual-style.css';
 import './styles/header-actions.css';
 import './styles/reception.css';
+import './styles/components.css';
