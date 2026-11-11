@@ -61,6 +61,9 @@ export interface Member {
   name: string;
   fullName?: string;
   photoIndex?: number;
+  birthDate?: string;
+  gender?: string;
+  organization?: string;
   email: string;
   phone: string;
   plan: string;
