@@ -1,0 +1,511 @@
+/* Stable navigation: icon anchors and row heights never depend on rail width. */
+.app-shell .sidebar,
+.app-shell.is-sidebar-collapsed .sidebar {
+  padding-inline: 12px;
+}
+.app-shell .sidebar .side-nav button,
+.app-shell.is-sidebar-collapsed .sidebar .side-nav button {
+  display: flex;
+  justify-content: flex-start;
+  height: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.app-shell .sidebar .side-nav button > svg {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  flex-shrink: 0;
+}
+.app-shell .sidebar .nav-label:not(summary),
+.app-shell.is-sidebar-collapsed .sidebar .nav-label:not(summary) {
+  display: block;
+  height: 24px;
+  min-height: 24px;
+  margin: 0;
+  padding: 4px 12px;
+  border: 0;
+  line-height: 16px;
+  white-space: nowrap;
+}
+.app-shell.is-sidebar-collapsed .sidebar .nav-label:not(summary) {
+  visibility: hidden;
+}
+.app-shell .sidebar .club-context-button,
+.app-shell.is-sidebar-collapsed .sidebar .club-context-button {
+  display: flex;
+  height: 64px;
+  min-height: 64px;
+  margin: 4px 0 8px;
+  padding: 8px 12px;
+  gap: 8px;
+}
+.app-shell .sidebar .club-context-button > .club-logo {
+  display: none;
+}
+.app-shell.is-sidebar-collapsed .sidebar .club-context-button > span,
+.app-shell.is-sidebar-collapsed .sidebar .club-context-button > svg {
+  display: none;
+}
+.app-shell.is-sidebar-collapsed .sidebar .club-context-button::before {
+  content: 'A';
+  color: inherit;
+  font-size: 18px;
+}
+.app-shell .sidebar .management-nav-group > summary,
+.app-shell.is-sidebar-collapsed .sidebar .management-nav-group > summary {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  margin: 0;
+}
+.app-shell .sidebar .management-nav-group > summary > svg {
+  flex: 0 0 18px;
+}
+.app-shell .sidebar .management-nav-group > summary::after {
+  margin-left: auto;
+}
+.app-shell.is-sidebar-collapsed .sidebar .management-nav-group > summary::after {
+  display: none;
+}
+.app-shell .sidebar .management-nav-group > button,
+.app-shell.is-sidebar-collapsed .sidebar .management-nav-group > button {
+  width: 100%;
+  margin: 2px 0;
+  padding-left: 12px;
+}
+/* One focused reception canvas. Calendar retains extra width for parallel rooms. */
+.app-shell[data-role='administrator'] .app-content {
+  max-width: 1168px;
+  margin-inline: auto;
+}
+.app-shell[data-role='administrator'] .app-content.has-calendar {
+  max-width: 1440px;
+}
+.reception-focus {
+  width: min(100%, 760px);
+  margin: auto;
+  display: grid;
+  gap: 24px;
+  padding-block: 24px;
+}
+.reception-ready {
+  text-align: center;
+  padding: 36px 24px;
+  color: var(--color-muted);
+}
+.reception-ready > svg {
+  color: var(--color-accent);
+}
+.reception-ready h2 {
+  color: var(--color-ink);
+  font-size: 24px;
+  margin: 16px 0 12px;
+  font-weight: 600;
+}
+.reception-ready p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0;
+}
+.reception-shift-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--color-divider);
+  padding-block: 12px;
+}
+.reception-shift-line > span {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--color-muted);
+}
+.reception-shift-line strong {
+  color: var(--color-ink);
+  font-weight: 500;
+  font-size: 16px;
+}
+/* Fictitious portrait atlas; each circle crops one square from a single local asset. */
+
+.app-shell .client-name-block h1 {
+  font-size: 26px;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+.app-shell .client-contact-facts dt,
+.app-shell .client-info-card dt,
+.app-shell .client-balance > span {
+  color: #697365;
+  font-size: 14px;
+  font-weight: 400;
+}
+.app-shell .client-contact-facts dd,
+.app-shell .client-info-card dd {
+  color: var(--color-ink);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.client-phone {
+  flex-wrap: wrap;
+}
+.client-phone > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  color: var(--color-accent);
+  background: var(--color-surface);
+}
+.client-pinned-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  margin-top: 16px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-surface);
+  color: var(--color-muted);
+}
+.client-pinned-note.has-note {
+  border-color: var(--color-accent-line);
+  border-left: 4px solid var(--color-accent);
+  background: var(--color-accent-soft);
+}
+.client-pinned-note > svg {
+  flex-shrink: 0;
+  margin-top: 4px;
+  color: var(--color-accent);
+}
+.client-pinned-note > div {
+  min-width: 0;
+  flex: 1;
+}
+.client-pinned-note strong {
+  display: block;
+  font-size: 14px;
+  color: var(--color-accent);
+}
+.client-pinned-note p {
+  margin: 8px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.client-pinned-note small {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+.client-pinned-note > .button {
+  margin-left: auto;
+}
+.client-comments-section {
+  padding: 20px;
+}
+.client-comments-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.client-comments-toolbar h3 {
+  margin: 0;
+  font-size: 18px;
+}
+.client-comments-toolbar h3 span {
+  color: var(--color-muted);
+}
+.client-comment-entry {
+  padding: 18px 0;
+  border-top: 1px solid var(--color-divider);
+}
+.client-comment-entry header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.client-comment-entry time {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+.client-comment-entry header > span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-accent);
+  font-size: 14px;
+}
+.client-comment-entry p {
+  font-size: 18px;
+  color: var(--color-ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 12px 0;
+}
+.client-call-panel {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 16px;
+}
+.client-call-panel h3,
+.client-call-panel p {
+  margin: 0;
+}
+.training-details {
+  display: grid;
+  gap: 20px;
+}
+.training-details > p {
+  margin: 0;
+  line-height: 1.6;
+}
+.training-details-summary {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.training-details-summary p {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+.training-details-summary p span {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+.training-details-summary strong {
+  color: var(--color-ink);
+  font-size: 18px;
+}
+.schedule-attendees h3 {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 18px;
+}
+.schedule-attendees h3 span,
+.schedule-attendance-total {
+  color: var(--color-muted);
+  font-size: 14px;
+}
+.schedule-book-client {
+  margin-block: 16px;
+  position: relative;
+  z-index: 2;
+}
+.schedule-book-client .client-search {
+  width: 100%;
+  max-width: none;
+}
+.schedule-book-selection {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 16px;
+}
+.schedule-book-selection strong {
+  flex: 1;
+  min-width: 180px;
+}
+.schedule-roster-list {
+  margin-top: 16px;
+}
+.schedule-roster-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--color-divider);
+}
+.schedule-roster-row > div {
+  flex: 1;
+  min-width: 0;
+}
+.schedule-roster-row small {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+.schedule-client-name {
+  display: block;
+  background: transparent;
+  text-align: left;
+  padding: 0;
+  font-size: 16px;
+  color: var(--color-ink);
+  font-weight: 500;
+}
+.schedule-client-name:disabled {
+  color: var(--color-ink);
+  opacity: 1;
+  cursor: default;
+}
+.schedule-roster-row [aria-pressed='true'] {
+  color: var(--color-success);
+  border-color: var(--color-success);
+  background: var(--color-success-soft);
+}
+.calendar-event.is-readonly {
+  cursor: pointer;
+}
+@container workspace (max-width:700px) {
+  .reception-focus {
+    padding: 0;
+    gap: 12px;
+  }
+  .reception-ready {
+    padding: 24px 12px;
+  }
+  .reception-ready h2 {
+    font-size: 20px;
+  }
+  .client-pinned-note {
+    flex-wrap: wrap;
+    padding: 14px;
+  }
+  .client-pinned-note > div {
+    flex-basis: calc(100% - 40px);
+  }
+}
+@media (max-width: 600px) {
+  .schedule-roster-row {
+    flex-wrap: wrap;
+  }
+  .schedule-roster-row > div {
+    flex-basis: calc(100% - 52px);
+  }
+  .schedule-roster-row > .button {
+    margin-left: 40px;
+  }
+}
+
+:root[data-visual-style='vivid']
+  .app-shell
+  :is(.client-contact-facts dt, .client-info-card dt, .client-balance > span) {
+  color: #657080;
+}
+.app-shell .sidebar .club-context-button > span {
+  min-width: 0;
+  flex: 1;
+}
+.app-shell .sidebar .club-context-button strong {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-shell .client-identity {
+  padding-bottom: 16px;
+}
+.app-shell .client-facts-row {
+  margin-top: 12px;
+  padding-top: 12px;
+}
+.app-shell .client-contact-facts {
+  padding-top: 0;
+}
+.app-shell .client-pinned-note {
+  padding-block: 12px;
+  margin-top: 12px;
+}
+.app-shell .client-pinned-note p {
+  margin: 4px 0 0;
+}
+.app-shell .client-history {
+  margin-top: 12px;
+}
+.modal:has(> .training-details) {
+  width: min(760px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+}
+@container workspace (min-width:1100px) {
+  .app-shell .client-contact-facts {
+    grid-template-columns: minmax(180px, 1.3fr) repeat(3, minmax(110px, 1fr));
+    align-content: start;
+    padding-top: 0;
+  }
+  .app-shell .client-balance {
+    min-width: 170px;
+  }
+}
+.modal:has(> .training-details) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.modal:has(> .training-details) > .modal-heading {
+  flex-shrink: 0;
+}
+.modal > .training-details {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+.app-shell .sidebar.has-management-menu .sidebar-navigation > .nav-label {
+  display: none;
+}
+.app-shell .sidebar .side-nav > .management-statistics-link {
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--color-line);
+}
+.app-shell .sidebar .management-nav-group > summary,
+.app-shell.is-sidebar-collapsed .sidebar .management-nav-group > summary {
+  border: 0;
+  font-size: 14px;
+}
+.app-shell .client-identity-top {
+  display: grid;
+  grid-template-columns: 44px 56px minmax(0, 1fr);
+  gap: 12px;
+}
+.app-shell .client-photo > .avatar {
+  width: 56px;
+  height: 56px;
+}
+.app-shell .client-name-block {
+  min-width: 0;
+}
+.app-shell .client-primary-actions {
+  grid-column: 3;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+@container workspace (max-width:700px) {
+  .app-shell .client-identity-top {
+    grid-template-columns: 32px 48px minmax(0, 1fr);
+    gap: 10px;
+  }
+  .app-shell .client-photo > .avatar {
+    width: 48px;
+    height: 48px;
+  }
+  .app-shell .client-name-block h1 {
+    font-size: 22px;
+  }
+  .app-shell .client-primary-actions {
+    grid-column: 1 / -1;
+  }
+}
