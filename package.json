@@ -20,7 +20,8 @@
     "test:registration": "node scripts/check-registration.mjs",
     "test:checkout": "node scripts/check-checkout.mjs",
     "test:cash": "node scripts/check-cash.mjs",
-    "test:crm": "node scripts/check-crm.mjs"
+    "test:crm": "node scripts/check-crm.mjs",
+    "test:ui": "node scripts/check-ui.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
