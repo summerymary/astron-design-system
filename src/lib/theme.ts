@@ -1,9 +1,6 @@
 export const DEFAULT_PRIMARY = '#8A332C';
 export const THEME_PRESETS = [
   { name: 'Астрон', color: DEFAULT_PRIMARY },
-  { name: 'Глубокий синий', color: '#173B70' },
-  { name: 'Тёмный лес', color: '#164B3B' },
-  { name: 'Лайм', color: '#F0FC03' },
   { name: 'Графит', color: '#111111' },
 ];
 
