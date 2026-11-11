@@ -4,7 +4,8 @@ export type DemoRecord = { id: string; [key: string]: string };
 export type Field = {
   key: string;
   label: string;
-  type?: 'text' | 'number' | 'date' | 'datetime-local' | 'email' | 'tel' | 'textarea' | 'color';
+  type?:
+    'text' | 'number' | 'date' | 'time' | 'datetime-local' | 'email' | 'tel' | 'textarea' | 'color';
   options?: string[];
   required?: boolean;
   hint?: string;
@@ -1564,6 +1565,66 @@ export function createWorkspaceData(): Record<string, DemoRecord[]> {
     ...initialExtra,
     'cash-events': demoCashMovements,
   });
+  const gymPlan = data.plans.find((plan) => plan.id === 'plan-1')!;
+  const periods = [
+    {
+      id: 'light',
+      name: 'Лайт',
+      accessWeekdays: '06:30–16:00, 20:00–23:10',
+      accessWeekends: '07:00–22:10',
+      memberId: '1006',
+    },
+    {
+      id: 'lunch',
+      name: 'Ланч',
+      accessWeekdays: '12:00–15:00',
+      accessWeekends: '17:00–22:10',
+      memberId: '1005',
+    },
+  ];
+  for (const period of periods) {
+    const plan = {
+      ...gymPlan,
+      id: `plan-${period.id}`,
+      name: period.name,
+      accessWeekdays: period.accessWeekdays,
+      accessWeekends: period.accessWeekends,
+      short: `Будни ${period.accessWeekdays}; выходные ${period.accessWeekends}`,
+      hours: `Пн–Пт ${period.accessWeekdays}; Сб–Вс ${period.accessWeekends}`,
+      description: 'Тренажёрный зал в часы тарифа. Цена демонстрационная.',
+    };
+    data.plans.push(plan);
+    (data['issued-plans'] ||= []).push({
+      ...plan,
+      id: `issued-${period.id}`,
+      memberId: period.memberId,
+      issued: TODAY,
+    });
+  }
+  const youth = {
+    ...gymPlan,
+    id: 'plan-youth',
+    name: 'Молодёжный',
+    ageMin: '14',
+    ageMax: '23',
+    age: '14–23 года включительно',
+    short: 'Тренажёрный зал · 14–23 года',
+    description: 'Возраст проверяется на дату посещения. Цена демонстрационная.',
+  };
+  data.plans.push(youth);
+  (data['issued-plans'] ||= []).push({
+    ...youth,
+    id: 'issued-youth',
+    memberId: '1003',
+    issued: TODAY,
+  });
+  const groupPlan = data.plans.find((plan) => plan.id === 'plan-2')!;
+  (data['issued-plans'] ||= []).push({
+    ...groupPlan,
+    id: 'issued-group-demo',
+    memberId: '1001',
+    issued: TODAY,
+  });
   // Fill the reference week with coherent small-group examples; Friday retains its 14 sessions.
   const weekDays = [
     '2026-11-02',
@@ -1695,6 +1756,22 @@ export function createWorkspaceData(): Record<string, DemoRecord[]> {
     createdAt: '2026-10-28T18:45',
   }));
   data['client-pins'] = [{ id: '1001', commentId: 'seed-comment-1001' }];
+  const reserveExample = data.events.find(
+    (event) => event.day === '2026-11-08' && event.time === '15:00' && event.kind !== 'personal',
+  );
+  if (reserveExample) {
+    reserveExample.capacityMode = 'Своя вместимость';
+    reserveExample.capacity = '4';
+    reserveExample.attendees = reserveExample.attendees.split(',').slice(0, 4).join(',');
+    reserveExample.booked = String(reserveExample.attendees.split(',').filter(Boolean).length);
+    if (Number(reserveExample.booked) === 4) {
+      reserveExample.status = 'Мест нет';
+      reserveExample.reserve = ids
+        .filter((id) => !reserveExample.attendees.split(',').includes(id))
+        .slice(0, 1)
+        .join(',');
+    }
+  }
   return data;
 }
 export const money = (value: string | number) => `${Number(value || 0).toLocaleString('ru-RU')} ₽`;
