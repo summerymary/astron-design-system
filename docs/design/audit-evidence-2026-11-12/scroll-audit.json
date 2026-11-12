@@ -1,0 +1,2538 @@
+{
+  "workspaces": [
+    {
+      "section": "schedule",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "trainer-clients",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-catalog",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-sales",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-inventory",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "registration",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "services",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "members",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "products",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "cash",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "crm",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "requests",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "messages",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "reviews",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "memberships",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "calls",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "notifications",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "directories",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "statistics",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "settings",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "employees",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "positions",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "absences",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "payroll",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "clubs",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "rooms",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "receptions",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "training-templates",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "training-groups",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "schedule-calendar",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "service-settings",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-categories",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-collections",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "inventory",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "cameras",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "rbac",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "security",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "event-logs",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "leads",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "segments",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "pipelines",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "retention",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "external-messages",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "schedule",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "trainer-clients",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "bar-catalog",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "bar-sales",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "bar-inventory",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "registration",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "services",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "members",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "products",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "cash",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "crm",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "bar",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "requests",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "messages",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "reviews",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "memberships",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "calls",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "notifications",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "directories",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "statistics",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "settings",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "employees",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "positions",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "absences",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "payroll",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "clubs",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "rooms",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "receptions",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "training-templates",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "training-groups",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "schedule-calendar",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "service-settings",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "bar-categories",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "bar-collections",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "inventory",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "cameras",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "rbac",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "security",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "event-logs",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "leads",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "segments",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "pipelines",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "retention",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "external-messages",
+      "clipped": [],
+      "height": 650,
+      "horizontal": false,
+      "width": 1024
+    },
+    {
+      "section": "schedule",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "trainer-clients",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-catalog",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-sales",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-inventory",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "registration",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "services",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "members",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "products",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "cash",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "crm",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "requests",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "messages",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "reviews",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "memberships",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "calls",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "notifications",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "directories",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "statistics",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "settings",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "employees",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "positions",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "absences",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "payroll",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "clubs",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "rooms",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "receptions",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "training-templates",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "training-groups",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "schedule-calendar",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "service-settings",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-categories",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-collections",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "inventory",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "cameras",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "rbac",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "security",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "event-logs",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "leads",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "segments",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "pipelines",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "retention",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "external-messages",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    }
+  ],
+  "homes": [
+    {
+      "role": "administrator",
+      "clipped": [],
+      "h": 720,
+      "horizontal": false,
+      "w": 1280
+    },
+    {
+      "role": "trainer",
+      "clipped": [],
+      "h": 720,
+      "horizontal": false,
+      "w": 1280
+    },
+    {
+      "role": "bartender",
+      "clipped": [],
+      "h": 720,
+      "horizontal": false,
+      "w": 1280
+    },
+    {
+      "role": "club-director",
+      "clipped": [],
+      "h": 720,
+      "horizontal": false,
+      "w": 1280
+    },
+    {
+      "role": "network-director",
+      "clipped": [],
+      "h": 720,
+      "horizontal": false,
+      "w": 1280
+    },
+    {
+      "role": "marketer",
+      "clipped": [],
+      "h": 720,
+      "horizontal": false,
+      "w": 1280
+    },
+    {
+      "role": "fitness-director",
+      "clipped": [],
+      "h": 720,
+      "horizontal": false,
+      "w": 1280
+    },
+    {
+      "role": "operations-director",
+      "clipped": [],
+      "h": 720,
+      "horizontal": false,
+      "w": 1280
+    },
+    {
+      "role": "sysadmin",
+      "clipped": [],
+      "h": 720,
+      "horizontal": false,
+      "w": 1280
+    },
+    {
+      "role": "accountant",
+      "clipped": [],
+      "h": 720,
+      "horizontal": false,
+      "w": 1280
+    },
+    {
+      "role": "administrator",
+      "clipped": [],
+      "h": 844,
+      "horizontal": false,
+      "w": 390
+    },
+    {
+      "role": "trainer",
+      "clipped": [],
+      "h": 844,
+      "horizontal": false,
+      "w": 390
+    },
+    {
+      "role": "bartender",
+      "clipped": [],
+      "h": 844,
+      "horizontal": false,
+      "w": 390
+    },
+    {
+      "role": "club-director",
+      "clipped": [],
+      "h": 844,
+      "horizontal": false,
+      "w": 390
+    },
+    {
+      "role": "network-director",
+      "clipped": [],
+      "h": 844,
+      "horizontal": false,
+      "w": 390
+    },
+    {
+      "role": "marketer",
+      "clipped": [],
+      "h": 844,
+      "horizontal": false,
+      "w": 390
+    },
+    {
+      "role": "fitness-director",
+      "clipped": [],
+      "h": 844,
+      "horizontal": false,
+      "w": 390
+    },
+    {
+      "role": "operations-director",
+      "clipped": [],
+      "h": 844,
+      "horizontal": false,
+      "w": 390
+    },
+    {
+      "role": "sysadmin",
+      "clipped": [],
+      "h": 844,
+      "horizontal": false,
+      "w": 390
+    },
+    {
+      "role": "accountant",
+      "clipped": [],
+      "h": 844,
+      "horizontal": false,
+      "w": 390
+    }
+  ],
+  "profiles": [
+    {
+      "theme": "",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 528.25,
+        "height": 134,
+        "left": 575,
+        "right": 1379,
+        "top": 394.25,
+        "width": 804,
+        "x": 575,
+        "y": 394.25
+      },
+      "footer": {
+        "bottom": 623,
+        "height": 61,
+        "left": 301,
+        "right": 1379,
+        "top": 562,
+        "width": 1078,
+        "x": 301,
+        "y": 562
+      },
+      "h": 900,
+      "name": {
+        "bottom": 360.5,
+        "height": 64.5,
+        "left": 575,
+        "right": 1379,
+        "top": 296,
+        "width": 804,
+        "x": 575,
+        "y": 296
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 546,
+        "height": 250,
+        "left": 301,
+        "right": 551,
+        "top": 296,
+        "width": 250,
+        "x": 301,
+        "y": 296
+      },
+      "w": 1440
+    },
+    {
+      "theme": "",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 450.25,
+        "height": 134,
+        "left": 559,
+        "right": 1395,
+        "top": 316.25,
+        "width": 836,
+        "x": 559,
+        "y": 316.25
+      },
+      "footer": {
+        "bottom": 545,
+        "height": 61,
+        "left": 285,
+        "right": 1395,
+        "top": 484,
+        "width": 1110,
+        "x": 285,
+        "y": 484
+      },
+      "h": 900,
+      "name": {
+        "bottom": 282.5,
+        "height": 64.5,
+        "left": 559,
+        "right": 1395,
+        "top": 218,
+        "width": 836,
+        "x": 559,
+        "y": 218
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 468,
+        "height": 250,
+        "left": 285,
+        "right": 535,
+        "top": 218,
+        "width": 250,
+        "x": 285,
+        "y": 218
+      },
+      "w": 1440
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 528.25,
+        "height": 134,
+        "left": 575,
+        "right": 1379,
+        "top": 394.25,
+        "width": 804,
+        "x": 575,
+        "y": 394.25
+      },
+      "footer": {
+        "bottom": 623,
+        "height": 61,
+        "left": 301,
+        "right": 1379,
+        "top": 562,
+        "width": 1078,
+        "x": 301,
+        "y": 562
+      },
+      "h": 900,
+      "name": {
+        "bottom": 360.5,
+        "height": 64.5,
+        "left": 575,
+        "right": 1379,
+        "top": 296,
+        "width": 804,
+        "x": 575,
+        "y": 296
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 546,
+        "height": 250,
+        "left": 301,
+        "right": 551,
+        "top": 296,
+        "width": 250,
+        "x": 301,
+        "y": 296
+      },
+      "w": 1440
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 450.25,
+        "height": 134,
+        "left": 559,
+        "right": 1395,
+        "top": 316.25,
+        "width": 836,
+        "x": 559,
+        "y": 316.25
+      },
+      "footer": {
+        "bottom": 545,
+        "height": 61,
+        "left": 285,
+        "right": 1395,
+        "top": 484,
+        "width": 1110,
+        "x": 285,
+        "y": 484
+      },
+      "h": 900,
+      "name": {
+        "bottom": 282.5,
+        "height": 64.5,
+        "left": 559,
+        "right": 1395,
+        "top": 218,
+        "width": 836,
+        "x": 559,
+        "y": 218
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 468,
+        "height": 250,
+        "left": 285,
+        "right": 535,
+        "top": 218,
+        "width": 250,
+        "x": 285,
+        "y": 218
+      },
+      "w": 1440
+    },
+    {
+      "theme": "?style=vivid",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 528.25,
+        "height": 134,
+        "left": 575,
+        "right": 1379,
+        "top": 394.25,
+        "width": 804,
+        "x": 575,
+        "y": 394.25
+      },
+      "footer": {
+        "bottom": 623,
+        "height": 61,
+        "left": 301,
+        "right": 1379,
+        "top": 562,
+        "width": 1078,
+        "x": 301,
+        "y": 562
+      },
+      "h": 900,
+      "name": {
+        "bottom": 360.5,
+        "height": 64.5,
+        "left": 575,
+        "right": 1379,
+        "top": 296,
+        "width": 804,
+        "x": 575,
+        "y": 296
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 546,
+        "height": 250,
+        "left": 301,
+        "right": 551,
+        "top": 296,
+        "width": 250,
+        "x": 301,
+        "y": 296
+      },
+      "w": 1440
+    },
+    {
+      "theme": "?style=vivid",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 450.25,
+        "height": 134,
+        "left": 559,
+        "right": 1395,
+        "top": 316.25,
+        "width": 836,
+        "x": 559,
+        "y": 316.25
+      },
+      "footer": {
+        "bottom": 545,
+        "height": 61,
+        "left": 285,
+        "right": 1395,
+        "top": 484,
+        "width": 1110,
+        "x": 285,
+        "y": 484
+      },
+      "h": 900,
+      "name": {
+        "bottom": 282.5,
+        "height": 64.5,
+        "left": 559,
+        "right": 1395,
+        "top": 218,
+        "width": 836,
+        "x": 559,
+        "y": 218
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 468,
+        "height": 250,
+        "left": 285,
+        "right": 535,
+        "top": 218,
+        "width": 250,
+        "x": 285,
+        "y": 218
+      },
+      "w": 1440
+    },
+    {
+      "theme": "",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 528.25,
+        "height": 134,
+        "left": 559,
+        "right": 1235,
+        "top": 394.25,
+        "width": 676,
+        "x": 559,
+        "y": 394.25
+      },
+      "footer": {
+        "bottom": 623,
+        "height": 61,
+        "left": 285,
+        "right": 1235,
+        "top": 562,
+        "width": 950,
+        "x": 285,
+        "y": 562
+      },
+      "h": 720,
+      "name": {
+        "bottom": 360.5,
+        "height": 64.5,
+        "left": 559,
+        "right": 1235,
+        "top": 296,
+        "width": 676,
+        "x": 559,
+        "y": 296
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 546,
+        "height": 250,
+        "left": 285,
+        "right": 535,
+        "top": 296,
+        "width": 250,
+        "x": 285,
+        "y": 296
+      },
+      "w": 1280
+    },
+    {
+      "theme": "",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 450.25,
+        "height": 134,
+        "left": 559,
+        "right": 1235,
+        "top": 316.25,
+        "width": 676,
+        "x": 559,
+        "y": 316.25
+      },
+      "footer": {
+        "bottom": 545,
+        "height": 61,
+        "left": 285,
+        "right": 1235,
+        "top": 484,
+        "width": 950,
+        "x": 285,
+        "y": 484
+      },
+      "h": 720,
+      "name": {
+        "bottom": 282.5,
+        "height": 64.5,
+        "left": 559,
+        "right": 1235,
+        "top": 218,
+        "width": 676,
+        "x": 559,
+        "y": 218
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 468,
+        "height": 250,
+        "left": 285,
+        "right": 535,
+        "top": 218,
+        "width": 250,
+        "x": 285,
+        "y": 218
+      },
+      "w": 1280
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 528.25,
+        "height": 134,
+        "left": 559,
+        "right": 1235,
+        "top": 394.25,
+        "width": 676,
+        "x": 559,
+        "y": 394.25
+      },
+      "footer": {
+        "bottom": 623,
+        "height": 61,
+        "left": 285,
+        "right": 1235,
+        "top": 562,
+        "width": 950,
+        "x": 285,
+        "y": 562
+      },
+      "h": 720,
+      "name": {
+        "bottom": 360.5,
+        "height": 64.5,
+        "left": 559,
+        "right": 1235,
+        "top": 296,
+        "width": 676,
+        "x": 559,
+        "y": 296
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 546,
+        "height": 250,
+        "left": 285,
+        "right": 535,
+        "top": 296,
+        "width": 250,
+        "x": 285,
+        "y": 296
+      },
+      "w": 1280
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 450.25,
+        "height": 134,
+        "left": 559,
+        "right": 1235,
+        "top": 316.25,
+        "width": 676,
+        "x": 559,
+        "y": 316.25
+      },
+      "footer": {
+        "bottom": 545,
+        "height": 61,
+        "left": 285,
+        "right": 1235,
+        "top": 484,
+        "width": 950,
+        "x": 285,
+        "y": 484
+      },
+      "h": 720,
+      "name": {
+        "bottom": 282.5,
+        "height": 64.5,
+        "left": 559,
+        "right": 1235,
+        "top": 218,
+        "width": 676,
+        "x": 559,
+        "y": 218
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 468,
+        "height": 250,
+        "left": 285,
+        "right": 535,
+        "top": 218,
+        "width": 250,
+        "x": 285,
+        "y": 218
+      },
+      "w": 1280
+    },
+    {
+      "theme": "?style=vivid",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 528.25,
+        "height": 134,
+        "left": 559,
+        "right": 1235,
+        "top": 394.25,
+        "width": 676,
+        "x": 559,
+        "y": 394.25
+      },
+      "footer": {
+        "bottom": 623,
+        "height": 61,
+        "left": 285,
+        "right": 1235,
+        "top": 562,
+        "width": 950,
+        "x": 285,
+        "y": 562
+      },
+      "h": 720,
+      "name": {
+        "bottom": 360.5,
+        "height": 64.5,
+        "left": 559,
+        "right": 1235,
+        "top": 296,
+        "width": 676,
+        "x": 559,
+        "y": 296
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 546,
+        "height": 250,
+        "left": 285,
+        "right": 535,
+        "top": 296,
+        "width": 250,
+        "x": 285,
+        "y": 296
+      },
+      "w": 1280
+    },
+    {
+      "theme": "?style=vivid",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 450.25,
+        "height": 134,
+        "left": 559,
+        "right": 1235,
+        "top": 316.25,
+        "width": 676,
+        "x": 559,
+        "y": 316.25
+      },
+      "footer": {
+        "bottom": 545,
+        "height": 61,
+        "left": 285,
+        "right": 1235,
+        "top": 484,
+        "width": 950,
+        "x": 285,
+        "y": 484
+      },
+      "h": 720,
+      "name": {
+        "bottom": 282.5,
+        "height": 64.5,
+        "left": 559,
+        "right": 1235,
+        "top": 218,
+        "width": 676,
+        "x": 559,
+        "y": 218
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 468,
+        "height": 250,
+        "left": 285,
+        "right": 535,
+        "top": 218,
+        "width": 250,
+        "x": 285,
+        "y": 218
+      },
+      "w": 1280
+    },
+    {
+      "theme": "",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 515.8828125,
+        "height": 134,
+        "left": 534.2734375,
+        "right": 979,
+        "top": 381.8828125,
+        "width": 444.7265625,
+        "x": 534.2734375,
+        "y": 381.8828125
+      },
+      "footer": {
+        "bottom": 658.2734375,
+        "height": 121,
+        "left": 285,
+        "right": 979,
+        "top": 537.2734375,
+        "width": 694,
+        "x": 285,
+        "y": 537.2734375
+      },
+      "h": 650,
+      "name": {
+        "bottom": 360.5,
+        "height": 64.5,
+        "left": 534.2734375,
+        "right": 979,
+        "top": 296,
+        "width": 444.7265625,
+        "x": 534.2734375,
+        "y": 296
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 521.2734375,
+        "height": 225.2734375,
+        "left": 285,
+        "right": 510.2734375,
+        "top": 296,
+        "width": 225.2734375,
+        "x": 285,
+        "y": 296
+      },
+      "w": 1024
+    },
+    {
+      "theme": "",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 437.8828125,
+        "height": 134,
+        "left": 534.2734375,
+        "right": 979,
+        "top": 303.8828125,
+        "width": 444.7265625,
+        "x": 534.2734375,
+        "y": 303.8828125
+      },
+      "footer": {
+        "bottom": 580.2734375,
+        "height": 121,
+        "left": 285,
+        "right": 979,
+        "top": 459.2734375,
+        "width": 694,
+        "x": 285,
+        "y": 459.2734375
+      },
+      "h": 650,
+      "name": {
+        "bottom": 282.5,
+        "height": 64.5,
+        "left": 534.2734375,
+        "right": 979,
+        "top": 218,
+        "width": 444.7265625,
+        "x": 534.2734375,
+        "y": 218
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 443.2734375,
+        "height": 225.2734375,
+        "left": 285,
+        "right": 510.2734375,
+        "top": 218,
+        "width": 225.2734375,
+        "x": 285,
+        "y": 218
+      },
+      "w": 1024
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 515.8828125,
+        "height": 134,
+        "left": 534.2734375,
+        "right": 979,
+        "top": 381.8828125,
+        "width": 444.7265625,
+        "x": 534.2734375,
+        "y": 381.8828125
+      },
+      "footer": {
+        "bottom": 658.2734375,
+        "height": 121,
+        "left": 285,
+        "right": 979,
+        "top": 537.2734375,
+        "width": 694,
+        "x": 285,
+        "y": 537.2734375
+      },
+      "h": 650,
+      "name": {
+        "bottom": 360.5,
+        "height": 64.5,
+        "left": 534.2734375,
+        "right": 979,
+        "top": 296,
+        "width": 444.7265625,
+        "x": 534.2734375,
+        "y": 296
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 521.2734375,
+        "height": 225.2734375,
+        "left": 285,
+        "right": 510.2734375,
+        "top": 296,
+        "width": 225.2734375,
+        "x": 285,
+        "y": 296
+      },
+      "w": 1024
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 437.8828125,
+        "height": 134,
+        "left": 534.2734375,
+        "right": 979,
+        "top": 303.8828125,
+        "width": 444.7265625,
+        "x": 534.2734375,
+        "y": 303.8828125
+      },
+      "footer": {
+        "bottom": 580.2734375,
+        "height": 121,
+        "left": 285,
+        "right": 979,
+        "top": 459.2734375,
+        "width": 694,
+        "x": 285,
+        "y": 459.2734375
+      },
+      "h": 650,
+      "name": {
+        "bottom": 282.5,
+        "height": 64.5,
+        "left": 534.2734375,
+        "right": 979,
+        "top": 218,
+        "width": 444.7265625,
+        "x": 534.2734375,
+        "y": 218
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 443.2734375,
+        "height": 225.2734375,
+        "left": 285,
+        "right": 510.2734375,
+        "top": 218,
+        "width": 225.2734375,
+        "x": 285,
+        "y": 218
+      },
+      "w": 1024
+    },
+    {
+      "theme": "?style=vivid",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 515.8828125,
+        "height": 134,
+        "left": 534.2734375,
+        "right": 979,
+        "top": 381.8828125,
+        "width": 444.7265625,
+        "x": 534.2734375,
+        "y": 381.8828125
+      },
+      "footer": {
+        "bottom": 658.2734375,
+        "height": 121,
+        "left": 285,
+        "right": 979,
+        "top": 537.2734375,
+        "width": 694,
+        "x": 285,
+        "y": 537.2734375
+      },
+      "h": 650,
+      "name": {
+        "bottom": 360.5,
+        "height": 64.5,
+        "left": 534.2734375,
+        "right": 979,
+        "top": 296,
+        "width": 444.7265625,
+        "x": 534.2734375,
+        "y": 296
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 521.2734375,
+        "height": 225.2734375,
+        "left": 285,
+        "right": 510.2734375,
+        "top": 296,
+        "width": 225.2734375,
+        "x": 285,
+        "y": 296
+      },
+      "w": 1024
+    },
+    {
+      "theme": "?style=vivid",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 437.8828125,
+        "height": 134,
+        "left": 534.2734375,
+        "right": 979,
+        "top": 303.8828125,
+        "width": 444.7265625,
+        "x": 534.2734375,
+        "y": 303.8828125
+      },
+      "footer": {
+        "bottom": 580.2734375,
+        "height": 121,
+        "left": 285,
+        "right": 979,
+        "top": 459.2734375,
+        "width": 694,
+        "x": 285,
+        "y": 459.2734375
+      },
+      "h": 650,
+      "name": {
+        "bottom": 282.5,
+        "height": 64.5,
+        "left": 534.2734375,
+        "right": 979,
+        "top": 218,
+        "width": 444.7265625,
+        "x": 534.2734375,
+        "y": 218
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 443.2734375,
+        "height": 225.2734375,
+        "left": 285,
+        "right": 510.2734375,
+        "top": 218,
+        "width": 225.2734375,
+        "x": 285,
+        "y": 218
+      },
+      "w": 1024
+    },
+    {
+      "theme": "",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 873.59375,
+        "height": 177,
+        "left": 52,
+        "right": 338,
+        "top": 696.59375,
+        "width": 286,
+        "x": 52,
+        "y": 696.59375
+      },
+      "footer": {
+        "bottom": 1108.1875,
+        "height": 218.59375,
+        "left": 52,
+        "right": 338,
+        "top": 889.59375,
+        "width": 286,
+        "x": 52,
+        "y": 889.59375
+      },
+      "h": 844,
+      "name": {
+        "bottom": 680.59375,
+        "height": 135,
+        "left": 164,
+        "right": 338,
+        "top": 545.59375,
+        "width": 174,
+        "x": 164,
+        "y": 545.59375
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 641.59375,
+        "height": 96,
+        "left": 52,
+        "right": 148,
+        "top": 545.59375,
+        "width": 96,
+        "x": 52,
+        "y": 545.59375
+      },
+      "w": 390
+    },
+    {
+      "theme": "",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 710.59375,
+        "height": 177,
+        "left": 52,
+        "right": 338,
+        "top": 533.59375,
+        "width": 286,
+        "x": 52,
+        "y": 533.59375
+      },
+      "footer": {
+        "bottom": 945.1875,
+        "height": 218.59375,
+        "left": 52,
+        "right": 338,
+        "top": 726.59375,
+        "width": 286,
+        "x": 52,
+        "y": 726.59375
+      },
+      "h": 844,
+      "name": {
+        "bottom": 517.59375,
+        "height": 135,
+        "left": 164,
+        "right": 338,
+        "top": 382.59375,
+        "width": 174,
+        "x": 164,
+        "y": 382.59375
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 478.59375,
+        "height": 96,
+        "left": 52,
+        "right": 148,
+        "top": 382.59375,
+        "width": 96,
+        "x": 52,
+        "y": 382.59375
+      },
+      "w": 390
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 873.59375,
+        "height": 177,
+        "left": 52,
+        "right": 338,
+        "top": 696.59375,
+        "width": 286,
+        "x": 52,
+        "y": 696.59375
+      },
+      "footer": {
+        "bottom": 1108.1875,
+        "height": 218.59375,
+        "left": 52,
+        "right": 338,
+        "top": 889.59375,
+        "width": 286,
+        "x": 52,
+        "y": 889.59375
+      },
+      "h": 844,
+      "name": {
+        "bottom": 680.59375,
+        "height": 135,
+        "left": 164,
+        "right": 338,
+        "top": 545.59375,
+        "width": 174,
+        "x": 164,
+        "y": 545.59375
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 641.59375,
+        "height": 96,
+        "left": 52,
+        "right": 148,
+        "top": 545.59375,
+        "width": 96,
+        "x": 52,
+        "y": 545.59375
+      },
+      "w": 390
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 710.59375,
+        "height": 177,
+        "left": 52,
+        "right": 338,
+        "top": 533.59375,
+        "width": 286,
+        "x": 52,
+        "y": 533.59375
+      },
+      "footer": {
+        "bottom": 945.1875,
+        "height": 218.59375,
+        "left": 52,
+        "right": 338,
+        "top": 726.59375,
+        "width": 286,
+        "x": 52,
+        "y": 726.59375
+      },
+      "h": 844,
+      "name": {
+        "bottom": 517.59375,
+        "height": 135,
+        "left": 164,
+        "right": 338,
+        "top": 382.59375,
+        "width": 174,
+        "x": 164,
+        "y": 382.59375
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 478.59375,
+        "height": 96,
+        "left": 52,
+        "right": 148,
+        "top": 382.59375,
+        "width": 96,
+        "x": 52,
+        "y": 382.59375
+      },
+      "w": 390
+    },
+    {
+      "theme": "?style=vivid",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 873.59375,
+        "height": 177,
+        "left": 52,
+        "right": 338,
+        "top": 696.59375,
+        "width": 286,
+        "x": 52,
+        "y": 696.59375
+      },
+      "footer": {
+        "bottom": 1108.1875,
+        "height": 218.59375,
+        "left": 52,
+        "right": 338,
+        "top": 889.59375,
+        "width": 286,
+        "x": 52,
+        "y": 889.59375
+      },
+      "h": 844,
+      "name": {
+        "bottom": 680.59375,
+        "height": 135,
+        "left": 164,
+        "right": 338,
+        "top": 545.59375,
+        "width": 174,
+        "x": 164,
+        "y": 545.59375
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 641.59375,
+        "height": 96,
+        "left": 52,
+        "right": 148,
+        "top": 545.59375,
+        "width": 96,
+        "x": 52,
+        "y": 545.59375
+      },
+      "w": 390
+    },
+    {
+      "theme": "?style=vivid",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 710.59375,
+        "height": 177,
+        "left": 52,
+        "right": 338,
+        "top": 533.59375,
+        "width": 286,
+        "x": 52,
+        "y": 533.59375
+      },
+      "footer": {
+        "bottom": 945.1875,
+        "height": 218.59375,
+        "left": 52,
+        "right": 338,
+        "top": 726.59375,
+        "width": 286,
+        "x": 52,
+        "y": 726.59375
+      },
+      "h": 844,
+      "name": {
+        "bottom": 517.59375,
+        "height": 135,
+        "left": 164,
+        "right": 338,
+        "top": 382.59375,
+        "width": 174,
+        "x": 164,
+        "y": 382.59375
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 478.59375,
+        "height": 96,
+        "left": 52,
+        "right": 148,
+        "top": 382.59375,
+        "width": 96,
+        "x": 52,
+        "y": 382.59375
+      },
+      "w": 390
+    },
+    {
+      "theme": "",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 968.890625,
+        "height": 201,
+        "left": 52,
+        "right": 268,
+        "top": 767.890625,
+        "width": 216,
+        "x": 52,
+        "y": 767.890625
+      },
+      "footer": {
+        "bottom": 1304.484375,
+        "height": 319.59375,
+        "left": 52,
+        "right": 268,
+        "top": 984.890625,
+        "width": 216,
+        "x": 52,
+        "y": 984.890625
+      },
+      "h": 780,
+      "name": {
+        "bottom": 751.890625,
+        "height": 186,
+        "left": 164,
+        "right": 268,
+        "top": 565.890625,
+        "width": 104,
+        "x": 164,
+        "y": 565.890625
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 661.890625,
+        "height": 96,
+        "left": 52,
+        "right": 148,
+        "top": 565.890625,
+        "width": 96,
+        "x": 52,
+        "y": 565.890625
+      },
+      "w": 320
+    },
+    {
+      "theme": "",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 805.890625,
+        "height": 201,
+        "left": 52,
+        "right": 268,
+        "top": 604.890625,
+        "width": 216,
+        "x": 52,
+        "y": 604.890625
+      },
+      "footer": {
+        "bottom": 1141.484375,
+        "height": 319.59375,
+        "left": 52,
+        "right": 268,
+        "top": 821.890625,
+        "width": 216,
+        "x": 52,
+        "y": 821.890625
+      },
+      "h": 780,
+      "name": {
+        "bottom": 588.890625,
+        "height": 186,
+        "left": 164,
+        "right": 268,
+        "top": 402.890625,
+        "width": 104,
+        "x": 164,
+        "y": 402.890625
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 498.890625,
+        "height": 96,
+        "left": 52,
+        "right": 148,
+        "top": 402.890625,
+        "width": 96,
+        "x": 52,
+        "y": 402.890625
+      },
+      "w": 320
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 968.890625,
+        "height": 201,
+        "left": 52,
+        "right": 268,
+        "top": 767.890625,
+        "width": 216,
+        "x": 52,
+        "y": 767.890625
+      },
+      "footer": {
+        "bottom": 1304.484375,
+        "height": 319.59375,
+        "left": 52,
+        "right": 268,
+        "top": 984.890625,
+        "width": 216,
+        "x": 52,
+        "y": 984.890625
+      },
+      "h": 780,
+      "name": {
+        "bottom": 751.890625,
+        "height": 186,
+        "left": 164,
+        "right": 268,
+        "top": 565.890625,
+        "width": 104,
+        "x": 164,
+        "y": 565.890625
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 661.890625,
+        "height": 96,
+        "left": 52,
+        "right": 148,
+        "top": 565.890625,
+        "width": 96,
+        "x": 52,
+        "y": 565.890625
+      },
+      "w": 320
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 805.890625,
+        "height": 201,
+        "left": 52,
+        "right": 268,
+        "top": 604.890625,
+        "width": 216,
+        "x": 52,
+        "y": 604.890625
+      },
+      "footer": {
+        "bottom": 1141.484375,
+        "height": 319.59375,
+        "left": 52,
+        "right": 268,
+        "top": 821.890625,
+        "width": 216,
+        "x": 52,
+        "y": 821.890625
+      },
+      "h": 780,
+      "name": {
+        "bottom": 588.890625,
+        "height": 186,
+        "left": 164,
+        "right": 268,
+        "top": 402.890625,
+        "width": 104,
+        "x": 164,
+        "y": 402.890625
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 498.890625,
+        "height": 96,
+        "left": 52,
+        "right": 148,
+        "top": 402.890625,
+        "width": 96,
+        "x": 52,
+        "y": 402.890625
+      },
+      "w": 320
+    },
+    {
+      "theme": "?style=vivid",
+      "role": "administrator",
+      "clipped": [],
+      "facts": {
+        "bottom": 968.890625,
+        "height": 201,
+        "left": 52,
+        "right": 268,
+        "top": 767.890625,
+        "width": 216,
+        "x": 52,
+        "y": 767.890625
+      },
+      "footer": {
+        "bottom": 1304.484375,
+        "height": 319.59375,
+        "left": 52,
+        "right": 268,
+        "top": 984.890625,
+        "width": 216,
+        "x": 52,
+        "y": 984.890625
+      },
+      "h": 780,
+      "name": {
+        "bottom": 751.890625,
+        "height": 186,
+        "left": 164,
+        "right": 268,
+        "top": 565.890625,
+        "width": 104,
+        "x": 164,
+        "y": 565.890625
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 661.890625,
+        "height": 96,
+        "left": 52,
+        "right": 148,
+        "top": 565.890625,
+        "width": 96,
+        "x": 52,
+        "y": 565.890625
+      },
+      "w": 320
+    },
+    {
+      "theme": "?style=vivid",
+      "role": "club-director",
+      "clipped": [],
+      "facts": {
+        "bottom": 805.890625,
+        "height": 201,
+        "left": 52,
+        "right": 268,
+        "top": 604.890625,
+        "width": 216,
+        "x": 52,
+        "y": 604.890625
+      },
+      "footer": {
+        "bottom": 1141.484375,
+        "height": 319.59375,
+        "left": 52,
+        "right": 268,
+        "top": 821.890625,
+        "width": 216,
+        "x": 52,
+        "y": 821.890625
+      },
+      "h": 780,
+      "name": {
+        "bottom": 588.890625,
+        "height": 186,
+        "left": 164,
+        "right": 268,
+        "top": 402.890625,
+        "width": 104,
+        "x": 164,
+        "y": 402.890625
+      },
+      "overflow": false,
+      "photo": {
+        "bottom": 498.890625,
+        "height": 96,
+        "left": 52,
+        "right": 148,
+        "top": 402.890625,
+        "width": 96,
+        "x": 52,
+        "y": 402.890625
+      },
+      "w": 320
+    }
+  ],
+  "sales": [
+    {
+      "size": 1280,
+      "stage": "goods",
+      "clipped": [],
+      "horizontal": false
+    },
+    {
+      "size": 1024,
+      "stage": "goods",
+      "clipped": [],
+      "horizontal": false
+    },
+    {
+      "size": 390,
+      "stage": "goods",
+      "clipped": [],
+      "horizontal": false
+    },
+    {
+      "size": 320,
+      "stage": "goods",
+      "clipped": [],
+      "horizontal": false
+    }
+  ]
+}

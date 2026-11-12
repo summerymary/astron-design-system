@@ -1,0 +1,1413 @@
+{
+  "sameProfileGeometry": true,
+  "matrix": [
+    {
+      "section": "schedule",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "trainer-clients",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-catalog",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-sales",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-inventory",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "registration",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "services",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "members",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "products",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "cash",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "crm",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "requests",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "messages",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "reviews",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "memberships",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "calls",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "notifications",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "directories",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "statistics",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "settings",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "employees",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "positions",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "absences",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "payroll",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "clubs",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "rooms",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "receptions",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "training-templates",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "training-groups",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "schedule-calendar",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "service-settings",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-categories",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-collections",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "inventory",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "cameras",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "rbac",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "security",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "event-logs",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "leads",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "segments",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "pipelines",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "retention",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "external-messages",
+      "style": "",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "schedule",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "trainer-clients",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-catalog",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-sales",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-inventory",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "registration",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "services",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "members",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "products",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "cash",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "crm",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "requests",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "messages",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "reviews",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "memberships",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "calls",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "notifications",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "directories",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "statistics",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "settings",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "employees",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "positions",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "absences",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "payroll",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "clubs",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "rooms",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "receptions",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "training-templates",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "training-groups",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "schedule-calendar",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "service-settings",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-categories",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "bar-collections",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "inventory",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "cameras",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "rbac",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "security",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "event-logs",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "leads",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "segments",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "pipelines",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "retention",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "external-messages",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 720,
+      "horizontal": false,
+      "width": 1280
+    },
+    {
+      "section": "schedule",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "trainer-clients",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-catalog",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-sales",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-inventory",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "registration",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "services",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "members",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "products",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "cash",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "crm",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "requests",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "messages",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "reviews",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "memberships",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "calls",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "notifications",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "directories",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "statistics",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "settings",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "employees",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "positions",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "absences",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "payroll",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "clubs",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "rooms",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "receptions",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "training-templates",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "training-groups",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "schedule-calendar",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "service-settings",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-categories",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-collections",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "inventory",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "cameras",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "rbac",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "security",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "event-logs",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "leads",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "segments",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "pipelines",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "retention",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "external-messages",
+      "style": "",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "schedule",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "trainer-clients",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-catalog",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-sales",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-inventory",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "registration",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "services",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "members",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "products",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "cash",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "crm",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "requests",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "messages",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "reviews",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "memberships",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "calls",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "notifications",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "directories",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "statistics",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "settings",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "employees",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "positions",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "absences",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "payroll",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "clubs",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "rooms",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "receptions",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "training-templates",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "training-groups",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "schedule-calendar",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "service-settings",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-categories",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "bar-collections",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "inventory",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "cameras",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "rbac",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "security",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "event-logs",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "leads",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "segments",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "pipelines",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "retention",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    },
+    {
+      "section": "external-messages",
+      "style": "?style=vivid",
+      "clipped": [],
+      "height": 844,
+      "horizontal": false,
+      "width": 390
+    }
+  ]
+}
