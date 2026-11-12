@@ -3,7 +3,6 @@ import { daysInClub as countDaysInClub, demoStamp, nextDemoNow } from '../lib/de
 import { useCallback, useState } from 'react';
 import type { ReactNode } from 'react';
 import {
-  ArrowUpRight,
   CalendarDays,
   Camera,
   Check,
@@ -17,7 +16,15 @@ import {
   ShoppingBag,
   Wallet,
 } from 'lucide-react';
-import { Avatar, Button, IconButton, Modal, StateContent, StatusBadge } from '../components/ui';
+import {
+  Avatar,
+  Button,
+  DisclosureMenu,
+  IconButton,
+  Modal,
+  StateContent,
+  StatusBadge,
+} from '../components/ui';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { Back, DataTable, Empty, Notice, RecordForm, Tabs } from '../components/WorkspaceUI';
 import { TODAY } from '../data/workspace';
@@ -188,34 +195,54 @@ export function ClientProfile({
                     >
                       <Edit3 size={18} />
                     </IconButton>
-                    <details className="client-more">
-                      <summary aria-label="Другие действия" title="Другие действия">
-                        <MoreHorizontal size={19} />
-                      </summary>
+                    <DisclosureMenu
+                      className="client-more"
+                      label="Другие действия"
+                      icon={<MoreHorizontal size={19} />}
+                    >
                       <div>
-                        {[
-                          'Зачислить нулём',
-                          'Продать подарочную',
-                          'Добавить комментарий',
-                          'Добавить отзыв',
-                        ].map((action) => (
-                          <button
-                            key={action}
-                            type="button"
-                            onClick={(e) => {
-                              e.currentTarget.closest('details')?.removeAttribute('open');
-                              if (action === 'Добавить комментарий') setForm('comment');
-                              else setPreviewAction(action);
-                            }}
-                          >
-                            {action}
-                          </button>
-                        ))}
+                        {['Зачислить нулём', 'Продать подарочную', 'Добавить отзыв'].map(
+                          (action) => (
+                            <button
+                              key={action}
+                              type="button"
+                              onClick={() => {
+                                setPreviewAction(action);
+                              }}
+                            >
+                              {action}
+                            </button>
+                          ),
+                        )}
                       </div>
-                    </details>
+                    </DisclosureMenu>
                   </div>
                 )}
               </div>
+              <div className="client-facts-row">
+                <dl className="client-contact-facts">
+                  <Fact label="Телефон">
+                    <span className="client-phone">
+                      {phoneHidden ? hiddenPhone(member.phone) : member.phone}
+                      <IconButton
+                        variant="secondary"
+                        label="Позвонить клиенту"
+                        title="Позвонить клиенту"
+                        onClick={() => {
+                          setCallActive(false);
+                          setPreviewAction('Звонок клиенту');
+                        }}
+                      >
+                        <Phone size={18} />
+                      </IconButton>
+                    </span>
+                  </Fact>
+                  <Fact label="Дата рождения">{profile.birthDate}</Fact>
+                  <Fact label="Пол">{profile.gender}</Fact>
+                  <Fact label="Организация">{profile.organization}</Fact>
+                </dl>
+              </div>
+              {balanceBlock}
               {!canOperate && canSell && (
                 <div className="client-primary-actions">
                   <Button
@@ -244,30 +271,6 @@ export function ClientProfile({
                   </Button>
                 </div>
               )}
-              <div className="client-facts-row">
-                <dl className="client-contact-facts">
-                  <Fact label="Телефон">
-                    <span className="client-phone">
-                      {phoneHidden ? hiddenPhone(member.phone) : member.phone}
-                      <IconButton
-                        variant="secondary"
-                        label="Позвонить клиенту"
-                        title="Позвонить клиенту"
-                        onClick={() => {
-                          setCallActive(false);
-                          setPreviewAction('Звонок клиенту');
-                        }}
-                      >
-                        <Phone size={18} />
-                      </IconButton>
-                    </span>
-                  </Fact>
-                  <Fact label="Дата рождения">{profile.birthDate}</Fact>
-                  <Fact label="Пол">{profile.gender}</Fact>
-                  <Fact label="Организация">{profile.organization}</Fact>
-                </dl>
-              </div>
-              {balanceBlock}
             </div>
           </section>
           {canOperate && clientAge !== null && clientAge < 14 && (
@@ -315,11 +318,6 @@ export function ClientProfile({
                   {tab === 'subscriptions' && (
                     <div className="client-section-heading">
                       <span>{activeCount} действующих</span>
-                      {canOperate && (
-                        <button className="client-text-action" onClick={() => onAction('services')}>
-                          Продать услугу <ArrowUpRight size={14} />
-                        </button>
-                      )}
                     </div>
                   )}
                   {tab === 'subscriptions' && (
