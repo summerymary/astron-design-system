@@ -933,7 +933,7 @@ export function App() {
               </div>
               <button
                 type="button"
-                className="icon-button sidebar-toggle"
+                className="sidebar-toggle"
                 aria-label={sidebarCollapsed ? 'Развернуть меню' : 'Свернуть меню'}
                 title={sidebarCollapsed ? 'Развернуть меню' : 'Свернуть меню'}
                 aria-expanded={!sidebarCollapsed}
