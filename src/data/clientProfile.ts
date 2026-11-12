@@ -12,7 +12,7 @@ export const clientTabs = [
   { id: 'info', label: 'Информация' },
   { id: 'bookings', label: 'Предзапись' },
   { id: 'messages', label: 'Переписка' },
-  { id: 'actions', label: 'Активность' },
+  { id: 'actions', label: 'События' },
   { id: 'calls', label: 'Звонки' },
   { id: 'reviews', label: 'Отзывы' },
 ] as const;
