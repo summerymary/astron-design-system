@@ -1,105 +1,110 @@
-@layer legacy {
-/* Client lookup is the primary reception tool. Keep it wide and centered. */
-.app-shell .app-topbar.admin-topbar {
-  padding: 12px 24px;
-  height: auto;
-}
-.app-shell .admin-topbar .admin-header-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
-  gap: 10px 12px;
-  width: 100%;
-  max-width: 1120px;
-  margin-inline: auto;
-}
-.app-shell .admin-topbar .workstation-control {
-  grid-area: 1 / 1;
-  min-width: 0;
-  max-width: 300px;
-  width: 100%;
-}
-.app-shell .admin-topbar .admin-header-indicators {
-  grid-area: 1 / 2;
-  margin: 0;
-  gap: 6px;
-}
-.app-shell .admin-topbar .admin-lock-button {
-  grid-area: 1 / 3;
-}
-.app-shell .admin-topbar .quick-card.client-search {
-  grid-area: 2 / 1;
-  width: 100%;
-  min-width: 0;
-  max-width: none;
-  height: 64px;
-  border-width: 1.5px;
-  background: var(--color-surface);
-}
-.app-shell .admin-topbar .quick-card.client-search input {
-  font-size: 18px;
-  min-width: 0;
-}
-.app-shell .admin-topbar .quick-card.client-search > svg {
-  width: 22px;
-  height: 22px;
-}
-.app-shell .admin-topbar .admin-header-actions {
-  grid-area: 2 / 2 / 3 / 4;
-  display: flex;
-  gap: 8px;
-  width: auto;
-  margin: 0;
-}
-.app-shell .admin-topbar .admin-header-actions > button {
-  width: auto;
-  min-width: 0;
-  flex: 0 0 auto;
-}
-.app-shell .admin-topbar .admin-header-actions > button > span { display: inline; }
-.app-shell .admin-topbar .admin-header-actions > button[aria-current='page']:not(.button-primary) {
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-}
-@container workspace (max-width: 1100px) and (min-width: 701px) {
-  .app-shell .admin-topbar .header-inbox > span {
-    display: none;
-  }
-}
-@container workspace (max-width: 700px) {
+@layer pages {
+  /* Client lookup is the primary reception tool. Keep it wide and centered. */
   .app-shell .app-topbar.admin-topbar {
-    padding: 10px 16px;
+    padding: 8px 24px;
     min-height: 0;
+    height: auto;
   }
   .app-shell .admin-topbar .admin-header-content {
-    gap: 8px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 8px 12px;
+    width: 100%;
+    max-width: 1120px;
+    margin-inline: auto;
   }
   .app-shell .admin-topbar .workstation-control {
+    grid-area: 1 / 1;
+    min-width: 0;
     max-width: none;
+    width: 100%;
+  }
+  .app-shell .admin-topbar .admin-header-indicators {
+    grid-area: 1 / 2;
+    margin: 0;
+    gap: 6px;
+  }
+  .app-shell .admin-topbar .admin-lock-button {
+    grid-area: 1 / 3;
   }
   .app-shell .admin-topbar .quick-card.client-search {
-    grid-area: 2 / 1 / 3 / 4;
-    height: 56px;
+    grid-area: 2 / 1;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    height: var(--control-height);
+    border-width: 1px;
+    background: var(--color-surface);
   }
   .app-shell .admin-topbar .quick-card.client-search input {
     font-size: 16px;
+    min-width: 0;
+  }
+  .app-shell .admin-topbar .quick-card.client-search > svg {
+    width: 20px;
+    height: 20px;
   }
   .app-shell .admin-topbar .admin-header-actions {
-    grid-area: 3 / 1 / 4 / 4;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: 100%;
-    gap: 6px;
+    grid-area: 2 / 2 / 3 / 4;
+    display: flex;
+    gap: 8px;
+    width: auto;
+    margin: 0;
   }
   .app-shell .admin-topbar .admin-header-actions > button {
-    width: 100%;
+    width: auto;
+    min-width: 0;
+    flex: 0 0 auto;
   }
   .app-shell .admin-topbar .admin-header-actions > button > span {
-    white-space: normal;
+    display: inline;
   }
-  .app-shell .admin-topbar .admin-header-actions > .header-add-client-action {
-    grid-column: 1 / -1;
+  .app-shell
+    .admin-topbar
+    .admin-header-actions
+    > button[aria-current='page']:not(.button-primary) {
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    border-color: var(--color-accent);
   }
-}
-
+  @container workspace (max-width: 1100px) and (min-width: 701px) {
+    .app-shell .admin-topbar .header-inbox > span {
+      display: none;
+    }
+  }
+  @container workspace (max-width: 700px) {
+    .app-shell .app-topbar.admin-topbar {
+      padding: 8px 16px;
+      min-height: 0;
+    }
+    .app-shell .admin-topbar .admin-header-content {
+      gap: 8px;
+    }
+    .app-shell .admin-topbar .workstation-control {
+      max-width: none;
+    }
+    .app-shell .admin-topbar .quick-card.client-search {
+      grid-area: 2 / 1 / 3 / 4;
+      height: var(--control-height);
+    }
+    .app-shell .admin-topbar .quick-card.client-search input {
+      font-size: 16px;
+    }
+    .app-shell .admin-topbar .admin-header-actions {
+      grid-area: 3 / 1 / 4 / 4;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      width: 100%;
+      gap: 6px;
+    }
+    .app-shell .admin-topbar .admin-header-actions > button {
+      width: 100%;
+    }
+    .app-shell .admin-topbar .admin-header-actions > button > span {
+      white-space: normal;
+    }
+    .app-shell .admin-topbar .admin-header-actions > .header-add-client-action {
+      grid-column: 1 / -1;
+    }
+  }
 }

@@ -177,3 +177,15 @@
 }
 
 }
+
+@layer pages {
+  @media (min-width: 1000px) and (min-height: 650px) {
+    /* Natural-height content must overflow into its scroll owner, never shrink and clip. */
+    .fits-workspace .workspace-page-body > :not(.sale-workspace, .messenger-workspace) {
+      flex-shrink: 0;
+    }
+    .fits-workspace .sale-main > .ws-panel {
+      flex-shrink: 0;
+    }
+  }
+}

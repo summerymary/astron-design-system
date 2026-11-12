@@ -1,10 +1,64 @@
 /* Shared component contract. Page CSS owns placement; this file owns appearance
    and interaction states. Existing page sheets live in @layer legacy so they
    cannot override a shared control. Document new families in src/design-system/registry.ts. */
-:root[data-visual-style='vivid'] {
-  --surface-border: var(--vivid-panel-border);
-  --button-primary-fill: linear-gradient(135deg, #c42d54, #ab2543);
-  --button-primary-shadow: 0 3px 8px #94223520;
+body [data-ui='disclosure-menu'] {
+  position: relative;
+}
+body [data-ui='disclosure-menu'] > summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-height);
+  height: var(--control-height);
+  border: 1px solid var(--color-control-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  list-style: none;
+}
+body [data-ui='disclosure-menu'] > summary::-webkit-details-marker {
+  display: none;
+}
+body [data-ui='disclosure-menu'][open] > summary {
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
+}
+body [data-ui='disclosure-menu'] > div {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 4px);
+  right: 0;
+  width: max-content;
+  min-width: min(220px, calc(100vw - 48px));
+  max-width: calc(100vw - 48px);
+  padding: 6px;
+  background: var(--color-surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-popup);
+}
+body [data-ui='disclosure-menu'] > div > button {
+  display: block;
+  width: 100%;
+  min-height: var(--control-height);
+  padding: 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text);
+  font-size: var(--control-font-size);
+  line-height: 24px;
+  text-align: left;
+  cursor: pointer;
+}
+body [data-ui='disclosure-menu'] > div > button:hover {
+  background: var(--color-surface-muted);
+}
+body [data-ui='disclosure-menu'] :is(summary, button):focus-visible {
+  outline: var(--focus-width) solid var(--color-accent);
+  outline-offset: -2px;
 }
 body .button.button {
   --button-height: var(--control-height);
@@ -486,7 +540,10 @@ body .client-balance {
   border-radius: 0;
   background: transparent;
 }
-body .client-balance > strong { font-size: 28px; line-height: 1.2; }
+body .client-balance > strong {
+  font-size: 28px;
+  line-height: 1.2;
+}
 body .client-balance > div {
   flex-direction: row;
   align-items: center;
@@ -508,8 +565,82 @@ body .client-more > summary:focus-visible {
   outline: var(--focus-width) solid var(--color-accent);
   outline-offset: 2px;
 }
-body .reception-shift { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; color: var(--color-muted); font-size: 14px; }
-body .reception-shift strong { color: var(--color-ink); font-size: 16px; font-weight: 600; }
+body .reception-shift {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+body .reception-shift strong {
+  color: var(--color-ink);
+  font-size: 16px;
+  font-weight: 600;
+}
+/* Reception context is a compact textual control, with no repeated club logo. */
+body .admin-topbar .client-search input,
+body .admin-topbar .client-search input::placeholder {
+  font-size: var(--text-body);
+}
+body .workstation-button {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  min-height: var(--control-height);
+  gap: 8px;
+  padding: 0;
+}
+body .workstation-button .workstation-context {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+body .workstation-context strong,
+body .workstation-context small {
+  font-size: var(--text-caption);
+  line-height: 20px;
+}
+body .workstation-context strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+body .workstation-context small {
+  flex-shrink: 0;
+}
+body .workstation-context-divider {
+  color: var(--color-muted);
+}
+body .workstation-button > svg {
+  flex-shrink: 0;
+  align-self: center;
+  width: 14px;
+  height: 14px;
+  margin: 0;
+}
+body .workstation-button:focus-visible {
+  outline: var(--focus-width) solid var(--color-accent);
+  outline-offset: var(--focus-offset);
+  border-radius: var(--radius-control);
+}
+@container workspace (max-width: 700px) {
+  body .workstation-button .workstation-context {
+    display: grid;
+    gap: 0;
+    text-align: left;
+  }
+  body .workstation-context-divider {
+    display: none;
+  }
+  body .workstation-context small {
+    font-size: 12px;
+  }
+}
 body input:is([type='checkbox'], [type='radio']) {
   width: 18px;
   height: 18px;
@@ -709,4 +840,88 @@ body [data-ui='stats'] strong {
   body [data-ui='stats'] > div:nth-child(even) {
     border-inline-end: 0;
   }
+}
+
+/* Contrast: the Astron palette, with a second inward stroke, never a layout change. */
+:root[data-visual-style='vivid'] {
+  --surface-border: var(--color-line);
+  --button-primary-fill: var(--color-action);
+  --button-primary-shadow: none;
+  --color-divider: var(--color-line);
+}
+:root[data-visual-style='vivid']
+  body
+  :is(
+    .panel,
+    .client-identity,
+    .client-history,
+    .client-info-card,
+    .messenger-shell,
+    .directory-search-panel
+  ) {
+  border-color: var(--surface-border);
+  box-shadow: inset 0 0 0 1px var(--surface-border);
+}
+:root[data-visual-style='vivid']
+  body
+  :is(.select-popover, .client-search-dropdown, .modal, [data-ui='disclosure-menu'] > div) {
+  border-color: var(--surface-border);
+  box-shadow:
+    inset 0 0 0 1px var(--surface-border),
+    var(--shadow-popup);
+}
+:root[data-visual-style='vivid']
+  body
+  :is(
+    .button-primary,
+    .button-secondary,
+    .button-accent,
+    .button-danger,
+    [data-ui='icon-button'][data-variant='secondary'],
+    [data-ui='disclosure-menu'] > summary,
+    .select-trigger,
+    .search-field,
+    .quick-card.client-search,
+    .sale-name-search > div,
+    .calendar-date input,
+    .form-field input:not([type='checkbox']):not([type='radio']):not([type='color']),
+    .form-field textarea
+  ) {
+  box-shadow: inset 0 0 0 1px var(--contour-color, var(--color-control-border));
+}
+:root[data-visual-style='vivid'] body .button-primary {
+  --contour-color: var(--color-action-border);
+}
+:root[data-visual-style='vivid'] body .button-accent,
+:root[data-visual-style='vivid'] body [data-ui='disclosure-menu'][open] > summary,
+:root[data-visual-style='vivid'] body .select-trigger[aria-expanded='true'],
+:root[data-visual-style='vivid']
+  body
+  :is(.search-field, .quick-card.client-search, .sale-name-search > div):focus-within,
+:root[data-visual-style='vivid']
+  body
+  :is(
+    .button-secondary:hover,
+    .select-trigger:focus-visible,
+    .form-field input:focus-visible,
+    .form-field textarea:focus-visible
+  ) {
+  --contour-color: var(--color-accent);
+}
+:root[data-visual-style='vivid'] body .button-danger,
+:root[data-visual-style='vivid']
+  body
+  :is(.quick-card-error, .form-field.field-error input, .form-field [aria-invalid='true']) {
+  --contour-color: var(--color-danger);
+}
+:root[data-visual-style='vivid']
+  body
+  :is(.button, .select-trigger, .form-field input, .form-field textarea):disabled {
+  --contour-color: var(--color-line);
+}
+:root[data-visual-style='vivid'] body .sidebar .side-nav button.active {
+  box-shadow: inset 0 0 0 2px var(--color-accent);
+}
+:root[data-visual-style='vivid'] body .ui-tabs[data-ui='tabs'] > button[aria-selected='true'] {
+  box-shadow: inset 0 -3px var(--color-accent);
 }
