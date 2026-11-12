@@ -231,6 +231,32 @@ body :is(.button, .icon-button, .search-clear, .text-link, .ws-record-link):focu
   outline: var(--focus-width) solid var(--color-accent);
   outline-offset: var(--focus-offset);
 }
+/* Scrollable navigation/card grids must keep the focus indicator inside the target. */
+body .sale-section-link.catalog-section-card:hover {
+  outline: none;
+  border-color: var(--color-accent);
+}
+body .membership-catalog-card:hover .membership-plastic {
+  outline: none;
+  border-color: var(--color-accent);
+}
+body .membership-catalog-conditions .pass-access-note {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 21px;
+}
+body
+  :is(
+    .sale-section-link.catalog-section-card,
+    .membership-catalog-card,
+    .sidebar .side-nav button,
+    .sidebar .management-nav-group > summary,
+    .sidebar .nav-accordion > summary
+  ):focus-visible {
+  outline: var(--focus-width) solid var(--color-accent);
+  outline-offset: -4px;
+}
 body .form-field.form-field {
   gap: var(--field-gap);
 }

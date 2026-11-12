@@ -827,3 +827,26 @@ button.membership-kind-card {
 }
 
 }
+
+@layer pages {
+.membership-catalog-conditions {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+}
+.membership-catalog-meta {
+  margin-top: auto;
+}
+@supports (grid-template-rows: subgrid) {
+  .membership-catalog-card {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    row-gap: 10px;
+  }
+  .membership-catalog-meta {
+    align-self: end;
+    margin-top: 0;
+  }
+}
+}
