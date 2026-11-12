@@ -139,7 +139,6 @@ export function AdminSection({
   if (section === 'cash')
     return (
       <CashWorkspace
-        navigate={navigate}
         clubName={clubName}
         employeeName={employeeName}
         members={members}

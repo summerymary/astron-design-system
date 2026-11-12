@@ -405,14 +405,16 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
             detail={`${quantityLabel(row.duration, 'day')} · ${row.type === 'Безлимитный' ? 'безлимит посещений' : quantityLabel(row.visits, 'visit')}`}
             footer={money(row.price)}
           />
-          {accessWindowLabel(row) && (
-            <span className="pass-access-note">{accessWindowLabel(row)}</span>
-          )}
-          {row.ageMin && (
-            <span className="pass-access-note">
-              Возраст {row.ageMin}–{row.ageMax} лет
-            </span>
-          )}
+          <span className="membership-catalog-conditions">
+            {accessWindowLabel(row) && (
+              <span className="pass-access-note">{accessWindowLabel(row)}</span>
+            )}
+            {row.ageMin && (
+              <span className="pass-access-note">
+                Возраст {row.ageMin}–{row.ageMax} лет
+              </span>
+            )}
+          </span>
           <span className="membership-catalog-meta">
             <Status>{row.status}</Status>
             <span>{row.online === 'Доступен' ? 'Доступен онлайн' : 'В клубе'}</span>

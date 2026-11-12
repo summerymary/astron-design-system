@@ -1,18 +1,10 @@
 import { clientName } from '../lib/client-display';
 import { demoStamp, nextDemoNow } from '../lib/demo-clock';
 import { useCallback, useEffect, useState } from 'react';
-import {
-  ArrowDownLeft,
-  ArrowUpRight,
-  Banknote,
-  ChevronRight,
-  CreditCard,
-  ReceiptText,
-} from 'lucide-react';
+import { ArrowDownLeft, ArrowUpRight, Banknote, ChevronRight, CreditCard } from 'lucide-react';
 import { Button, Modal } from '../components/ui';
 import { Select } from '../components/Select';
 import { Empty, Notice, Stats, Tabs } from '../components/WorkspaceUI';
-import type { Navigate } from '../components/WorkspaceUI';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { money, prettyDate, TODAY } from '../data/workspace';
 import type { Member } from '../types';
@@ -43,13 +35,11 @@ const commands = {
 type Command = keyof typeof commands;
 
 export function CashWorkspace({
-  navigate,
   clubName,
   employeeName,
   members,
   onMember,
 }: {
-  navigate: Navigate;
   clubName: string;
   employeeName: string;
   members: Member[];
@@ -183,10 +173,6 @@ export function CashWorkspace({
             setMessage('');
           }}
         />
-        <Button variant="secondary" onClick={() => navigate('services')}>
-          <ReceiptText size={17} />
-          Продать
-        </Button>
       </div>
       {message && <Notice tone="success">{message}</Notice>}
       <section className="panel ws-panel cash-main-panel">

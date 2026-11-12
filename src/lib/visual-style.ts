@@ -15,9 +15,10 @@ export function readVisualStyle(search: string): VisualStyle {
   return new URLSearchParams(search).get('style') === 'vivid' ? 'vivid' : 'astron';
 }
 
-// Astron colours with stronger contours; geometry and semantic colours are shared.
+// Astron colours with a light greige canvas and stronger contours; geometry is shared.
 export const VIVID_OVERRIDES = {
   ...ASTRON_TOKENS,
+  '--color-canvas': '#F4F3F0',
   '--color-line': '#B8AEA6',
   '--color-control-border': '#746C63',
 } satisfies Partial<ThemeTokens>;

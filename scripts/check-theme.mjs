@@ -79,10 +79,11 @@ for (const preset of THEME_PRESETS) {
     );
   }
   for (const key of Object.keys(ASTRON_TOKENS).filter(
-    (key) => !['--color-line', '--color-control-border'].includes(key),
+    (key) => !['--color-canvas', '--color-line', '--color-control-border'].includes(key),
   )) {
     assert.equal(alternative[key], ASTRON_TOKENS[key], `${key}: Contrast drifted from Astron`);
   }
+  assert.equal(alternative['--color-canvas'], '#F4F3F0');
   assert.ok(
     contrastRatio(alternative['--color-line'], alternative['--color-surface']) >
       contrastRatio(ASTRON_TOKENS['--color-line'], ASTRON_TOKENS['--color-surface']),
