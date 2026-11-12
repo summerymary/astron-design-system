@@ -12,6 +12,7 @@ import './styles/guide.css';
 import './styles/typography.css';
 import './styles/layout.css';
 import './styles/memberships.css';
+import './styles/client-search.css';
 import './styles/visual-style.css';
 import './styles/components.css';
 

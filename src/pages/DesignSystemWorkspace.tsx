@@ -40,6 +40,14 @@ export function DesignSystemWorkspace() {
           <div className="guide-appearance-actions">
             <ThemeSelect />
             <a
+              className="button button-secondary"
+              href="./developer/"
+              target="_blank"
+              rel="noopener"
+            >
+              Разработчику <ArrowUpRight size={15} />
+            </a>
+            <a
               className="button button-secondary guide-open-prototype"
               href={`./${appearanceSearch(palette.primary, visualStyle)}#/overview?device=desktop&state=default&role=administrator`}
               target="_blank"

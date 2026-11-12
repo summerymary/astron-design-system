@@ -155,7 +155,7 @@ export function SearchBox({
       {value && (
         <button
           type="button"
-          className="icon-button"
+          className="icon-button search-clear"
           aria-label="Очистить поиск"
           onClick={() => onChange('')}
         >

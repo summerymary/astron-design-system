@@ -21,7 +21,9 @@
     "test:checkout": "node scripts/check-checkout.mjs",
     "test:cash": "node scripts/check-cash.mjs",
     "test:crm": "node scripts/check-crm.mjs",
-    "test:ui": "node scripts/check-ui.mjs"
+    "test:ui": "node scripts/check-ui.mjs",
+    "docs:export": "node scripts/export-design-system.mjs",
+    "test:handoff": "node scripts/export-design-system.mjs --check"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

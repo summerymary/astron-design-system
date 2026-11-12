@@ -1,0 +1,6884 @@
+{
+  "views": [
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "overview",
+      "title": "Ресепшен · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "trainer",
+      "path": "overview",
+      "title": "Мой тренировочный день · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "overview",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "club-director",
+      "path": "overview",
+      "title": "Пульс клуба · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "network-director",
+      "path": "overview",
+      "title": "Обзор сети · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "overview",
+      "title": "Маркетинг сети · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "fitness-director",
+      "path": "overview",
+      "title": "Фитнес-направление · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "operations-director",
+      "path": "overview",
+      "title": "Операционная работа · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "overview",
+      "title": "Системное управление · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "accountant",
+      "path": "overview",
+      "title": "Финансы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "members",
+      "title": "Клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 19,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "title": "Смирнова Анна Андреевна · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 19,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=schedule",
+      "title": "Расписание · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 21,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "trainer",
+      "path": "admin-section",
+      "extra": "&section=trainer-clients",
+      "title": "Мои клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-catalog",
+      "title": "Каталог бара · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-sales",
+      "title": "Продажи бара · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-inventory",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=registration",
+      "title": "Регистрация посещения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=services",
+      "title": "Продажа услуг · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=members",
+      "title": "Клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=products",
+      "title": "Продажа товаров · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=cash",
+      "title": "Касса · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 16,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=crm",
+      "title": "CRM · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=requests",
+      "title": "Онлайн-заявки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=messages",
+      "title": "Сообщения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=reviews",
+      "title": "Отзывы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=memberships",
+      "title": "Абонементы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 9,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=calls",
+      "title": "Звонки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=notifications",
+      "title": "Уведомления · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 13,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=directories",
+      "title": "Справочники · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=statistics",
+      "title": "Статистика · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=settings",
+      "title": "Мой профиль · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 8,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=employees",
+      "title": "Персонал · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 18,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=positions",
+      "title": "Должности · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=absences",
+      "title": "Отсутствия · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=payroll",
+      "title": "Расчёт зарплаты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 11,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=clubs",
+      "title": "Клубы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=rooms",
+      "title": "Залы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 14,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=receptions",
+      "title": "Ресепшены · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=training-templates",
+      "title": "Шаблоны занятий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=training-groups",
+      "title": "Группы занятий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=schedule-calendar",
+      "title": "Календарь клуба · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=service-settings",
+      "title": "Настройки системы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 3,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-categories",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-collections",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=inventory",
+      "title": "Склад · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 11,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=cameras",
+      "title": "Камеры · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=rbac",
+      "title": "Роли и права · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 15,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=security",
+      "title": "Безопасность · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=event-logs",
+      "title": "Журнал событий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 3,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=leads",
+      "title": "Заявки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=segments",
+      "title": "Группы клиентов · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 8,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=pipelines",
+      "title": "Сценарии заявок · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 16,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=retention",
+      "title": "Вернуть клиентов · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=external-messages",
+      "title": "Внешние обращения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=schedule",
+      "title": "Расписание · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 20,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=cash",
+      "title": "Касса · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 21,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=calls",
+      "title": "Звонки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=products",
+      "title": "Продажа товаров · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=services",
+      "title": "Продажа услуг · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=registration",
+      "title": "Регистрация посещения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=messages",
+      "title": "Сообщения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=memberships",
+      "title": "Абонементы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 14,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "overview",
+      "title": "Ресепшен · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "trainer",
+      "path": "overview",
+      "title": "Мой тренировочный день · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "overview",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "club-director",
+      "path": "overview",
+      "title": "Пульс клуба · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "network-director",
+      "path": "overview",
+      "title": "Обзор сети · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "overview",
+      "title": "Маркетинг сети · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "fitness-director",
+      "path": "overview",
+      "title": "Фитнес-направление · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "operations-director",
+      "path": "overview",
+      "title": "Операционная работа · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "overview",
+      "title": "Системное управление · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "accountant",
+      "path": "overview",
+      "title": "Финансы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "members",
+      "title": "Клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 9,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "title": "Смирнова Анна Андреевна · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=schedule",
+      "title": "Расписание · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 11,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "trainer",
+      "path": "admin-section",
+      "extra": "&section=trainer-clients",
+      "title": "Мои клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-catalog",
+      "title": "Каталог бара · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-sales",
+      "title": "Продажи бара · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-inventory",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=registration",
+      "title": "Регистрация посещения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 5,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=services",
+      "title": "Продажа услуг · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 5,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=members",
+      "title": "Клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=products",
+      "title": "Продажа товаров · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 5,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=cash",
+      "title": "Касса · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=crm",
+      "title": "CRM · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=requests",
+      "title": "Онлайн-заявки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=messages",
+      "title": "Сообщения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=reviews",
+      "title": "Отзывы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=memberships",
+      "title": "Абонементы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=calls",
+      "title": "Звонки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=notifications",
+      "title": "Уведомления · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 11,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=directories",
+      "title": "Справочники · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=statistics",
+      "title": "Статистика · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=settings",
+      "title": "Мой профиль · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 8,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=employees",
+      "title": "Персонал · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 16,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=positions",
+      "title": "Должности · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=absences",
+      "title": "Отсутствия · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=payroll",
+      "title": "Расчёт зарплаты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=clubs",
+      "title": "Клубы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=rooms",
+      "title": "Залы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=receptions",
+      "title": "Ресепшены · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=training-templates",
+      "title": "Шаблоны занятий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=training-groups",
+      "title": "Группы занятий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=schedule-calendar",
+      "title": "Календарь клуба · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=service-settings",
+      "title": "Настройки системы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 3,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-categories",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-collections",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=inventory",
+      "title": "Склад · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=cameras",
+      "title": "Камеры · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=rbac",
+      "title": "Роли и права · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 15,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=security",
+      "title": "Безопасность · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 9,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=event-logs",
+      "title": "Журнал событий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 3,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=leads",
+      "title": "Заявки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=segments",
+      "title": "Группы клиентов · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 8,
+      "controlCount": 9,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=pipelines",
+      "title": "Сценарии заявок · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 14,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=retention",
+      "title": "Вернуть клиентов · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=external-messages",
+      "title": "Внешние обращения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=schedule",
+      "title": "Расписание · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=cash",
+      "title": "Касса · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=calls",
+      "title": "Звонки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=products",
+      "title": "Продажа товаров · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=services",
+      "title": "Продажа услуг · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=registration",
+      "title": "Регистрация посещения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=messages",
+      "title": "Сообщения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "astron",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=memberships",
+      "title": "Абонементы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "overview",
+      "title": "Ресепшен · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "trainer",
+      "path": "overview",
+      "title": "Мой тренировочный день · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "overview",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "club-director",
+      "path": "overview",
+      "title": "Пульс клуба · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "network-director",
+      "path": "overview",
+      "title": "Обзор сети · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "overview",
+      "title": "Маркетинг сети · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "fitness-director",
+      "path": "overview",
+      "title": "Фитнес-направление · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "operations-director",
+      "path": "overview",
+      "title": "Операционная работа · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "overview",
+      "title": "Системное управление · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "accountant",
+      "path": "overview",
+      "title": "Финансы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "members",
+      "title": "Клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 19,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "title": "Смирнова Анна Андреевна · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 19,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=schedule",
+      "title": "Расписание · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 21,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "trainer",
+      "path": "admin-section",
+      "extra": "&section=trainer-clients",
+      "title": "Мои клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-catalog",
+      "title": "Каталог бара · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-sales",
+      "title": "Продажи бара · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-inventory",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=registration",
+      "title": "Регистрация посещения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=services",
+      "title": "Продажа услуг · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=members",
+      "title": "Клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=products",
+      "title": "Продажа товаров · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=cash",
+      "title": "Касса · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 16,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=crm",
+      "title": "CRM · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=requests",
+      "title": "Онлайн-заявки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=messages",
+      "title": "Сообщения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=reviews",
+      "title": "Отзывы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=memberships",
+      "title": "Абонементы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 9,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=calls",
+      "title": "Звонки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=notifications",
+      "title": "Уведомления · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 13,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=directories",
+      "title": "Справочники · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=statistics",
+      "title": "Статистика · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=settings",
+      "title": "Мой профиль · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 8,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=employees",
+      "title": "Персонал · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 18,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=positions",
+      "title": "Должности · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=absences",
+      "title": "Отсутствия · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=payroll",
+      "title": "Расчёт зарплаты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 11,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=clubs",
+      "title": "Клубы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=rooms",
+      "title": "Залы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 14,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=receptions",
+      "title": "Ресепшены · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=training-templates",
+      "title": "Шаблоны занятий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=training-groups",
+      "title": "Группы занятий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=schedule-calendar",
+      "title": "Календарь клуба · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=service-settings",
+      "title": "Настройки системы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 3,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-categories",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-collections",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=inventory",
+      "title": "Склад · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 11,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=cameras",
+      "title": "Камеры · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=rbac",
+      "title": "Роли и права · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 15,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=security",
+      "title": "Безопасность · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=event-logs",
+      "title": "Журнал событий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 3,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=leads",
+      "title": "Заявки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=segments",
+      "title": "Группы клиентов · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 8,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=pipelines",
+      "title": "Сценарии заявок · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 16,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=retention",
+      "title": "Вернуть клиентов · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=external-messages",
+      "title": "Внешние обращения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=schedule",
+      "title": "Расписание · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 20,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=cash",
+      "title": "Касса · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 21,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=calls",
+      "title": "Звонки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=products",
+      "title": "Продажа товаров · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=services",
+      "title": "Продажа услуг · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=registration",
+      "title": "Регистрация посещения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=messages",
+      "title": "Сообщения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=memberships",
+      "title": "Абонементы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 14,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "overview",
+      "title": "Ресепшен · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "trainer",
+      "path": "overview",
+      "title": "Мой тренировочный день · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "overview",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "club-director",
+      "path": "overview",
+      "title": "Пульс клуба · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "network-director",
+      "path": "overview",
+      "title": "Обзор сети · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "overview",
+      "title": "Маркетинг сети · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "fitness-director",
+      "path": "overview",
+      "title": "Фитнес-направление · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "operations-director",
+      "path": "overview",
+      "title": "Операционная работа · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "overview",
+      "title": "Системное управление · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "accountant",
+      "path": "overview",
+      "title": "Финансы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "members",
+      "title": "Клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 9,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "title": "Смирнова Анна Андреевна · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=schedule",
+      "title": "Расписание · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 11,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "trainer",
+      "path": "admin-section",
+      "extra": "&section=trainer-clients",
+      "title": "Мои клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-catalog",
+      "title": "Каталог бара · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-sales",
+      "title": "Продажи бара · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-inventory",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=registration",
+      "title": "Регистрация посещения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 5,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=services",
+      "title": "Продажа услуг · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 5,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=members",
+      "title": "Клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=products",
+      "title": "Продажа товаров · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 5,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=cash",
+      "title": "Касса · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=crm",
+      "title": "CRM · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=requests",
+      "title": "Онлайн-заявки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=messages",
+      "title": "Сообщения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=reviews",
+      "title": "Отзывы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=memberships",
+      "title": "Абонементы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=calls",
+      "title": "Звонки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=notifications",
+      "title": "Уведомления · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 11,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=directories",
+      "title": "Справочники · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=statistics",
+      "title": "Статистика · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=settings",
+      "title": "Мой профиль · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 8,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=employees",
+      "title": "Персонал · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 16,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=positions",
+      "title": "Должности · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=absences",
+      "title": "Отсутствия · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=payroll",
+      "title": "Расчёт зарплаты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=clubs",
+      "title": "Клубы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=rooms",
+      "title": "Залы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=receptions",
+      "title": "Ресепшены · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=training-templates",
+      "title": "Шаблоны занятий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=training-groups",
+      "title": "Группы занятий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=schedule-calendar",
+      "title": "Календарь клуба · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=service-settings",
+      "title": "Настройки системы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 3,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-categories",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-collections",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=inventory",
+      "title": "Склад · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=cameras",
+      "title": "Камеры · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=rbac",
+      "title": "Роли и права · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 15,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=security",
+      "title": "Безопасность · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 9,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=event-logs",
+      "title": "Журнал событий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 3,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=leads",
+      "title": "Заявки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=segments",
+      "title": "Группы клиентов · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 8,
+      "controlCount": 9,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=pipelines",
+      "title": "Сценарии заявок · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 14,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=retention",
+      "title": "Вернуть клиентов · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=external-messages",
+      "title": "Внешние обращения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=schedule",
+      "title": "Расписание · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=cash",
+      "title": "Касса · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=calls",
+      "title": "Звонки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=products",
+      "title": "Продажа товаров · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=services",
+      "title": "Продажа услуг · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=registration",
+      "title": "Регистрация посещения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=messages",
+      "title": "Сообщения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "graphite",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=memberships",
+      "title": "Абонементы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "overview",
+      "title": "Ресепшен · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "trainer",
+      "path": "overview",
+      "title": "Мой тренировочный день · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "overview",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "club-director",
+      "path": "overview",
+      "title": "Пульс клуба · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "network-director",
+      "path": "overview",
+      "title": "Обзор сети · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "overview",
+      "title": "Маркетинг сети · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "fitness-director",
+      "path": "overview",
+      "title": "Фитнес-направление · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "operations-director",
+      "path": "overview",
+      "title": "Операционная работа · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "overview",
+      "title": "Системное управление · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "accountant",
+      "path": "overview",
+      "title": "Финансы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "members",
+      "title": "Клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 19,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "title": "Смирнова Анна Андреевна · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 19,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=schedule",
+      "title": "Расписание · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 21,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "trainer",
+      "path": "admin-section",
+      "extra": "&section=trainer-clients",
+      "title": "Мои клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-catalog",
+      "title": "Каталог бара · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-sales",
+      "title": "Продажи бара · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-inventory",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=registration",
+      "title": "Регистрация посещения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=services",
+      "title": "Продажа услуг · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=members",
+      "title": "Клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=products",
+      "title": "Продажа товаров · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=cash",
+      "title": "Касса · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 16,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=crm",
+      "title": "CRM · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=requests",
+      "title": "Онлайн-заявки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=messages",
+      "title": "Сообщения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=reviews",
+      "title": "Отзывы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=memberships",
+      "title": "Абонементы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 9,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=calls",
+      "title": "Звонки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=notifications",
+      "title": "Уведомления · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 13,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=directories",
+      "title": "Справочники · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=statistics",
+      "title": "Статистика · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=settings",
+      "title": "Мой профиль · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 8,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=employees",
+      "title": "Персонал · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 18,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=positions",
+      "title": "Должности · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=absences",
+      "title": "Отсутствия · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=payroll",
+      "title": "Расчёт зарплаты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 11,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=clubs",
+      "title": "Клубы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=rooms",
+      "title": "Залы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 14,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=receptions",
+      "title": "Ресепшены · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=training-templates",
+      "title": "Шаблоны занятий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=training-groups",
+      "title": "Группы занятий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=schedule-calendar",
+      "title": "Календарь клуба · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=service-settings",
+      "title": "Настройки системы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 3,
+      "controlCount": 10,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-categories",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-collections",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=inventory",
+      "title": "Склад · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 11,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=cameras",
+      "title": "Камеры · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=rbac",
+      "title": "Роли и права · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 15,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=security",
+      "title": "Безопасность · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=event-logs",
+      "title": "Журнал событий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 3,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=leads",
+      "title": "Заявки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=segments",
+      "title": "Группы клиентов · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 8,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=pipelines",
+      "title": "Сценарии заявок · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 16,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=retention",
+      "title": "Вернуть клиентов · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=external-messages",
+      "title": "Внешние обращения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=schedule",
+      "title": "Расписание · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 20,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=cash",
+      "title": "Касса · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 21,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=calls",
+      "title": "Звонки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=products",
+      "title": "Продажа товаров · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=services",
+      "title": "Продажа услуг · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=registration",
+      "title": "Регистрация посещения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=messages",
+      "title": "Сообщения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "desktop",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=memberships",
+      "title": "Абонементы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 14,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "overview",
+      "title": "Ресепшен · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "trainer",
+      "path": "overview",
+      "title": "Мой тренировочный день · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "overview",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "club-director",
+      "path": "overview",
+      "title": "Пульс клуба · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "network-director",
+      "path": "overview",
+      "title": "Обзор сети · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "overview",
+      "title": "Маркетинг сети · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "fitness-director",
+      "path": "overview",
+      "title": "Фитнес-направление · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "operations-director",
+      "path": "overview",
+      "title": "Операционная работа · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "overview",
+      "title": "Системное управление · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 4,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "accountant",
+      "path": "overview",
+      "title": "Финансы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "members",
+      "title": "Клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 9,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "client-profile",
+      "extra": "&clientId=1001",
+      "title": "Смирнова Анна Андреевна · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 15,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=schedule",
+      "title": "Расписание · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 11,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "trainer",
+      "path": "admin-section",
+      "extra": "&section=trainer-clients",
+      "title": "Мои клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-catalog",
+      "title": "Каталог бара · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-sales",
+      "title": "Продажи бара · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-inventory",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=registration",
+      "title": "Регистрация посещения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 5,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=services",
+      "title": "Продажа услуг · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 5,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=members",
+      "title": "Клиенты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=products",
+      "title": "Продажа товаров · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 5,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=cash",
+      "title": "Касса · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=crm",
+      "title": "CRM · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=requests",
+      "title": "Онлайн-заявки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=messages",
+      "title": "Сообщения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=reviews",
+      "title": "Отзывы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=memberships",
+      "title": "Абонементы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 7,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=calls",
+      "title": "Звонки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=notifications",
+      "title": "Уведомления · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 11,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=directories",
+      "title": "Справочники · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=statistics",
+      "title": "Статистика · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=settings",
+      "title": "Мой профиль · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 8,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=employees",
+      "title": "Персонал · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 16,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=positions",
+      "title": "Должности · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=absences",
+      "title": "Отсутствия · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=payroll",
+      "title": "Расчёт зарплаты · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=clubs",
+      "title": "Клубы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=rooms",
+      "title": "Залы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=receptions",
+      "title": "Ресепшены · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=training-templates",
+      "title": "Шаблоны занятий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=training-groups",
+      "title": "Группы занятий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=schedule-calendar",
+      "title": "Календарь клуба · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=service-settings",
+      "title": "Настройки системы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 3,
+      "controlCount": 8,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-categories",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "bartender",
+      "path": "admin-section",
+      "extra": "&section=bar-collections",
+      "title": "Бар · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 7,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=inventory",
+      "title": "Склад · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 9,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=cameras",
+      "title": "Камеры · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 0,
+      "controlCount": 6,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=rbac",
+      "title": "Роли и права · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 15,
+      "controlCount": 5,
+      "searchFrames": []
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=security",
+      "title": "Безопасность · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 9,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "sysadmin",
+      "path": "admin-section",
+      "extra": "&section=event-logs",
+      "title": "Журнал событий · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 3,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=leads",
+      "title": "Заявки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 13,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=segments",
+      "title": "Группы клиентов · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 8,
+      "controlCount": 9,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=pipelines",
+      "title": "Сценарии заявок · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 14,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=retention",
+      "title": "Вернуть клиентов · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "marketer",
+      "path": "admin-section",
+      "extra": "&section=external-messages",
+      "title": "Внешние обращения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 1,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=schedule",
+      "title": "Расписание · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 12,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=cash",
+      "title": "Касса · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=calls",
+      "title": "Звонки · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=products",
+      "title": "Продажа товаров · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=services",
+      "title": "Продажа услуг · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=registration",
+      "title": "Регистрация посещения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 8,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=messages",
+      "title": "Сообщения · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 11,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    },
+    {
+      "theme": "contrast",
+      "device": "mobile",
+      "role": "administrator",
+      "path": "admin-section",
+      "extra": "&section=memberships",
+      "title": "Абонементы · Астрон",
+      "overflow": false,
+      "unnamed": 0,
+      "fieldCount": 2,
+      "controlCount": 10,
+      "searchFrames": [
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        },
+        {
+          "height": 44,
+          "radius": "10px",
+          "font": "16px",
+          "padding": "0px 12px"
+        }
+      ]
+    }
+  ],
+  "schedule": [
+    {
+      "role": "Администратор",
+      "width": 390,
+      "height": 844,
+      "device": "mobile",
+      "dateContained": true,
+      "dateHeight": 44,
+      "grid": 420,
+      "heading": 45,
+      "overflow": false,
+      "range": [
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "23:00"
+      ],
+      "scrollClient": 465,
+      "title": "Расписание · Астрон"
+    },
+    {
+      "role": "Администратор",
+      "width": 1280,
+      "height": 800,
+      "device": "mobile",
+      "dateContained": true,
+      "dateHeight": 44,
+      "grid": 420,
+      "heading": 45,
+      "overflow": false,
+      "range": [
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "23:00"
+      ],
+      "scrollClient": 465,
+      "title": "Расписание · Астрон"
+    },
+    {
+      "role": "Администратор",
+      "width": 1280,
+      "height": 720,
+      "device": "desktop",
+      "dateContained": true,
+      "dateHeight": 44,
+      "grid": 362.6640625,
+      "heading": 45,
+      "overflow": false,
+      "range": [
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "23:00"
+      ],
+      "scrollClient": 202,
+      "title": "Расписание · Астрон"
+    },
+    {
+      "role": "Тренер",
+      "width": 390,
+      "height": 844,
+      "device": "mobile",
+      "dateContained": true,
+      "dateHeight": 44,
+      "grid": 420,
+      "heading": 45,
+      "overflow": false,
+      "range": [
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "23:00"
+      ],
+      "scrollClient": 465,
+      "title": "Расписание · Астрон"
+    },
+    {
+      "role": "Тренер",
+      "width": 1280,
+      "height": 800,
+      "device": "mobile",
+      "dateContained": true,
+      "dateHeight": 44,
+      "grid": 420,
+      "heading": 45,
+      "overflow": false,
+      "range": [
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "23:00"
+      ],
+      "scrollClient": 465,
+      "title": "Расписание · Астрон"
+    },
+    {
+      "role": "Тренер",
+      "width": 1280,
+      "height": 720,
+      "device": "desktop",
+      "dateContained": true,
+      "dateHeight": 44,
+      "grid": 362.6640625,
+      "heading": 45,
+      "overflow": false,
+      "range": [
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "23:00"
+      ],
+      "scrollClient": 196,
+      "title": "Расписание · Астрон"
+    },
+    {
+      "role": "Директор клуба",
+      "width": 390,
+      "height": 844,
+      "device": "mobile",
+      "dateContained": true,
+      "dateHeight": 44,
+      "grid": 420,
+      "heading": 45,
+      "overflow": false,
+      "range": [
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "23:00"
+      ],
+      "scrollClient": 465,
+      "title": "Расписание · Астрон"
+    },
+    {
+      "role": "Директор клуба",
+      "width": 1280,
+      "height": 800,
+      "device": "mobile",
+      "dateContained": true,
+      "dateHeight": 44,
+      "grid": 420,
+      "heading": 45,
+      "overflow": false,
+      "range": [
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "23:00"
+      ],
+      "scrollClient": 465,
+      "title": "Расписание · Астрон"
+    },
+    {
+      "role": "Директор клуба",
+      "width": 1280,
+      "height": 720,
+      "device": "desktop",
+      "dateContained": true,
+      "dateHeight": 44,
+      "grid": 362.6640625,
+      "heading": 45,
+      "overflow": false,
+      "range": [
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "23:00"
+      ],
+      "scrollClient": 174,
+      "title": "Расписание · Астрон"
+    }
+  ],
+  "sidebar": {
+    "before": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "h": 44,
+      "x": 24,
+      "y": 761
+    },
+    "after": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "h": 44,
+      "x": 24,
+      "y": 761
+    }
+  }
+}

@@ -190,12 +190,44 @@ body .icon-button.icon-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-body .ws-table .icon-button.icon-button {
-  width: 32px;
-  height: 32px;
-  min-height: 32px;
+/* A labelled navigation control must not inherit the square icon-button size. */
+body .app-shell .sidebar-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: var(--control-height);
+  min-height: var(--control-height);
+  padding: 0 12px;
+  gap: 10px;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
+  box-shadow: none;
+  color: var(--color-muted);
+  font-size: var(--text-caption);
+  line-height: 20px;
+  white-space: nowrap;
 }
-body :is(.button, .icon-button, .text-link, .ws-record-link):focus-visible {
+body .app-shell .sidebar-toggle:is(:hover, :active) {
+  background: transparent;
+  color: var(--color-accent);
+}
+body .app-shell .sidebar-toggle > svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+body .app-shell .sidebar-toggle:focus-visible {
+  outline: var(--focus-width) solid var(--color-accent);
+  outline-offset: var(--focus-offset);
+}
+body .ws-table .icon-button.icon-button {
+  width: var(--control-height-compact);
+  height: var(--control-height-compact);
+  min-height: var(--control-height-compact);
+}
+body :is(.button, .icon-button, .search-clear, .text-link, .ws-record-link):focus-visible {
   outline: var(--focus-width) solid var(--color-accent);
   outline-offset: var(--focus-offset);
 }
@@ -211,7 +243,10 @@ body
   .form-field.form-field
   :is(input:not([type='checkbox']):not([type='radio']):not([type='color']), textarea),
 body .select-trigger.select-trigger.select-trigger,
-body .search-field.search-field {
+body .search-field.search-field,
+body .quick-card.client-search,
+body .sale-name-search > div,
+body .select-search.select-search {
   height: var(--control-height);
   min-height: var(--control-height);
   border: 1px solid var(--color-control-border);
@@ -236,6 +271,7 @@ body .form-field.form-field textarea {
 }
 body .calendar-date input {
   width: 150px;
+  height: var(--control-height);
   min-height: var(--control-height);
   padding: 9px 10px;
   border: 1px solid var(--color-control-border);
@@ -256,34 +292,115 @@ body .calendar-date input:focus-visible {
 body .form-field.form-field :is(input, textarea):focus-visible,
 body .select-trigger.select-trigger:focus-visible,
 body .select-trigger.select-trigger[aria-expanded='true'],
-body .search-field.search-field:focus-within {
+body .search-field.search-field:focus-within,
+body .quick-card.client-search:focus-within,
+body .sale-name-search > div:focus-within,
+body .select-search.select-search:focus-within {
   outline: var(--focus-width) solid var(--color-accent);
   outline-offset: var(--focus-offset);
   border-color: var(--color-accent);
   box-shadow: none;
 }
-body .search-field.search-field {
+/* All regular searches share a frame; client suggestions and Enter are behaviours. */
+body
+  :is(
+    .search-field.search-field,
+    .quick-card.client-search,
+    .sale-name-search > div,
+    .select-search.select-search
+  ) {
+  position: relative;
+  display: flex;
+  align-items: center;
   gap: 10px;
   padding: 0 12px;
+  box-shadow: none;
 }
-body .search-field.search-field > svg {
-  width: 18px;
-  height: 18px;
+body
+  :is(
+    .search-field.search-field,
+    .quick-card.client-search,
+    .sale-name-search > div,
+    .select-search.select-search
+  )
+  > svg {
+  width: 20px;
+  height: 20px;
+  color: var(--color-muted);
   flex-shrink: 0;
 }
-body .search-field.search-field input {
-  outline: none;
-  border: 0;
-  background: transparent;
-  min-width: 0;
-  min-height: 42px;
-  padding: 8px 0;
-  color: var(--color-ink);
-  font-size: var(--control-font-size);
-}
-body .search-field.search-field:focus-within input:focus {
+body
+  :is(
+    .search-field.search-field,
+    .quick-card.client-search,
+    .sale-name-search > div,
+    .select-search.select-search
+  )
+  > input {
   outline: none;
   box-shadow: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: 42px;
+  min-height: 0;
+  padding: 8px 0;
+  color: var(--color-ink);
+  font-family: inherit;
+  font-size: var(--control-font-size);
+  line-height: 24px;
+}
+body
+  :is(
+    .search-field.search-field,
+    .quick-card.client-search,
+    .sale-name-search > div,
+    .select-search.select-search
+  )
+  > input::placeholder {
+  color: var(--color-muted);
+  font-size: var(--control-font-size);
+  opacity: 1;
+}
+body
+  :is(
+    .search-field.search-field,
+    .quick-card.client-search,
+    .sale-name-search > div,
+    .select-search.select-search
+  ):focus-within
+  > input:focus {
+  outline: none;
+  box-shadow: none;
+}
+body :is(.search-field.search-field, .quick-card.client-search) > .search-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 42px;
+  min-height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-muted);
+  flex-shrink: 0;
+}
+body :is(.search-field.search-field, .quick-card.client-search) > .search-clear:hover {
+  color: var(--color-accent);
+  background: var(--color-surface-muted);
+}
+body :is(.search-field.search-field, .quick-card.client-search) > .search-clear > svg {
+  width: 18px;
+  height: 18px;
+}
+body .quick-card.client-search.quick-card-error {
+  border-color: var(--color-danger);
+  outline-color: var(--color-danger);
 }
 body .form-field.form-field :is(input, textarea)[aria-invalid='true'],
 body .form-field.field-error input {
@@ -579,10 +696,6 @@ body .reception-shift strong {
   font-weight: 600;
 }
 /* Reception context is a compact textual control, with no repeated club logo. */
-body .admin-topbar .client-search input,
-body .admin-topbar .client-search input::placeholder {
-  font-size: var(--text-body);
-}
 body .workstation-button {
   display: flex;
   align-items: center;
@@ -883,6 +996,7 @@ body [data-ui='stats'] strong {
     .search-field,
     .quick-card.client-search,
     .sale-name-search > div,
+    .select-search,
     .calendar-date input,
     .form-field input:not([type='checkbox']):not([type='radio']):not([type='color']),
     .form-field textarea
@@ -897,7 +1011,12 @@ body [data-ui='stats'] strong {
 :root[data-visual-style='vivid'] body .select-trigger[aria-expanded='true'],
 :root[data-visual-style='vivid']
   body
-  :is(.search-field, .quick-card.client-search, .sale-name-search > div):focus-within,
+  :is(
+    .search-field,
+    .quick-card.client-search,
+    .sale-name-search > div,
+    .select-search
+  ):focus-within,
 :root[data-visual-style='vivid']
   body
   :is(
@@ -911,7 +1030,11 @@ body [data-ui='stats'] strong {
 :root[data-visual-style='vivid'] body .button-danger,
 :root[data-visual-style='vivid']
   body
-  :is(.quick-card-error, .form-field.field-error input, .form-field [aria-invalid='true']) {
+  :is(
+    .quick-card.client-search.quick-card-error,
+    .form-field.field-error input,
+    .form-field [aria-invalid='true']
+  ) {
   --contour-color: var(--color-danger);
 }
 :root[data-visual-style='vivid']
@@ -922,6 +1045,9 @@ body [data-ui='stats'] strong {
 :root[data-visual-style='vivid'] body .sidebar .side-nav button.active {
   box-shadow: inset 0 0 0 2px var(--color-accent);
 }
-:root[data-visual-style='vivid'] body .ui-tabs[data-ui='tabs'] > button[aria-selected='true'] {
+:root[data-visual-style='vivid']
+  body
+  .ui-tabs[data-ui='tabs'][data-variant='line']
+  > button[aria-selected='true'] {
   box-shadow: inset 0 -3px var(--color-accent);
 }
