@@ -14,6 +14,7 @@ import { ClientSearch } from './ClientSearch';
 import { initialMembers } from '../data/mock';
 import { UI_RULES } from '../design-system/registry';
 import { ReceptionShift } from './ReceptionShift';
+import { CatalogSectionCard } from './CatalogSectionCard';
 
 export function DesignRules() {
   const [tab, setTab] = useState('Абонементы');
@@ -124,6 +125,25 @@ export function DesignRules() {
             members={initialMembers}
             hidePhones
             onMember={(member) => setResult(`Выбран клиент: ${member.fullName || member.name}`)}
+          />
+        </div>
+      </div>
+      <div className="panel ws-panel-body ws-stack">
+        <h3>Переходы каталога</h3>
+        <p className="ui-rule-purpose">
+          При наведении меняется цвет рамки. Клавиша Tab показывает внутренний контур, который не
+          обрезается по краям блока.
+        </p>
+        <div className="ui-rule-grid">
+          <CatalogSectionCard
+            id="memberships"
+            count={7}
+            onClick={() => setResult('Выбран раздел абонементов.')}
+          />
+          <CatalogSectionCard
+            id="personal"
+            count={1}
+            onClick={() => setResult('Выбран персональный тренинг.')}
           />
         </div>
       </div>
