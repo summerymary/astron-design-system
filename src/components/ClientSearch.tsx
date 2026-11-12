@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { ArrowUpRight, CornerDownLeft, Search, X } from 'lucide-react';
+import { ArrowUpRight, Search, X } from 'lucide-react';
 import { Avatar } from './ui';
 import { memberCards } from '../data/admin';
 import { clientCard, searchMembers } from '../lib/member-search';
@@ -127,7 +127,7 @@ export function ClientSearch({
       {query && (
         <button
           type="button"
-          className="client-search-clear"
+          className="client-search-clear search-clear"
           aria-label="Очистить поиск клиента"
           onClick={() => {
             setQuery('');
@@ -139,9 +139,6 @@ export function ClientSearch({
           <X size={14} />
         </button>
       )}
-      <button type="submit" aria-label="Найти клиента" title="Найти клиента · Enter">
-        <CornerDownLeft size={16} />
-      </button>
       <span className="sr-only" id={`${id}-help`}>
         Введите номер карты, ФИО или телефон. Стрелки — выбор, Enter —{' '}
         {mode === 'profile' ? 'открыть карточку' : 'выбрать клиента'}, Escape — закрыть список.
