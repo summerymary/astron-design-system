@@ -122,3 +122,20 @@
 }
 
 }
+
+@layer pages {
+  .ui-search-examples {
+    overflow: visible;
+  }
+  .ui-search-examples > .ws-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    align-items: start;
+    gap: 16px;
+  }
+  .ui-search-examples .client-search {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+  }
+}
