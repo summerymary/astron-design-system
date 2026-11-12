@@ -28,9 +28,14 @@ assert.equal(contrastRatio('#123456', '#123456'), 1);
 assert.deepEqual(generatePalette(DEFAULT_PRIMARY).tokens, ASTRON_TOKENS);
 // The alternative skin must never mutate the saved club palette or repurpose statuses.
 const styleSource = await readFile(new URL('../src/lib/visual-style.ts', import.meta.url), 'utf8');
-const styleCompiled = ts.transpileModule(styleSource, {
-  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
-}).outputText;
+const styleCompiled = ts
+  .transpileModule(styleSource, {
+    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
+  })
+  .outputText.replace(
+    "from './theme'",
+    `from '${'data:text/javascript;base64,' + Buffer.from(compiled).toString('base64')}'`,
+  );
 const { visualStyleTokens, readVisualStyle, appearanceSearch } = await import(
   `data:text/javascript;base64,${Buffer.from(styleCompiled).toString('base64')}`
 );
@@ -45,8 +50,8 @@ for (const preset of THEME_PRESETS) {
   const alternative = visualStyleTokens(original, 'vivid');
   assert.equal(
     alternative['--color-action'],
-    '#B32D3D',
-    'Contrast variant must use vivid burgundy actions',
+    ASTRON_TOKENS['--color-action'],
+    'Contrast must preserve Astron burgundy actions',
   );
   assert.deepEqual(original, snapshot, 'Alternative mutated the original palette');
   assert.deepEqual(
@@ -73,21 +78,19 @@ for (const preset of THEME_PRESETS) {
       `Contrast: controls blend into ${surface}`,
     );
   }
+  for (const key of Object.keys(ASTRON_TOKENS).filter(
+    (key) => !['--color-line', '--color-control-border'].includes(key),
+  )) {
+    assert.equal(alternative[key], ASTRON_TOKENS[key], `${key}: Contrast drifted from Astron`);
+  }
   assert.ok(
-    contrastRatio(alternative['--color-canvas'], alternative['--color-surface']) >= 1.15,
-    'Contrast: the workspace background is too close to white panels',
+    contrastRatio(alternative['--color-line'], alternative['--color-surface']) >
+      contrastRatio(ASTRON_TOKENS['--color-line'], ASTRON_TOKENS['--color-surface']),
+    'Contrast panel outlines must be more visible than Astron',
   );
   const url = new URL(`https://example.com/${appearanceSearch(preset.color, 'vivid')}`);
   assert.equal(readVisualStyle(url.search), 'vivid');
   assert.equal(url.searchParams.get('theme'), preset.color.slice(1));
-}
-for (const text of ['#F1E8ED', '#CBBBC4']) {
-  for (const background of ['#25151C', '#321C28', '#21171F']) {
-    assert.ok(contrastRatio(text, background) >= 4.5, 'Dark navigation text is too faint');
-  }
-}
-for (const background of ['#B32D3D', '#C42D54', '#AB2543']) {
-  assert.ok(contrastRatio('#FFFFFF', background) >= 4.5, 'Bright action text is too faint');
 }
 console.log(
   'Alternative visual style: contrast, original palette, status semantics and shared URLs passed.',
