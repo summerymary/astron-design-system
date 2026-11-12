@@ -8,6 +8,62 @@ import { feedbackTone, statusTone } from '../lib/ui-semantics';
 import type { StatusTone } from '../lib/ui-semantics';
 import { lockScroll } from '../lib/overlay';
 
+/** A transient disclosure closes without consuming the outside action. */
+export function DisclosureMenu({
+  label,
+  icon,
+  className = '',
+  children,
+}: {
+  label: string;
+  icon: ReactNode;
+  className?: string;
+  children: ReactNode;
+}) {
+  const root = useRef<HTMLDetailsElement>(null);
+  useEffect(() => {
+    const dismissOutside = (event: Event) => {
+      const element = root.current;
+      if (element?.open && !element.contains(event.target as Node)) element.open = false;
+    };
+    const escape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || !root.current?.open) return;
+      event.preventDefault();
+      event.stopPropagation();
+      root.current.open = false;
+      root.current.querySelector('summary')?.focus();
+    };
+    document.addEventListener('pointerdown', dismissOutside, true);
+    document.addEventListener('click', dismissOutside, true);
+    document.addEventListener('focusin', dismissOutside, true);
+    document.addEventListener('keydown', escape, true);
+    return () => {
+      document.removeEventListener('pointerdown', dismissOutside, true);
+      document.removeEventListener('click', dismissOutside, true);
+      document.removeEventListener('focusin', dismissOutside, true);
+      document.removeEventListener('keydown', escape, true);
+    };
+  }, []);
+  return (
+    <details
+      ref={root}
+      className={className}
+      data-ui="disclosure-menu"
+      onClickCapture={(event) => {
+        if ((event.target as Element).closest('button, a')) {
+          event.currentTarget.open = false;
+          event.currentTarget.querySelector('summary')?.focus();
+        }
+      }}
+    >
+      <summary aria-label={label} title={label}>
+        {icon}
+      </summary>
+      {children}
+    </details>
+  );
+}
+
 export function Button({
   variant = 'primary',
   size = 'default',

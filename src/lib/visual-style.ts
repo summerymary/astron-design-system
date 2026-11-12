@@ -1,3 +1,4 @@
+import { ASTRON_TOKENS } from './theme';
 import type { ThemeTokens } from './theme';
 
 export type VisualStyle = 'astron' | 'vivid';
@@ -5,7 +6,7 @@ export type VisualStyle = 'astron' | 'vivid';
 export const THEME_OPTIONS = [
   { id: 'astron', name: 'Астрон', color: '#8A332C', style: 'astron' },
   { id: 'graphite', name: 'Графит', color: '#111111', style: 'astron' },
-  { id: 'contrast', name: 'Контраст', color: '#B32D3D', style: 'vivid' },
+  { id: 'contrast', name: 'Контраст', color: '#8A332C', style: 'vivid' },
 ] as const;
 export type ThemeId = (typeof THEME_OPTIONS)[number]['id'];
 
@@ -14,34 +15,11 @@ export function readVisualStyle(search: string): VisualStyle {
   return new URLSearchParams(search).get('style') === 'vivid' ? 'vivid' : 'astron';
 }
 
-// A brighter Astron palette. Layout, semantic statuses and membership colours stay shared.
+// Astron colours with stronger contours; geometry and semantic colours are shared.
 export const VIVID_OVERRIDES = {
-  '--color-accent': '#B32D3D',
-  '--color-accent-hover': '#942235',
-  '--color-accent-pressed': '#761A2B',
-  '--color-accent-soft': '#FDEDF0',
-  '--color-accent-soft-hover': '#F8DCE3',
-  '--color-accent-line': '#A34867',
-  '--color-on-accent': '#FFFFFF',
-  '--color-action': '#B32D3D',
-  '--color-action-hover': '#942235',
-  '--color-action-pressed': '#761A2B',
-  '--color-action-border': '#942235',
-  '--color-on-action': '#FFFFFF',
-  '--color-ink': '#151922',
-  '--color-text': '#303947',
-  '--color-muted': '#4D5966',
-  '--color-subtle': '#4D5966',
-  '--color-canvas': '#E8EBF1',
-  '--color-stage': '#DDE2EB',
-  '--color-surface': '#FFFFFF',
-  '--color-surface-subtle': '#F1F3F7',
-  '--color-surface-muted': '#DCE2EB',
-  '--color-line': '#A7AFBC',
-  '--color-control-border': '#754659',
-  '--color-chart': '#B32D3D',
-  '--color-skeleton': '#DAD6DF',
-  '--color-skeleton-highlight': '#F9F7FA',
+  ...ASTRON_TOKENS,
+  '--color-line': '#B8AEA6',
+  '--color-control-border': '#746C63',
 } satisfies Partial<ThemeTokens>;
 
 export function visualStyleTokens(tokens: ThemeTokens, style: VisualStyle): ThemeTokens {

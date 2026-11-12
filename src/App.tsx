@@ -75,7 +75,6 @@ const navigation = [
   { id: 'members' as const, label: 'Клиенты', icon: Users },
 ];
 const workNavigation = [
-  { id: 'services', label: 'Продажа услуг', icon: BadgeDollarSign },
   { id: 'cash', label: 'Касса', icon: Wallet },
   { id: 'memberships', label: 'Абонементы', icon: CreditCard },
   { id: 'calls', label: 'Звонки', icon: Phone },
