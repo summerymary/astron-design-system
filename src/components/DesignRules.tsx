@@ -1,6 +1,14 @@
 import { useState } from 'react';
-import { Edit3, Plus, Trash2 } from 'lucide-react';
-import { Button, ConfirmDialog, CountBadge, IconButton, SectionTitle, StatusBadge } from './ui';
+import { Edit3, MoreHorizontal, Plus, Trash2 } from 'lucide-react';
+import {
+  Button,
+  ConfirmDialog,
+  CountBadge,
+  DisclosureMenu,
+  IconButton,
+  SectionTitle,
+  StatusBadge,
+} from './ui';
 import { Notice, Stats, Tabs } from './WorkspaceUI';
 import { UI_RULES } from '../design-system/registry';
 import { ReceptionShift } from './ReceptionShift';
@@ -38,6 +46,16 @@ export function DesignRules() {
           <IconButton label="Редактировать пример">
             <Edit3 size={18} />
           </IconButton>
+          <DisclosureMenu
+            label="Дополнительные действия примера"
+            icon={<MoreHorizontal size={18} />}
+          >
+            <div>
+              <button type="button" onClick={() => setResult('Дополнительное действие выбрано.')}>
+                Открыть сведения
+              </button>
+            </div>
+          </DisclosureMenu>
         </div>
         <div className="ws-actions" aria-label="Образцы статусов">
           <CountBadge>6</CountBadge>

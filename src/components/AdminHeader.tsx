@@ -1,5 +1,4 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { ClubLogo } from './ClubLogo';
 import { ClientSearch } from './ClientSearch';
 import { useWorkspace } from './WorkspaceProvider';
 import { Button } from './ui';
@@ -8,7 +7,6 @@ import {
   ChevronDown,
   MessageSquare,
   Plus,
-  PhoneIncoming,
   ShieldCheck,
   Bell,
   UserRound,
@@ -112,9 +110,11 @@ export function AdminHeader({
           aria-label={`Рабочая зона: ${club.name}, ${workplace.name}`}
           title={`${club.name} · ${workplace.name}`}
         >
-          <ClubLogo brand={club.brand} variant="compact" decorative />
-          <span>
+          <span className="workstation-context">
             <strong>{club.name}</strong>
+            <span className="workstation-context-divider" aria-hidden="true">
+              ·
+            </span>
             <small>{workplace.name}</small>
           </span>
           <ChevronDown size={14} />
@@ -214,14 +214,6 @@ export function AdminHeader({
         </Button>
       </div>
       <div className="admin-header-indicators">
-        <button
-          className="icon-button header-call-button"
-          aria-label="Журнал звонков"
-          title="Журнал звонков"
-          onClick={() => onAction('calls')}
-        >
-          <PhoneIncoming size={16} />
-        </button>
         <span className="system-health" title="Демонстрационное состояние системы">
           <ShieldCheck size={15} />
           <span>Всё работает</span>

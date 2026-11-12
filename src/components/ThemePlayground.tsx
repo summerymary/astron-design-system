@@ -69,7 +69,7 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
           {visualStyle === 'vivid' ? (
             <div className="theme-custom-settings">
               <p>
-                Контраст: тёмное меню, яркие бордовые действия и заметные границы белых панелей.
+                Контраст: цвета Астрона, светлое меню и усиленные рамки панелей, кнопок и полей.
                 Палитра этой темы фиксирована.
               </p>
               <Button variant="secondary" onClick={() => setVisualStyle('astron')}>
@@ -196,7 +196,7 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
       </div>
       <p className="theme-adjustment" role="status">
         {visualStyle === 'vivid'
-          ? 'Тема «Контраст»: тёмное меню, насыщенный бордовый, светло-серый фон и белые панели с заметными границами. Статусы и цвета абонементов сохраняют свой смысл.'
+          ? 'Тема «Контраст»: тёплый бордовый и светлое меню Астрона, усиленные рамки без изменения размеров. Статусы и цвета абонементов сохраняют свой смысл.'
           : palette.primary === DEFAULT_PRIMARY
             ? 'Палитра «Астрона»: тёплый бордовый, графитовый текст, белые карточки и едва тёплый белый фон. Серо-зелёные подписи сохраняют читаемость.'
             : palette.appearance === 'citrus'
