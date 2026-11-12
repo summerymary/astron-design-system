@@ -1,0 +1,975 @@
+{
+  "schemaVersion": 1,
+  "description": "Generated from the application. Contextual declarations are not global defaults; keep their original scope.",
+  "base": {
+    "--color-accent": "#8a332c",
+    "--color-accent-hover": "#722820",
+    "--color-accent-pressed": "#5b1f19",
+    "--color-accent-soft": "#f6ebe6",
+    "--color-accent-soft-hover": "#eedbd2",
+    "--color-accent-line": "#d7b0a2",
+    "--color-on-accent": "#ffffff",
+    "--color-action": "#8a332c",
+    "--color-action-hover": "#722820",
+    "--color-action-pressed": "#5b1f19",
+    "--color-action-border": "#8a332c",
+    "--color-on-action": "#ffffff",
+    "--color-ink": "#181c24",
+    "--color-text": "#3d4652",
+    "--color-muted": "#606a5c",
+    "--color-subtle": "var(--color-muted)",
+    "--color-canvas": "#fdfdfc",
+    "--color-stage": "#f1efea",
+    "--color-surface": "#ffffff",
+    "--color-surface-subtle": "#fdfcf9",
+    "--color-surface-muted": "#f3f1ed",
+    "--color-line": "#dce1e7",
+    "--color-control-border": "#7c8794",
+    "--color-success": "#276444",
+    "--color-success-bg": "#eaf4ee",
+    "--color-warning": "#83520d",
+    "--color-warning-bg": "#fff3dc",
+    "--color-danger": "#b42318",
+    "--color-danger-bg": "#fff0ed",
+    "--color-info": "#3e5e89",
+    "--color-info-bg": "#eef2f8",
+    "--color-paused": "#6b547e",
+    "--color-paused-bg": "#f3eef6",
+    "--color-chart": "#b16b59",
+    "--color-skeleton": "#dce1e7",
+    "--color-skeleton-highlight": "#fcfbf8",
+    "--table-record-row-height": "44px",
+    "--table-record-padding-y": "3px",
+    "--table-record-avatar-size": "28px",
+    "--text-caption": "14px",
+    "--text-small": "15px",
+    "--text-body": "16px",
+    "--text-lead": "18px",
+    "--text-heading-sm": "20px",
+    "--text-heading-md": "24px",
+    "--text-heading-lg": "28px",
+    "--text-heading-xl": "32px",
+    "--text-display-sm": "36px",
+    "--text-display": "44px",
+    "--text-display-lg": "64px",
+    "--text-display-xl": "80px",
+    "--font-sans": "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "--font-mono": "'SFMono-Regular', Consolas, monospace",
+    "--space-1": "4px",
+    "--space-2": "8px",
+    "--space-3": "12px",
+    "--space-4": "16px",
+    "--space-6": "24px",
+    "--space-8": "32px",
+    "--space-12": "48px",
+    "--radius-sm": "6px",
+    "--radius-control": "10px",
+    "--radius-card": "16px",
+    "--radius-pill": "999px",
+    "--control-height": "44px",
+    "--control-height-compact": "36px",
+    "--control-icon-size": "18px",
+    "--control-padding-x": "14px",
+    "--control-font-size": "var(--text-body)",
+    "--focus-width": "2px",
+    "--focus-offset": "2px",
+    "--panel-padding": "24px",
+    "--panel-gap": "24px",
+    "--field-gap": "8px",
+    "--form-gap": "16px",
+    "--status-radius": "6px",
+    "--surface-border": "var(--color-line)",
+    "--button-primary-fill": "var(--color-action)",
+    "--button-primary-shadow": "none",
+    "--shadow-popup": "0 16px 56px #181c2416",
+    "--color-divider": "color-mix(in srgb, var(--color-line) 60%, var(--color-surface))",
+    "--layout-page-padding": "clamp(28px, 3cqi, 48px)",
+    "--layout-panel-padding": "28px",
+    "--layout-section-gap": "28px"
+  },
+  "themes": {
+    "astron": {
+      "name": "Астрон",
+      "tokens": {
+        "--color-accent": "#8A332C",
+        "--color-accent-hover": "#722820",
+        "--color-accent-pressed": "#5B1F19",
+        "--color-accent-soft": "#F6EBE6",
+        "--color-accent-soft-hover": "#EEDBD2",
+        "--color-accent-line": "#D7B0A2",
+        "--color-on-accent": "#FFFFFF",
+        "--color-action": "#8A332C",
+        "--color-action-hover": "#722820",
+        "--color-action-pressed": "#5B1F19",
+        "--color-action-border": "#8A332C",
+        "--color-on-action": "#FFFFFF",
+        "--color-ink": "#181C24",
+        "--color-text": "#3D4652",
+        "--color-muted": "#606A5C",
+        "--color-subtle": "#606A5C",
+        "--color-canvas": "#FDFDFC",
+        "--color-stage": "#F1EFEA",
+        "--color-surface": "#FFFFFF",
+        "--color-surface-subtle": "#FDFCF9",
+        "--color-surface-muted": "#F3F1ED",
+        "--color-line": "#DCE1E7",
+        "--color-control-border": "#7C8794",
+        "--color-success": "#276444",
+        "--color-success-bg": "#EAF4EE",
+        "--color-warning": "#83520D",
+        "--color-warning-bg": "#FFF3DC",
+        "--color-danger": "#B42318",
+        "--color-danger-bg": "#FFF0ED",
+        "--color-info": "#3E5E89",
+        "--color-info-bg": "#EEF2F8",
+        "--color-paused": "#6B547E",
+        "--color-paused-bg": "#F3EEF6",
+        "--color-chart": "#B16B59",
+        "--color-skeleton": "#DCE1E7",
+        "--color-skeleton-highlight": "#FCFBF8",
+        "--table-record-row-height": "44px",
+        "--table-record-padding-y": "3px",
+        "--table-record-avatar-size": "28px",
+        "--text-caption": "14px",
+        "--text-small": "15px",
+        "--text-body": "16px",
+        "--text-lead": "18px",
+        "--text-heading-sm": "20px",
+        "--text-heading-md": "24px",
+        "--text-heading-lg": "28px",
+        "--text-heading-xl": "32px",
+        "--text-display-sm": "36px",
+        "--text-display": "44px",
+        "--text-display-lg": "64px",
+        "--text-display-xl": "80px",
+        "--font-sans": "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        "--font-mono": "'SFMono-Regular', Consolas, monospace",
+        "--space-1": "4px",
+        "--space-2": "8px",
+        "--space-3": "12px",
+        "--space-4": "16px",
+        "--space-6": "24px",
+        "--space-8": "32px",
+        "--space-12": "48px",
+        "--radius-sm": "6px",
+        "--radius-control": "10px",
+        "--radius-card": "16px",
+        "--radius-pill": "999px",
+        "--control-height": "44px",
+        "--control-height-compact": "36px",
+        "--control-icon-size": "18px",
+        "--control-padding-x": "14px",
+        "--control-font-size": "var(--text-body)",
+        "--focus-width": "2px",
+        "--focus-offset": "2px",
+        "--panel-padding": "24px",
+        "--panel-gap": "24px",
+        "--field-gap": "8px",
+        "--form-gap": "16px",
+        "--status-radius": "6px",
+        "--surface-border": "var(--color-line)",
+        "--button-primary-fill": "var(--color-action)",
+        "--button-primary-shadow": "none",
+        "--shadow-popup": "0 16px 56px #181c2416",
+        "--color-divider": "color-mix(in srgb, var(--color-line) 60%, var(--color-surface))",
+        "--layout-page-padding": "clamp(28px, 3cqi, 48px)",
+        "--layout-panel-padding": "28px",
+        "--layout-section-gap": "28px"
+      }
+    },
+    "graphite": {
+      "name": "Графит",
+      "tokens": {
+        "--color-accent": "#333333",
+        "--color-accent-hover": "#242424",
+        "--color-accent-pressed": "#161616",
+        "--color-accent-soft": "#F3F3F3",
+        "--color-accent-soft-hover": "#EBEBEB",
+        "--color-accent-line": "#AEAEAE",
+        "--color-on-accent": "#FFFFFF",
+        "--color-action": "#333333",
+        "--color-action-hover": "#242424",
+        "--color-action-pressed": "#161616",
+        "--color-action-border": "#333333",
+        "--color-on-action": "#FFFFFF",
+        "--color-ink": "#1F1F1F",
+        "--color-text": "#404040",
+        "--color-muted": "#666666",
+        "--color-subtle": "#666666",
+        "--color-canvas": "#F9F9F9",
+        "--color-stage": "#EBEBEB",
+        "--color-surface": "#FFFFFF",
+        "--color-surface-subtle": "#FDFDFD",
+        "--color-surface-muted": "#F2F2F2",
+        "--color-line": "#D7D7D7",
+        "--color-control-border": "#838383",
+        "--color-success": "#276444",
+        "--color-success-bg": "#EAF4EE",
+        "--color-warning": "#83520D",
+        "--color-warning-bg": "#FFF3DC",
+        "--color-danger": "#B42318",
+        "--color-danger-bg": "#FFF0ED",
+        "--color-info": "#3E5E89",
+        "--color-info-bg": "#EEF2F8",
+        "--color-paused": "#6B547E",
+        "--color-paused-bg": "#F3EEF6",
+        "--color-chart": "#4D4D4D",
+        "--color-skeleton": "#D7D7D7",
+        "--color-skeleton-highlight": "#F9F9F9",
+        "--table-record-row-height": "44px",
+        "--table-record-padding-y": "3px",
+        "--table-record-avatar-size": "28px",
+        "--text-caption": "14px",
+        "--text-small": "15px",
+        "--text-body": "16px",
+        "--text-lead": "18px",
+        "--text-heading-sm": "20px",
+        "--text-heading-md": "24px",
+        "--text-heading-lg": "28px",
+        "--text-heading-xl": "32px",
+        "--text-display-sm": "36px",
+        "--text-display": "44px",
+        "--text-display-lg": "64px",
+        "--text-display-xl": "80px",
+        "--font-sans": "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        "--font-mono": "'SFMono-Regular', Consolas, monospace",
+        "--space-1": "4px",
+        "--space-2": "8px",
+        "--space-3": "12px",
+        "--space-4": "16px",
+        "--space-6": "24px",
+        "--space-8": "32px",
+        "--space-12": "48px",
+        "--radius-sm": "6px",
+        "--radius-control": "10px",
+        "--radius-card": "16px",
+        "--radius-pill": "999px",
+        "--control-height": "44px",
+        "--control-height-compact": "36px",
+        "--control-icon-size": "18px",
+        "--control-padding-x": "14px",
+        "--control-font-size": "var(--text-body)",
+        "--focus-width": "2px",
+        "--focus-offset": "2px",
+        "--panel-padding": "24px",
+        "--panel-gap": "24px",
+        "--field-gap": "8px",
+        "--form-gap": "16px",
+        "--status-radius": "6px",
+        "--surface-border": "var(--color-line)",
+        "--button-primary-fill": "var(--color-action)",
+        "--button-primary-shadow": "none",
+        "--shadow-popup": "0 16px 56px #181c2416",
+        "--color-divider": "color-mix(in srgb, var(--color-line) 60%, var(--color-surface))",
+        "--layout-page-padding": "clamp(28px, 3cqi, 48px)",
+        "--layout-panel-padding": "28px",
+        "--layout-section-gap": "28px"
+      }
+    },
+    "contrast": {
+      "name": "Контраст",
+      "tokens": {
+        "--color-accent": "#8A332C",
+        "--color-accent-hover": "#722820",
+        "--color-accent-pressed": "#5B1F19",
+        "--color-accent-soft": "#F6EBE6",
+        "--color-accent-soft-hover": "#EEDBD2",
+        "--color-accent-line": "#D7B0A2",
+        "--color-on-accent": "#FFFFFF",
+        "--color-action": "#8A332C",
+        "--color-action-hover": "#722820",
+        "--color-action-pressed": "#5B1F19",
+        "--color-action-border": "#8A332C",
+        "--color-on-action": "#FFFFFF",
+        "--color-ink": "#181C24",
+        "--color-text": "#3D4652",
+        "--color-muted": "#606A5C",
+        "--color-subtle": "#606A5C",
+        "--color-canvas": "#FDFDFC",
+        "--color-stage": "#F1EFEA",
+        "--color-surface": "#FFFFFF",
+        "--color-surface-subtle": "#FDFCF9",
+        "--color-surface-muted": "#F3F1ED",
+        "--color-line": "#B8AEA6",
+        "--color-control-border": "#746C63",
+        "--color-success": "#276444",
+        "--color-success-bg": "#EAF4EE",
+        "--color-warning": "#83520D",
+        "--color-warning-bg": "#FFF3DC",
+        "--color-danger": "#B42318",
+        "--color-danger-bg": "#FFF0ED",
+        "--color-info": "#3E5E89",
+        "--color-info-bg": "#EEF2F8",
+        "--color-paused": "#6B547E",
+        "--color-paused-bg": "#F3EEF6",
+        "--color-chart": "#B16B59",
+        "--color-skeleton": "#DCE1E7",
+        "--color-skeleton-highlight": "#FCFBF8",
+        "--table-record-row-height": "44px",
+        "--table-record-padding-y": "3px",
+        "--table-record-avatar-size": "28px",
+        "--text-caption": "14px",
+        "--text-small": "15px",
+        "--text-body": "16px",
+        "--text-lead": "18px",
+        "--text-heading-sm": "20px",
+        "--text-heading-md": "24px",
+        "--text-heading-lg": "28px",
+        "--text-heading-xl": "32px",
+        "--text-display-sm": "36px",
+        "--text-display": "44px",
+        "--text-display-lg": "64px",
+        "--text-display-xl": "80px",
+        "--font-sans": "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        "--font-mono": "'SFMono-Regular', Consolas, monospace",
+        "--space-1": "4px",
+        "--space-2": "8px",
+        "--space-3": "12px",
+        "--space-4": "16px",
+        "--space-6": "24px",
+        "--space-8": "32px",
+        "--space-12": "48px",
+        "--radius-sm": "6px",
+        "--radius-control": "10px",
+        "--radius-card": "16px",
+        "--radius-pill": "999px",
+        "--control-height": "44px",
+        "--control-height-compact": "36px",
+        "--control-icon-size": "18px",
+        "--control-padding-x": "14px",
+        "--control-font-size": "var(--text-body)",
+        "--focus-width": "2px",
+        "--focus-offset": "2px",
+        "--panel-padding": "24px",
+        "--panel-gap": "24px",
+        "--field-gap": "8px",
+        "--form-gap": "16px",
+        "--status-radius": "6px",
+        "--surface-border": "var(--color-line)",
+        "--button-primary-fill": "var(--color-action)",
+        "--button-primary-shadow": "none",
+        "--shadow-popup": "0 16px 56px #181c2416",
+        "--color-divider": "var(--color-line)",
+        "--layout-page-padding": "clamp(28px, 3cqi, 48px)",
+        "--layout-panel-padding": "28px",
+        "--layout-section-gap": "28px"
+      }
+    }
+  },
+  "metrics": {
+    "controlHeight": 44,
+    "compactHeight": 36,
+    "controlRadius": 10,
+    "panelRadius": 16,
+    "bodyText": 16,
+    "captionText": 14
+  },
+  "semantics": {
+    "membershipKinds": [
+      {
+        "id": "gym",
+        "name": "Железная карта",
+        "description": "Тренажёрный зал",
+        "colorName": "Стальной",
+        "background": "#EDF0F3",
+        "foreground": "#465462",
+        "line": "#CDD4DC",
+        "type": "Безлимитный",
+        "visits": "0",
+        "duration": "30"
+      },
+      {
+        "id": "group",
+        "name": "Групповые тренировки",
+        "description": "Занятия в группе",
+        "colorName": "Шалфейный",
+        "background": "#EDF3EE",
+        "foreground": "#42634D",
+        "line": "#CCDCD0",
+        "type": "По посещениям",
+        "visits": "12",
+        "duration": "60"
+      },
+      {
+        "id": "personal",
+        "name": "Персональные тренировки",
+        "description": "Занятия с тренером один на один",
+        "colorName": "Приглушённый красный",
+        "background": "#F8EEEE",
+        "foreground": "#914B50",
+        "line": "#E8CFD1",
+        "type": "По посещениям",
+        "visits": "4",
+        "duration": "30"
+      },
+      {
+        "id": "single",
+        "name": "Разовое посещение",
+        "description": "Один самостоятельный визит",
+        "colorName": "Дымчато-синий",
+        "background": "#E8F0FF",
+        "foreground": "#204DA8",
+        "line": "#B8CDF3",
+        "type": "Разовое посещение",
+        "visits": "1",
+        "duration": "1"
+      },
+      {
+        "id": "guest",
+        "name": "Гостевой визит",
+        "description": "Знакомство с клубом",
+        "colorName": "Светлый контур",
+        "background": "transparent",
+        "foreground": "#606A5C",
+        "line": "#CCD2C8",
+        "type": "Разовое посещение",
+        "visits": "1",
+        "duration": "7"
+      }
+    ],
+    "intensity": [
+      {
+        "value": "Низкая",
+        "color": "#26804A",
+        "label": "Низкая интенсивность"
+      },
+      {
+        "value": "Средняя",
+        "color": "#D4AE17",
+        "label": "Средняя интенсивность"
+      },
+      {
+        "value": "Высокая",
+        "color": "#CE3F3F",
+        "label": "Высокая интенсивность"
+      }
+    ],
+    "occupancy": [
+      {
+        "min": 0,
+        "label": "0–24%",
+        "background": "#F5EEF2",
+        "foreground": "#3E2533",
+        "line": "#D9C1CF"
+      },
+      {
+        "min": 25,
+        "label": "25–49%",
+        "background": "#EACBD8",
+        "foreground": "#3E2533",
+        "line": "#BF8BA3"
+      },
+      {
+        "min": 50,
+        "label": "50–74%",
+        "background": "#D596B0",
+        "foreground": "#3E1829",
+        "line": "#A55E7D"
+      },
+      {
+        "min": 75,
+        "label": "75–99%",
+        "background": "#8A3F61",
+        "foreground": "#FFFFFF",
+        "line": "#6C2D4A"
+      },
+      {
+        "min": 100,
+        "label": "100% и выше",
+        "background": "#4E1F35",
+        "foreground": "#FFFFFF",
+        "line": "#4E1F35"
+      }
+    ]
+  },
+  "contextualDeclarations": [
+    {
+      "name": "--layout-section-gap",
+      "value": "12px",
+      "source": "src/styles/cash.css"
+    },
+    {
+      "name": "--button-height",
+      "value": "var(--control-height)",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--panel-padding",
+      "value": "16px",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--panel-gap",
+      "value": "16px",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--surface-border",
+      "value": "var(--color-line)",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--button-primary-fill",
+      "value": "var(--color-action)",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--button-primary-shadow",
+      "value": "none",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--color-divider",
+      "value": "var(--color-line)",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--contour-color",
+      "value": "var(--color-action-border)",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--contour-color",
+      "value": "var(--color-accent)",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--contour-color",
+      "value": "var(--color-danger)",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--contour-color",
+      "value": "var(--color-line)",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--layout-section-gap",
+      "value": "16px",
+      "source": "src/styles/crm.css"
+    },
+    {
+      "name": "--ds-card-padding",
+      "value": "24px",
+      "source": "src/styles/design-system.css"
+    },
+    {
+      "name": "--ds-grid-gap",
+      "value": "16px",
+      "source": "src/styles/design-system.css"
+    },
+    {
+      "name": "--ds-section-gap",
+      "value": "32px",
+      "source": "src/styles/design-system.css"
+    },
+    {
+      "name": "--ds-card-padding",
+      "value": "16px",
+      "source": "src/styles/design-system.css"
+    },
+    {
+      "name": "--ds-grid-gap",
+      "value": "12px",
+      "source": "src/styles/design-system.css"
+    },
+    {
+      "name": "--ds-section-gap",
+      "value": "24px",
+      "source": "src/styles/design-system.css"
+    },
+    {
+      "name": "--disclosure-inset",
+      "value": "12px",
+      "source": "src/styles/disclosures.css"
+    },
+    {
+      "name": "--layout-panel-padding",
+      "value": "20px",
+      "source": "src/styles/layout.css"
+    },
+    {
+      "name": "--layout-section-gap",
+      "value": "20px",
+      "source": "src/styles/layout.css"
+    },
+    {
+      "name": "--ds-card-padding",
+      "value": "var(--layout-panel-padding)",
+      "source": "src/styles/layout.css"
+    },
+    {
+      "name": "--ds-grid-gap",
+      "value": "20px",
+      "source": "src/styles/layout.css"
+    },
+    {
+      "name": "--ds-section-gap",
+      "value": "40px",
+      "source": "src/styles/layout.css"
+    },
+    {
+      "name": "--layout-section-gap",
+      "value": "24px",
+      "source": "src/styles/layout.css"
+    },
+    {
+      "name": "--ds-card-padding",
+      "value": "20px",
+      "source": "src/styles/layout.css"
+    },
+    {
+      "name": "--ds-grid-gap",
+      "value": "16px",
+      "source": "src/styles/layout.css"
+    },
+    {
+      "name": "--ds-section-gap",
+      "value": "32px",
+      "source": "src/styles/layout.css"
+    },
+    {
+      "name": "--section-bg",
+      "value": "#edf0f3",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-ink",
+      "value": "#465462",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-line",
+      "value": "#cdd4dc",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-bg",
+      "value": "#f8eeee",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-ink",
+      "value": "#914b50",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-line",
+      "value": "#e8cfd1",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-bg",
+      "value": "#e8f0ff",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-ink",
+      "value": "#204da8",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-line",
+      "value": "#b8cdf3",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-bg",
+      "value": "#fff2e5",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-ink",
+      "value": "#8a450d",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-line",
+      "value": "#eac5a2",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-bg",
+      "value": "#f5f4ed",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-ink",
+      "value": "#606a5c",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--section-line",
+      "value": "#ccd2c8",
+      "source": "src/styles/memberships.css"
+    },
+    {
+      "name": "--layout-section-gap",
+      "value": "16px",
+      "source": "src/styles/memberships.css"
+    }
+  ],
+  "runtimeVariables": [
+    {
+      "name": "--membership-bg",
+      "expression": "kind.background",
+      "source": "src/components/MembershipTag.tsx"
+    },
+    {
+      "name": "--membership-text",
+      "expression": "kind.foreground",
+      "source": "src/components/MembershipTag.tsx"
+    },
+    {
+      "name": "--membership-line",
+      "expression": "kind.line",
+      "source": "src/components/MembershipTag.tsx"
+    },
+    {
+      "name": "--select-chevron",
+      "expression": "arrow",
+      "source": "src/components/ThemeProvider.tsx"
+    },
+    {
+      "name": "--select-chevron",
+      "expression": "oldArrow",
+      "source": "src/components/ThemeProvider.tsx"
+    },
+    {
+      "name": "--bar-height",
+      "expression": "`${(item.value / (period === 'week' ? 200 : 800)) * 100}%`",
+      "source": "src/pages/Overview.tsx"
+    },
+    {
+      "name": "--calendar-columns",
+      "expression": "columns.length",
+      "source": "src/pages/ScheduleWorkspace.tsx"
+    },
+    {
+      "name": "--event-color",
+      "expression": "heatmap\n                            ? eventOccupancy(event).line\n                            : trainingIntensity(event).color",
+      "source": "src/pages/ScheduleWorkspace.tsx"
+    },
+    {
+      "name": "--event-background",
+      "expression": "eventOccupancy(event).background",
+      "source": "src/pages/ScheduleWorkspace.tsx"
+    },
+    {
+      "name": "--event-foreground",
+      "expression": "eventOccupancy(event).foreground",
+      "source": "src/pages/ScheduleWorkspace.tsx"
+    }
+  ],
+  "rules": [
+    {
+      "id": "actions",
+      "title": "Кнопки и действия",
+      "purpose": "Одинаковое действие узнаётся на любой странице.",
+      "components": [
+        "Button",
+        "IconButton",
+        "TextLink",
+        "SectionLinks",
+        "Back",
+        "DisclosureMenu"
+      ],
+      "rules": [
+        "Обычная кнопка — от 44 px, текст 16 px, скругление 10 px. В плотной таблице допускается вариант 36 px с текстом 14 px; на телефоне область нажатия снова от 44 px.",
+        "Главная кнопка запускает следующий шаг или сохраняет результат. Вторичная имеет рамку, спокойная текстовая — без заливки. Акцентная рамка выделяет важное дополнительное действие, например «Продать».",
+        "Удаление и отмена занятия используют красное действие. Кнопка «Отмена», которая просто закрывает окно, остаётся нейтральной. Отключённая кнопка не реагирует; наведение и нажатие не меняют размеры.",
+        "У кнопки только с иконкой всегда есть понятное название и подсказка. Все варианты используют одинаковый видимый фокус клавиатуры.",
+        "Временное меню дополнительных действий закрывается нажатием вне его области, уходом фокуса и Escape. Нажатие снаружи выполняет выбранное действие с первого раза. Открытие и закрытие самого меню не меняют данные. Действие не повторяется в меню, если уже явно доступно рядом."
+      ]
+    },
+    {
+      "id": "fields",
+      "title": "Поля и выбор значений",
+      "purpose": "Формы заполняются одинаково, независимо от раздела.",
+      "components": [
+        "FieldControl",
+        "RecordForm",
+        "Select",
+        "ThemeSelect",
+        "Switch"
+      ],
+      "rules": [
+        "Поле и выпадающий список имеют высоту от 44 px, текст 16 px и скругление 10 px. Название располагается сверху, подсказка и ошибка — снизу.",
+        "Одиночный выбор всегда открывает один и тот же список: текущий вариант с галочкой, стрелки для перемещения, Enter для выбора, Escape для закрытия. В длинном списке есть поиск.",
+        "Ошибка объясняет, что исправить, и связана с полем. Обязательное поле отмечается звёздочкой. «Отмена» не отправляет форму; отправка выполняется явной кнопкой сохранения."
+      ]
+    },
+    {
+      "id": "search",
+      "title": "Поиск",
+      "purpose": "Один способ поиска — одно поведение.",
+      "components": [
+        "SearchBox",
+        "ClientSearch"
+      ],
+      "rules": [
+        "Обычный поиск — поле от 44 px с лупой слева и очисткой справа. Подсказка называет, какие данные можно искать.",
+        "Поиск клиента и поиск по списку используют одну рамку: высота 44 px, скругление 10 px, боковые отступы 12 px, промежуток 10 px, лупа 20 px цвета вторичного текста, текст и подсказка 16 px. Фокус одинаковый. Подсказки клиентов и клавиша Enter добавляют поведение; отдельной кнопки со знаком Enter нет.",
+        "Поиск клиента в шапке, регистрации, продаже и записи на занятие принимает карту, ФИО и телефон. Результаты не обрезаются соседними блоками. Выбор клиента сам по себе ничего не списывает и не продаёт.",
+        "Поиск на ресепшене и соседние основные кнопки имеют общую высоту 44 px на компьютере и телефоне; поиск выделяется шириной. Большой поиск справочника — 64 px.",
+        "Поиск внутри выпадающего списка и каталога продажи использует ту же рамку, шрифт, лупу и фокус. Очистка — единое встроенное действие 36 × 42 px; X 18 px, без постоянной подложки."
+      ]
+    },
+    {
+      "id": "statuses",
+      "title": "Статусы",
+      "purpose": "Один смысл сохраняет один цвет.",
+      "components": [
+        "StatusBadge",
+        "Badge",
+        "Status",
+        "CountBadge"
+      ],
+      "rules": [
+        "У каждого статуса есть подпись. Действующий или успешно выполненный — зелёный; ожидание и необходимость внимания — янтарные; ошибка или отмена — красные; работа и доставка — синие; заморозка — фиолетовая; архив и завершённый срок — нейтральные.",
+        "Состояние определяется полным значением, а не частью слова: «Не активен» не должно становиться зелёным. Неизвестное состояние нейтральное до уточнения смысла.",
+        "Шрифт 14 px, одинаковые отступы и скругление 6 px. Цвет услуги или абонемента не заменяет статус."
+      ]
+    },
+    {
+      "id": "tabs",
+      "title": "Разделы и режимы",
+      "purpose": "Переключатели сохраняют одинаковую логику.",
+      "components": [
+        "Tabs"
+      ],
+      "rules": [
+        "Вкладки содержимого подчёркивают выбранный раздел. Счётчик относится к названию. Arrow Left / Right, Home и End меняют выбранную вкладку и переводят фокус.",
+        "Режимы одного инструмента, например день / неделя / список, используют компактный переключатель с общей подложкой. Его отличие от вкладок — назначение, а не стиль конкретной страницы.",
+        "Длинный ряд прокручивается внутри. Названия не уменьшаются, выбор не меняет высоту переключателя."
+      ]
+    },
+    {
+      "id": "surfaces",
+      "title": "Блоки и страницы",
+      "purpose": "Информация собирается по одной сетке.",
+      "components": [
+        "SectionTitle",
+        "AdminPageLayout",
+        "LinkCards",
+        "Stats",
+        "CatalogSectionCard",
+        "ResourcePage",
+        "RecordDetails"
+      ],
+      "rules": [
+        "Рабочая панель имеет скругление 16 px, один контур и внутренние отступы 24 px на компьютере, 16 px на телефоне. Между соседними блоками — 24 / 16 px.",
+        "Заголовок страницы компактный. Действия находятся у данных, к которым относятся. Прокрутка длинных списков остаётся внутри рабочего блока на компьютере; на телефоне доступна обычная прокрутка. Панели внутри прокручиваемого блока не сжимаются и не обрезают данные; последняя запись и нижние действия должны быть доступны мышью и клавиатурой.",
+        "Переход-карточка открывается по всей свободной площади. Показатель, переход, форма и уведомление — разные виды блока: их оформление соответствует задаче, а не случайной странице."
+      ]
+    },
+    {
+      "id": "tables",
+      "title": "Списки и таблицы",
+      "purpose": "Сравнивать записи и открывать карточки удобно везде.",
+      "components": [
+        "DataTable",
+        "Avatar"
+      ],
+      "rules": [
+        "Строка — от 44 px и растёт при переносе текста. Основные данные 16 px, заголовки колонок и пояснения 14 px. Имена клиентов показываются с отчеством.",
+        "Открываемая запись реагирует на свободную площадь строки; встроенные кнопки выполняют только своё действие. Для клавиатуры есть подписанная кнопка открытия.",
+        "На телефоне таблица может стать списком карточек. Широкая техническая таблица прокручивается внутри своего блока; содержимое не расширяет всю страницу."
+      ]
+    },
+    {
+      "id": "dialogs",
+      "title": "Окна и подтверждения",
+      "purpose": "Перед изменением понятны объект и последствия.",
+      "components": [
+        "Modal",
+        "ConfirmDialog"
+      ],
+      "rules": [
+        "Окно имеет заголовок, подписанную кнопку закрытия и единый ряд действий внизу: нейтральная отмена слева, подтверждение справа. Текст ошибки остаётся рядом с действием.",
+        "Удаление записи, занятия, сообщения и снятие записи клиента используют общее окно подтверждения с названием объекта и объяснением последствий. Подтверждение выделено красным.",
+        "Фокус остаётся внутри верхнего окна и возвращается к исходной кнопке после закрытия. Escape закрывает обычное окно. Заблокированный экран снимается только отдельным действием разблокировки."
+      ]
+    },
+    {
+      "id": "feedback",
+      "title": "Подсказки, ошибки и пустые состояния",
+      "purpose": "Результат действия не нужно угадывать.",
+      "components": [
+        "Notice",
+        "Toast",
+        "Empty",
+        "StateContent"
+      ],
+      "rules": [
+        "Ошибка объясняет причину и следующий шаг. Успех подтверждает конкретный результат. Цвет всегда сопровождается текстом; краткое уведомление не заменяет постоянную важную информацию.",
+        "Пустой поиск предлагает изменить запрос или сбросить фильтры. Пустой раздел предлагает первое доступное действие. Загрузка, пустота и ошибка оформляются разными состояниями."
+      ]
+    },
+    {
+      "id": "navigation",
+      "title": "Навигация",
+      "purpose": "Расположение и доступность разделов предсказуемы.",
+      "components": [
+        "AdminHeader",
+        "ScreenLock"
+      ],
+      "rules": [
+        "Шапка ресепшена компактная: клуб и рабочее место одной строкой без повторного логотипа, на телефоне — двумя короткими строками. Поиск и основные действия одинаковой высоты 44 px; отступы между рядами 8 px. Дополнительный значок журнала звонков в шапке не дублирует левое меню.",
+        "Иконки бокового меню сохраняют положение при сворачивании. Состав пунктов зависит от роли, но одинаковые разделы называются и выглядят одинаково.",
+        "Кнопка сворачивания меню — строка высотой 44 px на всю доступную ширину, с иконкой и однострочной подписью. Заливки нет, включая наведение; фокус обозначается внешним контуром. В свёрнутом меню подпись скрывается, иконка не смещается.",
+        "На телефоне текущий пункт выделяется цветом, жирной подписью и иконкой без фона. Для длинного названия расписания выделена дополнительная ширина.",
+        "Роль определяет доступ к действию; тема меняет цвета. Тема не меняет сетку, права, данные и смысл статусов."
+      ]
+    },
+    {
+      "id": "domain",
+      "title": "Специальные элементы клуба",
+      "purpose": "Особенности работы сохраняются как явные паттерны.",
+      "components": [
+        "MembershipCard",
+        "MembershipTag",
+        "ScheduleAttendees",
+        "ClubLogo",
+        "LogoGuidelines",
+        "ReceptionShift"
+      ],
+      "rules": [
+        "Абонемент при выборе выглядит как цветная карта, в карточке клиента — компактная строка, в журнале — цветной текст. Название и назначение сохраняются. Состояние и ограничения показаны отдельно.",
+        "Расписание использует общие поля, вкладки, поиск клиентов и подтверждения. Интенсивность, заполняемость и резерв имеют отдельные подписанные правила. На узком контейнере дата занимает свою строку, сетка не сжимается ниже 420 px, легенда компактная; это действует и в предпросмотре телефона на компьютере.",
+        "Логотип вписан без декоративной рамки и сохраняет пропорции. На тёмной поверхности используется контрастный вариант. Большое фото клиента — особый блок для узнавания, обычные аватары остаются компактными.",
+        "Карточка клиента: фото шириной до 280 px на всю высоту левой колонки, справа имя, контакты, компактная строка счёта и основные действия. Редактирование находится у имени. На телефоне фото 96 × 96 px, блоки идут последовательно, без обрезки действий. Смена ресепшена — компактная строка рядом с заголовком страницы, а не отдельный блок под поисковой подсказкой."
+      ]
+    },
+    {
+      "id": "communication",
+      "title": "Комментарии и сообщения",
+      "purpose": "История, важность и действия выглядят одинаково.",
+      "components": [
+        "ChatHistory",
+        "ClientComments",
+        "PinnedClientComment",
+        "AttentionFlags"
+      ],
+      "rules": [
+        "У сообщения есть автор, время и реальный демонстрационный статус доставки. Изменение и удаление доступны для сообщений клуба через одно меню; удаление подтверждается.",
+        "Комментарий сохраняется в общей истории клиента. Важный комментарий можно закрепить в карточке; закрепление не создаёт отдельную копию текста.",
+        "Отметки важного и непросмотренного используют один компонент в уведомлениях и чатах."
+      ]
+    },
+    {
+      "id": "guidance",
+      "title": "Темы и примеры",
+      "purpose": "Дизайн-система показывает настоящие компоненты приложения.",
+      "components": [
+        "ThemePlayground",
+        "DesignRules"
+      ],
+      "rules": [
+        "Астрон, Графит и Контраст — темы одного интерфейса. Примеры используют рабочие компоненты и те же состояния, что приложение.",
+        "Контраст сохраняет цвета и светлое меню Астрона. Видимая рамка панелей и полей усилена до 2 px внутренней линией без изменения размеров. Выбор выделяется бордовым, клавиатурный фокус остаётся отдельным внешним контуром; разделители строк легче рамок.",
+        "Сначала переиспользуется существующий элемент. Новый паттерн получает назначение, размеры, состояния, поведение с клавиатурой и на телефоне; затем добавляется в правила и примеры."
+      ]
+    }
+  ]
+}
