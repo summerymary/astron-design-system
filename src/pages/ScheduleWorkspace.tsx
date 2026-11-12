@@ -283,7 +283,7 @@ export function ScheduleWorkspace({
         viewportBottom - rect.top - heading - footer - legend - scrollbar - (fullscreen ? 16 : 6);
       // On phones the page may scroll, but the calendar still shows the complete day.
       const height = Math.max(
-        !fullscreen && window.innerWidth < 1000 ? 360 : 100,
+        !fullscreen && root.current.clientWidth < 700 ? 420 : 100,
         Math.floor(remaining),
       );
       const next = { height, width: root.current.clientWidth, heading, inset: scrollbar };
@@ -1194,7 +1194,8 @@ export function ScheduleWorkspace({
               {TRAINING_INTENSITIES.map((item) => (
                 <span key={item.value}>
                   <i style={{ background: item.color }} />
-                  {item.label}
+                  <span className="calendar-legend-full">{item.label}</span>
+                  <span className="calendar-legend-short">{item.value}</span>
                 </span>
               ))}
             </div>
