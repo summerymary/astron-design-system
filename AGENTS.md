@@ -1,5 +1,15 @@
 # Источник редизайна и ограничения
 
+## Публикация списания из расписания — 15 ноября 2026
+
+По новой прямой просьбе «пушни в гит» разрешены commit/push накопленного исправления списания из списка занятия и обновление GitHub Pages. Включены общая атомарная регистрация, защита повторов, выбор подходящей карты, синхронизация журнала и присутствия, правила и экспорт. Проверки завершены. Сохранить публичную историю через отдельную ветку и обычное объединение, без force push; .openai/hosting.json не публиковать. Исходные системы клуба и Sites-зеркало не используются. Следующие commit/push снова только по новой прямой просьбе.
+
+## Списание из списка занятия — локально, 15 ноября 2026
+
+Проверка: все 12 предметных/UI-команд, test:handoff, TypeScript/build и git diff --check прошли. После финального оформления повторены theme/ui/handoff/build. В браузере: списание 12→11, история посещений, защита через регистрацию, выбор второй из двух карт (первая осталась 12), отсутствие карты и фильтр продажи, обратная синхронизация регистрации со списком, рабочий пример. Мобильные окна в четырёх темах 390×844 без горизонтального переполнения, нижние кнопки 44 px видимы; ошибок консоли нет. Успешная disabled-кнопка остаётся зелёной, вес 700, opacity 1. Доказательство: /private/tmp/astron-roster-pass-debit-20261115.png. Только локальные демоданные; собственный сервер остановлен. Commit/push не выполнялись.
+
+«Отметить» в ScheduleAttendees теперь списывает посещение, сохраняет квитанцию visit-bookings и присутствие в events общей атомарной операцией trainingVisit / WorkspaceProvider.registerTrainingVisit. Её использует также регистрация предзаписи. Одна подходящая карта списывается сразу; несколько требуют выбора и подтверждения; без карты — совместимая продажа. Часы, возраст, сопровождение, категория тренера и окно −60/+30 минут сохраняются. Повтор клиента/занятия блокируется квитанцией. Кнопка «Присутствует» не является переключателем отмены; снятие записи не возвращает списание, это указано в подтверждении. Журнал использует время и клуб занятия. Правила, рабочий пример и экспорт обновлены. Изменения локальные; нового запроса commit/push нет.
+
 ## Publication requested - 15 November 2026
 
 The user explicitly requested pushing all pending changes to summerymary/astron-design-system and its established GitHub Pages deployment. Include client registration/search, trainer categories and booking, client duplicate review/update, weekly schedule copy, Marketing navigation, role restrictions, shared components, guide and developer exports. Preserve public history through a release branch and regular merge; no force push. Exclude internal .openai/hosting.json. All 12 domain/UI tests, handoff and production build passed before release; final handoff/UI/build checks passed again. Club systems/APIs and the Sites mirror are not used. Future commit/push again requires a new direct request.
