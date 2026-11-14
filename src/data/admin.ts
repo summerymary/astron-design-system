@@ -153,7 +153,7 @@ export const adminSections = [
   { id: 'members', label: 'Клиенты', caption: 'База и карточки клиентов' },
   { id: 'products', label: 'Продажа товаров', caption: 'Товары ресепшена' },
   { id: 'cash', label: 'Касса', caption: 'Операции смены' },
-  { id: 'crm', label: 'CRM', caption: 'Работа с клиентами' },
+  { id: 'crm', label: 'Маркетинг', caption: 'Аудитории, обращения и продажи' },
   { id: 'bar', label: 'Бар', caption: 'Заказы и товары бара' },
   { id: 'requests', label: 'Онлайн-заявки', caption: 'Новые обращения' },
   { id: 'messages', label: 'Сообщения', caption: 'Переписка с клиентами' },

@@ -22,6 +22,7 @@ export const statusLabels: Record<MemberStatus, string> = {
 export const initialMembers: Member[] = [
   {
     id: 1001,
+    birthDate: '1998-04-12',
     photoIndex: 0,
     name: 'Анна Смирнова',
     fullName: 'Смирнова Анна Андреевна',
@@ -36,6 +37,7 @@ export const initialMembers: Member[] = [
   },
   {
     id: 1002,
+    birthDate: '1992-04-12',
     photoIndex: 1,
     name: 'Михаил Волков',
     fullName: 'Волков Михаил Сергеевич',
@@ -50,6 +52,7 @@ export const initialMembers: Member[] = [
   },
   {
     id: 1003,
+    birthDate: '1985-04-12',
     photoIndex: 2,
     name: 'Елена Козлова',
     fullName: 'Козлова Елена Викторовна',
@@ -64,6 +67,7 @@ export const initialMembers: Member[] = [
   },
   {
     id: 1004,
+    birthDate: '2000-04-12',
     photoIndex: 3,
     name: 'Дмитрий Соколов',
     fullName: 'Соколов Дмитрий Алексеевич',
@@ -78,6 +82,7 @@ export const initialMembers: Member[] = [
   },
   {
     id: 1005,
+    birthDate: '1994-04-12',
     photoIndex: 4,
     name: 'Мария Лебедева',
     fullName: 'Лебедева Мария Игоревна',
@@ -92,6 +97,7 @@ export const initialMembers: Member[] = [
   },
   {
     id: 1006,
+    birthDate: '1981-04-12',
     photoIndex: 5,
     name: 'Алексей Морозов',
     fullName: 'Морозов Алексей Николаевич',

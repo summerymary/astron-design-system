@@ -565,6 +565,16 @@ export const directoryGroups: { label: string; items: AdminSectionId[] }[] = [
   },
 ];
 export const initialExtra: Record<string, DemoRecord[]> = {
+  'trainer-categories': [
+    { id: 'trainer', name: 'Тренер', lessonPrice: '1500' },
+    { id: 'senior', name: 'Старший тренер', lessonPrice: '2000' },
+    { id: 'master', name: 'Мастер-тренер', lessonPrice: '2500' },
+  ],
+  'trainer-profiles': [
+    { id: 'user-trainer', name: 'Алина Белова', categoryId: 'trainer', status: 'Активен' },
+    { id: 'trainer-maxim', name: 'Максим Ветров', categoryId: 'senior', status: 'Активен' },
+    { id: 'trainer-denis', name: 'Денис Орлов', categoryId: 'master', status: 'Активен' },
+  ],
   'reception-services': [
     {
       id: 'service-towel',
@@ -631,6 +641,13 @@ export const initialExtra: Record<string, DemoRecord[]> = {
     { id: 'gift-demo-2', name: 'DEMO-1002', balance: '10000', status: 'Активна' },
   ],
   'personal-clients': [
+    {
+      id: 'pc-maxim',
+      trainerId: 'trainer-maxim',
+      memberId: '1002',
+      goal: 'Персональный план тренировок',
+    },
+    { id: 'pc-denis', trainerId: 'trainer-denis', memberId: '1004', goal: 'Техника и прогресс' },
     {
       id: 'pc-1',
       trainerId: 'user-trainer',
@@ -1565,6 +1582,40 @@ export function createWorkspaceData(): Record<string, DemoRecord[]> {
     ...initialExtra,
     'cash-events': demoCashMovements,
   });
+  data.employees.push(
+    {
+      id: 'emp-maxim',
+      name: 'Максим Ветров',
+      position: 'Персональный тренер',
+      club: 'Центральный',
+      phone: '+7 900 000-20-03',
+      email: 'maxim@example.com',
+      status: 'Активен',
+    },
+    {
+      id: 'emp-denis',
+      name: 'Денис Орлов',
+      position: 'Персональный тренер',
+      club: 'Центральный',
+      phone: '+7 900 000-20-04',
+      email: 'denis@example.com',
+      status: 'Активен',
+    },
+  );
+  const personalPlan = data.plans.find((plan) => plan.id === 'plan-3')!;
+  personalPlan.trainerCategory = 'trainer';
+  personalPlan.name = 'Персональные тренировки · Тренер';
+  for (const category of data['trainer-categories'].filter((row) => row.id !== 'trainer')) {
+    data.plans.push({
+      ...personalPlan,
+      id: `personal-${category.id}`,
+      trainerCategory: category.id,
+      name: `Персональные тренировки · ${category.name}`,
+      price: String(Number(category.lessonPrice) * 4),
+    });
+  }
+  for (const event of data.events.filter((row) => row.kind === 'personal'))
+    event.trainerCategory = 'trainer';
   const gymPlan = data.plans.find((plan) => plan.id === 'plan-1')!;
   const periods = [
     {

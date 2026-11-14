@@ -31,6 +31,8 @@ export interface DemoSubscription {
   accessWeekdays?: string;
   accessWeekends?: string;
   training?: string;
+  trainerCategory?: string;
+  trainerId?: string;
   ageMin?: string;
   ageMax?: string;
 }
@@ -47,6 +49,7 @@ export function getClientProfile(member: Member, data: Record<string, DemoRecord
       id: `S-${member.id}-01`,
       name: member.plan,
       kindId: kind?.id,
+      ...(kind?.id === 'personal' ? { trainerCategory: 'trainer' } : {}),
       used: limit === null ? baseUsed : Math.min(baseUsed, limit),
       remaining: limit === null ? null : Math.max(0, limit - baseUsed),
       boughtAt: member.joined,
@@ -57,6 +60,7 @@ export function getClientProfile(member: Member, data: Record<string, DemoRecord
     {
       id: `S-${member.id}-02`,
       name: 'Персональные тренировки · 4 занятия',
+      trainerCategory: 'trainer',
       used: 1,
       remaining: 3,
       boughtAt: '20.10.2026',
@@ -99,6 +103,8 @@ export function getClientProfile(member: Member, data: Record<string, DemoRecord
       accessWeekdays: row.accessWeekdays,
       accessWeekends: row.accessWeekends,
       training: row.training,
+      trainerCategory: row.trainerCategory,
+      trainerId: row.trainerId,
       ageMin: row.ageMin,
       ageMax: row.ageMax,
       activatedAt: null,
