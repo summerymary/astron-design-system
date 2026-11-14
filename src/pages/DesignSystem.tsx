@@ -698,7 +698,7 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
               ].map(([title, text]) => (
                 <article key={title}>
                   <h3>{title}</h3>
-                  <p>{visualStyle === 'vivid' ? contrastRules[title] || text : text}</p>
+                  <p>{visualStyle === 'contrast' ? contrastRules[title] || text : text}</p>
                 </article>
               ))}
             </div>
