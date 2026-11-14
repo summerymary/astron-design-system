@@ -26,7 +26,7 @@ import type { Navigate } from '../components/WorkspaceUI';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { TODAY } from '../data/workspace';
 import type { DemoRecord } from '../data/workspace';
-import type { DemoUser, Member } from '../types';
+import type { DemoUser, Member, RegisterVisit } from '../types';
 import { PersonalTrainingForm, personalDraft } from './StaffWorkspace';
 import {
   canManageEvent,
@@ -77,6 +77,7 @@ type Drag = {
 
 export function ScheduleWorkspace({
   members,
+  onRegister,
   navigate,
   clubName,
   onClubChange,
@@ -86,6 +87,7 @@ export function ScheduleWorkspace({
   onRecord,
 }: {
   members: Member[];
+  onRegister: RegisterVisit;
   navigate: Navigate;
   clubName: string;
   onClubChange: (club: string) => void;
@@ -1444,6 +1446,15 @@ export function ScheduleWorkspace({
                 <ScheduleAttendees
                   key={opened.id}
                   event={opened}
+                  onRegister={onRegister}
+                  onSell={(member, event) => {
+                    closeDetails();
+                    setFullscreen(false);
+                    navigate('services', member, undefined, {
+                      saleTraining: event.kind === 'personal' ? 'personal' : 'group',
+                      saleTrainerId: event.kind === 'personal' ? event.trainerId : undefined,
+                    });
+                  }}
                   members={members}
                   editable={isAdmin || isManagementRole(user.role)}
                   onMember={

@@ -139,7 +139,7 @@ body .button.button-accent {
 body .button.button-accent:hover:not(:disabled) {
   background: var(--color-accent-soft);
 }
-/* Attendance confirmation: semantic green in every theme, including its toggle state. */
+/* A completed attendance remains green even when repeat activation is disabled. */
 body .button.button-success {
   color: var(--color-success);
   border-color: var(--color-success);
@@ -180,6 +180,14 @@ body .button.button:disabled {
   cursor: not-allowed;
   opacity: 0.65;
   transform: none;
+}
+body .button.button-success[aria-pressed='true']:disabled {
+  color: var(--color-success);
+  background: var(--color-success-soft);
+  border-color: var(--color-success);
+  box-shadow: inset 0 0 0 1px var(--color-success);
+  cursor: default;
+  opacity: 1;
 }
 body .button.button[data-size='compact'],
 body .ws-table .button.button {

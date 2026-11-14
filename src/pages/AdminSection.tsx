@@ -5,7 +5,7 @@ import type { Navigate } from '../components/WorkspaceUI';
 import { resources } from '../data/workspace';
 import { adminSections } from '../data/admin';
 import type { AdminSectionId } from '../data/admin';
-import type { DemoUser, Member, VisitKind } from '../types';
+import type { DemoUser, Member, RegisterVisit } from '../types';
 import { BarCatalog, BarSales, BartenderHome, TrainerClients } from './StaffWorkspace';
 import { canOpenModule } from '../lib/staff-rules';
 import {
@@ -61,7 +61,7 @@ export function AdminSection({
   user: DemoUser;
   navigate: Navigate;
   onMember: (member: Member) => void;
-  onRegister: (member: Member, kind: VisitKind, passName?: string, passId?: string) => void;
+  onRegister: RegisterVisit;
   onBack: () => void;
 }) {
   if (section === 'trainer-clients')
@@ -103,6 +103,7 @@ export function AdminSection({
   if (section === 'schedule')
     return (
       <ScheduleWorkspace
+        onRegister={onRegister}
         recordId={recordId}
         onRecord={onRecord}
         members={members}

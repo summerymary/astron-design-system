@@ -1,14 +1,20 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { createWorkspaceData } from '../data/workspace';
 import type { DemoRecord } from '../data/workspace';
 import { WorkspaceContext as Context } from '../lib/workspace-context';
 import { reserveSeatNotification } from '../lib/schedule-attendance';
+import { trainingVisit } from '../lib/training-visit';
 export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState(createWorkspaceData);
+  const current = useRef(data);
+  const update = (change: (previous: typeof data) => typeof data) => {
+    current.current = change(current.current);
+    setData(current.current);
+  };
   const [barOpen, setBarOpen] = useState(false);
   const put = (collection: string, record: DemoRecord) =>
-    setData((previous) => {
+    update((previous) => {
       const notice =
         collection === 'events'
           ? reserveSeatNotification(
@@ -28,7 +34,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       };
     });
   const remove = (collection: string, id: string) =>
-    setData((previous) => ({
+    update((previous) => ({
       ...previous,
       [collection]: previous[collection].filter((row) => row.id !== id),
     }));
@@ -38,10 +44,15 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
         data,
         put,
         remove,
+        registerTrainingVisit: (request) => {
+          const result = trainingVisit(current.current, request);
+          update(() => result.data);
+          return result;
+        },
         barOpen,
         setBarOpen,
         reset: () => {
-          setData(createWorkspaceData());
+          update(() => createWorkspaceData());
           setBarOpen(false);
         },
       }}

@@ -1,7 +1,7 @@
 import '../styles/registration.css';
 import { clientName, hiddenPhone } from '../lib/client-display';
 import { useState } from 'react';
-import type { DemoUser, Member, VisitKind } from '../types';
+import type { DemoUser, Member, RegisterVisit } from '../types';
 import type { Navigate } from '../components/WorkspaceUI';
 import { Avatar, Button } from '../components/ui';
 import { ClientBookingDialog } from '../components/ClientBookingDialog';
@@ -40,14 +40,14 @@ export function RegistrationWorkspace({
   members: Member[];
   initialMember: Member | null;
   clubName: string;
-  onRegister: (member: Member, kind: VisitKind, passName?: string, passId?: string) => void;
+  onRegister: RegisterVisit;
   onMember: (member: Member) => void;
   navigate: Navigate;
   hidePhones?: boolean;
   hasHeaderSearch?: boolean;
   user: DemoUser;
 }) {
-  const { data, put } = useWorkspace();
+  const { data, put, registerTrainingVisit } = useWorkspace();
   const [selected, setSelected] = useState<Member | null>(initialMember);
   const [passId, setPassId] = useState<string | null>(null);
   const [bookingId, setBookingId] = useState<string | null>(null);
@@ -389,46 +389,50 @@ export function RegistrationWorkspace({
                             );
                           const problem = unavailable(pass);
                           if (problem) throw new Error(problem);
-                          const kind = membershipKinds.find((kind) => kind.id === pass.kindId);
-                          const issued = (data['issued-plans'] || []).find(
-                            (row) => row.id === pass.id,
-                          );
-                          const usage = usePass(
-                            selected,
-                            pass,
-                            Number(issued?.duration || kind?.duration || 30),
-                            TODAY,
-                            actualNow.slice(11, 16),
-                            booking,
-                            { trainerVerified, acknowledged: supervisionAcknowledged },
-                          );
-                          setPassId(pass.id);
-                          put('pass-usage', usage);
-                          onRegister(
-                            selected,
-                            booking ? (booking.kind === 'personal' ? 'personal' : 'group') : 'gym',
-                            pass.name,
-                            pass.id,
-                          );
-                          if (booking)
-                            put('visit-bookings', {
-                              id: `${selected.id}:${booking.id}`,
-                              memberId: String(selected.id),
+                          if (booking) {
+                            const result = registerTrainingVisit({
+                              member: selected,
                               eventId: booking.id,
                               passId: pass.id,
-                              date: actualNow,
+                              at: actualNow,
+                              acknowledged: supervisionAcknowledged,
                             });
-                          if (clientAge !== null && clientAge < 14)
-                            put('visit-supervision', {
-                              id: demoId('supervision'),
-                              memberId: String(selected.id),
-                              date: actualNow,
-                              type: trainerVerified
-                                ? 'Запись к тренеру'
-                                : 'Подтверждение администратора',
-                              trainer: trainerVerified ? booking?.trainer || '' : '',
-                              acknowledged: String(supervisionAcknowledged),
-                            });
+                            onRegister(
+                              selected,
+                              booking.kind === 'personal' ? 'personal' : 'group',
+                              result.pass.name,
+                              result.pass.id,
+                              { at: actualNow, club: result.event.club, eventId: booking.id },
+                            );
+                          } else {
+                            const kind = membershipKinds.find((kind) => kind.id === pass.kindId);
+                            const issued = (data['issued-plans'] || []).find(
+                              (row) => row.id === pass.id,
+                            );
+                            put(
+                              'pass-usage',
+                              usePass(
+                                selected,
+                                pass,
+                                Number(issued?.duration || kind?.duration || 30),
+                                TODAY,
+                                actualNow.slice(11, 16),
+                                undefined,
+                                { acknowledged: supervisionAcknowledged },
+                              ),
+                            );
+                            onRegister(selected, 'gym', pass.name, pass.id);
+                            if (clientAge !== null && clientAge < 14)
+                              put('visit-supervision', {
+                                id: demoId('supervision'),
+                                memberId: String(selected.id),
+                                date: actualNow,
+                                type: 'Подтверждение администратора',
+                                trainer: '',
+                                acknowledged: String(supervisionAcknowledged),
+                              });
+                          }
+                          setPassId(pass.id);
                           setCompletedPassName(pass.name);
                           setDone(true);
                         } catch (err) {

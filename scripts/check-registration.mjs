@@ -440,3 +440,124 @@ assert.ok(nearest.every((event) => event.day > '2026-11-06' || event.time >= '14
 console.log(
   'Client booking checks passed: mandatory booking, trainer categories, assignments, administrator personal booking, role checks, conflicts, future slots and nearest groups.',
 );
+
+// A roster mark must consume a pass and register attendance as one transaction.
+const { trainingVisit } = await import(
+  await load(new URL('../src/lib/training-visit.ts', import.meta.url))
+);
+const at = '2026-11-06T14:35';
+const rosterMember = { ...member, birthDate: '1998-04-12' };
+const rosterEvent = {
+  id: 'roster-test',
+  name: 'Пилатес',
+  kind: 'group',
+  day: '2026-11-06',
+  time: '15:10',
+  duration: '50',
+  club: 'Центральный',
+  trainer: 'Алина Белова',
+  capacity: '20',
+  status: 'Запись открыта',
+  attendees: '1001',
+  present: '',
+  booked: '1',
+};
+const rosterData = {
+  ...workspace.createWorkspaceData(),
+  events: [rosterEvent],
+  'issued-plans': [
+    {
+      id: 'roster-pass',
+      memberId: '1001',
+      name: 'Групповой пакет',
+      kindId: 'group',
+      visits: '2',
+      duration: '30',
+      issued: '2026-11-06',
+      type: 'По посещениям',
+    },
+  ],
+};
+const beforeRoster = structuredClone(rosterData);
+const request = { member: rosterMember, eventId: rosterEvent.id, passId: 'roster-pass', at };
+const marked = trainingVisit(rosterData, request);
+assert.deepEqual(rosterData, beforeRoster, 'The transaction must not mutate its input');
+assert.equal(marked.data.events[0].present, '1001');
+assert.equal(marked.data['visit-bookings'].filter((r) => r.eventId === rosterEvent.id).length, 1);
+assert.equal(marked.data['pass-usage'].find((r) => r.passId === 'roster-pass').remaining, '1');
+assert.equal(marked.receipt.passName, 'Групповой пакет');
+assert.equal(marked.receipt.date, at);
+assert.throws(() => trainingVisit(marked.data, request), /уже отмечено/);
+assert.throws(
+  () => trainingVisit({ ...marked.data, events: [{ ...rosterEvent, present: '' }] }, request),
+  /уже отмечено/,
+  'Clearing presence/removing and rebooking must never charge the same visit twice',
+);
+for (const changes of [
+  { status: 'Отменено' },
+  { status: 'Завершено' },
+  { attendees: '' },
+  { day: '2026-11-07' },
+  { time: '12:00' },
+  { time: '20:00' },
+]) {
+  assert.throws(() =>
+    trainingVisit({ ...rosterData, events: [{ ...rosterEvent, ...changes }] }, request),
+  );
+}
+assert.throws(() =>
+  trainingVisit(rosterData, { ...request, member: { ...rosterMember, archived: true } }),
+);
+assert.throws(() => trainingVisit(rosterData, { ...request, passId: 'S-1001-01' }), /групповые/);
+const blockedPasses = [
+  { visits: '0' },
+  { accessWeekdays: '06:30–12:00', accessWeekends: '07:00–22:10' },
+  { ageMin: '14', ageMax: '23' },
+];
+for (const changes of blockedPasses) {
+  const blocked = {
+    ...rosterData,
+    'issued-plans': [{ ...rosterData['issued-plans'][0], ...changes }],
+  };
+  assert.throws(() => trainingVisit(blocked, request), JSON.stringify(changes));
+  assert.equal(blocked.events[0].present, '', 'A failed debit must not mark attendance');
+  assert.equal(blocked['visit-bookings']?.length || 0, 0);
+}
+const secondEvent = { ...rosterEvent, id: 'roster-second', time: '15:00' };
+const lastMarked = trainingVisit(
+  { ...marked.data, events: [...marked.data.events, secondEvent] },
+  { ...request, eventId: secondEvent.id },
+);
+const lastProfile = getClientProfile(rosterMember, lastMarked.data);
+assert.equal(lastProfile.subscriptions.find((r) => r.id === 'roster-pass').remaining, 0);
+assert.equal(lastProfile.subscriptions.find((r) => r.id === 'roster-pass').status, 'expired');
+const childRequest = { ...request, member: { ...rosterMember, birthDate: '2014-04-12' } };
+assert.throws(() => trainingVisit(rosterData, childRequest), /14 лет/);
+assert.equal(
+  trainingVisit(rosterData, { ...childRequest, acknowledged: true }).data.events[0].present,
+  '1001',
+);
+const senior = {
+  ...rosterData,
+  events: [{ ...rosterEvent, kind: 'personal', trainer: 'Максим Ветров' }],
+  'issued-plans': [
+    { ...rosterData['issued-plans'][0], kindId: 'personal', trainerCategory: 'senior' },
+  ],
+};
+const trainer = senior['trainer-profiles'].find((r) => r.name === 'Максим Ветров');
+senior['issued-plans'][0].trainerCategory = trainer.categoryId;
+const personalMark = trainingVisit(senior, request);
+assert.equal(personalMark.event.trainerCategory, trainer.categoryId);
+assert.equal(personalMark.data['pass-usage'][0].remaining, '1');
+assert.throws(
+  () =>
+    trainingVisit(
+      { ...senior, 'issued-plans': [{ ...senior['issued-plans'][0], trainerCategory: 'trainer' }] },
+      request,
+    ),
+  /категории/,
+);
+assert.throws(() => trainingVisit({ ...senior, 'trainer-profiles': [] }, request), /тренер/);
+console.log(
+  'Roster debit checks passed: atomic usage/presence/receipt, activation, independent balances, repeat protection, schedule windows, pass restrictions, trainer category and minor supervision.',
+);

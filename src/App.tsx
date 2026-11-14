@@ -68,7 +68,7 @@ import { canOpenModule, isManagementRole } from './lib/staff-rules';
 import { managementNavigationGroups } from './data/management-navigation';
 import { AdminPageLayout } from './components/AdminPageLayout';
 import { ScreenLock, screenIsLocked, rememberScreenLock } from './components/ScreenLock';
-import type { Device, Member, Page, Scenario, UserRole, Visit, VisitKind } from './types';
+import type { Device, Member, Page, Scenario, UserRole, Visit, RegisterVisit } from './types';
 const navigation = [
   { id: 'overview' as const, label: 'Ресепшен', icon: LayoutDashboard },
   { id: 'members' as const, label: 'Клиенты', icon: Users },
@@ -470,20 +470,23 @@ export function App() {
       goTo(previous.page);
     } else goTo('overview');
   };
-  const createVisit = (member: Member, kind: VisitKind, passName?: string, passId?: string) => {
+  const createVisit: RegisterVisit = (member, kind, passName, passId, context) => {
     if (!canOpenModule(role, 'registration')) return;
-    const time = demoStamp(nextDemoNow());
+    const clockTime = demoStamp(nextDemoNow());
+    const time = context?.at || clockTime;
     const visit: Visit = {
-      id: `demo-${Date.now()}`,
+      id: context ? `booking-${member.id}-${context.eventId}` : `demo-${crypto.randomUUID()}`,
       memberId: member.id,
       card: memberCards[member.id] ?? String(member.id + 99000),
       enteredAt: time,
       kind,
       plan: passName || member.plan,
       passId,
-      clubId: club.id,
+      clubId: context
+        ? demoClubs.find((item) => item.name.split(' · ').at(-1) === context.club)?.id || club.id
+        : club.id,
     };
-    setVisits((prev) => [visit, ...prev]);
+    setVisits((prev) => (prev.some((row) => row.id === visit.id) ? prev : [visit, ...prev]));
     workspace.put('logs', {
       id: `log-${visit.id}`,
       name: 'Регистрация посещения',

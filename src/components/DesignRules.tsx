@@ -25,6 +25,28 @@ import { ClientBookingDialog } from './ClientBookingDialog';
 import { WorkspaceProvider } from './WorkspaceProvider';
 import { demoUsers } from '../data/roles';
 import { NewMemberDialog } from './NewMemberDialog';
+import { ScheduleAttendees } from './ScheduleAttendees';
+import { useWorkspace } from './WorkspaceProvider';
+
+function AttendanceExample() {
+  const { data } = useWorkspace();
+  const [result, setResult] = useState('');
+  const event = data.events.find(
+    (row) => row.day === '2026-11-06' && row.time === '15:10' && row.kind !== 'personal',
+  );
+  return event ? (
+    <>
+      <ScheduleAttendees
+        event={event}
+        members={initialMembers}
+        editable
+        onRegister={(_member, _kind, name) => setResult(`Посещение списано: ${name}.`)}
+        onSell={() => setResult('В прототипе откроется продажа подходящего абонемента.')}
+      />
+      {result && <Notice>{result}</Notice>}
+    </>
+  ) : null;
+}
 
 export function DesignRules() {
   const [bookingExample, setBookingExample] = useState(false);
@@ -80,6 +102,16 @@ export function DesignRules() {
         </WorkspaceProvider>
       )}
       <div className="panel ws-panel-body ws-stack">
+        <h3>Посещение из списка занятия</h3>
+        <p>
+          «Отметить» списывает одно посещение подходящего абонемента. При нескольких картах
+          требуется выбор. Повторное нажатие не списывает ещё раз.
+        </p>
+        <WorkspaceProvider>
+          <AttendanceExample />
+        </WorkspaceProvider>
+      </div>
+      <div className="panel ws-panel-body ws-stack">
         <h3>Абонемент для посещения</h3>
         <p>Только доступные карты. Выбор строки не списывает посещение.</p>
         <VisitPassList passes={examplePasses} value={examplePassId} onChange={setExamplePassId} />
@@ -97,7 +129,8 @@ export function DesignRules() {
           <Button
             variant="success"
             aria-pressed={attendance}
-            onClick={() => setAttendance(!attendance)}
+            disabled={attendance}
+            onClick={() => setAttendance(true)}
           >
             <Check size={18} />
             {attendance ? 'Присутствует' : 'Отметить'}
