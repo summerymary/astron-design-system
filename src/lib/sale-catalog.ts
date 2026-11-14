@@ -1,5 +1,7 @@
 import type { DemoRecord } from '../data/workspace';
 import { matchesSearch } from './directory-search';
+import { supportsTraining } from './training-kind';
+import type { TrainingKind } from './training-kind';
 
 export const saleSections = [
   {
@@ -48,8 +50,12 @@ export type SaleCatalogItem = {
   sectionId: SaleSectionId;
   type: 'plan' | 'product' | 'service';
 };
-export function saleCatalog(data: Record<string, DemoRecord[]>): SaleCatalogItem[] {
-  return [
+export function saleCatalog(
+  data: Record<string, DemoRecord[]>,
+  training?: TrainingKind | null,
+  trainerCategory?: string | null,
+): SaleCatalogItem[] {
+  const items: SaleCatalogItem[] = [
     ...(data.plans || [])
       .filter((row) => row.status === 'Опубликован')
       .map((record): SaleCatalogItem => ({
@@ -64,6 +70,26 @@ export function saleCatalog(data: Record<string, DemoRecord[]>): SaleCatalogItem
       .filter((row) => row.status === 'Активен')
       .map((record): SaleCatalogItem => ({ record, sectionId: 'goods-services', type: 'service' })),
   ];
+  const scoped =
+    trainerCategory !== undefined && training !== 'group'
+      ? items.filter(
+          (item) =>
+            !supportsTraining(
+              { training: item.record.training, kindId: item.record.kindId },
+              'personal',
+            ) || item.record.trainerCategory === trainerCategory,
+        )
+      : items;
+  return training
+    ? scoped.filter(
+        (item) =>
+          item.type === 'plan' &&
+          supportsTraining(
+            { training: item.record.training, kindId: item.record.kindId },
+            training,
+          ),
+      )
+    : scoped;
 }
 export function searchSaleCatalog(
   items: SaleCatalogItem[],

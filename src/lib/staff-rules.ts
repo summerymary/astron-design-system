@@ -72,16 +72,25 @@ export function canManageEvent(event: DemoRecord, user: DemoUser): boolean {
 export function canCreateEvent(user: DemoUser): boolean {
   return isManagementRole(user.role) || user.role === 'trainer';
 }
+export function canCopySchedule(user: DemoUser): boolean {
+  return isManagementRole(user.role);
+}
+export function canDeleteEvent(event: DemoRecord, user: DemoUser): boolean {
+  return user.role !== 'administrator' && canManageEvent(event, user);
+}
 export function canCancelEvent(event: DemoRecord, user: DemoUser): boolean {
   if (['Завершено', 'Отменено'].includes(event.status)) return false;
-  return user.role === 'administrator' || canManageEvent(event, user);
+  return user.role !== 'administrator' && canManageEvent(event, user);
 }
 export function personalScopeError(
   event: DemoRecord,
   user: DemoUser,
   assignments: DemoRecord[],
 ): string | null {
-  if (!canCreateEvent(user)) return 'Эта роль не добавляет тренировки.';
+  // Reception may create only a validated, assigned personal appointment.
+  // General calendar creation/moving/cancellation/deletion rights remain unchanged.
+  if (!canCreateEvent(user) && user.role !== 'administrator')
+    return 'Эта роль не добавляет тренировки.';
   if (user.role === 'trainer' && (event.trainerId !== user.id || event.trainer !== user.name))
     return 'Можно записывать тренировки только от своего имени.';
   if (
