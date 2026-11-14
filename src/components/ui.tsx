@@ -72,7 +72,7 @@ export function Button({
   children,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: 'primary' | 'secondary' | 'ghost' | 'accent' | 'danger' | 'danger-ghost';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'accent' | 'success' | 'danger' | 'danger-ghost';
   size?: 'default' | 'compact';
   children: ReactNode;
 }) {
@@ -333,11 +333,13 @@ export function StateContent({
 export function Modal({
   title,
   subtitle,
+  size = 'default',
   onClose,
   children,
 }: {
   title: string;
   subtitle?: string;
+  size?: 'default' | 'wide';
   onClose: () => void;
   children: ReactNode;
 }) {
@@ -391,7 +393,14 @@ export function Modal({
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="modal" role="dialog" aria-modal="true" aria-labelledby={titleId} ref={ref}>
+      <div
+        className="modal"
+        data-size={size}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        ref={ref}
+      >
         <div className="modal-heading">
           <div>
             <h2 id={titleId}>{title}</h2>

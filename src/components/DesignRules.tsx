@@ -1,5 +1,8 @@
+import { VisitPassList } from './VisitPassList';
+import { getClientProfile } from '../data/clientProfile';
+import { availableVisitPasses } from '../lib/registration';
 import { useState } from 'react';
-import { Edit3, MoreHorizontal, Plus, Trash2 } from 'lucide-react';
+import { Check, Edit3, MoreHorizontal, Plus, Trash2 } from 'lucide-react';
 import {
   Button,
   ConfirmDialog,
@@ -15,13 +18,32 @@ import { initialMembers } from '../data/mock';
 import { UI_RULES } from '../design-system/registry';
 import { ReceptionShift } from './ReceptionShift';
 import { CatalogSectionCard } from './CatalogSectionCard';
+import { ScheduleCopyDialog } from './ScheduleCopyDialog';
+import { createWorkspaceData } from '../data/workspace';
+import { planWeekCopy } from '../lib/schedule-copy';
+import { ClientBookingDialog } from './ClientBookingDialog';
+import { WorkspaceProvider } from './WorkspaceProvider';
+import { demoUsers } from '../data/roles';
+import { NewMemberDialog } from './NewMemberDialog';
 
 export function DesignRules() {
+  const [bookingExample, setBookingExample] = useState(false);
+  const [examplePassId, setExamplePassId] = useState('');
+  const examplePasses = availableVisitPasses(
+    getClientProfile(initialMembers[0]).subscriptions,
+    '2026-11-06T14:38',
+    '1998-04-12',
+  );
   const [tab, setTab] = useState('Абонементы');
   const [mode, setMode] = useState('День');
   const [confirm, setConfirm] = useState(false);
   const [result, setResult] = useState('');
   const [exampleQuery, setExampleQuery] = useState('');
+  const [attendance, setAttendance] = useState(false);
+  const [exampleBookings, setExampleBookings] = useState<number[]>([]);
+  const [copyExample, setCopyExample] = useState(false);
+  const [exampleSchedule] = useState(createWorkspaceData);
+  const [newClientExample, setNewClientExample] = useState(false);
   return (
     <section className="ds-section ui-rules" aria-label="Единые правила интерфейса">
       <SectionTitle
@@ -33,6 +55,36 @@ export function DesignRules() {
         нет, его правила и пример добавляются сюда до повторного использования.
       </Notice>
       <div className="panel ws-panel-body ws-stack">
+        <h3>Запись клиента</h3>
+        <p>
+          Одинаковое окно в карточке и регистрации. Групповые занятия, резерв или персональная
+          запись к закреплённому тренеру.
+        </p>
+        <Button variant="secondary" onClick={() => setBookingExample(true)}>
+          Записать — пример
+        </Button>
+      </div>
+      {bookingExample && (
+        <WorkspaceProvider>
+          <ClientBookingDialog
+            member={initialMembers[0]}
+            user={demoUsers.find((user) => user.role === 'administrator')!}
+            clubName="Центральный"
+            onClose={() => setBookingExample(false)}
+            onBooked={(event, reserved) =>
+              setResult(
+                `Пример: ${reserved ? 'резерв' : 'запись'} на ${event.name} в ${event.time}.`,
+              )
+            }
+          />
+        </WorkspaceProvider>
+      )}
+      <div className="panel ws-panel-body ws-stack">
+        <h3>Абонемент для посещения</h3>
+        <p>Только доступные карты. Выбор строки не списывает посещение.</p>
+        <VisitPassList passes={examplePasses} value={examplePassId} onChange={setExamplePassId} />
+      </div>
+      <div className="panel ws-panel-body ws-stack">
         <h3>Действия и состояния</h3>
         <div className="ws-actions">
           <Button>
@@ -42,6 +94,14 @@ export function DesignRules() {
           <Button variant="secondary">Редактировать</Button>
           <Button variant="ghost">Отмена</Button>
           <Button variant="accent">Продать</Button>
+          <Button
+            variant="success"
+            aria-pressed={attendance}
+            onClick={() => setAttendance(!attendance)}
+          >
+            <Check size={18} />
+            {attendance ? 'Присутствует' : 'Отметить'}
+          </Button>
           <Button variant="danger" onClick={() => setConfirm(true)}>
             <Trash2 size={18} />
             Удалить пример
@@ -108,6 +168,71 @@ export function DesignRules() {
           onOpen={() => setResult('В приложении откроется рабочий день сотрудника.')}
         />
       </div>
+      <div className="panel ws-panel-body ws-stack">
+        <h3>Проверка клиента перед созданием</h3>
+        <p>
+          Пример: Смирнова Анна, дата рождения 12.04.1998 или телефон +7 999 123-45-67. Одно
+          совпадение ФИО не вызывает предупреждение.
+        </p>
+        <Button variant="secondary" onClick={() => setNewClientExample(true)}>
+          Новый клиент — пример
+        </Button>
+      </div>
+      {newClientExample && (
+        <NewMemberDialog
+          members={initialMembers}
+          hidePhones
+          onClose={() => setNewClientExample(false)}
+          onOpen={(member) => {
+            setNewClientExample(false);
+            setResult(`В приложении откроется карточка: ${member.fullName || member.name}.`);
+          }}
+          onCreate={(draft) => {
+            setNewClientExample(false);
+            setResult(
+              `Пример: отдельная карточка ${draft.fullName}. Данные приложения не изменены.`,
+            );
+          }}
+          onUpdate={(member) => {
+            setNewClientExample(false);
+            setResult(
+              `Пример обновления: ${member.fullName || member.name}. Абонементы и история сохраняются.`,
+            );
+          }}
+        />
+      )}
+      <div className="panel ws-panel-body ws-stack">
+        <h3>Копирование недели расписания</h3>
+        <p>
+          Предыдущая или выбранная неделя переносится в открытую неделю календаря. Сначала
+          показываются занятия и причины пропуска; записи клиентов не копируются.
+        </p>
+        <Button variant="secondary" onClick={() => setCopyExample(true)}>
+          Копировать неделю — пример
+        </Button>
+      </div>
+      {copyExample && (
+        <ScheduleCopyDialog
+          events={exampleSchedule.events}
+          rooms={exampleSchedule.rooms}
+          club="Центральный"
+          targetDay="2026-11-09"
+          onClose={() => setCopyExample(false)}
+          onCopy={(source) => {
+            const plan = planWeekCopy(
+              exampleSchedule.events,
+              exampleSchedule.rooms,
+              'Центральный',
+              source,
+              '2026-11-09',
+            );
+            setResult(
+              `Пример: будет добавлено ${plan.items.filter((item) => !item.reason).length} занятий без записей клиентов.`,
+            );
+            setCopyExample(false);
+          }}
+        />
+      )}
       <div className="panel ws-panel-body ws-stack ui-search-examples">
         <h3>Одинаковый поиск</h3>
         <p className="ui-rule-purpose">
@@ -127,6 +252,21 @@ export function DesignRules() {
             onMember={(member) => setResult(`Выбран клиент: ${member.fullName || member.name}`)}
           />
         </div>
+        <h3>Запись прямо из поиска</h3>
+        <ClientSearch
+          members={initialMembers}
+          mode="selection"
+          purpose="занятия"
+          hidePhones
+          resultAction={(member) => ({
+            label: exampleBookings.includes(member.id) ? 'Уже записан' : 'Записать клиента',
+            disabled: exampleBookings.includes(member.id),
+          })}
+          onMember={(member) => {
+            setExampleBookings((ids) => [...ids, member.id]);
+            setResult(`Пример записи: ${member.fullName || member.name}. Посещение не списано.`);
+          }}
+        />
       </div>
       <div className="panel ws-panel-body ws-stack">
         <h3>Переходы каталога</h3>
