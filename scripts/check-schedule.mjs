@@ -4,9 +4,19 @@ import ts from 'typescript';
 
 async function load(path) {
   const source = await readFile(new URL(path, import.meta.url), 'utf8');
-  const compiled = ts.transpileModule(source, {
+  let compiled = ts.transpileModule(source, {
     compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
   }).outputText;
+  if (path.endsWith('schedule-copy.ts')) {
+    const dependency = ts.transpileModule(
+      await readFile(new URL('../src/lib/schedule.ts', import.meta.url), 'utf8'),
+      {
+        compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
+      },
+    ).outputText;
+    const url = `data:text/javascript;base64,${Buffer.from(dependency).toString('base64')}`;
+    compiled = compiled.replace(/from ['"]\.\/schedule['"]/g, `from ${JSON.stringify(url)}`);
+  }
   return import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
 }
 const rules = await load('../src/lib/schedule.ts');
@@ -368,3 +378,123 @@ for (const band of rules.OCCUPANCY_SCALE)
     contrastRatio(band.foreground, band.background) >= 4.5,
     'Readable heatmap text: ' + band.label,
   );
+
+// Weekly reuse is a preview, never a move of the original records or client bookings.
+{
+  const { planWeekCopy } = await load('../src/lib/schedule-copy.ts');
+  const snapshotBeforeCopy = structuredClone(data);
+  const copyPlan = planWeekCopy(events, data.rooms, 'Центральный', '2026-11-05', '2026-11-13');
+  assert.equal(copyPlan.sourceWeek, '2026-11-02');
+  assert.equal(copyPlan.targetWeek, '2026-11-09');
+  assert.equal(copyPlan.error, null);
+  assert.ok(copyPlan.items.length > 40, 'The entire week, not just the selected day, is copied');
+  assert.ok(copyPlan.excludedPersonal > 0);
+  assert.ok(copyPlan.excludedCancelled > 0);
+  const ready = copyPlan.items.filter((item) => !item.reason);
+  assert.equal(ready.length, copyPlan.items.length);
+  for (const { source, record } of ready) {
+    assert.notEqual(record.id, source.id);
+    assert.equal(record.day, rules.addDays(source.day, 7));
+    for (const key of [
+      'name',
+      'time',
+      'room',
+      'club',
+      'trainer',
+      'duration',
+      'intensity',
+      'capacity',
+    ])
+      assert.equal(record[key], source[key], key);
+    for (const key of ['attendees', 'present', 'reserve', 'memberId'])
+      assert.equal(record[key], '');
+    assert.equal(record.booked, '0');
+    assert.equal(record.status, 'Запись открыта');
+    assert.notEqual(record.kind, 'personal');
+  }
+  assert.deepEqual(data, snapshotBeforeCopy, 'Planning must not mutate data');
+  const repeated = planWeekCopy(
+    [...events, ...ready.map((item) => item.record)],
+    data.rooms,
+    'Центральный',
+    '2026-11-02',
+    '2026-11-09',
+  );
+  assert.ok(
+    repeated.items.every((item) => item.reason),
+    'Repeating must not duplicate copied classes',
+  );
+  assert.match(
+    planWeekCopy(events, data.rooms, 'Центральный', '2026-11-04', '2026-11-06').error,
+    /совпадают/,
+  );
+  assert.match(
+    planWeekCopy(events, data.rooms, 'Центральный', '2026-02-30', '2026-11-09').error,
+    /корректную/,
+  );
+  assert.match(
+    planWeekCopy([], data.rooms, 'Центральный', '2026-10-26', '2026-11-09').error,
+    /нет групповых/,
+  );
+  const sample = ready[0];
+  const conflict = { ...sample.record, id: 'cross-club', club: 'Парк', room: 'Другой зал' };
+  const blocked = planWeekCopy(
+    [...events, conflict],
+    data.rooms,
+    'Центральный',
+    '2026-11-02',
+    '2026-11-09',
+  );
+  assert.match(
+    blocked.items.find((item) => item.source.id === sample.source.id).reason,
+    /У тренера/,
+  );
+  const roomConflict = { ...sample.record, id: 'same-room', trainer: 'Другой тренер' };
+  const roomBlocked = planWeekCopy(
+    [...events, roomConflict],
+    data.rooms,
+    'Центральный',
+    '2026-11-02',
+    '2026-11-09',
+  );
+  assert.match(
+    roomBlocked.items.find((item) => item.source.id === sample.source.id).reason,
+    /В зале/,
+  );
+  const inactiveRooms = data.rooms.map((room) => ({ ...room, status: 'В архиве' }));
+  assert.ok(
+    planWeekCopy(events, inactiveRooms, 'Центральный', '2026-11-02', '2026-11-09').items.every(
+      (item) => item.reason,
+    ),
+  );
+  const overlappingSource = [
+    { ...sample.source, attendees: '100001', present: '100001', reserve: '100002' },
+    { ...sample.source, id: 'overlapping-source' },
+  ];
+  const collisions = planWeekCopy(
+    overlappingSource,
+    data.rooms,
+    'Центральный',
+    sample.source.day,
+    '2026-11-09',
+  );
+  assert.equal(
+    collisions.items.filter((item) => !item.reason).length,
+    1,
+    'Candidates also conflict with previously accepted candidates',
+  );
+  assert.deepEqual(
+    planWeekCopy(
+      [...events, { ...sample.source, id: 'other-club', club: 'Парк' }],
+      data.rooms,
+      'Центральный',
+      '2026-11-02',
+      '2026-11-09',
+    ),
+    copyPlan,
+    'Other clubs are not copied',
+  );
+  console.log(
+    'Week copy checks passed: arbitrary week normalization, immutable preview, preserved slots, cleared participants, excluded personal/cancelled sessions, conflict checks, duplicate protection and invalid/empty inputs.',
+  );
+}

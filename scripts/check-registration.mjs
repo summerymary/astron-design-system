@@ -36,7 +36,13 @@ const profile = getClientProfile(member);
 const personal = profile.subscriptions.find((pass) => pass.kindId === 'personal');
 assert.equal(personal.remaining, 3);
 const original = structuredClone(personal);
-const usage = usePass(member, personal, 30, '2026-11-06');
+const testPersonalBooking = {
+  id: 'test-personal',
+  kind: 'personal',
+  trainer: 'Алина Белова',
+  trainerCategory: 'trainer',
+};
+const usage = usePass(member, personal, 30, '2026-11-06', '14:35', testPersonalBooking);
 assert.equal(usage.remaining, '2');
 assert.deepEqual(personal, original);
 const updated = getClientProfile(
@@ -66,14 +72,17 @@ const data = {
 const pending = getClientProfile(member, data).subscriptions[0];
 assert.equal(pending.status, 'pending');
 assert.equal(passUnavailable(pending), null);
-const first = usePass(member, pending, 60, '2026-11-06');
+const first = usePass(member, pending, 60, '2026-11-06', '14:35', {
+  id: 'test-group',
+  kind: 'group',
+});
 const second = getClientProfile(member, { ...data, 'pass-usage': [first] }).subscriptions[0];
 assert.equal(second.remaining, 11);
 assert.equal(second.status, 'active');
 assert.equal(second.activatedAt, '06.11.2026');
 assert.equal(second.endsAt, '04.01.2027');
 const last = { ...personal, remaining: 1 };
-const lastUse = usePass(member, last, 30, '2026-11-06');
+const lastUse = usePass(member, last, 30, '2026-11-06', '14:35', testPersonalBooking);
 assert.equal(
   getClientProfile(member, { 'pass-usage': [lastUse] }).subscriptions.find(
     (pass) => pass.id === last.id,
@@ -214,7 +223,12 @@ for (const patch of [
   );
 const groupPass = { ...personal, id: 'group', kindId: 'group' };
 const gymPass = { ...personal, id: 'gym', kindId: 'gym' };
-const personalEvent = { ...event, kind: 'personal', trainer: 'Алина Белова' };
+const personalEvent = {
+  ...event,
+  kind: 'personal',
+  trainer: 'Алина Белова',
+  trainerCategory: 'trainer',
+};
 assert.deepEqual(
   rules.recommendedPassIds([groupPass, personal, gymPass], event, '2026-11-06T14:35'),
   ['group'],
@@ -266,4 +280,163 @@ assert.throws(
 );
 console.log(
   'Under-14 checks passed: warning acknowledgement, known trainer booking, unknown age and tariff age restrictions.',
+);
+
+const visitCandidates = [
+  groupPass,
+  gymPass,
+  personal,
+  { ...groupPass, id: 'expired', status: 'expired' },
+  { ...groupPass, id: 'paused', status: 'paused' },
+  { ...groupPass, id: 'spent', remaining: 0 },
+  { ...groupPass, id: 'closed-hours', accessWeekdays: '06:30-12:00' },
+  { ...groupPass, id: 'age-restricted', ageMin: '14', ageMax: '23' },
+];
+const visitSnapshot = structuredClone(visitCandidates);
+assert.deepEqual(
+  rules
+    .availableVisitPasses(visitCandidates, '2026-11-06T14:35', '1990-01-01', event)
+    .map((pass) => pass.id),
+  ['group'],
+);
+assert.deepEqual(
+  rules
+    .availableVisitPasses(visitCandidates, '2026-11-06T14:35', '1990-01-01', personalEvent)
+    .map((pass) => pass.id),
+  [personal.id],
+);
+assert.deepEqual(
+  rules
+    .availableVisitPasses(visitCandidates, '2026-11-06T14:35', '1990-01-01')
+    .map((pass) => pass.id),
+  ['gym'],
+);
+assert.deepEqual(rules.availableVisitPasses([], '2026-11-06T14:35', '1990-01-01'), []);
+assert.deepEqual(visitCandidates, visitSnapshot, 'Filtering does not consume or modify any pass');
+console.log(
+  'Visit list checks passed: incompatible, expired, paused, spent, time-limited and age-limited passes are omitted.',
+);
+
+assert.throws(() => usePass(member, personal, 30, '2026-11-06', '14:35'), /запишите/);
+assert.throws(() => usePass(member, groupPass, 30, '2026-11-06', '14:35'), /запишите/);
+assert.ok(rules.bookingPassProblem(personal, { ...personalEvent, trainerCategory: 'senior' }));
+assert.equal(
+  rules.bookingPassProblem(
+    { ...personal, trainerCategory: 'senior' },
+    { ...personalEvent, trainerCategory: 'senior' },
+  ),
+  null,
+);
+assert.ok(rules.bookingPassProblem(personal, { ...personalEvent, trainerCategory: '' }));
+const personalRules = await import(
+  await load(new URL('../src/lib/personal-training.ts', import.meta.url))
+);
+const bookingRules = await import(
+  await load(new URL('../src/lib/client-booking.ts', import.meta.url))
+);
+assert.equal(personalRules.personalTrainers(seed).length, 3);
+assert.deepEqual(
+  personalRules.clientTrainers(seed, 1002).map((trainer) => trainer.categoryId),
+  ['senior'],
+);
+assert.deepEqual(
+  personalRules.clientTrainers(seed, 1004).map((trainer) => trainer.categoryId),
+  ['master'],
+);
+const bookingData = { ...structuredClone(seed), events: [] };
+const adminBooker = { id: 'user-admin', name: 'Александра Крылова', role: 'administrator' };
+const newBookingClient = { ...member, id: 1008 };
+const bookingInput = {
+  id: 'personal-booking-new',
+  trainerId: 'trainer-maxim',
+  club: 'Центральный',
+  day: '2026-11-06',
+  time: '14:40',
+  room: 'Зал персональных тренировок',
+};
+const bookingSnapshot = structuredClone(bookingData);
+const newBooking = bookingRules.createPersonalBooking(
+  bookingData,
+  adminBooker,
+  newBookingClient,
+  bookingInput,
+  '2026-11-06T14:35',
+);
+assert.notEqual(typeof newBooking, 'string');
+assert.equal(newBooking.event.trainerCategory, 'senior');
+assert.equal(newBooking.event.attendees, '1008');
+assert.equal(newBooking.assignment.trainerId, 'trainer-maxim');
+assert.deepEqual(
+  bookingData,
+  bookingSnapshot,
+  'Preview does not modify schedule, assignments or pass balances',
+);
+assert.equal(
+  typeof bookingRules.createPersonalBooking(
+    bookingData,
+    adminBooker,
+    member,
+    bookingInput,
+    '2026-11-06T14:35',
+  ),
+  'string',
+  'An assigned client cannot silently switch trainer',
+);
+assert.equal(
+  typeof bookingRules.createPersonalBooking(
+    bookingData,
+    { ...adminBooker, role: 'bartender' },
+    newBookingClient,
+    bookingInput,
+    '2026-11-06T14:35',
+  ),
+  'string',
+);
+assert.equal(
+  typeof bookingRules.createPersonalBooking(
+    bookingData,
+    adminBooker,
+    newBookingClient,
+    { ...bookingInput, time: '14:00' },
+    '2026-11-06T14:35',
+  ),
+  'string',
+);
+const withBooking = {
+  ...bookingData,
+  events: [newBooking.event],
+  'personal-clients': [...bookingData['personal-clients'], newBooking.assignment],
+};
+assert.equal(
+  typeof bookingRules.createPersonalBooking(
+    withBooking,
+    adminBooker,
+    newBookingClient,
+    { ...bookingInput, id: 'other' },
+    '2026-11-06T14:35',
+  ),
+  'string',
+  'Trainer/room/client conflicts block double booking',
+);
+const slots = bookingRules.personalBookingSlots(
+  withBooking,
+  adminBooker,
+  newBookingClient,
+  'trainer-maxim',
+  'Центральный',
+  '2026-11-06',
+  bookingInput.room,
+  '2026-11-06T14:35',
+);
+assert.ok(slots.length > 0 && slots.every((time) => time >= '15:30'));
+const nearest = bookingRules.nearestGroupEvents(seed, 'Центральный', '2026-11-06T14:35');
+assert.ok(
+  nearest.length > 0 &&
+    nearest.every(
+      (event) => event.kind !== 'personal' && !['Отменено', 'Завершено'].includes(event.status),
+    ),
+);
+assert.ok(nearest.every((event) => event.day > '2026-11-06' || event.time >= '14:05'));
+console.log(
+  'Client booking checks passed: mandatory booking, trainer categories, assignments, administrator personal booking, role checks, conflicts, future slots and nearest groups.',
 );

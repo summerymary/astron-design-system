@@ -3,7 +3,9 @@ import { Select } from './components/Select';
 import { ThemeSelect } from './components/ThemeSelect';
 import { appearanceSearch } from './lib/visual-style';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import type { FormEvent } from 'react';
+import { NewMemberDialog } from './components/NewMemberDialog';
+import { findMemberDuplicates, memberContactError } from './lib/member-duplicates';
+import type { NewMemberDraft } from './lib/member-duplicates';
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -52,13 +54,11 @@ import { adminSections, initialVisits, memberCards, workstations } from './data/
 import type { AdminSectionId } from './data/admin';
 import { classes, initialMembers, pages, scenarios } from './data/mock';
 import { demoClubs, demoNetworks, demoUsers, roleHomes, roles } from './data/roles';
-import { initialProfileBookings } from './data/profileBookings';
 import { useTheme } from './components/ThemeProvider';
 import { useWorkspace } from './components/WorkspaceProvider';
 import { SectionsPage } from './pages/SectionsPage';
 import { Members } from './pages/Members';
 import { AdminOverview } from './pages/AdminOverview';
-import { ReceptionShift } from './components/ReceptionShift';
 import { AdminSection } from './pages/AdminSection';
 import { ClientProfile } from './pages/ClientProfile';
 import { RoleOverview } from './pages/RoleOverview';
@@ -66,7 +66,6 @@ import { AccountingHome } from './pages/AccountingHome';
 import { BartenderHome, TrainerHome } from './pages/StaffWorkspace';
 import { canOpenModule, isManagementRole } from './lib/staff-rules';
 import { managementNavigationGroups } from './data/management-navigation';
-import { membershipKinds } from './data/membership-kinds';
 import { AdminPageLayout } from './components/AdminPageLayout';
 import { ScreenLock, screenIsLocked, rememberScreenLock } from './components/ScreenLock';
 import type { Device, Member, Page, Scenario, UserRole, Visit, VisitKind } from './types';
@@ -145,6 +144,14 @@ function initialOptions() {
     clientId: Number(params.get('clientId')) || null,
     section,
     recordId: params.get('recordId'),
+    sectionMemberId: Number(params.get('memberId')) || null,
+    saleTrainerId: params.get('trainerId') || null,
+    saleTraining:
+      params.get('training') === 'group'
+        ? ('group' as const)
+        : params.get('training') === 'personal'
+          ? ('personal' as const)
+          : null,
     device: params.get('device') === 'mobile' ? ('mobile' as Device) : ('desktop' as Device),
     scenario: scenarios.some((s) => s.id === params.get('state'))
       ? (params.get('state') as Scenario)
@@ -167,7 +174,13 @@ export function App() {
   const [workstationId, setWorkstationId] = useState('central-01');
   const [adminSection, setAdminSection] = useState<AdminSectionId>(options.section);
   const [recordId, setRecordId] = useState<string | null>(options.recordId);
-  const [sectionMember, setSectionMember] = useState<Member | null>(null);
+  const [sectionMember, setSectionMember] = useState<Member | null>(
+    initialMembers.find((member) => member.id === options.sectionMemberId) || null,
+  );
+  const [saleTraining, setSaleTraining] = useState<'group' | 'personal' | null>(
+    options.saleTraining,
+  );
+  const [saleTrainerId, setSaleTrainerId] = useState<string | null>(options.saleTrainerId);
   const [modal, setModal] = useState<'add' | 'reset' | 'club' | null>(null);
   const [workingClubs, setWorkingClubs] = useState<Partial<Record<UserRole, string>>>({});
   const [selectedMemberId, setSelectedMemberId] = useState<number | null>(options.clientId);
@@ -190,6 +203,8 @@ export function App() {
       section: AdminSectionId;
       clientId: number | null;
       member: Member | null;
+      saleTraining: 'group' | 'personal' | null;
+      saleTrainerId: string | null;
     }[]
   >([]);
   const memberCount =
@@ -233,7 +248,7 @@ export function App() {
       : workingClub;
   const network = demoNetworks.find((n) => n.id === currentUser.networkId)!;
   const visibleNavigation = navigation
-    .filter((n) => n.id !== 'members' || currentRole.canViewMembers)
+    .filter((n) => n.id !== 'members' || (currentRole.canViewMembers && role !== 'administrator'))
     .map((n) =>
       n.id === 'overview'
         ? {
@@ -266,14 +281,14 @@ export function App() {
     if (item.top < bounds.top + 8) menu.scrollTop += item.top - bounds.top - 8;
     else if (item.bottom > bounds.bottom - 8) menu.scrollTop += item.bottom - bounds.bottom + 8;
   }, [managingRole, role, page, adminSection, sidebarCollapsed]);
-  const routeKey = `${page}:${role}:${page === 'admin-section' ? `${adminSection}:${recordId || ''}` : ''}:${page === 'client-profile' ? selectedMemberId : ''}`;
+  const routeKey = `${page}:${role}:${page === 'admin-section' ? `${adminSection}:${recordId || ''}:${sectionMember?.id || ''}:${saleTraining || ''}:${saleTrainerId || ''}` : ''}:${page === 'client-profile' ? selectedMemberId : ''}`;
   const previousRouteKey = useRef(routeKey);
   const navigationRole = useRef(role);
   const navigationMembers = useRef(members);
   navigationMembers.current = members;
   navigationRole.current = role;
   useEffect(() => {
-    const hash = `#/${page}?device=${device}&state=${scenario}&role=${role}${page === 'admin-section' ? `&section=${adminSection}${recordId ? `&recordId=${encodeURIComponent(recordId)}` : ''}` : ''}${page === 'client-profile' && selectedMemberId ? `&clientId=${selectedMemberId}` : ''}`;
+    const hash = `#/${page}?device=${device}&state=${scenario}&role=${role}${page === 'admin-section' ? `&section=${adminSection}${recordId ? `&recordId=${encodeURIComponent(recordId)}` : ''}${sectionMember ? `&memberId=${sectionMember.id}` : ''}${adminSection === 'services' && saleTraining ? `&training=${saleTraining}` : ''}${adminSection === 'services' && saleTrainerId ? `&trainerId=${encodeURIComponent(saleTrainerId)}` : ''}` : ''}${page === 'client-profile' && selectedMemberId ? `&clientId=${selectedMemberId}` : ''}`;
     const entry = window.history.state || {};
     const index = Number(entry.astronIndex) || 0;
     const context = {
@@ -286,7 +301,19 @@ export function App() {
       window.history.replaceState({ ...entry, ...context, astronIndex: index }, '', hash);
     }
     previousRouteKey.current = routeKey;
-  }, [page, device, scenario, role, adminSection, selectedMemberId, currentPage.title, routeKey]);
+  }, [
+    page,
+    device,
+    scenario,
+    role,
+    adminSection,
+    selectedMemberId,
+    currentPage.title,
+    routeKey,
+    sectionMember,
+    saleTraining,
+    saleTrainerId,
+  ]);
   useEffect(() => {
     document.title = `${currentPage.title} · Астрон`;
   }, [currentPage.title]);
@@ -301,9 +328,11 @@ export function App() {
       setScenario(next.scenario);
       setAdminSection(next.section);
       setRecordId(next.recordId);
+      setSaleTraining(next.saleTraining);
+      setSaleTrainerId(next.saleTrainerId);
       setSectionMember(
         navigationMembers.current.find(
-          (member) => member.id === window.history.state?.sectionMemberId,
+          (member) => member.id === (next.sectionMemberId || window.history.state?.sectionMemberId),
         ) || null,
       );
       setNotificationOpen(false);
@@ -341,6 +370,8 @@ export function App() {
     setModal(null);
     setToast('');
     setSectionMember(null);
+    setSaleTraining(null);
+    setSaleTrainerId(null);
     contentRef.current?.scrollTo(0, 0);
     window.scrollTo(0, 0);
   };
@@ -368,7 +399,12 @@ export function App() {
     goTo('sections');
   };
   const openRegistration = (member?: Member) => openModule('registration', member);
-  const openModule = (section: AdminSectionId, member?: Member, targetRecord?: string) => {
+  const openModule = (
+    section: AdminSectionId,
+    member?: Member,
+    targetRecord?: string,
+    context?: { saleTraining?: 'group' | 'personal'; saleTrainerId?: string },
+  ) => {
     if (!canOpenModule(role, section)) return;
     setRecordId(targetRecord || null);
     if (section === 'members') {
@@ -381,8 +417,12 @@ export function App() {
         section: adminSection,
         clientId: selectedMemberId,
         member: sectionMember,
+        saleTraining,
+        saleTrainerId,
       });
     setAdminSection(section);
+    setSaleTraining(section === 'services' ? context?.saleTraining || null : null);
+    setSaleTrainerId(section === 'services' ? context?.saleTrainerId || null : null);
     setSectionMember(member || null);
     setScenario('default');
     goTo('admin-section');
@@ -405,8 +445,12 @@ export function App() {
         section: adminSection,
         clientId: selectedMemberId,
         member: sectionMember,
+        saleTraining,
+        saleTrainerId,
       });
     setAdminSection(section);
+    setSaleTraining(null);
+    setSaleTrainerId(null);
     setSectionMember(member ?? null);
     setScenario('default');
     goTo('admin-section');
@@ -421,6 +465,8 @@ export function App() {
       setAdminSection(previous.section);
       setSelectedMemberId(previous.clientId);
       setSectionMember(previous.member);
+      setSaleTraining(previous.saleTraining);
+      setSaleTrainerId(previous.saleTrainerId);
       goTo(previous.page);
     } else goTo('overview');
   };
@@ -459,19 +505,21 @@ export function App() {
     );
     notify(`Посещение зарегистрировано · ${member.name}`);
   };
-  const addMember = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!currentRole.canAddMembers) return;
-    const data = new FormData(e.currentTarget);
-    const name = String(data.get('name')).trim();
-    if (!name) return;
+  const addMember = (draft: NewMemberDraft, reviewed: boolean) => {
+    if (!currentRole.canAddMembers) return 'Добавление клиента недоступно в этой роли.';
+    const problem = memberContactError(draft);
+    if (problem) return problem;
+    if (findMemberDuplicates(members, draft).length && !reviewed)
+      return 'Проверьте существующие карточки перед созданием отдельного клиента.';
+    const name = draft.fullName.trim();
     const newMember: Member = {
       id: Math.max(1000, ...members.map((m) => m.id)) + 1,
       name,
       fullName: name,
-      email: String(data.get('email')).trim(),
-      phone: String(data.get('phone')).trim() || 'Не указан',
-      plan: String(data.get('plan')),
+      email: draft.email.trim(),
+      phone: draft.phone.trim() || 'Не указан',
+      birthDate: draft.birthDate,
+      plan: draft.plan,
       status: 'active',
       joined: DEMO_DAY.split('-').reverse().join('.'),
       expires: '01.12.2026',
@@ -738,11 +786,11 @@ export function App() {
                     aria-current={
                       page === 'admin-section' && adminSection === 'crm' ? 'page' : undefined
                     }
-                    title={sidebarCollapsed ? 'CRM' : undefined}
-                    aria-label={sidebarCollapsed ? 'CRM' : undefined}
+                    title={sidebarCollapsed ? 'Маркетинг' : undefined}
+                    aria-label={sidebarCollapsed ? 'Маркетинг' : undefined}
                   >
                     <Users size={18} />
-                    <span className="nav-item-label">CRM</span>
+                    <span className="nav-item-label">Маркетинг</span>
                   </button>
                 )}
               </nav>
@@ -954,7 +1002,7 @@ export function App() {
                     setWorkstationId(id);
                   }}
                   members={members}
-                  onMember={openMember}
+                  onMember={openRegistration}
                   onAction={(id) =>
                     openAdminAction(id, page === 'client-profile' ? selectedMember : undefined)
                   }
@@ -1040,46 +1088,41 @@ export function App() {
               key={resetVersion}
             >
               <AdminPageLayout enabled={role === 'administrator'}>
-                {page !== 'client-profile' && (
-                  <div className="page-heading work-page-toolbar">
-                    <div className="page-title-group">
-                      {page === 'admin-section' && (
-                        <button
-                          className="page-back icon-button"
-                          aria-label="Назад"
-                          title="Назад"
-                          onClick={backFromSection}
-                        >
-                          <ArrowLeft size={18} />
-                        </button>
-                      )}
-                      <h1>{currentPage.title}</h1>
-                      {page === 'members' && memberCount !== undefined && (
-                        <CountBadge>{memberCount}</CountBadge>
-                      )}
-                    </div>
-                    <div className="page-actions">
-                      {page === 'overview' && role === 'administrator' && (
-                        <ReceptionShift
-                          shift={workspace.data.shifts.find((row) => row.club === club.shortName)}
-                          onOpen={() => openAdminAction('payroll')}
-                        />
-                      )}
-                      {(page === 'overview' || page === 'members') &&
-                        currentRole.canAddMembers &&
-                        role !== 'administrator' && (
-                          <Button
-                            aria-label="Добавить клиента"
-                            title="Добавить клиента"
-                            onClick={() => setModal('add')}
+                {page !== 'client-profile' &&
+                  !(page === 'overview' && role === 'administrator') && (
+                    <div className="page-heading work-page-toolbar">
+                      <div className="page-title-group">
+                        {page === 'admin-section' && (
+                          <button
+                            className="page-back icon-button"
+                            aria-label="Назад"
+                            title="Назад"
+                            onClick={backFromSection}
                           >
-                            <Plus size={16} />
-                            <span>Добавить клиента</span>
-                          </Button>
+                            <ArrowLeft size={18} />
+                          </button>
                         )}
+                        <h1>{currentPage.title}</h1>
+                        {page === 'members' && memberCount !== undefined && (
+                          <CountBadge>{memberCount}</CountBadge>
+                        )}
+                      </div>
+                      <div className="page-actions">
+                        {(page === 'overview' || page === 'members') &&
+                          currentRole.canAddMembers &&
+                          role !== 'administrator' && (
+                            <Button
+                              aria-label="Добавить клиента"
+                              title="Добавить клиента"
+                              onClick={() => setModal('add')}
+                            >
+                              <Plus size={16} />
+                              <span>Добавить клиента</span>
+                            </Button>
+                          )}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
                 <div
                   className="workspace-page-body"
                   ref={pageBodyRef}
@@ -1093,7 +1136,7 @@ export function App() {
                         key={selectedMember.id}
                         member={selectedMember}
                         visits={visits.filter((v) => v.memberId === selectedMember.id)}
-                        bookings={selectedMember.id === 1001 ? initialProfileBookings : []}
+                        clubName={club.name}
                         canOperate={role === 'administrator' || managingRole}
                         canSell={role === 'accountant'}
                         user={currentUser}
@@ -1179,6 +1222,8 @@ export function App() {
                       key={`${adminSection}-${currentUser.id}-${club.id}`}
                       section={adminSection}
                       recordId={recordId}
+                      saleTraining={saleTraining}
+                      saleTrainerId={saleTrainerId}
                       onRecord={setRecordId}
                       member={sectionMember}
                       members={members}
@@ -1251,7 +1296,7 @@ export function App() {
                     onClick={() => openModule(role === 'marketer' ? 'crm' : 'cash')}
                   >
                     <Users size={20} />
-                    <span>{role === 'marketer' ? 'CRM' : 'Касса'}</span>
+                    <span>{role === 'marketer' ? 'Маркетинг' : 'Касса'}</span>
                   </button>
                   <button
                     className={
@@ -1351,61 +1396,46 @@ export function App() {
         </Modal>
       )}
       {modal === 'add' && (
-        <Modal title="Новый клиент" onClose={closeModal}>
-          <form onSubmit={addMember} className="member-form">
-            <label className="form-field">
-              <span>
-                Фамилия, имя, отчество <em>*</em>
-              </span>
-              <input
-                name="name"
-                placeholder="Смирнова Анна Андреевна"
-                required
-                maxLength={80}
-                autoComplete="name"
-                pattern=".*\S.*"
-              />
-            </label>
-            <label className="form-field">
-              <span>Email</span>
-              <input
-                name="email"
-                type="email"
-                placeholder="anna@example.com"
-                maxLength={120}
-                autoComplete="email"
-              />
-            </label>
-            <label className="form-field">
-              <span>Телефон</span>
-              <input
-                name="phone"
-                type="tel"
-                placeholder="+7 999 123-45-67"
-                maxLength={30}
-                autoComplete="tel"
-              />
-            </label>
-            <label className="form-field">
-              <span>Абонемент</span>
-              <Select name="plan">
-                {membershipKinds.map((kind) => (
-                  <option key={kind.id}>{kind.name}</option>
-                ))}
-              </Select>
-            </label>
-            <p className="form-note">Данные сохранятся в памяти до обновления страницы.</p>
-            <div className="modal-actions">
-              <Button type="button" variant="secondary" onClick={closeModal}>
-                Отмена
-              </Button>
-              <Button type="submit">
-                <Plus size={16} />
-                Добавить клиента
-              </Button>
-            </div>
-          </form>
-        </Modal>
+        <NewMemberDialog
+          members={members}
+          hidePhones={role === 'administrator'}
+          onClose={closeModal}
+          onOpen={(member) => {
+            setModal(null);
+            openMember(member);
+          }}
+          onCreate={addMember}
+          onUpdate={(updated) => {
+            if (!currentRole.canAddMembers || !members.some((member) => member.id === updated.id))
+              return 'Обновление клиента недоступно.';
+            setMembers((previous) =>
+              previous.map((member) =>
+                member.id === updated.id
+                  ? {
+                      ...member,
+                      name: updated.name,
+                      fullName: updated.fullName,
+                      birthDate: updated.birthDate,
+                      phone: updated.phone,
+                      email: updated.email,
+                    }
+                  : member,
+              ),
+            );
+            setModal(null);
+            openMember(updated);
+            workspace.put('logs', {
+              id: `client-update-${crypto.randomUUID()}`,
+              name: 'Изменение карточки клиента',
+              memberId: String(updated.id),
+              user: currentUser.name,
+              date: demoStamp(nextDemoNow()),
+              status: 'Выполнено',
+              description: 'Данные обновлены после проверки совпадения при добавлении клиента.',
+            });
+            notify('Данные клиента обновлены');
+          }}
+        />
       )}
       {modal === 'reset' && (
         <Modal

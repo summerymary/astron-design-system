@@ -4,6 +4,8 @@ import type { DemoRecord } from '../data/workspace';
 import type { Member } from '../types';
 import { accessWindowError, parseAccessHours } from './workspace-rules';
 import { demoStamp, registrationNow } from './demo-clock';
+import { requiresTrainingBooking } from './personal-training';
+import { supportsTraining } from './training-kind';
 
 export function accessWindowLabel(
   pass: Pick<DemoSubscription, 'accessWeekdays' | 'accessWeekends'> | DemoRecord,
@@ -96,17 +98,30 @@ export function registrationBookings(
     .sort((a, b) => a.time.localeCompare(b.time));
 }
 export function bookingPassProblem(pass: DemoSubscription, event?: DemoRecord): string | null {
-  if (!event) return null;
+  if (!event) return requiresTrainingBooking(pass) ? 'Сначала запишите клиента на занятие.' : null;
   const kind = event.kind === 'personal' ? 'personal' : 'group';
-  const training = pass.training?.toLocaleLowerCase('ru');
-  const matches = training
-    ? training.includes(kind === 'personal' ? 'персональ' : 'группов')
-    : pass.kindId === kind;
+  const matches = supportsTraining(pass, kind);
+  if (
+    matches &&
+    kind === 'personal' &&
+    (!event.trainerCategory || pass.trainerCategory !== event.trainerCategory)
+  )
+    return 'Нужен персональный абонемент категории выбранного тренера.';
   return matches
     ? null
     : kind === 'personal'
       ? 'Для этой записи нужен абонемент на персональные тренировки'
       : 'Для этой записи нужен абонемент на групповые занятия';
+}
+export function availableVisitPasses(
+  passes: DemoSubscription[],
+  at: string,
+  birthDate: string,
+  event?: DemoRecord,
+): DemoSubscription[] {
+  return passes.filter(
+    (pass) => !passUnavailable(pass, at, birthDate) && !bookingPassProblem(pass, event),
+  );
 }
 export function recommendedPassIds(
   passes: DemoSubscription[],

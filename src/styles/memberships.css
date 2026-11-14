@@ -565,12 +565,10 @@ button.membership-kind-card {
     display: none;
   }
 }
-.registration-workspace .plastic-card-grid,
 .sale-catalog .plastic-card-grid:not(.sale-item-grid) {
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 228px), 228px));
   gap: 16px;
 }
-.registration-workspace .plastic-choice,
 .sale-catalog .plastic-choice {
   width: 100%;
 }
@@ -611,8 +609,7 @@ button.membership-kind-card {
   line-height: 20px;
 }
 @container workspace (max-width: 700px) {
-  .registration-workspace .plastic-card-grid,
-  .sale-catalog .plastic-card-grid:not(.sale-item-grid) {
+    .sale-catalog .plastic-card-grid:not(.sale-item-grid) {
     grid-template-columns: minmax(0, 1fr);
   }
 }
@@ -795,18 +792,6 @@ button.membership-kind-card {
   border-color: var(--color-accent);
   background: var(--color-accent-soft);
   color: var(--color-accent);
-}
-.registration-recommendation {
-  min-height: 21px;
-  display: block;
-  margin-bottom: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-accent);
-}
-.plastic-choice.is-recommended:not([aria-pressed='true']) {
-  outline: 2px dashed var(--color-accent);
-  outline-offset: 3px;
 }
 .client-membership-name > small {
   display: block;

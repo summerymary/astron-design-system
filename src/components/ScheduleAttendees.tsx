@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Check, Plus, UserMinus } from 'lucide-react';
+import { Check, UserMinus } from 'lucide-react';
 import { Avatar, Button, ConfirmDialog, IconButton } from './ui';
 import { ClientSearch } from './ClientSearch';
 import { useWorkspace } from './WorkspaceProvider';
+import { clientTrainers, personalBooking, personalTrainers } from '../lib/personal-training';
 import { clientName } from '../lib/client-display';
 import { changeAttendance, changeReserve, rosterIds } from '../lib/schedule-attendance';
 import { memberCards } from '../data/admin';
@@ -21,7 +22,6 @@ export function ScheduleAttendees({
   onMember?: (member: Member) => void;
 }) {
   const { data, put } = useWorkspace();
-  const [selected, setSelected] = useState<Member | null>(null);
   const [removing, setRemoving] = useState<Member | null>(null);
   const [removingReserve, setRemovingReserve] = useState(false);
   const [feedback, setFeedback] = useState('');
@@ -37,12 +37,32 @@ export function ScheduleAttendees({
     if (!editable) return;
     const current = data.events.find((row) => row.id === event.id);
     if (!current) return setFeedback('Занятие больше недоступно.');
+    const trainer =
+      current.kind === 'personal'
+        ? personalTrainers(data).find(
+            (row) => row.id === current.trainerId || row.name === current.trainer,
+          )
+        : undefined;
+    const assigned = clientTrainers(data, member.id);
+    if (
+      (action === 'book' || action === 'reserve') &&
+      current.kind === 'personal' &&
+      (!trainer || (assigned.length && !assigned.some((row) => row.id === trainer.id)))
+    )
+      return setFeedback('Выберите персонального тренера, за которым закреплён клиент.');
     const next =
       action === 'reserve' || action === 'unreserve'
         ? changeReserve(current, member, action === 'reserve' ? 'join' : 'leave')
         : changeAttendance(current, member, action, data.events);
     if (typeof next === 'string') return setFeedback(next);
-    put('events', next);
+    if (action === 'book' && trainer && !assigned.length)
+      put('personal-clients', {
+        id: `${trainer.id}:${member.id}`,
+        trainerId: trainer.id,
+        memberId: String(member.id),
+        goal: '',
+      });
+    put('events', personalBooking(next, data));
     setFeedback(
       action === 'reserve'
         ? 'Клиент добавлен в резерв. Посещение не списывается.'
@@ -56,7 +76,6 @@ export function ScheduleAttendees({
                 ? 'Присутствие отмечено.'
                 : 'Отметка присутствия снята.',
     );
-    if (action === 'book' || action === 'reserve') setSelected(null);
     if (action === 'remove') setRemoving(null);
   };
   return (
@@ -72,26 +91,37 @@ export function ScheduleAttendees({
         <div className="schedule-book-client">
           <ClientSearch
             members={members}
-            onMember={setSelected}
+            onMember={(member) => change(member, full ? 'reserve' : 'book')}
+            resultAction={(member) => {
+              const booked = ids.includes(String(member.id));
+              const reserved = reserve.includes(String(member.id));
+              const assigned = clientTrainers(data, member.id);
+              const trainer = personalTrainers(data).find(
+                (row) => row.id === event.trainerId || row.name === event.trainer,
+              );
+              const otherTrainer =
+                event.kind === 'personal' &&
+                (!trainer ||
+                  (assigned.length > 0 && !assigned.some((row) => row.id === trainer.id)));
+              return {
+                label: otherTrainer
+                  ? 'Другой персональный тренер'
+                  : booked
+                    ? 'Уже записан'
+                    : reserved
+                      ? 'Уже в резерве'
+                      : full
+                        ? 'Добавить в резерв'
+                        : event.kind === 'personal' && !assigned.length
+                          ? 'Записать и закрепить'
+                          : 'Записать клиента',
+                disabled: booked || reserved || otherTrainer,
+              };
+            }}
             mode="selection"
             purpose="занятия"
             hidePhones
           />
-          {selected && (
-            <div className="schedule-book-selection">
-              <Avatar member={selected} />
-              <strong>{clientName(selected)}</strong>
-              <Button
-                disabled={
-                  ids.includes(String(selected.id)) || reserve.includes(String(selected.id))
-                }
-                onClick={() => change(selected, full ? 'reserve' : 'book')}
-              >
-                <Plus size={16} />
-                {full ? 'Добавить в резерв' : 'Записать клиента'}
-              </Button>
-            </div>
-          )}
           {full && <p>Все места заняты. Можно записать клиента в резерв.</p>}
         </div>
       )}
@@ -117,7 +147,7 @@ export function ScheduleAttendees({
               {mutable ? (
                 <>
                   <Button
-                    variant="secondary"
+                    variant="success"
                     aria-pressed={present.includes(id)}
                     onClick={() => change(member, present.includes(id) ? 'absent' : 'present')}
                   >

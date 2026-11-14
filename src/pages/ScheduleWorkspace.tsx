@@ -32,6 +32,8 @@ import {
   canManageEvent,
   canCreateEvent,
   canCancelEvent,
+  canCopySchedule,
+  canDeleteEvent,
   isManagementRole,
   personalScopeError,
 } from '../lib/staff-rules';
@@ -58,6 +60,8 @@ import {
   weekStart,
 } from '../lib/schedule';
 import type { ScheduleColumn } from '../lib/schedule';
+import { ScheduleCopyDialog } from '../components/ScheduleCopyDialog';
+import { planWeekCopy } from '../lib/schedule-copy';
 import '../styles/schedule.css';
 
 type PendingMove = { before: DemoRecord; after: DemoRecord };
@@ -107,6 +111,8 @@ export function ScheduleWorkspace({
       '\u0426\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u044b\u0439',
   );
   const canEdit = (event: DemoRecord) => canManageEvent(event, user);
+  const canDelete = (event: DemoRecord) => canDeleteEvent(event, user);
+  const canCopy = canCopySchedule(user);
   const club = isAdmin ? scheduleClub : clubName.split(' \u00b7 ').at(-1)!;
   const setClub = isAdmin ? setScheduleClub : onClubChange;
   const saved =
@@ -164,6 +170,22 @@ export function ScheduleWorkspace({
     ),
   ];
   const week = weekStart(day);
+  const openWeekCopy = () => {
+    if (!canCopy) return;
+    setCopying(true);
+    setError('');
+  };
+  const applyWeekCopy = (copySource: string) => {
+    if (!canCopy) return;
+    const current = planWeekCopy(data.events, data.rooms, club, copySource, week);
+    const ready = current.items.filter((item) => !item.reason);
+    if (current.error || !ready.length) return;
+    ready.forEach((item) => put('events', { ...item.record, id: demoId('event') }));
+    closeCopy();
+    setMessage(
+      `Добавлено занятий: ${ready.length}. Пропущено: ${current.items.length - ready.length}. ${dayText(week)} — ${dayText(addDays(week, 6))}.`,
+    );
+  };
   const dates = Array.from({ length: 7 }, (_, i) => addDays(week, i));
   const rangeEvents = data.events.filter(
     (e) => e.club === club && (view === 'Неделя' ? dates.includes(e.day) : e.day === day),
@@ -361,7 +383,7 @@ export function ScheduleWorkspace({
     setError('');
   };
   const requestDelete = (event: DemoRecord) => {
-    if (!canEdit(event)) return;
+    if (!canDelete(event)) return;
     setDeleting({ ...event });
     setContext(null);
     closeDetails();
@@ -370,7 +392,7 @@ export function ScheduleWorkspace({
   const deleteTraining = () => {
     if (!deleting) return;
     const current = data.events.find((event) => event.id === deleting.id);
-    if (!current || !canEdit(current)) {
+    if (!current || !canDelete(current)) {
       setError('Занятие уже удалено или больше недоступно для изменения.');
       return;
     }
@@ -652,7 +674,7 @@ export function ScheduleWorkspace({
                   Добавить тренировку{context.event?.status === 'Отменено' ? ' на это время' : ''}
                 </button>
               )}
-              {context.event && canEdit(context.event) && (
+              {context.event && canDelete(context.event) && (
                 <button
                   role="menuitem"
                   className="calendar-delete-action"
@@ -710,6 +732,12 @@ export function ScheduleWorkspace({
             />
           )}
           <div className="calendar-create">
+            {canCopy && (
+              <Button variant="secondary" onClick={openWeekCopy}>
+                <Copy size={16} />
+                Копировать неделю
+              </Button>
+            )}
             {canCreate && (
               <>
                 <Button
@@ -860,10 +888,6 @@ export function ScheduleWorkspace({
                     <option value="30">30 минут</option>
                   </Select>
                 </label>
-                <Button variant="ghost" onClick={() => setCopying(true)}>
-                  <Copy size={14} />
-                  Из прошлой недели
-                </Button>
                 <Button variant="ghost" onClick={() => navigate('schedule-calendar')}>
                   Настройки календаря
                 </Button>
@@ -1224,7 +1248,7 @@ export function ScheduleWorkspace({
       {fullscreen ? createPortal(content, document.body) : content}
       {createPortal(
         <>
-          {deleting && (
+          {deleting && canDelete(deleting) && (
             <ConfirmDialog
               title="Удалить тренировку?"
               subject={`${dayText(deleting.day)} · ${eventTime(deleting)} · ${deleting.room}`}
@@ -1445,14 +1469,16 @@ export function ScheduleWorkspace({
                         <Move size={16} />
                         Перенести / изменить
                       </Button>
-                      <Button
-                        variant="secondary"
-                        className="calendar-delete-action"
-                        onClick={() => requestDelete(opened)}
-                      >
-                        <Trash2 size={16} />
-                        Удалить тренировку
-                      </Button>
+                      {canDelete(opened) && (
+                        <Button
+                          variant="secondary"
+                          className="calendar-delete-action"
+                          onClick={() => requestDelete(opened)}
+                        >
+                          <Trash2 size={16} />
+                          Удалить тренировку
+                        </Button>
+                      )}
                     </>
                   )}
                   {canCancelEvent(opened, user) && (
@@ -1492,7 +1518,7 @@ export function ScheduleWorkspace({
               </div>
             </Modal>
           )}
-          {cancelling && (
+          {cancelling && canCancelEvent(cancelling, user) && (
             <ConfirmDialog
               title="Отменить занятие?"
               subject={`${cancelling.name} · ${dayText(cancelling.day)} · ${eventTime(cancelling)} · ${cancelling.club}`}
@@ -1510,64 +1536,15 @@ export function ScheduleWorkspace({
               }}
             />
           )}
-          {copying && canCreate && (
-            <Modal
-              title="Добавить занятия из прошлой недели?"
-              subtitle="Только для выбранного клуба. Записи участников не копируются."
+          {copying && canCopy && (
+            <ScheduleCopyDialog
+              events={data.events}
+              rooms={data.rooms}
+              club={club}
+              targetDay={week}
               onClose={closeCopy}
-            >
-              <p>
-                {dayText(addDays(week, -7))} — {dayText(addDays(week, -1))} → {dayText(week)} —{' '}
-                {dayText(addDays(week, 6))}
-              </p>
-              <p>
-                Существующие занятия сохранятся. Занятия с пересечениями по залу или тренеру будут
-                пропущены.
-              </p>
-              <div className="modal-actions">
-                <Button variant="secondary" onClick={closeCopy}>
-                  Отмена
-                </Button>
-                <Button
-                  onClick={() => {
-                    const existing = [...data.events];
-                    let added = 0;
-                    let skipped = 0;
-                    data.events
-                      .filter(
-                        (e) =>
-                          e.club === club &&
-                          e.day >= addDays(week, -7) &&
-                          e.day < week &&
-                          e.status !== 'Отменено',
-                      )
-                      .forEach((event) => {
-                        const next = {
-                          ...event,
-                          id: demoId('event'),
-                          day: addDays(event.day, 7),
-                          booked: '0',
-                          attendees: '',
-                          status: 'Запись открыта',
-                        };
-                        if (validateEvent(next, existing, data.rooms)) {
-                          skipped++;
-                          return;
-                        }
-                        existing.push(next);
-                        put('events', next);
-                        added++;
-                      });
-                    setCopying(false);
-                    setMessage(
-                      `Добавлено занятий: ${added}. Пропущено с пересечениями: ${skipped}.`,
-                    );
-                  }}
-                >
-                  Добавить занятия
-                </Button>
-              </div>
-            </Modal>
+              onCopy={applyWeekCopy}
+            />
           )}
         </>,
         document.body,

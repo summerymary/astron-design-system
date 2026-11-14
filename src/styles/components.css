@@ -85,6 +85,14 @@ body .button.button > svg {
   height: var(--control-icon-size);
   flex-shrink: 0;
 }
+body .button.new-client-match-card {
+  text-align: left;
+}
+body .new-client-match-card > .avatar {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+}
 body .button.button-primary {
   background: var(--button-primary-fill);
   border-color: var(--color-action-border);
@@ -130,6 +138,22 @@ body .button.button-accent {
 }
 body .button.button-accent:hover:not(:disabled) {
   background: var(--color-accent-soft);
+}
+/* Attendance confirmation: semantic green in every theme, including its toggle state. */
+body .button.button-success {
+  color: var(--color-success);
+  border-color: var(--color-success);
+  background: var(--color-success-soft);
+  font-weight: 700;
+}
+body .button.button-success:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-success) 15%, var(--color-success-soft));
+}
+body .button.button-success[aria-pressed='true']:not(:disabled) {
+  color: var(--color-success);
+  background: var(--color-success-soft);
+  border-color: var(--color-success);
+  box-shadow: inset 0 0 0 1px var(--color-success);
 }
 body .button.button-danger {
   background: var(--color-danger);
@@ -327,6 +351,39 @@ body .select-search.select-search:focus-within {
   border-color: var(--color-accent);
   box-shadow: none;
 }
+/* Inset search focus stays visible inside clipped/scrolling panels and dialogs. */
+body .search-field.search-field:focus-within,
+body .quick-card.client-search:focus-within,
+body .sale-name-search > div:focus-within,
+body .select-search.select-search:focus-within {
+  outline-offset: -3px;
+}
+/* The option is one button: no nested button and the same action with Enter. */
+body .client-search.client-search-select > .client-search-dropdown {
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+}
+body .client-search .client-search-result-action {
+  flex-wrap: wrap;
+}
+body .client-search .client-search-result-action > span:not(.avatar):not(.client-search-action) {
+  flex: 1 1 160px;
+}
+body .client-search .client-search-result-action > .client-search-action {
+  flex: 0 0 auto;
+  max-width: 100%;
+  margin-left: auto;
+  white-space: normal;
+}
+body .client-search .client-search-result-action[aria-disabled='true'] {
+  cursor: default;
+}
+body .client-search .client-search-result-action[aria-disabled='true'] > .client-search-action {
+  color: var(--color-muted);
+  background: var(--color-surface-muted);
+  border-color: var(--color-line);
+}
 /* All regular searches share a frame; client suggestions and Enter are behaviours. */
 body
   :is(
@@ -444,6 +501,9 @@ body .modal.modal {
   border-radius: var(--radius-card);
   border-color: var(--surface-border);
   padding: var(--panel-padding);
+}
+body .modal.modal[data-size='wide'] {
+  width: min(920px, calc(100vw - 32px));
 }
 body .modal-actions.modal-actions {
   display: flex;
@@ -1042,14 +1102,20 @@ body [data-ui='stats'] strong {
     .form-field input:not([type='checkbox']):not([type='radio']):not([type='color']),
     .form-field textarea
   ) {
-  box-shadow: inset 0 0 0 var(--contrast-contour-width) var(--contour-color, var(--color-control-border));
+  box-shadow: inset 0 0 0 var(--contrast-contour-width)
+    var(--contour-color, var(--color-control-border));
 }
 :root:is([data-visual-style='vivid'], [data-visual-style='contrast']) body .button-primary {
   --contour-color: var(--color-action-border);
 }
 :root:is([data-visual-style='vivid'], [data-visual-style='contrast']) body .button-accent,
-:root:is([data-visual-style='vivid'], [data-visual-style='contrast']) body [data-ui='disclosure-menu'][open] > summary,
-:root:is([data-visual-style='vivid'], [data-visual-style='contrast']) body .select-trigger[aria-expanded='true'],
+:root:is([data-visual-style='vivid'], [data-visual-style='contrast'])
+  body
+  [data-ui='disclosure-menu'][open]
+  > summary,
+:root:is([data-visual-style='vivid'], [data-visual-style='contrast'])
+  body
+  .select-trigger[aria-expanded='true'],
 :root:is([data-visual-style='vivid'], [data-visual-style='contrast'])
   body
   :is(
@@ -1083,7 +1149,11 @@ body [data-ui='stats'] strong {
   :is(.button, .select-trigger, .form-field input, .form-field textarea):disabled {
   --contour-color: var(--color-line);
 }
-:root:is([data-visual-style='vivid'], [data-visual-style='contrast']) body .sidebar .side-nav button.active {
+:root:is([data-visual-style='vivid'], [data-visual-style='contrast'])
+  body
+  .sidebar
+  .side-nav
+  button.active {
   box-shadow: inset 0 0 0 var(--contrast-selection-width) var(--color-accent);
 }
 :root:is([data-visual-style='vivid'], [data-visual-style='contrast'])
@@ -1140,7 +1210,9 @@ body [data-ui='stats'] strong {
 :root[data-visual-style='vivid'] body .calendar-panel:not(.calendar-heatmap) .calendar-event:hover {
   background: color-mix(in srgb, var(--event-color) 20%, var(--color-surface));
 }
-:root[data-visual-style='vivid'] body :is(.client-contact-facts dt, .client-info-card dt, .client-balance > span) {
+:root[data-visual-style='vivid']
+  body
+  :is(.client-contact-facts dt, .client-info-card dt, .client-balance > span) {
   color: var(--color-muted);
 }
 :root[data-visual-style='vivid'] body :is(.app-topbar, .role-note, .date-chip) {
@@ -1148,4 +1220,144 @@ body [data-ui='stats'] strong {
 }
 :root[data-visual-style='vivid'] body .class-meta .is-full {
   color: var(--color-warning);
+}
+
+/* Compact eligible-pass selection; native radios keep keyboard behaviour. */
+body [data-ui='visit-pass-list'] {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+body .visit-pass-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 76px;
+  padding: 14px 16px;
+  border: 1px solid var(--color-control-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+}
+body .visit-pass-row:hover {
+  border-color: var(--color-accent);
+}
+body .visit-pass-row.is-selected {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+body .visit-pass-row:focus-within {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -4px;
+}
+body .visit-pass-row > input {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--color-accent);
+}
+body .visit-pass-description {
+  display: grid;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+body .visit-pass-description .membership-tag {
+  justify-self: start;
+  max-width: 100%;
+  white-space: normal;
+  font-size: 16px;
+  font-weight: 600;
+}
+body .visit-pass-meta,
+body .visit-pass-summary {
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+body .visit-pass-meta {
+  color: var(--color-muted);
+}
+body .visit-pass-summary {
+  max-width: 38%;
+  text-align: right;
+}
+body .visit-pass-summary strong {
+  font-size: 16px;
+  font-weight: 600;
+}
+body .visit-pass-recommendation {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+@media (max-width: 600px) {
+  body .visit-pass-row {
+    flex-wrap: wrap;
+    padding: 12px;
+  }
+  body .visit-pass-summary {
+    width: calc(100% - 32px);
+    max-width: none;
+    margin-left: 32px;
+    text-align: left;
+  }
+}
+
+/* Booking options share one layout in cards, reception and the guide. */
+body .client-booking-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+body .client-booking-option > div {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+body .client-booking-option strong {
+  font-size: 16px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+body .client-booking-option span {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+@media (max-width: 600px) {
+  body .client-booking-option {
+    flex-wrap: wrap;
+  }
+}
+
+/* Reusable modal body with pinned heading and actions. */
+body .modal:has(> .modal-scroll-body) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: calc(100dvh - 32px);
+}
+body .modal:has(> .modal-scroll-body) > :is(.modal-heading, .modal-actions) {
+  flex-shrink: 0;
+}
+body .modal-scroll-body {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 4px;
+  margin-inline: -4px;
 }

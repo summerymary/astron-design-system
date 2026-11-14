@@ -178,7 +178,7 @@ export function AdminHeader({
           </>
         )}
       </div>
-      <ClientSearch key={workstationId} members={members} onMember={onMember} hidePhones />
+      <ClientSearch key={workstationId} members={members} onMember={onMember} mode="registration" hidePhones />
       <div className="admin-header-actions">
         <Button
           className="header-add-client-action"

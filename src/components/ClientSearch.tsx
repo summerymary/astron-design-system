@@ -12,12 +12,14 @@ export function ClientSearch({
   mode = 'profile',
   purpose = 'посещения',
   hidePhones = false,
+  resultAction,
 }: {
   members: Member[];
   onMember: (member: Member) => void;
-  mode?: 'profile' | 'selection';
+  mode?: 'profile' | 'selection' | 'registration';
   purpose?: 'посещения' | 'покупки' | 'занятия';
   hidePhones?: boolean;
+  resultAction?: (member: Member) => { label: string; disabled?: boolean };
 }) {
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
@@ -44,6 +46,7 @@ export function ClientSearch({
     return () => document.removeEventListener('pointerdown', dismiss);
   }, []);
   const choose = (member: Member) => {
+    if (resultAction?.(member).disabled) return;
     setQuery('');
     setOpen(false);
     setActive(-1);
@@ -55,7 +58,7 @@ export function ClientSearch({
     <form
       ref={root}
       role="search"
-      aria-label={mode === 'profile' ? 'Быстрый поиск клиента' : `Поиск клиента для ${purpose}`}
+      aria-label={mode !== 'selection' ? 'Быстрый поиск клиента' : `Поиск клиента для ${purpose}`}
       className={`quick-card client-search ${mode === 'selection' ? 'client-search-select' : ''} ${invalid ? 'quick-card-error' : ''}`}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
@@ -80,7 +83,7 @@ export function ClientSearch({
     >
       <Search size={18} aria-hidden="true" />
       <label className="sr-only" htmlFor={`${id}-input`}>
-        {mode === 'profile'
+        {mode !== 'selection'
           ? 'Карта, ФИО или телефон клиента'
           : `Клиент для ${purpose}: карта, ФИО или телефон`}
       </label>
@@ -141,7 +144,14 @@ export function ClientSearch({
       )}
       <span className="sr-only" id={`${id}-help`}>
         Введите номер карты, ФИО или телефон. Стрелки — выбор, Enter —{' '}
-        {mode === 'profile' ? 'открыть карточку' : 'выбрать клиента'}, Escape — закрыть список.
+        {resultAction
+          ? 'выполнить действие в строке'
+          : mode === 'profile'
+            ? 'открыть карточку'
+            : mode === 'registration'
+              ? 'перейти к регистрации посещения'
+              : 'выбрать клиента'}
+        , Escape — закрыть список.
       </span>
       {visible && (
         <div className="client-search-dropdown">
@@ -149,30 +159,46 @@ export function ClientSearch({
             {matches.length ? `Найдено клиентов: ${matches.length}` : 'Ничего не найдено'}
           </div>
           <div role="listbox" aria-label="Найденные клиенты" id={`${id}-results`}>
-            {matches.map((member, index) => (
-              <button
-                type="button"
-                role="option"
-                tabIndex={-1}
-                aria-selected={index === active}
-                id={`${id}-option-${member.id}`}
-                key={member.id}
-                onMouseDown={(event) => event.preventDefault()}
-                onClick={() => choose(member)}
-                onMouseEnter={() => setActive(index)}
-              >
-                <Avatar member={member} />
-                <span>
-                  <strong>{member.fullName ?? member.name}</strong>
-                  <small>
-                    {hidePhones ? hiddenPhone(member.phone) : member.phone}
-                    <i />
-                    Карта {clientCard(member, memberCards)}
-                  </small>
-                </span>
-                <ArrowUpRight size={14} />
-              </button>
-            ))}
+            {matches.map((member, index) => {
+              const action = resultAction?.(member);
+              return (
+                <button
+                  type="button"
+                  role="option"
+                  tabIndex={-1}
+                  aria-selected={index === active}
+                  aria-disabled={action?.disabled || undefined}
+                  aria-label={
+                    action ? `${action.label}: ${member.fullName ?? member.name}` : undefined
+                  }
+                  className={action ? 'client-search-result-action' : undefined}
+                  id={`${id}-option-${member.id}`}
+                  key={member.id}
+                  onMouseDown={(event) => event.preventDefault()}
+                  onClick={() => choose(member)}
+                  onMouseEnter={() => setActive(index)}
+                >
+                  <Avatar member={member} />
+                  <span>
+                    <strong>{member.fullName ?? member.name}</strong>
+                    <small>
+                      {hidePhones ? hiddenPhone(member.phone) : member.phone}
+                      <i />
+                      Карта {clientCard(member, memberCards)}
+                    </small>
+                  </span>
+                  {action ? (
+                    <span
+                      className={`button button-${action.disabled ? 'secondary' : 'primary'} client-search-action`}
+                    >
+                      {action.label}
+                    </span>
+                  ) : (
+                    <ArrowUpRight size={14} />
+                  )}
+                </button>
+              );
+            })}
           </div>
           {!matches.length && (
             <p className="client-search-empty">
@@ -181,11 +207,15 @@ export function ClientSearch({
             </p>
           )}
           <p className="client-search-help">
-            {mode === 'profile'
-              ? 'Поиск открывает карточку. Посещение оформляется отдельно.'
-              : purpose === 'занятия'
-                ? 'После выбора подтвердите запись на занятие или добавление в резерв.'
-                : 'Выбор клиента не создаёт посещение. Для этого нужна кнопка подтверждения.'}
+            {resultAction
+              ? 'Действие указано в строке клиента. Запись и резерв не списывают посещение.'
+              : mode === 'registration'
+                ? 'Откроется регистрация посещения выбранного клиента. Списание только после подтверждения.'
+                : mode === 'profile'
+                  ? 'Поиск открывает карточку. Посещение оформляется отдельно.'
+                  : purpose === 'занятия'
+                    ? 'После выбора подтвердите запись на занятие или добавление в резерв.'
+                    : 'Выбор клиента не создаёт посещение. Для этого нужна кнопка подтверждения.'}
           </p>
         </div>
       )}

@@ -152,7 +152,7 @@ export function CRMWorkspace({
             items={['Сегодня', 'Просрочено', 'Готово']}
             value={taskFilter}
             onChange={setTaskFilter}
-            label="Задачи CRM"
+            label="Задачи маркетинга"
           />
           <div className="ws-panel-body">
             {tasks.length ? (

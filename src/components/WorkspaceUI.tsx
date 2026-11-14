@@ -21,8 +21,14 @@ import type { AdminSectionId } from '../data/admin';
 import type { DemoRecord, Field, Resource } from '../data/workspace';
 import { money, prettyDate } from '../data/workspace';
 import { demoId, useWorkspace } from './WorkspaceProvider';
+import type { TrainingKind } from '../lib/training-kind';
 
-export type Navigate = (section: AdminSectionId, member?: Member, recordId?: string) => void;
+export type Navigate = (
+  section: AdminSectionId,
+  member?: Member,
+  recordId?: string,
+  context?: { saleTraining?: TrainingKind; saleTrainerId?: string },
+) => void;
 export function Tabs({
   items,
   value,
@@ -767,6 +773,7 @@ export function ResourcePage({
                     cancelLabel="Оставить запись"
                     onClose={() => setConfirm(false)}
                     onConfirm={() => {
+                      if (config.readonly) return;
                       remove(collection, opened.id);
                       closeDetails();
                       setMessage('Запись удалена из прототипа.');
@@ -787,7 +794,7 @@ export function ResourcePage({
           )}
         </RecordDetails>
       )}
-      {editing && (
+      {editing && !config.readonly && (
         <RecordForm
           title={
             editing === 'new'
@@ -798,6 +805,7 @@ export function ResourcePage({
           initial={editing === 'new' ? undefined : editing}
           onClose={closeForm}
           onSave={(record) => {
+            if (config.readonly) return 'Изменение записей недоступно.';
             const error = config.validate?.(
               record,
               rows.find((row) => row.id === record.id),

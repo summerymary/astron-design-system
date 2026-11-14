@@ -1,3 +1,4 @@
+import { ClientBookingDialog } from '../components/ClientBookingDialog';
 import { accessWindowLabel, ageOnDate } from '../lib/registration';
 import { daysInClub as countDaysInClub, demoStamp, nextDemoNow } from '../lib/demo-clock';
 import { useCallback, useState } from 'react';
@@ -33,7 +34,7 @@ import type { ClientTabId, SubscriptionStatus } from '../data/clientProfile';
 import type { AdminSectionId } from '../data/admin';
 import { visitKinds } from '../data/admin';
 import { demoClubs } from '../data/roles';
-import { profileBookingOptions } from '../data/profileBookings';
+import { personalBooking } from '../lib/personal-training';
 import { findClientChat, readChatMessages } from '../lib/client-messages';
 import { ChatHistory } from '../components/ChatHistory';
 import { MembershipTag } from '../components/MembershipTag';
@@ -65,7 +66,7 @@ function EmptyTab({ title, description }: { title: string; description: string }
 export function ClientProfile({
   member,
   visits,
-  bookings,
+  clubName,
   canOperate,
   canSell = false,
   user,
@@ -79,7 +80,7 @@ export function ClientProfile({
 }: {
   member: Member;
   visits: Visit[];
-  bookings: string[];
+  clubName: string;
   canOperate: boolean;
   canSell?: boolean;
   user: DemoUser;
@@ -94,6 +95,8 @@ export function ClientProfile({
   const { data, put } = useWorkspace();
   const profile = getClientProfile(member, data);
   const clientAge = ageOnDate(profile.birthDate, TODAY);
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const [bookingFeedback, setBookingFeedback] = useState('');
   const [tab, setTab] = useState<ClientTabId>('subscriptions');
   const [form, setForm] = useState<'edit' | 'comment' | null>(null);
   const closeForm = useCallback(() => setForm(null), []);
@@ -102,9 +105,22 @@ export function ClientProfile({
       row.category !== 'Бар' && (row.memberId === String(member.id) || row.client === member.name),
   );
   const notes = (data.comments || []).filter((row) => row.memberId === String(member.id));
-  const eventBookings = data.events.filter((row) =>
-    (row.attendees || '').split(',').includes(String(member.id)),
-  );
+  const eventBookings = data.events
+    .filter(
+      (row) =>
+        row.day >= TODAY &&
+        !['Отменено', 'Завершено'].includes(row.status) &&
+        [...(row.attendees || '').split(','), ...(row.reserve || '').split(',')].includes(
+          String(member.id),
+        ),
+    )
+    .sort((a, b) => `${a.day}T${a.time}`.localeCompare(`${b.day}T${b.time}`))
+    .map((row) => ({
+      ...personalBooking(row, data),
+      bookingState: (row.reserve || '').split(',').includes(String(member.id))
+        ? 'В резерве'
+        : 'Записан',
+    }));
   const [filter, setFilter] = useState('all');
   const [callActive, setCallActive] = useState(false);
   const phoneHidden = user.role === 'administrator';
@@ -114,6 +130,8 @@ export function ClientProfile({
   const [previewAction, setPreviewAction] = useState<string | null>(null);
   const closePreview = useCallback(() => setPreviewAction(null), []);
   const subscriptions = profile.subscriptions.filter((subscription) => subscription.kindId);
+  const categoryName = (id?: string) =>
+    (data['trainer-categories'] || []).find((row) => row.id === id)?.name;
   const additionalServices = [
     ...profile.subscriptions
       .filter((subscription) => !subscription.kindId)
@@ -133,7 +151,6 @@ export function ClientProfile({
   const shownSubscriptions = subscriptions.filter((s) => filter === 'all' || s.status === filter);
   const sortedVisits = [...visits].sort((a, b) => b.enteredAt.localeCompare(a.enteredAt));
   const activeCount = subscriptions.filter((s) => s.status === 'active').length;
-  const upcoming = profileBookingOptions.filter((item) => bookings.includes(item.id));
   const daysInClub = countDaysInClub(member.joined);
   const balanceBlock = (
     <div className="client-balance">
@@ -257,6 +274,10 @@ export function ClientProfile({
               )}
               {canOperate && (
                 <div className="client-primary-actions">
+                  <Button variant="secondary" onClick={() => setBookingOpen(true)}>
+                    <CalendarDays size={15} />
+                    Записать
+                  </Button>
                   <Button onClick={onRegistration}>
                     <Check size={15} />
                     Отметить посещение
@@ -273,6 +294,7 @@ export function ClientProfile({
               )}
             </div>
           </section>
+          {bookingFeedback && <Notice tone="success">{bookingFeedback}</Notice>}
           {canOperate && clientAge !== null && clientAge < 14 && (
             <Notice tone="warning">
               Клиенту {clientAge} лет. Занятия разрешены только с тренером или ответственным
@@ -353,6 +375,10 @@ export function ClientProfile({
                               <div className="client-membership-row">
                                 <div className="client-membership-name" title={sub.name}>
                                   <MembershipTag name={sub.name} kindId={sub.kindId} textOnly />
+                                  {categoryName(sub.trainerCategory) &&
+                                    !sub.name.includes(categoryName(sub.trainerCategory)!) && (
+                                      <small>Категория: {categoryName(sub.trainerCategory)}</small>
+                                    )}
                                   {accessWindowLabel(sub) && (
                                     <small>{accessWindowLabel(sub)}</small>
                                   )}
@@ -594,29 +620,12 @@ export function ClientProfile({
                       }
                     />
                   )}
-                  {tab === 'bookings' &&
-                    (upcoming.length ? (
-                      <div className="client-bookings">
-                        {upcoming.map((item) => (
-                          <div key={item.id}>
-                            <span>
-                              <CalendarDays size={20} />
-                            </span>
-                            <div>
-                              <strong>{item.title}</strong>
-                              <small>{item.subtitle}</small>
-                            </div>
-                            <b>{item.time}</b>
-                            <span className="client-booking-status">Записан</span>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <EmptyTab
-                        title="Нет ближайших записей"
-                        description="Клиент пока не записан на занятия."
-                      />
-                    ))}
+                  {tab === 'bookings' && !eventBookings.length && (
+                    <EmptyTab
+                      title="Нет ближайших записей"
+                      description="Запишите клиента кнопкой «Записать» в карточке."
+                    />
+                  )}
                   {tab === 'reviews' && (
                     <EmptyTab
                       title="Отзывов пока нет"
@@ -625,7 +634,7 @@ export function ClientProfile({
                   )}
                   {tab === 'bookings' && !!eventBookings.length && (
                     <div className="ws-panel-body">
-                      <h3>Новые записи из расписания</h3>
+                      <h3>Ближайшие записи</h3>
                       <DataTable
                         rows={eventBookings}
                         columns={[
@@ -633,6 +642,8 @@ export function ClientProfile({
                           { key: 'day', label: 'Дата' },
                           { key: 'time', label: 'Начало' },
                           { key: 'room', label: 'Зал' },
+                          { key: 'trainer', label: 'Тренер' },
+                          { key: 'bookingState', label: 'Запись' },
                         ]}
                       />
                     </div>
@@ -793,6 +804,19 @@ export function ClientProfile({
             });
             closeForm();
           }}
+        />
+      )}
+      {bookingOpen && (
+        <ClientBookingDialog
+          member={member}
+          user={user}
+          clubName={clubName}
+          onClose={() => setBookingOpen(false)}
+          onBooked={(event, reserved) =>
+            setBookingFeedback(
+              `${reserved ? 'Клиент добавлен в резерв' : 'Клиент записан'}: ${event.name}, ${event.day.split('-').reverse().join('.')} в ${event.time}.`,
+            )
+          }
         />
       )}
     </div>

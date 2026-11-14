@@ -1,0 +1,15 @@
+@layer pages {
+  .client-booking-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .client-booking-fields > :last-child {
+    grid-column: 1 / -1;
+  }
+  @media (max-width: 600px) {
+    .client-booking-fields {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}
