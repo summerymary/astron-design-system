@@ -104,6 +104,22 @@ export const initialMembers: Member[] = [
     visits: 42,
     color: 'sand',
   },
+  {
+    id: 1007,
+    name: 'Матвей Соколов',
+    fullName: 'Соколов Матвей Дмитриевич',
+    birthDate: '2014-05-18',
+    gender: 'Мужской',
+    email: 'matvey.sokolov@example.com',
+    phone: '+7 999 701-20-12',
+    plan: 'Персональные тренировки',
+    status: 'active',
+    joined: '01.11.2026',
+    expires: '01.12.2026',
+    visits: 1,
+    initialPassVisits: 1,
+    color: 'blue',
+  },
 ];
 
 export const classes = [
