@@ -33,20 +33,22 @@ const base = Object.fromEntries(
     m[2].trim(),
   ]),
 );
+const contrastCSS =
+  (await read('src/styles/components.css')).match(
+    /:root\[data-visual-style='vivid'\]\s*\{([^}]+)\}/,
+  )?.[1] || '';
 const contrastRoot = Object.fromEntries(
-  [
-    ...(
-      (await read('src/styles/components.css')).match(
-        /:root\[data-visual-style='vivid'\]\s*\{([^}]+)\}/,
-      )?.[1] || ''
-    ).matchAll(/(--[\w-]+):\s*([^;]+);/g),
-  ].map((m) => [m[1], m[2].trim()]),
+  [...contrastCSS.matchAll(/(--[\w-]+):\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]),
 );
 const themes = Object.fromEntries(
   THEME_OPTIONS.map((option) => [
     option.id,
     {
       name: option.name,
+      colorScheme:
+        option.style === 'vivid'
+          ? contrastCSS.match(/\bcolor-scheme:\s*(\w+)/)?.[1] || 'light'
+          : 'light',
       tokens: {
         ...base,
         ...visualStyleTokens(generatePalette(option.color).tokens, option.style),
@@ -148,6 +150,7 @@ const css =
     .map(
       ([id, theme], index) =>
         `${index === 0 ? ':root,\n' : ''}:root[data-astron-theme="${id}"] {\n` +
+        `  color-scheme: ${theme.colorScheme};\n` +
         Object.entries(theme.tokens)
           .map(([key, value]) => `  ${key}: ${value};`)
           .join('\n') +

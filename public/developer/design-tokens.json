@@ -90,6 +90,7 @@
   "themes": {
     "astron": {
       "name": "Астрон",
+      "colorScheme": "light",
       "tokens": {
         "--color-accent": "#8A332C",
         "--color-accent-hover": "#722820",
@@ -179,6 +180,7 @@
     },
     "graphite": {
       "name": "Графит",
+      "colorScheme": "light",
       "tokens": {
         "--color-accent": "#333333",
         "--color-accent-hover": "#242424",
@@ -267,44 +269,45 @@
       }
     },
     "contrast": {
-      "name": "Контраст",
+      "name": "Тёмная",
+      "colorScheme": "dark",
       "tokens": {
-        "--color-accent": "#8A332C",
-        "--color-accent-hover": "#722820",
-        "--color-accent-pressed": "#5B1F19",
-        "--color-accent-soft": "#F6EBE6",
-        "--color-accent-soft-hover": "#EEDBD2",
-        "--color-accent-line": "#D7B0A2",
-        "--color-on-accent": "#FFFFFF",
-        "--color-action": "#8A332C",
-        "--color-action-hover": "#722820",
-        "--color-action-pressed": "#5B1F19",
-        "--color-action-border": "#8A332C",
+        "--color-accent": "#FFB4C4",
+        "--color-accent-hover": "#FFC7D2",
+        "--color-accent-pressed": "#F0A3AD",
+        "--color-accent-soft": "#452831",
+        "--color-accent-soft-hover": "#512E39",
+        "--color-accent-line": "#BF8292",
+        "--color-on-accent": "#202020",
+        "--color-action": "#963646",
+        "--color-action-hover": "#A94153",
+        "--color-action-pressed": "#7E2938",
+        "--color-action-border": "#EDABBA",
         "--color-on-action": "#FFFFFF",
-        "--color-ink": "#181C24",
-        "--color-text": "#3D4652",
-        "--color-muted": "#606A5C",
-        "--color-subtle": "#606A5C",
-        "--color-canvas": "#F4F3F0",
-        "--color-stage": "#F1EFEA",
-        "--color-surface": "#FFFFFF",
-        "--color-surface-subtle": "#FDFCF9",
-        "--color-surface-muted": "#F3F1ED",
-        "--color-line": "#B8AEA6",
-        "--color-control-border": "#746C63",
-        "--color-success": "#276444",
-        "--color-success-bg": "#EAF4EE",
-        "--color-warning": "#83520D",
-        "--color-warning-bg": "#FFF3DC",
-        "--color-danger": "#B42318",
-        "--color-danger-bg": "#FFF0ED",
-        "--color-info": "#3E5E89",
-        "--color-info-bg": "#EEF2F8",
-        "--color-paused": "#6B547E",
-        "--color-paused-bg": "#F3EEF6",
-        "--color-chart": "#B16B59",
-        "--color-skeleton": "#DCE1E7",
-        "--color-skeleton-highlight": "#FCFBF8",
+        "--color-ink": "#FFFFFF",
+        "--color-text": "#EEEEEE",
+        "--color-muted": "#BFBFBF",
+        "--color-subtle": "#BFBFBF",
+        "--color-canvas": "#202020",
+        "--color-stage": "#181818",
+        "--color-surface": "#2A2A2A",
+        "--color-surface-subtle": "#242424",
+        "--color-surface-muted": "#343434",
+        "--color-line": "#9B7A84",
+        "--color-control-border": "#C38B9A",
+        "--color-success": "#A4D8B4",
+        "--color-success-bg": "#263B31",
+        "--color-warning": "#F4D187",
+        "--color-warning-bg": "#40361F",
+        "--color-danger": "#FFB3AC",
+        "--color-danger-bg": "#442B34",
+        "--color-info": "#B7D1FF",
+        "--color-info-bg": "#273348",
+        "--color-paused": "#D6C0F1",
+        "--color-paused-bg": "#382D45",
+        "--color-chart": "#BB6376",
+        "--color-skeleton": "#424242",
+        "--color-skeleton-highlight": "#565656",
         "--table-record-row-height": "44px",
         "--table-record-padding-y": "3px",
         "--table-record-avatar-size": "28px",
@@ -348,11 +351,14 @@
         "--surface-border": "var(--color-line)",
         "--button-primary-fill": "var(--color-action)",
         "--button-primary-shadow": "none",
-        "--shadow-popup": "0 16px 56px #181c2416",
+        "--shadow-popup": "0 16px 56px #00000060",
         "--color-divider": "var(--color-line)",
         "--layout-page-padding": "clamp(28px, 3cqi, 48px)",
         "--layout-panel-padding": "28px",
-        "--layout-section-gap": "28px"
+        "--layout-section-gap": "28px",
+        "--contrast-contour-width": "2px",
+        "--contrast-selection-width": "3px",
+        "--contrast-tab-width": "4px"
       }
     }
   },
@@ -504,6 +510,21 @@
       "source": "src/styles/components.css"
     },
     {
+      "name": "--contrast-contour-width",
+      "value": "2px",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--contrast-selection-width",
+      "value": "3px",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--contrast-tab-width",
+      "value": "4px",
+      "source": "src/styles/components.css"
+    },
+    {
       "name": "--surface-border",
       "value": "var(--color-line)",
       "source": "src/styles/components.css"
@@ -521,6 +542,11 @@
     {
       "name": "--color-divider",
       "value": "var(--color-line)",
+      "source": "src/styles/components.css"
+    },
+    {
+      "name": "--shadow-popup",
+      "value": "0 16px 56px #00000060",
       "source": "src/styles/components.css"
     },
     {
@@ -968,8 +994,8 @@
         "DesignRules"
       ],
       "rules": [
-        "Астрон, Графит и Контраст — темы одного интерфейса. Примеры используют рабочие компоненты и те же состояния, что приложение.",
-        "Контраст сохраняет бордовый акцент, белые панели и светлое меню Астрона. Фон рабочей области — мягкий серо-бежевый #F4F3F0; у исходного Астрона остаётся #FDFDFC. Видимая рамка панелей и полей усилена до 2 px внутренней линией без изменения размеров. Выбор выделяется бордовым, клавиатурный фокус остаётся отдельным внешним контуром; разделители строк легче рамок.",
+        "Астрон, Графит и Тёмная — темы одного интерфейса. Примеры используют рабочие компоненты и те же состояния, что приложение.",
+        "Тёмная тема: фон #202020, тёмно-серые панели #2A2A2A, дополнительные поверхности #242424 / #343434. Основные данные белые #FFFFFF, текст #EEEEEE, подписи #BFBFBF. Бордовые кнопки #963646 с белым текстом; hover #A94153, pressed #7E2938. Рамки панелей ярче #9B7A84, полей #C38B9A, основных кнопок #EDABBA. Рамка 1 px вместе с внутренней линией 2 px даёт визуальные 3 px без изменения размеров. Акцент #FFB4C4, выбранный пункт обведён внутренней линией 3 px, активная вкладка подчёркнута на 4 px. Нативные поля тёмные (color-scheme:dark), логотип на тёмном белый. Цвета статусов и категорий сохраняют смысл. Геометрия, маршруты и поведение общие с Астроном. Толщины задаются --contrast-contour-width:2px, --contrast-selection-width:3px, --contrast-tab-width:4px в общем CSS. Отдельный контур фокуса сохраняется; мобильное меню без активной подложки.",
         "Сначала переиспользуется существующий элемент. Новый паттерн получает назначение, размеры, состояния, поведение с клавиатурой и на телефоне; затем добавляется в правила и примеры."
       ]
     }

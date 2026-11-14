@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-13",
+  "theme": "contrast",
+  "canvas": "#202020",
+  "surface": "#2A2A2A",
+  "action": "#963646",
+  "onAction": "#FFFFFF",
+  "accent": "#F0A3AD",
+  "checks": [
+    "test:theme",
+    "test:ui",
+    "test:handoff",
+    "TypeScript",
+    "production build",
+    "git diff --check"
+  ],
+  "browser": {
+    "desktop": "1280x720: client card, form/Select, active sidebar, theme roundtrip, guide",
+    "mobile": "390x844: members",
+    "pageHorizontalOverflow": false,
+    "consoleErrors": [],
+    "astronRestoredCanvas": "#FDFDFC",
+    "astronRestoredColorScheme": "normal"
+  },
+  "screenshot": "/private/tmp/astron-gray-burgundy-20261113.png",
+  "published": false
+}

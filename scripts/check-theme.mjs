@@ -48,42 +48,53 @@ for (const preset of THEME_PRESETS) {
   const original = generatePalette(preset.color).tokens;
   const snapshot = { ...original };
   const alternative = visualStyleTokens(original, 'vivid');
-  assert.equal(
-    alternative['--color-action'],
-    ASTRON_TOKENS['--color-action'],
-    'Contrast must preserve Astron burgundy actions',
-  );
+  assert.equal(alternative['--color-canvas'], '#202020');
+  assert.equal(alternative['--color-action'], '#963646');
+  assert.ok(contrastRatio(alternative['--color-line'], alternative['--color-surface']) >= 3, 'Panel border contrast');
+  assert.ok(contrastRatio(alternative['--color-action-border'], alternative['--color-action']) >= 3, 'Primary button border contrast');
   assert.deepEqual(original, snapshot, 'Alternative mutated the original palette');
   assert.deepEqual(
     visualStyleTokens(original, 'astron'),
     snapshot,
     'Original palette did not restore',
   );
-  for (const key of Object.keys(original).filter((key) =>
-    /success|warning|danger|paused|info/.test(key),
-  )) {
-    assert.equal(alternative[key], original[key], `${key}: status semantics changed`);
+  for (const semantic of ['success', 'warning', 'danger', 'paused', 'info']) {
+    assert.ok(
+      contrastRatio(alternative[`--color-${semantic}`], alternative[`--color-${semantic}-bg`]) >=
+        4.5,
+      `${semantic}: status text must remain readable`,
+    );
   }
-  for (const surface of ['--color-surface', '--color-canvas', '--color-surface-muted']) {
-    assert.ok(contrastRatio(alternative['--color-muted'], alternative[surface]) >= 4.5);
-    assert.ok(contrastRatio(alternative['--color-ink'], alternative[surface]) >= 4.5);
+  for (const surface of [
+    '--color-surface',
+    '--color-canvas',
+    '--color-surface-muted',
+    '--color-surface-subtle',
+    '--color-accent-soft-hover',
+  ]) {
+    for (const text of ['--color-muted', '--color-text', '--color-ink', '--color-accent']) {
+      assert.ok(
+        contrastRatio(alternative[text], alternative[surface]) >= 4.5,
+        `${text} on ${surface}: surface text contrast`,
+      );
+    }
   }
-  assert.ok(contrastRatio(alternative['--color-on-action'], alternative['--color-action']) >= 4.5);
+  for (const state of ['--color-action', '--color-action-hover', '--color-action-pressed']) {
+    assert.ok(contrastRatio(alternative['--color-on-action'], alternative[state]) >= 4.5);
+  }
+  assert.ok(contrastRatio(alternative['--color-canvas'], alternative['--color-danger']) >= 4.5);
+  assert.equal(alternative['--color-surface'], '#2A2A2A');
+  assert.ok(contrastRatio(alternative['--color-ink'], alternative['--color-surface']) >= 12);
+  assert.ok(contrastRatio('#FFFFFF', alternative['--color-canvas']) >= 4.5);
   assert.ok(
     contrastRatio(alternative['--color-control-border'], alternative['--color-surface']) >= 3,
   );
-  for (const surface of ['--color-canvas', '--color-surface-muted']) {
+  for (const surface of ['--color-canvas', '--color-surface-subtle', '--color-surface-muted']) {
     assert.ok(
       contrastRatio(alternative['--color-control-border'], alternative[surface]) >= 3,
       `Contrast: controls blend into ${surface}`,
     );
   }
-  for (const key of Object.keys(ASTRON_TOKENS).filter(
-    (key) => !['--color-canvas', '--color-line', '--color-control-border'].includes(key),
-  )) {
-    assert.equal(alternative[key], ASTRON_TOKENS[key], `${key}: Contrast drifted from Astron`);
-  }
-  assert.equal(alternative['--color-canvas'], '#F4F3F0');
   assert.ok(
     contrastRatio(alternative['--color-line'], alternative['--color-surface']) >
       contrastRatio(ASTRON_TOKENS['--color-line'], ASTRON_TOKENS['--color-surface']),
@@ -150,7 +161,6 @@ for (const input of inputs) {
   }
   const surfaces = [
     '--color-surface',
-    '--color-canvas',
     '--color-surface-muted',
     '--color-surface-subtle',
     '--color-accent-soft',

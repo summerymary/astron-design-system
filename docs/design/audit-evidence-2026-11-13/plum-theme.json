@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-13",
+  "theme": "contrast",
+  "canvas": "#1E1B22",
+  "surface": "#29252E",
+  "accent": "#E6B6C5",
+  "checks": [
+    "test:theme",
+    "test:ui",
+    "docs:export",
+    "test:handoff",
+    "TypeScript",
+    "production build",
+    "git diff --check"
+  ],
+  "browser": {
+    "desktop": "1280x720: client card, edit form, Select, theme roundtrip, styleguide",
+    "mobile": "390x844: members",
+    "pageHorizontalOverflow": false,
+    "consoleErrors": [],
+    "astronRestoredCanvas": "#FDFDFC",
+    "astronRestoredColorScheme": "normal"
+  },
+  "screenshot": "/private/tmp/astron-plum-dark-20261113.png",
+  "scope": "Palette delta; 114-view audit in dark-theme.json belongs to preceding brown palette.",
+  "published": false
+}

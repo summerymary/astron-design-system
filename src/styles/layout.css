@@ -26,7 +26,7 @@
   background: var(--color-surface);
 }
 .app-shell .directory-search-input:focus-within {
-  outline: 2px solid var(--color-action);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
 }
 .app-shell .directory-search-input input {
@@ -373,12 +373,12 @@ html {
 }
 .app-shell .side-nav button.active {
   background: var(--color-accent-soft);
-  color: var(--color-action);
+  color: var(--color-accent);
   font-weight: 600;
 }
 .app-shell .side-nav button.active > .nav-count {
   background: var(--color-surface);
-  color: var(--color-action);
+  color: var(--color-accent);
 }
 .app-shell .sandbox-card {
   background: transparent;
@@ -627,9 +627,9 @@ html {
   justify-content: flex-start;
 }
 .design-system .ds-categories > button.selected {
-  color: var(--color-action);
+  color: var(--color-accent);
   background: transparent;
-  border-bottom-color: var(--color-action);
+  border-bottom-color: var(--color-accent);
 }
 .design-system .ds-categories > button > svg,
 .design-system .ds-categories > button > span {

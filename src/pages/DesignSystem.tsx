@@ -309,7 +309,7 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                 </span>
                 <h3>Читаемый текст</h3>
                 <p>
-                  Контраст текста на главной кнопке. Вторичный текст на белом —{' '}
+                  Контраст текста на главной кнопке. Вторичный текст на поверхности —{' '}
                   {contrastRatio(
                     themeColor('--color-muted'),
                     themeColor('--color-surface'),
