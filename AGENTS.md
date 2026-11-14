@@ -1,5 +1,84 @@
 # Источник редизайна и ограничения
 
+## Publication requested - 15 November 2026
+
+The user explicitly requested pushing all pending changes to summerymary/astron-design-system and its established GitHub Pages deployment. Include client registration/search, trainer categories and booking, client duplicate review/update, weekly schedule copy, Marketing navigation, role restrictions, shared components, guide and developer exports. Preserve public history through a release branch and regular merge; no force push. Exclude internal .openai/hosting.json. All 12 domain/UI tests, handoff and production build passed before release; final handoff/UI/build checks passed again. Club systems/APIs and the Sites mirror are not used. Future commit/push again requires a new direct request.
+
+
+## Client booking and trainer categories - local, 15 November 2026
+
+Validation: all 12 domain/UI checks, handoff verification, TypeScript/build and git diff --check passed. Registration/staff/UI/handoff were repeated after final layout changes. Browser verified group sale/return, mandatory booking, category-specific senior tariff purchase and visit, child trainer supervision, conflict rejection, shared booking from the profile, real prebooking rows and no repeated client search after success. Four mobile themes at 390x844 have no page overflow, 44px fields and visible pinned 44px submit actions. Guide example and Escape work; no console errors. QA data existed only in owned temporary tabs, now closed; viewport reset. Evidence: /private/tmp/astron-personal-booking-20261115.png and /private/tmp/astron-visit-list-20261115.png. Local only, no commit/push.
+
+
+Кнопка «Записать» в карточке и регистрации открывает общий `ClientBookingDialog`. Групповые: ближайшие семь дней, число свободных мест, запись или резерв, защита от повторов и пересечений. Персональные: закреплённый тренер, дата и время, зал, свободные варианты; первая запись явно создаёт закрепление. Запись не списывает посещение.
+
+Администратор может создать персональную запись клиента. Общий `canCreateEvent` для него остаётся закрытым: он не добавляет групповые занятия, не переносит, не отменяет и не удаляет тренировки. Эти ограничения проверяются независимо от новой записи. Вкладка «Предзапись» использует тот же список событий и резерв, старые отдельные заглушки убраны.
+
+В окне закреплены заголовок и нижние действия, содержимое владеет одной прокруткой (`modal-scroll-body`). На телефоне поля располагаются одной колонкой. Поля, кнопки и вкладки используют общие компоненты; пример находится в стайлгайде.
+
+Пользователь подтвердил демонстрационные категории и цены:
+
+| Категория | За занятие | Пакет из четырёх |
+| --- | ---: | ---: |
+| Тренер | 1 500 ₽ | 6 000 ₽ |
+| Старший тренер | 2 000 ₽ | 8 000 ₽ |
+| Мастер-тренер | 2 500 ₽ | 10 000 ₽ |
+
+`trainer-categories` хранит названия и базовые цены, `trainer-profiles` — категорию и идентификатор тренера, `personal-clients` — закрепление клиента. В примерах Алина Белова, Максим Ветров и Денис Орлов. Тариф и выданная карта содержат `trainerCategory`; персональная карта и событие сохраняют `trainerId`.
+
+Каталог предлагает категорию закреплённого или явно выбранного тренера. Его имя и категория видны на оплате. Новое закрепление при первой персональной покупке объясняется явно. Из предзаписи передаются `training=personal` и `trainerId`; фильтр затрагивает источник выбранной позиции, а не только видимый список. Групповые тарифы от персональной категории не зависят. Обычный вход в продажу сбрасывает контекст предыдущей предзаписи.
+
+Групповые и персональные карты без записи не списываются: сначала требуется запись. Самостоятельный визит использует только подходящие карты тренажёрного зала. `bookingPassProblem` проверяет направление и категорию тренера, `availableVisitPasses` скрывает неподходящие карты, `usePass` повторяет проверку перед списанием. Границы предзаписи −60/+30 минут и защита от повторного списания сохранены.
+
+`personalBooking` разрешает категорию из действующей базы тренеров. `createPersonalBooking` проверяет роль, закрепление, прошлое время и конфликты тренера, зала и клиента, не меняя входные данные. У ребёнка запись к действующему тренеру заменяет ручное подтверждение сопровождения. Запись через список участников также проверяет закрепление. При редактировании персонального занятия тренером категория проставляется из общего источника.
+
+Все данные пока в памяти фронтенда до обновления страницы. При внедрении разработчик повторяет проверки на сервере и связывает доступность тренера с рабочими сменами. Демонстрационные цены заменяются рабочими. Исходные системы клуба не менялись. Commit/push этой доработки не запрошены.
+
+
+## Регистрация: фото и доступные абонементы — локально, 14 ноября 2026
+
+Регистрация показывает фото, полное ФИО, номер карты и контакты по правам роли. Пластиковые карты заменены общим VisitPassList: компактные строки с нативным одиночным выбором, названием, сроком, остатком и рекомендацией для предзаписи. Недоступные по состоянию, остатку, времени, возрасту или направлению абонементы исключаются через availableVisitPasses; финальная проверка usePass сохранена. При нескольких записях сначала требуется выбрать занятие либо самостоятельный визит; для уже зарегистрированной записи повтор и предложение покупки не показываются.
+
+Без подходящей карты есть явная продажа абонемента. Для предзаписи переход сохраняет клиента и training=group/personal: saleCatalog ограничивает весь каталог только опубликованными совместимыми абонементами, включая комбинированные тарифы, исключая товары и услуги. Направление определяется общим supportsTraining, независимо от цвета/категории. Контекст сохраняется в URL и истории, обычная продажа заново открывается без этого фильтра. После продажи можно вернуться к регистрации и выбрать выданную карту; автоматического списания нет.
+
+После успеха остаются фото, данные и результат с сохранённым названием использованного абонемента; повторного поиска, «Другой клиент» и «Следующий клиент» нет. Администратор использует общий поиск шапки; отдельный начальный поиск регистрации у него также скрыт. Правила, рабочий пример и экспорт разработчику обновляются одновременно. Нового разрешения commit/push нет; всё локально.
+
+
+## Совпадения клиентов и запрет отмены — локально, 14 ноября 2026
+
+Validation: all 12 domain/UI checks, test:handoff and TypeScript/build passed; search/staff/UI/handoff repeated after final fixes. Browser confirmed silent name-only matching, identity+DOB with changed phone, +7/8 phone equality with different name, explicit separate creation, review reset, multiple matches and existing-card links. Updated phone and full name retained id=1001 and all four passes; empty update fields preserve existing data and a short matching name preserves the patronymic. Both forms close after update/navigation. Four mobile themes at 390x844 have one column, 36px avatars, reachable review checkbox and visible footer, with no page overflow. Admin context menu has only Open; details have no Cancel/Delete, templates have no edit/delete. Director retains Cancel. Guide example works; no console errors. QA data existed only in the owned tab, now closed. Evidence: /private/tmp/astron-client-duplicates-20261114.png. Local only, no commit/push.
+
+Последнее уточнение заменяет прежнее разрешение отмены: администратор не удаляет и не отменяет тренировки. Меню, карточка, подтверждение и обработчик используют общий запрет canCancelEvent/canDeleteEvent. Управление записью клиентов сохранено. База шаблонов занятий у администратора только для чтения; generic ResourcePage дополнительно проверяет readonly перед сохранением/удалением.
+
+NewMemberDialog проверяет фамилию/имя вместе с датой рождения и независимо полный нормализованный телефон. Одно ФИО не предупреждает. Есть причина совпадения, ссылка на существующего клиента, отдельная форма обновления ФИО/даты/телефона/почты с явным сохранением и возможность создать отдельного человека после отметки проверки. Изменение полей сбрасывает отметку. Обновление сохраняет id, абонементы, счёт и историю; не объединяет карточки. Известное отчество не теряется при кратком совпадающем вводе, пустые необязательные поля не стирают сведения при подстановке. Существующие демодаты записаны явно без смены видимых значений. Правила, рабочий пример и экспорт разработчику обновлены. Commit/push не запрошены.
+
+## Копирование недели и запрет удаления администратору — локально, 14 ноября 2026
+
+Validation: all 12 domain/UI checks, handoff verification and TypeScript/build passed. New schedule cases cover arbitrary week normalization, immutable plans, cleared participants/reserve/presence, cross-club coach and room conflicts, batch overlaps, repeat protection and invalid/empty inputs. Browser: copied 60 classes; cancel keeps 0; selected week recalculates; same-week and repeat confirmation disabled. Four mobile themes (390x844), desktop wide dialog, last row and fixed actions checked. Admin context menu contains only Open/Cancel; no Delete in details, director retains Delete. Guide example works, no console errors. QA copies reset by reloading the owned tab. Evidence: /private/tmp/astron-week-copy-20261114.png. Local only, no commit/push.
+
+Добавлен общий ScheduleCopyDialog с выбором предыдущей/произвольной исходной недели, диапазонами и предварительным списком готовых/пропущенных занятий с причинами. Назначение — открытая неделя календаря. Управляющие роли копируют групповые занятия всех залов выбранного клуба. Персональные и отменённые занятия исключены; участники, резерв и присутствие очищаются, создаются новые id. Существующие занятия сохраняются, пересечения/дубли/неактуальные настройки пропускаются, проверка повторяется перед применением. Права копирования отдельным canCopySchedule; администратору и тренеру массовое копирование не предоставляется. Администратору явно запрещено удаление через canDeleteEvent во всех точках интерфейса и обработчике; отмена и управление записью сохранены. Правила и рабочий пример обновлены в стайлгайде. Commit/push не запрошены.
+
+
+## Запись, присутствие и Маркетинг — локально, 14 ноября 2026
+
+В окне занятия результат ClientSearch содержит действие «Записать клиента» либо «Добавить в резерв». Повторная запись/резерв недоступны, доменные проверки сохранены, посещение не списывается. Промежуточный блок выбора убран. Фокус поиска внутри рамки с offset −3 px, не обрезается прокручиваемым окном. Отметка присутствия использует общий зелёный Button success с весом 700 и aria-pressed; правило и рабочие примеры внесены в дизайн-систему.
+
+CRM переименована в «Маркетинг» в общей, боковой и мобильной навигации, внутренний маршрут и права сохраняются. Через Google Docs прочитана только вкладка CRM документа «Новое ПО»; сам документ не изменялся. Требования и границы текущей реализации: docs/design/marketing-requirements-2026-11-14.md. Это основа дальнейшей проработки, а не заявление о реализации всех сценариев.
+
+По последнему скриншоту на главной администратора скрыта вся строка с заголовком «Ресепшен» и сменой. Это заменяет прежнее расположение смены у заголовка; сами данные смен и рабочий день остаются. Нового разрешения commit/push нет.
+
+
+Проверка: все 12 предметных/UI-команд, test:handoff, TypeScript/build и git diff --check прошли. Браузер подтвердил запись кнопкой в результате, защиту от повтора (включая Enter), резерв с клавиатуры, зелёную отметку веса 700 и снятие присутствия. Тестовая запись и резерв после проверки сняты. Исправлена также ширина выпадающего списка в мобильном окне: действие целиком внутри панели. Проверены четыре темы при 390×844, настольное окно, «Маркетинг» у маркетолога и главная администратора без прежней строки заголовка/смены. Рабочие примеры в стайлгайде выполняются; ошибок консоли нет. Доказательства: /private/tmp/astron-booking-actions-20261114.png и /private/tmp/astron-reception-clean-20261114.png. Проверка не повторяет все бизнес-сценарии прототипа. Локально, без commit/push.
+
+
+## Поиск администратора ведёт к посещению — локально, 14 ноября 2026
+
+Быстрый поиск администратора по карте, ФИО или телефону сразу открывает регистрацию посещения выбранного клиента, без промежуточной карточки. Сам поиск не списывает посещение: абонемент и условия проверяются, затем требуется явное подтверждение. Повторный выбор другого клиента в шапке сбрасывает форму и подтверждение сопровождения. Карточка остаётся доступной кнопкой на регистрации. Пункт «Клиенты» скрыт из левого и мобильного меню администратора; у остальных ролей он сохраняется. Нового разрешения commit/push нет.
+
+
+Validation: test:search, test:registration, test:ui, test:handoff, TypeScript/build and git diff --check passed. Browser verified card+Enter, name+mouse and phone+Enter lead directly to registration. Switching adult/child updates the selected member and clears supervision acknowledgement; returning to the child disables confirmation again. Card link still works. Administrator sidebar/mobile navigation have no Clients; club director keeps Clients. Mobile search works, new reception heading verified, no console errors. Evidence /private/tmp/astron-admin-search-registration-20261114.png. No visit was registered during QA. Local only, no commit/push.
+
+
 ## Publication requested - 14 November 2026 (light Contrast and demo child)
 
 User requested pushing the pending changes: separate light Contrast and Dark themes, updated handoff/guide and one child client (Matvey Sokolov, 12, card 100007). Browser verified the child card warning, card search, and disabled visit confirmation until supervision is acknowledged. Preserve public history and publish to GitHub Pages; no club systems/APIs or Sites mirror. Future commit/push again requires a new direct request.
