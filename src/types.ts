@@ -3,6 +3,13 @@ export type Scenario = 'default' | 'empty' | 'loading' | 'error';
 export type Device = 'desktop' | 'mobile';
 export type MemberStatus = 'active' | 'expiring' | 'paused';
 export type VisitKind = 'gym' | 'group' | 'personal' | 'online';
+export type RegisterVisit = (
+  member: Member,
+  kind: VisitKind,
+  passName?: string,
+  passId?: string,
+  context?: { at: string; club: string; eventId: string },
+) => void;
 export interface Visit {
   id: string;
   memberId: number;
