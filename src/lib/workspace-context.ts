@@ -1,10 +1,12 @@
 import { createContext } from 'react';
 import type { DemoRecord } from '../data/workspace';
+import type { TrainingVisitRequest, trainingVisit } from './training-visit';
 
 export type WorkspaceState = {
   data: Record<string, DemoRecord[]>;
   put: (collection: string, record: DemoRecord) => void;
   remove: (collection: string, id: string) => void;
+  registerTrainingVisit: (request: TrainingVisitRequest) => ReturnType<typeof trainingVisit>;
   reset: () => void;
   barOpen: boolean;
   setBarOpen: (open: boolean) => void;
