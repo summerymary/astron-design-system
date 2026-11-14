@@ -36,7 +36,7 @@ const styleCompiled = ts
     "from './theme'",
     `from '${'data:text/javascript;base64,' + Buffer.from(compiled).toString('base64')}'`,
   );
-const { visualStyleTokens, readVisualStyle, appearanceSearch } = await import(
+const { visualStyleTokens, readVisualStyle, appearanceSearch, THEME_OPTIONS } = await import(
   `data:text/javascript;base64,${Buffer.from(styleCompiled).toString('base64')}`
 );
 assert.equal(readVisualStyle(''), 'astron');
@@ -104,6 +104,20 @@ for (const preset of THEME_PRESETS) {
   assert.equal(readVisualStyle(url.search), 'vivid');
   assert.equal(url.searchParams.get('theme'), preset.color.slice(1));
 }
+assert.deepEqual(THEME_OPTIONS.map(t => t.id), ['astron', 'graphite', 'contrast', 'dark']);
+assert.equal(THEME_OPTIONS.find(t => t.id === 'dark').style, 'vivid');
+assert.equal(THEME_OPTIONS.find(t => t.id === 'contrast').style, 'contrast');
+assert.equal(readVisualStyle('?style=contrast'), 'contrast');
+const lightContrast = visualStyleTokens(ASTRON_TOKENS, 'contrast');
+assert.equal(lightContrast['--color-canvas'], '#F4F3F0');
+assert.equal(lightContrast['--color-surface'], '#FFFFFF');
+assert.equal(lightContrast['--color-action'], ASTRON_TOKENS['--color-action']);
+assert.equal(lightContrast['--color-line'], '#B8AEA6');
+assert.equal(lightContrast['--color-control-border'], '#746C63');
+assert.ok(contrastRatio(lightContrast['--color-control-border'], '#FFFFFF') >= 3);
+assert.ok(contrastRatio(lightContrast['--color-ink'], lightContrast['--color-canvas']) >= 4.5);
+assert.equal(readVisualStyle(appearanceSearch('#111111', 'contrast')), 'contrast');
+assert.notDeepEqual(lightContrast, visualStyleTokens(ASTRON_TOKENS, 'vivid'));
 console.log(
   'Alternative visual style: contrast, original palette, status semantics and shared URLs passed.',
 );
