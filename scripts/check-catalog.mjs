@@ -98,7 +98,7 @@ const original = structuredClone(data);
 const catalog = saleCatalog(data);
 assert.equal(saleSections.length, 5);
 assert.equal(new Set(catalog.map((item) => item.record.id)).size, catalog.length);
-assert.equal(catalog.filter((item) => item.sectionId === 'personal').length, 1);
+assert.equal(catalog.filter((item) => item.sectionId === 'personal').length, 3);
 assert.equal(catalog.filter((item) => item.sectionId === 'corporate').length, 1);
 assert.equal(catalog.filter((item) => item.sectionId === 'exceptions').length, 2);
 assert.equal(searchSaleCatalog(catalog, 'ЖЕЛЕЗНАЯ', null).length, 2);
@@ -160,4 +160,69 @@ assert.equal(
 assert.deepEqual(data, original, 'Catalog browsing and search must not change source records');
 console.log(
   'Sale catalog checks passed: section isolation, name search, published/active records and bar exclusion.',
+);
+
+const trainingCatalog = {
+  ...data,
+  plans: [
+    { ...data.plans[0], id: 'group-plan', training: 'Групповые занятия', kindId: 'gym' },
+    {
+      ...data.plans[0],
+      id: 'personal-plan',
+      training: 'Персональные тренировки',
+      kindId: 'personal',
+    },
+    {
+      ...data.plans[0],
+      id: 'combined',
+      training: 'Групповые занятия и персональные тренировки',
+      saleSection: 'corporate',
+    },
+    { ...data.plans[0], id: 'kind-fallback', training: ' ', kindId: 'group' },
+    { ...data.plans[0], id: 'unpublished', training: 'Групповые занятия', status: 'В архиве' },
+    { ...data.plans[0], id: 'gym-only', training: 'Тренажёрный зал', kindId: 'group' },
+  ],
+};
+assert.deepEqual(
+  saleCatalog(trainingCatalog, 'group').map((entry) => entry.record.id),
+  ['group-plan', 'combined', 'kind-fallback'],
+);
+assert.deepEqual(
+  saleCatalog(trainingCatalog, 'personal').map((entry) => entry.record.id),
+  ['personal-plan', 'combined'],
+);
+assert.ok(saleCatalog(trainingCatalog, 'group').every((entry) => entry.type === 'plan'));
+assert.ok(
+  saleCatalog(trainingCatalog).some((entry) => entry.type === 'product'),
+  'An ordinary sale is not permanently restricted by a previous booking',
+);
+assert.equal(
+  searchSaleCatalog(saleCatalog(trainingCatalog, 'group'), '', 'goods-services').length,
+  0,
+);
+console.log(
+  'Booking sale checks passed: only compatible published passes, including combined/corporate tariffs; no products, services or stale hidden selection.',
+);
+for (const [category, amount] of [
+  ['trainer', 6000],
+  ['senior', 8000],
+  ['master', 10000],
+]) {
+  const personalItems = saleCatalog(data, 'personal', category);
+  assert.equal(personalItems.length, 1);
+  assert.equal(personalItems[0].record.trainerCategory, category);
+  assert.equal(Number(personalItems[0].record.price), amount);
+}
+assert.equal(
+  saleCatalog(data, 'personal', null).length,
+  0,
+  'No usable trainer means no personal tariff',
+);
+assert.equal(
+  saleCatalog(data, 'group', 'master').length,
+  saleCatalog(data, 'group').length,
+  'Personal category does not remove group tariffs',
+);
+console.log(
+  'Trainer tariff checks passed: category-specific prices, filtered personal catalog and independent group sales.',
 );

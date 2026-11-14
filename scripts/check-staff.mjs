@@ -16,6 +16,8 @@ const {
   canManageEvent,
   canCreateEvent,
   canCancelEvent,
+  canDeleteEvent,
+  canCopySchedule,
   personalScopeError,
   noteError,
 } = await load('../src/lib/staff-rules.ts');
@@ -136,12 +138,23 @@ const session = data.events.find((e) => e.id === 'personal-demo-1');
 assert.ok(canManageEvent(session, trainer));
 assert.equal(canManageEvent(session, admin), false);
 assert.equal(canCreateEvent(admin), false);
-assert.ok(canCancelEvent(session, admin));
+assert.equal(canDeleteEvent(session, admin), false);
+assert.equal(canCopySchedule(admin), false);
+assert.equal(canCopySchedule(trainer), false);
+assert.equal(canCopySchedule(bartender), false);
+assert.equal(canCancelEvent(session, admin), false);
 assert.equal(canCancelEvent({ ...session, status: 'Отменено' }, admin), false);
-assert.match(personalScopeError(session, admin, data['personal-clients']), /не добавляет/);
+assert.equal(
+  personalScopeError(session, admin, data['personal-clients']),
+  null,
+  'Reception can create an assigned personal appointment, while general creation stays forbidden',
+);
+assert.ok(personalScopeError({ ...session, kind: 'group' }, admin, data['personal-clients']));
 for (const role of managementRoles) {
   const manager = { ...admin, role };
   assert.ok(canManageEvent(session, manager));
+  assert.ok(canDeleteEvent(session, manager));
+  assert.ok(canCopySchedule(manager));
   assert.equal(personalScopeError(session, manager, data['personal-clients']), null);
 }
 assert.equal(canManageEvent(session, bartender), false);
