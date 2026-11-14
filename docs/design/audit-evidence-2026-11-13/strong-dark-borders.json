@@ -1,0 +1,1554 @@
+{
+  "date": "2026-11-13",
+  "theme": "contrast",
+  "canvas": "#202020",
+  "surface": "#2A2A2A",
+  "panelBorder": "#9B7A84",
+  "controlBorder": "#C38B9A",
+  "contourInset": "2px",
+  "selectionInset": "3px",
+  "activeTab": "4px",
+  "desktop": [
+    {
+      "target": {
+        "role": "administrator",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=desktop&state=default&role=administrator",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "role": "trainer",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=desktop&state=default&role=trainer",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "role": "bartender",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=desktop&state=default&role=bartender",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "role": "club-director",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=desktop&state=default&role=club-director",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "role": "network-director",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=desktop&state=default&role=network-director",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "role": "marketer",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=desktop&state=default&role=marketer",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "role": "fitness-director",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=desktop&state=default&role=fitness-director",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "role": "operations-director",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=desktop&state=default&role=operations-director",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "role": "sysadmin",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=desktop&state=default&role=sysadmin",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "role": "accountant",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=desktop&state=default&role=accountant",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "schedule",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=schedule",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "trainer-clients",
+        "role": "trainer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=trainer&section=trainer-clients",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "bar-catalog",
+        "role": "bartender"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=bartender&section=bar-catalog",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "bar-sales",
+        "role": "bartender"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=bartender&section=bar-sales",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "bar-inventory",
+        "role": "bartender"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=desktop&state=default&role=bartender",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "registration",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=administrator&section=registration",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "services",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=administrator&section=services",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "members",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=members",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "products",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=administrator&section=products",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "cash",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=administrator&section=cash",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "crm",
+        "role": "marketer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=marketer&section=crm",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "bar",
+        "role": "bartender"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=bartender&section=bar",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "requests",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=administrator&section=requests",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "messages",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=administrator&section=messages",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "reviews",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=reviews",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "memberships",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=administrator&section=memberships",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "calls",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=administrator&section=calls",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "notifications",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=administrator&section=notifications",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "directories",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=directories",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "statistics",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=statistics",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "settings",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=settings",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "employees",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=employees",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "positions",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=positions",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "absences",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=absences",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "payroll",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=payroll",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "clubs",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=clubs",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "rooms",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=rooms",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "receptions",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=receptions",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "training-templates",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=training-templates",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "training-groups",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=training-groups",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "schedule-calendar",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=schedule-calendar",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "service-settings",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=service-settings",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "bar-categories",
+        "role": "bartender"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=desktop&state=default&role=bartender",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "bar-collections",
+        "role": "bartender"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=desktop&state=default&role=bartender",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "inventory",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=inventory",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "cameras",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=cameras",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "rbac",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=rbac",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "security",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=security",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "event-logs",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=sysadmin&section=event-logs",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "leads",
+        "role": "marketer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=marketer&section=leads",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "segments",
+        "role": "marketer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=marketer&section=segments",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "pipelines",
+        "role": "marketer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=marketer&section=pipelines",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "retention",
+        "role": "marketer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=marketer&section=retention",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "external-messages",
+        "role": "marketer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=marketer&section=external-messages",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "schedule",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=administrator&section=schedule",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "schedule",
+        "role": "trainer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=trainer&section=schedule",
+        "width": 1280
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "schedule",
+        "role": "club-director"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=desktop&state=default&role=club-director&section=schedule",
+        "width": 1280
+      }
+    }
+  ],
+  "mobile": [
+    {
+      "target": {
+        "role": "administrator",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=mobile&state=default&role=administrator",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "role": "trainer",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=mobile&state=default&role=trainer",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "role": "bartender",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=mobile&state=default&role=bartender",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "role": "club-director",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=mobile&state=default&role=club-director",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "role": "network-director",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=mobile&state=default&role=network-director",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "role": "marketer",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=mobile&state=default&role=marketer",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "role": "fitness-director",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=mobile&state=default&role=fitness-director",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "role": "operations-director",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=mobile&state=default&role=operations-director",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "role": "sysadmin",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=mobile&state=default&role=sysadmin",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "role": "accountant",
+        "path": "overview"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=mobile&state=default&role=accountant",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "schedule",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=schedule",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "trainer-clients",
+        "role": "trainer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=trainer&section=trainer-clients",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "bar-catalog",
+        "role": "bartender"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=bartender&section=bar-catalog",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "bar-sales",
+        "role": "bartender"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=bartender&section=bar-sales",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "bar-inventory",
+        "role": "bartender"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=mobile&state=default&role=bartender",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "registration",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=administrator&section=registration",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "services",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=administrator&section=services",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "members",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=members",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "products",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=administrator&section=products",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "cash",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=administrator&section=cash",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "crm",
+        "role": "marketer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=marketer&section=crm",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "bar",
+        "role": "bartender"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=bartender&section=bar",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "requests",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=administrator&section=requests",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "messages",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=administrator&section=messages",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "reviews",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=reviews",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "memberships",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=administrator&section=memberships",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "calls",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=administrator&section=calls",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "notifications",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=administrator&section=notifications",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "directories",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=directories",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "statistics",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=statistics",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "settings",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=settings",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "employees",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=employees",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "positions",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=positions",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "absences",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=absences",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "payroll",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=payroll",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "clubs",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=clubs",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "rooms",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=rooms",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "receptions",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=receptions",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "training-templates",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=training-templates",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "training-groups",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=training-groups",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "schedule-calendar",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=schedule-calendar",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "service-settings",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=service-settings",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "bar-categories",
+        "role": "bartender"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=mobile&state=default&role=bartender",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "bar-collections",
+        "role": "bartender"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/overview?device=mobile&state=default&role=bartender",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "inventory",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=inventory",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "cameras",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=cameras",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "rbac",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=rbac",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "security",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=security",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "event-logs",
+        "role": "sysadmin"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=sysadmin&section=event-logs",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "leads",
+        "role": "marketer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=marketer&section=leads",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "segments",
+        "role": "marketer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=marketer&section=segments",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "pipelines",
+        "role": "marketer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=marketer&section=pipelines",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "retention",
+        "role": "marketer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=marketer&section=retention",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "external-messages",
+        "role": "marketer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=marketer&section=external-messages",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "schedule",
+        "role": "administrator"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=administrator&section=schedule",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "schedule",
+        "role": "trainer"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=trainer&section=schedule",
+        "width": 390
+      }
+    },
+    {
+      "target": {
+        "path": "admin-section",
+        "section": "schedule",
+        "role": "club-director"
+      },
+      "result": {
+        "bad": [],
+        "overflow": false,
+        "path": "#/admin-section?device=mobile&state=default&role=club-director&section=schedule",
+        "width": 390
+      }
+    }
+  ],
+  "guide": {
+    "bad": [],
+    "overflow": false,
+    "path": "",
+    "width": 1280
+  },
+  "geometryMatchesAstron": true,
+  "geometry": {
+    "contrast": {
+      ".app-topbar": {
+        "height": 113,
+        "width": 1040,
+        "x": 240,
+        "y": 64
+      },
+      ".client-identity": {
+        "height": 402.5,
+        "width": 992,
+        "x": 264,
+        "y": 245
+      },
+      ".client-identity .button-primary": {
+        "height": 44,
+        "width": 222.4453125,
+        "x": 589,
+        "y": 582.5
+      },
+      ".client-photo": {
+        "height": 360.5,
+        "width": 280,
+        "x": 285,
+        "y": 266
+      },
+      ".sidebar": {
+        "height": 656,
+        "width": 240,
+        "x": 0,
+        "y": 64
+      }
+    },
+    "astron": {
+      ".app-topbar": {
+        "height": 113,
+        "width": 1040,
+        "x": 240,
+        "y": 64
+      },
+      ".client-identity": {
+        "height": 402.5,
+        "width": 992,
+        "x": 264,
+        "y": 245
+      },
+      ".client-identity .button-primary": {
+        "height": 44,
+        "width": 222.4453125,
+        "x": 589,
+        "y": 582.5
+      },
+      ".client-photo": {
+        "height": 360.5,
+        "width": 280,
+        "x": 285,
+        "y": 266
+      },
+      ".sidebar": {
+        "height": 656,
+        "width": 240,
+        "x": 0,
+        "y": 64
+      }
+    }
+  },
+  "consoleErrors": [],
+  "screenshot": "/private/tmp/astron-dark-strong-borders-20261113.png",
+  "scope": "Visible text contrast and page overflow; redirects retained. Not a full repeat of business scenarios.",
+  "published": false
+}
