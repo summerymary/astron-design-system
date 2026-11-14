@@ -5,7 +5,7 @@ export function AdminOverview() {
     <div className="reception-focus">
       <section className="reception-ready" aria-label="Работа с клиентом">
         <Search size={32} aria-hidden="true" />
-        <h2>Откройте карточку клиента</h2>
+        <h2>Найдите клиента для посещения</h2>
         <p>
           Введите или отсканируйте карту в поиске выше.
           <br />

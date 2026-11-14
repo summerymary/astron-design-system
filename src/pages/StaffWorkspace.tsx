@@ -1,3 +1,4 @@
+import { personalTrainers } from '../lib/personal-training';
 import { clientName } from '../lib/client-display';
 import { nextDemoNow } from '../lib/demo-clock';
 import { Select } from '../components/Select';
@@ -48,6 +49,8 @@ export function personalDraft(
     intensity: 'Средняя',
     name: 'Персональная тренировка',
     trainerId: user.id,
+    trainerCategory:
+      personalTrainers(data).find((trainer) => trainer.id === user.id)?.categoryId || '',
     trainer: user.name,
     club,
     room: room?.name || '',
@@ -109,6 +112,8 @@ export function PersonalTrainingForm({
             kind: 'personal',
             name: 'Персональная тренировка',
             trainerId: ownerId,
+            trainerCategory:
+              personalTrainers(data).find((trainer) => trainer.id === ownerId)?.categoryId || '',
             trainer: initial.trainer || user.name,
             format: 'Персональное',
             capacity: '1',
@@ -591,7 +596,7 @@ export function TrainerClients({
                   />
                 </label>
                 <div className="ws-actions">
-              <Button type="submit" disabled={!draft.text.trim()}>
+                  <Button type="submit" disabled={!draft.text.trim()}>
                     <NotebookPen size={15} />
                     {draft.editingId ? 'Сохранить изменения' : 'Сохранить заметку'}
                   </Button>

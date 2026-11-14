@@ -1,3 +1,6 @@
+import { supportsTraining } from '../lib/training-kind';
+import { clientTrainers, personalTrainers } from '../lib/personal-training';
+import type { TrainingKind } from '../lib/training-kind';
 import { accessWindowLabel } from '../lib/registration';
 import { clientName, hiddenPhone } from '../lib/client-display';
 import { demoStamp, nextDemoNow } from '../lib/demo-clock';
@@ -31,6 +34,8 @@ export function SaleWorkspace({
   allowRegistration = true,
   initialSection = null,
   hidePhones = false,
+  training = null,
+  initialTrainerId = null,
 }: {
   members: Member[];
   initialMember: Member | null;
@@ -40,6 +45,8 @@ export function SaleWorkspace({
   allowRegistration?: boolean;
   initialSection?: SaleSectionId | null;
   hidePhones?: boolean;
+  training?: TrainingKind | null;
+  initialTrainerId?: string | null;
 }) {
   const { data, put } = useWorkspace();
   const saleRoot = useRef<HTMLDivElement>(null);
@@ -51,6 +58,7 @@ export function SaleWorkspace({
   const [memberId, setMemberId] = useState(String(initialMember?.id || ''));
   const [sectionId, setSectionId] = useState<SaleSectionId | null>(initialSection);
   const [query, setQuery] = useState('');
+  const [trainerId, setTrainerId] = useState(initialTrainerId || '');
   const [itemId, setItemId] = useState('');
   const [quantity, setQuantity] = useState('1');
   const [discount, setDiscount] = useState('0');
@@ -70,10 +78,17 @@ export function SaleWorkspace({
     return () => cancelAnimationFrame(frame);
   }, [saleStep, itemId, method]);
   const member = members.find((member) => String(member.id) === memberId);
-  const catalog = saleCatalog(data);
+  const assignedTrainers = member ? clientTrainers(data, member.id) : [];
+  const trainers = assignedTrainers.length ? assignedTrainers : personalTrainers(data);
+  const personalTrainer = trainers.find((trainer) => trainer.id === trainerId) || trainers[0];
+  const catalog = saleCatalog(data, training, personalTrainer?.categoryId || null);
   const selected = catalog.find((entry) => entry.record.id === itemId);
   const item = selected?.record;
   const isPlan = selected?.type === 'plan';
+  const isPersonalPlan =
+    isPlan &&
+    item &&
+    supportsTraining({ training: item.training, kindId: item.kindId }, 'personal');
   const category =
     selected?.type === 'product'
       ? 'Товары'
@@ -103,6 +118,11 @@ export function SaleWorkspace({
   const confirm = () => {
     if (!member || !item || done || calculationError) return;
     try {
+      if (
+        isPersonalPlan &&
+        (!personalTrainer || item.trainerCategory !== personalTrainer.categoryId)
+      )
+        throw new Error('Выберите персональный абонемент категории закреплённого тренера.');
       const payment = paymentPlan(
         pricing.total,
         method,
@@ -159,8 +179,28 @@ export function SaleWorkspace({
           date: TODAY,
           status: 'Не погашено',
         });
-      if (isPlan) put('issued-plans', { ...item, id: demoId('issued'), memberId, issued: TODAY });
-      else if (category === 'Товары')
+      if (isPlan) {
+        put('issued-plans', {
+          ...item,
+          id: demoId('issued'),
+          memberId,
+          issued: TODAY,
+          ...(isPersonalPlan && personalTrainer
+            ? { trainerId: personalTrainer.id, trainerCategory: personalTrainer.categoryId }
+            : {}),
+        });
+        if (
+          isPersonalPlan &&
+          personalTrainer &&
+          !assignedTrainers.some((trainer) => trainer.id === personalTrainer.id)
+        )
+          put('personal-clients', {
+            id: `${personalTrainer.id}:${memberId}`,
+            memberId,
+            trainerId: personalTrainer.id,
+            goal: '',
+          });
+      } else if (category === 'Товары')
         put('retail-products', { ...item, stock: String(Number(item.stock) - Number(quantity)) });
       else put('issued-services', { ...item, id: demoId('service'), memberId, issued: TODAY });
       if (printReceipt) {
@@ -312,14 +352,65 @@ export function SaleWorkspace({
           <section className="panel ws-panel sale-catalog" aria-label="Каталог продажи">
             <div className="ws-panel-heading">
               <div>
-                <h2>2. {currentSection?.name || 'Выбор покупки'}</h2>
+                <h2>
+                  2.{' '}
+                  {training
+                    ? training === 'personal'
+                      ? 'Абонементы на персональные тренировки'
+                      : 'Абонементы на групповые занятия'
+                    : currentSection?.name || 'Выбор покупки'}
+                </h2>
                 <p>
-                  {currentSection?.description ||
+                  {(training
+                    ? 'Показаны только абонементы, которые подходят для выбранной предзаписи.'
+                    : currentSection?.description) ||
                     'Выберите раздел или найдите покупку по названию.'}
                 </p>
               </div>
             </div>
             <div className="ws-panel-body ws-stack">
+              {(training === 'personal' ||
+                sectionId === 'personal' ||
+                (query.trim() &&
+                  visibleItems.some((entry) =>
+                    supportsTraining(
+                      { training: entry.record.training, kindId: entry.record.kindId },
+                      'personal',
+                    ),
+                  ))) && (
+                <>
+                  <label className="form-field">
+                    <span>Персональный тренер</span>
+                    <Select
+                      value={personalTrainer?.id || ''}
+                      onChange={(event) => {
+                        setTrainerId(event.target.value);
+                        setItemId('');
+                        clearResult();
+                      }}
+                    >
+                      {!trainers.length && <option value="">Нет действующих тренеров</option>}
+                      {trainers.map((trainer) => (
+                        <option key={trainer.id} value={trainer.id}>
+                          {trainer.name} · {trainer.category}
+                        </option>
+                      ))}
+                    </Select>
+                  </label>
+                  {personalTrainer && (
+                    <Notice>
+                      {personalTrainer.category} · {money(personalTrainer.lessonPrice)} за занятие.
+                      Демо-тариф.
+                      {!assignedTrainers.length && (
+                        <p>
+                          При покупке персонального абонемента клиент будет закреплён за выбранным
+                          тренером.
+                        </p>
+                      )}
+                    </Notice>
+                  )}
+                </>
+              )}
               {sectionId && (
                 <div className="ws-actions">
                   <Button variant="ghost" onClick={() => openSection(null)}>
@@ -338,7 +429,9 @@ export function SaleWorkspace({
                     placeholder={
                       sectionId
                         ? 'Название в этом разделе'
-                        : 'Абонемент, тренировка, товар или услуга'
+                        : training
+                          ? 'Название подходящего абонемента'
+                          : 'Абонемент, тренировка, товар или услуга'
                     }
                     onChange={(event) => setQuery(event.target.value)}
                   />
@@ -354,7 +447,7 @@ export function SaleWorkspace({
                   )}
                 </div>
               </div>
-              {!sectionId && !query.trim() ? (
+              {!training && !sectionId && !query.trim() ? (
                 <div className="sale-section-grid">
                   {saleSections.map((section) => {
                     const count = catalog.filter((entry) => entry.sectionId === section.id).length;
@@ -442,6 +535,11 @@ export function SaleWorkspace({
                           {memberCards[member.id] || String(member.id + 99000)}
                         </span>
                         <span>За единицу: {money(item.price)}</span>
+                        {isPersonalPlan && personalTrainer && (
+                          <span>
+                            {personalTrainer.name} · {personalTrainer.category}
+                          </span>
+                        )}
                       </div>
                       <details className="checkout-contact-details">
                         <summary>Контакты и описание покупки</summary>

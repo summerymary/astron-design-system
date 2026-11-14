@@ -19,6 +19,7 @@ import {
 } from './WorkspaceOperations';
 import { CRMWorkspace, NotificationsWorkspace } from './WorkspaceCRM';
 import { MessagesWorkspace } from './MessengerWorkspace';
+import type { TrainingKind } from '../lib/training-kind';
 import { roles } from '../data/roles';
 import {
   CamerasWorkspace,
@@ -33,6 +34,8 @@ import {
 export function AdminSection({
   section,
   recordId,
+  saleTraining,
+  saleTrainerId,
   onRecord,
   member,
   members,
@@ -47,6 +50,8 @@ export function AdminSection({
 }: {
   section: AdminSectionId;
   recordId: string | null;
+  saleTraining: TrainingKind | null;
+  saleTrainerId: string | null;
   onRecord: (id: string | null) => void;
   member: Member | null;
   members: Member[];
@@ -85,7 +90,11 @@ export function AdminSection({
       <ResourcePage
         key={section}
         collection={section}
-        config={resources[section]}
+        config={
+          user.role === 'administrator' && section === 'training-templates'
+            ? { ...resources[section], readonly: true }
+            : resources[section]
+        }
         navigate={navigate}
         recordId={recordId}
         onRecord={onRecord}
@@ -108,6 +117,9 @@ export function AdminSection({
   if (section === 'registration')
     return (
       <RegistrationWorkspace
+        key={member?.id ?? 'no-client'}
+        user={user}
+        hasHeaderSearch={user.role === 'administrator'}
         members={members}
         initialMember={member}
         clubName={clubName}
@@ -120,6 +132,9 @@ export function AdminSection({
   if (section === 'services')
     return (
       <SaleWorkspace
+        key={`${member?.id || ''}:${saleTraining || ''}:${saleTrainerId || ''}`}
+        initialTrainerId={saleTrainerId}
+        training={saleTraining}
         members={members}
         initialMember={member}
         navigate={navigate}
