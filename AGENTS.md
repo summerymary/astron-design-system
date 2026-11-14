@@ -1,5 +1,23 @@
 # Источник редизайна и ограничения
 
+## Publication requested - 14 November 2026 (light Contrast and demo child)
+
+User requested pushing the pending changes: separate light Contrast and Dark themes, updated handoff/guide and one child client (Matvey Sokolov, 12, card 100007). Browser verified the child card warning, card search, and disabled visit confirmation until supervision is acknowledged. Preserve public history and publish to GitHub Pages; no club systems/APIs or Sites mirror. Future commit/push again requires a new direct request.
+
+
+## Demo child - local, 14 November 2026
+
+Added one fictional client: Sokolov Matvey Dmitrievich, id 1007, card 100007, birth date 2014-05-18 (12 in the demo date). Personal training pass; no invented portrait or automatic booking. Existing under-14 card warning and registration supervision confirmation apply unchanged. Search, list and reset use the common initialMembers fixture. No commit/push requested.
+
+
+## Светлый Контраст возвращён отдельно — локально, 14 ноября 2026
+
+Контраст и Тёмная теперь отдельные темы. Контраст восстановлен по светлому варианту: фон #F4F3F0, белые панели, палитра Астрона, рамки панелей #B8AEA6 и полей #746C63, визуальная толщина 2 px. Его URL ?style=contrast и внутренний id contrast. Тёмная сохраняет палитру и усиленные рамки опубликованной версии: ?style=vivid, id dark. Прежние ссылки ?style=vivid продолжают открывать Тёмную. Обе темы сохраняют геометрию, данные и страницу; цвет бренда не подменяет их фиксированные палитры. Нативные поля используют light для Контраста и dark для Тёмной. Обновлены общий компонент выбора темы, стайлгайд, реестр, проверки и экспорт. Нового разрешения commit/push нет.
+
+
+Validation: theme/UI checks, handoff verification, TypeScript and production build passed. Browser confirmed four separate options, light Contrast -> Dark -> Contrast switching, preserved client URL and 280 px photo, independent light/dark colour-scheme, reload persistence, mobile view without page overflow, four themes and correct light description/HEX in the guide. No console errors. Local only; no commit/push.
+
+
 ## Dark theme named - 14 November 2026
 
 The charcoal/white/burgundy variant is now named "Тёмная" in the shared theme selector and guide. Its dark colours and stronger borders are unchanged. Internal contrast id and ?style=vivid stay compatible. Included in the already requested GitHub publication.
