@@ -14,6 +14,7 @@ export const memberCards: Record<number, string> = {
   1004: '100004',
   1005: '100005',
   1006: '100006',
+  1007: '100007',
 };
 export const memberDemographics: Record<number, { gender: 'male' | 'female'; age: number }> = {
   1001: { gender: 'female', age: 28 },

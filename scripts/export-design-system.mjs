@@ -33,29 +33,17 @@ const base = Object.fromEntries(
     m[2].trim(),
   ]),
 );
-const contrastCSS =
-  (await read('src/styles/components.css')).match(
-    /:root\[data-visual-style='vivid'\]\s*\{([^}]+)\}/,
-  )?.[1] || '';
-const contrastRoot = Object.fromEntries(
-  [...contrastCSS.matchAll(/(--[\w-]+):\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]),
-);
+const componentsCSS = await read('src/styles/components.css');
 const themes = Object.fromEntries(
-  THEME_OPTIONS.map((option) => [
-    option.id,
-    {
+  THEME_OPTIONS.map((option) => {
+    const rootCSS = componentsCSS.match(new RegExp(":root\\[data-visual-style='" + option.style + "'\\]\\s*\\{([^}]+)\\}"))?.[1] || '';
+    const rootTokens = Object.fromEntries([...rootCSS.matchAll(/(--[\w-]+):\s*([^;]+);/g)].map(m => [m[1], m[2].trim()]));
+    return [option.id, {
       name: option.name,
-      colorScheme:
-        option.style === 'vivid'
-          ? contrastCSS.match(/\bcolor-scheme:\s*(\w+)/)?.[1] || 'light'
-          : 'light',
-      tokens: {
-        ...base,
-        ...visualStyleTokens(generatePalette(option.color).tokens, option.style),
-        ...(option.style === 'vivid' ? contrastRoot : {}),
-      },
-    },
-  ]),
+      colorScheme: rootCSS.match(/\bcolor-scheme:\s*(\w+)/)?.[1] || 'light',
+      tokens: { ...base, ...visualStyleTokens(generatePalette(option.color).tokens, option.style), ...rootTokens },
+    }];
+  }),
 );
 const contextual = [];
 for (const folder of ['src/styles', 'src/components']) {

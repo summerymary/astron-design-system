@@ -1,17 +1,20 @@
+import { ASTRON_TOKENS } from './theme';
 import type { ThemeTokens } from './theme';
 
-export type VisualStyle = 'astron' | 'vivid';
+export type VisualStyle = 'astron' | 'vivid' | 'contrast';
 
 export const THEME_OPTIONS = [
   { id: 'astron', name: 'Астрон', color: '#8A332C', style: 'astron' },
   { id: 'graphite', name: 'Графит', color: '#111111', style: 'astron' },
-  { id: 'contrast', name: 'Тёмная', color: '#202020', style: 'vivid' },
+  { id: 'contrast', name: 'Контраст', color: '#8A332C', style: 'contrast' },
+  { id: 'dark', name: 'Тёмная', color: '#202020', style: 'vivid' },
 ] as const;
 export type ThemeId = (typeof THEME_OPTIONS)[number]['id'];
 
 export function readVisualStyle(search: string): VisualStyle {
   // The retired Minimal/Spectrum routes return to Astron; its source is archived separately.
-  return new URLSearchParams(search).get('style') === 'vivid' ? 'vivid' : 'astron';
+  const style = new URLSearchParams(search).get('style');
+  return style === 'vivid' || style === 'contrast' ? style : 'astron';
 }
 
 // Charcoal surfaces, white text and burgundy controls with stronger contours. Semantic hues and component geometry remain shared with Astron.
@@ -54,12 +57,19 @@ export const VIVID_OVERRIDES = {
   '--color-skeleton-highlight': '#565656',
 } satisfies ThemeTokens;
 
+export const CONTRAST_OVERRIDES = {
+  ...ASTRON_TOKENS,
+  '--color-canvas': '#F4F3F0',
+  '--color-line': '#B8AEA6',
+  '--color-control-border': '#746C63',
+} satisfies ThemeTokens;
+
 export function visualStyleTokens(tokens: ThemeTokens, style: VisualStyle): ThemeTokens {
-  return style === 'vivid' ? { ...tokens, ...VIVID_OVERRIDES } : tokens;
+  return style === 'vivid' ? { ...tokens, ...VIVID_OVERRIDES } : style === 'contrast' ? { ...tokens, ...CONTRAST_OVERRIDES } : tokens;
 }
 
 export function appearanceSearch(primary: string, style: VisualStyle) {
   const params = new URLSearchParams({ theme: primary.slice(1) });
-  if (style === 'vivid') params.set('style', 'vivid');
+  if (style !== 'astron') params.set('style', style);
   return `?${params}`;
 }
