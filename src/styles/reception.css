@@ -317,17 +317,6 @@
     width: 100%;
     max-width: none;
   }
-  .schedule-book-selection {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding-top: 16px;
-  }
-  .schedule-book-selection strong {
-    flex: 1;
-    min-width: 180px;
-  }
   .schedule-roster-list {
     margin-top: 16px;
   }
@@ -361,11 +350,6 @@
     color: var(--color-ink);
     opacity: 1;
     cursor: default;
-  }
-  .schedule-roster-row [aria-pressed='true'] {
-    color: var(--color-success);
-    border-color: var(--color-success);
-    background: var(--color-success-soft);
   }
   .calendar-event.is-readonly {
     cursor: pointer;

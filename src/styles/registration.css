@@ -1,0 +1,50 @@
+@layer pages {
+  .registration-client-identity {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+  }
+  .registration-client-identity > .avatar {
+    flex: 0 0 88px;
+    width: 88px;
+    height: 88px;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .registration-client-identity > div {
+    min-width: 0;
+  }
+  .registration-client-identity h2 {
+    overflow-wrap: anywhere;
+  }
+  .registration-client-identity p {
+    margin-top: 4px;
+  }
+  .registration-no-pass {
+    display: grid;
+    justify-items: start;
+    gap: 12px;
+  }
+  .registration-no-pass p {
+    color: var(--color-muted);
+  }
+  .registration-no-pass .button {
+    max-width: 100%;
+    white-space: normal;
+    height: auto;
+    min-height: 44px;
+    text-align: left;
+  }
+  @media (max-width: 600px) {
+    .registration-client-identity {
+      align-items: start;
+      gap: 12px;
+    }
+    .registration-client-identity > .avatar {
+      flex-basis: 64px;
+      width: 64px;
+      height: 64px;
+    }
+  }
+}
