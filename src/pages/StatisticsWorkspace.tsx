@@ -6,7 +6,8 @@ import { Back, DataTable, Empty, Notice, Stats } from '../components/WorkspaceUI
 import { Button } from '../components/ui';
 import { Select } from '../components/Select';
 import { ReportCatalogue } from '../components/ReportCatalogue';
-import { ReportBars } from '../components/ReportBars';
+import { ReportChart } from '../components/ReportChart';
+import { statisticsCharts } from '../lib/statistics-charts';
 import { statisticsReports, reportTitle, reportPending } from '../data/statistics';
 import { TODAY, prettyDate, money } from '../data/workspace';
 import { getClientProfile } from '../data/clientProfile';
@@ -92,35 +93,7 @@ function StatisticsReport({
     hidePhones,
     at: `${TODAY}T14:35`,
   });
-  const chartBlock = output.blocks[0];
-  const chartKey =
-    id === 'gtrener_rating'
-      ? 'occupancy'
-      : id === 'ptrener_rating_all'
-        ? 'hours'
-        : report.group === 'sales'
-          ? 'amount'
-          : id === 'unique_visits'
-            ? 'clients'
-            : 'count';
-  const chartColumn = chartBlock?.columns.find((c) => c.key === chartKey);
-  const chartRows =
-    chartColumn &&
-    !chartBlock.memberLinks &&
-    chartBlock.rows.every((r) => r[chartKey] !== '' && Number(r[chartKey]) >= 0)
-      ? chartBlock.rows
-          .slice(0, 12)
-          .map((r) => ({
-            id: r.id,
-            name: r.month ? `${r.month} · ${r.name}` : r.name,
-            value: Number(r[chartKey]),
-            label:
-              chartColumn.format === 'money'
-                ? money(Number(r[chartKey]) / 100)
-                : `${r[chartKey]}${chartColumn.format === 'percent' ? '%' : ''}`,
-          }))
-          .filter((r) => Number.isFinite(r.value) && r.value >= 0)
-      : [];
+  const charts = statisticsCharts(id, output, filters);
   const update = (key: keyof ReportFilters, value: string) =>
     setFilters((f) => ({ ...f, [key]: value, ...(key === 'to' && asOf ? { from: value } : {}) }));
   const field = (key: keyof ReportFilters, label: string, type = 'date') => (
@@ -306,6 +279,8 @@ function StatisticsReport({
                 {flag('onlyNoPurchase', 'Ничего не купил')}
               </>
             )}
+            {id === 'clients_sell_gender_age' &&
+              flag('onlyPersonal', 'Только персональные тренировки')}
             {id === 'clients_segmetation' &&
               choice('segment', 'Сегмент', [
                 { id: 'all', name: 'Все сегменты' },
@@ -407,6 +382,7 @@ function StatisticsReport({
               ])}
             {['timetoabstat', 'clients_gender_age'].includes(id) && (
               <>
+                {id === 'clients_gender_age' && flag('uniqueOnly', 'Только уникальные клиенты')}
                 {choice('gender', 'Пол', [
                   { id: 'all', name: 'Любой' },
                   { id: 'Женский', name: 'Женский' },
@@ -441,17 +417,9 @@ function StatisticsReport({
       ) : (
         <>
           <Stats items={output.metrics} />
-          {chartRows.length > 0 && (
-            <section className="panel ws-panel-body ws-stack">
-              <h3>
-                {chartBlock.title} · {chartColumn!.label.toLocaleLowerCase('ru')}
-              </h3>
-              <ReportBars rows={chartRows} unit={chartColumn!.label} />
-              {chartBlock.rows.length > 12 && (
-                <p className="ws-muted">Первые 12 групп; полный результат в таблице ниже.</p>
-              )}
-            </section>
-          )}
+          {charts.map((chart) => (
+            <ReportChart key={chart.id} chart={chart} />
+          ))}
           {output.blocks.map((block, index) => (
             <section className="panel ws-panel" key={`${id}-${index}`}>
               <div className="ws-panel-heading">
