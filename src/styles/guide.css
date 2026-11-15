@@ -124,6 +124,12 @@
 }
 
 @layer pages {
+  @media (max-width: 760px) {
+    .guide-appearance-actions {
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+  }
   .ui-search-examples {
     overflow: visible;
   }
