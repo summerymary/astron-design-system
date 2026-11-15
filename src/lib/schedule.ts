@@ -122,6 +122,46 @@ export function calendarBounds(events: DemoRecord[]): { start: number; end: numb
   return { start, end };
 }
 
+/** One shared time axis across visible columns; never compress an occupied hour. */
+export function calendarTimeline(events: DemoRecord[], hideEmptyHours = false) {
+  const bounds = calendarBounds(events);
+  const occupied = new Set<number>();
+  if (hideEmptyHours)
+    for (const event of events) {
+      const from = minutes(event.time),
+        to = from + Number(event.duration);
+      if (!Number.isFinite(from) || !Number.isFinite(to) || to <= from) continue;
+      for (
+        let hour = Math.max(0, Math.floor(from / 60) * 60);
+        hour < Math.min(1440, to);
+        hour += 60
+      )
+        occupied.add(hour);
+    }
+  const starts = hideEmptyHours
+    ? [...occupied].sort((a, b) => a - b)
+    : Array.from({ length: (bounds.end - bounds.start) / 60 }, (_, i) => bounds.start + i * 60);
+  const segments: { start: number; end: number }[] = [];
+  for (const hour of starts) {
+    const previous = segments.at(-1);
+    if (previous?.end === hour) previous.end = hour + 60;
+    else segments.push({ start: hour, end: hour + 60 });
+  }
+  const duration = segments.reduce((n, s) => n + s.end - s.start, 0) || 60;
+  const offset = (time: number) =>
+    segments.reduce((n, s) => n + Math.max(0, Math.min(time, s.end) - s.start), 0);
+  return {
+    start: starts[0] ?? bounds.start,
+    end: segments.at(-1)?.end ?? bounds.end,
+    duration,
+    segments,
+    hours: starts.length ? [...starts, segments.at(-1)!.end] : [],
+    position: (time: number) => (offset(time) / duration) * 100,
+    size: (time: number, length: number) =>
+      ((offset(time + length) - offset(time)) / duration) * 100,
+  };
+}
+
 // Fit is an overview of the entire time range, independent of role and fullscreen.
 // Larger scales deliberately scroll inside the calendar and preserve readable tiles.
 export function calendarGeometry(
@@ -129,8 +169,10 @@ export function calendarGeometry(
   scale: string,
   availableHeight: number,
   weekly: boolean,
+  visibleDuration?: number,
 ): { height: number; hourStep: number } {
   const { start, end } = calendarBounds(events);
+  const span = visibleDuration ?? end - start;
   const viewport = Math.max(1, Math.floor(availableHeight));
   const shortest = Math.min(
     50,
@@ -138,8 +180,8 @@ export function calendarGeometry(
       .map((event) => Number(event.duration))
       .filter((duration) => Number.isFinite(duration) && duration > 0),
   );
-  const comfortable = Math.max(viewport, ((end - start) / shortest) * (weekly ? 72 : 52));
-  const titleHeight = events.length ? ((end - start) / shortest) * 16 : 0;
+  const comfortable = Math.max(viewport, (span / shortest) * (weekly ? 72 : 52));
+  const titleHeight = events.length ? (span / shortest) * 16 : 0;
   const height =
     scale === 'Весь день'
       ? Math.max(viewport, titleHeight)
@@ -147,7 +189,7 @@ export function calendarGeometry(
         ? comfortable * 1.5
         : comfortable;
   // Keep axis labels apart at overview scale without reducing their font size.
-  const hourStep = Math.max(1, Math.ceil(26 / ((height * 60) / (end - start))));
+  const hourStep = Math.max(1, Math.ceil(26 / ((height * 60) / span)));
   return { height, hourStep };
 }
 
