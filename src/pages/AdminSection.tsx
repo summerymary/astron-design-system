@@ -21,6 +21,17 @@ import { CRMWorkspace, NotificationsWorkspace } from './WorkspaceCRM';
 import { MessagesWorkspace } from './MessengerWorkspace';
 import type { TrainingKind } from '../lib/training-kind';
 import { roles } from '../data/roles';
+import { GiftCardsWorkspace } from './GiftCardsWorkspace';
+import { RetailWorkspace } from './RetailWorkspace';
+import { CallsWorkspace } from './CallsWorkspace';
+import {
+  TrainerClientRoster,
+  PersonalTrainingsWorkspace,
+  ShiftScheduleWorkspace,
+  StaffContactsWorkspace,
+} from './ReceptionStaff';
+import { personalTrainers } from '../lib/personal-training';
+import { useWorkspace } from '../components/WorkspaceProvider';
 import {
   CamerasWorkspace,
   DirectoriesWorkspace,
@@ -66,6 +77,40 @@ export function AdminSection({
   onRegister: RegisterVisit;
   onBack: () => void;
 }) {
+  const { data } = useWorkspace();
+  if (section === 'gift-cards')
+    return (
+      <GiftCardsWorkspace
+        members={members}
+        user={user}
+        clubName={clubName}
+        initialMember={member}
+      />
+    );
+  if (section === 'personal-trainings')
+    return (
+      <PersonalTrainingsWorkspace
+        initialMember={member}
+        user={user}
+        members={members}
+        clubName={clubName}
+        onMember={onMember}
+        onRegistration={(member) => navigate('registration', member)}
+        recordId={recordId}
+        onRecord={onRecord}
+      />
+    );
+  if (section === 'shifts') return <ShiftScheduleWorkspace user={user} clubName={clubName} />;
+  if (section === 'calls')
+    return (
+      <CallsWorkspace
+        members={members}
+        onMember={onMember}
+        hidePhones={user.role === 'administrator'}
+      />
+    );
+  if (section === 'employees' && user.role === 'administrator')
+    return <StaffContactsWorkspace clubName={clubName} recordId={recordId} onRecord={onRecord} />;
   if (section === 'trainer-clients')
     return user.role === 'trainer' ? (
       <TrainerClients user={user} members={members} initialMember={member} navigate={navigate} />
@@ -73,19 +118,7 @@ export function AdminSection({
   if (section === 'bar-catalog') return <BarCatalog navigate={navigate} />;
   if (section === 'bar-sales') return <BarSales clubName={clubName} />;
   if (section === 'products')
-    return (
-      <SaleWorkspace
-        key="retail-sale"
-        initialSection="goods-services"
-        members={members}
-        initialMember={member}
-        navigate={navigate}
-        clubName={clubName}
-        employeeName={employeeName}
-        hidePhones={user.role === 'administrator'}
-        allowRegistration={canOpenModule(user.role, 'registration')}
-      />
-    );
+    return <RetailWorkspace clubName={clubName} employeeName={employeeName} />;
   if (section === 'bar-inventory') return <InventoryWorkspace key="bar" bar navigate={navigate} />;
   if (resources[section])
     return (
@@ -100,6 +133,22 @@ export function AdminSection({
         navigate={navigate}
         recordId={recordId}
         onRecord={onRecord}
+        detailsExtra={
+          section === 'employees'
+            ? (employee) => {
+                const trainer = personalTrainers(data).find((row) => row.name === employee.name);
+                return trainer ? (
+                  <TrainerClientRoster
+                    trainerId={trainer.id}
+                    user={user}
+                    members={members}
+                    onMember={onMember}
+                    onBook={(client) => navigate('personal-trainings', client, trainer.id)}
+                  />
+                ) : null;
+              }
+            : undefined
+        }
       />
     );
   if (section === 'schedule')

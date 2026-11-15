@@ -1,3 +1,4 @@
+import { redeemGift, replaceRecord } from '../lib/reception-operations';
 import { supportsTraining } from '../lib/training-kind';
 import { clientTrainers, personalTrainers } from '../lib/personal-training';
 import type { TrainingKind } from '../lib/training-kind';
@@ -48,7 +49,7 @@ export function SaleWorkspace({
   training?: TrainingKind | null;
   initialTrainerId?: string | null;
 }) {
-  const { data, put } = useWorkspace();
+  const { data, put, transact } = useWorkspace();
   const saleRoot = useRef<HTMLDivElement>(null);
   const submitArea = useRef<HTMLDivElement>(null);
   const [saleStep, setSaleStep] = useState<'client' | 'catalog' | 'payment'>(
@@ -166,12 +167,18 @@ export function SaleWorkspace({
         status: payment.credit ? (paid ? 'Частичная оплата' : 'В долг') : 'Оплачено',
         receiptRequested: String(printReceipt),
       };
-      put('ledger', details);
-      if (payment.gift && gift)
-        put('gift-cards', {
-          ...gift,
-          balance: String(Math.round((Number(gift.balance) - payment.gift) * 100) / 100),
-        });
+      transact((current) => {
+        const next = replaceRecord(current, 'ledger', details);
+        return payment.gift && gift
+          ? redeemGift(next, gift.id, payment.gift, {
+              id: `sale-gift:${id}`,
+              date: stamp,
+              name: 'Оплата покупки',
+              comment: item.name,
+              saleId: id,
+            })
+          : next;
+      });
       if (payment.credit)
         put('receivables', {
           id: `debt-${id}`,
@@ -214,7 +221,7 @@ export function SaleWorkspace({
           ...details,
           id: `receipt-${id}`,
           saleId: id,
-          card: memberCards[member.id] || String(member.id + 99000),
+          card: member.cardNumber ?? memberCards[member.id] ?? String(member.id + 99000),
         };
         put('receipts', next);
         setReceipt(next);
@@ -334,7 +341,9 @@ export function SaleWorkspace({
               {member && (
                 <div className="checkout-client">
                   <strong>{member.fullName || member.name}</strong>
-                  <span>Карта {memberCards[member.id] || String(member.id + 99000)}</span>
+                  <span>
+                    Карта {member.cardNumber ?? memberCards[member.id] ?? String(member.id + 99000)}
+                  </span>
                   <span>
                     {hidePhones ? hiddenPhone(member.phone) : member.phone} · {member.email}
                   </span>
@@ -538,7 +547,7 @@ export function SaleWorkspace({
                         <strong>{item.name}</strong>
                         <span>
                           {clientName(member)} · карта{' '}
-                          {memberCards[member.id] || String(member.id + 99000)}
+                          {member.cardNumber ?? memberCards[member.id] ?? String(member.id + 99000)}
                         </span>
                         <span>За единицу: {money(item.price)}</span>
                         {isPersonalPlan && personalTrainer && (
@@ -556,7 +565,11 @@ export function SaleWorkspace({
                           </div>
                           <div>
                             <dt>Номер карты</dt>
-                            <dd>{memberCards[member.id] || String(member.id + 99000)}</dd>
+                            <dd>
+                              {member.cardNumber ??
+                                memberCards[member.id] ??
+                                String(member.id + 99000)}
+                            </dd>
                           </div>
                           <div>
                             <dt>Контакты</dt>

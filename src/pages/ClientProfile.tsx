@@ -1,4 +1,10 @@
 import { ClientBookingDialog } from '../components/ClientBookingDialog';
+import { CallDialog } from '../components/CallDialog';
+import { RestoreCardDialog } from '../components/RestoreCardDialog';
+import { MembershipDetails } from '../components/MembershipDetails';
+import { cardNumberError } from '../lib/reception-operations';
+import { memberCards } from '../data/admin';
+import type { DemoSubscription } from '../data/clientProfile';
 import { accessWindowLabel, ageOnDate } from '../lib/registration';
 import { daysInClub as countDaysInClub, demoStamp, nextDemoNow } from '../lib/demo-clock';
 import { useCallback, useState } from 'react';
@@ -65,6 +71,7 @@ function EmptyTab({ title, description }: { title: string; description: string }
 }
 export function ClientProfile({
   member,
+  members,
   visits,
   clubName,
   canOperate,
@@ -79,6 +86,7 @@ export function ClientProfile({
   onUpdate,
 }: {
   member: Member;
+  members: Member[];
   visits: Visit[];
   clubName: string;
   canOperate: boolean;
@@ -97,6 +105,8 @@ export function ClientProfile({
   const clientAge = ageOnDate(profile.birthDate, TODAY);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [bookingFeedback, setBookingFeedback] = useState('');
+  const [restoring, setRestoring] = useState(false);
+  const [openedPassId, setOpenedPassId] = useState<string | null>(null);
   const [tab, setTab] = useState<ClientTabId>('subscriptions');
   const [form, setForm] = useState<'edit' | 'comment' | null>(null);
   const closeForm = useCallback(() => setForm(null), []);
@@ -122,7 +132,6 @@ export function ClientProfile({
         : 'Записан',
     }));
   const [filter, setFilter] = useState('all');
-  const [callActive, setCallActive] = useState(false);
   const phoneHidden = user.role === 'administrator';
   const pinnedId =
     data['client-pins']?.find((row) => row.id === String(member.id))?.commentId || '';
@@ -218,19 +227,23 @@ export function ClientProfile({
                       icon={<MoreHorizontal size={19} />}
                     >
                       <div>
-                        {['Зачислить нулём', 'Продать подарочную', 'Добавить отзыв'].map(
-                          (action) => (
-                            <button
-                              key={action}
-                              type="button"
-                              onClick={() => {
-                                setPreviewAction(action);
-                              }}
-                            >
-                              {action}
-                            </button>
-                          ),
-                        )}
+                        <button type="button" onClick={() => setRestoring(true)}>
+                          Восстановить карту
+                        </button>
+                        <button type="button" onClick={() => onAction('gift-cards')}>
+                          Продать подарочную карту
+                        </button>
+                        {['Зачислить нулём', 'Добавить отзыв'].map((action) => (
+                          <button
+                            key={action}
+                            type="button"
+                            onClick={() => {
+                              setPreviewAction(action);
+                            }}
+                          >
+                            {action}
+                          </button>
+                        ))}
                       </div>
                     </DisclosureMenu>
                   </div>
@@ -246,7 +259,6 @@ export function ClientProfile({
                         label="Позвонить клиенту"
                         title="Позвонить клиенту"
                         onClick={() => {
-                          setCallActive(false);
                           setPreviewAction('Звонок клиенту');
                         }}
                       >
@@ -294,7 +306,14 @@ export function ClientProfile({
               )}
             </div>
           </section>
-          {bookingFeedback && <Notice tone="success">{bookingFeedback}</Notice>}
+          {bookingFeedback && (
+            <Notice tone="success">
+              <p>{bookingFeedback}</p>
+              <Button variant="success" onClick={onRegistration}>
+                Отметить посещение
+              </Button>
+            </Notice>
+          )}
           {canOperate && clientAge !== null && clientAge < 14 && (
             <Notice tone="warning">
               Клиенту {clientAge} лет. Занятия разрешены только с тренером или ответственным
@@ -372,7 +391,12 @@ export function ClientProfile({
                         <ul className="client-membership-list" aria-label="Абонементы клиента">
                           {shownSubscriptions.map((sub) => (
                             <li key={sub.id}>
-                              <div className="client-membership-row">
+                              <button
+                                type="button"
+                                className="client-membership-row"
+                                onClick={() => setOpenedPassId(sub.id)}
+                                aria-label={`Абонемент: ${sub.name}, история и действия`}
+                              >
                                 <div className="client-membership-name" title={sub.name}>
                                   <MembershipTag name={sub.name} kindId={sub.kindId} textOnly />
                                   {categoryName(sub.trainerCategory) &&
@@ -399,7 +423,7 @@ export function ClientProfile({
                                     {sub.remaining === null ? 'Безлимит' : sub.remaining}
                                   </strong>
                                 </div>
-                              </div>
+                              </button>
                               <details className="client-membership-details ws-disclosure">
                                 <summary>Подробнее</summary>
                                 <dl className="ws-facts">
@@ -699,42 +723,29 @@ export function ClientProfile({
           </section>
         </div>
       </div>
-      {previewAction && (
+      {previewAction === 'Звонок клиенту' && (
+        <CallDialog
+          name={clientName(member)}
+          phone={member.phone}
+          hidden={phoneHidden}
+          onClose={closePreview}
+        />
+      )}
+      {previewAction && previewAction !== 'Звонок клиенту' && (
         <Modal title={previewAction} subtitle={clientName(member)} onClose={closePreview}>
-          {previewAction === 'Звонок клиенту' ? (
-            <div className="client-call-panel">
-              <Phone size={28} />
-              <h3>{clientName(member)}</h3>
-              <p>{phoneHidden ? hiddenPhone(member.phone) : member.phone}</p>
-              <p role="status">
-                {callActive
-                  ? 'Демонстрационный звонок идёт'
-                  : 'В прототипе звонок будет имитирован, без внешнего соединения.'}
-              </p>
-              <Button
-                onClick={() => {
-                  if (callActive) closePreview();
-                  else setCallActive(true);
-                }}
-              >
-                {callActive ? 'Завершить звонок' : 'Начать демозвонок'}
-              </Button>
-            </div>
-          ) : (
-            <div className="client-action-preview">
-              <span>
-                <FileText size={27} />
-              </span>
-              <h3>Экран в разработке</h3>
-              <p>
-                Экран и доступные действия будут разработаны на следующем этапе. Операции пока не
-                выполняются.
-              </p>
-              <Button variant="secondary" onClick={closePreview}>
-                К карточке клиента
-              </Button>
-            </div>
-          )}
+          <div className="client-action-preview">
+            <span>
+              <FileText size={27} />
+            </span>
+            <h3>Экран в разработке</h3>
+            <p>
+              Экран и доступные действия будут разработаны на следующем этапе. Операции пока не
+              выполняются.
+            </p>
+            <Button variant="secondary" onClick={closePreview}>
+              К карточке клиента
+            </Button>
+          </div>
         </Modal>
       )}
       {form === 'comment' && (
@@ -763,6 +774,7 @@ export function ClientProfile({
           title="Сведения о клиенте"
           fields={[
             { key: 'fullName', label: 'Фамилия, имя, отчество', required: true },
+            { key: 'cardNumber', label: 'Номер карты', required: true },
             { key: 'phone', label: 'Телефон', type: 'tel', required: true },
             { key: 'birthDate', label: 'Дата рождения', type: 'date' },
             { key: 'gender', label: 'Пол', options: ['Не указан', 'Женский', 'Мужской'] },
@@ -773,6 +785,7 @@ export function ClientProfile({
           initial={{
             id: String(member.id),
             fullName: member.fullName || member.name,
+            cardNumber: profile.card,
             phone: member.phone,
             birthDate:
               member.birthDate ??
@@ -787,6 +800,8 @@ export function ClientProfile({
           onClose={closeForm}
           onSave={(record) => {
             if (!record.fullName.trim()) return 'Укажите фамилию, имя и отчество.';
+            const cardError = cardNumberError(record.cardNumber, member, members, memberCards);
+            if (cardError) return cardError;
             if (
               !/^\+?[\d\s()−-]+$/.test(record.phone) ||
               !/^\d{10,15}$/.test(record.phone.replace(/\D/g, ''))
@@ -796,6 +811,7 @@ export function ClientProfile({
               ...member,
               name: record.fullName.trim(),
               fullName: record.fullName.trim(),
+              cardNumber: record.cardNumber.trim(),
               phone: record.phone.trim(),
               birthDate: record.birthDate,
               gender: record.gender,
@@ -817,6 +833,26 @@ export function ClientProfile({
             });
             closeForm();
           }}
+        />
+      )}
+      {restoring && (
+        <RestoreCardDialog
+          member={member}
+          members={members}
+          user={user}
+          clubName={clubName}
+          onUpdate={onUpdate}
+          onClose={() => setRestoring(false)}
+        />
+      )}
+      {openedPassId && subscriptions.find((pass) => pass.id === openedPassId) && (
+        <MembershipDetails
+          pass={subscriptions.find((pass) => pass.id === openedPassId) as DemoSubscription}
+          member={member}
+          members={members}
+          visits={visits}
+          canOperate={canOperate}
+          onClose={() => setOpenedPassId(null)}
         />
       )}
       {bookingOpen && (

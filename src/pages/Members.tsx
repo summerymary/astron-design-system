@@ -195,7 +195,7 @@ export function Members({
                           <td>{hidePhones ? hiddenPhone(m.phone) : m.phone}</td>
                           <td>{m.email || '—'}</td>
                           <td>
-                            <code>{memberCards[m.id] || String(m.id + 99000)}</code>
+                            <code>{m.cardNumber ?? memberCards[m.id] ?? String(m.id + 99000)}</code>
                           </td>
                           <td>
                             <Status>{m.archived ? 'В архиве' : 'Активен'}</Status>

@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { Button, ConfirmDialog, CountBadge, Modal } from '../components/ui';
 import { ScheduleAttendees } from '../components/ScheduleAttendees';
+import { ScheduleDayBoard } from '../components/ScheduleDayBoard';
 import { clientName } from '../lib/client-display';
 import { DataTable, Empty, Notice, SearchBox, Status, Tabs } from '../components/WorkspaceUI';
 import type { Navigate } from '../components/WorkspaceUI';
@@ -894,7 +895,7 @@ export function ScheduleWorkspace({
                 ))}
               </Select>
             </label>
-            {view !== 'Список' && (
+            {view !== 'Список' && !(isAdmin && view === 'День') && (
               <label className="calendar-scale">
                 <span className="sr-only">Масштаб расписания</span>
                 <Select
@@ -1022,7 +1023,24 @@ export function ScheduleWorkspace({
             )}
           </div>
         )}
-        {view === 'Список' ? (
+        {isAdmin && view === 'День' && events.length && columns.length ? (
+          <div
+            className="calendar-scroll schedule-day-scroll"
+            ref={scroller}
+            tabIndex={0}
+            aria-label="Расписание на день по времени начала"
+            style={{ height: `${available.height + available.heading + available.inset}px` }}
+          >
+            <ScheduleDayBoard
+              events={events}
+              rooms={columns}
+              onOpen={show}
+              onContext={(event, x, y) =>
+                setContext({ event, slot: seed(event.time, event.room, event.day), x, y })
+              }
+            />
+          </div>
+        ) : view === 'Список' ? (
           <DataTable
             rows={[...events]
               .map((event): DemoRecord => ({ ...event, occupancy: eventOccupancy(event).label }))
