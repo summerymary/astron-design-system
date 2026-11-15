@@ -1,0 +1,1324 @@
+{
+  "date": "2026-11-15",
+  "scope": "48 desktop and 48 mobile DOM report views, themes distributed across four options; 8 additional final timeline checks. Club director role. Not a full repetition of every business scenario.",
+  "views": [
+    {
+      "id": "birdthday",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Дни рождения"
+    },
+    {
+      "id": "calls",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Звонки"
+    },
+    {
+      "id": "client_lastvisit",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Потерянные клиенты"
+    },
+    {
+      "id": "client_lastvisit_personal",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Потерянные ПТ клиенты"
+    },
+    {
+      "id": "client_lifetime",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Время жизни"
+    },
+    {
+      "id": "client_never",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Клиенты не посещали"
+    },
+    {
+      "id": "clients_active",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Активные клиенты"
+    },
+    {
+      "id": "clients_gender_age",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 18,
+          "overflow": false,
+          "title": "Пол и возраст посетителей"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Половозрастная структура"
+    },
+    {
+      "id": "clients_ltv",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Средние расходы клиента (LTV)"
+    },
+    {
+      "id": "clients_ltv_bydate",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Средние расходы клиента за период"
+    },
+    {
+      "id": "clients_new",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Новые клиенты: регистрация, визит, покупка"
+    },
+    {
+      "id": "clients_rating",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Рейтинг по сумме покупок"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Рейтинг клиентов по покупкам"
+    },
+    {
+      "id": "clients_rating_visit",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 6,
+          "overflow": false,
+          "title": "Рейтинг по посещениям"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Рейтинг клиентов по посещениям"
+    },
+    {
+      "id": "clients_segmetation",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 9,
+          "overflow": false,
+          "title": "Сегменты базы"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Сегментация клиентов"
+    },
+    {
+      "id": "clients_sell_discount",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Продажи со скидкой"
+    },
+    {
+      "id": "clients_sell_gender_age",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 9,
+          "overflow": false,
+          "title": "Сумма покупок по полу и возрасту"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Средний чек по полу и возрасту"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Пол/возраст покупателей"
+    },
+    {
+      "id": "fail_finance_report",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Ошибочные операции"
+    },
+    {
+      "id": "feedbacks",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Отзывы"
+    },
+    {
+      "id": "financeresult",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Финансовый результат"
+    },
+    {
+      "id": "finbyyear",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 1,
+          "lines": 0,
+          "meters": 0,
+          "overflow": false,
+          "title": "Выручка по месяцам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Выручка"
+    },
+    {
+      "id": "finbyyear_by_abonements",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Сумма продаж"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Количество продаж"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Выручка по абонементам"
+    },
+    {
+      "id": "fincredits",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Обязательства перед клиентами"
+    },
+    {
+      "id": "free_trener_find",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Свободный тренер"
+    },
+    {
+      "id": "gt_finance",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Групповые занятия и цены"
+    },
+    {
+      "id": "gtrener_busy",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Занятость групповых тренеров"
+    },
+    {
+      "id": "gtrener_rating",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Заполняемость групповых занятий"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Рейтинг групповых"
+    },
+    {
+      "id": "kassacontrol",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Контроль кассы"
+    },
+    {
+      "id": "newclients",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Новые клиенты по источникам"
+    },
+    {
+      "id": "newclients_source",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 1,
+          "overflow": false,
+          "title": "Источники новых клиентов"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Источники новых клиентов"
+    },
+    {
+      "id": "notcame",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Статистика пропусков"
+    },
+    {
+      "id": "ptrener_rating",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 1,
+          "overflow": false,
+          "title": "Количество персональных занятий"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Рейтинг ПТ"
+    },
+    {
+      "id": "ptrener_rating_all",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 9,
+          "overflow": false,
+          "title": "Рабочие часы по видам нагрузки"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Рабочие часы тренеров"
+    },
+    {
+      "id": "report_all_clients_phones",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Контакты клиентов"
+    },
+    {
+      "id": "report_pclients",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Клиенты тренера"
+    },
+    {
+      "id": "report_pclients_lost",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Потерянные клиенты тренера"
+    },
+    {
+      "id": "report_pclients_phones",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Контакты персональных клиентов"
+    },
+    {
+      "id": "report_pclients_stat",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Удержание и потеря клиентов тренера"
+    },
+    {
+      "id": "selling_clients_afterguest",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Покупка после гостевого"
+    },
+    {
+      "id": "selling_clients_new",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Продажи новым клиентам"
+    },
+    {
+      "id": "selling_clients_secondary",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Результат продления"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Доля продления"
+    },
+    {
+      "id": "selling_clients_secondary_summer",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Результат продления · 2026"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Доля продления по Летней карте"
+    },
+    {
+      "id": "selling_stat",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Сумма продаж"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Количество продаж"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Статистика продаж"
+    },
+    {
+      "id": "selltovosit",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Продажи и посещения"
+    },
+    {
+      "id": "timetoabstat",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "По клубам"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 4,
+          "overflow": false,
+          "title": "По направлению"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 2,
+          "overflow": false,
+          "title": "По полу"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 4,
+          "overflow": false,
+          "title": "По возрасту"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 1,
+          "overflow": false,
+          "title": "Популярность групповых программ"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 5,
+          "overflow": false,
+          "title": "По типам абонементов"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 5,
+          "overflow": false,
+          "title": "По названиям абонементов"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Посещения по параметрам"
+    },
+    {
+      "id": "trener_financial_result",
+      "device": "desktop",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Финансовый результат по тренеру"
+    },
+    {
+      "id": "unique_visits",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 2,
+          "overflow": false,
+          "title": "Сколько клубов посещает один клиент"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Уникальные посетители"
+    },
+    {
+      "id": "unlim_avg_visit",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 5,
+          "overflow": false,
+          "title": "Частота визитов по безлимитам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Сегментация посещений по безлимитам"
+    },
+    {
+      "id": "visit_by_period",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 4,
+          "meters": 0,
+          "overflow": false,
+          "title": "Посещения по дням и клубам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Статистика посещения по месяцам"
+    },
+    {
+      "id": "birdthday",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Дни рождения"
+    },
+    {
+      "id": "calls",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Звонки"
+    },
+    {
+      "id": "client_lastvisit",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Потерянные клиенты"
+    },
+    {
+      "id": "client_lastvisit_personal",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Потерянные ПТ клиенты"
+    },
+    {
+      "id": "client_lifetime",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Время жизни"
+    },
+    {
+      "id": "client_never",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Клиенты не посещали"
+    },
+    {
+      "id": "clients_active",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Активные клиенты"
+    },
+    {
+      "id": "clients_gender_age",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 18,
+          "overflow": false,
+          "title": "Пол и возраст посетителей"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Половозрастная структура"
+    },
+    {
+      "id": "clients_ltv",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Средние расходы клиента (LTV)"
+    },
+    {
+      "id": "clients_ltv_bydate",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Средние расходы клиента за период"
+    },
+    {
+      "id": "clients_new",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Новые клиенты: регистрация, визит, покупка"
+    },
+    {
+      "id": "clients_rating",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Рейтинг по сумме покупок"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Рейтинг клиентов по покупкам"
+    },
+    {
+      "id": "clients_rating_visit",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 6,
+          "overflow": false,
+          "title": "Рейтинг по посещениям"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Рейтинг клиентов по посещениям"
+    },
+    {
+      "id": "clients_segmetation",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 9,
+          "overflow": false,
+          "title": "Сегменты базы"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Сегментация клиентов"
+    },
+    {
+      "id": "clients_sell_discount",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Продажи со скидкой"
+    },
+    {
+      "id": "clients_sell_gender_age",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 9,
+          "overflow": false,
+          "title": "Сумма покупок по полу и возрасту"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Средний чек по полу и возрасту"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Пол/возраст покупателей"
+    },
+    {
+      "id": "fail_finance_report",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Ошибочные операции"
+    },
+    {
+      "id": "feedbacks",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Отзывы"
+    },
+    {
+      "id": "financeresult",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Финансовый результат"
+    },
+    {
+      "id": "finbyyear",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 1,
+          "lines": 0,
+          "meters": 0,
+          "overflow": false,
+          "title": "Выручка по месяцам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Выручка"
+    },
+    {
+      "id": "finbyyear_by_abonements",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Сумма продаж"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Количество продаж"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Выручка по абонементам"
+    },
+    {
+      "id": "fincredits",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Обязательства перед клиентами"
+    },
+    {
+      "id": "free_trener_find",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Свободный тренер"
+    },
+    {
+      "id": "gt_finance",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Групповые занятия и цены"
+    },
+    {
+      "id": "gtrener_busy",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Занятость групповых тренеров"
+    },
+    {
+      "id": "gtrener_rating",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Заполняемость групповых занятий"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Рейтинг групповых"
+    },
+    {
+      "id": "kassacontrol",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Контроль кассы"
+    },
+    {
+      "id": "newclients",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Новые клиенты по источникам"
+    },
+    {
+      "id": "newclients_source",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 1,
+          "overflow": false,
+          "title": "Источники новых клиентов"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Источники новых клиентов"
+    },
+    {
+      "id": "notcame",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Статистика пропусков"
+    },
+    {
+      "id": "ptrener_rating",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 1,
+          "overflow": false,
+          "title": "Количество персональных занятий"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Рейтинг ПТ"
+    },
+    {
+      "id": "ptrener_rating_all",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 9,
+          "overflow": false,
+          "title": "Рабочие часы по видам нагрузки"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Рабочие часы тренеров"
+    },
+    {
+      "id": "report_all_clients_phones",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Контакты клиентов"
+    },
+    {
+      "id": "report_pclients",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Клиенты тренера"
+    },
+    {
+      "id": "report_pclients_lost",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Потерянные клиенты тренера"
+    },
+    {
+      "id": "report_pclients_phones",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Контакты персональных клиентов"
+    },
+    {
+      "id": "report_pclients_stat",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Удержание и потеря клиентов тренера"
+    },
+    {
+      "id": "selling_clients_afterguest",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Покупка после гостевого"
+    },
+    {
+      "id": "selling_clients_new",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Продажи новым клиентам"
+    },
+    {
+      "id": "selling_clients_secondary",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Результат продления"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Доля продления"
+    },
+    {
+      "id": "selling_clients_secondary_summer",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Результат продления · 2026"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Доля продления по Летней карте"
+    },
+    {
+      "id": "selling_stat",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Сумма продаж"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "Количество продаж"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Статистика продаж"
+    },
+    {
+      "id": "selltovosit",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Продажи и посещения"
+    },
+    {
+      "id": "timetoabstat",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 3,
+          "overflow": false,
+          "title": "По клубам"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 4,
+          "overflow": false,
+          "title": "По направлению"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 2,
+          "overflow": false,
+          "title": "По полу"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 4,
+          "overflow": false,
+          "title": "По возрасту"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 1,
+          "overflow": false,
+          "title": "Популярность групповых программ"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 5,
+          "overflow": false,
+          "title": "По типам абонементов"
+        },
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 5,
+          "overflow": false,
+          "title": "По названиям абонементов"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Посещения по параметрам"
+    },
+    {
+      "id": "trener_financial_result",
+      "device": "mobile",
+      "charts": [],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Финансовый результат по тренеру"
+    },
+    {
+      "id": "unique_visits",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 2,
+          "overflow": false,
+          "title": "Сколько клубов посещает один клиент"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Уникальные посетители"
+    },
+    {
+      "id": "unlim_avg_visit",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 0,
+          "meters": 5,
+          "overflow": false,
+          "title": "Частота визитов по безлимитам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Сегментация посещений по безлимитам"
+    },
+    {
+      "id": "visit_by_period",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 4,
+          "meters": 0,
+          "overflow": false,
+          "title": "Посещения по дням и клубам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Статистика посещения по месяцам"
+    },
+    {
+      "id": "visit_by_period",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 4,
+          "meters": 0,
+          "overflow": false,
+          "title": "Посещения по дням и клубам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Статистика посещения по месяцам"
+    },
+    {
+      "id": "visit_by_period",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 4,
+          "meters": 0,
+          "overflow": false,
+          "title": "Посещения по дням и клубам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Статистика посещения по месяцам"
+    },
+    {
+      "id": "visit_by_period",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 4,
+          "meters": 0,
+          "overflow": false,
+          "title": "Посещения по дням и клубам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Статистика посещения по месяцам"
+    },
+    {
+      "id": "visit_by_period",
+      "device": "mobile",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 4,
+          "meters": 0,
+          "overflow": false,
+          "title": "Посещения по дням и клубам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Статистика посещения по месяцам"
+    },
+    {
+      "id": "visit_by_period",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 4,
+          "meters": 0,
+          "overflow": false,
+          "title": "Посещения по дням и клубам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Статистика посещения по месяцам"
+    },
+    {
+      "id": "visit_by_period",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 4,
+          "meters": 0,
+          "overflow": false,
+          "title": "Посещения по дням и клубам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "astron",
+      "title": "Статистика посещения по месяцам"
+    },
+    {
+      "id": "visit_by_period",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 4,
+          "meters": 0,
+          "overflow": false,
+          "title": "Посещения по дням и клубам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "contrast",
+      "title": "Статистика посещения по месяцам"
+    },
+    {
+      "id": "visit_by_period",
+      "device": "desktop",
+      "charts": [
+        {
+          "columns": 0,
+          "lines": 4,
+          "meters": 0,
+          "overflow": false,
+          "title": "Посещения по дням и клубам"
+        }
+      ],
+      "pageOverflow": false,
+      "style": "vivid",
+      "title": "Статистика посещения по месяцам"
+    }
+  ],
+  "scenarios": {
+    "uniqueClientToggle": "12 visits -> 6 distinct demo clients",
+    "personalOnly": "empty result for demo fixture without PT sales",
+    "revenueMean": "three selected months incl zero and partial months; formula matches saved sales",
+    "timelineKeyboardScroll": true,
+    "guideExample": true
+  },
+  "console": []
+}
