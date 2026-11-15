@@ -34,6 +34,7 @@ jobs:
       - run: pnpm test:checkout
       - run: pnpm test:cash
       - run: pnpm test:crm
+      - run: pnpm test:statistics
       - run: pnpm test:ui
       - run: pnpm test:handoff
       - run: pnpm build
