@@ -9,6 +9,7 @@ import { ReportCatalogue } from '../components/ReportCatalogue';
 import { ReportBars } from '../components/ReportBars';
 import { statisticsReports, reportTitle, reportPending } from '../data/statistics';
 import { TODAY, prettyDate, money } from '../data/workspace';
+import { getClientProfile } from '../data/clientProfile';
 import { buildStatistics, defaultReportFilters, statisticsCsv } from '../lib/statistics';
 import type { ReportFilters } from '../lib/statistics';
 import '../styles/statistics.css';
@@ -72,7 +73,16 @@ function StatisticsReport({
   hidePhones: boolean;
 }) {
   const { data } = useWorkspace();
-  const defaults = { ...defaultReportFilters, threshold: id === 'notcame' ? '0' : '21' };
+  const defaults = {
+    ...defaultReportFilters,
+    threshold: id === 'notcame' ? '0' : id === 'client_lifetime' ? '30' : '21',
+    ...(id === 'free_trener_find' ? { timeFrom: '14:00' } : {}),
+    ...(['selling_clients_secondary_summer', 'trener_financial_result', 'financeresult'].includes(
+      id,
+    )
+      ? { from: `${TODAY.slice(0, 4)}-01-01` }
+      : {}),
+  };
   const [filters, setFilters] = useState<ReportFilters>(defaults);
   const report = statisticsReports.find((r) => r.id === id)!;
   const output = buildStatistics(id, filters, {
@@ -95,7 +105,9 @@ function StatisticsReport({
             : 'count';
   const chartColumn = chartBlock?.columns.find((c) => c.key === chartKey);
   const chartRows =
-    chartColumn && !chartBlock.memberLinks
+    chartColumn &&
+    !chartBlock.memberLinks &&
+    chartBlock.rows.every((r) => r[chartKey] !== '' && Number(r[chartKey]) >= 0)
       ? chartBlock.rows
           .slice(0, 12)
           .map((r) => ({
@@ -139,7 +151,22 @@ function StatisticsReport({
       </Select>
     </label>
   );
-  const noPeriod = ['report_all_clients_phones'].includes(id);
+  const flag = (key: keyof ReportFilters, label: string) => (
+    <label className="ws-checkbox" key={key}>
+      <input
+        type="checkbox"
+        checked={filters[key] === '1'}
+        onChange={(e) => update(key, e.target.checked ? '1' : '0')}
+      />
+      {label}
+    </label>
+  );
+  const noPeriod = [
+    'client_lifetime',
+    'clients_ltv',
+    'fincredits',
+    'report_all_clients_phones',
+  ].includes(id);
   const asOf = [
     'clients_active',
     'client_never',
@@ -147,6 +174,8 @@ function StatisticsReport({
     'client_lastvisit',
     'client_lastvisit_personal',
     'report_pclients_lost',
+    'free_trener_find',
+    'clients_segmetation',
   ].includes(id);
   const noClub = [
     'birdthday',
@@ -157,6 +186,9 @@ function StatisticsReport({
     'report_all_clients_phones',
     'calls',
     'report_pclients_lost',
+    'fincredits',
+    'client_lifetime',
+    'clients_segmetation',
   ].includes(id);
   const showKind = [
     'client_never',
@@ -180,7 +212,7 @@ function StatisticsReport({
           Object.fromEntries(
             Object.entries(r).map(([key, value]) => [
               key,
-              b.columns.find((c) => c.key === key)?.format === 'money'
+              b.columns.find((c) => c.key === key)?.format === 'money' && value !== ''
                 ? (Number(value) / 100).toLocaleString('ru-RU', {
                     useGrouping: false,
                     maximumFractionDigits: 2,
@@ -254,6 +286,90 @@ function StatisticsReport({
                 { id: 'all', name: 'Все тренеры' },
                 ...(data['trainer-profiles'] || []).map((t) => ({ id: t.id, name: t.name })),
               ])}
+            {['clients_active', 'selltovosit', 'selling_clients_secondary'].includes(id) && (
+              <>
+                {flag('includePersonal', 'Включать персональные тренировки')}
+                {flag('includeSingle', 'Включать разовые и гостевые')}
+                {flag('includeCorporate', 'Включать корпоративные')}
+                {id === 'clients_active' && flag('onlyUnlimited', 'Только безлимитные')}
+              </>
+            )}
+            {id === 'newclients' && (
+              <>
+                {choice('source', 'Источник', [
+                  { id: 'all', name: 'Любой источник' },
+                  ...[...new Set(members.map((m) => getClientProfile(m, data).source))].map(
+                    (name) => ({ id: name, name }),
+                  ),
+                ])}
+                {flag('onlyOnline', 'Зарегистрировался онлайн')}
+                {flag('onlyNoPurchase', 'Ничего не купил')}
+              </>
+            )}
+            {id === 'clients_segmetation' &&
+              choice('segment', 'Сегмент', [
+                { id: 'all', name: 'Все сегменты' },
+                ...[
+                  'Активные клиенты',
+                  'Клиенты с намерением',
+                  'Потенциальный продленец',
+                  'Заснувший',
+                  'Потерянный 1 уровень',
+                  'Потерянный 2 уровень',
+                  'Потерянный 3 уровень',
+                  'Потерянный 4 уровень',
+                  'Нет истории посещений',
+                ].map((name, i) => ({ id: String(i), name })),
+              ])}
+            {id === 'feedbacks' &&
+              choice('operator', 'Оператор', [
+                { id: 'all', name: 'Все операторы' },
+                ...[...new Set((data['client-reviews'] || []).map((r) => r.operator))].map(
+                  (name) => ({ id: name, name }),
+                ),
+              ])}
+            {id === 'calls' && (
+              <>
+                {choice('callStatus', 'Статус звонка', [
+                  { id: 'all', name: 'Все статусы' },
+                  ...[...new Set((data.calls || []).map((r) => r.status))].map((name) => ({
+                    id: name,
+                    name,
+                  })),
+                ])}
+                {flag('onlyUnknown', 'Нет в базе клиентов')}
+              </>
+            )}
+            {id === 'ptrener_rating_all' && (
+              <>
+                {flag('countPersonal', 'Считать ПТ')}
+                {flag('countGroup', 'Считать групповые')}
+                {flag('countDuty', 'Считать дежурные часы')}
+              </>
+            )}
+            {id === 'free_trener_find' && (
+              <>
+                {field('timeFrom', 'Начало', 'time')}
+                {field('duration', 'Длительность, минут', 'number')}
+              </>
+            )}
+            {['client_lifetime', 'report_pclients_stat'].includes(id) &&
+              field('threshold', 'Интервал бездействия, дней', 'number')}
+            {['selling_clients_secondary', 'selling_clients_afterguest'].includes(id) &&
+              field('renewalDays', 'Демо-окно покупки, дней', 'number')}
+            {id === 'unlim_avg_visit' &&
+              choice('plan', 'Безлимитная карта', [
+                { id: 'all', name: 'Все безлимитные' },
+                ...[
+                  ...new Set(
+                    members.flatMap((m) =>
+                      getClientProfile(m, data)
+                        .subscriptions.filter((p) => p.remaining === null)
+                        .map((p) => p.name),
+                    ),
+                  ),
+                ].map((name) => ({ id: name, name })),
+              ])}
             {['clients_rating', 'clients_rating_visit'].includes(id) &&
               field('limit', 'Показать первых', 'number')}
             {id === 'clients_rating' &&
@@ -283,7 +399,7 @@ function StatisticsReport({
                 id === 'notcame' ? 'Пропусков более' : 'Дней без визитов более',
                 'number',
               )}
-            {id === 'clients_new' &&
+            {['clients_new', 'selling_clients_new'].includes(id) &&
               choice('criterion', 'Считать новыми по', [
                 { id: 'registration', name: 'Дате регистрации' },
                 { id: 'visit', name: 'Первому известному визиту' },
@@ -348,13 +464,15 @@ function StatisticsReport({
                   ...c,
                   render: c.format
                     ? (r) =>
-                        c.format === 'money'
-                          ? money(Number(r[c.key]) / 100)
-                          : c.format === 'date'
-                            ? r[c.key]
-                              ? prettyDate(r[c.key])
-                              : '—'
-                            : `${r[c.key]}%`
+                        r[c.key] === '' || r[c.key] === undefined
+                          ? '—'
+                          : c.format === 'money'
+                            ? money(Number(r[c.key]) / 100)
+                            : c.format === 'date'
+                              ? r[c.key]
+                                ? prettyDate(r[c.key])
+                                : '—'
+                              : `${r[c.key]}%`
                     : undefined,
                 }))}
                 onOpen={

@@ -44,7 +44,7 @@ import {
   TRAINING_INTENSITIES,
   trainingIntensity,
   addDays,
-  calendarBounds,
+  calendarTimeline,
   calendarGeometry,
   clock,
   dayText,
@@ -222,22 +222,23 @@ export function ScheduleWorkspace({
               events.some((e) => e.room === r.name),
           )
           .map((r) => ({ key: r.id, day, room: r.name, label: r.name }));
-  const { start, end } = calendarBounds(rangeEvents);
+  const timeline = calendarTimeline(isAdmin ? events : rangeEvents, isAdmin);
+  const { start, end } = timeline;
   const { height: gridHeight, hourStep } = calendarGeometry(
-    rangeEvents,
+    isAdmin ? events : rangeEvents,
     scale,
     available.height,
     view === 'Неделя',
+    timeline.duration,
   );
-  const hours = Array.from(
-    { length: Math.ceil((end - start) / 60) + 1 },
-    (_, i) => start + i * 60,
-  ).filter((t) => t <= end);
+  const hours = timeline.hours;
   const axisHours = hours
     .filter((_, i) => i % hourStep === 0 || i === hours.length - 1)
     .filter(
       (time, i, labels) =>
-        i === 0 || i === labels.length - 1 || ((end - time) / (end - start)) * gridHeight >= 26,
+        i === 0 ||
+        i === labels.length - 1 ||
+        ((100 - timeline.position(time)) / 100) * gridHeight >= 26,
     );
   const closeDetails = useCallback(() => {
     setOpenedId('');
@@ -985,7 +986,7 @@ export function ScheduleWorkspace({
             ]}
             onOpen={show}
           />
-        ) : columns.length ? (
+        ) : columns.length && (!isAdmin || events.length > 0) ? (
           <div
             className="calendar-scroll"
             ref={scroller}
@@ -1011,7 +1012,7 @@ export function ScheduleWorkspace({
               ))}
               <div className="calendar-time-axis" style={{ height: gridHeight }}>
                 {axisHours.map((time) => (
-                  <span key={time} style={{ top: `${((time - start) / (end - start)) * 100}%` }}>
+                  <span key={time} style={{ top: `${timeline.position(time)}%` }}>
                     {clock(time)}
                   </span>
                 ))}
@@ -1074,7 +1075,7 @@ export function ScheduleWorkspace({
                       <i
                         className="calendar-hour-line"
                         key={time}
-                        style={{ top: `${((time - start) / (end - start)) * 100}%` }}
+                        style={{ top: `${timeline.position(time)}%` }}
                       />
                     ))}
                   {layoutEvents(
@@ -1085,11 +1086,11 @@ export function ScheduleWorkspace({
                   ).map(({ event, lane, lanes }) => (
                     <button
                       key={event.id}
-                      className={`calendar-event ${canEdit(event) ? 'is-editable' : 'is-readonly'} ${event.status === 'Отменено' ? 'is-cancelled' : ''} ${ghost?.id === event.id ? 'is-dragging' : ''} ${scale === 'Весь день' && (Number(event.duration) / (end - start)) * gridHeight < 23 ? 'is-compact' : ''} ${(available.width - 56) / columns.length / lanes < 360 ? 'is-narrow' : ''} ${(available.width - 56) / columns.length / lanes < 250 ? 'is-title-only' : ''}`}
+                      className={`calendar-event ${canEdit(event) ? 'is-editable' : 'is-readonly'} ${event.status === 'Отменено' ? 'is-cancelled' : ''} ${ghost?.id === event.id ? 'is-dragging' : ''} ${scale === 'Весь день' && (timeline.size(minutes(event.time), Number(event.duration)) / 100) * gridHeight < 23 ? 'is-compact' : ''} ${(available.width - 56) / columns.length / lanes < 360 ? 'is-narrow' : ''} ${(available.width - 56) / columns.length / lanes < 250 ? 'is-title-only' : ''}`}
                       style={
                         {
-                          top: `${((minutes(event.time) - start) / (end - start)) * 100}%`,
-                          height: `${(Number(event.duration) / (end - start)) * 100}%`,
+                          top: `${timeline.position(minutes(event.time))}%`,
+                          height: `${timeline.size(minutes(event.time), Number(event.duration))}%`,
                           left: `calc(${(lane / lanes) * 100}% + 3px)`,
                           width: `calc(${100 / lanes}% - 6px)`,
                           '--event-color': heatmap
@@ -1181,8 +1182,8 @@ export function ScheduleWorkspace({
                       <div
                         className="calendar-drag-preview"
                         style={{
-                          top: `${((minutes(ghost.time) - start) / (end - start)) * 100}%`,
-                          height: `${(Number(ghost.duration) / (end - start)) * 100}%`,
+                          top: `${timeline.position(minutes(ghost.time))}%`,
+                          height: `${timeline.size(minutes(ghost.time), Number(ghost.duration))}%`,
                         }}
                       >
                         {eventTime(ghost)} · {ghost.name}
@@ -1194,12 +1195,20 @@ export function ScheduleWorkspace({
           </div>
         ) : (
           <Empty
-            title="В этом клубе пока нет залов"
-            text="Выберите другой клуб или добавьте зал в справочник."
+            title={
+              columns.length ? 'Нет занятий по выбранным условиям' : 'В этом клубе пока нет залов'
+            }
+            text={
+              columns.length
+                ? 'Выберите другую дату, зал или тренера. Пустые часы скрыты.'
+                : 'Выберите другой клуб или добавьте зал в справочник.'
+            }
             action={
-              <Button variant="secondary" onClick={() => navigate('rooms')}>
-                Справочник залов
-              </Button>
+              !columns.length && (
+                <Button variant="secondary" onClick={() => navigate('rooms')}>
+                  Справочник залов
+                </Button>
+              )
             }
           />
         )}
@@ -1227,6 +1236,7 @@ export function ScheduleWorkspace({
             </div>
           ))}
         <footer className="calendar-footer">
+          {isAdmin && view !== 'Список' && <span>Пустые часы скрыты · время МСК</span>}
           {canCreate && view !== 'Список' && (
             <span>
               <Move size={13} />
