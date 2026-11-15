@@ -6,26 +6,92 @@
   gap: 8px 16px;
   margin: 0;
 }
-.report-chart-groups { display: grid; gap: 20px; }
-.report-chart-group { display: grid; gap: 8px; min-width: 0; }
-.report-chart-group + .report-chart-group { border-top: 1px solid var(--surface-border); padding-top: 16px; }
-.report-chart-group h4 { font-size: 16px; font-weight: 600; margin: 0; }
-.report-chart-scroll { overflow-x: auto; max-width: 100%; }
-.report-chart-scroll:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; }
-.report-columns { display: block; width: 100%; height: 240px; }
-.report-columns text { fill: var(--color-text); font-family: inherit; font-size: 14px; font-variant-numeric: tabular-nums; }
-.report-chart-axis { stroke: var(--color-control-border); stroke-width: 1; }
-.report-chart-column { fill: var(--color-accent); }
-.report-chart-mean { stroke: var(--color-text); stroke-width: 2; stroke-dasharray: 6 4; }
-.report-chart-reference { color: var(--color-text); }
-.report-chart-legend { display: flex; flex-wrap: wrap; gap: 8px 20px; }
-.report-chart-legend > span { display: inline-flex; gap: 8px; align-items: center; }
-.report-chart-line { fill: none; stroke-width: 2; }
-.report-chart-series-0 { stroke: var(--color-accent); }
-.report-chart-series-1 { stroke: var(--color-text); stroke-dasharray: 8 4; }
-.report-chart-series-2 { stroke: var(--color-info); stroke-dasharray: 3 3; }
-.report-chart-series-3 { stroke: var(--color-muted); stroke-dasharray: 10 3 2 3; }
-.report-chart-point { fill: var(--color-surface); stroke-width: 2; stroke-dasharray: none; }
+.report-chart-groups {
+  display: grid;
+  gap: 20px;
+}
+.report-chart-group {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.report-chart-group + .report-chart-group {
+  border-top: 1px solid var(--surface-border);
+  padding-top: 16px;
+}
+.report-chart-group h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+.report-chart-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+}
+.report-chart-scroll:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+}
+.report-columns {
+  display: block;
+  width: 100%;
+  height: 240px;
+}
+.report-columns text {
+  fill: var(--color-text);
+  font-family: inherit;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.report-chart-axis {
+  stroke: var(--color-control-border);
+  stroke-width: 1;
+}
+.report-chart-column {
+  fill: var(--color-accent);
+}
+.report-chart-mean {
+  stroke: var(--color-text);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+}
+.report-chart-reference {
+  color: var(--color-text);
+}
+.report-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+.report-chart-legend > span {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+.report-chart-line {
+  fill: none;
+  stroke-width: 2;
+}
+.report-chart-series-0 {
+  stroke: var(--color-accent);
+}
+.report-chart-series-1 {
+  stroke: var(--color-text);
+  stroke-dasharray: 8 4;
+}
+.report-chart-series-2 {
+  stroke: var(--color-info);
+  stroke-dasharray: 3 3;
+}
+.report-chart-series-3 {
+  stroke: var(--color-muted);
+  stroke-dasharray: 10 3 2 3;
+}
+.report-chart-point {
+  fill: var(--color-surface);
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
 .report-bars {
   display: grid;
   gap: 14px;
@@ -378,7 +444,7 @@ body .form-field.form-field > span {
 }
 body
   .form-field.form-field
-  :is(input:not([type='checkbox']):not([type='radio']):not([type='color']), textarea),
+  :where(input:not([type='checkbox']):not([type='radio']):not([type='color']), textarea),
 body .select-trigger.select-trigger.select-trigger,
 body .search-field.search-field,
 body .quick-card.client-search,
@@ -398,11 +464,12 @@ body .select-trigger.select-trigger.select-trigger {
 }
 body
   .form-field.form-field
-  :is(input:not([type='checkbox']):not([type='radio']):not([type='color']), textarea) {
+  :where(input:not([type='checkbox']):not([type='radio']):not([type='color']), textarea) {
   padding: 9px 12px;
   width: 100%;
 }
 body .form-field.form-field textarea {
+  height: auto;
   min-height: 100px;
   resize: vertical;
 }
@@ -438,7 +505,11 @@ body .select-search.select-search:focus-within {
   border-color: var(--color-accent);
   box-shadow: none;
 }
-/* Inset search focus stays visible inside clipped/scrolling panels and dialogs. */
+/* Every field keeps its focus inside the border, including clipped dialogs. */
+body .calendar-date input:focus-visible,
+body .form-field.form-field :is(input, textarea):focus-visible,
+body .select-trigger.select-trigger:focus-visible,
+body .select-trigger.select-trigger[aria-expanded='true'],
 body .search-field.search-field:focus-within,
 body .quick-card.client-search:focus-within,
 body .sale-name-search > div:focus-within,
@@ -1447,4 +1518,145 @@ body .modal-scroll-body {
   overscroll-behavior: contain;
   padding: 4px;
   margin-inline: -4px;
+}
+
+/* Field geometry is independent of native input minimums and border width. */
+body .form-field,
+body .select-wrap {
+  min-width: 0;
+  max-width: 100%;
+}
+body .form-field :is(input, textarea),
+body .calendar-date input,
+body .select-trigger {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
+body .client-membership-row {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+body .sidebar-cash-link {
+  margin-top: 12px;
+  border-top: 1px solid var(--color-line);
+  padding-top: 12px;
+  border-radius: 0;
+}
+body .reception-payment {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  display: grid;
+  gap: 16px;
+}
+body .reception-payment legend {
+  margin-bottom: 16px;
+  font-size: var(--text-heading-sm);
+  font-weight: 600;
+}
+body .reception-payment-parts {
+  align-items: end;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+body .reception-product {
+  display: grid;
+  gap: 12px;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  min-width: 0;
+}
+body .reception-product strong {
+  color: var(--color-ink);
+}
+body .reception-product small {
+  color: var(--color-muted);
+}
+body .reception-product:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+body .reception-product:focus-visible,
+body .client-membership-row:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -4px;
+}
+
+body .schedule-day-board {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  font-size: var(--text-body);
+}
+body .schedule-day-board th,
+body .schedule-day-board td {
+  padding: 6px;
+  border-right: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  vertical-align: top;
+}
+body .schedule-day-board thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--color-surface-subtle);
+  padding: 12px;
+  text-align: left;
+  color: var(--color-ink);
+}
+body .schedule-day-board th:first-child {
+  width: 76px;
+  position: sticky;
+  left: 0;
+  background: var(--color-surface);
+  z-index: 2;
+  font-family: var(--font-mono);
+  padding: 12px 8px;
+}
+body .schedule-day-board thead th:first-child {
+  z-index: 4;
+  font-family: var(--font-sans);
+}
+body .schedule-day-event {
+  width: 100%;
+  min-height: 76px;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--event-color) 35%, var(--color-line));
+  border-left: 4px solid var(--event-color);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--event-color) 7%, var(--color-surface));
+  color: var(--color-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+body .schedule-day-event + .schedule-day-event {
+  margin-top: 6px;
+}
+body .schedule-day-event span,
+body .schedule-day-event small {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+body .schedule-day-event:hover {
+  border-color: var(--color-accent);
+}
+body .schedule-day-event:focus-visible,
+body .schedule-day-scroll:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -3px;
+}
+body .schedule-day-event.is-cancelled {
+  opacity: 0.6;
 }
