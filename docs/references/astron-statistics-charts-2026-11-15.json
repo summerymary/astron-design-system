@@ -1,0 +1,1115 @@
+{
+  "date": "2026-11-15",
+  "source": "https://system.astron.club/index.php?do=statmodule",
+  "scope": "Read-only navigation of 48 catalogue pages, initial results only. No form submission, printing, exports, audio or operations. No real record values saved. Empty/unrendered charts are not evidence of no business data.",
+  "reports": [
+    {
+      "id": "birdthday",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Дни рождения",
+        "День рождения N ноября",
+        "День рождения N ноября",
+        "День рождения N ноября",
+        "День рождения N ноября"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "№",
+          "День рождения",
+          "ФИО",
+          "Телефон",
+          "Последний визит",
+          "Не был дней"
+        ],
+        [
+          "№",
+          "День рождения",
+          "ФИО",
+          "Телефон",
+          "Последний визит",
+          "Не был дней"
+        ],
+        [
+          "№",
+          "День рождения",
+          "ФИО",
+          "Телефон",
+          "Последний визит",
+          "Не был дней"
+        ]
+      ]
+    },
+    {
+      "id": "calls",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Звонки"
+      ],
+      "ready": "interactive",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "№",
+          "Дата",
+          "Клиент",
+          "WA",
+          "Входящий телефон",
+          "Статус звонка",
+          "Целевой номер",
+          "Прослушать"
+        ]
+      ]
+    },
+    {
+      "id": "client_lastvisit",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Потеряные клиенты  - кто не посещал клуб определенный промежуток времени - N найдено"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Карта",
+          "ЛК",
+          "ФИО",
+          "Последний визит",
+          "День рождения",
+          "Телефон",
+          "WhatsApp"
+        ]
+      ]
+    },
+    {
+      "id": "client_lastvisit_personal",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Клиенты  - кто не посещает персональные тренировки определенный промежуток времени - N найдено"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Карта",
+          "ФИО",
+          "Последняя ПТ",
+          "День рождения",
+          "Телефон",
+          "Сумма"
+        ]
+      ]
+    },
+    {
+      "id": "client_lifetime",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Время жизни клиента"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Показатель",
+          "Значение"
+        ]
+      ]
+    },
+    {
+      "id": "client_never",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Активные клиенты которые не посещали тренажерный зал и ПТ ни одного раза за всю историю",
+        "Всего активных клиентов на сегодня: N"
+      ],
+      "ready": "loading",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "№",
+          "Клиент",
+          "Телефон"
+        ]
+      ]
+    },
+    {
+      "id": "clients_active",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Активные клиенты на дату",
+        "Всего N активных клиентов по состоянию на N-N-N"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Номер",
+          "Клиент",
+          "Телефон",
+          "Абонемент",
+          "Дата окончания"
+        ]
+      ]
+    },
+    {
+      "id": "clients_gender_age",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Половозрастная структура посетителей"
+      ],
+      "ready": "interactive",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Возраст",
+          "Мужчины",
+          "Женщины"
+        ]
+      ]
+    },
+    {
+      "id": "clients_ltv",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "LTV (Lifetime Value)"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Показатель",
+          "Значение"
+        ]
+      ]
+    },
+    {
+      "id": "clients_ltv_bydate",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "LTV (Lifetime Value) за период"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Показатель",
+          "Значение"
+        ]
+      ]
+    },
+    {
+      "id": "clients_new",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "распечататьНовые клиенты"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Номер",
+          "Клиент",
+          "Дата рождения",
+          "Дата регистрации",
+          "Первая покупка",
+          "Интервал",
+          "Первое посещение",
+          "Интервал",
+          "Телефон"
+        ]
+      ]
+    },
+    {
+      "id": "clients_rating",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Рейтинг клиентов",
+          "height": 630,
+          "pie": false,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Рейтинг клиентов"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Номер",
+          "Клиент",
+          "Сумма за период"
+        ]
+      ]
+    },
+    {
+      "id": "clients_rating_visit",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Рейтинг клиентов по количеству посещений",
+          "height": 630,
+          "pie": false,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Рейтинг клиентов по количеству посещений"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Номер",
+          "Клиент",
+          "Посещений за период"
+        ]
+      ]
+    },
+    {
+      "id": "clients_segmetation",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Сегментация клиентской базы"
+      ],
+      "ready": "interactive",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Параметр",
+          "Количество",
+          "Подробнее"
+        ]
+      ]
+    },
+    {
+      "id": "clients_sell_discount",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Продажи со скидками"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Наименование",
+          "Количество операций",
+          "Сумма"
+        ]
+      ]
+    },
+    {
+      "id": "clients_sell_gender_age",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Половозрастная структура покупателей",
+          "height": 1400,
+          "pie": false,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Половозрастная структура покупателей"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Возраст",
+          "Мужчины",
+          "Женщины"
+        ],
+        [
+          "Возраст",
+          "Мужчины",
+          "Женщины"
+        ]
+      ]
+    },
+    {
+      "id": "fail_finance_report",
+      "canvas": 0,
+      "charts": [],
+      "headings": [],
+      "ready": "complete",
+      "status": "blank",
+      "tableHeaders": []
+    },
+    {
+      "id": "feedbacks",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Отзывы клиентов"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "№",
+          "Дата",
+          "Клиент",
+          "Отзыв",
+          "Оператор",
+          "Оценка"
+        ]
+      ]
+    },
+    {
+      "id": "financeresult",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        ""
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Параметр",
+          "Всего",
+          "Посещений",
+          "Средняя цена"
+        ]
+      ]
+    },
+    {
+      "id": "finbyyear",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Выручка по месяцам",
+          "height": 550,
+          "pie": false,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Выручка по месяцам"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Месяц",
+          "Выручка",
+          "Среднее"
+        ]
+      ]
+    },
+    {
+      "id": "finbyyear_by_abonements",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Доля абонемента в общей выручке",
+          "height": 1200,
+          "pie": false,
+          "width": 782
+        },
+        {
+          "heading": "Доля абонемента в общей выручке",
+          "height": 1200,
+          "pie": false,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Доля абонемента в общей выручке"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Абонемент",
+          "Сумма"
+        ],
+        [
+          "Абонемент",
+          "Количество"
+        ]
+      ]
+    },
+    {
+      "id": "fincredits",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Задолженность перед клиентами"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Показатель",
+          "Сумма",
+          "Количество",
+          "Средний показатель"
+        ]
+      ]
+    },
+    {
+      "id": "free_trener_find",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Поиск свободного тренера"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Время",
+          "Свободный тренер на Воскресенье, N ноября N:N"
+        ]
+      ]
+    },
+    {
+      "id": "gt_finance",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "распечататьГрупповые занятия и цены",
+          "height": 200,
+          "pie": false,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "распечататьГрупповые занятия и цены"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Дата",
+          "Занятие",
+          "Тренер",
+          "Тариф",
+          "Посетителей",
+          "Доход по количественным",
+          "Доход по безлимитным",
+          "Средняя цена",
+          "Общий доход"
+        ]
+      ]
+    },
+    {
+      "id": "gtrener_busy",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Занятость тренеров"
+      ],
+      "ready": "interactive",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "",
+          "Понедельник N ноября",
+          "Вторник N ноября",
+          "Среда N ноября",
+          "Четверг N ноября",
+          "Пятница N ноября",
+          "Суббота N ноября",
+          "Воскресенье N ноября"
+        ]
+      ]
+    },
+    {
+      "id": "gtrener_rating",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Рейтинги групповых тренировок",
+          "height": 1290,
+          "pie": false,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Рейтинги групповых тренировок"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Номер",
+          "Тренер",
+          "Тренировок",
+          "Оффлайн",
+          "Онлайн",
+          "Видов тренировок",
+          "Всего клиентов",
+          "Средний процент"
+        ]
+      ]
+    },
+    {
+      "id": "kassacontrol",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Касса"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "id",
+          "Время",
+          "приход",
+          "расход",
+          "вид оплаты",
+          "№ кассы",
+          "комментарий",
+          "кассир",
+          "клуб"
+        ]
+      ]
+    },
+    {
+      "id": "newclients",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Новые клиенты (N чел.)"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "№",
+          "Клиент",
+          "Карта",
+          "Телефон",
+          "WA",
+          "Дата регистрации",
+          "Дата рождения",
+          "vk",
+          "Источник"
+        ]
+      ]
+    },
+    {
+      "id": "newclients_source",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Источники клиентов",
+          "height": 500,
+          "pie": false,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Источники клиентов"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Источник",
+          "Количество"
+        ],
+        [
+          "№",
+          "Источник",
+          "Количество"
+        ]
+      ]
+    },
+    {
+      "id": "notcame",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Пропуск тренировок с предварительной записью"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Клиент",
+          "Телефон",
+          "Пропусков"
+        ]
+      ]
+    },
+    {
+      "id": "ptrener_rating",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Рейтинги персональных тренеров",
+          "height": 2190,
+          "pie": false,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Рейтинги персональных тренеров"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Номер",
+          "Тренер",
+          "Тренировок",
+          "Из них ПТ",
+          "Из них СПТ",
+          "Клиентов на СПТ",
+          "Уникальных клиентов"
+        ]
+      ]
+    },
+    {
+      "id": "ptrener_rating_all",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Рейтинги персональных тренеров",
+          "height": 2490,
+          "pie": false,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Рейтинги персональных тренеров"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Тренер",
+          "Персональные тренировки",
+          "Групповые тренировки",
+          "Дежурные часы"
+        ],
+        [
+          "Номер",
+          "Тренер",
+          "ПТ",
+          "Из них ПТ",
+          "Из них СПТ",
+          "ГП",
+          "ДЧ",
+          "Всего"
+        ]
+      ]
+    },
+    {
+      "id": "report_all_clients_phones",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Телеофоны клиентов по запросу"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": []
+    },
+    {
+      "id": "report_pclients",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Клиенты персонального тренера"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": []
+    },
+    {
+      "id": "report_pclients_lost",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Потеряные клиенты тренера"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": []
+    },
+    {
+      "id": "report_pclients_phones",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Персональные клиенты за период"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": []
+    },
+    {
+      "id": "report_pclients_stat",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Клиенты персонального тренера",
+        "Сводная информация"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Параметр",
+          "Значение"
+        ]
+      ]
+    },
+    {
+      "id": "selling_clients_afterguest",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Покупки после гостевого визита",
+          "height": 360,
+          "pie": true,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Покупки после гостевого визита"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Параметр",
+          "Количество"
+        ],
+        [
+          "Номер",
+          "Клиент",
+          "Продлил"
+        ]
+      ]
+    },
+    {
+      "id": "selling_clients_new",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Продажи новым клиентам"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Номер",
+          "Абонемент",
+          "Количество",
+          "Цена",
+          "Стоимость",
+          "Выручка"
+        ]
+      ]
+    },
+    {
+      "id": "selling_clients_secondary",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Доля продления",
+          "height": 360,
+          "pie": true,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Доля продления"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Параметр",
+          "Количество"
+        ],
+        [
+          "Номер",
+          "Клиент",
+          "Дата окончания",
+          "Дата продления",
+          "Продлено до",
+          "Абонемент"
+        ]
+      ]
+    },
+    {
+      "id": "selling_clients_secondary_summer",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Доля продления по Летней карте",
+          "height": 360,
+          "pie": true,
+          "width": 782
+        },
+        {
+          "heading": "Доля продления по Летней карте",
+          "height": 360,
+          "pie": true,
+          "width": 782
+        },
+        {
+          "heading": "Доля продления по Летней карте",
+          "height": 360,
+          "pie": true,
+          "width": 782
+        },
+        {
+          "heading": "Доля продления по Летней карте",
+          "height": 360,
+          "pie": true,
+          "width": 782
+        },
+        {
+          "heading": "Доля продления по Летней карте",
+          "height": 360,
+          "pie": true,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Доля продления по Летней карте"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Параметр",
+          "Количество"
+        ],
+        [
+          "Номер",
+          "Клиент",
+          "Продлил"
+        ],
+        [
+          "Параметр",
+          "Количество"
+        ]
+      ]
+    },
+    {
+      "id": "selling_stat",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Статистика продаж"
+      ],
+      "ready": "interactive",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "№",
+          "Абонемент",
+          "Сумма",
+          "Количество покупок",
+          "Нал",
+          "Б/Н",
+          "Подар.",
+          "Корп.",
+          "Сайт",
+          "Л.С.",
+          "Кто купил",
+          "Список операций"
+        ]
+      ]
+    },
+    {
+      "id": "selltovosit",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Посещаемость и цена посещения"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Абонементы",
+          "Активаций за период",
+          "На сумму",
+          "Совершено посещений",
+          "Цена посещения"
+        ]
+      ]
+    },
+    {
+      "id": "timetoabstat",
+      "status": "loaded",
+      "headings": [
+        "Распределение по клубам",
+        "Тип посещения",
+        "Распределение по полу",
+        "Распределение по возрасту",
+        "Популярность групповых программ",
+        "Абонементы по типу",
+        "Абонементы по названию"
+      ],
+      "charts": 6,
+      "types": [
+        "pie",
+        "pie",
+        "pie",
+        "pie",
+        "pie",
+        "pie"
+      ],
+      "notes": "Пол — клиенты; возраст — посещения. Последний разрез по названию карты — таблица."
+    },
+    {
+      "id": "trener_financial_result",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "Накопительный финансовый результат по персональным тренировкам"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Тренер",
+          "Категория",
+          "Январь",
+          "Февраль",
+          "Март",
+          "Апрель",
+          "Май",
+          "Июнь",
+          "Июль",
+          "Август",
+          "Сентябрь",
+          "Октябрь",
+          "Ноябрь",
+          "Декабрь",
+          "Всего оплата ПТ",
+          "Всего выручка ПТ",
+          "Средний процент"
+        ]
+      ]
+    },
+    {
+      "id": "unique_visits",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Уникальные посетители",
+          "height": 300,
+          "pie": true,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Уникальные посетители",
+        "Всего уникальных посетителей по всем направлениям",
+        "Уникальных персональных клиентов",
+        "Уникальных НЕ персональных клиентов"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Клубов",
+          "Посещений"
+        ],
+        [
+          "Параметр",
+          "Уникальных клиентов",
+          "В т.ч. новых",
+          "Всего посещений",
+          "Среднее значение",
+          "Посещений в день",
+          "Сумма уникальныхклиентов в день"
+        ],
+        [
+          "Параметр",
+          "Персональных клиентов",
+          "В т.ч. новых",
+          "% от общего количества",
+          "Всего посещений",
+          "Среднее значение"
+        ]
+      ]
+    },
+    {
+      "id": "unlim_avg_visit",
+      "canvas": 0,
+      "charts": [],
+      "headings": [
+        "распечататьПосещаемость по безлимитам"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "Количество посещений в месяц",
+          "Количество клиентов"
+        ]
+      ]
+    },
+    {
+      "id": "visit_by_period",
+      "canvas": 0,
+      "charts": [
+        {
+          "heading": "Посещения по месяцам",
+          "height": 350,
+          "pie": false,
+          "width": 782
+        }
+      ],
+      "headings": [
+        "Посещения по месяцам"
+      ],
+      "ready": "complete",
+      "status": "loaded",
+      "tableHeaders": [
+        [
+          "День",
+          "Всего",
+          "на Лобачевского",
+          "на Воинов",
+          "на Кырли",
+          "на Ленинском",
+          "Большой на Кырли",
+          "на Суворова",
+          "на Кремлёвской"
+        ],
+        [
+          "День",
+          "Всего",
+          "на Лобачевского",
+          "на Воинов",
+          "на Кырли",
+          "на Ленинском",
+          "Большой на Кырли",
+          "на Суворова",
+          "на Кремлёвской"
+        ]
+      ]
+    }
+  ]
+}

@@ -29,6 +29,8 @@ export type ReportFilters = {
   includeSingle: string;
   includeCorporate: string;
   onlyUnlimited: string;
+  uniqueOnly: string;
+  onlyPersonal: string;
   source: string;
   onlyOnline: string;
   onlyNoPurchase: string;
@@ -64,6 +66,8 @@ export const defaultReportFilters: ReportFilters = {
   includeSingle: '1',
   includeCorporate: '1',
   onlyUnlimited: '0',
+  uniqueOnly: '0',
+  onlyPersonal: '0',
   source: 'all',
   onlyOnline: '0',
   onlyNoPurchase: '0',
@@ -330,6 +334,20 @@ export function buildStatistics(
         })),
       );
     }
+    const clubCounts = grouped(filteredVisits, (v) => String(v.memberId)).map(
+      ([, visits]) => new Set(visits.map((v) => v.club)).size,
+    );
+    block(
+      'Клиенты по числу клубов',
+      [col('name', 'Посещено клубов'), col('count', 'Клиентов')],
+      [...new Set(clubCounts)]
+        .sort((a, b) => a - b)
+        .map((count) => ({
+          id: String(count),
+          name: `${count} ${count === 1 ? 'клуб' : count < 5 ? 'клуба' : 'клубов'}`,
+          count: String(clubCounts.filter((n) => n === count).length),
+        })),
+    );
   } else if (['clients_rating', 'clients_rating_visit'].includes(id)) {
     const byMoney = id === 'clients_rating';
     const rows = members
@@ -395,7 +413,71 @@ export function buildStatistics(
       ),
       true,
     );
-  } else if (id === 'timetoabstat' || id === 'clients_gender_age') {
+  } else if (id === 'clients_gender_age') {
+    const list =
+      f.uniqueOnly === '1'
+        ? [...new Map(filteredVisits.map((v) => [v.memberId, v])).values()]
+        : filteredVisits;
+    const rows = grouped(list, (v) => {
+      const m = memberById.get(String(v.memberId));
+      const age = m ? reportAge(profile(m).birthDate, f.to) : null;
+      return age === null ? 'Возраст не указан' : String(age);
+    })
+      .sort(([a], [b]) => a.localeCompare(b, 'ru', { numeric: true }))
+      .map(([age, visits]) => ({
+        id: age,
+        name: /^\d+$/.test(age) ? `${age} лет` : age,
+        ...Object.fromEntries(
+          [
+            ['male', 'Мужской'],
+            ['female', 'Женский'],
+            ['unknown', 'Не указан'],
+          ].map(([key, gender]) => [
+            key,
+            String(
+              visits.filter((v) => {
+                const m = memberById.get(String(v.memberId));
+                const g = m ? profile(m).gender : 'Не указан';
+                return gender === 'Не указан' ? !['Мужской', 'Женский'].includes(g) : g === gender;
+              }).length,
+            ),
+          ]),
+        ),
+      }));
+    block(
+      'По полу и возрасту',
+      [
+        col('name', 'Возраст'),
+        col('male', 'Мужчины'),
+        col('female', 'Женщины'),
+        col('unknown', 'Пол не указан'),
+      ],
+      rows,
+    );
+    result.notes.push(
+      `Совместное распределение по точному возрасту и полу. Возраст — на конец периода. ${f.uniqueOnly === '1' ? 'Один клиент учитывается один раз по сети.' : 'Считаются посещения, повторные визиты включены.'} Неизвестные пол и возраст не исключаются.`,
+    );
+  } else if (id === 'timetoabstat') {
+    const passFor = (v: (typeof filteredVisits)[number]) => {
+      const m = memberById.get(String(v.memberId));
+      if (!m) return undefined;
+      const matches = profile(m).subscriptions.filter((p) =>
+        v.passId ? p.id === v.passId : p.name === v.plan,
+      );
+      return matches.length === 1 ? matches[0] : undefined;
+    };
+    const programFor = (v: (typeof filteredVisits)[number]) => {
+      const receipts = (data['visit-bookings'] || []).filter(
+        (r) =>
+          r.memberId === String(v.memberId) &&
+          localTimestamp(r.date) === v.local &&
+          (!v.passId || r.passId === v.passId),
+      );
+      return receipts.length === 1
+        ? (data.events || []).find((e) => e.id === receipts[0].eventId)?.name ||
+            'Программа не определена'
+        : 'Программа не определена';
+    };
     for (const [title, key] of [
       ['По клубам', (v: (typeof filteredVisits)[number]) => v.club],
       ['По направлению', (v: (typeof filteredVisits)[number]) => kindNames[v.kind]],
@@ -411,43 +493,89 @@ export function buildStatistics(
         (v: (typeof filteredVisits)[number]) => {
           const m = memberById.get(String(v.memberId));
           const age = m ? reportAge(profile(m).birthDate, f.to) : null;
+          const bands = [
+            [18, 'До 18'],
+            [24, '18–23'],
+            [30, '24–29'],
+            [36, '30–35'],
+            [42, '36–41'],
+            [48, '42–47'],
+            [55, '48–54'],
+            [61, '55–60'],
+            [67, '61–66'],
+            [73, '67–72'],
+            [79, '73–78'],
+          ] as const;
           return age === null
             ? 'Не указан'
-            : age < 14
-              ? 'До 14'
-              : age < 24
-                ? '14–23'
-                : age < 35
-                  ? '24–34'
-                  : age < 50
-                    ? '35–49'
-                    : '50 и старше';
+            : bands.find(([end]) => age < end)?.[1] || '79 и старше';
         },
       ],
-      ['По абонементам', (v: (typeof filteredVisits)[number]) => v.plan],
+      ['Популярность групповых программ', programFor],
+      [
+        'По типам абонементов',
+        (v: (typeof filteredVisits)[number]) =>
+          getMembershipKind(v.plan, passFor(v)?.kindId)?.name || 'Тип не определён',
+      ],
+      ['По названиям абонементов', (v: (typeof filteredVisits)[number]) => v.plan],
     ] as const) {
-      if (id === 'clients_gender_age' && !['По полу', 'По возрасту'].includes(title)) continue;
+      const list =
+        title === 'Популярность групповых программ'
+          ? filteredVisits.filter((v) => v.kind === 'group')
+          : filteredVisits;
+      const denominator =
+        title === 'По полу' ? countDistinct(list, (v) => v.memberId) : list.length;
       block(
         title,
         [
           col('name', 'Группа'),
           col('count', 'Посещений'),
           col('clients', 'Клиентов'),
-          col('share', 'Доля визитов', 'percent'),
+          col('share', title === 'По полу' ? 'Доля клиентов' : 'Доля визитов', 'percent'),
         ],
-        grouped(filteredVisits, key).map(([name, rows]) => ({
+        grouped(list, key).map(([name, rows]) => ({
           id: name,
           name,
           count: String(rows.length),
           clients: String(countDistinct(rows, (v) => v.memberId)),
-          share: String(pct(rows.length, filteredVisits.length)),
+          share: String(
+            pct(
+              title === 'По полу' ? countDistinct(rows, (v) => v.memberId) : rows.length,
+              denominator,
+            ),
+          ),
         })),
       );
+      if (title === 'По возрасту') {
+        const order = (name: string) =>
+          name === 'До 18' ? 0 : Number(name.match(/^\d+/)?.[0] ?? Infinity);
+        result.blocks.at(-1)!.rows.sort((a, b) => order(a.name) - order(b.name));
+      }
     }
     result.notes.push(
-      'Возраст рассчитан на конец периода; клиенты без даты рождения выделены отдельно. Клубы и направления не объединяются с типами абонементов.',
+      'Возраст рассчитан на конец периода; возрастные группы соответствуют источнику. Пол — уникальные клиенты, остальные распределения — посещения. Тип и название карты показаны отдельно. Групповая программа определяется только по квитанции конкретного посещения: без точной связи она неизвестна, а не подставляется из предзаписи.',
     );
   } else if (id === 'visit_by_period') {
+    if ((Date.parse(f.to) - Date.parse(f.from)) / dayMs > 365)
+      return { ...result, error: 'Для дневного графика выберите период не длиннее 366 дней.' };
+    const clubs =
+      f.club === 'all' ? [...new Set(filteredVisits.map((v) => v.club))].sort() : [f.club];
+    const days: string[] = [];
+    for (let day = f.from; day <= f.to; day = shift(day, 1)) days.push(day);
+    block(
+      'Посещения по дням и клубам',
+      [col('day', 'День', 'date'), col('name', 'Клуб'), col('count', 'Посещений')],
+      days.flatMap((day) =>
+        clubs.map((club) => ({
+          id: `${day}|${club}`,
+          day,
+          name: club,
+          count: String(
+            filteredVisits.filter((v) => v.local.slice(0, 10) === day && v.club === club).length,
+          ),
+        })),
+      ),
+    );
     block(
       'Посещаемость по месяцам и клубам',
       [
@@ -463,6 +591,9 @@ export function buildStatistics(
         count: String(rows.length),
         clients: String(countDistinct(rows, (v) => v.memberId)),
       })),
+    );
+    result.notes.push(
+      'Основная диаграмма и первая таблица сохраняют дневной шаг источника. Месячная сводка — дополнительная таблица. Ноль означает отсутствие сохранённых посещений за этот день в демоданных, а не подтверждённую полноту истории клуба.',
     );
   } else if (['clients_new', 'newclients', 'newclients_source'].includes(id)) {
     const rows = members
@@ -839,6 +970,26 @@ export function buildStatistics(
         ),
       })),
     );
+    if (id === 'finbyyear') {
+      const b = result.blocks.at(-1)!;
+      const months: string[] = [];
+      for (let month = f.from.slice(0, 7); month <= f.to.slice(0, 7);) {
+        months.push(month);
+        const next = new Date(`${month}-01T00:00:00Z`);
+        next.setUTCMonth(next.getUTCMonth() + 1);
+        month = next.toISOString().slice(0, 7);
+      }
+      b.rows = months.map(
+        (month) =>
+          b.rows.find((r) => r.id === month) || {
+            id: month,
+            name: month,
+            count: '0',
+            amount: '0',
+            share: '0',
+          },
+      );
+    }
     const previous = previousReportPeriod(f.from, f.to);
     if (f.compare === 'previous' && previous) {
       const amount = ledger
@@ -940,21 +1091,57 @@ export function buildStatistics(
       'Новый клиент определяется выбранным событием. Показан только первый известный проданный абонемент клиента, если событие и продажа попали в период. История неполная.',
     );
   } else if (id === 'clients_sell_gender_age') {
-    block(
-      'Покупки по полу и возрасту',
-      [col('name', 'Группа'), col('count', 'Покупок'), col('amount', 'Сумма', 'money')],
-      grouped(sales, (s) => {
-        const m = resolveBuyer(s);
-        if (!m) return 'Покупатель не определён';
-        const p = profile(m),
-          age = reportAge(p.birthDate, f.to);
-        return `${p.gender} · ${age === null ? 'Возраст не указан' : age < 24 ? 'До 24' : age < 35 ? '24–34' : age < 50 ? '35–49' : '50 и старше'}`;
-      }).map(([name, rows]) => ({
-        id: name,
-        name,
-        count: String(rows.length),
-        amount: String(rows.reduce((n, s) => n + cashCents(s.amount), 0)),
-      })),
+    const purchases = sales.filter(
+      (s) =>
+        f.onlyPersonal !== '1' ||
+        getMembershipKind(s.name)?.id === 'personal' ||
+        /персональ/i.test(s.category),
+    );
+    const groups = grouped(purchases, (s) => {
+      const m = resolveBuyer(s);
+      const age = m ? reportAge(profile(m).birthDate, f.to) : null;
+      return age === null ? 'Возраст не указан' : String(age);
+    }).sort(([a], [b]) => a.localeCompare(b, 'ru', { numeric: true }));
+    for (const average of [false, true])
+      block(
+        average ? 'Средний чек по полу и возрасту' : 'Сумма покупок по полу и возрасту',
+        [
+          col('name', 'Возраст'),
+          col('male', 'Мужчины', 'money'),
+          col('female', 'Женщины', 'money'),
+          col('unknown', 'Пол не указан', 'money'),
+        ],
+        groups.map(([age, rows]) => ({
+          id: age,
+          name: /^\d+$/.test(age) ? `${age} лет` : age,
+          ...Object.fromEntries(
+            [
+              ['male', 'Мужской'],
+              ['female', 'Женский'],
+              ['unknown', 'Не указан'],
+            ].map(([key, gender]) => {
+              const list = rows.filter((r) => {
+                const m = resolveBuyer(r);
+                const g = m ? profile(m).gender : 'Не указан';
+                return gender === 'Не указан' ? !['Мужской', 'Женский'].includes(g) : g === gender;
+              });
+              return [
+                key,
+                average && !list.length
+                  ? ''
+                  : String(
+                      Math.round(
+                        list.reduce((n, r) => n + cashCents(r.amount), 0) /
+                          (average ? list.length : 1),
+                      ),
+                    ),
+              ];
+            }),
+          ),
+        })),
+      );
+    result.notes.push(
+      'Сумма и средний чек разделены. Возраст — на конец периода; пол и точный возраст показаны совместно. Средний чек — сумма сделок / количество сделок, без покупок он неизвестен. Покупатель без связи с базой остаётся в неизвестной группе.',
     );
   } else if (id === 'unlim_avg_visit') {
     const unlimited = filteredVisits.filter((v) => {

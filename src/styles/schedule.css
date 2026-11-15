@@ -741,6 +741,75 @@
 }
 
 @layer pages {
+  .calendar-controls {
+    display: contents;
+  }
+  .calendar-is-admin .calendar-controls {
+    display: block;
+    padding: 8px 12px;
+  }
+  .calendar-is-admin .calendar-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+  }
+  .calendar-is-admin .calendar-toolbar .ws-tabs {
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .calendar-is-admin .calendar-create {
+    width: auto;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .calendar-is-admin .calendar-admin-filter-toggle {
+    display: flex;
+    flex: 1 1 170px;
+    min-width: 0;
+    max-width: 360px;
+    width: auto;
+    margin: 0;
+    gap: 8px;
+    text-align: left;
+  }
+  .calendar-admin-filter-toggle > .calendar-filter-summary {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .calendar-admin-filter-toggle > svg {
+    flex-shrink: 0;
+  }
+  .calendar-filter-count {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+  .calendar-admin-filter-toggle .is-open {
+    transform: rotate(90deg);
+  }
+  .calendar-is-admin .calendar-week-strip,
+  .calendar-is-admin .calendar-filters {
+    display: none;
+  }
+  .calendar-is-admin .calendar-controls.is-expanded .calendar-week-strip {
+    display: grid;
+    padding: 8px 0;
+  }
+  .calendar-is-admin .calendar-controls.is-expanded .calendar-filters {
+    display: flex;
+    padding: 0;
+  }
+  .calendar-is-admin .calendar-filters > .button:last-child {
+    margin-left: auto;
+  }
+  .calendar-is-admin .calendar-footer {
+    display: none;
+  }
   .calendar-intensity-legend .calendar-legend-short {
     display: none;
   }

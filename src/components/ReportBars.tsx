@@ -2,11 +2,13 @@
 export function ReportBars({
   rows,
   unit = '',
+  maximum,
 }: {
   rows: { id?: string; name: string; value: number; label: string }[];
   unit?: string;
+  maximum?: number;
 }) {
-  const max = Math.max(1, ...rows.map((r) => r.value));
+  const max = Math.max(1, maximum ?? 0, ...rows.map((r) => r.value));
   return (
     <div className="report-bars" data-ui="report-bars" aria-label={`Сравнение: ${unit}`}>
       {rows.map((row, index) => (

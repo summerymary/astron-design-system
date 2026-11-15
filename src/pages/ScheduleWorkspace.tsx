@@ -18,7 +18,7 @@ import {
   Trash2,
   Users,
 } from 'lucide-react';
-import { Button, ConfirmDialog, Modal } from '../components/ui';
+import { Button, ConfirmDialog, CountBadge, Modal } from '../components/ui';
 import { ScheduleAttendees } from '../components/ScheduleAttendees';
 import { clientName } from '../lib/client-display';
 import { DataTable, Empty, Notice, SearchBox, Status, Tabs } from '../components/WorkspaceUI';
@@ -327,7 +327,7 @@ export function ScheduleWorkspace({
     const panel = root.current?.querySelector('.calendar-panel');
     if (panel) observer.observe(panel);
     for (const el of root.current?.querySelectorAll(
-      '.calendar-toolbar, .calendar-filters, .calendar-footer, .calendar-color-mode, .calendar-occupancy-legend, .calendar-intensity-legend',
+      '.calendar-controls, .calendar-toolbar, .calendar-filters, .calendar-footer, .calendar-color-mode, .calendar-occupancy-legend, .calendar-intensity-legend',
     ) || [])
       observer.observe(el);
     window.addEventListener('resize', measure);
@@ -580,10 +580,38 @@ export function ScheduleWorkspace({
     if (room !== 'Все залы') setRoom(record.room);
   };
 
+  const changedFilters =
+    Number(room !== 'Все залы') + Number(trainer !== 'Все тренеры') + Number(scale !== 'Весь день');
+  const filterToggle = (
+    <Button
+      variant="secondary"
+      className={`calendar-filter-toggle ${isAdmin ? 'calendar-admin-filter-toggle' : ''}`}
+      aria-label="Фильтры расписания"
+      aria-expanded={filtersOpen}
+      aria-controls={
+        isAdmin && view !== 'Неделя' ? 'calendar-week-strip calendar-filters' : 'calendar-filters'
+      }
+      aria-describedby={isAdmin ? 'calendar-hours-note' : undefined}
+      title={`${club} · ${room} · ${trainer} · ${scale}`}
+      onClick={() => setFiltersOpen(!filtersOpen)}
+    >
+      <Settings2 size={18} />
+      <span className="calendar-filter-summary">
+        {isAdmin ? `${club} · ${room}` : `${room} · ${scale}`}
+      </span>
+      {isAdmin && changedFilters > 0 && (
+        <span className="calendar-filter-count" title={`Изменено фильтров: ${changedFilters}`}>
+          <CountBadge>{changedFilters}</CountBadge>
+        </span>
+      )}
+      {!isAdmin && <b>{events.length}</b>}
+      <ChevronRight size={16} className={filtersOpen ? 'is-open' : ''} />
+    </Button>
+  );
   const content = (
     <div
       ref={root}
-      className={`calendar-workspace ${isTrainer ? 'calendar-is-trainer' : ''} calendar-scale-${scale === 'Весь день' ? 'fit' : scale === 'Крупнее' ? 'large' : 'comfortable'} ${fullscreen ? 'calendar-fullscreen' : ''} ${view !== 'Список' && gridHeight > available.height ? 'calendar-needs-scroll' : ''}`}
+      className={`calendar-workspace ${isAdmin ? 'calendar-is-admin' : ''} ${isTrainer ? 'calendar-is-trainer' : ''} calendar-scale-${scale === 'Весь день' ? 'fit' : scale === 'Крупнее' ? 'large' : 'comfortable'} ${fullscreen ? 'calendar-fullscreen' : ''} ${view !== 'Список' && gridHeight > available.height ? 'calendar-needs-scroll' : ''}`}
       role={fullscreen ? 'dialog' : undefined}
       aria-modal={fullscreen ? true : undefined}
       aria-label={fullscreen ? 'Расписание на весь экран' : undefined}
@@ -692,214 +720,240 @@ export function ScheduleWorkspace({
           document.body,
         )}
       <section className={`calendar-panel panel ${heatmap ? 'calendar-heatmap' : ''}`}>
-        <div className="calendar-toolbar">
-          <div className="calendar-date-nav">
-            <button
-              className="icon-button"
-              aria-label={view === 'Неделя' ? 'Предыдущая неделя' : 'Предыдущий день'}
-              onClick={() => setDay(addDays(day, view === 'Неделя' ? -7 : -1))}
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <Button variant="secondary" onClick={() => setDay(TODAY)}>
-              Сегодня
-            </Button>
-            <button
-              className="icon-button"
-              aria-label={view === 'Неделя' ? 'Следующая неделя' : 'Следующий день'}
-              onClick={() => setDay(addDays(day, view === 'Неделя' ? 7 : 1))}
-            >
-              <ChevronRight size={18} />
-            </button>
-            <label className="calendar-date">
-              <span className="sr-only">Дата расписания</span>
-              <input
-                type="date"
-                value={day}
-                onInput={(e) => e.currentTarget.value && setDay(e.currentTarget.value)}
-                onChange={(e) => e.target.value && setDay(e.target.value)}
-              />
-            </label>
-          </div>
-          {heatmap ? (
-            <strong className="calendar-week-label">
-              Неделя · {dayText(week)} — {dayText(dates[6])}
-            </strong>
-          ) : (
-            <Tabs
-              items={['День', 'Неделя', 'Список']}
-              value={view}
-              onChange={setView}
-              label="Вид расписания"
-              variant="segmented"
-            />
-          )}
-          <div className="calendar-create">
-            {canCopy && (
-              <Button variant="secondary" onClick={openWeekCopy}>
-                <Copy size={16} />
-                Копировать неделю
-              </Button>
-            )}
-            {canCreate && (
-              <>
-                <Button
-                  variant="secondary"
-                  onClick={() => (isTrainer ? navigate('trainer-clients') : openLibrary())}
-                >
-                  <BookOpen size={15} />
-                  {isTrainer ? 'Мои клиенты' : 'База тренировок'}
-                </Button>
-                <Button onClick={() => openLibrary()}>
-                  <Plus size={15} />
-                  {isTrainer ? 'Персональная тренировка' : 'Занятие'}
-                </Button>
-              </>
-            )}
-            <button
-              className="icon-button"
-              aria-label={fullscreen ? 'Свернуть расписание' : 'Расписание на весь экран'}
-              title={fullscreen ? 'Свернуть' : 'Весь экран — все занятия перед глазами'}
-              onClick={() => setFullscreen(!fullscreen)}
-            >
-              {fullscreen ? <Minimize2 size={18} /> : <Maximize2 size={18} />}
-            </button>
-          </div>
-        </div>
-        {view !== 'Неделя' && (
-          <div className="calendar-week-strip" aria-label="Дни недели">
-            {dates.map((date) => (
-              <button
-                key={date}
-                aria-pressed={date === day}
-                onClick={() => {
-                  setDay(date);
-                  if (view === 'Список') setView('День');
-                }}
-                className={date === day ? 'selected' : ''}
-              >
-                <span>
-                  {new Date(`${date}T12:00:00Z`).toLocaleDateString('ru-RU', {
-                    weekday: 'short',
-                    timeZone: 'Europe/Moscow',
-                  })}
-                </span>
-                <b>{Number(date.slice(-2))}</b>
-                {date === TODAY && <i aria-label="Сегодня" />}
-              </button>
-            ))}
-          </div>
-        )}
-        <button
-          className="calendar-filter-toggle"
-          aria-label="Фильтры расписания"
-          aria-expanded={filtersOpen}
-          aria-controls="calendar-filters"
-          onClick={() => setFiltersOpen(!filtersOpen)}
-        >
-          <Settings2 size={16} />
-          <span>
-            {room} · {scale}
-          </span>
-          <b>{events.length}</b>
-          <ChevronRight size={16} className={filtersOpen ? 'is-open' : ''} />
-        </button>
         <div
-          className={`calendar-filters ${filtersOpen ? 'is-expanded' : ''}`}
-          id="calendar-filters"
+          className={`calendar-controls ${filtersOpen ? 'is-expanded' : ''}`}
+          onKeyDown={
+            isAdmin
+              ? (event) => {
+                  if (event.key === 'Escape' && filtersOpen && !event.defaultPrevented) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    setFiltersOpen(false);
+                    root.current
+                      ?.querySelector<HTMLButtonElement>('.calendar-filter-toggle')
+                      ?.focus();
+                  }
+                }
+              : undefined
+          }
         >
-          <label>
-            <span className="sr-only">Клуб расписания</span>
-            <Select
-              value={club}
-              disabled={isTrainer}
-              onChange={(e) => {
-                setClub(e.target.value);
-                setRoom('Все залы');
-                setTrainer(isTrainer ? user.name : 'Все тренеры');
-              }}
-            >
-              {demoClubs
-                .filter((item) => user.role === 'administrator' || user.clubIds.includes(item.id))
-                .map((item) => (
-                  <option key={item.id}>{item.shortName}</option>
-                ))}
-            </Select>
-          </label>
-          <label>
-            <span className="sr-only">Зал расписания</span>
-            <Select
-              value={room}
-              onChange={(e) => {
-                setRoom(e.target.value);
-                setFiltersOpen(false);
-              }}
-            >
-              <option>Все залы</option>
-              {activeRooms.map((r) => (
-                <option key={r.id}>{r.name}</option>
+          <div className="calendar-toolbar">
+            <div className="calendar-date-nav">
+              <button
+                className="icon-button"
+                aria-label={view === 'Неделя' ? 'Предыдущая неделя' : 'Предыдущий день'}
+                onClick={() => setDay(addDays(day, view === 'Неделя' ? -7 : -1))}
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <Button variant="secondary" onClick={() => setDay(TODAY)}>
+                Сегодня
+              </Button>
+              <button
+                className="icon-button"
+                aria-label={view === 'Неделя' ? 'Следующая неделя' : 'Следующий день'}
+                onClick={() => setDay(addDays(day, view === 'Неделя' ? 7 : 1))}
+              >
+                <ChevronRight size={18} />
+              </button>
+              <label className="calendar-date">
+                <span className="sr-only">Дата расписания</span>
+                <input
+                  type="date"
+                  value={day}
+                  onInput={(e) => e.currentTarget.value && setDay(e.currentTarget.value)}
+                  onChange={(e) => e.target.value && setDay(e.target.value)}
+                />
+              </label>
+            </div>
+            {heatmap ? (
+              <strong className="calendar-week-label">
+                Неделя · {dayText(week)} — {dayText(dates[6])}
+              </strong>
+            ) : (
+              <Tabs
+                items={['День', 'Неделя', 'Список']}
+                value={view}
+                onChange={setView}
+                label="Вид расписания"
+                variant="segmented"
+              />
+            )}
+            {isAdmin && filterToggle}
+            <div className="calendar-create">
+              {canCopy && (
+                <Button variant="secondary" onClick={openWeekCopy}>
+                  <Copy size={16} />
+                  Копировать неделю
+                </Button>
+              )}
+              {canCreate && (
+                <>
+                  <Button
+                    variant="secondary"
+                    onClick={() => (isTrainer ? navigate('trainer-clients') : openLibrary())}
+                  >
+                    <BookOpen size={15} />
+                    {isTrainer ? 'Мои клиенты' : 'База тренировок'}
+                  </Button>
+                  <Button onClick={() => openLibrary()}>
+                    <Plus size={15} />
+                    {isTrainer ? 'Персональная тренировка' : 'Занятие'}
+                  </Button>
+                </>
+              )}
+              <button
+                className="icon-button"
+                aria-label={fullscreen ? 'Свернуть расписание' : 'Расписание на весь экран'}
+                title={fullscreen ? 'Свернуть' : 'Весь экран — все занятия перед глазами'}
+                onClick={() => setFullscreen(!fullscreen)}
+              >
+                {fullscreen ? <Minimize2 size={18} /> : <Maximize2 size={18} />}
+              </button>
+            </div>
+          </div>
+          {view !== 'Неделя' && (
+            <div className="calendar-week-strip" id="calendar-week-strip" aria-label="Дни недели">
+              {dates.map((date) => (
+                <button
+                  key={date}
+                  aria-pressed={date === day}
+                  onClick={() => {
+                    setDay(date);
+                    if (isAdmin) setFiltersOpen(false);
+                    if (view === 'Список') setView('День');
+                  }}
+                  className={date === day ? 'selected' : ''}
+                >
+                  <span>
+                    {new Date(`${date}T12:00:00Z`).toLocaleDateString('ru-RU', {
+                      weekday: 'short',
+                      timeZone: 'Europe/Moscow',
+                    })}
+                  </span>
+                  <b>{Number(date.slice(-2))}</b>
+                  {date === TODAY && <i aria-label="Сегодня" />}
+                </button>
               ))}
-            </Select>
-          </label>
-          <label>
-            <span className="sr-only">Тренер расписания</span>
-            <Select
-              value={trainer}
-              disabled={isTrainer}
-              onChange={(e) => setTrainer(e.target.value)}
-            >
-              <option>Все тренеры</option>
-              {trainers.map((t) => (
-                <option key={t}>{t}</option>
-              ))}
-            </Select>
-          </label>
-          {view !== 'Список' && (
-            <label className="calendar-scale">
-              <span className="sr-only">Масштаб расписания</span>
+            </div>
+          )}
+          {!isAdmin && filterToggle}
+          {isAdmin && (
+            <span className="sr-only" id="calendar-hours-note">
+              Изменено фильтров: {changedFilters}. {trainer}. {scale}. Пустые часы скрыты.
+              Дополнительные параметры и дни недели доступны в фильтрах расписания.
+            </span>
+          )}
+          <div
+            className={`calendar-filters ${filtersOpen ? 'is-expanded' : ''}`}
+            id="calendar-filters"
+          >
+            <label>
+              <span className="sr-only">Клуб расписания</span>
               <Select
-                value={scale}
+                value={club}
+                disabled={isTrainer}
                 onChange={(e) => {
-                  setScale(e.target.value);
-                  setFiltersOpen(false);
+                  setClub(e.target.value);
+                  setRoom('Все залы');
+                  setTrainer(isTrainer ? user.name : 'Все тренеры');
                 }}
               >
-                <option>Комфортно</option>
-                <option>Весь день</option>
-                <option>Крупнее</option>
+                {demoClubs
+                  .filter((item) => user.role === 'administrator' || user.clubIds.includes(item.id))
+                  .map((item) => (
+                    <option key={item.id}>{item.shortName}</option>
+                  ))}
               </Select>
             </label>
-          )}
-          <span className="calendar-count">
-            Занятий: <b>{events.length}</b>
-          </span>
-          {canCreate && !isTrainer && (
-            <details className="calendar-more">
-              <summary aria-label="Другие действия с расписанием">
-                <Settings2 size={16} />
-              </summary>
-              <div>
-                <label>
-                  Шаг переноса
-                  <Select
-                    aria-label="Шаг переноса"
-                    value={step}
-                    onChange={(e) => setStep(e.target.value)}
-                  >
-                    <option value="5">5 минут</option>
-                    <option value="15">15 минут</option>
-                    <option value="30">30 минут</option>
-                  </Select>
-                </label>
-                <Button variant="ghost" onClick={() => navigate('schedule-calendar')}>
-                  Настройки календаря
-                </Button>
-                <Button variant="ghost" onClick={() => navigate('training-groups')}>
-                  Группы тренировок
-                </Button>
-              </div>
-            </details>
-          )}
+            <label>
+              <span className="sr-only">Зал расписания</span>
+              <Select
+                value={room}
+                onChange={(e) => {
+                  setRoom(e.target.value);
+                  if (!isAdmin) setFiltersOpen(false);
+                }}
+              >
+                <option>Все залы</option>
+                {activeRooms.map((r) => (
+                  <option key={r.id}>{r.name}</option>
+                ))}
+              </Select>
+            </label>
+            <label>
+              <span className="sr-only">Тренер расписания</span>
+              <Select
+                value={trainer}
+                disabled={isTrainer}
+                onChange={(e) => setTrainer(e.target.value)}
+              >
+                <option>Все тренеры</option>
+                {trainers.map((t) => (
+                  <option key={t}>{t}</option>
+                ))}
+              </Select>
+            </label>
+            {view !== 'Список' && (
+              <label className="calendar-scale">
+                <span className="sr-only">Масштаб расписания</span>
+                <Select
+                  value={scale}
+                  onChange={(e) => {
+                    setScale(e.target.value);
+                    if (!isAdmin) setFiltersOpen(false);
+                  }}
+                >
+                  <option>Комфортно</option>
+                  <option>Весь день</option>
+                  <option>Крупнее</option>
+                </Select>
+              </label>
+            )}
+            <span className="calendar-count">
+              Занятий: <b>{events.length}</b>
+            </span>
+            {isAdmin && (
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setFiltersOpen(false);
+                  root.current
+                    ?.querySelector<HTMLButtonElement>('.calendar-filter-toggle')
+                    ?.focus();
+                }}
+              >
+                Готово
+              </Button>
+            )}
+            {canCreate && !isTrainer && (
+              <details className="calendar-more">
+                <summary aria-label="Другие действия с расписанием">
+                  <Settings2 size={16} />
+                </summary>
+                <div>
+                  <label>
+                    Шаг переноса
+                    <Select
+                      aria-label="Шаг переноса"
+                      value={step}
+                      onChange={(e) => setStep(e.target.value)}
+                    >
+                      <option value="5">5 минут</option>
+                      <option value="15">15 минут</option>
+                      <option value="30">30 минут</option>
+                    </Select>
+                  </label>
+                  <Button variant="ghost" onClick={() => navigate('schedule-calendar')}>
+                    Настройки календаря
+                  </Button>
+                  <Button variant="ghost" onClick={() => navigate('training-groups')}>
+                    Группы тренировок
+                  </Button>
+                </div>
+              </details>
+            )}
+          </div>
         </div>
         {message && (
           <div className="calendar-feedback" role="status">

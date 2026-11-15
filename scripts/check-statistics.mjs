@@ -24,6 +24,9 @@ const {
 const { statisticsReports, reportPending } = await import(
   await load(new URL('../src/data/statistics.ts', import.meta.url))
 );
+const { statisticsCharts } = await import(
+  await load(new URL('../src/lib/statistics-charts.ts', import.meta.url))
+);
 const { createWorkspaceData } = await import(
   await load(new URL('../src/data/workspace.ts', import.meta.url))
 );
@@ -370,6 +373,143 @@ assert.ok(
   ),
 );
 assert.equal(JSON.stringify(input), before, 'Detailed calculations must remain read-only');
+
+// Chart contracts preserve the source's dimensions; chart values are the table's raw units.
+const chartBefore = JSON.stringify(input);
+for (const report of statisticsReports) {
+  const output = buildStatistics(report.id, f, input);
+  const saved = JSON.stringify(output);
+  const charts = statisticsCharts(report.id, output, f);
+  assert.equal(JSON.stringify(output), saved, 'Charts must not mutate tables');
+  assert.equal(new Set(charts.map((c) => c.id)).size, charts.length, report.id);
+  for (const chart of charts)
+    for (const row of chart.rows) {
+      assert.equal(row.values.length, chart.series.length);
+      assert.ok(row.values.every((v) => v === null || (Number.isFinite(v) && v >= 0)));
+    }
+}
+const distribution = statisticsCharts('unique_visits', unique, f)[0];
+assert.equal(
+  distribution.rows.reduce((n, r) => n + r.values[0], 0),
+  unique.metrics[0].value,
+  'Club-count distribution partitions people, not visits or clubs',
+);
+assert.ok(distribution.rows.some((r) => r.id === '2'));
+for (const id of ['clients_rating', 'clients_rating_visit']) {
+  const out = buildStatistics(id, f, input);
+  assert.equal(
+    statisticsCharts(id, out, f)[0].rows[0].values[0],
+    Number(out.blocks[0].rows[0].value),
+    'Client ratings cannot disappear because rows link to profiles',
+  );
+}
+const parameterReport = buildStatistics('timetoabstat', f, input);
+assert.equal(
+  statisticsCharts('timetoabstat', parameterReport, f).length,
+  7,
+  'All source dimensions, including program and both pass dimensions',
+);
+const sexChart = statisticsCharts('timetoabstat', parameterReport, f).find(
+  (c) => c.title === 'По полу',
+);
+assert.equal(
+  sexChart.rows.reduce((n, r) => n + r.values[0], 0),
+  new Set(input.visits.map((v) => v.memberId)).size,
+  'Sex distribution counts clients, not their repeat visits',
+);
+const repeated = { ...input, visits: [input.visits[0], { ...input.visits[0], id: 'repeat' }] };
+assert.equal(
+  statisticsCharts(
+    'clients_gender_age',
+    buildStatistics('clients_gender_age', f, repeated),
+    f,
+  )[0].rows[0].values.reduce((n, v) => n + v, 0),
+  2,
+);
+const uniqueFilter = { ...f, uniqueOnly: '1' };
+assert.equal(
+  statisticsCharts(
+    'clients_gender_age',
+    buildStatistics('clients_gender_age', uniqueFilter, repeated),
+    uniqueFilter,
+  )[0].rows[0].values.reduce((n, v) => n + v, 0),
+  1,
+);
+const ageVisits = {
+  ...input,
+  members: [{ ...input.members[0], birthDate: '2008-11-06' }],
+  visits: [input.visits[0]],
+};
+assert.equal(
+  buildStatistics('timetoabstat', f, ageVisits).blocks.find((b) => b.title === 'По возрасту')
+    .rows[0].name,
+  '18–23',
+);
+const hoursChart = statisticsCharts('ptrener_rating_all', hours, f)[0];
+assert.deepEqual(
+  hoursChart.series.map((s) => s.key),
+  ['personalHours', 'groupHours', 'dutyHours'],
+);
+const planCharts = statisticsCharts(
+  'finbyyear_by_abonements',
+  buildStatistics('finbyyear_by_abonements', f, input),
+  f,
+);
+assert.deepEqual(
+  planCharts.map((c) => c.series[0].key),
+  ['amount', 'count'],
+);
+const chronological = { ...f, from: '2026-09-01' };
+const revenue = statisticsCharts(
+  'finbyyear',
+  buildStatistics('finbyyear', chronological, input),
+  chronological,
+)[0];
+assert.deepEqual(
+  revenue.rows.map((r) => r.id),
+  ['2026-09', '2026-10', '2026-11'],
+);
+assert.equal(
+  revenue.reference.value,
+  revenue.rows.reduce((n, r) => n + r.values[0], 0) / 3,
+  'Average includes explicit months without saved sales',
+);
+const daily = statisticsCharts(
+  'visit_by_period',
+  buildStatistics('visit_by_period', f, input),
+  f,
+)[0];
+assert.equal(daily.kind, 'lines');
+assert.equal(daily.rows.length, 6);
+assert.equal(
+  daily.rows.reduce((n, r) => n + r.values[0], 0),
+  input.visits.length,
+);
+assert.ok(
+  daily.rows.every((r) => r.values[0] === r.values.slice(1).reduce((n, v) => n + v, 0)),
+  'Daily total must equal club series',
+);
+const statuses = {
+  metrics: [],
+  notes: [],
+  blocks: [
+    {
+      title: 'Покупка следующей карты',
+      columns: [],
+      rows: [
+        { id: 'a', status: 'Продлил', anchor: '2026-01-01' },
+        { id: 'b', status: 'Не продлил', anchor: '2026-02-01' },
+        { id: 'c', status: 'Окно ещё открыто', anchor: '2026-03-01' },
+      ],
+    },
+  ],
+};
+assert.deepEqual(
+  statisticsCharts('selling_clients_secondary', statuses, f)[0].rows.map((r) => r.values[0]),
+  [1, 1, 1],
+  'Open windows are separate from failure',
+);
+assert.equal(JSON.stringify(input), chartBefore);
 
 const csv = statisticsCsv([
   {
