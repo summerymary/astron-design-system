@@ -262,6 +262,7 @@ const hours = buildStatistics('ptrener_rating_all', f, {
   ...input,
   data: {
     ...input.data,
+    'trainer-duty': [],
     events: [
       { ...event, id: 'short', trainer: 'First', trainerId: 'first', duration: '30' },
       { ...event, id: 'long', trainer: 'Second', trainerId: 'second', duration: '90' },
@@ -269,11 +270,107 @@ const hours = buildStatistics('ptrener_rating_all', f, {
   },
 });
 assert.equal(hours.blocks[0].rows[0].id, 'second', 'Working-hours ranking is sorted by hours');
-assert.ok(buildStatistics('clients_ltv', f, input).pending);
-assert.ok(
-  buildStatistics('fail_finance_report', f, input).pending,
+assert.equal(buildStatistics('clients_ltv', f, input).metrics[2].value, '1 400 ₽');
+assert.equal(
+  buildStatistics('fail_finance_report', f, {
+    ...input,
+    data: { ...input.data, 'fiscal-results': [] },
+  }).blocks[0].rows.length,
+  0,
   'No receipt number does not imply fiscal failure',
 );
+// Source semantics: club liabilities, account debits and explicit fiscal results.
+const liabilities = buildStatistics('fincredits', f, input);
+assert.equal(liabilities.blocks[0].rows.find((r) => r.memberId === '1001').amount, '240000');
+assert.ok(liabilities.blocks[2].rows.every((r) => r.plan !== 'Прокат полотенца'));
+assert.ok(liabilities.notes.some((n) => n.includes('обязательства клуба')));
+const noValuation = buildStatistics('fincredits', f, {
+  ...input,
+  data: { ...input.data, 'report-pass-values': [] },
+});
+assert.equal(noValuation.blocks[2].rows.length, 0);
+assert.ok(noValuation.notes.some((n) => n.includes('Нет сохранённой цены')));
+assert.equal(
+  buildStatistics('clients_ltv_bydate', f, input).blocks[0].rows.find((r) => r.memberId === '1001')
+    .amount,
+  '150000',
+);
+assert.equal(
+  buildStatistics('clients_ltv', f, input).blocks[0].rows.find((r) => r.memberId === '1001').amount,
+  '300000',
+);
+assert.equal(
+  buildStatistics('clients_ltv_bydate', { ...f, club: 'Парк' }, input).blocks[0].rows.length,
+  1,
+);
+const discounts = buildStatistics('clients_sell_discount', f, input).blocks[0].rows;
+assert.equal(discounts[0].original, '420000');
+assert.equal(discounts[0].discount, '30000');
+assert.equal(discounts[0].amount, '390000');
+assert.equal(discounts.length, 1, 'Unknown historical discounts are excluded');
+assert.equal(
+  buildStatistics('feedbacks', { ...f, operator: 'Другой' }, input).blocks[0].rows.length,
+  0,
+);
+assert.equal(
+  buildStatistics(
+    'ptrener_rating_all',
+    { ...f, countPersonal: '0', countGroup: '0' },
+    input,
+  ).blocks[0].rows.reduce((n, r) => n + Number(r.dutyHours), 0),
+  6,
+);
+const availability = {
+  ...input,
+  data: {
+    ...input.data,
+    events: [{ ...event, trainerId: 'user-trainer', day: f.to, time: '14:30', club: 'Парк' }],
+  },
+};
+assert.ok(
+  !buildStatistics(
+    'free_trener_find',
+    { ...f, club: 'Центральный', timeFrom: '14:00' },
+    availability,
+  ).blocks[0].rows.some((r) => r.name === 'Алина Белова'),
+  'Cross-club conflicts also block a coach',
+);
+assert.equal(
+  buildStatistics('free_trener_find', { ...f, timeFrom: '23:00', duration: '120' }, input).blocks
+    .length,
+  0,
+);
+assert.ok(buildStatistics('selling_clients_secondary', { ...f, renewalDays: '0' }, input).error);
+const { shiftMonths } = await import(
+  await load(new URL('../src/lib/statistics-details.ts', import.meta.url))
+);
+assert.equal(shiftMonths('2026-11-30', 3), '2027-02-28');
+assert.equal(shiftMonths('2023-11-30', 3), '2024-02-29');
+const life = buildStatistics('client_lifetime', { ...f, threshold: '1' }, input);
+assert.equal(life.blocks[0].rows.filter((r) => !r.end).length, life.metrics[1].value);
+assert.equal(
+  buildStatistics('clients_segmetation', { ...f, segment: '0' }, input).blocks[1].rows.some(
+    (r) => r.segment !== 'Активные клиенты',
+  ),
+  false,
+);
+const noPrice = buildStatistics(
+  'selltovosit',
+  { ...f, from: '2026-09-01' },
+  { ...input, data: { ...input.data, 'report-pass-values': [] } },
+);
+assert.ok(noPrice.blocks[0].rows.length > 0);
+assert.ok(
+  noPrice.blocks[0].rows.every((r) => r.amount === '' && r.average === ''),
+  'Missing price must not become a zero price',
+);
+assert.ok(
+  buildStatistics('trener_financial_result', f, input).blocks[0].rows.every(
+    (r) => r.month === '2026-11',
+  ),
+);
+assert.equal(JSON.stringify(input), before, 'Detailed calculations must remain read-only');
+
 const csv = statisticsCsv([
   {
     title: 'Тест',
