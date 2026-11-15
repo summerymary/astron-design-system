@@ -142,6 +142,9 @@ export function SaleWorkspace({
         name: item.name,
         description: item.short || item.description || item.name,
         category,
+        itemId: item.id,
+        kindId: item.kindId || '',
+        trainerId: isPersonalPlan ? personalTrainer?.id || '' : '',
         date: stamp.slice(0, 10),
         time: stamp.slice(11),
         cashier: employeeName,
@@ -185,6 +188,9 @@ export function SaleWorkspace({
           id: demoId('issued'),
           memberId,
           issued: TODAY,
+          saleId: id,
+          purchasePrice: String(pricing.total),
+          club: details.club,
           ...(isPersonalPlan && personalTrainer
             ? { trainerId: personalTrainer.id, trainerCategory: personalTrainer.categoryId }
             : {}),

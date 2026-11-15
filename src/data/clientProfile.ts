@@ -154,7 +154,9 @@ export function getClientProfile(member: Member, data: Record<string, DemoRecord
     mobileApp: hasDemoProfile && member.id % 2 === 1,
     note: hasDemoProfile ? 'Предпочитает вечерние занятия.' : '',
     goal: hasDemoProfile ? 'Регулярные тренировки и хорошее самочувствие' : 'Не указана',
-    source: hasDemoProfile ? 'Рекомендация друга' : 'Не указан',
+    source:
+      data['client-sources']?.find((r) => r.memberId === String(member.id))?.source ||
+      (hasDemoProfile ? 'Рекомендация друга' : 'Не указан'),
     smsConsent: hasDemoProfile,
     emailConsent: hasDemoProfile,
     subscriptions: all,

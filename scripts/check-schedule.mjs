@@ -101,6 +101,44 @@ for (const samples of [busyDay, events, displayedDay, [], [displayedDay[0]]]) {
   }
 }
 
+// Administrator compression is shared across visible rooms/days, preserving event duration.
+const sparse = [
+  { id: 'morning', time: '07:30', duration: '90' },
+  { id: 'evening', time: '18:10', duration: '50' },
+  { id: 'other-room', time: '12:00', duration: '60' },
+];
+const sparseBefore = JSON.stringify(sparse);
+const compact = rules.calendarTimeline(sparse, true);
+assert.deepEqual(compact.hours, [420, 480, 720, 1080, 1140]);
+assert.equal(compact.duration, 240);
+assert.equal(compact.position(540), compact.position(720), 'Empty gaps consume no space');
+assert.equal(compact.size(450, 90), 37.5, 'Partial-hour class keeps its full 90 minutes');
+assert.equal(compact.position(1090) + compact.size(1090, 50), 100);
+assert.deepEqual(
+  rules.calendarTimeline([sparse[0]], true).hours,
+  [420, 480, 540],
+  'Filtered calendar has its own occupied hours',
+);
+assert.deepEqual(
+  rules.calendarTimeline([], true).hours,
+  [],
+  'Empty filters show an empty state, not an empty time grid',
+);
+assert.equal(
+  rules.calendarTimeline(sparse).duration,
+  rules.calendarBounds(sparse).end - rules.calendarBounds(sparse).start,
+  'Other roles retain continuous time',
+);
+assert.equal(JSON.stringify(sparse), sparseBefore);
+assert.equal(
+  rules.calendarTimeline([{ id: 'late', time: '23:30', duration: '30' }], true).end,
+  1440,
+);
+assert.equal(
+  rules.calendarTimeline([{ id: 'bad', time: 'bad', duration: '20' }], true).hours.length,
+  0,
+);
+
 const original = { ...displayedDay[0], attendees: '1001,1002' };
 const before = structuredClone(original);
 const target = { day: '2026-11-07', time: '08:00', room: 'Сайкл-студия', club: 'Центральный' };

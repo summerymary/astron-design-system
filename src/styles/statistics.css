@@ -44,6 +44,10 @@
   .statistics-filters > .form-field {
     min-width: 0;
   }
+  .statistics-filters > .ws-checkbox {
+    min-height: var(--control-height);
+    align-self: center;
+  }
   .statistics-filters > button {
     justify-self: start;
   }
@@ -63,6 +67,9 @@
   @container workspace (max-width: 600px) {
     .statistics-filters {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .statistics-filters > .ws-checkbox {
+      grid-column: 1 / -1;
     }
     .statistics-filters .select-trigger {
       width: 100%;

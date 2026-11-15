@@ -28,7 +28,7 @@ import {
 } from '../components/ui';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { Back, DataTable, Empty, Notice, RecordForm, Tabs } from '../components/WorkspaceUI';
-import { TODAY } from '../data/workspace';
+import { TODAY, prettyDate } from '../data/workspace';
 import { clientTabs, getClientProfile } from '../data/clientProfile';
 import type { ClientTabId, SubscriptionStatus } from '../data/clientProfile';
 import type { AdminSectionId } from '../data/admin';
@@ -627,9 +627,22 @@ export function ClientProfile({
                     />
                   )}
                   {tab === 'reviews' && (
-                    <EmptyTab
-                      title="Отзывов пока нет"
-                      description="Отзывы клиента будут собраны в этом разделе."
+                    <DataTable
+                      rows={(data['client-reviews'] || []).filter(
+                        (r) => r.memberId === String(member.id),
+                      )}
+                      columns={[
+                        { key: 'date', label: 'Дата', render: (r) => prettyDate(r.date) },
+                        { key: 'text', label: 'Отзыв' },
+                        { key: 'rating', label: 'Оценка' },
+                        { key: 'operator', label: 'Оператор' },
+                      ]}
+                      empty={
+                        <EmptyTab
+                          title="Отзывов пока нет"
+                          description="Отзывы клиента будут собраны в этом разделе."
+                        />
+                      }
                     />
                   )}
                   {tab === 'bookings' && !!eventBookings.length && (

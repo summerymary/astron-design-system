@@ -5,6 +5,8 @@ import { getClientProfile } from '../data/clientProfile';
 import { clientName, hiddenPhone } from './client-display';
 import { cashCents, cashFlow, cashJournal } from './cash';
 import { reportPending } from '../data/statistics';
+import { detailedStatistics } from './statistics-details';
+import { getMembershipKind } from '../data/membership-kinds';
 
 export type ReportFilters = {
   from: string;
@@ -23,6 +25,23 @@ export type ReportFilters = {
   channel: string;
   compare: string;
   grouping: string;
+  includePersonal: string;
+  includeSingle: string;
+  includeCorporate: string;
+  onlyUnlimited: string;
+  source: string;
+  onlyOnline: string;
+  onlyNoPurchase: string;
+  segment: string;
+  operator: string;
+  callStatus: string;
+  onlyUnknown: string;
+  plan: string;
+  countPersonal: string;
+  countGroup: string;
+  countDuty: string;
+  duration: string;
+  renewalDays: string;
 };
 export const defaultReportFilters: ReportFilters = {
   from: '2026-11-01',
@@ -41,6 +60,23 @@ export const defaultReportFilters: ReportFilters = {
   channel: 'all',
   compare: 'none',
   grouping: 'plan',
+  includePersonal: '1',
+  includeSingle: '1',
+  includeCorporate: '1',
+  onlyUnlimited: '0',
+  source: 'all',
+  onlyOnline: '0',
+  onlyNoPurchase: '0',
+  segment: 'all',
+  operator: 'all',
+  callStatus: 'all',
+  onlyUnknown: '0',
+  plan: 'all',
+  countPersonal: '1',
+  countGroup: '1',
+  countDuty: '1',
+  duration: '60',
+  renewalDays: '30',
 };
 export type ReportColumn = { key: string; label: string; format?: 'money' | 'date' | 'percent' };
 export type ReportBlock = {
@@ -94,7 +130,14 @@ export function reportFilterError(f: ReportFilters): string | null {
     f.timeFrom > f.timeTo
   )
     return 'Начало времени не должно быть позже конца.';
-  for (const key of ['ageFrom', 'ageTo', 'limit', 'threshold'] as const) {
+  for (const key of [
+    'ageFrom',
+    'ageTo',
+    'limit',
+    'threshold',
+    'duration',
+    'renewalDays',
+  ] as const) {
     if (
       f[key] !== '' &&
       (!/^\d+$/.test(f[key]) || Number(f[key]) > (key.startsWith('age') ? 120 : 10000))
@@ -133,6 +176,8 @@ export function buildStatistics(
   const result: ReportResult = { metrics: [], blocks: [], notes: [] };
   const error = reportFilterError(f);
   if (error) return { ...result, error };
+  const detailed = detailedStatistics(id, f, input);
+  if (detailed) return detailed;
   if (reportPending[id]) return { ...result, pending: reportPending[id] };
   const { data, visits, at } = input;
   const members = input.members.filter((m) => !m.archived);
@@ -421,7 +466,7 @@ export function buildStatistics(
     );
   } else if (['clients_new', 'newclients', 'newclients_source'].includes(id)) {
     const rows = members
-      .map((m) => {
+      .map((m): DemoRecord => {
         const firstVisit =
           allVisits
             .filter((v) => v.memberId === m.id)
@@ -448,7 +493,16 @@ export function buildStatistics(
                 : registered,
         };
       })
-      .filter((r) => inPeriod(id === 'clients_new' ? r.criterion : r.registered));
+      .filter((r) => inPeriod(id === 'clients_new' ? r.criterion : r.registered))
+      .filter(
+        (r) =>
+          (f.source === 'all' || r.source === f.source) &&
+          (f.onlyNoPurchase !== '1' || !r.firstBuy) &&
+          (f.onlyOnline !== '1' ||
+            (data['client-sources'] || []).some(
+              (s) => s.memberId === r.memberId && s.online === 'true',
+            )),
+      );
     if (id === 'newclients_source')
       block(
         'Источники регистраций',
@@ -484,6 +538,10 @@ export function buildStatistics(
           reportDay(p.activatedAt) <= f.to &&
           (!p.endsAt || reportDay(p.endsAt) >= f.to) &&
           p.status !== 'paused' &&
+          (f.includePersonal === '1' || p.kindId !== 'personal') &&
+          (f.includeSingle === '1' || !['single', 'guest'].includes(p.kindId || '')) &&
+          (f.includeCorporate === '1' || !/корпоратив/i.test((p.training || '') + ' ' + p.name)) &&
+          (f.onlyUnlimited !== '1' || p.remaining === null) &&
           p.remaining !== 0,
       ),
     );
@@ -548,7 +606,12 @@ export function buildStatistics(
         col('duration', 'Длительность'),
         col('status', 'Статус'),
       ],
-      (data.calls || []).filter((r) => inPeriod(reportDay(r.time.slice(0, 10)))),
+      (data.calls || []).filter(
+        (r) =>
+          inPeriod(reportDay(r.time.slice(0, 10))) &&
+          (f.callStatus === 'all' || r.status === f.callStatus) &&
+          (f.onlyUnknown !== '1' || !r.memberId),
+      ),
     );
     result.notes.push(
       'Аудиозаписи не подключены. Звонки без привязки к клубу не делятся по клубам.',
@@ -560,7 +623,9 @@ export function buildStatistics(
       id === 'ptrener_rating'
         ? e.kind === 'personal'
         : id === 'ptrener_rating_all'
-          ? true
+          ? e.kind === 'personal'
+            ? f.countPersonal === '1'
+            : f.countGroup === '1'
           : e.kind !== 'personal',
     );
     block(
@@ -569,20 +634,63 @@ export function buildStatistics(
         col('name', 'Тренер'),
         col('count', 'Занятий'),
         col('hours', 'Часов по расписанию'),
+        ...(id === 'ptrener_rating_all'
+          ? [
+              col('personalHours', 'Часов ПТ'),
+              col('groupHours', 'Часов ГП'),
+              col('dutyHours', 'Дежурных часов'),
+            ]
+          : []),
         col('present', 'Отмечено посещений'),
         col('booked', 'Записано'),
         col('capacity', 'Мест'),
         col('occupancy', 'Заполняемость', 'percent'),
       ],
-      grouped(list, trainerKey)
+      grouped<DemoRecord>(
+        [
+          ...list,
+          ...(id === 'ptrener_rating_all' && f.countDuty === '1'
+            ? (data['trainer-duty'] || [])
+                .filter(
+                  (d) =>
+                    inPeriod(d.day) &&
+                    inClub(d.club) &&
+                    (f.trainer === 'all' || d.trainerId === f.trainer),
+                )
+                .map((d) => ({
+                  ...d,
+                  kind: 'duty',
+                  trainer:
+                    (data['trainer-profiles'] || []).find((t) => t.id === d.trainerId)?.name ||
+                    'Не указан',
+                }))
+            : []),
+        ],
+        trainerKey,
+      )
         .map(([key, rows]) => {
           const capacity = rows.reduce((n, e) => n + Number(e.capacity || 0), 0),
             booked = rows.reduce((n, e) => n + Number(e.booked || 0), 0);
           return {
             id: key,
             name: rows[0].trainer,
-            count: String(rows.length),
+            count: String(rows.filter((e) => e.kind !== 'duty').length),
             hours: (rows.reduce((n, e) => n + Number(e.duration || 0), 0) / 60).toFixed(1),
+            personalHours: (
+              rows
+                .filter((e) => e.kind === 'personal')
+                .reduce((n, e) => n + Number(e.duration || 0), 0) / 60
+            ).toFixed(1),
+            groupHours: (
+              rows
+                .filter((e) => !['personal', 'duty'].includes(e.kind))
+                .reduce((n, e) => n + Number(e.duration || 0), 0) / 60
+            ).toFixed(1),
+            dutyHours: (
+              rows
+                .filter((e) => e.kind === 'duty')
+                .reduce((n, e) => n + Number(e.duration || 0), 0) / 60
+            ).toFixed(1),
             present: String(rows.reduce((n, e) => n + ids(e.present).length, 0)),
             booked: String(booked),
             capacity: String(capacity),
@@ -792,7 +900,25 @@ export function buildStatistics(
   } else if (id === 'selling_clients_new') {
     const list = sales.filter((s) => {
       const m = resolveBuyer(s);
-      return Boolean(m && inPeriod(reportDay(m.joined)));
+      if (!m || !getMembershipKind(s.name, s.kindId)) return false;
+      const criterion =
+        f.criterion === 'registration'
+          ? reportDay(m.joined)
+          : f.criterion === 'visit'
+            ? allVisits
+                .filter((v) => v.memberId === m.id)
+                .map((v) => v.local.slice(0, 10))
+                .sort()[0] || ''
+            : ledger
+                .filter((r) => resolveBuyer(r)?.id === m.id)
+                .map((r) => r.date)
+                .sort()[0] || '';
+      const first = ledger
+        .filter((r) => resolveBuyer(r)?.id === m.id && getMembershipKind(r.name, r.kindId))
+        .sort((a, b) =>
+          `${a.date} ${a.time || ''} ${a.id}`.localeCompare(`${b.date} ${b.time || ''} ${b.id}`),
+        )[0];
+      return inPeriod(criterion) && first?.id === s.id;
     });
     block(
       'Покупки новых клиентов',
@@ -811,7 +937,7 @@ export function buildStatistics(
       true,
     );
     result.notes.push(
-      'Новый клиент в деморасчёте — зарегистрированный за выбранный период. Продажа также должна попадать в этот период.',
+      'Новый клиент определяется выбранным событием. Показан только первый известный проданный абонемент клиента, если событие и продажа попали в период. История неполная.',
     );
   } else if (id === 'clients_sell_gender_age') {
     block(
@@ -821,7 +947,7 @@ export function buildStatistics(
         const m = resolveBuyer(s);
         if (!m) return 'Покупатель не определён';
         const p = profile(m),
-          age = reportAge(p.birthDate, s.date);
+          age = reportAge(p.birthDate, f.to);
         return `${p.gender} · ${age === null ? 'Возраст не указан' : age < 24 ? 'До 24' : age < 35 ? '24–34' : age < 50 ? '35–49' : '50 и старше'}`;
       }).map(([name, rows]) => ({
         id: name,
@@ -830,42 +956,25 @@ export function buildStatistics(
         amount: String(rows.reduce((n, s) => n + cashCents(s.amount), 0)),
       })),
     );
-  } else if (id === 'fincredits') {
-    block(
-      'Остаток задолженности',
-      [
-        col('date', 'Дата', 'date'),
-        col('client', 'Клиент'),
-        col('name', 'Покупка'),
-        col('amount', 'Долг', 'money'),
-      ],
-      cashJournal(sales, [])
-        .filter((r) => r.credit > 0)
-        .map((r) => ({
-          id: r.id,
-          date: r.date,
-          client: r.client,
-          memberId: r.memberId,
-          name: r.name,
-          amount: String(r.credit),
-        })),
-      true,
-    );
-    result.notes.push(
-      'Показан сохранённый в продаже остаток долга; демонстрационный журнал пока не содержит отдельного графика погашений.',
-    );
   } else if (id === 'unlim_avg_visit') {
     const unlimited = filteredVisits.filter((v) => {
       const m = memberById.get(String(v.memberId));
       return Boolean(
         m &&
         profile(m).subscriptions.some(
-          (p) => (v.passId ? p.id === v.passId : p.name === v.plan) && p.remaining === null,
+          (p) =>
+            (v.passId ? p.id === v.passId : p.name === v.plan) &&
+            p.remaining === null &&
+            (f.plan === 'all' || p.name === f.plan),
         ),
       );
     });
     const amounts = members
-      .filter((m) => profile(m).subscriptions.some((p) => p.remaining === null))
+      .filter((m) =>
+        profile(m).subscriptions.some(
+          (p) => p.remaining === null && (f.plan === 'all' || p.name === f.plan),
+        ),
+      )
       .map((m) => ({
         ...person(m),
         count: String(unlimited.filter((v) => v.memberId === m.id).length),

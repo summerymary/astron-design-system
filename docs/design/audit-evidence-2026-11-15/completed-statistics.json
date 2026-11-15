@@ -1,0 +1,770 @@
+{
+  "reports": [
+    {
+      "blocks": 3,
+      "error": "",
+      "heading": "Уникальные посетители",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=unique_visits"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Рейтинг клиентов по покупкам",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_rating"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Рейтинг клиентов по посещениям",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_rating_visit"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Статистика пропусков",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=notcame"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Дни рождения",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=birdthday"
+    },
+    {
+      "blocks": 5,
+      "error": "",
+      "heading": "Посещения по параметрам",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=timetoabstat"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Статистика посещения по месяцам",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=visit_by_period"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Новые клиенты: регистрация, визит, покупка",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_new"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Клиенты не посещали",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=client_never"
+    },
+    {
+      "blocks": 2,
+      "error": "",
+      "heading": "Время жизни",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=client_lifetime"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Новые клиенты по источникам",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=newclients"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Источники новых клиентов",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=newclients_source"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Активные клиенты",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_active"
+    },
+    {
+      "blocks": 2,
+      "error": "",
+      "heading": "Половозрастная структура",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_gender_age"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Контакты клиентов",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=report_all_clients_phones"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Потерянные клиенты",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=client_lastvisit"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Потерянные ПТ клиенты",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=client_lastvisit_personal"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Отзывы",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=feedbacks"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Звонки",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=calls"
+    },
+    {
+      "blocks": 2,
+      "error": "",
+      "heading": "Сегментация клиентов",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_segmetation"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Занятость групповых тренеров",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=gtrener_busy"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Клиенты тренера",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=report_pclients"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Потерянные клиенты тренера",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=report_pclients_lost"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Удержание и потеря клиентов тренера",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=report_pclients_stat"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Рейтинг ПТ",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=ptrener_rating"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Рабочие часы тренеров",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=ptrener_rating_all"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Контакты персональных клиентов",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=report_pclients_phones"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Рейтинг групповых",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=gtrener_rating"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Свободный тренер",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=free_trener_find"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Статистика продаж",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=selling_stat"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Продажи и посещения",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=selltovosit"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Контроль кассы",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=kassacontrol"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Продажи новым клиентам",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=selling_clients_new"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Доля продления",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=selling_clients_secondary"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Пол/возраст покупателей",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_sell_gender_age"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Продажи со скидкой",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_sell_discount"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Финансовый результат",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=financeresult"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Средние расходы клиента (LTV)",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_ltv"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Средние расходы клиента за период",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_ltv_bydate"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Выручка",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=finbyyear"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Доля продления по Летней карте",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=selling_clients_secondary_summer"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Покупка после гостевого",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=selling_clients_afterguest"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Финансовый результат по тренеру",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=trener_financial_result"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Ошибочные операции",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=fail_finance_report"
+    },
+    {
+      "blocks": 3,
+      "error": "",
+      "heading": "Обязательства перед клиентами",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=fincredits"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Выручка по абонементам",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=finbyyear_by_abonements"
+    },
+    {
+      "blocks": 1,
+      "error": "",
+      "heading": "Групповые занятия и цены",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=gt_finance"
+    },
+    {
+      "blocks": 2,
+      "error": "",
+      "heading": "Сегментация посещений по безлимитам",
+      "overflow": false,
+      "pending": false,
+      "url": "#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=unlim_avg_visit"
+    }
+  ],
+  "schedule": [
+    {
+      "events": [
+        {
+          "height": "27.7778%",
+          "label": "Средняя интенсивность, Персональная тренировка, Смирнова Анна Андреевна, 6 ноября, 08:45–09:35, Алина Белова, Зал персональных тренировок, записано 1 из 1, Запланирована",
+          "top": "25%"
+        },
+        {
+          "height": "27.7778%",
+          "label": "Средняя интенсивность, Персональная тренировка, Козлова Елена Викторовна, 6 ноября, 16:05–16:55, Алина Белова, Зал персональных тренировок, записано 1 из 1, Запланирована",
+          "top": "69.4444%"
+        }
+      ],
+      "hours": [
+        "08:00",
+        "09:00",
+        "16:00",
+        "17:00"
+      ],
+      "overflow": false,
+      "view": "administrator-personal-room"
+    },
+    {
+      "buttonCount": 2,
+      "events": 2,
+      "hours": [
+        "08:00",
+        "09:00",
+        "16:00",
+        "17:00"
+      ],
+      "overflow": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=schedule",
+      "view": "mobile"
+    },
+    {
+      "buttonCount": 14,
+      "events": 14,
+      "hours": [
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "23:00"
+      ],
+      "overflow": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=schedule",
+      "view": "mobile"
+    },
+    {
+      "buttonCount": 14,
+      "events": 14,
+      "hours": [
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "23:00"
+      ],
+      "overflow": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=schedule",
+      "view": "mobile"
+    },
+    {
+      "buttonCount": 14,
+      "events": 14,
+      "hours": [
+        "06:00",
+        "08:00",
+        "10:00",
+        "12:00",
+        "14:00",
+        "16:00",
+        "18:00",
+        "20:00",
+        "23:00"
+      ],
+      "overflow": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=schedule",
+      "view": "mobile"
+    }
+  ],
+  "mobile": [
+    {
+      "heading": "Уникальные посетители",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=unique_visits"
+    },
+    {
+      "heading": "Рейтинг клиентов по покупкам",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_rating"
+    },
+    {
+      "heading": "Рейтинг клиентов по посещениям",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_rating_visit"
+    },
+    {
+      "heading": "Статистика пропусков",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=notcame"
+    },
+    {
+      "heading": "Дни рождения",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=birdthday"
+    },
+    {
+      "heading": "Посещения по параметрам",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=timetoabstat"
+    },
+    {
+      "heading": "Статистика посещения по месяцам",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=visit_by_period"
+    },
+    {
+      "heading": "Новые клиенты: регистрация, визит, покупка",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_new"
+    },
+    {
+      "heading": "Клиенты не посещали",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=client_never"
+    },
+    {
+      "heading": "Время жизни",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=client_lifetime"
+    },
+    {
+      "heading": "Новые клиенты по источникам",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=newclients"
+    },
+    {
+      "heading": "Источники новых клиентов",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=newclients_source"
+    },
+    {
+      "heading": "Активные клиенты",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_active"
+    },
+    {
+      "heading": "Половозрастная структура",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_gender_age"
+    },
+    {
+      "heading": "Контакты клиентов",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=report_all_clients_phones"
+    },
+    {
+      "heading": "Потерянные клиенты",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=client_lastvisit"
+    },
+    {
+      "heading": "Потерянные ПТ клиенты",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=client_lastvisit_personal"
+    },
+    {
+      "heading": "Отзывы",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=feedbacks"
+    },
+    {
+      "heading": "Звонки",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=calls"
+    },
+    {
+      "heading": "Сегментация клиентов",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_segmetation"
+    },
+    {
+      "heading": "Занятость групповых тренеров",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=gtrener_busy"
+    },
+    {
+      "heading": "Клиенты тренера",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=report_pclients"
+    },
+    {
+      "heading": "Потерянные клиенты тренера",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=report_pclients_lost"
+    },
+    {
+      "heading": "Удержание и потеря клиентов тренера",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=report_pclients_stat"
+    },
+    {
+      "heading": "Рейтинг ПТ",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=ptrener_rating"
+    },
+    {
+      "heading": "Рабочие часы тренеров",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=ptrener_rating_all"
+    },
+    {
+      "heading": "Контакты персональных клиентов",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=report_pclients_phones"
+    },
+    {
+      "heading": "Рейтинг групповых",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=gtrener_rating"
+    },
+    {
+      "heading": "Свободный тренер",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=free_trener_find"
+    },
+    {
+      "heading": "Статистика продаж",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=selling_stat"
+    },
+    {
+      "heading": "Продажи и посещения",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=selltovosit"
+    },
+    {
+      "heading": "Контроль кассы",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=kassacontrol"
+    },
+    {
+      "heading": "Продажи новым клиентам",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=selling_clients_new"
+    },
+    {
+      "heading": "Доля продления",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=selling_clients_secondary"
+    },
+    {
+      "heading": "Пол/возраст покупателей",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_sell_gender_age"
+    },
+    {
+      "heading": "Продажи со скидкой",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_sell_discount"
+    },
+    {
+      "heading": "Финансовый результат",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=financeresult"
+    },
+    {
+      "heading": "Средние расходы клиента (LTV)",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_ltv"
+    },
+    {
+      "heading": "Средние расходы клиента за период",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_ltv_bydate"
+    },
+    {
+      "heading": "Выручка",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=finbyyear"
+    },
+    {
+      "heading": "Доля продления по Летней карте",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=selling_clients_secondary_summer"
+    },
+    {
+      "heading": "Покупка после гостевого",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=selling_clients_afterguest"
+    },
+    {
+      "heading": "Финансовый результат по тренеру",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=trener_financial_result"
+    },
+    {
+      "heading": "Ошибочные операции",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=fail_finance_report"
+    },
+    {
+      "heading": "Обязательства перед клиентами",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=fincredits"
+    },
+    {
+      "heading": "Выручка по абонементам",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=finbyyear_by_abonements"
+    },
+    {
+      "heading": "Групповые занятия и цены",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=gt_finance"
+    },
+    {
+      "heading": "Сегментация посещений по безлимитам",
+      "overflow": false,
+      "pending": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=unlim_avg_visit"
+    }
+  ],
+  "console": []
+}
