@@ -534,6 +534,7 @@ export const resources: Record<string, Resource> = {
     rows: [
       {
         id: 'call-1',
+        memberId: '1001',
         name: 'Анна Смирнова',
         time: '06.11.2026 12:40',
         direction: 'Входящий',
@@ -543,6 +544,7 @@ export const resources: Record<string, Resource> = {
       },
       {
         id: 'call-2',
+        memberId: '1002',
         name: 'Михаил Волков',
         time: '06.11.2026 11:15',
         direction: 'Исходящий',
@@ -1366,6 +1368,9 @@ export const initialExtra: Record<string, DemoRecord[]> = {
       club: 'Центральный',
       client: 'Анна Смирнова',
       amount: '3900',
+      basePrice: '4200',
+      discountAmount: '300',
+      total: '3900',
       method: 'Карта',
       status: 'Оплачено',
     },
@@ -1580,6 +1585,7 @@ export function createWorkspaceData(): Record<string, DemoRecord[]> {
   const data: Record<string, DemoRecord[]> = structuredClone({
     ...Object.fromEntries(Object.entries(resources).map(([key, value]) => [key, value.rows])),
     ...initialExtra,
+    ...createReportingData(),
     'cash-events': demoCashMovements,
   });
   data.employees.push(
@@ -1832,3 +1838,135 @@ export const prettyDate = (value: string) =>
       (value.includes('T') ? ` ${value.split('T')[1]}` : '')
     : '—';
 export const TODAY = '2026-11-06';
+
+/** Fictional reporting history, separate from real club data and fiscal equipment. */
+function createReportingData(): Record<string, DemoRecord[]> {
+  const mainPrices = [3900, 6000, 600, 5400, 0, 3900, 6000];
+  return {
+    'report-pass-values': mainPrices.flatMap((price, i): DemoRecord[] => [
+      {
+        id: `value-${1001 + i}-01`,
+        passId: `S-${1001 + i}-01`,
+        memberId: String(1001 + i),
+        price: String(price),
+        club: i === 5 ? 'Парк' : 'Центральный',
+      },
+      ...(i < 6
+        ? [
+            {
+              id: `value-${1001 + i}-02`,
+              passId: `S-${1001 + i}-02`,
+              memberId: String(1001 + i),
+              price: '6000',
+              club: 'Центральный',
+            },
+            {
+              id: `value-${1001 + i}-04`,
+              passId: `S-${1001 + i}-04`,
+              memberId: String(1001 + i),
+              price: '3900',
+              club: 'Центральный',
+              summer: i === 0 ? 'true' : 'false',
+            },
+          ]
+        : []),
+    ]),
+    'client-sources': [
+      { id: 'source-1001', memberId: '1001', source: 'Рекомендация друга', online: 'false' },
+      { id: 'source-1003', memberId: '1003', source: 'Поиск в интернете', online: 'true' },
+      { id: 'source-1007', memberId: '1007', source: 'Сайт клуба', online: 'true' },
+    ],
+    'account-debits': [
+      { id: 'debit-1', memberId: '1001', date: '2026-10-21', amount: '1500', club: 'Центральный' },
+      { id: 'debit-2', memberId: '1001', date: '2026-11-03', amount: '1500', club: 'Центральный' },
+      { id: 'debit-3', memberId: '1002', date: '2026-11-04', amount: '2000', club: 'Центральный' },
+      { id: 'debit-4', memberId: '1003', date: '2026-11-05', amount: '100', club: 'Центральный' },
+      { id: 'debit-5', memberId: '1006', date: '2026-11-06', amount: '500', club: 'Парк' },
+    ],
+    'trainer-costs': [
+      {
+        id: 'cost-1',
+        date: '2026-11-05',
+        trainerId: 'user-trainer',
+        club: 'Центральный',
+        kind: 'group',
+        amount: '1200',
+      },
+      {
+        id: 'cost-2',
+        date: '2026-11-05',
+        trainerId: 'trainer-maxim',
+        club: 'Центральный',
+        kind: 'personal',
+        amount: '1000',
+      },
+      {
+        id: 'cost-3',
+        date: '2026-11-04',
+        trainerId: 'trainer-denis',
+        club: 'Парк',
+        kind: 'duty',
+        amount: '800',
+      },
+    ],
+    'trainer-duty': [
+      {
+        id: 'duty-1',
+        trainerId: 'trainer-denis',
+        club: 'Парк',
+        day: '2026-11-04',
+        time: '09:00',
+        duration: '240',
+      },
+      {
+        id: 'duty-2',
+        trainerId: 'trainer-maxim',
+        club: 'Центральный',
+        day: '2026-11-06',
+        time: '10:00',
+        duration: '120',
+      },
+    ],
+    'trainer-availability': ['user-trainer', 'trainer-maxim', 'trainer-denis'].map(
+      (trainerId, i) => ({
+        id: `availability-${i}`,
+        trainerId,
+        club: 'Центральный',
+        day: '2026-11-06',
+        time: '08:00',
+        end: '21:00',
+      }),
+    ),
+    'client-reviews': [
+      {
+        id: 'review-demo-1',
+        memberId: '1001',
+        date: '2026-11-05',
+        club: 'Центральный',
+        operator: 'Александра Крылова',
+        rating: '5',
+        text: 'Удобное расписание, внимательный тренер.',
+      },
+      {
+        id: 'review-demo-2',
+        memberId: '1003',
+        date: '2026-11-06',
+        club: 'Центральный',
+        operator: 'Александра Крылова',
+        rating: '4',
+        text: 'Хотелось бы больше вечерних занятий.',
+      },
+    ],
+    'fiscal-results': [
+      {
+        id: 'fiscal-demo-1',
+        saleId: 'sale-1',
+        date: '2026-11-06',
+        club: 'Центральный',
+        status: 'Ошибка',
+        code: 'DEMO-OFFLINE',
+        description: 'Демонстрация: устройство недоступно. Реального запроса не было.',
+      },
+    ],
+  };
+}
