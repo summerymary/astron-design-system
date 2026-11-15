@@ -18,6 +18,7 @@ import { initialMembers } from '../data/mock';
 import { UI_RULES } from '../design-system/registry';
 import { ReportCatalogue } from './ReportCatalogue';
 import { ReportBars } from './ReportBars';
+import { ReportChart } from './ReportChart';
 import { statisticsReports, reportTitle } from '../data/statistics';
 import { ReceptionShift } from './ReceptionShift';
 import { CatalogSectionCard } from './CatalogSectionCard';
@@ -344,6 +345,23 @@ export function DesignRules() {
               `Выбран отчёт: ${reportTitle(statisticsReports.find((r) => r.id === id)!)}. Данные приложения не изменены.`,
             )
           }
+        />
+        <ReportChart
+          chart={{
+            id: 'guide-revenue',
+            title: 'Выручка по месяцам — пример',
+            unit: '₽',
+            format: 'money',
+            kind: 'columns',
+            series: [{ key: 'amount', label: 'Выручка' }],
+            rows: [
+              { id: '2026-09', name: '2026-09', values: [600000] },
+              { id: '2026-10', name: '2026-10', values: [900000] },
+              { id: '2026-11', name: '2026-11', values: [300000] },
+            ],
+            reference: { value: 600000, label: 'Среднее за месяц' },
+            note: 'Категории сравниваются полосами; ход времени — по календарю. Все суммы вымышлены.',
+          }}
         />
       </div>
       <div className="ui-rule-grid">
