@@ -65,6 +65,7 @@ export interface RoleHomeData {
 }
 export interface Member {
   id: number;
+  cardNumber?: string;
   name: string;
   fullName?: string;
   photoIndex?: number;
