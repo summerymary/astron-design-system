@@ -43,6 +43,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       value={{
         data,
         put,
+        transact: update,
         remove,
         registerTrainingVisit: (request) => {
           const result = trainingVisit(current.current, request);
