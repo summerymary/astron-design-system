@@ -16,6 +16,9 @@ import { Notice, SearchBox, Stats, Tabs } from './WorkspaceUI';
 import { ClientSearch } from './ClientSearch';
 import { initialMembers } from '../data/mock';
 import { UI_RULES } from '../design-system/registry';
+import { ReportCatalogue } from './ReportCatalogue';
+import { ReportBars } from './ReportBars';
+import { statisticsReports, reportTitle } from '../data/statistics';
 import { ReceptionShift } from './ReceptionShift';
 import { CatalogSectionCard } from './CatalogSectionCard';
 import { ScheduleCopyDialog } from './ScheduleCopyDialog';
@@ -319,6 +322,29 @@ export function DesignRules() {
             onClick={() => setResult('Выбран персональный тренинг.')}
           />
         </div>
+      </div>
+      <div className="ws-stack">
+        <h3>Каталог отчётов — рабочий пример</h3>
+        <div className="panel ws-panel-body">
+          <ReportBars
+            unit="Посещений"
+            rows={[
+              { name: 'Центральный', value: 12, label: '12' },
+              { name: 'Парк', value: 5, label: '5' },
+              { name: 'Речной', value: 0, label: '0' },
+            ]}
+          />
+        </div>
+        <ReportCatalogue
+          reports={statisticsReports.filter((r) =>
+            ['unique_visits', 'gtrener_rating', 'clients_ltv'].includes(r.id),
+          )}
+          onOpen={(id) =>
+            setResult(
+              `Выбран отчёт: ${reportTitle(statisticsReports.find((r) => r.id === id)!)}. Данные приложения не изменены.`,
+            )
+          }
+        />
       </div>
       <div className="ui-rule-grid">
         {UI_RULES.map((rule) => (
