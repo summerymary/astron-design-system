@@ -1,4 +1,8 @@
 import type { Member } from '../types';
+import { memberCards } from '../data/admin';
+import { clientCard as readClientCard } from './member-search';
+
+export const clientCard = (member: Member) => readClientCard(member, memberCards);
 
 export const clientName = (member: Pick<Member, 'name' | 'fullName'>) =>
   member.fullName?.trim() || member.name;

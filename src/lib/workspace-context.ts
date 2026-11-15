@@ -5,6 +5,7 @@ import type { TrainingVisitRequest, trainingVisit } from './training-visit';
 export type WorkspaceState = {
   data: Record<string, DemoRecord[]>;
   put: (collection: string, record: DemoRecord) => void;
+  transact: (change: (data: Record<string, DemoRecord[]>) => Record<string, DemoRecord[]>) => void;
   remove: (collection: string, id: string) => void;
   registerTrainingVisit: (request: TrainingVisitRequest) => ReturnType<typeof trainingVisit>;
   reset: () => void;
