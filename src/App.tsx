@@ -1230,6 +1230,7 @@ export function App() {
                       onRecord={setRecordId}
                       member={sectionMember}
                       members={members}
+                      visits={visits}
                       clubName={club.name}
                       onClubChange={changeWorkingClub}
                       employeeName={currentUser.name}

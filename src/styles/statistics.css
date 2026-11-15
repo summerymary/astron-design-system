@@ -1,0 +1,75 @@
+@layer pages {
+  .statistics-report {
+    gap: 16px;
+  }
+  .statistics-report > .ws-subheading {
+    margin-bottom: 0;
+  }
+  .statistics-report .statistics-report-heading {
+    padding-block: 16px;
+  }
+  .statistics-catalogue-search {
+    align-items: center;
+  }
+  .statistics-catalogue-search .search-field {
+    flex: 1;
+    min-width: min(100%, 220px);
+  }
+  .statistics-catalogue-groups,
+  .statistics-catalogue-groups > section {
+    display: grid;
+    gap: 16px;
+  }
+  .statistics-catalogue-groups {
+    gap: 28px;
+  }
+  .statistics-catalogue-groups .ws-card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  }
+  .statistics-catalogue-groups .ws-link-card {
+    height: 100%;
+    align-items: center;
+  }
+  .statistics-catalogue-groups .ws-link-card > span {
+    min-width: 0;
+  }
+  .statistics-catalogue-groups .ws-link-card > svg {
+    flex-shrink: 0;
+  }
+  .statistics-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+    align-items: end;
+  }
+  .statistics-filters > .form-field {
+    min-width: 0;
+  }
+  .statistics-filters > button {
+    justify-self: start;
+  }
+  .statistics-data-note {
+    font-size: var(--text-small);
+  }
+  .statistics-method p {
+    line-height: 1.6;
+    max-width: 90ch;
+  }
+  .statistics-report .ws-stats {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  }
+  .statistics-report .ws-table {
+    min-width: 600px;
+  }
+  @container workspace (max-width: 600px) {
+    .statistics-filters {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .statistics-filters .select-trigger {
+      width: 100%;
+    }
+    .statistics-report > .ws-subheading {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+  }
+}

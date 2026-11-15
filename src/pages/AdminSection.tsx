@@ -5,7 +5,7 @@ import type { Navigate } from '../components/WorkspaceUI';
 import { resources } from '../data/workspace';
 import { adminSections } from '../data/admin';
 import type { AdminSectionId } from '../data/admin';
-import type { DemoUser, Member, RegisterVisit } from '../types';
+import type { DemoUser, Member, RegisterVisit, Visit } from '../types';
 import { BarCatalog, BarSales, BartenderHome, TrainerClients } from './StaffWorkspace';
 import { canOpenModule } from '../lib/staff-rules';
 import {
@@ -39,6 +39,7 @@ export function AdminSection({
   onRecord,
   member,
   members,
+  visits,
   clubName,
   onClubChange,
   employeeName,
@@ -55,6 +56,7 @@ export function AdminSection({
   onRecord: (id: string | null) => void;
   member: Member | null;
   members: Member[];
+  visits: Visit[];
   clubName: string;
   onClubChange: (name: string) => void;
   employeeName: string;
@@ -145,7 +147,17 @@ export function AdminSection({
         allowRegistration={canOpenModule(user.role, 'registration')}
       />
     );
-  if (section === 'statistics') return <StatisticsWorkspace />;
+  if (section === 'statistics')
+    return (
+      <StatisticsWorkspace
+        members={members}
+        visits={visits}
+        reportId={recordId}
+        onReport={onRecord}
+        onMember={onMember}
+        hidePhones={user.role === 'administrator'}
+      />
+    );
   if (section === 'bar')
     return user.role === 'bartender' ? (
       <BartenderHome navigate={navigate} clubName={clubName} />
