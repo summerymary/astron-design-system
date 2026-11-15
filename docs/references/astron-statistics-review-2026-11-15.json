@@ -1,0 +1,1968 @@
+{
+  "reviewedOn": "2026-11-15",
+  "source": "https://system.astron.club/index.php?do=statmodule",
+  "readOnly": true,
+  "noFormSubmission": true,
+  "noExport": true,
+  "noRealRecordsSaved": true,
+  "previouslyCheckedForms": 12,
+  "revisitedReports": [
+    {
+      "id": "client_lifetime",
+      "status": "loaded-after-wait",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "interval",
+            "tag": "INPUT",
+            "type": "number"
+          },
+          {
+            "label": "Разбивка по клубам",
+            "name": "clubdiff",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Время жизни клиента"
+        ],
+        "path": "/index.php?do=statmodule&type=client_lifetime",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [],
+            "hasRows": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "financeresult",
+      "status": "loaded-after-month-navigation",
+      "structure": {
+        "controls": [],
+        "headings": [
+          "Промежуточный финансовый результат (период не сохранен)"
+        ],
+        "path": "/index.php?do=statmodule&type=financeresult&year=2026&month=11",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Параметр",
+              "Всего",
+              "Посещений",
+              "Средняя цена"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "metrics": [
+        "Выручка групповых программ",
+        "Оплата тренерам групповых программ",
+        "Прибыль групповых программ",
+        "Выручка персональных тренировок",
+        "Оплата персональных тренеров",
+        "Прибыль персональных тренировок",
+        "Выручка тренажерного зала",
+        "Оплата дежурных часов",
+        "Прибыль тренажерного зала",
+        "Продажи подарочных карт",
+        "Продажи товаров",
+        "Продажи заморозки абонемента"
+      ]
+    },
+    {
+      "id": "newclients",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "datestart",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "dateend",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "source",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "type": "text"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          },
+          {
+            "label": "Зарегистрировался онлайн",
+            "name": "selfreg",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "Ничего не купил",
+            "name": "notbuy",
+            "tag": "INPUT",
+            "type": "checkbox"
+          }
+        ],
+        "headings": [
+          "Новые клиенты (… чел.)"
+        ],
+        "labels": [
+          "Любой источник",
+          "Зарегистрировался онлайн",
+          "Ничего не купил"
+        ],
+        "path": "/index.php?do=statmodule&type=newclients",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "№",
+              "Клиент",
+              "Карта",
+              "Телефон",
+              "WA",
+              "Дата регистрации",
+              "Дата рождения",
+              "vk",
+              "Источник"
+            ],
+            "hasRows": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "newclients_source",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "datestart",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "dateend",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Источники клиентов"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=newclients_source",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Источник",
+              "Количество"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "№",
+              "Источник",
+              "Количество"
+            ],
+            "hasRows": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "clients_active",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "Считать персональные тренировки",
+            "name": "showab_pt",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "Считать разовые посещения",
+            "name": "showab_once",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "Считать корпоративные",
+            "name": "showab_corp",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "Только безлимитные",
+            "name": "only_unlimited",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Активные клиенты на дату",
+          "Всего … активных клиентов по состоянию на …-…-…"
+        ],
+        "labels": [
+          "Считать персональные тренировки",
+          "Считать разовые посещения",
+          "Считать корпоративные",
+          "Только безлимитные"
+        ],
+        "path": "/index.php?do=statmodule&type=clients_active",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Номер",
+              "Клиент",
+              "Телефон",
+              "Абонемент",
+              "Дата окончания"
+            ],
+            "hasRows": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "clients_gender_age",
+      "status": "loaded-after-wait",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "endtade",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "Считать только уникальных клиентов",
+            "name": "dist",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "Считать только персональные тренировки",
+            "name": "pers",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "на Лобачевского",
+            "name": "club_1",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "на Воинов",
+            "name": "club_2",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "на Кырли",
+            "name": "club_7",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "на Ленинском",
+            "name": "club_8",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "Большой на Кырли",
+            "name": "club_9",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "на Суворова",
+            "name": "club_10",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "на Кремлёвской",
+            "name": "club_11",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Половозрастная структура посетителей"
+        ],
+        "labels": [
+          "Считать только уникальных клиентов",
+          "Считать только персональные тренировки",
+          "на Лобачевского",
+          "на Воинов",
+          "на Кырли",
+          "на Ленинском",
+          "Большой на Кырли",
+          "на Суворова",
+          "на Кремлёвской"
+        ],
+        "path": "/index.php?do=statmodule&type=clients_gender_age",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Возраст",
+              "Мужчины",
+              "Женщины"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Возраст",
+              "Количество",
+              "В среднем",
+              "Кто?",
+              "Количество",
+              "В среднем",
+              "Кто?"
+            ],
+            "hasRows": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "report_all_clients_phones",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "endtade",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "TEXTAREA",
+            "type": null
+          }
+        ],
+        "headings": [
+          "Телеофоны клиентов по запросу"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=report_all_clients_phones",
+        "ready": "complete",
+        "tables": []
+      }
+    },
+    {
+      "id": "client_lastvisit",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "todate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "fromdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Потеряные клиенты - кто не посещал клуб определенный промежуток времени - … найдено"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=client_lastvisit",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [],
+            "hasRows": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "client_lastvisit_personal",
+      "status": "loaded-after-wait",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "todate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "fromdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Клиенты - кто не посещает персональные тренировки определенный промежуток времени - … найдено"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=client_lastvisit_personal",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [],
+            "hasRows": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "feedbacks",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "datestart",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "dateend",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "operators",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Отзывы клиентов"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=feedbacks",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "№",
+              "Дата",
+              "Клиент",
+              "Отзыв",
+              "Оператор",
+              "Оценка"
+            ],
+            "hasRows": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "calls",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "datestart",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "dateend",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "status",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": "clubs",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "Нет в базе",
+            "name": "onlynew",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Звонки"
+        ],
+        "labels": [
+          "Нет в базе"
+        ],
+        "path": "/index.php?do=statmodule&type=calls",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "№",
+              "Дата",
+              "Клиент",
+              "WA",
+              "Входящий телефон",
+              "Статус звонка",
+              "Целевой номер",
+              "Прослушать"
+            ],
+            "hasRows": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "clients_segmetation",
+      "status": "loaded-after-wait",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "subtype",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Сегментация клиентской базы"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=clients_segmetation",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Параметр",
+              "Количество"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Параметр",
+              "Количество",
+              "Подробнее"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "modes": [
+        "Сводные данные",
+        "Активные клиенты",
+        "Клиенты с намерением",
+        "Потенциальный продленец",
+        "Заснувший",
+        "Потерянный 1 уровень",
+        "Потерянный 2 уровень",
+        "Потерянный 3 уровень",
+        "Потерянный 4 уровень"
+      ]
+    },
+    {
+      "id": "gtrener_busy",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "trenerid",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Занятость тренеров"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=gtrener_busy",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [],
+            "hasRows": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "report_pclients",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "endtade",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "trener",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Клиенты персонального тренера"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=report_pclients",
+        "ready": "complete",
+        "tables": []
+      }
+    },
+    {
+      "id": "report_pclients_lost",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "trener",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Потеряные клиенты тренера"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=report_pclients_lost",
+        "ready": "complete",
+        "tables": []
+      }
+    },
+    {
+      "id": "report_pclients_stat",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "trener",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Клиенты персонального тренера",
+          "Сводная информация"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=report_pclients_stat",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Параметр",
+              "Значение"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": [
+        "Всего клиентов за период",
+        "Активных клиентов на настоящее время",
+        "Потерянных клиентов со стартовой даты",
+        "Доля потерянных клиентов"
+      ]
+    },
+    {
+      "id": "ptrener_rating",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "club",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "endtade",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Рейтинги персональных тренеров"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=ptrener_rating",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Номер",
+              "Тренер",
+              "Тренировок",
+              "Из них ПТ",
+              "Из них СПТ",
+              "Клиентов на СПТ",
+              "Уникальных клиентов",
+              "",
+              "ИТОГО:"
+            ],
+            "hasRows": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "ptrener_rating_all",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "club",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "endtade",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "Считать ПТ",
+            "name": "countpt",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "Считать ГП",
+            "name": "countgt",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "Считать ДЧ",
+            "name": "countdh",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Рейтинги персональных тренеров"
+        ],
+        "labels": [
+          "Считать ПТ",
+          "Считать ГП",
+          "Считать ДЧ"
+        ],
+        "path": "/index.php?do=statmodule&type=ptrener_rating_all&countpt=1&countgt=1&countdh=1",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Тренер",
+              "Персональные тренировки",
+              "Групповые тренировки",
+              "Дежурные часы"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Номер",
+              "Тренер",
+              "ПТ",
+              "Из них ПТ",
+              "Из них СПТ",
+              "ГП",
+              "ДЧ",
+              "Всего"
+            ],
+            "hasRows": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "report_pclients_phones",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "endtade",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "TEXTAREA",
+            "type": null
+          }
+        ],
+        "headings": [
+          "Персональные клиенты за период"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=report_pclients_phones",
+        "ready": "complete",
+        "tables": []
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "free_trener_find",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "clublist",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": "day",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "timelist",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "найти",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Поиск свободного тренера"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=free_trener_find",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "selltovosit",
+      "status": "loaded-after-wait",
+      "structure": {
+        "controls": [
+          {
+            "label": "Количественные и безлимитные",
+            "name": "showab_all",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "Персональные тренировки",
+            "name": "showab_pt",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "Разовые посещения",
+            "name": "showab_once",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "Корпоративные",
+            "name": "showab_corp",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "",
+            "name": "start_date",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "end_date",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Посещаемость и цена посещения"
+        ],
+        "labels": [
+          "Дополнительные фильтры:",
+          "Количественные и безлимитные",
+          "Персональные тренировки",
+          "Разовые посещения",
+          "Корпоративные",
+          "Отчет берет абонементы активированные и законченные в выбранном периоде (дата покупки не учитывается) для безлимитов учитывается только дата активации и окончания, для количественных дата активации и счетчик посещений. Считает сумму по которой они были куплены, вычисляет количество одного посещения делением общего количества посещений на общую цену."
+        ],
+        "path": "/index.php?do=statmodule&type=selltovosit",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Абонементы",
+              "Активаций за период",
+              "На сумму",
+              "Совершено посещений",
+              "Цена посещения"
+            ],
+            "hasRows": false
+          }
+        ]
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "kassacontrol",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "enddate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "club",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": "typelist",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": "numkassa",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Касса"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=kassacontrol",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "id",
+              "Время",
+              "приход",
+              "расход",
+              "вид оплаты",
+              "№ кассы",
+              "комментарий",
+              "кассир",
+              "клуб"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "selling_clients_new",
+      "status": "loaded-after-wait",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "endtade",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "criteriy",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "Считать персональные тренировки",
+            "name": "showab_pt",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "Считать разовые посещения",
+            "name": "showab_once",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Продажи новым клиентам"
+        ],
+        "labels": [
+          "Считать персональные тренировки",
+          "Считать разовые посещения"
+        ],
+        "path": "/index.php?do=statmodule&type=selling_clients_new",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Номер",
+              "Абонемент",
+              "Количество",
+              "Цена",
+              "Стоимость",
+              "Выручка"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "selling_clients_secondary",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "endtade",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "Считать персональные тренировки",
+            "name": "showab_pt",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "Считать корпоративные",
+            "name": "showab_corp",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Доля продления"
+        ],
+        "labels": [
+          "Считать персональные тренировки",
+          "Считать корпоративные"
+        ],
+        "path": "/index.php?do=statmodule&type=selling_clients_secondary",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Параметр",
+              "Количество"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Номер",
+              "Клиент",
+              "Дата окончания",
+              "Дата продления",
+              "Продлено до",
+              "Абонемент"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": [
+        "Доля продления",
+        "Не продлили"
+      ]
+    },
+    {
+      "id": "clients_sell_gender_age",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "endtade",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "Считать только персональные тренировки",
+            "name": "pers",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Половозрастная структура покупателей"
+        ],
+        "labels": [
+          "Считать только персональные тренировки"
+        ],
+        "path": "/index.php?do=statmodule&type=clients_sell_gender_age",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Возраст",
+              "Мужчины",
+              "Женщины"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Возраст",
+              "Сумма",
+              "Средний чек",
+              "Сумма",
+              "Средний чек"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "clients_sell_discount",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "startdate",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "endtade",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Продажи со скидками"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=clients_sell_discount",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Наименование",
+              "Количество операций",
+              "Сумма"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "clients_ltv",
+      "status": "loaded-after-wait",
+      "structure": {
+        "controls": [],
+        "headings": [
+          "LTV (Lifetime Value)"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=clients_ltv",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "clients_ltv_bydate",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "start_date",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "end_date",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "LTV (Lifetime Value) за период"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=clients_ltv_bydate",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "selling_clients_secondary_summer",
+      "status": "loaded",
+      "structure": {
+        "controls": [],
+        "headings": [
+          "Доля продления по Летней карте"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=selling_clients_secondary_summer",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Параметр",
+              "Количество"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Номер",
+              "Клиент",
+              "Продлил"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Параметр",
+              "Количество"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Номер",
+              "Клиент",
+              "Продлил"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Параметр",
+              "Количество"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Номер",
+              "Клиент",
+              "Продлил"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Параметр",
+              "Количество"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Номер",
+              "Клиент",
+              "Продлил"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Параметр",
+              "Количество"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Номер",
+              "Клиент",
+              "Продлил"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": [
+        "Продлили",
+        "Не продлили",
+        "Продлили",
+        "Не продлили",
+        "Продлили",
+        "Не продлили",
+        "Продлили",
+        "Не продлили",
+        "Продлили",
+        "Не продлили"
+      ]
+    },
+    {
+      "id": "selling_clients_afterguest",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "start_date",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "end_date",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Покупки после гостевого визита"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=selling_clients_afterguest",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Параметр",
+              "Количество"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Номер",
+              "Клиент",
+              "Продлил"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": [
+        "Продлили",
+        "Не продлили"
+      ]
+    },
+    {
+      "id": "trener_financial_result",
+      "status": "loaded",
+      "structure": {
+        "controls": [],
+        "headings": [
+          "Накопительный финансовый результат по персональным тренировкам"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=trener_financial_result",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Тренер",
+              "Категория",
+              "Январь",
+              "Февраль",
+              "Март",
+              "Апрель",
+              "Май",
+              "Июнь",
+              "Июль",
+              "Август",
+              "Сентябрь",
+              "Октябрь",
+              "Ноябрь",
+              "Декабрь",
+              "Всего оплата ПТ",
+              "Всего выручка ПТ",
+              "Средний процент"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "fail_finance_report",
+      "status": "blank-after-two-attempts-and-extended-wait",
+      "structure": {
+        "controls": [],
+        "headings": [],
+        "labels": [],
+        "path": "/index.php?do=fail_finance_report",
+        "ready": "complete",
+        "tables": []
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "fincredits",
+      "status": "loaded",
+      "structure": {
+        "controls": [],
+        "headings": [
+          "Задолженность перед клиентами"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=fincredits",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "finbyyear_by_abonements",
+      "status": "loaded-after-wait",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "datestart",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "dateend",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "Доля абонемента в общей выручке"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=finbyyear_by_abonements",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Абонемент",
+              "Сумма"
+            ],
+            "hasRows": true
+          },
+          {
+            "headers": [
+              "Абонемент",
+              "Количество"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "gt_finance",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "start_date",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "end_date",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "clubselect",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "type": "text"
+          },
+          {
+            "label": "",
+            "name": "trener",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "type": "text"
+          },
+          {
+            "label": "Группировать по тренеру",
+            "name": "tgroup",
+            "tag": "INPUT",
+            "type": "checkbox"
+          },
+          {
+            "label": "",
+            "name": "sortby",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "type": "text"
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "распечататьГрупповые занятия и цены"
+        ],
+        "labels": [
+          "Все клубы",
+          "Все тренеры",
+          "Группировать по тренеру",
+          "Сортировка по средним визитам",
+          "Отчет считает среднюю доходность по групповым занятиям и среднюю цену посещения по нему. Не рекомендуется выбирать большие периоды из-за большого размера таблицы и большого количества данных"
+        ],
+        "path": "/index.php?do=statmodule&type=gt_finance",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Дата",
+              "Занятие",
+              "Тренер",
+              "Тариф",
+              "Посетителей",
+              "Доход по количественным",
+              "Доход по безлимитным",
+              "Средняя цена",
+              "Общий доход"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": []
+    },
+    {
+      "id": "unlim_avg_visit",
+      "status": "loaded",
+      "structure": {
+        "controls": [
+          {
+            "label": "",
+            "name": "start_date",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "end_date",
+            "tag": "INPUT",
+            "type": "date"
+          },
+          {
+            "label": "",
+            "name": "bycard",
+            "tag": "SELECT",
+            "type": null
+          },
+          {
+            "label": "",
+            "name": null,
+            "tag": "INPUT",
+            "text": "показать",
+            "type": "submit"
+          }
+        ],
+        "headings": [
+          "распечататьПосещаемость по безлимитам"
+        ],
+        "labels": [],
+        "path": "/index.php?do=statmodule&type=unlim_avg_visit",
+        "ready": "complete",
+        "tables": [
+          {
+            "headers": [
+              "Количество посещений в месяц",
+              "Количество клиентов"
+            ],
+            "hasRows": true
+          }
+        ]
+      },
+      "metricLabels": []
+    }
+  ],
+  "summary": {
+    "revisited": 36,
+    "contentAvailable": 35,
+    "blank": 1,
+    "previouslyObserved": 12,
+    "totalWithContent": 47,
+    "totalCatalogue": 48,
+    "remaining": [
+      "fail_finance_report"
+    ]
+  }
+}
