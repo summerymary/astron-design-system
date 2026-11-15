@@ -14,13 +14,12 @@ import {
   RecordForm,
   SearchBox,
   SectionLinks,
-  Stats,
   Status,
   Tabs,
 } from '../components/WorkspaceUI';
 import type { Navigate } from '../components/WorkspaceUI';
 import type { DemoRecord, Field } from '../data/workspace';
-import { money, prettyDate, TODAY } from '../data/workspace';
+import { money, TODAY } from '../data/workspace';
 import { inventoryStock, validatePlan } from '../lib/workspace-rules';
 import { membershipKinds } from '../data/membership-kinds';
 import { MembershipCard } from '../components/MembershipCard';
@@ -35,11 +34,6 @@ const clubField: Field = {
   label: 'Клуб',
   options: ['Центральный', 'Парк', 'Речной'],
   required: true,
-};
-const datePlus = (date: string, days: number) => {
-  const value = new Date(`${date}T12:00:00Z`);
-  value.setUTCDate(value.getUTCDate() + days);
-  return value.toISOString().slice(0, 10);
 };
 const planSteps = [
   'Основное',
@@ -617,183 +611,7 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
 
 export { RegistrationWorkspace } from './VisitRegistration';
 
-export function StatisticsWorkspace() {
-  const { data } = useWorkspace();
-  const [report, setReport] = useState<string | null>(null);
-  const [from, setFrom] = useState('2026-11-01');
-  const [to, setTo] = useState(TODAY);
-  const [club, setClub] = useState('Все клубы');
-  const [compare, setCompare] = useState('Без сравнения');
-  const [group, setGroup] = useState('По дням');
-  const filtered = data.ledger.filter(
-    (row) =>
-      row.category !== 'Бар' &&
-      row.date >= from &&
-      row.date <= to &&
-      (club === 'Все клубы' || row.club === club),
-  );
-  const total = filtered.reduce((sum, row) => sum + Number(row.amount), 0);
-  const grouped = new Map<string, number>();
-  filtered.forEach((row) => {
-    const key =
-      group === 'По клубам' ? row.club : group === 'По категориям' ? row.category : row.date;
-    grouped.set(key, (grouped.get(key) || 0) + Number(row.amount));
-  });
-  const days = Math.round((Date.parse(to) - Date.parse(from)) / 86400000) + 1;
-  const previous = data.ledger
-    .filter(
-      (row) =>
-        row.category !== 'Бар' &&
-        row.date >= datePlus(from, -days) &&
-        row.date < from &&
-        (club === 'Все клубы' || row.club === club),
-    )
-    .reduce((sum, row) => sum + Number(row.amount), 0);
-  if (!report)
-    return (
-      <div className="ws-stack">
-        <div className="ws-card-grid">
-          {['Обзор продаж', 'Выручка'].map((name) => (
-            <button className="panel ws-link-card" key={name} onClick={() => setReport(name)}>
-              <span>
-                <strong>{name}</strong>
-                <small>Период, клуб, сравнение и детализация</small>
-              </span>
-              <ArrowRight size={18} />
-            </button>
-          ))}
-        </div>
-        {[
-          'Клиенты',
-          'Посещаемость',
-          'Тренеры',
-          'Обратная связь',
-          'Звонки',
-          'Прогнозы и когорты',
-        ].map((name) => (
-          <section className="panel ws-panel-body" key={name}>
-            <div className="ws-subheading">
-              <h3>{name}</h3>
-              <Status>Пока недоступно</Status>
-            </div>
-            <p className="ws-muted">
-              В источнике отчёты этой категории недоступны. Их экраны будут разработаны после
-              уточнения состава и прав доступа.
-            </p>
-          </section>
-        ))}
-        <Notice>
-          В прототипе отчёты рассчитываются по вымышленным продажам. В источнике просмотрен экран
-          параметров; получение данных завершилось ошибкой.
-        </Notice>
-      </div>
-    );
-  return (
-    <div className="ws-stack">
-      <Back onClick={() => setReport(null)}>Все отчёты</Back>
-      <section className="panel ws-panel">
-        <div className="ws-panel-heading">
-          <div>
-            <h2>{report}</h2>
-            <p>Часовой пояс: Москва · валюта: ₽</p>
-          </div>
-        </div>
-        <div className="ws-toolbar ws-report-filters">
-          <label className="form-field">
-            <span>Начало периода</span>
-            <input type="date" value={from} max={to} onChange={(e) => setFrom(e.target.value)} />
-          </label>
-          <label className="form-field">
-            <span>Конец периода</span>
-            <input type="date" value={to} min={from} onChange={(e) => setTo(e.target.value)} />
-          </label>
-          <label className="form-field">
-            <span>Клуб</span>
-            <Select value={club} onChange={(e) => setClub(e.target.value)}>
-              {['Все клубы', 'Центральный', 'Парк', 'Речной'].map((value) => (
-                <option key={value}>{value}</option>
-              ))}
-            </Select>
-          </label>
-          <label className="form-field">
-            <span>Сравнение</span>
-            <Select value={compare} onChange={(e) => setCompare(e.target.value)}>
-              <option>Без сравнения</option>
-              <option>Предыдущий период</option>
-            </Select>
-          </label>
-          <label className="form-field">
-            <span>Детализация</span>
-            <Select value={group} onChange={(e) => setGroup(e.target.value)}>
-              <option>По дням</option>
-              <option>По клубам</option>
-              <option>По категориям</option>
-            </Select>
-          </label>
-        </div>
-      </section>
-      {!from || !to || from > to ? (
-        <Notice tone="warning">Укажите корректный период.</Notice>
-      ) : (
-        <>
-          <Stats
-            items={[
-              { label: 'Выручка', value: money(total) },
-              { label: 'Продажи', value: filtered.length },
-              {
-                label: 'Средний чек',
-                value: money(filtered.length ? Math.round(total / filtered.length) : 0),
-              },
-              ...(compare !== 'Без сравнения'
-                ? [
-                    {
-                      label: 'Предыдущий период',
-                      value: money(previous),
-                      note: previous
-                        ? `${Math.round((total / previous - 1) * 100)}% к предыдущему`
-                        : 'Нет продаж за прошлый период',
-                    },
-                  ]
-                : []),
-            ]}
-          />
-          <section className="panel ws-panel">
-            <div className="ws-panel-heading">
-              <h2>Распределение выручки</h2>
-            </div>
-            <div className="ws-panel-body ws-bars">
-              {[...grouped.entries()].map(([key, amount]) => (
-                <div key={key}>
-                  <span>{group === 'По дням' ? prettyDate(key) : key}</span>
-                  <div>
-                    <i style={{ width: `${(amount / Math.max(...grouped.values(), 1)) * 100}%` }} />
-                  </div>
-                  <strong>{money(amount)}</strong>
-                </div>
-              ))}
-              {!grouped.size && <Empty title="За этот период продаж нет" />}
-            </div>
-          </section>
-          <section className="panel ws-panel">
-            <div className="ws-panel-heading">
-              <h2>Продажи за период</h2>
-            </div>
-            <DataTable
-              rows={filtered}
-              columns={[
-                { key: 'date', label: 'Дата' },
-                { key: 'name', label: 'Позиция' },
-                { key: 'club', label: 'Клуб' },
-                { key: 'amount', label: 'Сумма' },
-                { key: 'method', label: 'Оплата' },
-              ]}
-            />
-          </section>
-        </>
-      )}
-    </div>
-  );
-}
+export { StatisticsWorkspace } from './StatisticsWorkspace';
 
 export { SaleWorkspace } from './ClientSale';
 
