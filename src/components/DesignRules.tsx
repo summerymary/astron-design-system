@@ -9,6 +9,7 @@ import {
   CountBadge,
   DisclosureMenu,
   IconButton,
+  Modal,
   SectionTitle,
   StatusBadge,
 } from './ui';
@@ -31,6 +32,82 @@ import { demoUsers } from '../data/roles';
 import { NewMemberDialog } from './NewMemberDialog';
 import { ScheduleAttendees } from './ScheduleAttendees';
 import { useWorkspace } from './WorkspaceProvider';
+
+import { ReceptionPayment, initialReceptionPayment } from './ReceptionPayment';
+import { CallDialog } from './CallDialog';
+import { RestoreCardDialog } from './RestoreCardDialog';
+import { MembershipDetails } from './MembershipDetails';
+import { ScheduleDayBoard } from './ScheduleDayBoard';
+
+function ReceptionExample() {
+  const { data } = useWorkspace();
+  const [payment, setPayment] = useState(initialReceptionPayment);
+  const [member, setMember] = useState(initialMembers[0]);
+  const [dialog, setDialog] = useState('');
+  const pass = getClientProfile(member, data).subscriptions[0];
+  return (
+    <section className="panel ws-panel-body ws-stack">
+      <h3>Операции ресепшена — рабочие примеры</h3>
+      <ReceptionPayment value={payment} onChange={setPayment} total={100} />
+      <div className="ws-actions">
+        <Button variant="secondary" onClick={() => setDialog('call')}>
+          Позвонить клиенту
+        </Button>
+        <Button variant="secondary" onClick={() => setDialog('restore')}>
+          Восстановить карту
+        </Button>
+        <Button variant="secondary" onClick={() => setDialog('pass')}>
+          История абонемента
+        </Button>
+      </div>
+      <div className="calendar-scroll" style={{ maxHeight: 280 }}>
+        <ScheduleDayBoard
+          events={data.events
+            .filter((event) => event.day === '2026-11-06' && event.club === 'Центральный')
+            .slice(0, 3)}
+          rooms={[{ key: 'demo-room', label: 'Большой зал', room: 'Большой зал' }]}
+          onOpen={(event) => setDialog(`schedule:${event.id}`)}
+        />
+      </div>
+      {dialog.startsWith('schedule:') && (
+        <Modal
+          title={data.events.find((event) => event.id === dialog.slice(9))?.name || 'Занятие'}
+          onClose={() => setDialog('')}
+        >
+          <p>Выбрано занятие. В прототипе здесь открывается список участников.</p>
+        </Modal>
+      )}
+      {dialog === 'call' && (
+        <CallDialog
+          name={member.fullName || member.name}
+          phone={member.phone}
+          hidden
+          onClose={() => setDialog('')}
+        />
+      )}
+      {dialog === 'restore' && (
+        <RestoreCardDialog
+          member={member}
+          members={initialMembers}
+          user={demoUsers.find((user) => user.role === 'administrator')!}
+          clubName="Астрон · Центральный"
+          onUpdate={setMember}
+          onClose={() => setDialog('')}
+        />
+      )}
+      {dialog === 'pass' && (
+        <MembershipDetails
+          pass={pass}
+          member={member}
+          members={initialMembers}
+          visits={[]}
+          canOperate
+          onClose={() => setDialog('')}
+        />
+      )}
+    </section>
+  );
+}
 
 function AttendanceExample() {
   const { data } = useWorkspace();
@@ -311,6 +388,9 @@ export function DesignRules() {
           При наведении меняется цвет рамки. Клавиша Tab показывает внутренний контур, который не
           обрезается по краям блока.
         </p>
+        <WorkspaceProvider>
+          <ReceptionExample />
+        </WorkspaceProvider>
         <div className="ui-rule-grid">
           <CatalogSectionCard
             id="memberships"
@@ -364,6 +444,9 @@ export function DesignRules() {
           }}
         />
       </div>
+      <WorkspaceProvider>
+        <ReceptionExample />
+      </WorkspaceProvider>
       <div className="ui-rule-grid">
         {UI_RULES.map((rule) => (
           <article className="panel ws-panel-body" key={rule.id}>

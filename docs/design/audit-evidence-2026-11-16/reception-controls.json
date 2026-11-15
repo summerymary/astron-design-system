@@ -1,0 +1,5121 @@
+{
+  "date": "2026-11-16",
+  "domChecks": [
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 274
+        }
+      ],
+      "overflow": false,
+      "section": "gift-cards",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=administrator&section=gift-cards"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 157.15625
+        }
+      ],
+      "overflow": false,
+      "section": "personal-trainings",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=administrator&section=personal-trainings"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 355.421875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 157.15625
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 341.421875
+        }
+      ],
+      "overflow": false,
+      "section": "shifts",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=administrator&section=shifts"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 157.15625
+        }
+      ],
+      "overflow": false,
+      "section": "employees",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=administrator&section=employees"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 147.1640625
+        }
+      ],
+      "overflow": false,
+      "section": "calls",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=administrator&section=calls"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 274
+        }
+      ],
+      "overflow": false,
+      "section": "products",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=administrator&section=products"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        }
+      ],
+      "overflow": false,
+      "section": "registration",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=administrator&section=registration"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 150
+        }
+      ],
+      "overflow": false,
+      "section": "schedule",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=administrator&section=schedule"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 886
+        }
+      ],
+      "overflow": false,
+      "section": "services",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=administrator&section=services"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 936
+        }
+      ],
+      "overflow": false,
+      "section": "memberships",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=administrator&section=memberships"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "text",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "email",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "password",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "password",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "password",
+          "width": 436
+        }
+      ],
+      "overflow": false,
+      "section": "settings",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=administrator&section=settings"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 147.1640625
+        }
+      ],
+      "overflow": false,
+      "section": "training-templates",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=administrator&section=training-templates"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 271.1953125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 271.203125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 271.203125
+        }
+      ],
+      "overflow": false,
+      "section": "cash",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=administrator&section=cash"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 274
+        }
+      ],
+      "overflow": false,
+      "section": "gift-cards",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=administrator&section=gift-cards"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 157.15625
+        }
+      ],
+      "overflow": false,
+      "section": "personal-trainings",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=administrator&section=personal-trainings"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 355.421875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 157.15625
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 341.421875
+        }
+      ],
+      "overflow": false,
+      "section": "shifts",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=administrator&section=shifts"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 157.15625
+        }
+      ],
+      "overflow": false,
+      "section": "employees",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=administrator&section=employees"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 147.1640625
+        }
+      ],
+      "overflow": false,
+      "section": "calls",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=administrator&section=calls"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 274
+        }
+      ],
+      "overflow": false,
+      "section": "products",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=administrator&section=products"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        }
+      ],
+      "overflow": false,
+      "section": "registration",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=administrator&section=registration"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 150
+        }
+      ],
+      "overflow": false,
+      "section": "schedule",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=administrator&section=schedule"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 886
+        }
+      ],
+      "overflow": false,
+      "section": "services",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=administrator&section=services"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 936
+        }
+      ],
+      "overflow": false,
+      "section": "memberships",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=administrator&section=memberships"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "text",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "email",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "password",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "password",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "password",
+          "width": 436
+        }
+      ],
+      "overflow": false,
+      "section": "settings",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=administrator&section=settings"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 147.1640625
+        }
+      ],
+      "overflow": false,
+      "section": "training-templates",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=administrator&section=training-templates"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 271.1953125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 271.203125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 271.203125
+        }
+      ],
+      "overflow": false,
+      "section": "cash",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=administrator&section=cash"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 274
+        }
+      ],
+      "overflow": false,
+      "section": "gift-cards",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=administrator&section=gift-cards"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 157.15625
+        }
+      ],
+      "overflow": false,
+      "section": "personal-trainings",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=administrator&section=personal-trainings"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 355.421875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 157.15625
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 341.421875
+        }
+      ],
+      "overflow": false,
+      "section": "shifts",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=administrator&section=shifts"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 157.15625
+        }
+      ],
+      "overflow": false,
+      "section": "employees",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=administrator&section=employees"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 147.1640625
+        }
+      ],
+      "overflow": false,
+      "section": "calls",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=administrator&section=calls"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 274
+        }
+      ],
+      "overflow": false,
+      "section": "products",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=administrator&section=products"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        }
+      ],
+      "overflow": false,
+      "section": "registration",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=administrator&section=registration"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 150
+        }
+      ],
+      "overflow": false,
+      "section": "schedule",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=administrator&section=schedule"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 886
+        }
+      ],
+      "overflow": false,
+      "section": "services",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=administrator&section=services"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 936
+        }
+      ],
+      "overflow": false,
+      "section": "memberships",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=administrator&section=memberships"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "text",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "email",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "password",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "password",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "password",
+          "width": 436
+        }
+      ],
+      "overflow": false,
+      "section": "settings",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=administrator&section=settings"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 147.1640625
+        }
+      ],
+      "overflow": false,
+      "section": "training-templates",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=administrator&section=training-templates"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 271.1953125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 271.203125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 271.203125
+        }
+      ],
+      "overflow": false,
+      "section": "cash",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=administrator&section=cash"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 274
+        }
+      ],
+      "overflow": false,
+      "section": "gift-cards",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=administrator&section=gift-cards"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 157.15625
+        }
+      ],
+      "overflow": false,
+      "section": "personal-trainings",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=administrator&section=personal-trainings"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 355.421875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 157.15625
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 341.421875
+        }
+      ],
+      "overflow": false,
+      "section": "shifts",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=administrator&section=shifts"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 157.15625
+        }
+      ],
+      "overflow": false,
+      "section": "employees",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=administrator&section=employees"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 147.1640625
+        }
+      ],
+      "overflow": false,
+      "section": "calls",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=administrator&section=calls"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 274
+        }
+      ],
+      "overflow": false,
+      "section": "products",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=administrator&section=products"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        }
+      ],
+      "overflow": false,
+      "section": "registration",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=administrator&section=registration"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 150
+        }
+      ],
+      "overflow": false,
+      "section": "schedule",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=administrator&section=schedule"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 886
+        }
+      ],
+      "overflow": false,
+      "section": "services",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=administrator&section=services"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 936
+        }
+      ],
+      "overflow": false,
+      "section": "memberships",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=administrator&section=memberships"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "text",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "email",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "password",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "password",
+          "width": 436
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "password",
+          "width": 436
+        }
+      ],
+      "overflow": false,
+      "section": "settings",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=administrator&section=settings"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 544
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 147.1640625
+        }
+      ],
+      "overflow": false,
+      "section": "training-templates",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=administrator&section=training-templates"
+    },
+    {
+      "device": "desktop",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 138.609375
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 479.5546875
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 271.1953125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 271.203125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 271.203125
+        }
+      ],
+      "overflow": false,
+      "section": "cash",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=administrator&section=cash"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 238
+        }
+      ],
+      "overflow": false,
+      "section": "gift-cards",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=gift-cards"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 286
+        }
+      ],
+      "overflow": false,
+      "section": "personal-trainings",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=personal-trainings"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 122
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 152
+        }
+      ],
+      "overflow": false,
+      "section": "shifts",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=shifts"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 286
+        }
+      ],
+      "overflow": false,
+      "section": "employees",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=employees"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 214
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 270
+        }
+      ],
+      "overflow": false,
+      "section": "calls",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=calls"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 238
+        }
+      ],
+      "overflow": false,
+      "section": "products",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=products"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        }
+      ],
+      "overflow": false,
+      "section": "registration",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=registration"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 302
+        }
+      ],
+      "overflow": false,
+      "section": "schedule",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=schedule"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 238
+        }
+      ],
+      "overflow": false,
+      "section": "services",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=services"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 272
+        }
+      ],
+      "overflow": false,
+      "section": "memberships",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=memberships"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "text",
+          "width": 294
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "email",
+          "width": 294
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        }
+      ],
+      "overflow": false,
+      "section": "settings",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=settings"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 147.1640625
+        }
+      ],
+      "overflow": false,
+      "section": "training-templates",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=training-templates"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 130
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 294
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 294
+        }
+      ],
+      "overflow": false,
+      "section": "cash",
+      "themeQuery": "?theme=8A332C",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=administrator&section=cash"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 238
+        }
+      ],
+      "overflow": false,
+      "section": "gift-cards",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=gift-cards"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 286
+        }
+      ],
+      "overflow": false,
+      "section": "personal-trainings",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=personal-trainings"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 122
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 152
+        }
+      ],
+      "overflow": false,
+      "section": "shifts",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=shifts"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 286
+        }
+      ],
+      "overflow": false,
+      "section": "employees",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=employees"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 214
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 270
+        }
+      ],
+      "overflow": false,
+      "section": "calls",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=calls"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 238
+        }
+      ],
+      "overflow": false,
+      "section": "products",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=products"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        }
+      ],
+      "overflow": false,
+      "section": "registration",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=registration"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 302
+        }
+      ],
+      "overflow": false,
+      "section": "schedule",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=schedule"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 238
+        }
+      ],
+      "overflow": false,
+      "section": "services",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=services"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 272
+        }
+      ],
+      "overflow": false,
+      "section": "memberships",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=memberships"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "text",
+          "width": 294
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "email",
+          "width": 294
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        }
+      ],
+      "overflow": false,
+      "section": "settings",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=settings"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 147.1640625
+        }
+      ],
+      "overflow": false,
+      "section": "training-templates",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=training-templates"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 130
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 294
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 294
+        }
+      ],
+      "overflow": false,
+      "section": "cash",
+      "themeQuery": "?theme=111111",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=administrator&section=cash"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 238
+        }
+      ],
+      "overflow": false,
+      "section": "gift-cards",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=gift-cards"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 286
+        }
+      ],
+      "overflow": false,
+      "section": "personal-trainings",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=personal-trainings"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 122
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 152
+        }
+      ],
+      "overflow": false,
+      "section": "shifts",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=shifts"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 286
+        }
+      ],
+      "overflow": false,
+      "section": "employees",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=employees"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 214
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 270
+        }
+      ],
+      "overflow": false,
+      "section": "calls",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=calls"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 238
+        }
+      ],
+      "overflow": false,
+      "section": "products",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=products"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        }
+      ],
+      "overflow": false,
+      "section": "registration",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=registration"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 302
+        }
+      ],
+      "overflow": false,
+      "section": "schedule",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=schedule"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 238
+        }
+      ],
+      "overflow": false,
+      "section": "services",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=services"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 272
+        }
+      ],
+      "overflow": false,
+      "section": "memberships",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=memberships"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "text",
+          "width": 294
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "email",
+          "width": 294
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        }
+      ],
+      "overflow": false,
+      "section": "settings",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=settings"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 147.1640625
+        }
+      ],
+      "overflow": false,
+      "section": "training-templates",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=training-templates"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 130
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 294
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 294
+        }
+      ],
+      "overflow": false,
+      "section": "cash",
+      "themeQuery": "?style=contrast&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=administrator&section=cash"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 238
+        }
+      ],
+      "overflow": false,
+      "section": "gift-cards",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=gift-cards"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 286
+        }
+      ],
+      "overflow": false,
+      "section": "personal-trainings",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=personal-trainings"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 122
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 152
+        }
+      ],
+      "overflow": false,
+      "section": "shifts",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=shifts"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 286
+        }
+      ],
+      "overflow": false,
+      "section": "employees",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=employees"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 214
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 270
+        }
+      ],
+      "overflow": false,
+      "section": "calls",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=calls"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 238
+        }
+      ],
+      "overflow": false,
+      "section": "products",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=products"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        }
+      ],
+      "overflow": false,
+      "section": "registration",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=registration"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 302
+        }
+      ],
+      "overflow": false,
+      "section": "schedule",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=schedule"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 238
+        }
+      ],
+      "overflow": false,
+      "section": "services",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=services"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 272
+        }
+      ],
+      "overflow": false,
+      "section": "memberships",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=memberships"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "text",
+          "width": 294
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "email",
+          "width": 294
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 18,
+          "outsideControl": false,
+          "type": "checkbox",
+          "width": 18
+        }
+      ],
+      "overflow": false,
+      "section": "settings",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=settings"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "INPUT",
+          "width": 230
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 147.1640625
+        }
+      ],
+      "overflow": false,
+      "section": "training-templates",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=training-templates"
+    },
+    {
+      "device": "mobile",
+      "fields": [
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 132
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 260.7578125
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 42,
+          "outsideControl": false,
+          "type": "search",
+          "width": 272
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "date",
+          "width": 130
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 294
+        },
+        {
+          "boxSizing": "border-box",
+          "height": 44,
+          "outsideControl": false,
+          "type": "button",
+          "width": 294
+        }
+      ],
+      "overflow": false,
+      "section": "cash",
+      "themeQuery": "?style=vivid&theme=8A332C",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=administrator&section=cash"
+    },
+    {
+      "fields": [
+        {
+          "focused": false,
+          "height": 44,
+          "offset": "0px",
+          "outline": "none",
+          "type": "INPUT"
+        },
+        {
+          "focused": true,
+          "height": 44,
+          "offset": "-3px",
+          "outline": "solid",
+          "type": "INPUT"
+        },
+        {
+          "focused": false,
+          "height": 100,
+          "offset": "0px",
+          "outline": "none",
+          "type": "TEXTAREA"
+        },
+        {
+          "focused": false,
+          "height": 44,
+          "offset": "0px",
+          "outline": "none",
+          "type": "BUTTON"
+        }
+      ],
+      "footer": {
+        "bottom": 811,
+        "height": 89,
+        "left": 33,
+        "right": 357,
+        "top": 722,
+        "width": 324,
+        "x": 33,
+        "y": 722
+      },
+      "overflow": false,
+      "rect": {
+        "bottom": 828,
+        "height": 812,
+        "left": 16,
+        "right": 374,
+        "top": 16,
+        "width": 358,
+        "x": 16,
+        "y": 16
+      },
+      "scenario": "mobile gift form focus",
+      "theme": "?theme=8A332C"
+    },
+    {
+      "fields": [
+        {
+          "focused": false,
+          "height": 44,
+          "offset": "0px",
+          "outline": "none",
+          "type": "INPUT"
+        },
+        {
+          "focused": true,
+          "height": 44,
+          "offset": "-3px",
+          "outline": "solid",
+          "type": "INPUT"
+        },
+        {
+          "focused": false,
+          "height": 100,
+          "offset": "0px",
+          "outline": "none",
+          "type": "TEXTAREA"
+        },
+        {
+          "focused": false,
+          "height": 44,
+          "offset": "0px",
+          "outline": "none",
+          "type": "BUTTON"
+        }
+      ],
+      "footer": {
+        "bottom": 811,
+        "height": 89,
+        "left": 33,
+        "right": 357,
+        "top": 722,
+        "width": 324,
+        "x": 33,
+        "y": 722
+      },
+      "overflow": false,
+      "rect": {
+        "bottom": 828,
+        "height": 812,
+        "left": 16,
+        "right": 374,
+        "top": 16,
+        "width": 358,
+        "x": 16,
+        "y": 16
+      },
+      "scenario": "mobile gift form focus",
+      "theme": "?theme=111111"
+    },
+    {
+      "fields": [
+        {
+          "focused": false,
+          "height": 44,
+          "offset": "0px",
+          "outline": "none",
+          "type": "INPUT"
+        },
+        {
+          "focused": true,
+          "height": 44,
+          "offset": "-3px",
+          "outline": "solid",
+          "type": "INPUT"
+        },
+        {
+          "focused": false,
+          "height": 100,
+          "offset": "0px",
+          "outline": "none",
+          "type": "TEXTAREA"
+        },
+        {
+          "focused": false,
+          "height": 44,
+          "offset": "0px",
+          "outline": "none",
+          "type": "BUTTON"
+        }
+      ],
+      "footer": {
+        "bottom": 811,
+        "height": 89,
+        "left": 33,
+        "right": 357,
+        "top": 722,
+        "width": 324,
+        "x": 33,
+        "y": 722
+      },
+      "overflow": false,
+      "rect": {
+        "bottom": 828,
+        "height": 812,
+        "left": 16,
+        "right": 374,
+        "top": 16,
+        "width": 358,
+        "x": 16,
+        "y": 16
+      },
+      "scenario": "mobile gift form focus",
+      "theme": "?style=contrast&theme=8A332C"
+    },
+    {
+      "fields": [
+        {
+          "focused": false,
+          "height": 44,
+          "offset": "0px",
+          "outline": "none",
+          "type": "INPUT"
+        },
+        {
+          "focused": true,
+          "height": 44,
+          "offset": "-3px",
+          "outline": "solid",
+          "type": "INPUT"
+        },
+        {
+          "focused": false,
+          "height": 100,
+          "offset": "0px",
+          "outline": "none",
+          "type": "TEXTAREA"
+        },
+        {
+          "focused": false,
+          "height": 44,
+          "offset": "0px",
+          "outline": "none",
+          "type": "BUTTON"
+        }
+      ],
+      "footer": {
+        "bottom": 811,
+        "height": 89,
+        "left": 33,
+        "right": 357,
+        "top": 722,
+        "width": 324,
+        "x": 33,
+        "y": 722
+      },
+      "overflow": false,
+      "rect": {
+        "bottom": 828,
+        "height": 812,
+        "left": 16,
+        "right": 374,
+        "top": 16,
+        "width": 358,
+        "x": 16,
+        "y": 16
+      },
+      "scenario": "mobile gift form focus",
+      "theme": "?style=vivid&theme=8A332C"
+    }
+  ],
+  "scenarios": [
+    "Anonymous retail purchase reduces stock and records payment",
+    "Gift card sale and confirmed debit update balance/history",
+    "Paid online order issued without second payment",
+    "Duplicate client card rejected; replacement costs 100; old card search empty, new card found",
+    "Cross-club trainer filter leaves reception context unchanged",
+    "Administrator personnel has no edit/add controls; shift schedule read only",
+    "Trainer list has no client contacts; management trainer roster shows contacts, administrator masks them",
+    "Personal booking shows visit action; subscription freeze preserves remaining visits"
+  ],
+  "consoleErrors": [],
+  "limits": "104 desktop/mobile DOM views plus targeted scenarios; not an exhaustive repeat of all pre-existing business operations. Source read-only; fictional demo data only."
+}

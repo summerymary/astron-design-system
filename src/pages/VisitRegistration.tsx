@@ -1,5 +1,5 @@
 import '../styles/registration.css';
-import { clientName, hiddenPhone } from '../lib/client-display';
+import { clientCard, clientName, hiddenPhone } from '../lib/client-display';
 import { useState } from 'react';
 import type { DemoUser, Member, RegisterVisit } from '../types';
 import type { Navigate } from '../components/WorkspaceUI';
@@ -8,7 +8,6 @@ import { ClientBookingDialog } from '../components/ClientBookingDialog';
 import { personalBooking, requiresTrainingBooking } from '../lib/personal-training';
 import { ClientSearch } from '../components/ClientSearch';
 import { VisitPassList } from '../components/VisitPassList';
-import { memberCards } from '../data/admin';
 import { Empty, Notice } from '../components/WorkspaceUI';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { getClientProfile } from '../data/clientProfile';
@@ -57,6 +56,7 @@ export function RegistrationWorkspace({
   const [error, setError] = useState('');
   const [bookingOpen, setBookingOpen] = useState(false);
   const [bookingFeedback, setBookingFeedback] = useState('');
+  const [feedbackEventId, setFeedbackEventId] = useState('');
   const passes = selected
     ? getClientProfile(
         members.find((member) => member.id === selected.id) || selected,
@@ -126,6 +126,69 @@ export function RegistrationWorkspace({
   const recommended = recommendedPassIds(passes, booking, now, birthDate);
   const selectedPassId = passId ?? (availablePasses.length === 1 ? availablePasses[0].id : '');
   const pass = passes.find((pass) => pass.id === selectedPassId);
+  const registerSelectedVisit = () => {
+    if (!selected || !pass || done) return;
+    try {
+      const actualNow = demoStamp(registrationNow());
+      if (
+        selectedBookingId &&
+        !registrationBookings(data.events, selected.id, club, actualNow).some(
+          (event) => event.id === selectedBookingId,
+        )
+      )
+        throw new Error(
+          'Предзапись изменилась или время занятия прошло. Выберите посещение заново.',
+        );
+      const problem = unavailable(pass);
+      if (problem) throw new Error(problem);
+      if (booking) {
+        const result = registerTrainingVisit({
+          member: selected,
+          eventId: booking.id,
+          passId: pass.id,
+          at: actualNow,
+          acknowledged: supervisionAcknowledged,
+        });
+        onRegister(
+          selected,
+          booking.kind === 'personal' ? 'personal' : 'group',
+          result.pass.name,
+          result.pass.id,
+          { at: actualNow, club: result.event.club, eventId: booking.id },
+        );
+      } else {
+        const kind = membershipKinds.find((kind) => kind.id === pass.kindId);
+        const issued = (data['issued-plans'] || []).find((row) => row.id === pass.id);
+        put(
+          'pass-usage',
+          usePass(
+            selected,
+            pass,
+            Number(issued?.duration || kind?.duration || 30),
+            TODAY,
+            actualNow.slice(11, 16),
+            undefined,
+            { acknowledged: supervisionAcknowledged },
+          ),
+        );
+        onRegister(selected, 'gym', pass.name, pass.id);
+        if (clientAge !== null && clientAge < 14)
+          put('visit-supervision', {
+            id: demoId('supervision'),
+            memberId: String(selected.id),
+            date: actualNow,
+            type: 'Подтверждение администратора',
+            trainer: '',
+            acknowledged: String(supervisionAcknowledged),
+          });
+      }
+      setPassId(pass.id);
+      setCompletedPassName(pass.name);
+      setDone(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Проверьте абонемент');
+    }
+  };
   const sellPass = () => {
     if (!selected) return;
     navigate(
@@ -179,7 +242,7 @@ export function RegistrationWorkspace({
               <Avatar member={selected} portrait />
               <div>
                 <h2>{clientName(selected)}</h2>
-                <p>Карта {memberCards[selected.id] || String(selected.id + 99000)}</p>
+                <p>Карта {clientCard(selected)}</p>
                 <p>
                   {hidePhones ? hiddenPhone(selected.phone) : selected.phone} · {clubName}
                 </p>
@@ -216,7 +279,28 @@ export function RegistrationWorkspace({
             </div>
           </div>
           <div className="ws-panel-body ws-stack">
-            {bookingFeedback && !done && <Notice tone="success">{bookingFeedback}</Notice>}
+            {bookingFeedback && !done && (
+              <Notice tone="success">
+                <p>{bookingFeedback}</p>
+                {feedbackEventId && (
+                  <Button
+                    variant="success"
+                    disabled={
+                      booking?.id !== feedbackEventId ||
+                      alreadyRegistered ||
+                      !availablePasses.length ||
+                      !!supervisionProblem
+                    }
+                    onClick={() => {
+                      if (pass) registerSelectedVisit();
+                      else document.getElementById('visit-confirmation')?.focus();
+                    }}
+                  >
+                    Отметить посещение
+                  </Button>
+                )}
+              </Notice>
+            )}
             {done ? (
               <Notice tone="success">
                 Посещение зарегистрировано по абонементу «{completedPassName}». Оно появилось в
@@ -347,98 +431,32 @@ export function RegistrationWorkspace({
                         : 'Для группового или персонального занятия сначала запишите клиента кнопкой «Записать». После записи здесь появится подходящий абонемент.'}
                     </Notice>
                   )}
-                {!availablePasses.length &&
-                  !alreadyRegistered &&
-                  !needsBookingChoice &&
-                  !needsTrainingBooking && (
-                    <div className="registration-no-pass" role="status">
-                      <h3>
-                        {booking
-                          ? 'Нет подходящего абонемента для занятия'
-                          : passes.length
-                            ? 'Нет доступных сейчас абонементов'
-                            : 'У клиента нет абонементов'}
-                      </h3>
-                      <p>
-                        {booking
-                          ? `Для записи «${booking.name}» нужен абонемент на ${booking.kind === 'personal' ? `персональные тренировки${bookingCategory ? ` категории «${bookingCategory}»` : ''}` : 'групповые занятия'}.`
-                          : 'Можно продать абонемент и затем зарегистрировать посещение.'}
-                      </p>
-                      <Button onClick={sellPass}>{saleLabel}</Button>
-                    </div>
-                  )}
+                {!availablePasses.length && !alreadyRegistered && !needsBookingChoice && (
+                  <div className="registration-no-pass" role="status">
+                    <h3>
+                      {booking
+                        ? 'Нет подходящего абонемента для занятия'
+                        : passes.length
+                          ? 'Нет доступных сейчас абонементов'
+                          : 'У клиента нет абонементов'}
+                    </h3>
+                    <p>
+                      {booking
+                        ? `Для записи «${booking.name}» нужен абонемент на ${booking.kind === 'personal' ? `персональные тренировки${bookingCategory ? ` категории «${bookingCategory}»` : ''}` : 'групповые занятия'}.`
+                        : 'Можно продать абонемент и затем зарегистрировать посещение.'}
+                    </p>
+                    <Button onClick={sellPass}>{saleLabel}</Button>
+                  </div>
+                )}
                 {availablePasses.length > 0 && (
                   <div className="ws-actions">
                     <Button variant="secondary" onClick={() => onMember(selected)}>
                       Отмена
                     </Button>
                     <Button
+                      id="visit-confirmation"
                       disabled={!pass || !!unavailable(pass) || !!supervisionProblem}
-                      onClick={() => {
-                        if (!pass || done) return;
-                        try {
-                          const actualNow = demoStamp(registrationNow());
-                          if (
-                            selectedBookingId &&
-                            !registrationBookings(data.events, selected.id, club, actualNow).some(
-                              (event) => event.id === selectedBookingId,
-                            )
-                          )
-                            throw new Error(
-                              'Предзапись изменилась или время занятия прошло. Выберите посещение заново.',
-                            );
-                          const problem = unavailable(pass);
-                          if (problem) throw new Error(problem);
-                          if (booking) {
-                            const result = registerTrainingVisit({
-                              member: selected,
-                              eventId: booking.id,
-                              passId: pass.id,
-                              at: actualNow,
-                              acknowledged: supervisionAcknowledged,
-                            });
-                            onRegister(
-                              selected,
-                              booking.kind === 'personal' ? 'personal' : 'group',
-                              result.pass.name,
-                              result.pass.id,
-                              { at: actualNow, club: result.event.club, eventId: booking.id },
-                            );
-                          } else {
-                            const kind = membershipKinds.find((kind) => kind.id === pass.kindId);
-                            const issued = (data['issued-plans'] || []).find(
-                              (row) => row.id === pass.id,
-                            );
-                            put(
-                              'pass-usage',
-                              usePass(
-                                selected,
-                                pass,
-                                Number(issued?.duration || kind?.duration || 30),
-                                TODAY,
-                                actualNow.slice(11, 16),
-                                undefined,
-                                { acknowledged: supervisionAcknowledged },
-                              ),
-                            );
-                            onRegister(selected, 'gym', pass.name, pass.id);
-                            if (clientAge !== null && clientAge < 14)
-                              put('visit-supervision', {
-                                id: demoId('supervision'),
-                                memberId: String(selected.id),
-                                date: actualNow,
-                                type: 'Подтверждение администратора',
-                                trainer: '',
-                                acknowledged: String(supervisionAcknowledged),
-                              });
-                          }
-                          setPassId(pass.id);
-                          setCompletedPassName(pass.name);
-                          setDone(true);
-                        } catch (err) {
-                          setError(err instanceof Error ? err.message : 'Проверьте абонемент');
-                        }
-                      }}
+                      onClick={registerSelectedVisit}
                     >
                       Подтвердить посещение
                     </Button>
@@ -478,6 +496,7 @@ export function RegistrationWorkspace({
           clubName={clubName}
           onClose={() => setBookingOpen(false)}
           onBooked={(event, reserved) => {
+            setFeedbackEventId(reserved ? '' : event.id);
             setBookingFeedback(
               `${reserved ? 'Клиент добавлен в резерв' : 'Клиент записан'}: ${event.name}, ${event.day.split('-').reverse().join('.')} в ${event.time}. Посещение пока не списано.`,
             );

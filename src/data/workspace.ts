@@ -576,8 +576,16 @@ export const initialExtra: Record<string, DemoRecord[]> = {
     { id: 'user-trainer', name: 'Алина Белова', categoryId: 'trainer', status: 'Активен' },
     { id: 'trainer-maxim', name: 'Максим Ветров', categoryId: 'senior', status: 'Активен' },
     { id: 'trainer-denis', name: 'Денис Орлов', categoryId: 'master', status: 'Активен' },
+    { id: 'trainer-olga', name: 'Ольга Миронова', categoryId: 'senior', status: 'Активен' },
   ],
   'reception-services': [
+    {
+      id: 'restore-card',
+      name: 'Восстановление карты',
+      price: '100',
+      description: 'Замена номера клиентской карты',
+      status: 'Активен',
+    },
     {
       id: 'service-towel',
       name: 'Прокат полотенца',
@@ -639,9 +647,48 @@ export const initialExtra: Record<string, DemoRecord[]> = {
     },
   ],
   'gift-cards': [
-    { id: 'gift-demo-1', name: 'DEMO-1001', balance: '3000', status: 'Активна' },
-    { id: 'gift-demo-2', name: 'DEMO-1002', balance: '10000', status: 'Активна' },
+    {
+      id: 'gift-demo-1',
+      name: 'DEMO-1001',
+      nominal: '3000',
+      balance: '3000',
+      date: '2026-11-06',
+      source: 'Продажа',
+      comment: 'Демонстрационная карта',
+      status: 'Активна',
+    },
+    {
+      id: 'gift-demo-2',
+      name: 'DEMO-1002',
+      nominal: '10000',
+      balance: '10000',
+      date: '2026-11-06',
+      source: 'Продажа',
+      comment: '',
+      status: 'Активна',
+    },
   ],
+  'gift-orders': [
+    {
+      id: 'online-gift-demo-1',
+      name: 'Заказ DEMO-01',
+      buyer: 'Александр Тестов',
+      recipient: 'Дарья Примерова',
+      amount: '3000',
+      delivery: 'Забрать в клубе',
+      status: 'Оплачен',
+    },
+    {
+      id: 'online-gift-demo-2',
+      name: 'Заказ DEMO-02',
+      buyer: 'Ирина Образцова',
+      recipient: 'Павел Тестов',
+      amount: '10000',
+      delivery: 'Забрать в клубе',
+      status: 'Оплачен',
+    },
+  ],
+  'gift-history': [],
   'personal-clients': [
     {
       id: 'pc-maxim',
@@ -1421,6 +1468,26 @@ export const initialExtra: Record<string, DemoRecord[]> = {
   ],
   shifts: [
     {
+      id: 'shift-demo-2',
+      name: 'Алина Белова',
+      club: 'Центральный',
+      start: '2026-11-06T09:00',
+      end: '2026-11-06T18:00',
+      status: 'Запланирована',
+      hours: '9',
+      rate: '250',
+    },
+    {
+      id: 'shift-demo-3',
+      name: 'Александра Крылова',
+      club: 'Центральный',
+      start: '2026-11-07T08:00',
+      end: '2026-11-07T20:00',
+      status: 'Запланирована',
+      hours: '12',
+      rate: '250',
+    },
+    {
       id: 'shift-1',
       name: 'Александра Крылова',
       club: 'Центральный',
@@ -1589,6 +1656,15 @@ export function createWorkspaceData(): Record<string, DemoRecord[]> {
     'cash-events': demoCashMovements,
   });
   data.employees.push(
+    {
+      id: 'emp-olga',
+      name: 'Ольга Миронова',
+      position: 'Персональный тренер',
+      club: 'Парк',
+      phone: '+7 900 000-20-05',
+      email: 'olga@example.com',
+      status: 'Активен',
+    },
     {
       id: 'emp-maxim',
       name: 'Максим Ветров',

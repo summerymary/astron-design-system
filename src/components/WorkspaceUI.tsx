@@ -615,12 +615,14 @@ export function ResourcePage({
   navigate,
   recordId,
   onRecord,
+  detailsExtra,
 }: {
   collection: string;
   config: Resource;
   navigate: Navigate;
   recordId?: string | null;
   onRecord?: (id: string | null) => void;
+  detailsExtra?: (record: DemoRecord) => ReactNode;
 }) {
   const { data, put, remove } = useWorkspace();
   const [query, setQuery] = useState('');
@@ -784,7 +786,8 @@ export function ResourcePage({
             )
           }
         >
-          {collection === 'employees' && <EmployeeExtras employee={opened} />}
+          {collection === 'employees' && !config.readonly && <EmployeeExtras employee={opened} />}
+          {detailsExtra?.(opened)}
           {collection === 'rooms' && opened.seats !== 'Без выбора места' && (
             <div className="ws-seat-preview" aria-label="Пример схемы мест">
               {Array.from({ length: Math.min(60, Number(opened.capacity) || 0) }, (_, i) => (

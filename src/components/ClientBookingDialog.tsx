@@ -25,8 +25,10 @@ export function ClientBookingDialog({
   onClose,
   onBooked,
   initialKind = 'group',
+  initialTrainerId,
 }: {
   initialKind?: 'group' | 'personal';
+  initialTrainerId?: string;
   member: Member;
   user: DemoUser;
   clubName: string;
@@ -36,10 +38,16 @@ export function ClientBookingDialog({
   const { data, put } = useWorkspace();
   const formId = useId();
   const assigned = clientTrainers(data, member.id);
-  const [kind, setKind] = useState(initialKind === 'personal' ? 'Персональные' : 'Групповые');
+  const selfBooking = user.role === 'trainer';
+  const [kind, setKind] = useState(
+    selfBooking || initialKind === 'personal' ? 'Персональные' : 'Групповые',
+  );
   const [club, setClub] = useState(clubName.split(' · ').at(-1)!);
   const [trainerId, setTrainerId] = useState(
-    assigned[0]?.id || personalTrainers(data)[0]?.id || '',
+    (selfBooking ? user.id : initialTrainerId) ||
+      assigned[0]?.id ||
+      personalTrainers(data)[0]?.id ||
+      '',
   );
   const [day, setDay] = useState(demoStamp(registrationNow()).slice(0, 10));
   const [time, setTime] = useState('');
@@ -47,7 +55,7 @@ export function ClientBookingDialog({
   const [error, setError] = useState('');
   const at = demoStamp(registrationNow());
   const trainers = (assigned.length ? assigned : personalTrainers(data)).filter(
-    (trainer) => trainer.club === club,
+    (trainer) => trainer.club === club && (!selfBooking || trainer.id === user.id),
   );
   const trainer = trainers.find((row) => row.id === trainerId);
   const rooms = data.rooms.filter((room) => room.club === club && room.status !== 'В архиве');
@@ -79,7 +87,7 @@ export function ClientBookingDialog({
       <div className="modal-scroll-body">
         <div className="ws-stack client-booking-dialog">
           <Tabs
-            items={['Групповые', 'Персональные']}
+            items={selfBooking ? ['Персональные'] : ['Групповые', 'Персональные']}
             value={kind}
             onChange={(value) => {
               setKind(value);
@@ -92,7 +100,14 @@ export function ClientBookingDialog({
             <Select
               value={club}
               onChange={(event) => {
-                setClub(event.target.value);
+                const nextClub = event.target.value;
+                setClub(nextClub);
+                setTrainerId(
+                  (assigned.length ? assigned : personalTrainers(data)).find(
+                    (trainer) =>
+                      trainer.club === nextClub && (!selfBooking || trainer.id === user.id),
+                  )?.id || '',
+                );
                 setTime('');
                 setRoomName('');
               }}
@@ -207,7 +222,9 @@ export function ClientBookingDialog({
               )}
               {!trainers.length && (
                 <Notice>
-                  В выбранном клубе нет подходящего закреплённого тренера. Выберите клуб его работы.
+                  {selfBooking && assigned.length
+                    ? 'Клиент закреплён за другим тренером. Для записи к себе сначала требуется изменить закрепление у руководителя.'
+                    : 'В выбранном клубе нет подходящего закреплённого тренера. Выберите клуб его работы.'}
                 </Notice>
               )}
               <div className="client-booking-fields">

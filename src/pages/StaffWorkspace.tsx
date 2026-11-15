@@ -1,4 +1,5 @@
 import { personalTrainers } from '../lib/personal-training';
+import { ClientBookingDialog } from '../components/ClientBookingDialog';
 import { clientName } from '../lib/client-display';
 import { nextDemoNow } from '../lib/demo-clock';
 import { Select } from '../components/Select';
@@ -434,6 +435,9 @@ export function TrainerClients({
 }) {
   const { data, put } = useWorkspace();
   const clients = personalClients(data, members, user.id);
+  const [mode, setMode] = useState<'list' | 'notes'>(initialMember ? 'notes' : 'list');
+  const [bookingMember, setBookingMember] = useState<Member | null>(null);
+  const [bookingMessage, setBookingMessage] = useState('');
   const [selectedId, setSelectedId] = useState(
     initialMember && clients.some((m) => m.id === initialMember.id)
       ? initialMember.id
@@ -459,11 +463,76 @@ export function TrainerClients({
     .sort((a, b) => `${a.day}${a.time}`.localeCompare(`${b.day}${b.time}`));
   const setDraft = (patch: Partial<typeof draft>) =>
     setDrafts((d) => ({ ...d, [String(selectedId)]: { ...draft, ...patch } }));
+  if (mode === 'list')
+    return (
+      <div className="ws-stack">
+        {bookingMessage && <Notice tone="success">{bookingMessage}</Notice>}
+        <section className="panel ws-panel">
+          <div className="ws-panel-heading">
+            <h2>Клиенты</h2>
+            <Button variant="secondary" onClick={() => setMode('notes')}>
+              Мои клиенты и заметки
+            </Button>
+          </div>
+          <div className="ws-panel-body">
+            <SearchBox value={query} onChange={setQuery} placeholder="ФИО клиента" />
+          </div>
+          <DataTable
+            rows={members
+              .filter(
+                (member) =>
+                  !member.archived &&
+                  clientName(member)
+                    .toLocaleLowerCase('ru')
+                    .includes(query.toLocaleLowerCase('ru')),
+              )
+              .map((member) => ({ id: String(member.id), name: clientName(member) }))}
+            columns={[
+              { key: 'name', label: 'Клиент' },
+              {
+                key: 'action',
+                label: 'Запись',
+                render: (row) => (
+                  <Button
+                    variant="secondary"
+                    onClick={() =>
+                      setBookingMember(members.find((member) => String(member.id) === row.id)!)
+                    }
+                  >
+                    Записать к себе
+                  </Button>
+                ),
+              },
+            ]}
+          />
+        </section>
+        {bookingMember && (
+          <ClientBookingDialog
+            member={bookingMember}
+            user={user}
+            clubName={`Астрон · ${personalTrainers(data).find((trainer) => trainer.id === user.id)?.club || 'Центральный'}`}
+            initialKind="personal"
+            initialTrainerId={user.id}
+            onClose={() => setBookingMember(null)}
+            onBooked={(event) =>
+              setBookingMessage(
+                `${clientName(bookingMember)} записан: ${event.day} в ${event.time}.`,
+              )
+            }
+          />
+        )}
+      </div>
+    );
   if (!clients.length)
     return (
       <Empty
         title="Пока нет персональных клиентов"
         text="Закреплённые за тренером клиенты появятся здесь."
+        action={
+          <Button variant="secondary" onClick={() => setMode('list')}>
+            Все клиенты
+          </Button>
+        }
       />
     );
   if (initialMember && !clients.some((member) => member.id === initialMember.id))
@@ -479,194 +548,204 @@ export function TrainerClients({
       />
     );
   return (
-    <div className="staff-clients-layout">
-      <section className="panel ws-panel">
-        <div className="ws-panel-heading">
-          <h2>
-            Мои клиенты <CountBadge>{clients.length}</CountBadge>
-          </h2>
-        </div>
-        <div className="ws-panel-body">
-          <SearchBox value={query} onChange={setQuery} placeholder="ФИО клиента" />
-        </div>
-        <div className="staff-client-list">
-          {clients
-            .filter((m) =>
-              clientName(m).toLocaleLowerCase('ru').includes(query.toLocaleLowerCase('ru')),
-            )
-            .map((member) => (
-              <button
-                key={member.id}
-                className={selectedId === member.id ? 'selected' : ''}
-                aria-pressed={selectedId === member.id}
-                onClick={() => {
-                  setSelectedId(member.id);
-                  setMessage('');
-                  if (
-                    (detail.current?.closest('.app-shell')?.clientWidth || window.innerWidth) < 700
-                  ) {
-                    const viewport = detail.current?.closest<HTMLElement>('.app-content');
-                    if (viewport && detail.current && viewport.scrollHeight > viewport.clientHeight)
-                      viewport.scrollTo({
-                        top:
-                          viewport.scrollTop +
-                          detail.current.getBoundingClientRect().top -
-                          viewport.getBoundingClientRect().top -
-                          12,
-                        behavior: 'smooth',
-                      });
-                    else detail.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
-                  }
-                }}
-              >
-                <Avatar member={member} small />
-                <span>
-                  <strong>{clientName(member)}</strong>
-                  <small>
-                    Заметок:{' '}
-                    {
-                      (data['trainer-notes'] || []).filter(
-                        (n) => n.trainerId === user.id && n.memberId === String(member.id),
-                      ).length
+    <div className="ws-stack">
+      <Button variant="secondary" onClick={() => setMode('list')}>
+        Все клиенты
+      </Button>
+      <div className="staff-clients-layout">
+        <section className="panel ws-panel">
+          <div className="ws-panel-heading">
+            <h2>
+              Мои клиенты <CountBadge>{clients.length}</CountBadge>
+            </h2>
+          </div>
+          <div className="ws-panel-body">
+            <SearchBox value={query} onChange={setQuery} placeholder="ФИО клиента" />
+          </div>
+          <div className="staff-client-list">
+            {clients
+              .filter((m) =>
+                clientName(m).toLocaleLowerCase('ru').includes(query.toLocaleLowerCase('ru')),
+              )
+              .map((member) => (
+                <button
+                  key={member.id}
+                  className={selectedId === member.id ? 'selected' : ''}
+                  aria-pressed={selectedId === member.id}
+                  onClick={() => {
+                    setSelectedId(member.id);
+                    setMessage('');
+                    if (
+                      (detail.current?.closest('.app-shell')?.clientWidth || window.innerWidth) <
+                      700
+                    ) {
+                      const viewport = detail.current?.closest<HTMLElement>('.app-content');
+                      if (
+                        viewport &&
+                        detail.current &&
+                        viewport.scrollHeight > viewport.clientHeight
+                      )
+                        viewport.scrollTo({
+                          top:
+                            viewport.scrollTop +
+                            detail.current.getBoundingClientRect().top -
+                            viewport.getBoundingClientRect().top -
+                            12,
+                          behavior: 'smooth',
+                        });
+                      else detail.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
                     }
-                  </small>
-                </span>
-                <ArrowRight size={15} />
-              </button>
-            ))}
-        </div>
-      </section>
-      {selected && (
-        <div className="ws-stack" ref={detail}>
-          <section className="panel ws-panel">
-            <div className="ws-panel-heading">
-              <div>
-                <h2>{clientName(selected)}</h2>
-                <p>
-                  {
-                    (data['personal-clients'] || []).find(
-                      (r) => r.trainerId === user.id && r.memberId === String(selected.id),
-                    )?.goal
-                  }
-                </p>
+                  }}
+                >
+                  <Avatar member={member} small />
+                  <span>
+                    <strong>{clientName(member)}</strong>
+                    <small>
+                      Заметок:{' '}
+                      {
+                        (data['trainer-notes'] || []).filter(
+                          (n) => n.trainerId === user.id && n.memberId === String(member.id),
+                        ).length
+                      }
+                    </small>
+                  </span>
+                  <ArrowRight size={15} />
+                </button>
+              ))}
+          </div>
+        </section>
+        {selected && (
+          <div className="ws-stack" ref={detail}>
+            <section className="panel ws-panel">
+              <div className="ws-panel-heading">
+                <div>
+                  <h2>{clientName(selected)}</h2>
+                  <p>
+                    {
+                      (data['personal-clients'] || []).find(
+                        (r) => r.trainerId === user.id && r.memberId === String(selected.id),
+                      )?.goal
+                    }
+                  </p>
+                </div>
+                <Avatar member={selected} />
               </div>
-              <Avatar member={selected} />
-            </div>
-            <div className="ws-panel-body ws-stack">
-              <h3>Заметки тренера</h3>
-              <form
-                className="ws-stack"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const problem = noteError(
-                    draft.text,
-                    user.id,
-                    String(selected.id),
-                    data['personal-clients'] || [],
-                  );
-                  if (problem) {
-                    setMessage(problem);
-                    return;
-                  }
-                  const original = notes.find((n) => n.id === draft.editingId);
-                  const noteTime = nextDemoNow().toISOString();
-                  put('trainer-notes', {
-                    id: original?.id || demoId('trainer-note'),
-                    trainerId: user.id,
-                    memberId: String(selected.id),
-                    text: draft.text.trim(),
-                    author: user.name,
-                    createdAt: original?.createdAt || noteTime,
-                    updatedAt: noteTime,
-                  });
-                  setDraft({ text: '', editingId: '' });
-                  setMessage('Заметка сохранена.');
-                }}
-              >
-                <label className="form-field">
-                  <span>{draft.editingId ? 'Изменить заметку' : 'Новая заметка'}</span>
-                  <textarea
-                    rows={4}
-                    required
-                    maxLength={2000}
-                    value={draft.text}
-                    onInput={(e) => setDraft({ text: e.currentTarget.value })}
-                    onChange={(e) => setDraft({ text: e.target.value })}
-                    placeholder="Что получилось и на что обратить внимание на следующем занятии"
-                  />
-                </label>
-                <div className="ws-actions">
-                  <Button type="submit" disabled={!draft.text.trim()}>
-                    <NotebookPen size={15} />
-                    {draft.editingId ? 'Сохранить изменения' : 'Сохранить заметку'}
-                  </Button>
-                  {draft.editingId && (
-                    <Button
-                      type="button"
-                      variant="secondary"
-                      onClick={() => setDraft({ text: '', editingId: '' })}
-                    >
-                      Отмена
+              <div className="ws-panel-body ws-stack">
+                <h3>Заметки тренера</h3>
+                <form
+                  className="ws-stack"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const problem = noteError(
+                      draft.text,
+                      user.id,
+                      String(selected.id),
+                      data['personal-clients'] || [],
+                    );
+                    if (problem) {
+                      setMessage(problem);
+                      return;
+                    }
+                    const original = notes.find((n) => n.id === draft.editingId);
+                    const noteTime = nextDemoNow().toISOString();
+                    put('trainer-notes', {
+                      id: original?.id || demoId('trainer-note'),
+                      trainerId: user.id,
+                      memberId: String(selected.id),
+                      text: draft.text.trim(),
+                      author: user.name,
+                      createdAt: original?.createdAt || noteTime,
+                      updatedAt: noteTime,
+                    });
+                    setDraft({ text: '', editingId: '' });
+                    setMessage('Заметка сохранена.');
+                  }}
+                >
+                  <label className="form-field">
+                    <span>{draft.editingId ? 'Изменить заметку' : 'Новая заметка'}</span>
+                    <textarea
+                      rows={4}
+                      required
+                      maxLength={2000}
+                      value={draft.text}
+                      onInput={(e) => setDraft({ text: e.currentTarget.value })}
+                      onChange={(e) => setDraft({ text: e.target.value })}
+                      placeholder="Что получилось и на что обратить внимание на следующем занятии"
+                    />
+                  </label>
+                  <div className="ws-actions">
+                    <Button type="submit" disabled={!draft.text.trim()}>
+                      <NotebookPen size={15} />
+                      {draft.editingId ? 'Сохранить изменения' : 'Сохранить заметку'}
                     </Button>
-                  )}
-                </div>
-              </form>
-              {message && <Notice>{message}</Notice>}
-              {notes.map((note) => (
-                <article className="staff-note" key={note.id}>
-                  <div>
-                    <time>
-                      {new Date(note.createdAt).toLocaleString('ru-RU', {
-                        timeZone: 'Europe/Moscow',
-                        day: 'numeric',
-                        month: 'long',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
-                    </time>
-                    <Button
-                      variant="ghost"
-                      onClick={() => setDraft({ text: note.text, editingId: note.id })}
-                    >
-                      <Edit3 size={14} />
-                      Изменить
-                    </Button>
+                    {draft.editingId && (
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        onClick={() => setDraft({ text: '', editingId: '' })}
+                      >
+                        Отмена
+                      </Button>
+                    )}
                   </div>
-                  <p>{note.text}</p>
-                </article>
-              ))}
-              {!notes.length && (
-                <p className="staff-muted">
-                  Заметок пока нет. Сохраните наблюдения после тренировки.
-                </p>
-              )}
-            </div>
-          </section>
-          <section className="panel ws-panel">
-            <div className="ws-panel-heading">
-              <h2>Персональные тренировки</h2>
-              <Button variant="ghost" onClick={() => navigate('schedule')}>
-                <CalendarDays size={15} />
-                Расписание
-              </Button>
-            </div>
-            <div className="ws-panel-body ws-stack">
-              {sessions.map((event) => (
-                <div className="staff-client-session" key={event.id}>
-                  <strong>
-                    {dayText(event.day)} · {eventTime(event)}
-                  </strong>
-                  <span>{event.room}</span>
-                  {event.description && <p>{event.description}</p>}
-                </div>
-              ))}
-              {!sessions.length && (
-                <p className="staff-muted">Запланированных персональных тренировок пока нет.</p>
-              )}
-            </div>
-          </section>
-        </div>
-      )}
+                </form>
+                {message && <Notice>{message}</Notice>}
+                {notes.map((note) => (
+                  <article className="staff-note" key={note.id}>
+                    <div>
+                      <time>
+                        {new Date(note.createdAt).toLocaleString('ru-RU', {
+                          timeZone: 'Europe/Moscow',
+                          day: 'numeric',
+                          month: 'long',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}
+                      </time>
+                      <Button
+                        variant="ghost"
+                        onClick={() => setDraft({ text: note.text, editingId: note.id })}
+                      >
+                        <Edit3 size={14} />
+                        Изменить
+                      </Button>
+                    </div>
+                    <p>{note.text}</p>
+                  </article>
+                ))}
+                {!notes.length && (
+                  <p className="staff-muted">
+                    Заметок пока нет. Сохраните наблюдения после тренировки.
+                  </p>
+                )}
+              </div>
+            </section>
+            <section className="panel ws-panel">
+              <div className="ws-panel-heading">
+                <h2>Персональные тренировки</h2>
+                <Button variant="ghost" onClick={() => navigate('schedule')}>
+                  <CalendarDays size={15} />
+                  Расписание
+                </Button>
+              </div>
+              <div className="ws-panel-body ws-stack">
+                {sessions.map((event) => (
+                  <div className="staff-client-session" key={event.id}>
+                    <strong>
+                      {dayText(event.day)} · {eventTime(event)}
+                    </strong>
+                    <span>{event.room}</span>
+                    {event.description && <p>{event.description}</p>}
+                  </div>
+                ))}
+                {!sessions.length && (
+                  <p className="staff-muted">Запланированных персональных тренировок пока нет.</p>
+                )}
+              </div>
+            </section>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

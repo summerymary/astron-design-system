@@ -124,6 +124,15 @@ export function getClientProfile(member: Member, data: Record<string, DemoRecord
       sub.endsAt = usage.endsAt || sub.endsAt;
       if (sub.status === 'pending') sub.status = 'active';
     }
+    const override = (data['membership-overrides'] || []).find(
+      (row) => row.memberId === String(member.id) && row.passId === sub.id,
+    );
+    if (override) {
+      if (override.status) sub.status = override.status as SubscriptionStatus;
+      if (override.remaining !== undefined)
+        sub.remaining = override.remaining === 'unlimited' ? null : Number(override.remaining);
+      if (override.endsAt) sub.endsAt = override.endsAt;
+    }
     if (
       sub.status !== 'paused' &&
       (sub.remaining === 0 || (sub.endsAt && sub.endsAt.split('.').reverse().join('-') < TODAY))
@@ -131,7 +140,7 @@ export function getClientProfile(member: Member, data: Record<string, DemoRecord
       sub.status = 'expired';
   }
   return {
-    card: memberCards[member.id] ?? String(member.id + 99000),
+    card: member.cardNumber ?? memberCards[member.id] ?? String(member.id + 99000),
     birthDate:
       member.birthDate !== undefined
         ? member.birthDate

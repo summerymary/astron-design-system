@@ -334,7 +334,7 @@ const personalRules = await import(
 const bookingRules = await import(
   await load(new URL('../src/lib/client-booking.ts', import.meta.url))
 );
-assert.equal(personalRules.personalTrainers(seed).length, 3);
+assert.equal(personalRules.personalTrainers(seed).length, 4);
 assert.deepEqual(
   personalRules.clientTrainers(seed, 1002).map((trainer) => trainer.categoryId),
   ['senior'],

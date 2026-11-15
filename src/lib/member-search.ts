@@ -1,7 +1,7 @@
 import type { Member } from '../types';
 
 export function clientCard(member: Member, cards: Record<number, string>) {
-  return cards[member.id] ?? String(member.id + 99000);
+  return member.cardNumber ?? cards[member.id] ?? String(member.id + 99000);
 }
 
 const digits = (value: string) => value.replace(/\D/g, '');

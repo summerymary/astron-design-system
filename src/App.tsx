@@ -46,6 +46,7 @@ import {
   BadgeDollarSign,
   Wallet,
   Globe,
+  Gift,
 } from 'lucide-react';
 import { CountBadge, Button, Modal, StateContent, Toast } from './components/ui';
 import { AdminHeader } from './components/AdminHeader';
@@ -74,18 +75,22 @@ const navigation = [
   { id: 'members' as const, label: 'Клиенты', icon: Users },
 ];
 const workNavigation = [
-  { id: 'cash', label: 'Касса', icon: Wallet },
-  { id: 'memberships', label: 'Абонементы', icon: CreditCard },
+  { id: 'personal-trainings', label: 'Персональные тренировки', icon: Dumbbell },
+  { id: 'gift-cards', label: 'Подарочные карты', icon: Gift },
   { id: 'calls', label: 'Звонки', icon: Phone },
   { id: 'messages', label: 'Сообщения', icon: MessageSquare },
   { id: 'bar', label: 'Бар', icon: CupSoda },
 ] as const;
 const managementNavigation = [
   { id: 'employees', label: 'Персонал', icon: BriefcaseBusiness },
+  { id: 'shifts', label: 'График смен', icon: CalendarDays },
   { id: 'directories', label: 'Справочники', icon: Library },
   { id: 'service-settings', label: 'Настройки', icon: Settings2 },
 ] as const;
 const managementIcons = {
+  'personal-trainings': Dumbbell,
+  'gift-cards': Gift,
+  shifts: CalendarDays,
   schedule: CalendarDays,
   memberships: CreditCard,
   registration: Check,
@@ -477,7 +482,7 @@ export function App() {
     const visit: Visit = {
       id: context ? `booking-${member.id}-${context.eventId}` : `demo-${crypto.randomUUID()}`,
       memberId: member.id,
-      card: memberCards[member.id] ?? String(member.id + 99000),
+      card: member.cardNumber ?? memberCards[member.id] ?? String(member.id + 99000),
       enteredAt: time,
       kind,
       plan: passName || member.plan,
@@ -905,6 +910,18 @@ export function App() {
                     <Menu size={18} />
                     <span className="nav-item-label">Все разделы</span>
                   </button>
+                  <button
+                    className={`sidebar-cash-link ${page === 'admin-section' && adminSection === 'cash' ? 'active' : ''}`}
+                    onClick={() => openModule('cash')}
+                    aria-current={
+                      page === 'admin-section' && adminSection === 'cash' ? 'page' : undefined
+                    }
+                    title={sidebarCollapsed ? 'Касса' : undefined}
+                    aria-label={sidebarCollapsed ? 'Касса' : undefined}
+                  >
+                    <Wallet size={18} />
+                    <span className="nav-item-label">Касса</span>
+                  </button>
                 </nav>
               )}
               {(role === 'trainer' ||
@@ -942,7 +959,7 @@ export function App() {
                               label: 'Моё расписание',
                               icon: CalendarDays,
                             },
-                            { id: 'trainer-clients' as const, label: 'Мои клиенты', icon: Users },
+                            { id: 'trainer-clients' as const, label: 'Клиенты', icon: Users },
                           ]
                         : [
                             { id: 'bar-catalog' as const, label: 'Каталог бара', icon: CupSoda },
@@ -1138,6 +1155,7 @@ export function App() {
                       <ClientProfile
                         key={selectedMember.id}
                         member={selectedMember}
+                        members={members}
                         visits={visits.filter((v) => v.memberId === selectedMember.id)}
                         clubName={club.name}
                         canOperate={role === 'administrator' || managingRole}
@@ -1337,7 +1355,7 @@ export function App() {
                     onClick={() => openModule(role === 'trainer' ? 'trainer-clients' : 'bar-sales')}
                   >
                     {role === 'trainer' ? <Users size={20} /> : <CreditCard size={20} />}
-                    <span>{role === 'trainer' ? 'Мои клиенты' : 'Продажи'}</span>
+                    <span>{role === 'trainer' ? 'Клиенты' : 'Продажи'}</span>
                   </button>
                 </>
               )}

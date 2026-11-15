@@ -67,7 +67,7 @@ export function saleCatalog(
       .filter((row) => row.status === 'Активен')
       .map((record): SaleCatalogItem => ({ record, sectionId: 'goods-services', type: 'product' })),
     ...(data['reception-services'] || [])
-      .filter((row) => row.status === 'Активен')
+      .filter((row) => row.status === 'Активен' && row.id !== 'restore-card')
       .map((record): SaleCatalogItem => ({ record, sectionId: 'goods-services', type: 'service' })),
   ];
   const scoped =

@@ -143,8 +143,15 @@ export const initialVisits: Visit[] = [
 ];
 
 export const adminSections = [
+  { id: 'gift-cards', label: 'Подарочные карты', caption: 'Продажа, выдача, остатки и история' },
+  {
+    id: 'personal-trainings',
+    label: 'Персональные тренировки',
+    caption: 'Тренеры клуба и запись клиентов',
+  },
+  { id: 'shifts', label: 'График смен', caption: 'Смены сотрудников по клубам и неделям' },
   { id: 'schedule', label: 'Расписание', caption: 'Занятия и записи' },
-  { id: 'trainer-clients', label: 'Мои клиенты', caption: 'Персональные тренировки и заметки' },
+  { id: 'trainer-clients', label: 'Клиенты', caption: 'Клиенты клуба и личные заметки тренера' },
   { id: 'bar-catalog', label: 'Каталог бара', caption: 'Напитки, цены и остатки' },
   { id: 'bar-sales', label: 'Продажи бара', caption: 'История заказов выбранного клуба' },
   { id: 'bar-inventory', label: 'Склад бара', caption: 'Остатки и документы только бара' },

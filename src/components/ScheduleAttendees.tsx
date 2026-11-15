@@ -217,7 +217,9 @@ export function ScheduleAttendees({
                 >
                   {clientName(member)}
                 </button>
-                <small>Карта {memberCards[member.id] || member.id + 99000}</small>
+                <small>
+                  Карта {member.cardNumber ?? memberCards[member.id] ?? String(member.id + 99000)}
+                </small>
               </div>
               {mutable ? (
                 <>
