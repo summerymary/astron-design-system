@@ -1,0 +1,1804 @@
+{
+  "date": "2026-11-15",
+  "desktop": [
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "unique_visits",
+      "title": "Уникальные посетители"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "clients_rating",
+      "title": "Рейтинг клиентов по покупкам"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "clients_rating_visit",
+      "title": "Рейтинг клиентов по посещениям"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "notcame",
+      "title": "Статистика пропусков"
+    },
+    {
+      "fieldHeights": [
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "birdthday",
+      "title": "Дни рождения"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "timetoabstat",
+      "title": "Посещения по параметрам"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "visit_by_period",
+      "title": "Статистика посещения по месяцам"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "clients_new",
+      "title": "Новые клиенты: регистрация, визит, покупка"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "client_never",
+      "title": "Клиенты не посещали"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "client_lifetime",
+      "title": "Время жизни"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "newclients",
+      "title": "Новые клиенты по источникам"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "newclients_source",
+      "title": "Источники новых клиентов"
+    },
+    {
+      "fieldHeights": [
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "clients_active",
+      "title": "Активные клиенты"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "clients_gender_age",
+      "title": "Половозрастная структура"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": false,
+      "report": "report_all_clients_phones",
+      "title": "Контакты клиентов"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "client_lastvisit",
+      "title": "Потерянные клиенты"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "client_lastvisit_personal",
+      "title": "Потерянные ПТ клиенты"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "feedbacks",
+      "title": "Отзывы"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "calls",
+      "title": "Звонки"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "clients_segmetation",
+      "title": "Сегментация клиентов"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "gtrener_busy",
+      "title": "Занятость групповых тренеров"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "report_pclients",
+      "title": "Клиенты тренера"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "report_pclients_lost",
+      "title": "Потерянные клиенты тренера"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "report_pclients_stat",
+      "title": "Процент удержания"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "ptrener_rating",
+      "title": "Рейтинг ПТ"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "ptrener_rating_all",
+      "title": "Рабочие часы тренеров"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "report_pclients_phones",
+      "title": "Контакты персональных клиентов"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "gtrener_rating",
+      "title": "Рейтинг групповых"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "free_trener_find",
+      "title": "Свободный тренер"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "selling_stat",
+      "title": "Статистика продаж"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "selltovosit",
+      "title": "Продажи и посещения"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "kassacontrol",
+      "title": "Контроль кассы"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "selling_clients_new",
+      "title": "Продажи новым клиентам"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "selling_clients_secondary",
+      "title": "Доля продления"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "clients_sell_gender_age",
+      "title": "Пол/возраст покупателей"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "clients_sell_discount",
+      "title": "Продажи со скидкой"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "financeresult",
+      "title": "Финансовый результат"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "clients_ltv",
+      "title": "LTV (Lifetime Value)"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "clients_ltv_bydate",
+      "title": "LTV за период"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "finbyyear",
+      "title": "Выручка"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "selling_clients_secondary_summer",
+      "title": "Доля продления по Летней карте"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "selling_clients_afterguest",
+      "title": "Покупка после гостевого"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "trener_financial_result",
+      "title": "Финансовый результат по тренеру"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "fail_finance_report",
+      "title": "Ошибочные операции"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "fincredits",
+      "title": "Задолженность"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "finbyyear_by_abonements",
+      "title": "Выручка по абонементам"
+    },
+    {
+      "fieldHeights": [],
+      "overflow": false,
+      "pending": true,
+      "report": "gt_finance",
+      "title": "Групповые занятия и цены"
+    },
+    {
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": false,
+      "pending": false,
+      "report": "unlim_avg_visit",
+      "title": "Сегментация посещений по безлимитам"
+    }
+  ],
+  "mobile": [
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Уникальные посетители",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=unique_visits"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Рейтинг клиентов по покупкам",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=clients_rating"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Посещения по параметрам",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=timetoabstat"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Новые клиенты: регистрация, визит, покупка",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=clients_new"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Рейтинг групповых",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=gtrener_rating"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Статистика продаж",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=selling_stat"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Задолженность",
+      "overflow": false,
+      "tables": [],
+      "url": "http://127.0.0.1:5173/#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=fincredits"
+    },
+    {
+      "controls": [],
+      "heading": "LTV (Lifetime Value)",
+      "overflow": false,
+      "tables": [],
+      "url": "http://127.0.0.1:5173/#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=clients_ltv"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Уникальные посетители",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?theme=111111#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=unique_visits"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Рейтинг клиентов по покупкам",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?theme=111111#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=clients_rating"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Посещения по параметрам",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?theme=111111#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=timetoabstat"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Новые клиенты: регистрация, визит, покупка",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?theme=111111#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=clients_new"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Рейтинг групповых",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?theme=111111#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=gtrener_rating"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Статистика продаж",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?theme=111111#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=selling_stat"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Задолженность",
+      "overflow": false,
+      "tables": [],
+      "url": "http://127.0.0.1:5173/?theme=111111#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=fincredits"
+    },
+    {
+      "controls": [],
+      "heading": "LTV (Lifetime Value)",
+      "overflow": false,
+      "tables": [],
+      "url": "http://127.0.0.1:5173/?theme=111111#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=clients_ltv"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Уникальные посетители",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?style=contrast#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=unique_visits"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Рейтинг клиентов по покупкам",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?style=contrast#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=clients_rating"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Посещения по параметрам",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?style=contrast#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=timetoabstat"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Новые клиенты: регистрация, визит, покупка",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?style=contrast#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=clients_new"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Рейтинг групповых",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?style=contrast#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=gtrener_rating"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Статистика продаж",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?style=contrast#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=selling_stat"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Задолженность",
+      "overflow": false,
+      "tables": [],
+      "url": "http://127.0.0.1:5173/?style=contrast#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=fincredits"
+    },
+    {
+      "controls": [],
+      "heading": "LTV (Lifetime Value)",
+      "overflow": false,
+      "tables": [],
+      "url": "http://127.0.0.1:5173/?style=contrast#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=clients_ltv"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Уникальные посетители",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?style=vivid#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=unique_visits"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Рейтинг клиентов по покупкам",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?style=vivid#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=clients_rating"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Посещения по параметрам",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        },
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?style=vivid#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=timetoabstat"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Новые клиенты: регистрация, визит, покупка",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?style=vivid#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=clients_new"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Рейтинг групповых",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?style=vivid#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=gtrener_rating"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Статистика продаж",
+      "overflow": false,
+      "tables": [
+        {
+          "scrollWidth": 0,
+          "width": 0
+        }
+      ],
+      "url": "http://127.0.0.1:5173/?style=vivid#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=selling_stat"
+    },
+    {
+      "controls": [
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        },
+        {
+          "height": 44,
+          "width": 137
+        }
+      ],
+      "heading": "Задолженность",
+      "overflow": false,
+      "tables": [],
+      "url": "http://127.0.0.1:5173/?style=vivid#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=fincredits"
+    },
+    {
+      "controls": [],
+      "heading": "LTV (Lifetime Value)",
+      "overflow": false,
+      "tables": [],
+      "url": "http://127.0.0.1:5173/?style=vivid#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=clients_ltv"
+    }
+  ],
+  "checks": {
+    "search": true,
+    "clubFilter": true,
+    "invalidDate": true,
+    "csvDownload": true,
+    "clientNavigation": true,
+    "pendingExportDisabled": true,
+    "keyboardFocus": {
+      "width": 2,
+      "offset": -4
+    },
+    "guideExample": true,
+    "guideMobileOverflow": false,
+    "mobileLastBlockReachable": true
+  },
+  "consoleErrors": [],
+  "screenshots": [
+    "/private/tmp/astron-statistics-catalogue-20261115.png",
+    "/private/tmp/astron-statistics-report-20261115.png",
+    "/private/tmp/astron-statistics-mobile-end-20261115.png"
+  ],
+  "limits": "DOM views are not a full repeat of every business scenario; only 12 source forms inspected, others catalogue-only; no source records saved; no commit/push.",
+  "initialConsoleErrors": [
+    {
+      "level": "error",
+      "message": "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. Алина Белова",
+      "timestamp": "2026-11-14T23:33:03.623Z",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=1233e18a"
+    }
+  ],
+  "resolvedIssues": [
+    "Legacy trainer name and stable ID are resolved to one known trainer before filtering/grouping. Chart keys use stable row IDs. Working-hours ranking sorts by hours.",
+    "Guide header actions wrap on narrow screens. Date input immediately updates report state."
+  ],
+  "finalDesktop": [
+    {
+      "id": "unique_visits",
+      "overflow": false,
+      "title": "Уникальные посетители"
+    },
+    {
+      "id": "clients_rating",
+      "overflow": false,
+      "title": "Рейтинг клиентов по покупкам"
+    },
+    {
+      "id": "clients_rating_visit",
+      "overflow": false,
+      "title": "Рейтинг клиентов по посещениям"
+    },
+    {
+      "id": "notcame",
+      "overflow": false,
+      "title": "Статистика пропусков"
+    },
+    {
+      "id": "birdthday",
+      "overflow": false,
+      "title": "Дни рождения"
+    },
+    {
+      "id": "timetoabstat",
+      "overflow": false,
+      "title": "Посещения по параметрам"
+    },
+    {
+      "id": "visit_by_period",
+      "overflow": false,
+      "title": "Статистика посещения по месяцам"
+    },
+    {
+      "id": "clients_new",
+      "overflow": false,
+      "title": "Новые клиенты: регистрация, визит, покупка"
+    },
+    {
+      "id": "client_never",
+      "overflow": false,
+      "title": "Клиенты не посещали"
+    },
+    {
+      "id": "client_lifetime",
+      "overflow": false,
+      "title": "Время жизни"
+    },
+    {
+      "id": "newclients",
+      "overflow": false,
+      "title": "Новые клиенты по источникам"
+    },
+    {
+      "id": "newclients_source",
+      "overflow": false,
+      "title": "Источники новых клиентов"
+    },
+    {
+      "id": "clients_active",
+      "overflow": false,
+      "title": "Активные клиенты"
+    },
+    {
+      "id": "clients_gender_age",
+      "overflow": false,
+      "title": "Половозрастная структура"
+    },
+    {
+      "id": "report_all_clients_phones",
+      "overflow": false,
+      "title": "Контакты клиентов"
+    },
+    {
+      "id": "client_lastvisit",
+      "overflow": false,
+      "title": "Потерянные клиенты"
+    },
+    {
+      "id": "client_lastvisit_personal",
+      "overflow": false,
+      "title": "Потерянные ПТ клиенты"
+    },
+    {
+      "id": "feedbacks",
+      "overflow": false,
+      "title": "Отзывы"
+    },
+    {
+      "id": "calls",
+      "overflow": false,
+      "title": "Звонки"
+    },
+    {
+      "id": "clients_segmetation",
+      "overflow": false,
+      "title": "Сегментация клиентов"
+    },
+    {
+      "id": "gtrener_busy",
+      "overflow": false,
+      "title": "Занятость групповых тренеров"
+    },
+    {
+      "id": "report_pclients",
+      "overflow": false,
+      "title": "Клиенты тренера"
+    },
+    {
+      "id": "report_pclients_lost",
+      "overflow": false,
+      "title": "Потерянные клиенты тренера"
+    },
+    {
+      "id": "report_pclients_stat",
+      "overflow": false,
+      "title": "Процент удержания"
+    },
+    {
+      "id": "ptrener_rating",
+      "overflow": false,
+      "title": "Рейтинг ПТ"
+    },
+    {
+      "id": "ptrener_rating_all",
+      "overflow": false,
+      "title": "Рабочие часы тренеров"
+    },
+    {
+      "id": "report_pclients_phones",
+      "overflow": false,
+      "title": "Контакты персональных клиентов"
+    },
+    {
+      "id": "gtrener_rating",
+      "overflow": false,
+      "title": "Рейтинг групповых"
+    },
+    {
+      "id": "free_trener_find",
+      "overflow": false,
+      "title": "Свободный тренер"
+    },
+    {
+      "id": "selling_stat",
+      "overflow": false,
+      "title": "Статистика продаж"
+    },
+    {
+      "id": "selltovosit",
+      "overflow": false,
+      "title": "Продажи и посещения"
+    },
+    {
+      "id": "kassacontrol",
+      "overflow": false,
+      "title": "Контроль кассы"
+    },
+    {
+      "id": "selling_clients_new",
+      "overflow": false,
+      "title": "Продажи новым клиентам"
+    },
+    {
+      "id": "selling_clients_secondary",
+      "overflow": false,
+      "title": "Доля продления"
+    },
+    {
+      "id": "clients_sell_gender_age",
+      "overflow": false,
+      "title": "Пол/возраст покупателей"
+    },
+    {
+      "id": "clients_sell_discount",
+      "overflow": false,
+      "title": "Продажи со скидкой"
+    },
+    {
+      "id": "financeresult",
+      "overflow": false,
+      "title": "Финансовый результат"
+    },
+    {
+      "id": "clients_ltv",
+      "overflow": false,
+      "title": "LTV (Lifetime Value)"
+    },
+    {
+      "id": "clients_ltv_bydate",
+      "overflow": false,
+      "title": "LTV за период"
+    },
+    {
+      "id": "finbyyear",
+      "overflow": false,
+      "title": "Выручка"
+    },
+    {
+      "id": "selling_clients_secondary_summer",
+      "overflow": false,
+      "title": "Доля продления по Летней карте"
+    },
+    {
+      "id": "selling_clients_afterguest",
+      "overflow": false,
+      "title": "Покупка после гостевого"
+    },
+    {
+      "id": "trener_financial_result",
+      "overflow": false,
+      "title": "Финансовый результат по тренеру"
+    },
+    {
+      "id": "fail_finance_report",
+      "overflow": false,
+      "title": "Ошибочные операции"
+    },
+    {
+      "id": "fincredits",
+      "overflow": false,
+      "title": "Задолженность"
+    },
+    {
+      "id": "finbyyear_by_abonements",
+      "overflow": false,
+      "title": "Выручка по абонементам"
+    },
+    {
+      "id": "gt_finance",
+      "overflow": false,
+      "title": "Групповые занятия и цены"
+    },
+    {
+      "id": "unlim_avg_visit",
+      "overflow": false,
+      "title": "Сегментация посещений по безлимитам"
+    }
+  ],
+  "finalMobile": [
+    {
+      "chart": [
+        "Максим Ветров",
+        "Денис Орлов",
+        "Алина Белова"
+      ],
+      "overflow": false,
+      "url": "http://127.0.0.1:5173/#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=ptrener_rating_all"
+    },
+    {
+      "chart": [
+        "Максим Ветров",
+        "Денис Орлов",
+        "Алина Белова"
+      ],
+      "overflow": false,
+      "url": "http://127.0.0.1:5173/?theme=111111#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=ptrener_rating_all"
+    },
+    {
+      "chart": [
+        "Максим Ветров",
+        "Денис Орлов",
+        "Алина Белова"
+      ],
+      "overflow": false,
+      "url": "http://127.0.0.1:5173/?style=contrast#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=ptrener_rating_all"
+    },
+    {
+      "chart": [
+        "Максим Ветров",
+        "Денис Орлов",
+        "Алина Белова"
+      ],
+      "overflow": false,
+      "url": "http://127.0.0.1:5173/?style=vivid#/admin-section?device=mobile&state=default&role=network-director&section=statistics&recordId=ptrener_rating_all"
+    }
+  ],
+  "mobileLastBlock": {
+    "scrollTop": 1708,
+    "scrollMax": 1708,
+    "lastBottom": 656,
+    "navTop": 680
+  }
+}
