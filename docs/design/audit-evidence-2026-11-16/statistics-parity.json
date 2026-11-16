@@ -1,0 +1,1196 @@
+{
+  "date": "2026-11-16",
+  "scope": "Local prototype only. Screenshot structure used; source systems and APIs not visited.",
+  "views": [
+    {
+      "charts": 1,
+      "controls": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "tables": 2,
+      "tabs": [
+        "Все посетители",
+        "Персональные",
+        "Неперсональные",
+        "Посещаемые клубы"
+      ],
+      "title": "Уникальные посетители",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=unique_visits",
+      "width": 1280
+    },
+    {
+      "charts": 1,
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "tables": 1,
+      "tabs": [
+        "По посещениям",
+        "По пропускам",
+        "По покупкам"
+      ],
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_rating_visit",
+      "width": 1280
+    },
+    {
+      "charts": 1,
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "tables": 1,
+      "tabs": [
+        "По посещениям",
+        "По пропускам",
+        "По покупкам"
+      ],
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=notcame",
+      "width": 1280
+    },
+    {
+      "charts": 1,
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "tables": 1,
+      "tabs": [
+        "По посещениям",
+        "По пропускам",
+        "По покупкам"
+      ],
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_rating",
+      "width": 1280
+    },
+    {
+      "charts": 0,
+      "controls": [],
+      "overflow": 0,
+      "tables": 1,
+      "tabs": [],
+      "title": "Дни рождения",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=birdthday",
+      "width": 1280
+    },
+    {
+      "charts": 1,
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "tables": 1,
+      "tabs": [
+        "Клубы",
+        "Типы посещений",
+        "Пол",
+        "Возраст",
+        "Программы",
+        "Типы абонементов",
+        "Названия абонементов"
+      ],
+      "title": "Посещения по параметрам",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=timetoabstat",
+      "width": 1280
+    },
+    {
+      "charts": 1,
+      "controls": [
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "tables": 1,
+      "tabs": [],
+      "title": "Статистика посещения по месяцам",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=visit_by_period",
+      "width": 1280
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Уникальные посетители",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=unique_visits",
+      "width": 1280
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_rating_visit",
+      "width": 1280
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=notcame",
+      "width": 1280
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_rating",
+      "width": 1280
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Дни рождения",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=birdthday",
+      "width": 1280
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Посещения по параметрам",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=timetoabstat",
+      "width": 1280
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Статистика посещения по месяцам",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=visit_by_period",
+      "width": 1280
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Уникальные посетители",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=unique_visits",
+      "width": 1280
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_rating_visit",
+      "width": 1280
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=notcame",
+      "width": 1280
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_rating",
+      "width": 1280
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Дни рождения",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=birdthday",
+      "width": 1280
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Посещения по параметрам",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=timetoabstat",
+      "width": 1280
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Статистика посещения по месяцам",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=visit_by_period",
+      "width": 1280
+    },
+    {
+      "canvas": "#202020",
+      "controls": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Уникальные посетители",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=unique_visits",
+      "width": 1280
+    },
+    {
+      "canvas": "#202020",
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_rating_visit",
+      "width": 1280
+    },
+    {
+      "canvas": "#202020",
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=notcame",
+      "width": 1280
+    },
+    {
+      "canvas": "#202020",
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=clients_rating",
+      "width": 1280
+    },
+    {
+      "canvas": "#202020",
+      "controls": [],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Дни рождения",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=birdthday",
+      "width": 1280
+    },
+    {
+      "canvas": "#202020",
+      "controls": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Посещения по параметрам",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=timetoabstat",
+      "width": 1280
+    },
+    {
+      "canvas": "#202020",
+      "controls": [
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "theme": "АстронГрафитКонтрастТёмная",
+      "title": "Статистика посещения по месяцам",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=visit_by_period",
+      "width": 1280
+    },
+    {
+      "canvas": "#FDFDFC",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Уникальные посетители",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=unique_visits",
+      "width": 390
+    },
+    {
+      "canvas": "#FDFDFC",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_rating_visit",
+      "width": 390
+    },
+    {
+      "canvas": "#FDFDFC",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=notcame",
+      "width": 390
+    },
+    {
+      "canvas": "#FDFDFC",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_rating",
+      "width": 390
+    },
+    {
+      "canvas": "#FDFDFC",
+      "controls": [],
+      "overflow": 0,
+      "title": "Дни рождения",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=birdthday",
+      "width": 390
+    },
+    {
+      "canvas": "#FDFDFC",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Посещения по параметрам",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=timetoabstat",
+      "width": 390
+    },
+    {
+      "canvas": "#FDFDFC",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Статистика посещения по месяцам",
+      "url": "http://127.0.0.1:4173/#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=visit_by_period",
+      "width": 390
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Уникальные посетители",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=unique_visits",
+      "width": 390
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_rating_visit",
+      "width": 390
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=notcame",
+      "width": 390
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_rating",
+      "width": 390
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [],
+      "overflow": 0,
+      "title": "Дни рождения",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=birdthday",
+      "width": 390
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Посещения по параметрам",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=timetoabstat",
+      "width": 390
+    },
+    {
+      "canvas": "#F9F9F9",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Статистика посещения по месяцам",
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=visit_by_period",
+      "width": 390
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Уникальные посетители",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=unique_visits",
+      "width": 390
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_rating_visit",
+      "width": 390
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=notcame",
+      "width": 390
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_rating",
+      "width": 390
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [],
+      "overflow": 0,
+      "title": "Дни рождения",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=birdthday",
+      "width": 390
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Посещения по параметрам",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=timetoabstat",
+      "width": 390
+    },
+    {
+      "canvas": "#F4F3F0",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Статистика посещения по месяцам",
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=visit_by_period",
+      "width": 390
+    },
+    {
+      "canvas": "#202020",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Уникальные посетители",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=unique_visits",
+      "width": 390
+    },
+    {
+      "canvas": "#202020",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_rating_visit",
+      "width": 390
+    },
+    {
+      "canvas": "#202020",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=notcame",
+      "width": 390
+    },
+    {
+      "canvas": "#202020",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Рейтинг клиентов",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=clients_rating",
+      "width": 390
+    },
+    {
+      "canvas": "#202020",
+      "controls": [],
+      "overflow": 0,
+      "title": "Дни рождения",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=birdthday",
+      "width": 390
+    },
+    {
+      "canvas": "#202020",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Посещения по параметрам",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=timetoabstat",
+      "width": 390
+    },
+    {
+      "canvas": "#202020",
+      "controls": [
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        },
+        {
+          "h": 44,
+          "outside": false
+        }
+      ],
+      "overflow": 0,
+      "title": "Статистика посещения по месяцам",
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=visit_by_period",
+      "width": 390
+    }
+  ],
+  "interactionChecks": [
+    "Rating period preserved across tabs and keyboard selection",
+    "Birthday demo list November 6, November 18, December 4 within November 6–December 5",
+    "Month native input, year boundary, leap February, future month without chart",
+    "Unique summary stays in tfoot after sorting; horizontal region scrolls by keyboard, inset focus offset -3px",
+    "Mobile tabs keyboard End selects last tab, donut and line chart inspected visually",
+    "CSV from Personal tab contains only personal summary",
+    "Guide month picker switches November to December and donut example renders"
+  ],
+  "limits": [
+    "56 DOM views check layout/control dimensions, not a repeat of every business scenario",
+    "Charts use incomplete demo history; unknown attendance/program links remain unknown"
+  ],
+  "consoleErrors": []
+}
