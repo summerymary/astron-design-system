@@ -8,17 +8,25 @@ export function ScheduleDayBoard({
   rooms,
   onOpen,
   onContext,
+  height = 580,
 }: {
+  height?: number;
   events: DemoRecord[];
   rooms: { key: string; label: string; room: string }[];
   onOpen: (event: DemoRecord) => void;
   onContext?: (event: DemoRecord, x: number, y: number) => void;
 }) {
   const times = [...new Set(events.map((event) => event.time))].sort();
+  const rowHeight = Math.max(34, Math.min(72, Math.floor(height / Math.max(1, times.length)) - 3));
   return (
-    <table className="schedule-day-board" data-ui="schedule-day-board">
+    <table
+      className="schedule-day-board"
+      data-ui="schedule-day-board"
+      style={{ '--day-row-height': `${rowHeight}px` } as CSSProperties}
+    >
       <caption className="sr-only">
-        Занятия по времени начала, МСК. Продолжительность указана в каждой тренировке.
+        Занятия по точному времени начала, МСК. Длительность и подробности открываются по нажатию на
+        тренировку.
       </caption>
       <thead>
         <tr>
@@ -66,14 +74,14 @@ export function ScheduleDayBoard({
                       aria-label={`${event.name}, ${eventTime(event)}, ${event.room}, ${event.trainer}, записано ${event.booked} из ${event.capacity}`}
                     >
                       <strong>{event.name}</strong>
-                      <span>
-                        {eventTime(event)} · {event.trainer}
+                      <span className="schedule-day-meta">
+                        <span>{event.trainer}</span>
+                        <b>
+                          {event.status === 'Отменено'
+                            ? 'Отменено'
+                            : `${event.booked}/${event.capacity}`}
+                        </b>
                       </span>
-                      <small>
-                        {event.status === 'Отменено'
-                          ? 'Отменено'
-                          : `${event.booked} / ${event.capacity} мест`}
-                      </small>
                     </button>
                   ))}
               </td>

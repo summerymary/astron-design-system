@@ -20,6 +20,7 @@ import { UI_RULES } from '../design-system/registry';
 import { ReportCatalogue } from './ReportCatalogue';
 import { ReportBars } from './ReportBars';
 import { ReportChart } from './ReportChart';
+import { ReportMonthPicker } from './ReportMonthPicker';
 import { statisticsReports, reportTitle } from '../data/statistics';
 import { ReceptionShift } from './ReceptionShift';
 import { CatalogSectionCard } from './CatalogSectionCard';
@@ -38,6 +39,7 @@ import { CallDialog } from './CallDialog';
 import { RestoreCardDialog } from './RestoreCardDialog';
 import { MembershipDetails } from './MembershipDetails';
 import { ScheduleDayBoard } from './ScheduleDayBoard';
+import { ShiftTimeline } from './ShiftTimeline';
 
 function ReceptionExample() {
   const { data } = useWorkspace();
@@ -60,6 +62,8 @@ function ReceptionExample() {
           История абонемента
         </Button>
       </div>
+      <h3>Журнал смен по дням</h3>
+      <ShiftTimeline rows={data.shifts} />
       <div className="calendar-scroll" style={{ maxHeight: 280 }}>
         <ScheduleDayBoard
           events={data.events
@@ -130,6 +134,7 @@ function AttendanceExample() {
 }
 
 export function DesignRules() {
+  const [reportMonthExample, setReportMonthExample] = useState('2026-11');
   const [bookingExample, setBookingExample] = useState(false);
   const [examplePassId, setExamplePassId] = useState('');
   const examplePasses = availableVisitPasses(
@@ -425,6 +430,44 @@ export function DesignRules() {
               `Выбран отчёт: ${reportTitle(statisticsReports.find((r) => r.id === id)!)}. Данные приложения не изменены.`,
             )
           }
+        />
+        <h3>Период отчёта и уникальные клиенты</h3>
+        <ReportMonthPicker month={reportMonthExample} onChange={setReportMonthExample} />
+        <p className="ws-muted">
+          Выбран месяц: {reportMonthExample}. Стрелки переключают месяц, включая переход между
+          годами.
+        </p>
+        <ReportChart
+          chart={{
+            id: 'guide-unique',
+            title: 'Сколько клубов посещает один клиент — пример',
+            kind: 'donut',
+            unit: 'Клиентов',
+            series: [{ key: 'count', label: 'Клиентов' }],
+            rows: [
+              { id: 'one', name: '1 клуб', values: [60] },
+              { id: 'two', name: '2 клуба', values: [30] },
+              { id: 'three', name: '3 клуба', values: [10] },
+            ],
+            note: 'Каждый человек учитывается один раз. Число и доля доступны без наведения и цвета.',
+          }}
+        />
+        <ReportChart
+          chart={{
+            id: 'guide-pyramid',
+            title: 'Пол и возраст — пример',
+            kind: 'pyramid',
+            unit: 'Клиентов',
+            series: [
+              { key: 'male', label: 'Мужчины' },
+              { key: 'female', label: 'Женщины' },
+            ],
+            rows: [
+              { id: '24', name: '24 года', values: [12, 18] },
+              { id: '25', name: '25 лет', values: [20, 16] },
+            ],
+            note: 'Сравниваются две группы одного возраста по общей шкале. Точные числа не зависят от цвета.',
+          }}
         />
         <ReportChart
           chart={{

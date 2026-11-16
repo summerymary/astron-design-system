@@ -1,5 +1,5 @@
 import type { DemoRecord } from '../data/workspace';
-import type { Member } from '../types';
+import type { Member, UserRole } from '../types';
 import { clientCard } from './member-search';
 import { paymentPlan, saleTotal } from './checkout';
 import type { PaymentMethod, PaymentParts } from './checkout';
@@ -104,7 +104,16 @@ export function retailSale(
   }
   return next;
 }
-export function issueGift(data: Data, input: DemoRecord, payment?: ReceptionPayment): Data {
+export const canIssueGiftWithoutPayment = (role?: UserRole) =>
+  !!role &&
+  ['club-director', 'network-director', 'fitness-director', 'operations-director'].includes(role);
+
+export function issueGift(
+  data: Data,
+  input: DemoRecord,
+  payment?: ReceptionPayment,
+  role?: UserRole,
+): Data {
   if ((data['gift-cards'] || []).some((row) => row.id === input.id))
     throw new Error('Карта уже выдана.');
   if (
@@ -130,6 +139,8 @@ export function issueGift(data: Data, input: DemoRecord, payment?: ReceptionPaym
     : null;
   if (input.orderId && (!order || Number(order.amount) !== amount))
     throw new Error('Заказ уже выдан или изменился.');
+  if (!payment && !order && !canIssueGiftWithoutPayment(role))
+    throw new Error('Выдача без оплаты доступна только директорам.');
   if (!payment && !order && !input.ownerId)
     throw new Error('Для выдачи без оплаты выберите владельца карты.');
   if (!payment && !order && !input.comment?.trim())

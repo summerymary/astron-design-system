@@ -5,7 +5,7 @@ export type StatisticsChart = {
   title: string;
   unit: string;
   format?: 'money' | 'percent';
-  kind: 'bars' | 'columns' | 'lines';
+  kind: 'bars' | 'columns' | 'lines' | 'donut' | 'pyramid';
   series: { key: string; label: string }[];
   rows: { id: string; name: string; values: (number | null)[] }[];
   maximum?: number;
@@ -58,12 +58,14 @@ export function statisticsCharts(
   };
   if (id === 'unique_visits')
     add('Сколько клубов посещает один клиент', 'Клиенты по числу клубов', ['count'], {
+      kind: 'donut',
       note: 'Каждый клиент входит ровно в одну группу. Это число клубов у клиента, а не рейтинг клубов.',
     });
   if (['clients_rating', 'clients_rating_visit'].includes(id))
     add(id === 'clients_rating' ? 'Рейтинг по сумме покупок' : 'Рейтинг по посещениям', 'Рейтинг', [
       'value',
     ]);
+  if (id === 'notcame') add('Рейтинг по пропускам', 'Клиенты с пропусками', ['count']);
   if (id === 'timetoabstat') {
     for (const title of [
       'По клубам',
@@ -74,10 +76,16 @@ export function statisticsCharts(
       'По типам абонементов',
       'По названиям абонементов',
     ])
-      add(title, title, [title === 'По полу' ? 'clients' : 'count']);
+      add(
+        title,
+        title === 'Популярность групповых программ' ? 'Направления групповых программ' : title,
+        [['По полу', 'По возрасту'].includes(title) ? 'clients' : 'count'],
+      );
   }
   if (id === 'clients_gender_age')
-    add('Пол и возраст посетителей', 'По полу и возрасту', ['male', 'female', 'unknown'], {
+    add('Пол и возраст посетителей', 'По полу и возрасту', ['male', 'female'], {
+      kind: 'pyramid',
+      note: 'Одинаковая шкала слева и справа. Неизвестные пол и возраст сохранены в таблице. Нажмите число в таблице, чтобы открыть клиентов.',
       unit: f.uniqueOnly === '1' ? 'Уникальных клиентов' : 'Посещений',
     });
   if (id === 'clients_sell_gender_age') {
@@ -126,7 +134,7 @@ export function statisticsCharts(
   }
   if (id === 'visit_by_period') {
     const block = result.blocks.find((b) => b.title === 'Посещения по дням и клубам');
-    if (block?.rows.length) charts.push(visitTimeline(block));
+    if (block?.rows.some((row) => row.total !== '')) charts.push(visitTimeline(block));
   }
   if (
     [
@@ -172,18 +180,16 @@ export function statisticsCharts(
 }
 
 function visitTimeline(block: ReportBlock): StatisticsChart {
-  const clubs = [...new Set(block.rows.map((r) => r.name))].sort();
-  const days = [...new Set(block.rows.map((r) => r.day))].sort();
-  const rows = days.map((day) => {
-    const values = clubs.map((club) =>
-      Number(block.rows.find((r) => r.day === day && r.name === club)?.count ?? 0),
-    );
-    return {
-      id: day,
-      name: day.split('-').reverse().join('.'),
-      values: [values.reduce((n, v) => n + v, 0), ...values],
-    };
-  });
+  const clubColumns = block.columns.filter((column) => column.key.startsWith('club'));
+  const rows = block.rows
+    .filter((row) => row.total !== '')
+    .map((row) => ({
+      id: row.day,
+      name: row.day.split('-').reverse().join('.'),
+      values: ['total', ...clubColumns.map((column) => column.key)].map((key) =>
+        row[key] === '' ? null : Number(row[key]),
+      ),
+    }));
   return {
     id: 'visit_by_period:daily',
     title: 'Посещения по дням и клубам',
@@ -191,9 +197,9 @@ function visitTimeline(block: ReportBlock): StatisticsChart {
     kind: 'lines',
     series: [
       { key: 'total', label: 'Всего' },
-      ...clubs.map((name) => ({ key: name, label: name })),
+      ...clubColumns.map((column) => ({ key: column.key, label: column.label })),
     ],
     rows,
-    note: 'Дневной шаг, итог и отдельная линия каждого клуба сохранены. Точные значения доступны в таблице ниже; ноль — отсутствие сохранённых демовизитов.',
+    note: 'Дневной шаг, итог и отдельная линия каждого клуба сохранены. Точные значения доступны в таблице ниже; ноль — отсутствие сохранённых демовизитов. График заканчивается текущим днём демочасов. Будущие даты остаются в таблице с —, а не с нулями.',
   };
 }

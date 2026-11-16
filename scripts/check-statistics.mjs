@@ -21,7 +21,7 @@ const {
   reportAge,
   statisticsCsv,
 } = await import(await load(new URL('../src/lib/statistics.ts', import.meta.url)));
-const { statisticsReports, reportPending } = await import(
+const { statisticsReports, reportPending, catalogueReports } = await import(
   await load(new URL('../src/data/statistics.ts', import.meta.url))
 );
 const { statisticsCharts } = await import(
@@ -511,6 +511,217 @@ assert.deepEqual(
 );
 assert.equal(JSON.stringify(input), chartBefore);
 
+// Source parity: totals must deduplicate people and days across branches.
+const uniqueProbe = buildStatistics(
+  'unique_visits',
+  { ...f, from: '2026-11-01', to: '2026-11-02' },
+  {
+    ...input,
+    visits: [
+      {
+        ...input.visits[0],
+        id: 'u1',
+        enteredAt: '2026-11-01T10:00',
+        memberId: 1001,
+        clubId: 'central',
+        kind: 'gym',
+      },
+      {
+        ...input.visits[0],
+        id: 'u2',
+        enteredAt: '2026-11-01T12:00',
+        memberId: 1001,
+        clubId: 'park',
+        kind: 'gym',
+      },
+      {
+        ...input.visits[0],
+        id: 'u3',
+        enteredAt: '2026-11-02T10:00',
+        memberId: 1001,
+        clubId: 'central',
+        kind: 'personal',
+      },
+      {
+        ...input.visits[0],
+        id: 'u4',
+        enteredAt: '2026-11-01T13:00',
+        memberId: 1002,
+        clubId: 'central',
+        kind: 'group',
+      },
+    ],
+  },
+);
+const networkRow = uniqueProbe.blocks[0].rows.find((r) => r.id === 'network-total');
+assert.equal(networkRow.clients, '2');
+assert.equal(networkRow.visits, '4');
+assert.equal(
+  networkRow.dailyUnique,
+  '3',
+  'One person/day across clubs, not a sum of branch totals',
+);
+assert.equal(networkRow.average, '2.00');
+assert.equal(networkRow.perDay, '2.00', 'Calendar days include empty dates');
+assert.equal(uniqueProbe.blocks[1].rows.find((r) => r.id === 'network-total').share, '50.00');
+const emptyUnique = buildStatistics('unique_visits', f, { ...input, visits: [] });
+assert.equal(emptyUnique.blocks[0].rows.find((r) => r.id === 'network-total').average, '');
+assert.equal(emptyUnique.metrics[0].value, 0);
+
+const ratingCards = catalogueReports(statisticsReports);
+assert.equal(ratingCards.length, 46, 'Three source rating routes become one catalogue entry');
+assert.equal(
+  ratingCards.filter((r) => ['clients_rating', 'clients_rating_visit', 'notcame'].includes(r.id))
+    .length,
+  1,
+);
+assert.ok(
+  ratingCards.find((r) => r.id === 'clients_rating_visit').description.includes('пропуски'),
+);
+assert.equal(
+  catalogueReports(statisticsReports.filter((r) => r.id === 'notcame')).length,
+  1,
+  'A limited catalogue must retain an available rating route',
+);
+const exactThreshold = buildStatistics(
+  'notcame',
+  { ...f, threshold: '3' },
+  {
+    ...input,
+    data: {
+      ...input.data,
+      events: Array.from({ length: 3 }, (_, i) => ({
+        ...event,
+        id: `miss-${i}`,
+        attendees: '1002,1002',
+      })),
+    },
+  },
+);
+assert.equal(
+  exactThreshold.blocks[0].rows[0].count,
+  '3',
+  'Inclusive minimum, duplicate roster IDs count once',
+);
+
+const { reportMonth, nextBirthday } = await import(
+  await load(new URL('../src/lib/report-period.ts', import.meta.url))
+);
+assert.deepEqual(reportMonth('2024-02'), { from: '2024-02-01', to: '2024-02-29' });
+assert.deepEqual(reportMonth('2026-12'), { from: '2026-12-01', to: '2026-12-31' });
+assert.equal(reportMonth('2026-13'), null);
+assert.equal(nextBirthday('2000-02-29', '2027-02-01'), '2027-02-28');
+assert.equal(nextBirthday('2000-02-29', '2028-02-01'), '2028-02-29');
+assert.equal(nextBirthday('2000-02-31', '2026-11-01'), null);
+const birthdayWindow = buildStatistics(
+  'birdthday',
+  { ...f, from: '2000-01-01', to: '2000-01-02' },
+  {
+    ...input,
+    at: '2026-12-20T23:59',
+    data: {},
+    members: [
+      { ...input.members[0], id: 1, birthDate: '2000-12-20' },
+      { ...input.members[0], id: 2, birthDate: '2000-01-18' },
+      { ...input.members[0], id: 3, birthDate: '2000-01-19' },
+      { ...input.members[0], id: 4, birthDate: '' },
+    ],
+  },
+);
+assert.deepEqual(
+  birthdayWindow.blocks[0].rows.map((r) => [r.memberId, r.birthday, r.days]),
+  [
+    ['1', '2026-12-20', '0'],
+    ['2', '2027-01-18', '29'],
+  ],
+  'Birthdays use the current 30-day window across years, not the old report dates',
+);
+const wholeMonthFilters = { ...f, ...reportMonth('2026-11') };
+const wholeMonth = buildStatistics('visit_by_period', wholeMonthFilters, input);
+assert.equal(wholeMonth.blocks[0].rows.length, 30);
+assert.equal(wholeMonth.blocks[0].rows[6].total, '', 'Future day is unknown, never zero');
+const futureMonthFilters = { ...f, ...reportMonth('2026-12') };
+const futureMonth = buildStatistics('visit_by_period', futureMonthFilters, input);
+assert.ok(futureMonth.metrics.every((metric) => metric.value === '—'));
+assert.equal(statisticsCharts('visit_by_period', futureMonth, futureMonthFilters).length, 0);
+const monthSeries = statisticsCharts('visit_by_period', wholeMonth, wholeMonthFilters)[0];
+assert.equal(
+  monthSeries.rows.length,
+  6,
+  'Line stops at today like the source; future dates stay in the table',
+);
+assert.equal(
+  monthSeries.rows[5].values[0],
+  input.visits.filter((v) => v.enteredAt.startsWith('2026-11-06')).length,
+);
+assert.ok(
+  monthSeries.rows
+    .filter((r) => r.values[0] !== null)
+    .every((r) => r.values[0] === r.values.slice(1).reduce((sum, value) => sum + value, 0)),
+);
+const branchMonth = buildStatistics(
+  'visit_by_period',
+  { ...wholeMonthFilters, club: 'Парк' },
+  input,
+);
+assert.equal(branchMonth.blocks[0].columns.length, 3, 'Day, total, selected club only');
+
+const programVisits = [0, 1, 2].map((n) => ({
+  ...input.visits[0],
+  id: `pg-${n}`,
+  memberId: n === 2 ? 1002 : 1001,
+  kind: 'group',
+  enteredAt: `2026-11-06T11:0${n}`,
+  passId: n === 2 ? 'S-1002-01' : 'S-1001-01',
+}));
+const programData = {
+  ...input.data,
+  events: [{ ...event, id: 'pg-event', name: 'Пилатес', intensity: 'Низкая', group: 'Баланс' }],
+  'visit-bookings': programVisits.map((visit) => ({
+    id: visit.id,
+    memberId: String(visit.memberId),
+    date: visit.enteredAt,
+    passId: visit.passId,
+    eventId: 'pg-event',
+  })),
+};
+const programReport = buildStatistics('timetoabstat', f, {
+  ...input,
+  visits: programVisits,
+  data: programData,
+});
+assert.equal(
+  programReport.blocks.find((b) => b.title === 'Направления групповых программ').rows[0].clients,
+  '2',
+);
+assert.equal(
+  programReport.blocks.find((b) => b.title === 'Популярность групповых программ').rows[0].name,
+  'Пилатес',
+);
+assert.equal(
+  programReport.blocks.find((b) => b.title === 'Популярность групповых программ').rows[0].count,
+  '3',
+);
+assert.equal(
+  programReport.blocks.find((b) => b.title === 'По названиям абонементов').rows[0].passes,
+  '2',
+  'Repeat visits do not add subscriptions',
+);
+assert.equal(
+  programReport.blocks
+    .find((b) => b.title === 'По полу')
+    .rows.reduce((sum, row) => sum + Number(row.clients), 0),
+  2,
+);
+assert.equal(
+  buildStatistics(
+    'timetoabstat',
+    { ...f, timeFrom: '18:00', timeTo: '20:00' },
+    { ...input, visits: programVisits, data: programData },
+  ).metrics[0].value,
+  0,
+);
+
 const csv = statisticsCsv([
   {
     title: 'Тест',
@@ -533,6 +744,152 @@ assert.ok(
     },
   ]).includes("'  =1+1"),
 );
+
+// Screenshot contracts: membership-based segmentation, never-visited selection,
+// gender cohort arithmetic and permission-safe call rows.
+const { clientSegment } = await import(
+  await load(new URL('../src/lib/client-segments.ts', import.meta.url))
+);
+const pass = {
+  id: 'fixture',
+  name: 'Железная карта',
+  kindId: 'gym',
+  used: 0,
+  remaining: null,
+  boughtAt: '2020-01-01',
+  activatedAt: '2020-01-01',
+  endsAt: '2026-11-05',
+  status: 'expired',
+};
+for (const [gap, index] of [
+  [1, 2],
+  [30, 2],
+  [31, 3],
+  [90, 3],
+  [91, 4],
+  [180, 4],
+  [181, 5],
+  [365, 5],
+  [366, 6],
+  [1095, 6],
+  [1096, 7],
+]) {
+  const ended = new Date(Date.parse('2026-11-06') - gap * 86400000).toISOString().slice(0, 10);
+  assert.equal(
+    clientSegment([{ ...pass, endsAt: ended }], '2026-11-06').index,
+    index,
+    `Segment boundary ${gap}`,
+  );
+}
+assert.equal(
+  clientSegment([{ ...pass, endsAt: '2026-11-06', status: 'active' }], '2026-11-06').index,
+  0,
+);
+assert.equal(
+  clientSegment([{ ...pass, endsAt: null, activatedAt: null, status: 'pending' }], '2026-11-06')
+    .index,
+  1,
+);
+assert.equal(clientSegment([], '2026-11-06').index, 8);
+assert.equal(
+  clientSegment([{ ...pass, endsAt: '2026-12-01', status: 'paused' }], '2026-11-06').index,
+  8,
+);
+assert.equal(
+  clientSegment(
+    [{ ...pass, boughtAt: '2026-12-01', endsAt: null, activatedAt: null, status: 'pending' }],
+    '2026-11-06',
+  ).index,
+  8,
+);
+const noHistoryMember = {
+  ...initialMembers[0],
+  id: 9001,
+  name: 'Тестов Тест Тестович',
+  joined: '2026-01-01',
+  expires: '2026-12-31',
+  plan: 'Железная карта',
+  visits: 0,
+  status: 'active',
+};
+const neverInput = {
+  ...input,
+  members: [noHistoryMember],
+  visits: [
+    {
+      ...input.visits[0],
+      id: 'old-group',
+      memberId: 9001,
+      kind: 'group',
+      enteredAt: '2026-01-02T10:00',
+    },
+  ],
+};
+assert.equal(
+  buildStatistics('client_never', f, neverInput).blocks[0].rows.length,
+  1,
+  'Group visits do not disqualify gym+PT cohort',
+);
+assert.equal(
+  buildStatistics('client_never', { ...f, kind: 'group' }, neverInput).blocks[0].rows.length,
+  0,
+  'Full history, before the period, is checked',
+);
+const pendingInput = {
+  ...neverInput,
+  visits: [],
+  data: {
+    ...input.data,
+    'membership-overrides': [
+      { id: 'o', memberId: '9001', passId: 'S-9001-01', status: 'expired', remaining: '0' },
+    ],
+    'issued-plans': [
+      {
+        id: 'pending-9001',
+        memberId: '9001',
+        name: 'Групповые тренировки',
+        kindId: 'group',
+        visits: '12',
+        issued: '2026-11-01',
+        boughtAt: '2026-11-01',
+      },
+    ],
+  },
+};
+assert.equal(
+  buildStatistics('client_never', f, pendingInput).blocks[0].rows.length,
+  1,
+  'Unactivated memberships qualify',
+);
+const ageReport = buildStatistics('clients_gender_age', f, repeated);
+const ageRow = ageReport.blocks[0].rows[0];
+const sex = Number(ageRow.male) ? 'male' : 'female';
+assert.equal(ageRow[sex + 'Clients'], '1');
+assert.equal(ageRow[sex + 'Average'], '2.00');
+assert.equal(statisticsCharts('clients_gender_age', ageReport, f)[0].kind, 'pyramid');
+assert.equal(
+  buildStatistics('clients_gender_age', { ...f, onlyPersonal: '1' }, repeated).metrics[1].value,
+  repeated.visits.filter((v) => v.kind === 'personal').length,
+);
+assert.equal(
+  buildStatistics('clients_gender_age', { ...f, clubs: 'Речной' }, repeated).metrics[1].value,
+  0,
+);
+assert.equal(reportAge('0986-01-01', '2026-11-06'), null, 'Impossible ages are unknown');
+const calls = buildStatistics('calls', f, input);
+assert.equal(calls.blocks[0].rows.length, 3);
+assert.equal(buildStatistics('calls', { ...f, onlyUnknown: '1' }, input).blocks[0].rows.length, 1);
+assert.equal(buildStatistics('calls', { ...f, club: 'Парк' }, input).blocks[0].rows.length, 1);
+assert.ok(
+  buildStatistics('calls', f, { ...input, hidePhones: true }).blocks[0].rows.every((row) =>
+    row.phone.includes('•'),
+  ),
+);
+for (const report of statisticsReports)
+  assert.ok(
+    buildStatistics(report.id, f, input).metrics.every((m) => !m.label.includes('Строк')),
+    report.id,
+  );
 console.log(
-  `Statistics: 48 catalogue entries; ${48 - Object.keys(reportPending).length} demo calculations; dates, Moscow time, uniqueness, no-shows, money, occupancy, CSV and immutability passed.`,
+  `Statistics: 48 definitions, 46 catalogue entries; ${48 - Object.keys(reportPending).length} demo calculations; dates, Moscow time, uniqueness, no-shows, money, occupancy, CSV and immutability passed.`,
 );

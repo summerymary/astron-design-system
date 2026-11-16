@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
-import { reportDescription, reportGroups, reportPending, reportTitle } from '../data/statistics';
+import {
+  catalogueReports,
+  reportDescription,
+  reportGroups,
+  reportPending,
+  reportTitle,
+} from '../data/statistics';
 import type { ReportDefinition } from '../data/statistics';
 import { matchesSearch } from '../lib/directory-search';
 import { Empty, SearchBox, Tabs } from './WorkspaceUI';
@@ -15,7 +21,7 @@ export function ReportCatalogue({
 }) {
   const [query, setQuery] = useState('');
   const [group, setGroup] = useState('all');
-  const found = reports.filter((r) =>
+  const found = catalogueReports(reports).filter((r) =>
     matchesSearch(`${reportTitle(r)} ${r.sourceTitle} ${reportDescription(r)}`, query),
   );
   const shown = found.filter((r) => group === 'all' || r.group === group);

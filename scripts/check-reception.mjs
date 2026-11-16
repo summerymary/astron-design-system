@@ -81,8 +81,22 @@ assert.equal(
   redeemGift(used, gift.id, 10, { id: 'last' })['gift-cards'].at(-1).status,
   'Использована',
 );
-assert.throws(() => issueGift(data, { ...gift, ownerId: '' }), /владельца/);
-assert.equal(issueGift(data, gift).ledger.length, data.ledger.length);
+assert.throws(
+  () => issueGift(data, { ...gift, ownerId: '' }, undefined, 'club-director'),
+  /владельца/,
+);
+assert.equal(issueGift(data, gift, undefined, 'club-director').ledger.length, data.ledger.length);
+for (const role of [
+  'administrator',
+  'trainer',
+  'bartender',
+  'marketer',
+  'accountant',
+  'system-administrator',
+]) {
+  assert.throws(() => issueGift(data, gift, undefined, role), /только директорам/);
+}
+assert.throws(() => issueGift(data, gift), /только директорам/);
 const order = data['gift-orders'][0];
 const online = issueGift(data, {
   ...gift,

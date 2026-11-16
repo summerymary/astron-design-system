@@ -1,0 +1,544 @@
+{
+  "date": "2026-11-16",
+  "build": "prototype-C8RlmlHz.js",
+  "views": [
+    {
+      "device": "desktop",
+      "theme": "",
+      "report": "client_never",
+      "canvas": "#FDFDFC",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Клиенты не посещали"
+    },
+    {
+      "device": "desktop",
+      "theme": "",
+      "report": "calls",
+      "canvas": "#FDFDFC",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Звонки"
+    },
+    {
+      "device": "desktop",
+      "theme": "",
+      "report": "clients_segmetation",
+      "canvas": "#FDFDFC",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Сегментация клиентов"
+    },
+    {
+      "device": "desktop",
+      "theme": "",
+      "report": "clients_gender_age",
+      "canvas": "#FDFDFC",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Половозрастная структура"
+    },
+    {
+      "device": "desktop",
+      "theme": "?theme=111111",
+      "report": "client_never",
+      "canvas": "#F9F9F9",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Клиенты не посещали"
+    },
+    {
+      "device": "desktop",
+      "theme": "?theme=111111",
+      "report": "calls",
+      "canvas": "#F9F9F9",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Звонки"
+    },
+    {
+      "device": "desktop",
+      "theme": "?theme=111111",
+      "report": "clients_segmetation",
+      "canvas": "#F9F9F9",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Сегментация клиентов"
+    },
+    {
+      "device": "desktop",
+      "theme": "?theme=111111",
+      "report": "clients_gender_age",
+      "canvas": "#F9F9F9",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Половозрастная структура"
+    },
+    {
+      "device": "desktop",
+      "theme": "?style=contrast",
+      "report": "client_never",
+      "canvas": "#F4F3F0",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Клиенты не посещали"
+    },
+    {
+      "device": "desktop",
+      "theme": "?style=contrast",
+      "report": "calls",
+      "canvas": "#F4F3F0",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Звонки"
+    },
+    {
+      "device": "desktop",
+      "theme": "?style=contrast",
+      "report": "clients_segmetation",
+      "canvas": "#F4F3F0",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Сегментация клиентов"
+    },
+    {
+      "device": "desktop",
+      "theme": "?style=contrast",
+      "report": "clients_gender_age",
+      "canvas": "#F4F3F0",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Половозрастная структура"
+    },
+    {
+      "device": "desktop",
+      "theme": "?style=vivid",
+      "report": "client_never",
+      "canvas": "#202020",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Клиенты не посещали"
+    },
+    {
+      "device": "desktop",
+      "theme": "?style=vivid",
+      "report": "calls",
+      "canvas": "#202020",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Звонки"
+    },
+    {
+      "device": "desktop",
+      "theme": "?style=vivid",
+      "report": "clients_segmetation",
+      "canvas": "#202020",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Сегментация клиентов"
+    },
+    {
+      "device": "desktop",
+      "theme": "?style=vivid",
+      "report": "clients_gender_age",
+      "canvas": "#202020",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Половозрастная структура"
+    },
+    {
+      "device": "mobile",
+      "theme": "",
+      "report": "client_never",
+      "canvas": "#FDFDFC",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Клиенты не посещали"
+    },
+    {
+      "device": "mobile",
+      "theme": "",
+      "report": "calls",
+      "canvas": "#FDFDFC",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Звонки"
+    },
+    {
+      "device": "mobile",
+      "theme": "",
+      "report": "clients_segmetation",
+      "canvas": "#FDFDFC",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Сегментация клиентов"
+    },
+    {
+      "device": "mobile",
+      "theme": "",
+      "report": "clients_gender_age",
+      "canvas": "#FDFDFC",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Половозрастная структура"
+    },
+    {
+      "device": "mobile",
+      "theme": "?theme=111111",
+      "report": "client_never",
+      "canvas": "#F9F9F9",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Клиенты не посещали"
+    },
+    {
+      "device": "mobile",
+      "theme": "?theme=111111",
+      "report": "calls",
+      "canvas": "#F9F9F9",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Звонки"
+    },
+    {
+      "device": "mobile",
+      "theme": "?theme=111111",
+      "report": "clients_segmetation",
+      "canvas": "#F9F9F9",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Сегментация клиентов"
+    },
+    {
+      "device": "mobile",
+      "theme": "?theme=111111",
+      "report": "clients_gender_age",
+      "canvas": "#F9F9F9",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Половозрастная структура"
+    },
+    {
+      "device": "mobile",
+      "theme": "?style=contrast",
+      "report": "client_never",
+      "canvas": "#F4F3F0",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Клиенты не посещали"
+    },
+    {
+      "device": "mobile",
+      "theme": "?style=contrast",
+      "report": "calls",
+      "canvas": "#F4F3F0",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Звонки"
+    },
+    {
+      "device": "mobile",
+      "theme": "?style=contrast",
+      "report": "clients_segmetation",
+      "canvas": "#F4F3F0",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Сегментация клиентов"
+    },
+    {
+      "device": "mobile",
+      "theme": "?style=contrast",
+      "report": "clients_gender_age",
+      "canvas": "#F4F3F0",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Половозрастная структура"
+    },
+    {
+      "device": "mobile",
+      "theme": "?style=vivid",
+      "report": "client_never",
+      "canvas": "#202020",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Клиенты не посещали"
+    },
+    {
+      "device": "mobile",
+      "theme": "?style=vivid",
+      "report": "calls",
+      "canvas": "#202020",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Звонки"
+    },
+    {
+      "device": "mobile",
+      "theme": "?style=vivid",
+      "report": "clients_segmetation",
+      "canvas": "#202020",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Сегментация клиентов"
+    },
+    {
+      "device": "mobile",
+      "theme": "?style=vivid",
+      "report": "clients_gender_age",
+      "canvas": "#202020",
+      "extraBack": false,
+      "fieldHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": 0,
+      "rowCounters": false,
+      "title": "Половозрастная структура"
+    }
+  ],
+  "scenarios": [
+    "gender count drilldown and current-cohort CSV",
+    "top back arrow to catalogue",
+    "call unknown-only and club filters",
+    "demo call start/end and member profile navigation",
+    "segmentation detail list and date-dependent cohorts",
+    "never-attended three direction choices",
+    "gender unique/PT/club filters",
+    "mobile pyramid keyboard horizontal scroll 0 to 40 px",
+    "desktop input focus inset -3px and Select portal within viewport",
+    "design guide working pyramid"
+  ],
+  "limitations": [
+    "No live source/API access",
+    "No real recordings; local demo file support only",
+    "No commit or push"
+  ],
+  "consoleErrors": 0
+}

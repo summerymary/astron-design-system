@@ -1,0 +1,99 @@
+{
+  "desktop": {
+    "buttonRects": [
+      {
+        "bottom": 385.5,
+        "name": "ПилатесАлина Белова4/20",
+        "top": 348.5
+      },
+      {
+        "bottom": 425.5,
+        "name": "Функциональная тренировкаМаксим Ветров5/20",
+        "top": 388.5
+      },
+      {
+        "bottom": 465.5,
+        "name": "Силовая тренировкаМаксим Ветров2/20",
+        "top": 428.5
+      },
+      {
+        "bottom": 465.5,
+        "name": "Персональная тренировкаАлина Белова1/1",
+        "top": 428.5
+      },
+      {
+        "bottom": 505.5,
+        "name": "Мягкая йогаМаксим Ветров3/20",
+        "top": 468.5
+      },
+      {
+        "bottom": 545.5,
+        "name": "ПилатесАлина Белова4/20",
+        "top": 508.5
+      },
+      {
+        "bottom": 585.5,
+        "name": "Здоровая спинаАлина Белова5/20",
+        "top": 548.5
+      },
+      {
+        "bottom": 625.5,
+        "name": "СтретчингАлина Белова2/20",
+        "top": 588.5
+      },
+      {
+        "bottom": 665.5,
+        "name": "Мягкая йогаМаксим Ветров3/20",
+        "top": 628.5
+      },
+      {
+        "bottom": 665.5,
+        "name": "Персональная тренировкаАлина Белова1/1",
+        "top": 628.5
+      },
+      {
+        "bottom": 705.5,
+        "name": "Функциональная тренировкаМаксим Ветров4/20",
+        "top": 668.5
+      },
+      {
+        "bottom": 745.5,
+        "name": "СайклДенис Орлов2/12",
+        "top": 708.5
+      },
+      {
+        "bottom": 785.5,
+        "name": "Силовая тренировкаМаксим Ветров5/20",
+        "top": 748.5
+      },
+      {
+        "bottom": 825.5,
+        "name": "Мягкая йогаМаксим Ветров2/20",
+        "top": 788.5
+      }
+    ],
+    "count": 14,
+    "first": "Пилатес, 06:00–06:50, Большой зал, Алина Белова, записано 4 из 20",
+    "last": "Мягкая йога, 21:35–22:25, Большой зал, Максим Ветров, записано 2 из 20",
+    "pageOverflow": false,
+    "rows": 12,
+    "scroll": {
+      "client": 524,
+      "total": 524
+    },
+    "viewport": {
+      "height": 900,
+      "width": 1440
+    }
+  },
+  "checks": [
+    "Filter modal labels/reset/apply verified",
+    "1280×720 fullscreen: scrollHeight=clientHeight=533; Escape returns focus",
+    "390×844 fullscreen: exit visible, event tap targets at least 44 px; horizontal room scroll",
+    "Administrator cannot issue unpaid gift; club-director can",
+    "Duplicate Smirnova search returns two distinct cards",
+    "Client age 21 год verified",
+    "Monthly shift timeline readonly for administrator"
+  ],
+  "consoleErrors": []
+}

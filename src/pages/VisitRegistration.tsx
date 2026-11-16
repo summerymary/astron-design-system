@@ -5,7 +5,7 @@ import type { DemoUser, Member, RegisterVisit } from '../types';
 import type { Navigate } from '../components/WorkspaceUI';
 import { Avatar, Button } from '../components/ui';
 import { ClientBookingDialog } from '../components/ClientBookingDialog';
-import { personalBooking, requiresTrainingBooking } from '../lib/personal-training';
+import { personalBooking } from '../lib/personal-training';
 import { ClientSearch } from '../components/ClientSearch';
 import { VisitPassList } from '../components/VisitPassList';
 import { Empty, Notice } from '../components/WorkspaceUI';
@@ -80,18 +80,6 @@ export function RegistrationWorkspace({
   const bookingCategory = (data['trainer-categories'] || []).find(
     (row) => row.id === booking?.trainerCategory,
   )?.name;
-  const nextBooking =
-    !bookings.length && selected
-      ? data.events
-          .filter(
-            (event) =>
-              event.club === club &&
-              !['Отменено', 'Завершено'].includes(event.status) &&
-              (event.attendees || '').split(',').includes(String(selected.id)) &&
-              `${event.day}T${event.time}` > now,
-          )
-          .sort((a, b) => `${a.day}T${a.time}`.localeCompare(`${b.day}T${b.time}`))[0]
-      : undefined;
   const clientAge = ageOnDate(birthDate, now.split('T')[0]);
   const trainerVerified =
     !!booking &&
@@ -120,9 +108,6 @@ export function RegistrationWorkspace({
     needsBookingChoice || alreadyRegistered
       ? []
       : availableVisitPasses(passes, now, birthDate, booking);
-  const needsTrainingBooking =
-    !booking &&
-    passes.some((pass) => !passUnavailable(pass, now, birthDate) && requiresTrainingBooking(pass));
   const recommended = recommendedPassIds(passes, booking, now, birthDate);
   const selectedPassId = passId ?? (availablePasses.length === 1 ? availablePasses[0].id : '');
   const pass = passes.find((pass) => pass.id === selectedPassId);
@@ -346,10 +331,6 @@ export function RegistrationWorkspace({
                 {!!bookings.length && (
                   <fieldset className="registration-bookings">
                     <legend>Клиент пришёл на занятие?</legend>
-                    <p>
-                      Предзапись учитывается за 60 минут до начала и 30 минут после начала.
-                      Подходящие карты выделены.
-                    </p>
                     <div className="ws-actions">
                       <Button
                         variant="secondary"
@@ -398,6 +379,23 @@ export function RegistrationWorkspace({
                     абонементы.
                   </Notice>
                 )}
+                {!availablePasses.length && !alreadyRegistered && !needsBookingChoice && (
+                  <div className="registration-no-pass" role="status">
+                    <h3>
+                      {booking
+                        ? 'Нет подходящего абонемента для занятия'
+                        : passes.length
+                          ? 'Нет доступных сейчас абонементов'
+                          : 'У клиента нет абонементов'}
+                    </h3>
+                    <p>
+                      {booking
+                        ? `Для записи «${booking.name}» нужен абонемент на ${booking.kind === 'personal' ? `персональные тренировки${bookingCategory ? ` категории «${bookingCategory}»` : ''}` : 'групповые занятия'}.`
+                        : 'Можно продать абонемент и затем зарегистрировать посещение.'}
+                    </p>
+                    <Button onClick={sellPass}>{saleLabel}</Button>
+                  </div>
+                )}
                 {availablePasses.length > 0 && (
                   <>
                     <div>
@@ -421,33 +419,7 @@ export function RegistrationWorkspace({
                     />
                   </>
                 )}
-                {!availablePasses.length &&
-                  !alreadyRegistered &&
-                  !needsBookingChoice &&
-                  needsTrainingBooking && (
-                    <Notice>
-                      {nextBooking
-                        ? `Ближайшая запись: ${nextBooking.name}, ${nextBooking.day.split('-').reverse().join('.')} в ${nextBooking.time}. Посещение можно отметить за 60 минут до начала и 30 минут после начала.`
-                        : 'Для группового или персонального занятия сначала запишите клиента кнопкой «Записать». После записи здесь появится подходящий абонемент.'}
-                    </Notice>
-                  )}
-                {!availablePasses.length && !alreadyRegistered && !needsBookingChoice && (
-                  <div className="registration-no-pass" role="status">
-                    <h3>
-                      {booking
-                        ? 'Нет подходящего абонемента для занятия'
-                        : passes.length
-                          ? 'Нет доступных сейчас абонементов'
-                          : 'У клиента нет абонементов'}
-                    </h3>
-                    <p>
-                      {booking
-                        ? `Для записи «${booking.name}» нужен абонемент на ${booking.kind === 'personal' ? `персональные тренировки${bookingCategory ? ` категории «${bookingCategory}»` : ''}` : 'групповые занятия'}.`
-                        : 'Можно продать абонемент и затем зарегистрировать посещение.'}
-                    </p>
-                    <Button onClick={sellPass}>{saleLabel}</Button>
-                  </div>
-                )}
+
                 {availablePasses.length > 0 && (
                   <div className="ws-actions">
                     <Button variant="secondary" onClick={() => onMember(selected)}>

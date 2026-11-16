@@ -19,17 +19,18 @@ const displayTitles: Record<string, string> = {
   clients_rating_visit: 'Рейтинг клиентов по посещениям',
   report_all_clients_phones: 'Контакты клиентов',
 };
-export const reportTitle = (report: ReportDefinition) => displayTitles[report.id] || report.title;
+export const reportTitle = (report: ReportDefinition) =>
+  report.catalogueTitle || displayTitles[report.id] || report.title;
 const descriptions: Record<string, string> = {
   unique_visits: 'Сколько разных клиентов посетили клубы за период',
   clients_rating: 'Клиенты с наибольшей суммой покупок',
   clients_rating_visit: 'Клиенты с наибольшим количеством посещений',
   notcame: 'Клиенты, которые записались, но не пришли на занятие',
-  birdthday: 'Дни рождения клиентов в ближайшие четыре дня',
+  birdthday: 'Дни рождения клиентов в ближайшие 30 дней',
   timetoabstat: 'Посещения по времени, направлению, полу, возрасту и карте',
-  visit_by_period: 'Посещаемость по месяцам и клубам',
+  visit_by_period: 'Выбор месяца, посещения по дням и сравнение клубов',
   clients_new: 'Первое обращение к клубу по выбранному событию',
-  client_never: 'Активные клиенты без известных посещений',
+  client_never: 'Клиенты с абонементом, не посещавшие выбранное направление',
   client_lifetime: 'Продолжительность отношений клиента с клубом',
   newclients: 'Новые регистрации и источник знакомства с клубом',
   newclients_source: 'Какие источники приводят новых клиентов',
@@ -40,7 +41,7 @@ const descriptions: Record<string, string> = {
   client_lastvisit_personal: 'Клиенты, которые давно не посещали персональные тренировки',
   feedbacks: 'Обратная связь клиентов за период',
   calls: 'Входящие и исходящие звонки',
-  clients_segmetation: 'Группы клиентов по согласованным признакам',
+  clients_segmetation: 'Группы клиентов по наличию и давности окончания абонемента',
   gtrener_busy: 'Нагрузка групповых тренеров по расписанию',
   report_pclients: 'Записи и посещения клиентов конкретного тренера',
   report_pclients_lost: 'Персональные клиенты без посещений более трёх недель',
@@ -71,9 +72,10 @@ const descriptions: Record<string, string> = {
   unlim_avg_visit: 'Частота визитов по безлимитным картам',
 };
 export const reportDescription = (report: ReportDefinition) =>
-  descriptions[report.id] || report.description;
+  report.catalogueTitle ? report.description : descriptions[report.id] || report.description;
 export const reportPending: Record<string, string> = {};
 export type ReportDefinition = {
+  catalogueTitle?: string;
   id: string;
   title: string;
   sourceTitle: string;
@@ -474,3 +476,29 @@ export const statisticsReports: ReportDefinition[] = [
     sourceTitle: 'Сегментация посещений по безлимитам',
   },
 ];
+
+export const clientRatingTabs = [
+  { id: 'clients_rating_visit', label: 'По посещениям' },
+  { id: 'notcame', label: 'По пропускам' },
+  { id: 'clients_rating', label: 'По покупкам' },
+];
+export const isClientRating = (id: string) => clientRatingTabs.some((tab) => tab.id === id);
+/** Keep source route IDs, but show a single searchable rating card in the catalogue. */
+export function catalogueReports(reports: ReportDefinition[]) {
+  const rating =
+    reports.find((report) => report.id === 'clients_rating_visit') ||
+    reports.find((report) => isClientRating(report.id));
+  return reports.flatMap((report) => {
+    if (!isClientRating(report.id)) return [report];
+    if (report !== rating) return [];
+    return [
+      {
+        ...report,
+        title: 'Рейтинг клиентов',
+        sourceTitle: 'Рейтинг посещений, пропусков и покупок',
+        description: 'Три вкладки: посещения, пропуски занятий и сумма покупок',
+        catalogueTitle: 'Рейтинг клиентов',
+      },
+    ];
+  });
+}

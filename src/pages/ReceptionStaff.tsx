@@ -13,7 +13,9 @@ import { ClientBookingDialog } from '../components/ClientBookingDialog';
 import { Back, DataTable, Empty, Notice, RecordForm, SearchBox } from '../components/WorkspaceUI';
 import { Select } from '../components/Select';
 import { TODAY } from '../data/workspace';
-import { addDays, weekStart } from '../lib/schedule';
+import { ReportMonthPicker } from '../components/ReportMonthPicker';
+import { reportMonth } from '../lib/report-period';
+import { ShiftTimeline } from '../components/ShiftTimeline';
 
 export function TrainerClientRoster({
   trainerId,
@@ -323,11 +325,10 @@ export function StaffContactsWorkspace({
 export function ShiftScheduleWorkspace({ user, clubName }: { user: DemoUser; clubName: string }) {
   const { data, put } = useWorkspace();
   const [club, setClub] = useState(clubName.split(' · ').at(-1)!);
-  const [day, setDay] = useState(TODAY);
+  const [month, setMonth] = useState(TODAY.slice(0, 7));
   const [editing, setEditing] = useState<DemoRecord | 'new' | null>(null);
   const [query, setQuery] = useState('');
-  const start = weekStart(day),
-    end = addDays(start, 6);
+  const { from: start, to: end } = reportMonth(month)!;
   const canEdit = isManagementRole(user.role);
   const rows = data.shifts
     .filter(
@@ -352,33 +353,14 @@ export function ShiftScheduleWorkspace({ user, clubName }: { user: DemoUser; clu
               <option key={row.id}>{row.name}</option>
             ))}
           </Select>
-          <label className="form-field">
-            <span>Неделя</span>
-            <input type="date" value={day} onChange={(event) => setDay(event.target.value)} />
-          </label>
+          <ReportMonthPicker month={month} onChange={setMonth} />
           {canEdit && <Button onClick={() => setEditing('new')}>Добавить смену</Button>}
         </div>
-        <div className="ws-panel-body">
-          <p>
-            {start} — {end}
-          </p>
-        </div>
-        <DataTable
-          rows={rows}
-          columns={[
-            { key: 'name', label: 'Сотрудник' },
-            { key: 'start', label: 'Начало' },
-            { key: 'end', label: 'Окончание' },
-            { key: 'status', label: 'Состояние' },
-          ]}
-          onOpen={canEdit ? setEditing : undefined}
-          empty={
-            <Empty
-              title="Смены на эту неделю не добавлены"
-              text="Выберите другую неделю или клуб."
-            />
-          }
-        />
+        {rows.length ? (
+          <ShiftTimeline rows={rows} onOpen={canEdit ? setEditing : undefined} />
+        ) : (
+          <Empty title="Смены на этот месяц не добавлены" text="Выберите другой месяц или клуб." />
+        )}
       </section>
       {editing && canEdit && (
         <RecordForm
@@ -395,6 +377,7 @@ export function ShiftScheduleWorkspace({ user, clubName }: { user: DemoUser; clu
             },
             { key: 'start', label: 'Начало', type: 'datetime-local', required: true },
             { key: 'end', label: 'Окончание', type: 'datetime-local', required: true },
+            { key: 'reception', label: 'Ресепшен', options: ['Ресепшен 01', 'Ресепшен 02'] },
             {
               key: 'status',
               label: 'Состояние',
