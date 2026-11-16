@@ -7,11 +7,13 @@ import { cashCents, cashFlow, cashJournal } from './cash';
 import { reportPending } from '../data/statistics';
 import { detailedStatistics } from './statistics-details';
 import { getMembershipKind } from '../data/membership-kinds';
+import { nextBirthday, reportNextDay } from './report-period';
 
 export type ReportFilters = {
   from: string;
   to: string;
   club: string;
+  clubs: string;
   kind: string;
   trainer: string;
   gender: string;
@@ -49,6 +51,7 @@ export const defaultReportFilters: ReportFilters = {
   from: '2026-11-01',
   to: '2026-11-06',
   club: 'all',
+  clubs: '',
   kind: 'all',
   trainer: 'all',
   gender: 'all',
@@ -123,7 +126,23 @@ export function previousReportPeriod(from: string, to: string) {
 export function reportAge(birth: string, at: string): number | null {
   const day = reportDay(birth);
   if (!validReportDay(day) || day > at) return null;
-  return Number(at.slice(0, 4)) - Number(day.slice(0, 4)) - (at.slice(5) < day.slice(5) ? 1 : 0);
+  const age =
+    Number(at.slice(0, 4)) - Number(day.slice(0, 4)) - (at.slice(5) < day.slice(5) ? 1 : 0);
+  return age <= 120 ? age : null;
+}
+function reportAgeLabel(value: string) {
+  const age = Number(value);
+  const lastTwo = age % 100;
+  const last = age % 10;
+  const unit =
+    lastTwo >= 11 && lastTwo <= 14
+      ? 'лет'
+      : last === 1
+        ? 'год'
+        : last >= 2 && last <= 4
+          ? 'года'
+          : 'лет';
+  return `${value} ${unit}`;
 }
 export function reportFilterError(f: ReportFilters): string | null {
   if (!validReportDay(f.from) || !validReportDay(f.to) || f.from > f.to)
@@ -178,6 +197,11 @@ export function buildStatistics(
   input: StatisticsInput,
 ): ReportResult {
   const result: ReportResult = { metrics: [], blocks: [], notes: [] };
+  if (id === 'birdthday') {
+    const today = reportDay(input.at);
+    if (!validReportDay(today)) return { ...result, error: 'Не удалось определить текущую дату.' };
+    f = { ...f, from: today, to: shift(today, 29) };
+  }
   const error = reportFilterError(f);
   if (error) return { ...result, error };
   const detailed = detailedStatistics(id, f, input);
@@ -186,7 +210,10 @@ export function buildStatistics(
   const { data, visits, at } = input;
   const members = input.members.filter((m) => !m.archived);
   const inPeriod = (date: string) => date >= f.from && date <= f.to;
-  const inClub = (club: string) => f.club === 'all' || club === f.club;
+  const inClub = (club: string) =>
+    id === 'clients_gender_age' && f.clubs
+      ? f.clubs.split(',').includes(club)
+      : f.club === 'all' || club === f.club;
   const profile = (m: Member) => getClientProfile(m, data);
   const memberById = new Map(members.map((m) => [String(m.id), m]));
   const person = (m: Member): DemoRecord => ({
@@ -302,50 +329,96 @@ export function buildStatistics(
         ),
       },
     ];
+    const periodDays = Math.round((Date.parse(f.to) - Date.parse(f.from)) / dayMs) + 1;
+    const clubs =
+      f.club === 'all'
+        ? [...new Set([...Object.values(clubNames), ...filteredVisits.map((v) => v.club)])]
+        : [f.club];
+    const uniqueCount = (rows: typeof filteredVisits) => countDistinct(rows, (v) => v.memberId);
+    const ratio = (n: number, d: number) => (d ? (n / d).toFixed(2) : '');
     for (const [title, list] of [
       ['Все направления', filteredVisits],
       ['Персональные посещения', filteredVisits.filter((v) => v.kind === 'personal')],
       ['Другие направления', filteredVisits.filter((v) => v.kind !== 'personal')],
     ] as const) {
+      const summarize = (
+        name: string,
+        rows: typeof filteredVisits,
+        all: typeof filteredVisits,
+        total = false,
+      ): DemoRecord => ({
+        id: total ? 'network-total' : name,
+        name,
+        clients: String(uniqueCount(rows)),
+        new: String(
+          uniqueCount(
+            rows.filter((v) => {
+              const m = memberById.get(String(v.memberId));
+              return Boolean(m && inPeriod(reportDay(m.joined)));
+            }),
+          ),
+        ),
+        share: ratio(uniqueCount(rows) * 100, uniqueCount(all)),
+        visits: String(rows.length),
+        average: ratio(rows.length, uniqueCount(rows)),
+        perDay: ratio(rows.length, periodDays),
+        dailyUnique: String(countDistinct(rows, (v) => `${v.local.slice(0, 10)}|${v.memberId}`)),
+      });
       block(
         title,
         [
           col('name', 'Клуб'),
           col('clients', 'Уникальных клиентов'),
-          col('new', 'Новых клиентов'),
+          col('new', 'Из них новых'),
+          ...(title !== 'Все направления'
+            ? [col('share', 'Доля посетителей клуба', 'percent')]
+            : []),
           col('visits', 'Посещений'),
           col('average', 'Визитов на клиента'),
+          col('perDay', 'Визитов в день'),
+          col('dailyUnique', 'Сумма уникальных по дням'),
         ],
-        grouped([...list], (v) => v.club).map(([name, rows]) => ({
-          id: name,
-          name,
-          clients: String(countDistinct(rows, (v) => v.memberId)),
-          new: String(
-            countDistinct(
-              rows.filter((v) => {
-                const m = memberById.get(String(v.memberId));
-                return Boolean(m && inPeriod(reportDay(m.joined)));
-              }),
-              (v) => v.memberId,
+        [
+          ...clubs.map((club) =>
+            summarize(
+              club,
+              list.filter((v) => v.club === club),
+              filteredVisits.filter((v) => v.club === club),
             ),
           ),
-          visits: String(rows.length),
-          average: (rows.length / countDistinct(rows, (v) => v.memberId)).toFixed(1),
-        })),
+          summarize(
+            f.club === 'all' ? 'Вся сеть · без повторов' : 'Итого по клубу',
+            [...list],
+            filteredVisits,
+            true,
+          ),
+        ],
       );
     }
+    result.notes.push(
+      'Уникальный клиент учитывается один раз за период. В итоге сети он не повторяется между клубами; итог нельзя получить сложением клубных строк. Новые — посетители, зарегистрированные в выбранном периоде.',
+      'Визитов на клиента = посещения / уникальные клиенты. Визитов в день = посещения / календарные дни периода. Сумма уникальных по дням считает человека один раз в каждом дне; в итоге сети также убирает повторы между клубами за день. При отсутствии клиентов среднее и доля не определены (—).',
+      'В персональной и неперсональной сводке доля — от всех посетителей того же клуба или сети. Один человек мог посещать оба направления: эти доли не складываются в 100%.',
+    );
     const clubCounts = grouped(filteredVisits, (v) => String(v.memberId)).map(
       ([, visits]) => new Set(visits.map((v) => v.club)).size,
     );
     block(
       'Клиенты по числу клубов',
-      [col('name', 'Посещено клубов'), col('count', 'Клиентов')],
+      [
+        col('name', 'Посещено клубов'),
+        col('count', 'Клиентов'),
+        col('share', 'Доля клиентов', 'percent'),
+      ],
       [...new Set(clubCounts)]
         .sort((a, b) => a - b)
         .map((count) => ({
           id: String(count),
           name: `${count} ${count === 1 ? 'клуб' : count < 5 ? 'клуба' : 'клубов'}`,
           count: String(clubCounts.filter((n) => n === count).length),
+          share: ((clubCounts.filter((n) => n === count).length * 100) / clubCounts.length).toFixed(
+            1,
+          ),
         })),
     );
   } else if (['clients_rating', 'clients_rating_visit'].includes(id)) {
@@ -382,80 +455,147 @@ export function buildStatistics(
     for (const e of pastEvents.filter(
       (e) => Date.parse(`${e.day}T${e.time}`) + Number(e.duration || 0) * 60000 < Date.parse(at),
     )) {
-      for (const mid of ids(e.attendees).filter((mid) => !ids(e.present).includes(mid)))
+      for (const mid of [...new Set(ids(e.attendees))].filter(
+        (mid) => !ids(e.present).includes(mid),
+      ))
         counts.set(mid, (counts.get(mid) || 0) + 1);
     }
     block(
       'Клиенты с пропусками',
       [...names, col('phone', 'Телефон'), col('count', 'Пропусков')],
       members
-        .filter((m) => (counts.get(String(m.id)) || 0) > Number(f.threshold))
-        .map((m) => ({ ...person(m), count: String(counts.get(String(m.id))) })),
+        .filter((m) => (counts.get(String(m.id)) || 0) >= Math.max(1, Number(f.threshold)))
+        .map((m): DemoRecord => ({ ...person(m), count: String(counts.get(String(m.id))) }))
+        .sort((a, b) => Number(b.count) - Number(a.count) || a.name.localeCompare(b.name, 'ru'))
+        .slice(0, Number(f.limit)),
       true,
     );
     result.notes.push(
-      'В деморасчёте пропуск — запись без отметки присутствия после окончания занятия. Отменённые занятия и резерв исключены. Порог строгий: более указанного количества.',
+      'В деморасчёте пропуск — запись без отметки присутствия после окончания занятия. Отменённые занятия и резерв исключены. Показаны клиенты с количеством пропусков не меньше выбранного минимума, по убыванию. Отсутствие отметки в неполной демоистории не доказывает реальный пропуск.',
     );
   } else if (id === 'birdthday') {
-    const days = Array.from({ length: 4 }, (_, i) => shift(f.to, i));
+    const today = reportDay(at);
     block(
-      'Ближайшие четыре дня',
+      'Дни рождения в ближайшие 30 дней',
       [
         col('birthday', 'День рождения', 'date'),
         ...names,
+        col('age', 'Исполняется лет'),
+        col('days', 'Через дней'),
         col('phone', 'Телефон'),
         col('last', 'Последний визит', 'date'),
       ],
-      days.flatMap((day) =>
-        members
-          .filter((m) => reportDay(profile(m).birthDate).slice(5) === day.slice(5))
-          .map((m) => ({ ...person(m), birthday: day, last: lastVisit(m.id) })),
-      ),
+      members
+        .flatMap((m): DemoRecord[] => {
+          const birth = reportDay(profile(m).birthDate);
+          const birthday = nextBirthday(birth, today);
+          if (!birthday || birthday > f.to) return [];
+          return [
+            {
+              ...person(m),
+              birthday,
+              age: String(Number(birthday.slice(0, 4)) - Number(birth.slice(0, 4))),
+              days: String(Math.round((Date.parse(birthday) - Date.parse(today)) / dayMs)),
+              last:
+                allVisits
+                  .filter((v) => v.memberId === m.id && v.local.slice(0, 10) <= today)
+                  .map((v) => v.local.slice(0, 10))
+                  .sort()
+                  .at(-1) || '',
+            },
+          ];
+        })
+        .sort((a, b) => a.birthday.localeCompare(b.birthday) || a.name.localeCompare(b.name, 'ru')),
       true,
     );
+    result.metrics = [
+      { label: 'Именинников', value: result.blocks[0].rows.length },
+      {
+        label: 'Период',
+        value: `${f.from.split('-').reverse().join('.')} — ${f.to.split('-').reverse().join('.')}`,
+      },
+    ];
+    result.notes.push(
+      'Ближайшие 30 календарных дней включают сегодня и следующие 29 дней по московской дате демочасов. Даты рождения без года или некорректные даты исключены. Для 29 февраля в невисокосном году используется 28 февраля.',
+    );
   } else if (id === 'clients_gender_age') {
-    const list =
-      f.uniqueOnly === '1'
-        ? [...new Map(filteredVisits.map((v) => [v.memberId, v])).values()]
-        : filteredVisits;
-    const rows = grouped(list, (v) => {
-      const m = memberById.get(String(v.memberId));
-      const age = m ? reportAge(profile(m).birthDate, f.to) : null;
-      return age === null ? 'Возраст не указан' : String(age);
-    })
+    const list = filteredVisits.filter((v) => f.onlyPersonal !== '1' || v.kind === 'personal');
+    const ageOf = (memberId: number) => {
+      const m = memberById.get(String(memberId));
+      return m ? reportAge(profile(m).birthDate, f.to) : null;
+    };
+    const genderOf = (memberId: number) => {
+      const m = memberById.get(String(memberId));
+      const gender = m ? profile(m).gender : '';
+      return gender === 'Мужской' ? 'male' : gender === 'Женский' ? 'female' : 'unknown';
+    };
+    const rows = grouped(list, (v) => String(ageOf(v.memberId) ?? 'unknown'))
       .sort(([a], [b]) => a.localeCompare(b, 'ru', { numeric: true }))
-      .map(([age, visits]) => ({
+      .map(([age, entries]) => ({
         id: age,
-        name: /^\d+$/.test(age) ? `${age} лет` : age,
+        name: age === 'unknown' ? 'Возраст не указан' : reportAgeLabel(age),
         ...Object.fromEntries(
-          [
-            ['male', 'Мужской'],
-            ['female', 'Женский'],
-            ['unknown', 'Не указан'],
-          ].map(([key, gender]) => [
-            key,
-            String(
-              visits.filter((v) => {
-                const m = memberById.get(String(v.memberId));
-                const g = m ? profile(m).gender : 'Не указан';
-                return gender === 'Не указан' ? !['Мужской', 'Женский'].includes(g) : g === gender;
-              }).length,
-            ),
-          ]),
+          ['male', 'female', 'unknown'].flatMap((key) => {
+            const subset = entries.filter((v) => genderOf(v.memberId) === key);
+            const clients = countDistinct(subset, (v) => v.memberId);
+            return [
+              [key, String(f.uniqueOnly === '1' ? clients : subset.length)],
+              [`${key}Visits`, String(subset.length)],
+              [`${key}Clients`, String(clients)],
+              [`${key}Average`, clients ? (subset.length / clients).toFixed(2) : ''],
+            ];
+          }),
         ),
       }));
+    const measure = f.uniqueOnly === '1' ? 'Клиентов' : 'Посещений';
     block(
       'По полу и возрасту',
       [
         col('name', 'Возраст'),
-        col('male', 'Мужчины'),
-        col('female', 'Женщины'),
-        col('unknown', 'Пол не указан'),
+        ...[
+          ['male', 'Мужчины'],
+          ['female', 'Женщины'],
+          ['unknown', 'Пол не указан'],
+        ].flatMap(([key, label]) => [
+          col(key, `${label} · ${measure.toLowerCase()}`),
+          col(`${key}Average`, `${label} · визитов на клиента`),
+        ]),
       ],
       rows,
     );
+    block(
+      'Клиенты по полу и возрасту',
+      [
+        ...names,
+        col('phone', 'Телефон'),
+        col('age', 'Возраст'),
+        col('gender', 'Пол'),
+        col('count', 'Посещений'),
+      ],
+      grouped(list, (v) => String(v.memberId)).flatMap(([memberId, entries]) => {
+        const m = memberById.get(memberId);
+        return m
+          ? [
+              {
+                ...person(m),
+                age: String(ageOf(m.id) ?? 'Не указан'),
+                ageKey: String(ageOf(m.id) ?? 'unknown'),
+                genderKey: genderOf(m.id),
+                gender: profile(m).gender || 'Не указан',
+                count: String(entries.length),
+              },
+            ]
+          : [];
+      }),
+      true,
+    );
+    result.metrics = [
+      { label: 'Уникальных клиентов', value: countDistinct(list, (v) => v.memberId) },
+      { label: 'Посещений', value: list.length },
+    ];
     result.notes.push(
-      `Совместное распределение по точному возрасту и полу. Возраст — на конец периода. ${f.uniqueOnly === '1' ? 'Один клиент учитывается один раз по сети.' : 'Считаются посещения, повторные визиты включены.'} Неизвестные пол и возраст не исключаются.`,
+      `Зеркальная диаграмма показывает точный возраст на конец периода: мужчины слева, женщины справа. ${f.uniqueOnly === '1' ? 'Один клиент учитывается один раз в выбранных клубах.' : 'Считаются все посещения.'} Среднее всегда означает визиты на одного уникального клиента. Нажмите число в таблице для списка клиентов.`,
+      'Неизвестные пол и возраст включены в таблицу и итоги. Невозможный возраст (более 120 лет), будущая или некорректная дата рождения показываются как неизвестные.',
     );
   } else if (id === 'timetoabstat') {
     const passFor = (v: (typeof filteredVisits)[number]) => {
@@ -466,7 +606,7 @@ export function buildStatistics(
       );
       return matches.length === 1 ? matches[0] : undefined;
     };
-    const programFor = (v: (typeof filteredVisits)[number]) => {
+    const eventFor = (v: (typeof filteredVisits)[number]) => {
       const receipts = (data['visit-bookings'] || []).filter(
         (r) =>
           r.memberId === String(v.memberId) &&
@@ -474,9 +614,22 @@ export function buildStatistics(
           (!v.passId || r.passId === v.passId),
       );
       return receipts.length === 1
-        ? (data.events || []).find((e) => e.id === receipts[0].eventId)?.name ||
-            'Программа не определена'
-        : 'Программа не определена';
+        ? (data.events || []).find((e) => e.id === receipts[0].eventId)
+        : undefined;
+    };
+    const programFor = (v: (typeof filteredVisits)[number]) =>
+      eventFor(v)?.name || 'Программа не определена';
+    const programGroup = (v: (typeof filteredVisits)[number]) => {
+      const event = eventFor(v);
+      if (!event) return 'Направление не определено';
+      const template = (data['training-templates'] || []).find(
+        (t) => t.id === event.templateId || t.name === event.name,
+      );
+      return (
+        event.group ||
+        template?.group ||
+        (event.intensity ? `${event.intensity} интенсивность` : 'Направление не определено')
+      );
     };
     for (const [title, key] of [
       ['По клубам', (v: (typeof filteredVisits)[number]) => v.club],
@@ -523,24 +676,54 @@ export function buildStatistics(
         title === 'Популярность групповых программ'
           ? filteredVisits.filter((v) => v.kind === 'group')
           : filteredVisits;
-      const denominator =
-        title === 'По полу' ? countDistinct(list, (v) => v.memberId) : list.length;
+      const denominator = ['По полу', 'По возрасту'].includes(title)
+        ? countDistinct(list, (v) => v.memberId)
+        : list.length;
       block(
         title,
         [
-          col('name', 'Группа'),
+          col(
+            'name',
+            title === 'Популярность групповых программ'
+              ? 'Программа'
+              : title === 'По названиям абонементов'
+                ? 'Абонемент'
+                : (
+                    {
+                      'По клубам': 'Клуб',
+                      'По направлению': 'Тип посещения',
+                      'По полу': 'Пол',
+                      'По возрасту': 'Возраст',
+                      'По типам абонементов': 'Тип абонемента',
+                    } as Record<string, string>
+                  )[title] || 'Группа',
+          ),
+          ...(title === 'Популярность групповых программ'
+            ? [col('group', 'Направление / интенсивность')]
+            : []),
           col('count', 'Посещений'),
-          col('clients', 'Клиентов'),
-          col('share', title === 'По полу' ? 'Доля клиентов' : 'Доля визитов', 'percent'),
+          col('clients', 'Уникальных клиентов'),
+          ...(title === 'По названиям абонементов' ? [col('passes', 'Абонементов')] : []),
+          col(
+            'share',
+            ['По полу', 'По возрасту'].includes(title) ? 'Доля клиентов' : 'Доля визитов',
+            'percent',
+          ),
         ],
         grouped(list, key).map(([name, rows]) => ({
           id: name,
           name,
           count: String(rows.length),
+          group: [...new Set(rows.map(programGroup))].join(', '),
+          passes: rows.every((v) => passFor(v))
+            ? String(countDistinct(rows, (v) => `${v.memberId}|${passFor(v)!.id}`))
+            : '',
           clients: String(countDistinct(rows, (v) => v.memberId)),
           share: String(
             pct(
-              title === 'По полу' ? countDistinct(rows, (v) => v.memberId) : rows.length,
+              ['По полу', 'По возрасту'].includes(title)
+                ? countDistinct(rows, (v) => v.memberId)
+                : rows.length,
               denominator,
             ),
           ),
@@ -552,48 +735,80 @@ export function buildStatistics(
         result.blocks.at(-1)!.rows.sort((a, b) => order(a.name) - order(b.name));
       }
     }
+    const groupVisits = filteredVisits.filter((v) => v.kind === 'group');
+    block(
+      'Направления групповых программ',
+      [
+        col('name', 'Направление / интенсивность'),
+        col('count', 'Посещений'),
+        col('clients', 'Уникальных клиентов'),
+        col('share', 'Доля групповых визитов', 'percent'),
+      ],
+      grouped(groupVisits, programGroup).map(([name, rows]) => ({
+        id: name,
+        name,
+        count: String(rows.length),
+        clients: String(countDistinct(rows, (v) => v.memberId)),
+        share: String(pct(rows.length, groupVisits.length)),
+      })),
+    );
+    result.metrics = [
+      { label: 'Посещений', value: filteredVisits.length },
+      { label: 'Уникальных клиентов', value: countDistinct(filteredVisits, (v) => v.memberId) },
+    ];
     result.notes.push(
-      'Возраст рассчитан на конец периода; возрастные группы соответствуют источнику. Пол — уникальные клиенты, остальные распределения — посещения. Тип и название карты показаны отдельно. Групповая программа определяется только по квитанции конкретного посещения: без точной связи она неизвестна, а не подставляется из предзаписи.',
+      'Возраст рассчитан на конец периода; возрастные группы соответствуют источнику. Пол и возраст — уникальные клиенты, остальные распределения — посещения. В каждой таблице также показано число визитов и уникальных клиентов. Уникальные клиенты разных программ и типов карт могут пересекаться; их строки нельзя складывать. Тип и название карты показаны отдельно. Групповая программа определяется только по квитанции конкретного посещения: без точной связи она неизвестна, а не подставляется из предзаписи. Направления программ и их состав показаны отдельно. Число абонементов — разные списанные карты, а не число покупок; если точная карта неизвестна, показано —.',
     );
   } else if (id === 'visit_by_period') {
     if ((Date.parse(f.to) - Date.parse(f.from)) / dayMs > 365)
       return { ...result, error: 'Для дневного графика выберите период не длиннее 366 дней.' };
     const clubs =
-      f.club === 'all' ? [...new Set(filteredVisits.map((v) => v.club))].sort() : [f.club];
+      f.club === 'all'
+        ? [...new Set([...Object.values(clubNames), ...filteredVisits.map((v) => v.club)])].sort()
+        : [f.club];
+    const today = reportDay(at);
     const days: string[] = [];
-    for (let day = f.from; day <= f.to; day = shift(day, 1)) days.push(day);
+    for (let day = f.from; day <= f.to; day = reportNextDay(day, 1)) days.push(day);
+    const dailyRows = days.map((day): DemoRecord => {
+      const list = filteredVisits.filter((v) => v.local.slice(0, 10) === day);
+      const future = day > today;
+      return {
+        id: day,
+        day,
+        name: day,
+        total: future ? '' : String(list.length),
+        ...Object.fromEntries(
+          clubs.map((club, i) => [
+            `club${i}`,
+            future ? '' : String(list.filter((v) => v.club === club).length),
+          ]),
+        ),
+      };
+    });
     block(
       'Посещения по дням и клубам',
-      [col('day', 'День', 'date'), col('name', 'Клуб'), col('count', 'Посещений')],
-      days.flatMap((day) =>
-        clubs.map((club) => ({
-          id: `${day}|${club}`,
-          day,
-          name: club,
-          count: String(
-            filteredVisits.filter((v) => v.local.slice(0, 10) === day && v.club === club).length,
-          ),
-        })),
-      ),
-    );
-    block(
-      'Посещаемость по месяцам и клубам',
       [
-        col('month', 'Месяц'),
-        col('name', 'Клуб'),
-        col('count', 'Посещений'),
-        col('clients', 'Клиентов'),
+        col('day', 'День', 'date'),
+        col('total', 'Всего'),
+        ...clubs.map((club, i) => col(`club${i}`, club)),
       ],
-      grouped(filteredVisits, (v) => `${v.local.slice(0, 7)}|${v.club}`).map(([key, rows]) => ({
-        id: key,
-        month: key.split('|')[0],
-        name: rows[0].club,
-        count: String(rows.length),
-        clients: String(countDistinct(rows, (v) => v.memberId)),
-      })),
+      dailyRows,
     );
+    const elapsedVisits = filteredVisits.filter((v) => v.local.slice(0, 10) <= today);
+    const elapsedDays = days.filter((day) => day <= today).length;
+    result.metrics = [
+      { label: 'Посещений за месяц', value: elapsedDays ? elapsedVisits.length : '—' },
+      {
+        label: 'Уникальных клиентов',
+        value: elapsedDays ? countDistinct(elapsedVisits, (v) => v.memberId) : '—',
+      },
+      {
+        label: 'В среднем за прошедший день',
+        value: elapsedDays ? (elapsedVisits.length / elapsedDays).toFixed(1) : '—',
+      },
+    ];
     result.notes.push(
-      'Основная диаграмма и первая таблица сохраняют дневной шаг источника. Месячная сводка — дополнительная таблица. Ноль означает отсутствие сохранённых посещений за этот день в демоданных, а не подтверждённую полноту истории клуба.',
+      'Выбран один календарный месяц. По горизонтали — дни месяца, линии — итог и каждый клуб. Таблица использует те же значения. Будущие дни показаны как — и не участвуют в среднем. Ноль в прошедшем дне означает отсутствие сохранённых демовизитов; история прототипа неполная.',
     );
   } else if (['clients_new', 'newclients', 'newclients_source'].includes(id)) {
     const rows = members
@@ -660,7 +875,45 @@ export function buildStatistics(
     result.notes.push(
       'Первая покупка и первый визит — первые известные записи в памяти прототипа, а не полная история клуба. Регистрация не привязана к клубу, поэтому клубный фильтр здесь не применяется.',
     );
-  } else if (id === 'client_never' || id === 'clients_active') {
+  } else if (id === 'client_never') {
+    const eligible = members.filter(
+      (m) =>
+        reportDay(m.joined) <= f.to &&
+        passes.some(
+          (p) =>
+            p.memberId === String(m.id) &&
+            getMembershipKind(p.name, p.kindId) &&
+            reportDay(p.boughtAt) <= f.to &&
+            p.status !== 'paused' &&
+            p.remaining !== 0 &&
+            (!p.endsAt || reportDay(p.endsAt) >= f.to) &&
+            ((!p.activatedAt && p.status === 'pending') ||
+              (p.activatedAt && reportDay(p.activatedAt) <= f.to)),
+        ),
+    );
+    const directions =
+      f.kind === 'personal' ? ['personal'] : f.kind === 'group' ? ['group'] : ['gym', 'personal'];
+    const rows = eligible
+      .filter(
+        (m) =>
+          !allVisits.some(
+            (v) =>
+              v.memberId === m.id &&
+              v.local.slice(0, 10) <= f.to &&
+              inClub(v.club) &&
+              directions.includes(v.kind),
+          ),
+      )
+      .map(person);
+    block('Клиенты без посещений направления', [...names, col('phone', 'Телефон')], rows, true);
+    result.metrics = [
+      { label: 'С действующей или неактивированной картой', value: eligible.length },
+      { label: 'Не посещали выбранное направление', value: rows.length },
+    ];
+    result.notes.push(
+      'Проверяется вся известная история до выбранной даты. В выборке клиенты с действующим либо неактивированным абонементом, а не вся база. Первая выборка требует отсутствия и тренажёрного зала, и персональных тренировок. Клуб ограничивает историю визитов; при «Все клубы» проверяется сеть. Услуги проката абонементами не считаются.',
+    );
+  } else if (id === 'clients_active') {
     const active = members.filter((m) =>
       passes.some(
         (p) =>
@@ -728,24 +981,54 @@ export function buildStatistics(
       'Это просмотр контактов, а не отправка рассылки. Согласие проверяется отдельно. Период и клуб не применяются к общей базе контактов.',
     );
   } else if (id === 'calls') {
+    const rows = (data.calls || [])
+      .filter(
+        (r) =>
+          inPeriod(reportDay(r.time.slice(0, 10))) &&
+          inClub(r.club || 'Не указан') &&
+          (f.callStatus === 'all' || r.status === f.callStatus) &&
+          (f.onlyUnknown !== '1' || !memberById.has(r.memberId)),
+      )
+      .map((r) => {
+        const m = memberById.get(r.memberId);
+        const phone = r.phone || m?.phone || '';
+        return {
+          ...r,
+          memberId: m ? String(m.id) : '',
+          name: m ? clientName(m) : 'Нет в базе',
+          phone: input.hidePhones ? hiddenPhone(phone) : phone,
+          club: r.club || 'Не указан',
+          targetPhone: r.targetPhone || '',
+          messenger: r.hasMessenger === 'true' ? 'Есть' : '—',
+          recording: r.recordingUrl ? 'Есть запись' : 'Нет записи',
+        };
+      }) as DemoRecord[];
     block(
       'Журнал звонков',
       [
         col('time', 'Время'),
+        col('club', 'Клуб'),
         col('name', 'Клиент'),
+        col('phone', 'Телефон клиента'),
         col('direction', 'Направление'),
-        col('duration', 'Длительность'),
         col('status', 'Статус'),
+        col('targetPhone', 'Номер клуба'),
+        col('duration', 'Длительность'),
+        col('messenger', 'Мессенджер'),
+        col('recording', 'Запись разговора'),
       ],
-      (data.calls || []).filter(
-        (r) =>
-          inPeriod(reportDay(r.time.slice(0, 10))) &&
-          (f.callStatus === 'all' || r.status === f.callStatus) &&
-          (f.onlyUnknown !== '1' || !r.memberId),
-      ),
+      rows,
     );
+    result.metrics = [
+      { label: 'Звонков за период', value: rows.length },
+      { label: 'Без клиента в базе', value: rows.filter((r) => !r.memberId).length },
+      {
+        label: 'Пропущенных',
+        value: rows.filter((r) => ['Пропущен', 'Не дозвонились'].includes(r.status)).length,
+      },
+    ];
     result.notes.push(
-      'Аудиозаписи не подключены. Звонки без привязки к клубу не делятся по клубам.',
+      'Имя открывает карточку, телефон — окно демонстрационного звонка. Телефоны клиентов скрываются согласно роли. Номер клуба показан отдельно. Аудиозаписи источника не копируются: локальный плеер доступен только при наличии демонстрационного файла.',
     );
   } else if (
     ['gtrener_busy', 'ptrener_rating', 'ptrener_rating_all', 'gtrener_rating'].includes(id)
@@ -1113,7 +1396,7 @@ export function buildStatistics(
         ],
         groups.map(([age, rows]) => ({
           id: age,
-          name: /^\d+$/.test(age) ? `${age} лет` : age,
+          name: /^\d+$/.test(age) ? reportAgeLabel(age) : age,
           ...Object.fromEntries(
             [
               ['male', 'Мужской'],
@@ -1196,10 +1479,6 @@ export function buildStatistics(
     result.pending =
       'Для этого отчёта нужен отдельный источник данных. Экран каталога сохранён, вымышленные результаты не подставляются.';
   }
-  if (!result.metrics.length && result.blocks.length)
-    result.metrics = [
-      { label: 'Строк в отчёте', value: result.blocks.reduce((n, b) => n + b.rows.length, 0) },
-    ];
   return result;
 }
 

@@ -4,6 +4,7 @@ import { getClientProfile } from '../data/clientProfile';
 import { getMembershipKind } from '../data/membership-kinds';
 import { clientName, hiddenPhone } from './client-display';
 import { cashCents } from './cash';
+import { clientSegment, clientSegments } from './client-segments';
 import type { ReportColumn, ReportFilters, ReportResult, StatisticsInput } from './statistics';
 
 const day = (v = '') =>
@@ -142,16 +143,6 @@ export function detailedStatistics(
       .map((v) => v.local.slice(0, 10))
       .sort()
       .at(-1) || '';
-  const activeCards = (memberId: string) =>
-    cards.filter(
-      (p) =>
-        p.memberId === memberId &&
-        p.activatedAt &&
-        day(p.activatedAt) <= f.to &&
-        (!p.endsAt || day(p.endsAt) >= f.to) &&
-        p.status !== 'paused' &&
-        p.remaining !== 0,
-    );
   const eligibleKind = (p: (typeof cards)[number]) =>
     (f.includePersonal === '1' || p.kind.id !== 'personal') &&
     (f.includeSingle === '1' || !['single', 'guest'].includes(p.kind.id)) &&
@@ -263,59 +254,60 @@ export function detailedStatistics(
       'Демонстрационная методика: начало — первый известный визит; окончание — последний визит + интервал бездействия. Продолжающие посещать не включаются в среднее завершённое время. Это неполная история и не подтверждённая серверная формула источника.',
     );
   } else if (id === 'clients_segmetation') {
-    const labels = [
-      'Активные клиенты',
-      'Клиенты с намерением',
-      'Потенциальный продленец',
-      'Заснувший',
-      'Потерянный 1 уровень',
-      'Потерянный 2 уровень',
-      'Потерянный 3 уровень',
-      'Потерянный 4 уровень',
-      'Нет истории посещений',
-    ];
-    const rows = members.map((m) => {
-      const last = lastVisit(String(m.id)),
-        elapsed = last ? days(last, f.to) : null;
-      const active = activeCards(String(m.id));
-      const renew = active.some((p) => p.endsAt && days(f.to, day(p.endsAt)) <= 14);
-      const booked = events.some((e) => e.day > f.to && ids(e.attendees).includes(String(m.id)));
-      const index = renew
-        ? 2
-        : active.length
-          ? 0
-          : booked
-            ? 1
-            : elapsed === null
-              ? 8
-              : elapsed <= 30
-                ? 3
-                : elapsed <= 60
-                  ? 4
-                  : elapsed <= 90
-                    ? 5
-                    : elapsed <= 180
-                      ? 6
-                      : 7;
-      return { ...person(m), last, segment: labels[index], segmentId: String(index) };
-    });
+    const rows = members
+      .filter((m) => day(m.joined) <= f.to)
+      .map((m) => {
+        const state = clientSegment(
+          cards.filter((p) => p.memberId === String(m.id)),
+          f.to,
+        );
+        return {
+          ...person(m),
+          segment: clientSegments[state.index].name,
+          segmentId: String(state.index),
+          ended: state.ended,
+          days: state.days,
+        };
+      });
     block(
       'Сегменты базы',
-      [col('name', 'Сегмент'), col('count', 'Клиентов')],
-      labels.map((name, i) => ({
-        id: String(i),
-        name,
-        count: String(rows.filter((r) => r.segmentId === String(i)).length),
-      })),
+      [
+        col('name', 'Сегмент'),
+        col('rule', 'Условие'),
+        col('count', 'Клиентов'),
+        col('share', 'Доля базы', 'percent'),
+      ],
+      clientSegments.map((segment, i) => {
+        const count = rows.filter((r) => r.segmentId === String(i)).length;
+        return {
+          id: String(i),
+          name: segment.name,
+          rule: segment.rule,
+          count: String(count),
+          share: rows.length ? ((count * 100) / rows.length).toFixed(1) : '',
+        };
+      }),
     );
     block(
       'Клиенты сегмента',
-      [...names, col('segment', 'Сегмент'), col('last', 'Последний визит', 'date')],
+      [
+        ...names,
+        col('phone', 'Телефон'),
+        col('segment', 'Сегмент'),
+        col('ended', 'Окончание абонемента', 'date'),
+        col('days', 'Дней после окончания'),
+      ],
       rows.filter((r) => f.segment === 'all' || r.segmentId === f.segment),
       true,
     );
+    out.metrics = [
+      { label: 'Клиентов в базе на дату', value: rows.length },
+      { label: 'С действующим абонементом', value: rows.filter((r) => r.segmentId === '0').length },
+      { label: 'Без достаточной истории', value: rows.filter((r) => r.segmentId === '8').length },
+    ];
     out.notes.push(
-      'Демонстрационные границы: продление — окончание активной карты в ближайшие 14 дней; намерение — будущая запись без активной карты; заснувший — до 30 дней без визита; уровни потери — 31–60 / 61–90 / 91–180 / более 180 дней. Приоритет: продление, активная карта, намерение, давность. Границы источника не раскрыты и требуют согласования.',
+      'Сегменты определяются абонементами на выбранную дату, а не визитами. Приоритет: действующий, неактивированный, затем давность окончания последнего абонемента. Каждый клиент входит в один сегмент. Замороженная текущая карта или неизвестная дата окончания — «Недостаточно данных».',
+      'Границы из источника: 1–30, 31–90, 91–180, 181–365, 366–1095 и 1096+ дней. В прототипе используется известное окончание абонемента; история покупок и прошлых остатков неполная. Сводка показана полосами вместо восьми секторов, чтобы точнее сравнивать небольшие сегменты.',
     );
   } else if (id === 'report_pclients_stat') {
     const rows = (data['personal-clients'] || [])
@@ -849,9 +841,5 @@ export function detailedStatistics(
       );
     }
   }
-  if (!out.metrics.length)
-    out.metrics = [
-      { label: 'Строк в отчёте', value: out.blocks.reduce((n, b) => n + b.rows.length, 0) },
-    ];
   return out;
 }
