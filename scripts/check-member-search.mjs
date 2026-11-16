@@ -19,15 +19,16 @@ for (const query of [
   '100001',
   '100 001',
   '100-001',
-  'Смирнова',
-  '  смИРНОВА анНа  ',
-  'Анна Андреевна',
-  'Андреевна Смир',
   '+7 (999) 123-45-67',
   '8 999 123 45 67',
   '123-45-67',
 ])
   assert.deepEqual(find(query), [1001], query);
+for (const query of ['Смирнова', '  смИРНОВА анНа  ', 'Анна Андреевна', 'Андреевна Смир'])
+  assert.deepEqual(find(query), [1001, 1008], `${query}: namesakes stay selectable`);
+assert.deepEqual(find('Волков Михаил'), [1002, 1009], 'Shared name retains both clients');
+assert.deepEqual(find('Михаил Семенович'), [1009], 'Patronymic disambiguates clients');
+assert.deepEqual(find('Михаил Сергеевич'), [1002], 'Original patronymic still finds its owner');
 assert.deepEqual(
   find('4567'),
   [1001, 1002, 1003, 1004],
