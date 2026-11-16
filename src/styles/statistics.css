@@ -2,6 +2,26 @@
   .statistics-report {
     gap: 16px;
   }
+  .statistics-report-actions {
+    justify-content: flex-end;
+  }
+  .statistics-clubs {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    border: 0;
+    padding: 8px 0 0;
+    min-width: 0;
+  }
+  .statistics-clubs legend {
+    color: var(--color-muted);
+    font-size: var(--text-small);
+    margin-bottom: 8px;
+  }
+  .statistics-clubs label {
+    min-height: var(--control-height);
+  }
   .statistics-report > .ws-subheading {
     margin-bottom: 0;
   }
@@ -41,6 +61,9 @@
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
     align-items: end;
   }
+  .statistics-filters > .report-month-picker {
+    grid-column: span 2;
+  }
   .statistics-filters > .form-field {
     min-width: 0;
   }
@@ -73,6 +96,26 @@
     }
     .statistics-filters .select-trigger {
       width: 100%;
+    }
+    .statistics-report-actions {
+      justify-content: flex-end;
+    }
+    .statistics-clubs {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+      border: 0;
+      padding: 8px 0 0;
+      min-width: 0;
+    }
+    .statistics-clubs legend {
+      color: var(--color-muted);
+      font-size: var(--text-small);
+      margin-bottom: 8px;
+    }
+    .statistics-clubs label {
+      min-height: var(--control-height);
     }
     .statistics-report > .ws-subheading {
       flex-wrap: wrap;
