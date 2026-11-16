@@ -266,7 +266,21 @@ export function ClientProfile({
                       </IconButton>
                     </span>
                   </Fact>
-                  <Fact label="Дата рождения">{profile.birthDate}</Fact>
+                  <Fact label="Дата рождения">
+                    {profile.birthDate}
+                    {clientAge !== null && (
+                      <span className="client-age">
+                        {clientAge}{' '}
+                        {clientAge % 100 >= 11 && clientAge % 100 <= 14
+                          ? 'лет'
+                          : clientAge % 10 === 1
+                            ? 'год'
+                            : clientAge % 10 >= 2 && clientAge % 10 <= 4
+                              ? 'года'
+                              : 'лет'}
+                      </span>
+                    )}
+                  </Fact>
                   <Fact label="Пол">{profile.gender}</Fact>
                   <Fact label="Организация">{profile.organization}</Fact>
                 </dl>

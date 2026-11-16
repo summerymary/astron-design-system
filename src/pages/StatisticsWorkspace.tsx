@@ -1,14 +1,27 @@
 import { useState } from 'react';
-import { Download, RotateCcw } from 'lucide-react';
+import { Download, RotateCcw, Phone } from 'lucide-react';
 import type { Member, Visit } from '../types';
 import { useWorkspace } from '../components/WorkspaceProvider';
-import { Back, DataTable, Empty, Notice, Stats } from '../components/WorkspaceUI';
+import { DataTable, Empty, Notice, Stats, Tabs } from '../components/WorkspaceUI';
 import { Button } from '../components/ui';
+import { CallDialog } from '../components/CallDialog';
+import { clientSegments } from '../lib/client-segments';
+import type { DemoRecord } from '../data/workspace';
+import type { ReportColumn } from '../lib/statistics';
 import { Select } from '../components/Select';
 import { ReportCatalogue } from '../components/ReportCatalogue';
 import { ReportChart } from '../components/ReportChart';
+import { ReportMonthPicker } from '../components/ReportMonthPicker';
+import { reportMonth } from '../lib/report-period';
+import { demoStamp, registrationNow } from '../lib/demo-clock';
 import { statisticsCharts } from '../lib/statistics-charts';
-import { statisticsReports, reportTitle, reportPending } from '../data/statistics';
+import {
+  clientRatingTabs,
+  isClientRating,
+  statisticsReports,
+  reportTitle,
+  reportPending,
+} from '../data/statistics';
 import { TODAY, prettyDate, money } from '../data/workspace';
 import { getClientProfile } from '../data/clientProfile';
 import { buildStatistics, defaultReportFilters, statisticsCsv } from '../lib/statistics';
@@ -42,16 +55,16 @@ export function StatisticsWorkspace({
     return (
       <Empty
         title="Такого отчёта нет"
-        action={<Button onClick={() => onReport(null)}>Все отчёты</Button>}
+        action={<Button onClick={() => onReport(null)}>Вернуться к статистике</Button>}
       />
     );
   return (
     <StatisticsReport
-      key={report.id}
+      key={isClientRating(report.id) ? 'client-ratings' : report.id}
       id={report.id}
+      onReport={onReport}
       members={members}
       visits={visits}
-      onBack={() => onReport(null)}
       onMember={onMember}
       hidePhones={hidePhones}
     />
@@ -60,23 +73,24 @@ export function StatisticsWorkspace({
 
 function StatisticsReport({
   id,
+  onReport,
   members,
   visits,
-  onBack,
   onMember,
   hidePhones,
 }: {
   id: string;
+  onReport: (id: string | null) => void;
   members: Member[];
   visits: Visit[];
-  onBack: () => void;
   onMember: (member: Member) => void;
   hidePhones: boolean;
 }) {
   const { data } = useWorkspace();
   const defaults = {
     ...defaultReportFilters,
-    threshold: id === 'notcame' ? '0' : id === 'client_lifetime' ? '30' : '21',
+    threshold: isClientRating(id) ? '3' : id === 'client_lifetime' ? '30' : '21',
+    ...(id === 'visit_by_period' ? reportMonth(TODAY.slice(0, 7)) : {}),
     ...(id === 'free_trener_find' ? { timeFrom: '14:00' } : {}),
     ...(['selling_clients_secondary_summer', 'trener_financial_result', 'financeresult'].includes(
       id,
@@ -91,11 +105,79 @@ function StatisticsReport({
     visits,
     data,
     hidePhones,
-    at: `${TODAY}T14:35`,
+    at: demoStamp(registrationNow()),
   });
   const charts = statisticsCharts(id, output, filters);
-  const update = (key: keyof ReportFilters, value: string) =>
+  const [view, setView] = useState('');
+  const [cohort, setCohort] = useState<{ age: string; gender: string } | null>(null);
+  const [call, setCall] = useState<{ name: string; phone: string } | null>(null);
+  const views =
+    id === 'unique_visits'
+      ? [
+          { id: 'Все направления', label: 'Все посетители' },
+          { id: 'Персональные посещения', label: 'Персональные' },
+          { id: 'Другие направления', label: 'Неперсональные' },
+          { id: 'Клиенты по числу клубов', label: 'Посещаемые клубы' },
+        ]
+      : id === 'timetoabstat'
+        ? [
+            { id: 'По клубам', label: 'Клубы' },
+            { id: 'По направлению', label: 'Типы посещений' },
+            { id: 'По полу', label: 'Пол' },
+            { id: 'По возрасту', label: 'Возраст' },
+            { id: 'Популярность групповых программ', label: 'Программы' },
+            { id: 'По типам абонементов', label: 'Типы абонементов' },
+            { id: 'По названиям абонементов', label: 'Названия абонементов' },
+          ]
+        : [];
+  const activeIndex = Number.isInteger(Number(view)) && views[Number(view)] ? Number(view) : 0;
+  const activeView = views[activeIndex]?.id;
+  const visibleBlocks = output.blocks
+    .filter((block) =>
+      id === 'clients_segmetation'
+        ? block.title === (filters.segment === 'all' ? 'Сегменты базы' : 'Клиенты сегмента')
+        : id === 'clients_gender_age'
+          ? block.title === (cohort ? 'Клиенты по полу и возрасту' : 'По полу и возрасту')
+          : true,
+    )
+    .map((block) =>
+      cohort && id === 'clients_gender_age'
+        ? {
+            ...block,
+            rows: block.rows.filter(
+              (r) => r.ageKey === cohort.age && r.genderKey === cohort.gender,
+            ),
+          }
+        : block,
+    )
+    .filter(
+      (block) =>
+        !activeView ||
+        block.title === activeView ||
+        (id === 'unique_visits' &&
+          activeView === 'Все направления' &&
+          block.title === 'Клиенты по числу клубов') ||
+        (activeView === 'Популярность групповых программ' &&
+          block.title === 'Направления групповых программ'),
+    );
+  const visibleCharts = charts
+    .filter(
+      () =>
+        !(id === 'clients_gender_age' && cohort) &&
+        !(id === 'clients_segmetation' && filters.segment !== 'all'),
+    )
+    .filter(
+      (chart) =>
+        !activeView ||
+        chart.title === activeView ||
+        (id === 'unique_visits' &&
+          ['Все направления', 'Клиенты по числу клубов'].includes(activeView)),
+    );
+
+  const update = (key: keyof ReportFilters, value: string) => {
+    setCohort(null);
     setFilters((f) => ({ ...f, [key]: value, ...(key === 'to' && asOf ? { from: value } : {}) }));
+  };
   const field = (key: keyof ReportFilters, label: string, type = 'date') => (
     <label className="form-field" key={key}>
       <span>{label}</span>
@@ -137,6 +219,8 @@ function StatisticsReport({
   const noPeriod = [
     'client_lifetime',
     'clients_ltv',
+    'birdthday',
+    'visit_by_period',
     'fincredits',
     'report_all_clients_phones',
   ].includes(id);
@@ -157,14 +241,13 @@ function StatisticsReport({
     'newclients_source',
     'clients_active',
     'report_all_clients_phones',
-    'calls',
+    'clients_gender_age',
     'report_pclients_lost',
     'fincredits',
     'client_lifetime',
     'clients_segmetation',
   ].includes(id);
   const showKind = [
-    'client_never',
     'client_lastvisit',
     'timetoabstat',
     'clients_gender_age',
@@ -174,7 +257,7 @@ function StatisticsReport({
   ].includes(id);
   const exportRows = () => {
     // Human-facing CSV uses displayed units; domain tables keep numeric kopecks for sorting.
-    const blocks = output.blocks.map((b) => ({
+    const blocks = visibleBlocks.map((b) => ({
       ...b,
       columns: b.columns.map((c) => ({
         ...c,
@@ -200,17 +283,98 @@ function StatisticsReport({
     );
     const link = document.createElement('a');
     link.href = url;
-    link.download = `astron-${id}-${filters.to}.csv`;
+    link.download = `astron-${id}-${id === 'birdthday' ? demoStamp(registrationNow()).slice(0, 10) : filters.to}.csv`;
     link.click();
     setTimeout(() => URL.revokeObjectURL(url), 0);
   };
+  const renderCell = (r: DemoRecord, c: ReportColumn, title: string) => {
+    if (id === 'clients_segmetation' && title === 'Сегменты базы' && c.key === 'count')
+      return (
+        <Button
+          variant="ghost"
+          disabled={!Number(r.count)}
+          onClick={() => update('segment', r.id)}
+          aria-label={`Подробнее: ${r.name}`}
+        >
+          {r.count} · Подробнее
+        </Button>
+      );
+    if (
+      id === 'clients_gender_age' &&
+      title === 'По полу и возрасту' &&
+      /^(male|female|unknown)(Clients)?$/.test(c.key)
+    )
+      return (
+        <Button
+          variant="ghost"
+          disabled={!Number(r[c.key])}
+          onClick={() => setCohort({ age: r.id, gender: c.key.replace('Clients', '') })}
+          aria-label={`Показать клиентов: ${r.name}, ${c.label}`}
+        >
+          {r[c.key]}
+        </Button>
+      );
+    if (id === 'calls' && c.key === 'name') {
+      const member = members.find((m) => String(m.id) === r.memberId);
+      return member ? (
+        <Button variant="ghost" onClick={() => onMember(member)}>
+          {r.name}
+        </Button>
+      ) : (
+        r.name
+      );
+    }
+    if (id === 'calls' && c.key === 'phone') {
+      const original = data.calls?.find((row) => row.id === r.id);
+      const phone = original?.phone || members.find((m) => String(m.id) === r.memberId)?.phone;
+      return phone ? (
+        <Button
+          variant="ghost"
+          onClick={() => setCall({ name: r.name, phone })}
+          aria-label={`Позвонить: ${r.name}`}
+        >
+          <Phone size={16} />
+          {r.phone}
+        </Button>
+      ) : (
+        '—'
+      );
+    }
+    if (id === 'calls' && c.key === 'recording') {
+      const localRecording = r.recordingUrl?.startsWith('audio/') ? r.recordingUrl : '';
+      return localRecording ? (
+        <audio
+          controls
+          preload="none"
+          src={new URL(localRecording, window.location.href.split('#')[0]).href}
+          aria-label={`Запись звонка ${r.time}`}
+        />
+      ) : (
+        <span className="ws-muted">Нет записи</span>
+      );
+    }
+    return r[c.key] === '' || r[c.key] === undefined
+      ? '—'
+      : c.format === 'money'
+        ? money(Number(r[c.key]) / 100)
+        : c.format === 'date'
+          ? prettyDate(r[c.key])
+          : c.format === 'percent'
+            ? `${r[c.key]}%`
+            : r[c.key];
+  };
   return (
     <div className="ws-stack statistics-report">
-      <div className="ws-subheading">
-        <Back onClick={onBack}>Все отчёты</Back>
+      <div className="ws-subheading statistics-report-actions">
         <div className="ws-actions">
           {!reportPending[id] && (
-            <Button variant="ghost" onClick={() => setFilters(defaults)}>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                setFilters(defaults);
+                setCohort(null);
+              }}
+            >
               <RotateCcw size={16} />
               Сбросить
             </Button>
@@ -219,7 +383,7 @@ function StatisticsReport({
             variant="secondary"
             onClick={exportRows}
             disabled={
-              Boolean(output.error || output.pending) || !output.blocks.some((b) => b.rows.length)
+              Boolean(output.error || output.pending) || !visibleBlocks.some((b) => b.rows.length)
             }
           >
             <Download size={18} />
@@ -227,14 +391,32 @@ function StatisticsReport({
           </Button>
         </div>
       </div>
+      {call && <CallDialog {...call} hidden={hidePhones} onClose={() => setCall(null)} />}
       <section className="panel ws-panel">
         <div className="ws-panel-heading statistics-report-heading">
           <div>
-            <h2>{reportTitle(report)}</h2>
+            <h2>{isClientRating(id) ? 'Рейтинг клиентов' : reportTitle(report)}</h2>
           </div>
         </div>
-        {!reportPending[id] && (
+        {isClientRating(id) && (
+          <Tabs
+            label="Вид рейтинга клиентов"
+            value={id}
+            onChange={onReport}
+            items={clientRatingTabs}
+          />
+        )}
+        {!reportPending[id] && id !== 'birdthday' && (
           <div className="ws-toolbar statistics-filters">
+            {id === 'visit_by_period' && (
+              <ReportMonthPicker
+                month={filters.from.slice(0, 7)}
+                onChange={(month) => {
+                  const period = reportMonth(month);
+                  if (period) setFilters((current) => ({ ...current, ...period }));
+                }}
+              />
+            )}
             {!noPeriod && (
               <>
                 {!asOf && field('from', 'С даты')}
@@ -245,6 +427,12 @@ function StatisticsReport({
               choice('club', 'Клуб', [
                 { id: 'all', name: 'Все клубы' },
                 ...['Центральный', 'Парк', 'Речной'].map((name) => ({ id: name, name })),
+              ])}
+            {id === 'client_never' &&
+              choice('kind', 'Не посещали', [
+                { id: 'all', name: 'Тренажёрный зал и ПТ' },
+                { id: 'personal', name: 'Персональные тренировки' },
+                { id: 'group', name: 'Групповые занятия' },
               ])}
             {showKind &&
               choice('kind', 'Направление', [
@@ -283,18 +471,8 @@ function StatisticsReport({
               flag('onlyPersonal', 'Только персональные тренировки')}
             {id === 'clients_segmetation' &&
               choice('segment', 'Сегмент', [
-                { id: 'all', name: 'Все сегменты' },
-                ...[
-                  'Активные клиенты',
-                  'Клиенты с намерением',
-                  'Потенциальный продленец',
-                  'Заснувший',
-                  'Потерянный 1 уровень',
-                  'Потерянный 2 уровень',
-                  'Потерянный 3 уровень',
-                  'Потерянный 4 уровень',
-                  'Нет истории посещений',
-                ].map((name, i) => ({ id: String(i), name })),
+                { id: 'all', name: 'Сводные данные' },
+                ...clientSegments.map((segment, i) => ({ id: String(i), name: segment.name })),
               ])}
             {id === 'feedbacks' &&
               choice('operator', 'Оператор', [
@@ -345,8 +523,7 @@ function StatisticsReport({
                   ),
                 ].map((name) => ({ id: name, name })),
               ])}
-            {['clients_rating', 'clients_rating_visit'].includes(id) &&
-              field('limit', 'Показать первых', 'number')}
+            {isClientRating(id) && field('limit', 'Показать первых', 'number')}
             {id === 'clients_rating' &&
               choice('channel', 'Канал покупки', [
                 { id: 'all', name: 'Любой' },
@@ -371,7 +548,7 @@ function StatisticsReport({
             {['notcame', 'client_lastvisit', 'client_lastvisit_personal'].includes(id) &&
               field(
                 'threshold',
-                id === 'notcame' ? 'Пропусков более' : 'Дней без визитов более',
+                id === 'notcame' ? 'Минимум пропусков' : 'Дней без визитов более',
                 'number',
               )}
             {['clients_new', 'selling_clients_new'].includes(id) &&
@@ -382,7 +559,12 @@ function StatisticsReport({
               ])}
             {['timetoabstat', 'clients_gender_age'].includes(id) && (
               <>
-                {id === 'clients_gender_age' && flag('uniqueOnly', 'Только уникальные клиенты')}
+                {id === 'clients_gender_age' && (
+                  <>
+                    {flag('uniqueOnly', 'Только уникальные клиенты')}
+                    {flag('onlyPersonal', 'Только персональные тренировки')}
+                  </>
+                )}
                 {choice('gender', 'Пол', [
                   { id: 'all', name: 'Любой' },
                   { id: 'Женский', name: 'Женский' },
@@ -390,7 +572,7 @@ function StatisticsReport({
                 ])}
                 {field('ageFrom', 'Возраст от', 'number')}
                 {field('ageTo', 'Возраст до', 'number')}
-                {id === 'timetoabstat' && (
+                {['timetoabstat', 'clients_gender_age'].includes(id) && (
                   <>
                     {field('timeFrom', 'Время с', 'time')}
                     {field('timeTo', 'Время до', 'time')}
@@ -398,11 +580,37 @@ function StatisticsReport({
                 )}
               </>
             )}
+            {id === 'clients_gender_age' && (
+              <fieldset className="statistics-clubs">
+                <legend>Клубы · если ничего не выбрано, учитывается вся сеть</legend>
+                {['Центральный', 'Парк', 'Речной'].map((club) => (
+                  <label className="ws-checkbox" key={club}>
+                    <input
+                      type="checkbox"
+                      checked={filters.clubs.split(',').includes(club)}
+                      onChange={(e) =>
+                        update(
+                          'clubs',
+                          e.target.checked
+                            ? [...filters.clubs.split(',').filter(Boolean), club].join(',')
+                            : filters.clubs
+                                .split(',')
+                                .filter((c) => c !== club)
+                                .join(','),
+                        )
+                      }
+                    />
+                    {club}
+                  </label>
+                ))}
+              </fieldset>
+            )}
           </div>
         )}
       </section>
       <p className="ws-muted statistics-data-note">
-        Демоданные · {prettyDate(TODAY)} · московское время · ₽
+        Демоданные · сегодня {prettyDate(demoStamp(registrationNow()).slice(0, 10))} · московское
+        время · ₽
       </p>
       {output.error ? (
         <Notice tone="warning">{output.error}</Notice>
@@ -416,51 +624,73 @@ function StatisticsReport({
         </section>
       ) : (
         <>
-          <Stats items={output.metrics} />
-          {charts.map((chart) => (
-            <ReportChart key={chart.id} chart={chart} />
-          ))}
-          {output.blocks.map((block, index) => (
-            <section className="panel ws-panel" key={`${id}-${index}`}>
-              <div className="ws-panel-heading">
-                <h3>{block.title}</h3>
-                <span className="ws-muted">Строк: {block.rows.length}</span>
-              </div>
-              <DataTable
-                rows={block.rows}
-                columns={block.columns.map((c) => ({
-                  ...c,
-                  render: c.format
-                    ? (r) =>
-                        r[c.key] === '' || r[c.key] === undefined
-                          ? '—'
-                          : c.format === 'money'
-                            ? money(Number(r[c.key]) / 100)
-                            : c.format === 'date'
-                              ? r[c.key]
-                                ? prettyDate(r[c.key])
-                                : '—'
-                              : `${r[c.key]}%`
-                    : undefined,
-                }))}
-                onOpen={
-                  block.memberLinks &&
-                  block.rows.every((r) => members.some((m) => String(m.id) === r.memberId))
-                    ? (r) => {
-                        const m = members.find((m) => String(m.id) === r.memberId);
-                        if (m) onMember(m);
-                      }
-                    : undefined
-                }
-                empty={
-                  <Empty
-                    title="По выбранным условиям данных нет"
-                    text="Выберите другой период или снимите часть фильтров."
-                  />
-                }
-              />
-            </section>
-          ))}
+          {!!output.metrics.length && <Stats items={output.metrics} />}
+          {cohort && id === 'clients_gender_age' && (
+            <div className="ws-actions">
+              <Button variant="secondary" onClick={() => setCohort(null)}>
+                К диаграмме и сводке
+              </Button>
+              <span>
+                {cohort.age === 'unknown' ? 'Возраст не указан' : `${cohort.age} лет`} ·{' '}
+                {cohort.gender === 'male'
+                  ? 'Мужчины'
+                  : cohort.gender === 'female'
+                    ? 'Женщины'
+                    : 'Пол не указан'}
+              </span>
+            </div>
+          )}
+          {!!views.length && (
+            <Tabs
+              label="Разрез отчёта"
+              value={String(activeIndex)}
+              onChange={setView}
+              items={views.map((item, index) => ({ ...item, id: String(index) }))}
+              panelId="statistics-result"
+              idPrefix="statistics-view"
+            />
+          )}
+          <div
+            className="ws-stack"
+            id="statistics-result"
+            role={views.length ? 'tabpanel' : undefined}
+            aria-labelledby={views.length ? `statistics-view-${activeIndex}` : undefined}
+          >
+            {visibleCharts.map((chart) => (
+              <ReportChart key={chart.id} chart={chart} />
+            ))}
+            {visibleBlocks.map((block, index) => (
+              <section className="panel ws-panel" key={`${id}-${index}`}>
+                <div className="ws-panel-heading">
+                  <h3>{block.title}</h3>
+                </div>
+                <DataTable
+                  rows={block.rows.filter((row) => row.id !== 'network-total')}
+                  footerRows={block.rows.filter((row) => row.id === 'network-total')}
+                  tableLabel={block.title}
+                  columns={block.columns.map((c) => ({
+                    ...c,
+                    render: (r) => renderCell(r, c, block.title),
+                  }))}
+                  onOpen={
+                    block.memberLinks &&
+                    block.rows.every((r) => members.some((m) => String(m.id) === r.memberId))
+                      ? (r) => {
+                          const m = members.find((m) => String(m.id) === r.memberId);
+                          if (m) onMember(m);
+                        }
+                      : undefined
+                  }
+                  empty={
+                    <Empty
+                      title="По выбранным условиям данных нет"
+                      text="Выберите другой период или снимите часть фильтров."
+                    />
+                  }
+                />
+              </section>
+            ))}
+          </div>
           <section className="panel ws-panel-body ws-stack statistics-method">
             <h3>Как читать отчёт</h3>
             <p>

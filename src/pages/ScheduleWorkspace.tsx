@@ -157,10 +157,20 @@ export function ScheduleWorkspace({
   const [available, setAvailable] = useState({ height: 580, width: 900, heading: 40, inset: 2 });
   const root = useRef<HTMLDivElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
+  const fullscreenTrigger = useRef<HTMLButtonElement>(null);
+  const wasFullscreen = useRef(false);
   const drag = useRef<Drag | null>(null);
   const suppressClick = useRef(false);
   const dialog = Boolean(
-    openedId || editing || library || pending || deleting || copying || context || cancelling,
+    openedId ||
+    editing ||
+    library ||
+    pending ||
+    deleting ||
+    copying ||
+    context ||
+    cancelling ||
+    filtersOpen,
   );
   const activeRooms = data.rooms.filter((r) => r.club === club && r.status !== 'В архиве');
   const trainers = [
@@ -294,7 +304,9 @@ export function ScheduleWorkspace({
       );
       const heading = Math.max(
         ...Array.from(
-          root.current.querySelectorAll('.calendar-time-heading, .calendar-column-heading'),
+          root.current.querySelectorAll(
+            '.calendar-time-heading, .calendar-column-heading, .schedule-day-board thead',
+          ),
         ).map((el) => el.getBoundingClientRect().height),
         0,
       );
@@ -337,6 +349,10 @@ export function ScheduleWorkspace({
       window.removeEventListener('resize', measure);
     };
   }, [fullscreen, view, heatmap, filtersOpen, message, columns.length]);
+  useEffect(() => {
+    if (wasFullscreen.current && !fullscreen) fullscreenTrigger.current?.focus();
+    wasFullscreen.current = fullscreen;
+  }, [fullscreen]);
   useEffect(() => {
     if (!fullscreen || dialog) return;
     const before = document.activeElement as HTMLElement | null;
@@ -589,9 +605,7 @@ export function ScheduleWorkspace({
       className={`calendar-filter-toggle ${isAdmin ? 'calendar-admin-filter-toggle' : ''}`}
       aria-label="Фильтры расписания"
       aria-expanded={filtersOpen}
-      aria-controls={
-        isAdmin && view !== 'Неделя' ? 'calendar-week-strip calendar-filters' : 'calendar-filters'
-      }
+      aria-haspopup="dialog"
       aria-describedby={isAdmin ? 'calendar-hours-note' : undefined}
       title={`${club} · ${room} · ${trainer} · ${scale}`}
       onClick={() => setFiltersOpen(!filtersOpen)}
@@ -720,9 +734,106 @@ export function ScheduleWorkspace({
           </>,
           document.body,
         )}
+      {fullscreen && (
+        <div className="calendar-fullscreen-heading">
+          <strong>Расписание · {dayText(day)}</strong>
+          <Button variant="secondary" onClick={() => setFullscreen(false)} autoFocus>
+            <Minimize2 size={18} /> Закрыть полный экран
+          </Button>
+        </div>
+      )}
+      {filtersOpen && (
+        <Modal title="Фильтры расписания" onClose={() => setFiltersOpen(false)}>
+          <div className="schedule-filter-form">
+            <label className="form-field">
+              <span>Клуб расписания</span>
+              <Select
+                value={club}
+                disabled={isTrainer}
+                onChange={(e) => {
+                  setClub(e.target.value);
+                  setRoom('Все залы');
+                  setTrainer(isTrainer ? user.name : 'Все тренеры');
+                }}
+              >
+                {demoClubs
+                  .filter((item) => isAdmin || user.clubIds.includes(item.id))
+                  .map((item) => (
+                    <option key={item.id}>{item.shortName}</option>
+                  ))}
+              </Select>
+            </label>
+            <label className="form-field">
+              <span>Зал</span>
+              <Select value={room} onChange={(e) => setRoom(e.target.value)}>
+                <option>Все залы</option>
+                {activeRooms.map((r) => (
+                  <option key={r.id}>{r.name}</option>
+                ))}
+              </Select>
+            </label>
+            <label className="form-field">
+              <span>Тренер</span>
+              <Select
+                value={trainer}
+                disabled={isTrainer}
+                onChange={(e) => setTrainer(e.target.value)}
+              >
+                <option>Все тренеры</option>
+                {trainers.map((t) => (
+                  <option key={t}>{t}</option>
+                ))}
+              </Select>
+            </label>
+            {view !== 'Список' && (
+              <label className="form-field">
+                <span>Размер занятий</span>
+                <Select value={scale} onChange={(e) => setScale(e.target.value)}>
+                  <option>Весь день</option>
+                  <option>Комфортно</option>
+                  <option>Крупнее</option>
+                </Select>
+              </label>
+            )}
+            {canCreate && !isTrainer && (
+              <label className="form-field">
+                <span>Шаг переноса</span>
+                <Select value={step} onChange={(e) => setStep(e.target.value)}>
+                  <option value="5">5 минут</option>
+                  <option value="15">15 минут</option>
+                  <option value="30">30 минут</option>
+                </Select>
+              </label>
+            )}
+          </div>
+          {canCreate && !isTrainer && (
+            <div className="ws-actions">
+              <Button variant="ghost" onClick={() => navigate('schedule-calendar')}>
+                Настройки календаря
+              </Button>
+              <Button variant="ghost" onClick={() => navigate('training-groups')}>
+                Группы тренировок
+              </Button>
+            </div>
+          )}
+          <div className="modal-actions">
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setRoom('Все залы');
+                setTrainer(isTrainer ? user.name : 'Все тренеры');
+                setScale('Весь день');
+              }}
+            >
+              Сбросить фильтры
+            </Button>
+            <Button onClick={() => setFiltersOpen(false)}>Показать {events.length} занятий</Button>
+          </div>
+        </Modal>
+      )}
       <section className={`calendar-panel panel ${heatmap ? 'calendar-heatmap' : ''}`}>
         <div
-          className={`calendar-controls ${filtersOpen ? 'is-expanded' : ''}`}
+          className="calendar-controls"
           onKeyDown={
             isAdmin
               ? (event) => {
@@ -803,14 +914,17 @@ export function ScheduleWorkspace({
                   </Button>
                 </>
               )}
-              <button
-                className="icon-button"
-                aria-label={fullscreen ? 'Свернуть расписание' : 'Расписание на весь экран'}
-                title={fullscreen ? 'Свернуть' : 'Весь экран — все занятия перед глазами'}
-                onClick={() => setFullscreen(!fullscreen)}
-              >
-                {fullscreen ? <Minimize2 size={18} /> : <Maximize2 size={18} />}
-              </button>
+              {!fullscreen && (
+                <button
+                  className="icon-button"
+                  ref={fullscreenTrigger}
+                  aria-label="Расписание на весь экран"
+                  title="Весь экран — все занятия перед глазами"
+                  onClick={() => setFullscreen(!fullscreen)}
+                >
+                  <Maximize2 size={18} />
+                </button>
+              )}
             </div>
           </div>
           {view !== 'Неделя' && (
@@ -842,119 +956,9 @@ export function ScheduleWorkspace({
           {isAdmin && (
             <span className="sr-only" id="calendar-hours-note">
               Изменено фильтров: {changedFilters}. {trainer}. {scale}. Пустые часы скрыты.
-              Дополнительные параметры и дни недели доступны в фильтрах расписания.
+              Дополнительные параметры доступны в фильтрах расписания.
             </span>
           )}
-          <div
-            className={`calendar-filters ${filtersOpen ? 'is-expanded' : ''}`}
-            id="calendar-filters"
-          >
-            <label>
-              <span className="sr-only">Клуб расписания</span>
-              <Select
-                value={club}
-                disabled={isTrainer}
-                onChange={(e) => {
-                  setClub(e.target.value);
-                  setRoom('Все залы');
-                  setTrainer(isTrainer ? user.name : 'Все тренеры');
-                }}
-              >
-                {demoClubs
-                  .filter((item) => user.role === 'administrator' || user.clubIds.includes(item.id))
-                  .map((item) => (
-                    <option key={item.id}>{item.shortName}</option>
-                  ))}
-              </Select>
-            </label>
-            <label>
-              <span className="sr-only">Зал расписания</span>
-              <Select
-                value={room}
-                onChange={(e) => {
-                  setRoom(e.target.value);
-                  if (!isAdmin) setFiltersOpen(false);
-                }}
-              >
-                <option>Все залы</option>
-                {activeRooms.map((r) => (
-                  <option key={r.id}>{r.name}</option>
-                ))}
-              </Select>
-            </label>
-            <label>
-              <span className="sr-only">Тренер расписания</span>
-              <Select
-                value={trainer}
-                disabled={isTrainer}
-                onChange={(e) => setTrainer(e.target.value)}
-              >
-                <option>Все тренеры</option>
-                {trainers.map((t) => (
-                  <option key={t}>{t}</option>
-                ))}
-              </Select>
-            </label>
-            {view !== 'Список' && !(isAdmin && view === 'День') && (
-              <label className="calendar-scale">
-                <span className="sr-only">Масштаб расписания</span>
-                <Select
-                  value={scale}
-                  onChange={(e) => {
-                    setScale(e.target.value);
-                    if (!isAdmin) setFiltersOpen(false);
-                  }}
-                >
-                  <option>Комфортно</option>
-                  <option>Весь день</option>
-                  <option>Крупнее</option>
-                </Select>
-              </label>
-            )}
-            <span className="calendar-count">
-              Занятий: <b>{events.length}</b>
-            </span>
-            {isAdmin && (
-              <Button
-                variant="secondary"
-                onClick={() => {
-                  setFiltersOpen(false);
-                  root.current
-                    ?.querySelector<HTMLButtonElement>('.calendar-filter-toggle')
-                    ?.focus();
-                }}
-              >
-                Готово
-              </Button>
-            )}
-            {canCreate && !isTrainer && (
-              <details className="calendar-more">
-                <summary aria-label="Другие действия с расписанием">
-                  <Settings2 size={16} />
-                </summary>
-                <div>
-                  <label>
-                    Шаг переноса
-                    <Select
-                      aria-label="Шаг переноса"
-                      value={step}
-                      onChange={(e) => setStep(e.target.value)}
-                    >
-                      <option value="5">5 минут</option>
-                      <option value="15">15 минут</option>
-                      <option value="30">30 минут</option>
-                    </Select>
-                  </label>
-                  <Button variant="ghost" onClick={() => navigate('schedule-calendar')}>
-                    Настройки календаря
-                  </Button>
-                  <Button variant="ghost" onClick={() => navigate('training-groups')}>
-                    Группы тренировок
-                  </Button>
-                </div>
-              </details>
-            )}
-          </div>
         </div>
         {message && (
           <div className="calendar-feedback" role="status">
@@ -1033,6 +1037,12 @@ export function ScheduleWorkspace({
           >
             <ScheduleDayBoard
               events={events}
+              height={
+                scale === 'Весь день'
+                  ? available.height
+                  : Math.max(1, new Set(events.map((event) => event.time)).size) *
+                    (scale === 'Крупнее' ? 72 : 56)
+              }
               rooms={columns}
               onOpen={show}
               onContext={(event, x, y) =>

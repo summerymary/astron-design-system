@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { Plus, ShoppingBag } from 'lucide-react';
 import type { DemoRecord } from '../data/workspace';
 import { money } from '../data/workspace';
 import type { Member, DemoUser } from '../types';
 import { demoStamp, nextDemoNow } from '../lib/demo-clock';
-import { issueGift, redeemGift } from '../lib/reception-operations';
+import { canIssueGiftWithoutPayment, issueGift, redeemGift } from '../lib/reception-operations';
 import { clientName } from '../lib/client-display';
 import { Button, ConfirmDialog, Modal } from '../components/ui';
 import { ClientSearch } from '../components/ClientSearch';
@@ -43,6 +44,7 @@ export function GiftCardsWorkspace({
   const [message, setMessage] = useState('');
   const card = (data['gift-cards'] || []).find((row) => row.id === opened);
   const start = (next: NonNullable<typeof mode>, onlineOrder?: DemoRecord) => {
+    if (next === 'issue' && !canIssueGiftWithoutPayment(user.role)) return;
     setMode(next);
     setOrder(onlineOrder || null);
     setNumber('');
@@ -70,7 +72,9 @@ export function GiftCardsWorkspace({
         cashier: user.name,
         orderId: order?.id || '',
       };
-      transact((current) => issueGift(current, input, mode === 'sell' ? payment : undefined));
+      transact((current) =>
+        issueGift(current, input, mode === 'sell' ? payment : undefined, user.role),
+      );
       setMode(null);
       setOpened(input.id);
       setTab('Карты');
@@ -90,14 +94,21 @@ export function GiftCardsWorkspace({
   );
   return (
     <div className="ws-stack" data-ui="gift-cards">
-      <div className="ws-actions">
-        <Button onClick={() => start('sell')}>Продать карту</Button>
-        <Button variant="secondary" onClick={() => start('issue')}>
-          Выдать без оплаты
-        </Button>
-      </div>
       {message && <Notice tone="success">{message}</Notice>}
       <section className="panel ws-panel">
+        <header className="ws-panel-heading">
+          <h2>Подарочные карты</h2>
+          <div className="ws-actions" role="group" aria-label="Действия с подарочными картами">
+            <Button onClick={() => start('sell')}>
+              <ShoppingBag size={18} /> Продать карту
+            </Button>
+            {canIssueGiftWithoutPayment(user.role) && (
+              <Button variant="secondary" onClick={() => start('issue')}>
+                <Plus size={18} /> Выдать без оплаты
+              </Button>
+            )}
+          </div>
+        </header>
         <div className="ws-panel-body ws-stack">
           <Tabs
             items={['Карты', 'Онлайн-заказы']}
