@@ -534,6 +534,9 @@ export const resources: Record<string, Resource> = {
     rows: [
       {
         id: 'call-1',
+        club: 'Центральный',
+        targetPhone: '+7 900 000-10-01',
+        hasMessenger: 'true',
         memberId: '1001',
         name: 'Анна Смирнова',
         time: '06.11.2026 12:40',
@@ -544,6 +547,9 @@ export const resources: Record<string, Resource> = {
       },
       {
         id: 'call-2',
+        club: 'Парк',
+        targetPhone: '+7 900 000-10-02',
+        hasMessenger: 'false',
         memberId: '1002',
         name: 'Михаил Волков',
         time: '06.11.2026 11:15',
@@ -551,6 +557,18 @@ export const resources: Record<string, Resource> = {
         status: 'Завершён',
         duration: '2 мин 18 с',
         note: 'Уточнение расписания.',
+      },
+      {
+        id: 'call-3',
+        name: 'Нет в базе',
+        phone: '+7 900 000-00-99',
+        club: 'Центральный',
+        targetPhone: '+7 900 000-10-01',
+        time: '06.11.2026 10:05',
+        direction: 'Входящий',
+        status: 'Завершён',
+        duration: '48 с',
+        note: 'Демонстрационный запрос о занятиях.',
       },
     ],
   },
