@@ -461,6 +461,10 @@ export function App() {
     goTo('admin-section');
   };
   const backFromSection = () => {
+    if (page === 'admin-section' && adminSection === 'statistics' && recordId) {
+      setRecordId(null);
+      return;
+    }
     if (Number(window.history.state?.astronIndex) > 0) {
       window.history.back();
       return;
