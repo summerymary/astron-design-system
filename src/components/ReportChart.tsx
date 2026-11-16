@@ -19,14 +19,21 @@ export function ReportChart({ chart }: { chart: StatisticsChart }) {
     ...chart.rows.flatMap((r) => r.values.filter((v): v is number => v !== null)),
   );
   const rows = expanded || chart.kind !== 'bars' ? chart.rows : chart.rows.slice(0, 12);
-  const width = Math.max(360, chart.rows.length * (chart.kind === 'lines' ? 64 : 128));
+  const left = Math.max(48, Math.min(140, format(maximum).length * 8 + 12));
+  const width = Math.max(360, chart.rows.length * (chart.kind === 'lines' ? 32 : 128) + left + 16);
+  const plotWidth = width - left - 16;
+  const xAt = (index: number) => left + ((index + 0.5) * plotWidth) / chart.rows.length;
   return (
     <section className="panel ws-panel-body ws-stack" data-ui="report-chart">
       <div className="ws-subheading">
         <h3>{chart.title}</h3>
         <span className="ws-muted">{chart.unit}</span>
       </div>
-      {chart.kind !== 'bars' ? (
+      {chart.kind === 'pyramid' ? (
+        <ReportPyramid chart={chart} />
+      ) : chart.kind === 'donut' ? (
+        <ReportDonut chart={chart} />
+      ) : chart.kind !== 'bars' ? (
         <>
           {chart.reference && (
             <p className="report-chart-reference">
@@ -76,10 +83,20 @@ export function ReportChart({ chart }: { chart: StatisticsChart }) {
                   ? `; ${chart.reference.label}: ${format(chart.reference.value)}`
                   : ''}
               </desc>
-              <line x1="12" x2={width - 12} y1="200" y2="200" className="report-chart-axis" />
-              <text x="12" y="190">
-                0
-              </text>
+              {[0, 0.5, 1].map((part) => (
+                <g key={part}>
+                  <line
+                    x1={left}
+                    x2={width - 16}
+                    y1={200 - part * 160}
+                    y2={200 - part * 160}
+                    className="report-chart-axis"
+                  />
+                  <text x={left - 8} y={205 - part * 160} textAnchor="end">
+                    {format(maximum * part)}
+                  </text>
+                </g>
+              ))}
               {chart.kind === 'lines' &&
                 chart.series.flatMap((s, i) => {
                   const segments: string[][] = [[]];
@@ -87,12 +104,7 @@ export function ReportChart({ chart }: { chart: StatisticsChart }) {
                     const value = r.values[i];
                     if (value === null) {
                       if (segments.at(-1)!.length) segments.push([]);
-                    } else
-                      segments
-                        .at(-1)!
-                        .push(
-                          `${((j + 0.5) * width) / chart.rows.length},${200 - (value / maximum) * 160}`,
-                        );
+                    } else segments.at(-1)!.push(`${xAt(j)},${200 - (value / maximum) * 160}`);
                   });
                   return segments
                     .filter((points) => points.length)
@@ -106,15 +118,15 @@ export function ReportChart({ chart }: { chart: StatisticsChart }) {
                 })}
               {chart.reference && (
                 <line
-                  x1="12"
-                  x2={width - 12}
+                  x1={left}
+                  x2={width - 16}
                   y1={200 - (chart.reference.value / maximum) * 160}
                   y2={200 - (chart.reference.value / maximum) * 160}
                   className="report-chart-mean"
                 />
               )}
               {chart.rows.map((row, i) => {
-                const x = ((i + 0.5) * width) / chart.rows.length;
+                const x = xAt(i);
                 const value = row.values[0];
                 const height = value === null ? 0 : (value / maximum) * 160;
                 return (
@@ -145,11 +157,13 @@ export function ReportChart({ chart }: { chart: StatisticsChart }) {
                         ),
                       )
                     )}
-                    <text x={x} y={Math.max(24, 190 - height)} textAnchor="middle">
-                      {format(value)}
-                    </text>
+                    {chart.kind === 'columns' && (
+                      <text x={x} y={Math.max(24, 190 - height)} textAnchor="middle">
+                        {format(value)}
+                      </text>
+                    )}
                     <text x={x} y="228" textAnchor="middle">
-                      {chart.kind === 'lines' ? row.name.slice(0, 5) : row.name}
+                      {chart.kind === 'lines' ? row.name.slice(0, 2) : row.name}
                     </text>
                   </g>
                 );
@@ -207,5 +221,114 @@ export function ReportChart({ chart }: { chart: StatisticsChart }) {
       )}
       {chart.note && <p className="ws-muted">{chart.note}</p>}
     </section>
+  );
+}
+
+function ReportDonut({ chart }: { chart: StatisticsChart }) {
+  const rows = chart.rows.filter((row) => (row.values[0] ?? 0) > 0);
+  const total = rows.reduce((sum, row) => sum + row.values[0]!, 0);
+  const circumference = 2 * Math.PI * 76;
+  let position = 0;
+  return (
+    <div className="report-donut">
+      <svg viewBox="0 0 220 220" role="img" aria-label={`${chart.title}: всего ${total}`}>
+        <title>{chart.title}</title>
+        <desc>
+          {rows
+            .map(
+              (row) =>
+                `${row.name}: ${row.values[0]} (${((row.values[0]! * 100) / total).toFixed(1)}%)`,
+            )
+            .join('; ')}
+        </desc>
+        {rows.map((row, index) => {
+          const length = (row.values[0]! / total) * circumference;
+          const offset = -position;
+          position += length;
+          return (
+            <circle
+              key={row.id}
+              cx="110"
+              cy="110"
+              r="76"
+              className={`report-donut-segment report-donut-tone-${index % 4}`}
+              strokeDasharray={`${length} ${circumference - length}`}
+              strokeDashoffset={offset}
+              transform="rotate(-90 110 110)"
+            />
+          );
+        })}
+        <text x="110" y="106" textAnchor="middle" className="report-donut-total">
+          {total.toLocaleString('ru-RU')}
+        </text>
+        <text x="110" y="131" textAnchor="middle" className="report-donut-caption">
+          клиентов
+        </text>
+      </svg>
+      <ul aria-label="Распределение клиентов">
+        {rows.map((row, index) => (
+          <li key={row.id}>
+            <span
+              className={`report-donut-key report-donut-tone-${index % 4}`}
+              aria-hidden="true"
+            />
+            <span>{row.name}</span>
+            <strong>
+              {row.values[0]} ·{' '}
+              {((row.values[0]! * 100) / total).toLocaleString('ru-RU', {
+                maximumFractionDigits: 1,
+              })}
+              %
+            </strong>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ReportPyramid({ chart }: { chart: StatisticsChart }) {
+  const maximum = Math.max(1, ...chart.rows.flatMap((row) => row.values.map((v) => v ?? 0)));
+  return (
+    <div
+      className="report-chart-scroll"
+      role="region"
+      tabIndex={0}
+      aria-label={`${chart.title}: зеркальная диаграмма`}
+    >
+      <div className="report-pyramid">
+        <div className="report-pyramid-heading">
+          <span>Мужчины</span>
+          <span>Возраст</span>
+          <span>Женщины</span>
+        </div>
+        {chart.rows.map((row) => (
+          <div className="report-pyramid-row" key={row.id}>
+            <div className="report-pyramid-side report-pyramid-male">
+              <span>{row.values[0]?.toLocaleString('ru-RU') ?? '—'}</span>
+              <div className="report-pyramid-track">
+                <i
+                  aria-hidden="true"
+                  style={{ width: `${((row.values[0] ?? 0) * 100) / maximum}%` }}
+                />
+              </div>
+            </div>
+            <span>{row.name}</span>
+            <div className="report-pyramid-side report-pyramid-female">
+              <div className="report-pyramid-track">
+                <i
+                  aria-hidden="true"
+                  style={{ width: `${((row.values[1] ?? 0) * 100) / maximum}%` }}
+                />
+              </div>
+              <span>{row.values[1]?.toLocaleString('ru-RU') ?? '—'}</span>
+            </div>
+          </div>
+        ))}
+        <p className="ws-muted">
+          Общая шкала: 0–{maximum.toLocaleString('ru-RU')} · {chart.unit.toLowerCase()}
+        </p>
+      </div>
+    </div>
   );
 }

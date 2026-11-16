@@ -416,11 +416,15 @@ export function recordValue(value: string, key = ''): ReactNode {
 export function DataTable({
   columns,
   rows,
+  footerRows = [],
+  tableLabel,
   onOpen,
   empty,
 }: {
   columns: { key: string; label: string; render?: (row: DemoRecord) => ReactNode }[];
   rows: DemoRecord[];
+  footerRows?: DemoRecord[];
+  tableLabel?: string;
   onOpen?: (record: DemoRecord) => void;
   empty?: ReactNode;
 }) {
@@ -432,10 +436,15 @@ export function DataTable({
           (sort.asc ? 1 : -1),
       )
     : rows;
-  if (!rows.length) return empty ?? <Empty />;
+  if (!rows.length && !footerRows.length) return empty ?? <Empty />;
   return (
     <>
-      <div className="ws-table-wrap">
+      <div
+        className="ws-table-wrap"
+        tabIndex={tableLabel ? 0 : undefined}
+        role={tableLabel ? 'region' : undefined}
+        aria-label={tableLabel}
+      >
         <table className="ws-table">
           <thead>
             <tr>
@@ -515,12 +524,26 @@ export function DataTable({
               </tr>
             ))}
           </tbody>
+          {!!footerRows.length && (
+            <tfoot>
+              {footerRows.map((row) => (
+                <tr key={row.id}>
+                  {columns.map((column) => (
+                    <td key={column.key}>
+                      {column.render ? column.render(row) : row[column.key] || '—'}
+                    </td>
+                  ))}
+                  {onOpen && <td />}
+                </tr>
+              ))}
+            </tfoot>
+          )}
         </table>
       </div>
       <div className="ws-mobile-records">
-        {ordered.map((row) => (
+        {[...ordered, ...footerRows].map((row) => (
           <div
-            className={`ws-mobile-record ${onOpen ? 'is-openable' : ''}`}
+            className={`ws-mobile-record ${onOpen ? 'is-openable' : ''} ${footerRows.includes(row) ? 'ws-table-summary' : ''}`}
             key={row.id}
             onClick={
               onOpen
