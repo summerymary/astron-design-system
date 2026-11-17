@@ -143,6 +143,11 @@ export const initialVisits: Visit[] = [
 ];
 
 export const adminSections = [
+  {
+    id: 'admin-account',
+    label: 'Личный кабинет',
+    caption: 'Свои смены, начисления и бонусы · вход по ПИН-коду',
+  },
   { id: 'gift-cards', label: 'Подарочные карты', caption: 'Продажа, выдача, остатки и история' },
   {
     id: 'personal-trainings',

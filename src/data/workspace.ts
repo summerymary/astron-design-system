@@ -1485,35 +1485,110 @@ export const initialExtra: Record<string, DemoRecord[]> = {
     },
   ],
   shifts: [
+    // Two fixed workplaces; one computer can be handed over several times per day.
+    ...Array.from({ length: 7 }, (_, index) => {
+      const day = `2026-11-${String(index + 2).padStart(2, '0')}`;
+      return [
+        {
+          id: index === 4 ? 'shift-1' : `shift-first-${index}`,
+          employeeId: 'emp-1',
+          name: 'Александра Крылова',
+          club: 'Центральный',
+          reception: 'Ресепшен 01',
+          workplace: 'Место 1',
+          start: `${day}T06:30`,
+          end: `${day}T14:30`,
+          status: index < 4 ? 'Завершена' : 'Запланирована',
+          hours: '8',
+          rate: '250',
+        },
+        {
+          id: `shift-second-${index}`,
+          employeeId: 'emp-reception-elena',
+          name: 'Елена Соколова',
+          club: 'Центральный',
+          reception: 'Ресепшен 01',
+          workplace: 'Место 1',
+          start: `${day}T14:30`,
+          end: `${day}T22:30`,
+          status: 'Запланирована',
+          hours: '8',
+          rate: '250',
+        },
+        {
+          id: `shift-cover-${index}`,
+          employeeId: 'emp-reception-maria',
+          name: 'Мария Орлова',
+          club: 'Центральный',
+          reception: 'Ресепшен 01',
+          workplace: 'Место 2',
+          start: `${day}T10:00`,
+          end: `${day}T14:00`,
+          status: 'Запланирована',
+          hours: '4',
+          rate: '250',
+        },
+        {
+          id: `shift-cover-late-${index}`,
+          employeeId: 'emp-reception-daria',
+          name: 'Дарья Иванова',
+          club: 'Центральный',
+          reception: 'Ресепшен 01',
+          workplace: 'Место 2',
+          start: `${day}T14:00`,
+          end: `${day}T18:00`,
+          status: 'Запланирована',
+          hours: '4',
+          rate: '250',
+        },
+      ];
+    }).flat(),
+  ],
+  'employee-bonuses': [
     {
-      id: 'shift-demo-2',
-      name: 'Алина Белова',
-      club: 'Центральный',
-      start: '2026-11-06T09:00',
-      end: '2026-11-06T18:00',
-      status: 'Запланирована',
-      hours: '9',
-      rate: '250',
+      id: 'bonus-admin-1',
+      employeeId: 'emp-1',
+      day: '2026-11-05',
+      name: 'Продления абонементов',
+      basis: '4 продления × 300 ₽',
+      amount: '1200',
+      status: 'Подтверждён',
     },
     {
-      id: 'shift-demo-3',
-      name: 'Александра Крылова',
-      club: 'Центральный',
-      start: '2026-11-07T08:00',
-      end: '2026-11-07T20:00',
-      status: 'Запланирована',
-      hours: '12',
-      rate: '250',
+      id: 'bonus-admin-2',
+      employeeId: 'emp-1',
+      day: '2026-11-06',
+      name: 'Помощь в проведении мероприятия',
+      basis: 'Разовый бонус',
+      amount: '500',
+      status: 'На согласовании',
     },
     {
-      id: 'shift-1',
-      name: 'Александра Крылова',
-      club: 'Центральный',
-      start: '2026-11-06T08:00',
-      end: '2026-11-06T20:00',
-      status: 'Черновик',
-      hours: '12',
-      rate: '250',
+      id: 'bonus-other-1',
+      employeeId: 'emp-reception-elena',
+      day: '2026-11-05',
+      name: 'Продления абонементов',
+      basis: '2 продления × 300 ₽',
+      amount: '600',
+      status: 'Подтверждён',
+    },
+  ],
+  'employee-payments': [
+    {
+      id: 'payment-admin-1',
+      employeeId: 'emp-1',
+      day: '2026-11-05',
+      name: 'Аванс',
+      amount: '5000',
+      status: 'Выплачено',
+    },
+    {
+      id: 'payment-other-1',
+      employeeId: 'emp-reception-elena',
+      day: '2026-11-05',
+      name: 'Аванс',
+      amount: '4000',
+      status: 'Выплачено',
     },
   ],
   assignments: [
@@ -1701,6 +1776,21 @@ export function createWorkspaceData(): Record<string, DemoRecord[]> {
       email: 'denis@example.com',
       status: 'Активен',
     },
+  );
+  data.employees.push(
+    ...[
+      ['emp-reception-elena', 'Елена Соколова'],
+      ['emp-reception-maria', 'Мария Орлова'],
+      ['emp-reception-daria', 'Дарья Иванова'],
+    ].map(([id, name], index) => ({
+      id,
+      name,
+      position: 'Администратор ресепшена',
+      club: 'Центральный',
+      phone: `+7 900 000-30-0${index + 1}`,
+      email: `reception${index + 1}@example.com`,
+      status: 'Активен',
+    })),
   );
   const personalPlan = data.plans.find((plan) => plan.id === 'plan-3')!;
   personalPlan.trainerCategory = 'trainer';
@@ -1908,18 +1998,18 @@ export function createWorkspaceData(): Record<string, DemoRecord[]> {
   }));
   data['client-pins'] = [{ id: '1001', commentId: 'seed-comment-1001' }];
   const reserveExample = data.events.find(
-    (event) => event.day === '2026-11-08' && event.time === '15:00' && event.kind !== 'personal',
+    (event) => event.day === '2026-11-06' && event.time === '06:00' && event.kind !== 'personal',
   );
   if (reserveExample) {
     reserveExample.capacityMode = 'Своя вместимость';
     reserveExample.capacity = '4';
-    reserveExample.attendees = reserveExample.attendees.split(',').slice(0, 4).join(',');
+    reserveExample.attendees = ids.slice(0, 4).join(',');
     reserveExample.booked = String(reserveExample.attendees.split(',').filter(Boolean).length);
     if (Number(reserveExample.booked) === 4) {
       reserveExample.status = 'Мест нет';
       reserveExample.reserve = ids
         .filter((id) => !reserveExample.attendees.split(',').includes(id))
-        .slice(0, 1)
+        .slice(0, 2)
         .join(',');
     }
   }
