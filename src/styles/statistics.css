@@ -61,7 +61,7 @@
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
     align-items: end;
   }
-  .statistics-filters > .report-month-picker {
+  .statistics-filters > :is(.report-month-picker, .report-week-picker) {
     grid-column: span 2;
   }
   .statistics-filters > .form-field {
@@ -86,6 +86,24 @@
   }
   .statistics-report .ws-table {
     min-width: 600px;
+  }
+  .statistics-week-table .ws-table {
+    min-width: 1360px;
+  }
+  .statistics-week-table td {
+    vertical-align: top;
+  }
+  .statistics-week-cell {
+    display: grid;
+    gap: 16px;
+    min-width: 140px;
+    max-width: 240px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .statistics-week-cell > div {
+    display: grid;
+    gap: 4px;
   }
   @container workspace (max-width: 600px) {
     .statistics-filters {
