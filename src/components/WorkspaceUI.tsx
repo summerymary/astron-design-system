@@ -1,3 +1,4 @@
+import { ShiftEditor } from './ShiftEditor';
 import { Select } from './Select';
 import '../styles/workspace.css';
 import { useCallback, useId, useRef, useState } from 'react';
@@ -850,12 +851,6 @@ function EmployeeExtras({ employee }: { employee: DemoRecord }) {
   const { data, put } = useWorkspace();
   const [form, setForm] = useState<'shifts' | 'assignments' | null>(null);
   const close = useCallback(() => setForm(null), []);
-  const shiftFields: Field[] = [
-    { key: 'club', label: 'Клуб', options: ['Центральный', 'Парк', 'Речной'] },
-    { key: 'start', label: 'Начало смены', type: 'datetime-local', required: true },
-    { key: 'end', label: 'Конец смены', type: 'datetime-local', required: true },
-    { key: 'status', label: 'Статус', options: ['Черновик', 'На проверке', 'Подтверждено'] },
-  ];
   const assignmentFields: Field[] = [
     { key: 'position', label: 'Должность', options: data.positions.map((row) => row.name) },
     { key: 'start', label: 'С даты', type: 'date', required: true },
@@ -897,24 +892,31 @@ function EmployeeExtras({ employee }: { employee: DemoRecord }) {
             </div>
           ))}
       </section>
-      {form && (
+      {form === 'shifts' && (
+        <ShiftEditor
+          employee={employee}
+          initial={{
+            id: '',
+            name: employee.name,
+            employeeId: employee.id,
+            club: employee.club,
+            reception: data.receptions.find((row) => row.club === employee.club)?.name || '',
+            workplace: 'Место 1',
+            start: '',
+            end: '',
+            status: 'Запланирована',
+          }}
+          onClose={close}
+        />
+      )}
+      {form === 'assignments' && (
         <RecordForm
           inline
-          title={form === 'shifts' ? 'Новая смена' : 'Назначение должности'}
-          fields={form === 'shifts' ? shiftFields : assignmentFields}
+          title="Назначение должности"
+          fields={assignmentFields}
           onClose={close}
           onSave={(record) => {
-            const hours =
-              record.start && record.end
-                ? String((Date.parse(record.end) - Date.parse(record.start)) / 3600000)
-                : '0';
-            put(form, {
-              ...record,
-              name: employee.name,
-              hours,
-              rate: '250',
-              status: record.status ?? 'Действует',
-            });
+            put('assignments', { ...record, name: employee.name, status: 'Действует' });
             close();
           }}
         />

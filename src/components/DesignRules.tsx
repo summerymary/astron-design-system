@@ -41,6 +41,31 @@ import { RestoreCardDialog } from './RestoreCardDialog';
 import { MembershipDetails } from './MembershipDetails';
 import { ScheduleDayBoard } from './ScheduleDayBoard';
 import { ShiftTimeline } from './ShiftTimeline';
+import { PinEntry } from './PinEntry';
+
+function AdminAccountExample() {
+  const [open, setOpen] = useState(false);
+  return (
+    <section className="panel ws-panel-body ws-stack">
+      <h3>Вход в личный кабинет администратора</h3>
+      <p className="muted">
+        Четыре цифры, подтверждение клавишей Enter и понятная ошибка. Демонстрационный код: 1234.
+      </p>
+      {open ? (
+        <>
+          <Notice tone="success">
+            Кабинет открыт. Начисления доступны только своему сотруднику.
+          </Notice>
+          <Button variant="secondary" onClick={() => setOpen(false)}>
+            Закрыть кабинет
+          </Button>
+        </>
+      ) : (
+        <PinEntry onUnlock={() => setOpen(true)} />
+      )}
+    </section>
+  );
+}
 
 function ReceptionExample() {
   const { data } = useWorkspace();
@@ -63,8 +88,18 @@ function ReceptionExample() {
           История абонемента
         </Button>
       </div>
-      <h3>Журнал смен по дням</h3>
-      <ShiftTimeline rows={data.shifts} />
+      <h3>Две смены одновременно и передача места</h3>
+      <p className="muted">
+        Две дорожки — два компьютера ресепшена. Последовательные смены на одной дорожке показывают
+        передачу места. Цвет обозначает администратора; имя и время всегда подписаны.
+      </p>
+      <ShiftTimeline
+        rows={data.shifts.filter((row) => row.start.startsWith('2026-11-06'))}
+        employees={data.employees}
+        allShifts={data.shifts}
+        from="2026-11-06"
+        to="2026-11-06"
+      />
       <div className="calendar-scroll" style={{ maxHeight: 280 }}>
         <ScheduleDayBoard
           events={data.events
@@ -389,6 +424,7 @@ export function DesignRules() {
           }}
         />
       </div>
+      <AdminAccountExample />
       <div className="panel ws-panel-body ws-stack">
         <h3>Переходы каталога</h3>
         <p className="ui-rule-purpose">
