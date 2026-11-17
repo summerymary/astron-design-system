@@ -21,6 +21,7 @@ import { ReportCatalogue } from './ReportCatalogue';
 import { ReportBars } from './ReportBars';
 import { ReportChart } from './ReportChart';
 import { ReportMonthPicker } from './ReportMonthPicker';
+import { ReportWeekPicker } from './ReportWeekPicker';
 import { statisticsReports, reportTitle } from '../data/statistics';
 import { ReceptionShift } from './ReceptionShift';
 import { CatalogSectionCard } from './CatalogSectionCard';
@@ -135,6 +136,7 @@ function AttendanceExample() {
 
 export function DesignRules() {
   const [reportMonthExample, setReportMonthExample] = useState('2026-11');
+  const [reportWeekExample, setReportWeekExample] = useState('2026-11-06');
   const [bookingExample, setBookingExample] = useState(false);
   const [examplePassId, setExamplePassId] = useState('');
   const examplePasses = availableVisitPasses(
@@ -436,6 +438,13 @@ export function DesignRules() {
         <p className="ws-muted">
           Выбран месяц: {reportMonthExample}. Стрелки переключают месяц, включая переход между
           годами.
+        </p>
+        <h3>Занятость тренеров за неделю</h3>
+        <ReportWeekPicker day={reportWeekExample} onChange={setReportWeekExample} />
+        <p className="ws-muted">
+          Выбрана неделя с датой {reportWeekExample}. Стрелки меняют неделю целиком. В матрице семь
+          дней с датами и строки времени начала, название, тренер и место каждого занятия; пустые
+          дни сохраняются. На телефоне данные показаны карточками, без потери дней.
         </p>
         <ReportChart
           chart={{

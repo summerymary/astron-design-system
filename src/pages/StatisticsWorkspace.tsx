@@ -12,6 +12,7 @@ import { Select } from '../components/Select';
 import { ReportCatalogue } from '../components/ReportCatalogue';
 import { ReportChart } from '../components/ReportChart';
 import { ReportMonthPicker } from '../components/ReportMonthPicker';
+import { ReportWeekPicker } from '../components/ReportWeekPicker';
 import { reportMonth } from '../lib/report-period';
 import { demoStamp, registrationNow } from '../lib/demo-clock';
 import { statisticsCharts } from '../lib/statistics-charts';
@@ -230,9 +231,9 @@ function StatisticsReport({
     'birdthday',
     'client_lastvisit',
     'client_lastvisit_personal',
-    'report_pclients_lost',
     'free_trener_find',
     'clients_segmetation',
+    'gtrener_busy',
   ].includes(id);
   const noClub = [
     'birdthday',
@@ -288,6 +289,22 @@ function StatisticsReport({
     setTimeout(() => URL.revokeObjectURL(url), 0);
   };
   const renderCell = (r: DemoRecord, c: ReportColumn, title: string) => {
+    if (id === 'gtrener_busy' && /^day[0-6]$/.test(c.key))
+      return r[c.key] ? (
+        <div className="statistics-week-cell">
+          {r[c.key].split('\n\n').map((entry, i) => {
+            const [lesson, place] = entry.split('\n');
+            return (
+              <div key={i}>
+                <strong>{lesson}</strong>
+                <span className="ws-muted">{place}</span>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        '—'
+      );
     if (id === 'clients_segmetation' && title === 'Сегменты базы' && c.key === 'count')
       return (
         <Button
@@ -324,8 +341,8 @@ function StatisticsReport({
         r.name
       );
     }
-    if (id === 'calls' && c.key === 'phone') {
-      const original = data.calls?.find((row) => row.id === r.id);
+    if ((id === 'calls' || id.startsWith('report_pclients')) && c.key === 'phone') {
+      const original = id === 'calls' ? data.calls?.find((row) => row.id === r.id) : undefined;
       const phone = original?.phone || members.find((m) => String(m.id) === r.memberId)?.phone;
       return phone ? (
         <Button
@@ -417,7 +434,10 @@ function StatisticsReport({
                 }}
               />
             )}
-            {!noPeriod && (
+            {id === 'gtrener_busy' && (
+              <ReportWeekPicker day={filters.to} onChange={(day) => update('to', day)} />
+            )}
+            {!noPeriod && id !== 'gtrener_busy' && (
               <>
                 {!asOf && field('from', 'С даты')}
                 {field('to', asOf ? 'На дату' : 'По дату включительно')}
@@ -493,6 +513,16 @@ function StatisticsReport({
                 {flag('onlyUnknown', 'Нет в базе клиентов')}
               </>
             )}
+            {id === 'gt_finance' && (
+              <>
+                {flag('groupByTrainer', 'Группировать по тренеру')}
+                {choice('reportSort', 'Сортировать', [
+                  { id: 'avg_visitors', name: 'По среднему числу посещений' },
+                  { id: 'all_shedules', name: 'По количеству занятий' },
+                  { id: 'all_visitors', name: 'По количеству посещений' },
+                ])}
+              </>
+            )}
             {id === 'ptrener_rating_all' && (
               <>
                 {flag('countPersonal', 'Считать ПТ')}
@@ -506,7 +536,7 @@ function StatisticsReport({
                 {field('duration', 'Длительность, минут', 'number')}
               </>
             )}
-            {['client_lifetime', 'report_pclients_stat'].includes(id) &&
+            {['client_lifetime', 'report_pclients_stat', 'report_pclients_lost'].includes(id) &&
               field('threshold', 'Интервал бездействия, дней', 'number')}
             {['selling_clients_secondary', 'selling_clients_afterguest'].includes(id) &&
               field('renewalDays', 'Демо-окно покупки, дней', 'number')}
@@ -660,7 +690,10 @@ function StatisticsReport({
               <ReportChart key={chart.id} chart={chart} />
             ))}
             {visibleBlocks.map((block, index) => (
-              <section className="panel ws-panel" key={`${id}-${index}`}>
+              <section
+                className={`panel ws-panel${id === 'gtrener_busy' ? ' statistics-week-table' : ''}`}
+                key={`${id}-${index}`}
+              >
                 <div className="ws-panel-heading">
                   <h3>{block.title}</h3>
                 </div>

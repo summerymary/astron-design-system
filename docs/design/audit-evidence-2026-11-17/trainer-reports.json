@@ -1,0 +1,560 @@
+{
+  "date": "2026-11-17",
+  "desktop": [
+    {
+      "id": "gtrener_busy",
+      "device": "desktop",
+      "snapshotLength": 21891,
+      "broken": 1,
+      "heading": [
+        "Занятость тренеров за неделю"
+      ],
+      "overflow": false,
+      "tables": [
+        {
+          "cols": 8,
+          "rows": 21,
+          "scrollable": true
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "id": "ptrener_rating",
+      "device": "desktop",
+      "snapshotLength": 4412,
+      "broken": 0,
+      "heading": [
+        "Рейтинг ПТ"
+      ],
+      "overflow": false,
+      "tables": [
+        {
+          "cols": 7,
+          "rows": 1,
+          "scrollable": false
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "id": "ptrener_rating_all",
+      "device": "desktop",
+      "snapshotLength": 6366,
+      "broken": 0,
+      "heading": [
+        "Рабочие часы тренеров"
+      ],
+      "overflow": false,
+      "tables": [
+        {
+          "cols": 8,
+          "rows": 3,
+          "scrollable": false
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "id": "gtrener_rating",
+      "device": "desktop",
+      "snapshotLength": 5355,
+      "broken": 0,
+      "heading": [
+        "Рейтинг групповых"
+      ],
+      "overflow": false,
+      "tables": [
+        {
+          "cols": 8,
+          "rows": 3,
+          "scrollable": false
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "id": "report_pclients",
+      "device": "desktop",
+      "snapshotLength": 5516,
+      "broken": 0,
+      "heading": [
+        "Клиенты тренера"
+      ],
+      "overflow": false,
+      "tables": [
+        {
+          "cols": 8,
+          "rows": 2,
+          "scrollable": false
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "id": "report_pclients_lost",
+      "device": "desktop",
+      "snapshotLength": 3513,
+      "broken": 0,
+      "heading": [
+        "Потерянные клиенты тренера"
+      ],
+      "overflow": false,
+      "tables": [],
+      "width": 1440
+    },
+    {
+      "id": "report_pclients_phones",
+      "device": "desktop",
+      "snapshotLength": 5551,
+      "broken": 0,
+      "heading": [
+        "Контакты персональных клиентов"
+      ],
+      "overflow": false,
+      "tables": [
+        {
+          "cols": 8,
+          "rows": 2,
+          "scrollable": false
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "id": "report_pclients_stat",
+      "device": "desktop",
+      "snapshotLength": 3800,
+      "broken": 0,
+      "heading": [
+        "Удержание и потеря клиентов тренера"
+      ],
+      "overflow": false,
+      "tables": [],
+      "width": 1440
+    },
+    {
+      "id": "free_trener_find",
+      "device": "desktop",
+      "snapshotLength": 4117,
+      "broken": 0,
+      "heading": [
+        "Свободный тренер"
+      ],
+      "overflow": false,
+      "tables": [
+        {
+          "cols": 6,
+          "rows": 2,
+          "scrollable": false
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "id": "gt_finance",
+      "device": "desktop",
+      "snapshotLength": 19682,
+      "broken": 1,
+      "heading": [
+        "Групповые занятия и цены"
+      ],
+      "overflow": false,
+      "tables": [
+        {
+          "cols": 10,
+          "rows": 45,
+          "scrollable": true
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "id": "trener_financial_result",
+      "device": "desktop",
+      "snapshotLength": 6416,
+      "broken": 0,
+      "heading": [
+        "Финансовый результат по тренеру"
+      ],
+      "overflow": false,
+      "tables": [
+        {
+          "cols": 7,
+          "rows": 4,
+          "scrollable": false
+        },
+        {
+          "cols": 5,
+          "rows": 4,
+          "scrollable": false
+        }
+      ],
+      "width": 1440
+    }
+  ],
+  "mobile": [
+    {
+      "cards": 0,
+      "heading": "Занятость тренеров за неделю",
+      "inputs": [],
+      "url": "#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=gtrener_busy",
+      "viewport": 390,
+      "width": 390
+    },
+    {
+      "cards": 0,
+      "heading": "Рейтинг ПТ",
+      "inputs": [],
+      "url": "#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=ptrener_rating",
+      "viewport": 390,
+      "width": 390
+    },
+    {
+      "cards": 0,
+      "heading": "Рабочие часы тренеров",
+      "inputs": [],
+      "url": "#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=ptrener_rating_all",
+      "viewport": 390,
+      "width": 390
+    },
+    {
+      "cards": 0,
+      "heading": "Рейтинг групповых",
+      "inputs": [],
+      "url": "#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=gtrener_rating",
+      "viewport": 390,
+      "width": 390
+    },
+    {
+      "cards": 0,
+      "heading": "Клиенты тренера",
+      "inputs": [],
+      "url": "#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=report_pclients",
+      "viewport": 390,
+      "width": 390
+    },
+    {
+      "cards": 0,
+      "heading": "Потерянные клиенты тренера",
+      "inputs": [],
+      "url": "#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=report_pclients_lost",
+      "viewport": 390,
+      "width": 390
+    },
+    {
+      "cards": 0,
+      "heading": "Контакты персональных клиентов",
+      "inputs": [],
+      "url": "#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=report_pclients_phones",
+      "viewport": 390,
+      "width": 390
+    },
+    {
+      "cards": 0,
+      "heading": "Удержание и потеря клиентов тренера",
+      "inputs": [],
+      "url": "#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=report_pclients_stat",
+      "viewport": 390,
+      "width": 390
+    },
+    {
+      "cards": 0,
+      "heading": "Свободный тренер",
+      "inputs": [],
+      "url": "#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=free_trener_find",
+      "viewport": 390,
+      "width": 390
+    },
+    {
+      "cards": 0,
+      "heading": "Групповые занятия и цены",
+      "inputs": [],
+      "url": "#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=gt_finance",
+      "viewport": 390,
+      "width": 390
+    },
+    {
+      "cards": 0,
+      "heading": "Финансовый результат по тренеру",
+      "inputs": [],
+      "url": "#/admin-section?device=mobile&state=default&role=club-director&section=statistics&recordId=trener_financial_result",
+      "viewport": 390,
+      "width": 390
+    }
+  ],
+  "themes": [
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "heading": "Занятость тренеров за неделю",
+      "inputs": [
+        {
+          "height": 44,
+          "outline": "0px"
+        }
+      ],
+      "nan": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=gtrener_busy",
+      "viewport": 1440,
+      "width": 1440
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "heading": "Рабочие часы тренеров",
+      "inputs": [
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        }
+      ],
+      "nan": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=ptrener_rating_all",
+      "viewport": 1440,
+      "width": 1440
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "heading": "Групповые занятия и цены",
+      "inputs": [
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        }
+      ],
+      "nan": false,
+      "url": "http://127.0.0.1:4173/#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=gt_finance",
+      "viewport": 1440,
+      "width": 1440
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "heading": "Занятость тренеров за неделю",
+      "inputs": [
+        {
+          "height": 44,
+          "outline": "0px"
+        }
+      ],
+      "nan": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=gtrener_busy",
+      "viewport": 1440,
+      "width": 1440
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "heading": "Рабочие часы тренеров",
+      "inputs": [
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        }
+      ],
+      "nan": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=ptrener_rating_all",
+      "viewport": 1440,
+      "width": 1440
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "heading": "Групповые занятия и цены",
+      "inputs": [
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        }
+      ],
+      "nan": false,
+      "url": "http://127.0.0.1:4173/?theme=111111#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=gt_finance",
+      "viewport": 1440,
+      "width": 1440
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "heading": "Занятость тренеров за неделю",
+      "inputs": [
+        {
+          "height": 44,
+          "outline": "0px"
+        }
+      ],
+      "nan": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=gtrener_busy",
+      "viewport": 1440,
+      "width": 1440
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "heading": "Рабочие часы тренеров",
+      "inputs": [
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        }
+      ],
+      "nan": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=ptrener_rating_all",
+      "viewport": 1440,
+      "width": 1440
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "heading": "Групповые занятия и цены",
+      "inputs": [
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        }
+      ],
+      "nan": false,
+      "url": "http://127.0.0.1:4173/?style=contrast#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=gt_finance",
+      "viewport": 1440,
+      "width": 1440
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "heading": "Занятость тренеров за неделю",
+      "inputs": [
+        {
+          "height": 44,
+          "outline": "0px"
+        }
+      ],
+      "nan": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=gtrener_busy",
+      "viewport": 1440,
+      "width": 1440
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "heading": "Рабочие часы тренеров",
+      "inputs": [
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        }
+      ],
+      "nan": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=ptrener_rating_all",
+      "viewport": 1440,
+      "width": 1440
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "heading": "Групповые занятия и цены",
+      "inputs": [
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 44,
+          "outline": "0px"
+        },
+        {
+          "height": 18,
+          "outline": "0px"
+        }
+      ],
+      "nan": false,
+      "url": "http://127.0.0.1:4173/?style=vivid#/admin-section?device=desktop&state=default&role=club-director&section=statistics&recordId=gt_finance",
+      "viewport": 1440,
+      "width": 1440
+    }
+  ],
+  "interactions": [
+    "Week +7 / -7 days changes the full Monday–Sunday period",
+    "Trainer filter changes the weekly event set",
+    "Grouping GT finance by trainer produces three rows",
+    "GT finance sort by class count orders 17,16,12"
+  ],
+  "console": [],
+  "scope": "Prototype DOM and UI only; source structures reviewed read-only. Not a full replay of all business flows."
+}

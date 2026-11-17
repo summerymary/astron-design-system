@@ -21,7 +21,6 @@ export function shiftMonths(d: string, n: number) {
 }
 const shift = (d: string, n: number) =>
   new Date(Date.parse(d) + n * 86400000).toISOString().slice(0, 10);
-const clockMinutes = (v: string) => Number(v.slice(0, 2)) * 60 + Number(v.slice(3, 5));
 const local = (v: string) =>
   /(?:Z|[+-]\d\d:\d\d)$/.test(v)
     ? new Date(Date.parse(v) + 10800000).toISOString().slice(0, 16)
@@ -38,8 +37,6 @@ const handled = new Set([
   'feedbacks',
   'client_lifetime',
   'clients_segmetation',
-  'report_pclients_stat',
-  'free_trener_find',
   'selltovosit',
   'selling_clients_secondary',
   'financeresult',
@@ -75,8 +72,11 @@ export function detailedStatistics(
     phone: input.hidePhones ? hiddenPhone(m.phone) : m.phone,
   });
   const people = new Map(members.map((m) => [String(m.id), m]));
-  const trainerKey = (e: DemoRecord) =>
-    e.trainerId || (data['trainer-profiles'] || []).find((t) => t.name === e.trainer)?.id || '';
+  const trainerKey = (e: DemoRecord) => {
+    if (e.trainerId) return e.trainerId;
+    const matches = (data['trainer-profiles'] || []).filter((t) => t.name === e.trainer);
+    return matches.length === 1 ? matches[0].id : `unknown:${e.id}`;
+  };
   const visits = [...new Map(input.visits.map((v) => [v.id, v])).values()].map((v) => ({
     ...v,
     local: local(v.enteredAt),
@@ -93,7 +93,9 @@ export function detailedStatistics(
     const found = members.filter((m) => [m.name, clientName(m)].includes(s.client));
     return found.length === 1 ? found[0] : undefined;
   };
-  const events = (data.events || []).filter((e) => e.status !== 'Отменено');
+  const events = [...new Map((data.events || []).map((e) => [e.id, e])).values()].filter(
+    (e) => !['Отменено', 'Отменена', 'Удалено'].includes(e.status),
+  );
   const selectedEvents = events.filter(
     (e) =>
       inPeriod(e.day) && inClub(e.club) && (f.trainer === 'all' || trainerKey(e) === f.trainer),
@@ -132,26 +134,15 @@ export function detailedStatistics(
     return [...map];
   };
   const names = [col('name', 'Клиент'), col('card', 'Карта')];
-  const lastVisit = (memberId: string, personal = false) =>
-    visits
-      .filter(
-        (v) =>
-          String(v.memberId) === memberId &&
-          v.local.slice(0, 10) <= f.to &&
-          (!personal || v.kind === 'personal'),
-      )
-      .map((v) => v.local.slice(0, 10))
-      .sort()
-      .at(-1) || '';
   const eligibleKind = (p: (typeof cards)[number]) =>
     (f.includePersonal === '1' || p.kind.id !== 'personal') &&
     (f.includeSingle === '1' || !['single', 'guest'].includes(p.kind.id)) &&
     (f.includeCorporate === '1' || !/корпоратив/i.test(p.training + ' ' + p.name)) &&
     (f.onlyUnlimited !== '1' || p.remaining === null);
-  const unitPrice = (p: (typeof cards)[number]) =>
-    p.price === null
-      ? null
-      : Math.round(p.price / Math.max(1, p.remaining === null ? p.used : p.used + p.remaining));
+  const unitPrice = (p: (typeof cards)[number]) => {
+    const denominator = p.remaining === null ? p.used : p.used + p.remaining;
+    return p.price === null || denominator <= 0 ? null : Math.round(p.price / denominator);
+  };
 
   if (id === 'feedbacks') {
     const rows: DemoRecord[] = (data['client-reviews'] || [])
@@ -308,109 +299,6 @@ export function detailedStatistics(
     out.notes.push(
       'Сегменты определяются абонементами на выбранную дату, а не визитами. Приоритет: действующий, неактивированный, затем давность окончания последнего абонемента. Каждый клиент входит в один сегмент. Замороженная текущая карта или неизвестная дата окончания — «Недостаточно данных».',
       'Границы из источника: 1–30, 31–90, 91–180, 181–365, 366–1095 и 1096+ дней. В прототипе используется известное окончание абонемента; история покупок и прошлых остатков неполная. Сводка показана полосами вместо восьми секторов, чтобы точнее сравнивать небольшие сегменты.',
-    );
-  } else if (id === 'report_pclients_stat') {
-    const rows = (data['personal-clients'] || [])
-      .filter((a) => f.trainer === 'all' || a.trainerId === f.trainer)
-      .flatMap((a) => {
-        const m = people.get(a.memberId);
-        if (!m) return [];
-        const last = lastVisit(a.memberId, true);
-        return [
-          {
-            ...person(m),
-            id: a.id,
-            trainer:
-              (data['trainer-profiles'] || []).find((t) => t.id === a.trainerId)?.name ||
-              'Не указан',
-            last,
-            status: !last
-              ? 'Нет истории ПТ'
-              : days(last, f.to) > Number(f.threshold)
-                ? 'Потерянный'
-                : 'Активный',
-          },
-        ];
-      });
-    const known = rows.filter((r) => r.last && r.last >= f.from),
-      lost = known.filter((r) => r.status === 'Потерянный').length;
-    out.metrics = [
-      { label: 'Клиентов с известной историей', value: known.length },
-      { label: 'Активных', value: known.length - lost },
-      { label: 'Потерянных', value: lost },
-      {
-        label: 'Доля потерянных',
-        value: known.length ? `${Math.round((lost / known.length) * 100)}%` : '—',
-      },
-    ];
-    block(
-      'Клиенты и состояние',
-      [
-        ...names,
-        col('trainer', 'Закреплённый тренер'),
-        col('last', 'Последний ПТ-визит', 'date'),
-        col('status', 'Состояние'),
-      ],
-      rows,
-      true,
-    );
-    out.notes.push(
-      'Демо: потеря — более указанного числа дней без известного ПТ-визита. Знаменатель — клиенты с последним визитом не раньше стартовой даты. Без истории не считаются потерянными. Используется текущее закрепление; историю смены тренеров нужно хранить отдельно.',
-    );
-  } else if (id === 'free_trener_find') {
-    const start = clockMinutes(f.timeFrom),
-      duration = Number(f.duration);
-    if (duration < 1 || duration > 240 || start + duration > 1440)
-      return { ...out, error: 'Укажите длительность 1–240 минут в пределах выбранного дня.' };
-    const rows = (data['trainer-availability'] || [])
-      .filter(
-        (s) =>
-          s.day === f.to &&
-          inClub(s.club) &&
-          (f.trainer === 'all' || s.trainerId === f.trainer) &&
-          clockMinutes(s.time) <= start &&
-          clockMinutes(s.end) >= start + duration,
-      )
-      .flatMap((s) => {
-        const t = (data['trainer-profiles'] || []).find(
-          (t) => t.id === s.trainerId && t.status !== 'В архиве',
-        );
-        const busy = events.some(
-          (e) =>
-            e.day === f.to &&
-            trainerKey(e) === s.trainerId &&
-            clockMinutes(e.time) < start + duration &&
-            start < clockMinutes(e.time) + Number(e.duration),
-        );
-        if (!t || busy) return [];
-        return [
-          {
-            id: s.id,
-            name: t.name,
-            club: s.club,
-            date: s.day,
-            time: f.timeFrom,
-            duration: String(duration),
-            category:
-              (data['trainer-categories'] || []).find((c) => c.id === t.categoryId)?.name ||
-              'Не указана',
-          },
-        ];
-      });
-    block(
-      'Свободные тренеры в рабочее время',
-      [
-        col('name', 'Тренер'),
-        col('category', 'Категория'),
-        col('club', 'Клуб'),
-        col('date', 'Дата', 'date'),
-        col('time', 'Начало'),
-        col('duration', 'Минут'),
-      ],
-      rows,
-    );
-    out.notes.push(
-      'Проверяются явно заданное рабочее окно и пересечения с занятиями во всех клубах. Нет окна в демоданных — доступность неизвестна, тренер не предлагается. Это просмотр, он не создаёт запись.',
     );
   } else if (id === 'clients_ltv' || id === 'clients_ltv_bydate') {
     const debits = (data['account-debits'] || []).filter(
@@ -700,7 +588,7 @@ export function detailedStatistics(
       'Исходная страница осталась пустой. Этот пример построен по описанию каталога и явным вымышленным результатам устройства. Реальных запросов ККМ нет; отсутствие номера чека не считается ошибкой. Повторное проведение отсюда недоступно.',
     );
   } else if (id === 'gt_finance') {
-    const rows = selectedEvents
+    let rows: DemoRecord[] = selectedEvents
       .filter((e) => e.kind !== 'personal')
       .map((e) => {
         let quantity = 0,
@@ -721,7 +609,14 @@ export function detailedStatistics(
           id: e.id,
           date: e.day,
           name: e.name,
-          trainer: e.trainer,
+          trainer:
+            e.trainer ||
+            (data['trainer-profiles'] || []).find((t) => t.id === trainerKey(e))?.name ||
+            'Не определён',
+          trainerId: trainerKey(e),
+          tariff: '',
+          lessons: '1',
+          avgVisitors: String(count),
           count: String(count),
           quantity: String(quantity),
           unlimited: String(unlimited),
@@ -730,12 +625,48 @@ export function detailedStatistics(
           unknown: String(unknown),
         };
       });
+    if (f.groupByTrainer === '1')
+      rows = group(rows, (r) => r.trainerId).map(([key, entries]) => {
+        const sum = (field: string) => entries.reduce((n, r) => n + Number(r[field]), 0);
+        const count = sum('count'),
+          unknown = sum('unknown'),
+          amount = sum('amount');
+        return {
+          id: key,
+          trainerId: key,
+          trainer: entries[0].trainer,
+          name: '',
+          date: '',
+          tariff: '',
+          lessons: String(entries.length),
+          avgVisitors: String(count / entries.length),
+          count: String(count),
+          quantity: String(sum('quantity')),
+          unlimited: String(sum('unlimited')),
+          amount: String(amount),
+          average: count && !unknown ? String(Math.round(amount / count)) : '',
+          unknown: String(unknown),
+        };
+      });
+    const sortKey =
+      f.reportSort === 'all_shedules'
+        ? 'lessons'
+        : f.reportSort === 'all_visitors'
+          ? 'count'
+          : 'avgVisitors';
+    rows.sort(
+      (a, b) =>
+        Number(b[sortKey]) - Number(a[sortKey]) ||
+        a.trainer.localeCompare(b.trainer, 'ru') ||
+        a.date.localeCompare(b.date),
+    );
     block(
       'Доход по известным списаниям групп',
       [
-        col('date', 'Дата', 'date'),
-        col('name', 'Занятие'),
-        col('trainer', 'Тренер'),
+        ...(f.groupByTrainer === '1'
+          ? [col('trainer', 'Тренер'), col('lessons', 'Занятий')]
+          : [col('date', 'Дата', 'date'), col('name', 'Занятие'), col('trainer', 'Тренер')]),
+        col('tariff', 'Тариф тренера', 'money'),
         col('count', 'Присутствовали'),
         col('quantity', 'Количественные', 'money'),
         col('unlimited', 'Безлимитные', 'money'),
@@ -746,7 +677,7 @@ export function detailedStatistics(
       rows,
     );
     out.notes.push(
-      'Предварительное распределение, не прибыль: количественная карта — цена / исходное число посещений; безлимит — цена / известный счётчик использованных посещений. Неизвестная карта/цена отмечается отдельно, средняя цена не вычисляется при неполных данных. Метод распределения безлимитов требует согласования с клубом.',
+      'Предварительное распределение, не прибыль: количественная карта — цена / исходное число посещений; безлимит — цена / известный счётчик использованных посещений. Неизвестная карта/цена отмечается отдельно, средняя цена не вычисляется при неполных данных. Тариф начисления тренеру в демомодели не задан и показан «—». Группировка и три сортировки сохранены из источника; для среднего числа визитов используется присутствие / число занятий. Метод распределения безлимитов требует согласования с клубом.',
     );
   } else {
     const kindOfSale = (s: DemoRecord) =>
@@ -755,25 +686,30 @@ export function detailedStatistics(
         : getMembershipKind(s.name, s.kindId)?.id === 'group'
           ? 'group'
           : 'gym';
-    const costs = (data['trainer-costs'] || []).filter(
+    const costs = [...new Map((data['trainer-costs'] || []).map((r) => [r.id, r])).values()].filter(
       (r) =>
-        inPeriod(r.date) && inClub(r.club) && (f.trainer === 'all' || r.trainerId === f.trainer),
+        !['Отменено', 'Отменена'].includes(r.status) &&
+        inPeriod(r.date) &&
+        inClub(r.club) &&
+        (f.trainer === 'all' || r.trainerId === f.trainer),
     );
     if (id === 'trener_financial_result') {
+      const personalSales = selectedSales.filter((s) => kindOfSale(s) === 'personal');
+      const personalCosts = costs.filter((c) => c.kind === 'personal');
       const months = [
         ...new Set([
-          ...selectedSales.map((s) => s.date.slice(0, 7)),
-          ...costs.map((c) => c.date.slice(0, 7)),
+          ...personalSales.map((s) => s.date.slice(0, 7)),
+          ...personalCosts.map((c) => c.date.slice(0, 7)),
         ]),
       ].sort();
       const rows = (data['trainer-profiles'] || [])
         .filter((t) => f.trainer === 'all' || f.trainer === t.id)
         .flatMap((t) =>
           months.map((month) => {
-            const revenue = selectedSales
+            const revenue = personalSales
                 .filter((s) => s.trainerId === t.id && s.date.startsWith(month))
                 .reduce((n, s) => n + cents(s.total ?? s.amount), 0),
-              expense = costs
+              expense = personalCosts
                 .filter((c) => c.trainerId === t.id && c.date.startsWith(month))
                 .reduce((n, c) => n + cents(c.amount), 0);
             return {
@@ -803,7 +739,31 @@ export function detailedStatistics(
         ],
         rows,
       );
+      const summary = group(rows, (r) => r.id.split(':')[0]).map(([key, entries]) => {
+        const amount = entries.reduce((n, r) => n + Number(r.amount), 0);
+        const expense = entries.reduce((n, r) => n + Number(r.expense), 0);
+        return {
+          id: key,
+          name: entries[0].name,
+          category: entries[0].category,
+          amount: String(amount),
+          expense: String(expense),
+          percent: amount ? String(Math.round((expense * 100) / amount)) : '',
+        };
+      });
+      block(
+        'Итоги ПТ за выбранный период',
+        [
+          col('name', 'Тренер'),
+          col('category', 'Категория'),
+          col('expense', 'Всего оплата ПТ', 'money'),
+          col('amount', 'Всего продажи ПТ', 'money'),
+          col('percent', 'Доля оплаты', 'percent'),
+        ],
+        summary,
+      );
       out.notes.push(
+        'Сохранены месяцы и итог по тренеру. Вместо очень широкой таблицы с 12 вложенными месяцами — строки «тренер — месяц», пригодные для телефона и CSV. Включены только персональные продажи и начисления; ГП, дежурства и прочие продажи исключены. Доля оплаты = сумма начислений / сумма связанных продаж; при нуле продаж показано «—».',
         'В демо доход отнесён тренеру только по явному trainerId продажи, без распределения по текущему закреплению клиента. Старые продажи без связи не приписываются сотруднику. Это разница связанных продаж и начислений, а не полная прибыль клуба.',
       );
     } else {

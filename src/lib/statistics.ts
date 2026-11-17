@@ -6,6 +6,7 @@ import { clientName, hiddenPhone } from './client-display';
 import { cashCents, cashFlow, cashJournal } from './cash';
 import { reportPending } from '../data/statistics';
 import { detailedStatistics } from './statistics-details';
+import { trainerStatistics } from './statistics-trainers';
 import { getMembershipKind } from '../data/membership-kinds';
 import { nextBirthday, reportNextDay } from './report-period';
 
@@ -46,6 +47,8 @@ export type ReportFilters = {
   countDuty: string;
   duration: string;
   renewalDays: string;
+  groupByTrainer: string;
+  reportSort: string;
 };
 export const defaultReportFilters: ReportFilters = {
   from: '2026-11-01',
@@ -84,6 +87,8 @@ export const defaultReportFilters: ReportFilters = {
   countDuty: '1',
   duration: '60',
   renewalDays: '30',
+  groupByTrainer: '0',
+  reportSort: 'avg_visitors',
 };
 export type ReportColumn = { key: string; label: string; format?: 'money' | 'date' | 'percent' };
 export type ReportBlock = {
@@ -204,6 +209,8 @@ export function buildStatistics(
   }
   const error = reportFilterError(f);
   if (error) return { ...result, error };
+  const trainerReport = trainerStatistics(id, f, input);
+  if (trainerReport) return trainerReport;
   const detailed = detailedStatistics(id, f, input);
   if (detailed) return detailed;
   if (reportPending[id]) return { ...result, pending: reportPending[id] };
@@ -1029,168 +1036,6 @@ export function buildStatistics(
     ];
     result.notes.push(
       'Имя открывает карточку, телефон — окно демонстрационного звонка. Телефоны клиентов скрываются согласно роли. Номер клуба показан отдельно. Аудиозаписи источника не копируются: локальный плеер доступен только при наличии демонстрационного файла.',
-    );
-  } else if (
-    ['gtrener_busy', 'ptrener_rating', 'ptrener_rating_all', 'gtrener_rating'].includes(id)
-  ) {
-    const list = selectedEvents.filter((e) =>
-      id === 'ptrener_rating'
-        ? e.kind === 'personal'
-        : id === 'ptrener_rating_all'
-          ? e.kind === 'personal'
-            ? f.countPersonal === '1'
-            : f.countGroup === '1'
-          : e.kind !== 'personal',
-    );
-    block(
-      'Тренеры',
-      [
-        col('name', 'Тренер'),
-        col('count', 'Занятий'),
-        col('hours', 'Часов по расписанию'),
-        ...(id === 'ptrener_rating_all'
-          ? [
-              col('personalHours', 'Часов ПТ'),
-              col('groupHours', 'Часов ГП'),
-              col('dutyHours', 'Дежурных часов'),
-            ]
-          : []),
-        col('present', 'Отмечено посещений'),
-        col('booked', 'Записано'),
-        col('capacity', 'Мест'),
-        col('occupancy', 'Заполняемость', 'percent'),
-      ],
-      grouped<DemoRecord>(
-        [
-          ...list,
-          ...(id === 'ptrener_rating_all' && f.countDuty === '1'
-            ? (data['trainer-duty'] || [])
-                .filter(
-                  (d) =>
-                    inPeriod(d.day) &&
-                    inClub(d.club) &&
-                    (f.trainer === 'all' || d.trainerId === f.trainer),
-                )
-                .map((d) => ({
-                  ...d,
-                  kind: 'duty',
-                  trainer:
-                    (data['trainer-profiles'] || []).find((t) => t.id === d.trainerId)?.name ||
-                    'Не указан',
-                }))
-            : []),
-        ],
-        trainerKey,
-      )
-        .map(([key, rows]) => {
-          const capacity = rows.reduce((n, e) => n + Number(e.capacity || 0), 0),
-            booked = rows.reduce((n, e) => n + Number(e.booked || 0), 0);
-          return {
-            id: key,
-            name: rows[0].trainer,
-            count: String(rows.filter((e) => e.kind !== 'duty').length),
-            hours: (rows.reduce((n, e) => n + Number(e.duration || 0), 0) / 60).toFixed(1),
-            personalHours: (
-              rows
-                .filter((e) => e.kind === 'personal')
-                .reduce((n, e) => n + Number(e.duration || 0), 0) / 60
-            ).toFixed(1),
-            groupHours: (
-              rows
-                .filter((e) => !['personal', 'duty'].includes(e.kind))
-                .reduce((n, e) => n + Number(e.duration || 0), 0) / 60
-            ).toFixed(1),
-            dutyHours: (
-              rows
-                .filter((e) => e.kind === 'duty')
-                .reduce((n, e) => n + Number(e.duration || 0), 0) / 60
-            ).toFixed(1),
-            present: String(rows.reduce((n, e) => n + ids(e.present).length, 0)),
-            booked: String(booked),
-            capacity: String(capacity),
-            occupancy: String(pct(booked, capacity)),
-          };
-        })
-        .sort(
-          (a, b) =>
-            Number(
-              b[
-                id === 'gtrener_rating'
-                  ? 'occupancy'
-                  : id === 'ptrener_rating_all'
-                    ? 'hours'
-                    : 'count'
-              ],
-            ) -
-            Number(
-              a[
-                id === 'gtrener_rating'
-                  ? 'occupancy'
-                  : id === 'ptrener_rating_all'
-                    ? 'hours'
-                    : 'count'
-              ],
-            ),
-        ),
-    );
-    result.notes.push(
-      'Часы — длительность занятий в расписании, не табель и не оплаченные часы. Заполняемость — записанные места / суммарная вместимость, не среднее процентов. Отменённые занятия исключены.',
-    );
-  } else if (['report_pclients', 'report_pclients_lost', 'report_pclients_phones'].includes(id)) {
-    const assignments = (data['personal-clients'] || []).filter(
-      (a) => f.trainer === 'all' || a.trainerId === f.trainer,
-    );
-    const rows = assignments.flatMap((a) => {
-      const m = memberById.get(a.memberId);
-      if (!m) return [];
-      const personalEvents = events.filter(
-        (e) =>
-          e.kind === 'personal' &&
-          trainerKey(e) === a.trainerId &&
-          ids(e.attendees).includes(a.memberId),
-      );
-      const attended = personalEvents.filter(
-        (e) => ids(e.present).includes(a.memberId) && e.day <= f.to,
-      );
-      const last =
-        attended
-          .map((e) => e.day)
-          .sort()
-          .at(-1) || '';
-      if (
-        id === 'report_pclients_lost' &&
-        (!last || last < shift(f.to, -365) || last >= shift(f.to, -21))
-      )
-        return [];
-      const count = personalEvents.filter((e) => inPeriod(e.day)).length;
-      if (id !== 'report_pclients_lost' && !count) return [];
-      return [
-        {
-          ...person(m),
-          id: a.id,
-          trainer:
-            (data['trainer-profiles'] || []).find((t) => t.id === a.trainerId)?.name || 'Не указан',
-          booked: String(count),
-          present: String(attended.filter((e) => inPeriod(e.day)).length),
-          last,
-        },
-      ];
-    });
-    block(
-      'Персональные клиенты',
-      [
-        ...names,
-        col('trainer', 'Тренер'),
-        col('phone', 'Телефон'),
-        col('booked', 'Записей за период'),
-        col('present', 'Отмечено посещений'),
-        col('last', 'Последняя отметка', 'date'),
-      ],
-      rows,
-      true,
-    );
-    result.notes.push(
-      'Используются закрепления клиентов и записи к конкретному тренеру. Потерянный: последняя отметка у этого тренера более 21 дня назад, но не более года. Неотмеченная запись не считается состоявшимся посещением.',
     );
   } else if (['selling_stat', 'finbyyear', 'finbyyear_by_abonements'].includes(id)) {
     const refunds = cashJournal([], cashMovements).filter(
