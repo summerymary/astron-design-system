@@ -47,6 +47,7 @@ import {
   Wallet,
   Globe,
   Gift,
+  UserRound,
 } from 'lucide-react';
 import { CountBadge, Button, Modal, StateContent, Toast } from './components/ui';
 import { AdminHeader } from './components/AdminHeader';
@@ -82,6 +83,7 @@ const workNavigation = [
   { id: 'bar', label: 'Бар', icon: CupSoda },
 ] as const;
 const managementNavigation = [
+  { id: 'admin-account', label: 'Личный кабинет', icon: UserRound },
   { id: 'employees', label: 'Персонал', icon: BriefcaseBusiness },
   { id: 'shifts', label: 'График смен', icon: CalendarDays },
   { id: 'directories', label: 'Справочники', icon: Library },
@@ -1258,6 +1260,7 @@ export function App() {
                       employeeName={currentUser.name}
                       user={currentUser}
                       navigate={openModule}
+                      screenLocked={screenLocked}
                       onMember={openMember}
                       onRegister={createVisit}
                       onBack={backFromSection}
