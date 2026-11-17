@@ -139,7 +139,7 @@ assert.equal(
   0,
 );
 
-const original = { ...displayedDay[0], attendees: '1001,1002' };
+const original = { ...displayedDay[0], attendees: '1001,1002', capacityMode: 'По залу' };
 const before = structuredClone(original);
 const target = { day: '2026-11-07', time: '08:00', room: 'Сайкл-студия', club: 'Центральный' };
 const moved = rules.moveEvent(original, target, data.rooms);
@@ -363,6 +363,7 @@ const fullEvent = {
   booked: '1',
   capacity: '1',
   present: '',
+  reserve: undefined,
   status: 'Мест нет',
 };
 const waitingMember = { id: 1002, name: 'Waiting client', visits: 20 };
@@ -407,6 +408,8 @@ assert.equal(reserveSeatNotification(freed, promoted, 2), null);
 assert.equal(changeReserve(withReserve, waitingMember, 'leave').reserve, '');
 const reserveSeed = data.events.find((event) => event.reserve);
 assert.ok(reserveSeed, 'Demo schedule includes a full class with a reserve');
+assert.equal(reserveSeed.day, '2026-11-06');
+assert.equal(rosterIds(reserveSeed.reserve).length, 2);
 assert.equal(rosterIds(reserveSeed.attendees).length, Number(reserveSeed.capacity));
 console.log(
   'Reserve checks passed: full capacity, duplicate protection, no pass usage, vacancy notifications, promotion and immutable records.',
