@@ -1,4 +1,5 @@
 import { ScheduleWorkspace } from './ScheduleWorkspace';
+import { AdminAccountWorkspace } from './AdminAccountWorkspace';
 import { Button } from '../components/ui';
 import { ResourcePage, SectionLinks } from '../components/WorkspaceUI';
 import type { Navigate } from '../components/WorkspaceUI';
@@ -55,6 +56,7 @@ export function AdminSection({
   onClubChange,
   employeeName,
   user,
+  screenLocked,
   navigate,
   onMember,
   onRegister,
@@ -72,12 +74,15 @@ export function AdminSection({
   onClubChange: (name: string) => void;
   employeeName: string;
   user: DemoUser;
+  screenLocked?: boolean;
   navigate: Navigate;
   onMember: (member: Member) => void;
   onRegister: RegisterVisit;
   onBack: () => void;
 }) {
   const { data } = useWorkspace();
+  if (section === 'admin-account')
+    return <AdminAccountWorkspace key={user.id} user={user} screenLocked={screenLocked} />;
   if (section === 'gift-cards')
     return (
       <GiftCardsWorkspace

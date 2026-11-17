@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Phone } from 'lucide-react';
 import type { DemoUser, Member } from '../types';
 import type { DemoRecord } from '../data/workspace';
-import { demoId, useWorkspace } from '../components/WorkspaceProvider';
+import { useWorkspace } from '../components/WorkspaceProvider';
 import { personalTrainers } from '../lib/personal-training';
 import { personalClients, isManagementRole } from '../lib/staff-rules';
 import { clientCard, clientName, hiddenPhone } from '../lib/client-display';
@@ -10,12 +10,17 @@ import { Button, Modal } from '../components/ui';
 import { CallDialog } from '../components/CallDialog';
 import { ClientSearch } from '../components/ClientSearch';
 import { ClientBookingDialog } from '../components/ClientBookingDialog';
-import { Back, DataTable, Empty, Notice, RecordForm, SearchBox } from '../components/WorkspaceUI';
+import { Back, DataTable, Empty, Notice, SearchBox, Tabs } from '../components/WorkspaceUI';
 import { Select } from '../components/Select';
 import { TODAY } from '../data/workspace';
 import { ReportMonthPicker } from '../components/ReportMonthPicker';
-import { reportMonth } from '../lib/report-period';
-import { ShiftTimeline } from '../components/ShiftTimeline';
+import { reportMonth, reportWeek } from '../lib/report-period';
+import { ShiftTimeline, shiftDate } from '../components/ShiftTimeline';
+import { ReportWeekPicker } from '../components/ReportWeekPicker';
+import { ShiftEditor } from '../components/ShiftEditor';
+import { shiftsOnDay, shiftHours, shiftPeriodHours } from '../lib/shifts';
+import { shiftStaffColors, shiftStaffKey } from '../lib/shift-colors';
+import type { CSSProperties } from 'react';
 
 export function TrainerClientRoster({
   trainerId,
@@ -323,89 +328,219 @@ export function StaffContactsWorkspace({
 }
 
 export function ShiftScheduleWorkspace({ user, clubName }: { user: DemoUser; clubName: string }) {
-  const { data, put } = useWorkspace();
+  const { data } = useWorkspace();
   const [club, setClub] = useState(clubName.split(' · ').at(-1)!);
-  const [month, setMonth] = useState(TODAY.slice(0, 7));
-  const [editing, setEditing] = useState<DemoRecord | 'new' | null>(null);
+  const [reception, setReception] = useState('Ресепшен 01');
+  const [day, setDay] = useState(TODAY);
+  const [view, setView] = useState('week');
+  const [editing, setEditing] = useState<DemoRecord | null>(null);
+  const [details, setDetails] = useState<string | null>(null);
   const [query, setQuery] = useState('');
-  const { from: start, to: end } = reportMonth(month)!;
+  const [message, setMessage] = useState('');
+  const period = view === 'week' ? reportWeek(day)! : reportMonth(day.slice(0, 7))!;
   const canEdit = isManagementRole(user.role);
-  const rows = data.shifts
-    .filter(
-      (row) =>
-        row.club === club &&
-        row.start.slice(0, 10) >= start &&
-        row.start.slice(0, 10) <= end &&
-        row.name.toLocaleLowerCase('ru').includes(query.toLocaleLowerCase('ru')),
-    )
-    .sort((a, b) => a.start.localeCompare(b.start));
+  const receptions = data.receptions.filter((row) => row.club === club && row.status === 'Активен');
+  const locationRows = data.shifts.filter(
+    (row) => row.club === club && (row.reception || 'Не указан') === reception,
+  );
+  const rows = locationRows.filter(
+    (row) =>
+      row.start.slice(0, 10) <= period.to &&
+      row.end > `${period.from}T00:00` &&
+      row.name.toLocaleLowerCase('ru').includes(query.toLocaleLowerCase('ru')),
+  );
+  const colors = shiftStaffColors(data.employees, data.shifts);
+  const create = (date = day, workplace = 'Место 1', start = '06:30', end = '14:30') => {
+    setDetails(null);
+    setEditing({
+      id: '',
+      name: '',
+      club,
+      reception,
+      workplace,
+      start: `${date}T${start}`,
+      end: `${date}T${end}`,
+      status: 'Запланирована',
+    });
+  };
+  const detailsRows = details ? shiftsOnDay(locationRows, details) : [];
   return (
     <div className="ws-stack">
+      {message && <Notice tone="success">{message}</Notice>}
       <section className="panel ws-panel">
-        <div className="ws-toolbar">
-          <SearchBox value={query} onChange={setQuery} placeholder="Сотрудник" />
-          <Select
-            aria-label="Клуб графика смен"
-            value={club}
-            onChange={(event) => setClub(event.target.value)}
-          >
-            {data.clubs.map((row) => (
-              <option key={row.id}>{row.name}</option>
-            ))}
-          </Select>
-          <ReportMonthPicker month={month} onChange={setMonth} />
-          {canEdit && <Button onClick={() => setEditing('new')}>Добавить смену</Button>}
+        <div className="ws-toolbar shift-schedule-toolbar">
+          <div className="form-field">
+            <span>Клуб</span>
+            <Select
+              aria-label="Клуб графика смен"
+              value={club}
+              onChange={(event) => {
+                setClub(event.target.value);
+                setReception(
+                  data.receptions.find(
+                    (row) => row.club === event.target.value && row.status === 'Активен',
+                  )?.name || '',
+                );
+              }}
+            >
+              {data.clubs.map((row) => (
+                <option key={row.id}>{row.name}</option>
+              ))}
+            </Select>
+          </div>
+          <div className="form-field">
+            <span>Ресепшен</span>
+            <Select
+              aria-label="Ресепшен графика смен"
+              value={reception}
+              onChange={(event) => setReception(event.target.value)}
+            >
+              {receptions.map((row) => (
+                <option key={row.id}>{row.name}</option>
+              ))}
+              {data.shifts.some((row) => row.club === club && !row.reception) && (
+                <option>Не указан</option>
+              )}
+            </Select>
+          </div>
+          <div className="form-field shift-search-field">
+            <span>Администратор</span>
+            <SearchBox
+              value={query}
+              onChange={setQuery}
+              placeholder="Имя или фамилия"
+              label="Поиск сотрудника в графике смен"
+            />
+          </div>
+          {canEdit && <Button onClick={() => create()}>Добавить смену</Button>}
         </div>
-        {rows.length ? (
-          <ShiftTimeline rows={rows} onOpen={canEdit ? setEditing : undefined} />
-        ) : (
-          <Empty title="Смены на этот месяц не добавлены" text="Выберите другой месяц или клуб." />
-        )}
+        <div className="shift-period-toolbar">
+          <Tabs
+            items={[
+              { id: 'week', label: 'Неделя' },
+              { id: 'month', label: 'Месяц' },
+            ]}
+            value={view}
+            onChange={setView}
+            label="Период графика смен"
+            variant="segmented"
+          />
+          {view === 'week' ? (
+            <ReportWeekPicker day={day} onChange={setDay} />
+          ) : (
+            <ReportMonthPicker
+              month={day.slice(0, 7)}
+              onChange={(month) => setDay(`${month}-01`)}
+            />
+          )}
+          <span className="muted shift-period-caption">
+            {shiftDate(period.from)} — {shiftDate(period.to)} · МСК
+          </span>
+        </div>
+        <ShiftTimeline
+          rows={rows}
+          employees={data.employees}
+          allShifts={data.shifts}
+          from={period.from}
+          to={period.to}
+          onDay={setDetails}
+        />
+        <p className="shift-journal-help">
+          Две дорожки — два рабочих места. Нажмите на день или смену, чтобы посмотреть подробности
+          {canEdit ? ' и передать место следующему администратору' : ''}.
+        </p>
       </section>
+      {details && (
+        <Modal title={`Смены · ${shiftDate(details)}`} onClose={() => setDetails(null)}>
+          <div className="ws-stack">
+            <p className="muted">
+              {club} · {reception} ·{' '}
+              {shiftPeriodHours(locationRows, details, details).toLocaleString('ru')} человеко-часов
+            </p>
+            {[
+              'Место 1',
+              'Место 2',
+              ...(detailsRows.some(({ row }) => !row.workplace) ? ['Не указано'] : []),
+            ].map((workplace) => (
+              <section className="shift-day-detail" key={workplace}>
+                <div className="ws-subheading">
+                  <h3>{workplace}</h3>
+                  {canEdit && (
+                    <Button variant="secondary" onClick={() => create(details, workplace)}>
+                      Добавить смену
+                    </Button>
+                  )}
+                </div>
+                {detailsRows
+                  .filter(({ row }) => (row.workplace || 'Не указано') === workplace)
+                  .map(({ row }) => (
+                    <div
+                      className="shift-detail-entry"
+                      key={row.id}
+                      style={
+                        {
+                          '--shift-staff-color': colors.get(shiftStaffKey(row, data.employees)),
+                        } as CSSProperties
+                      }
+                    >
+                      <div>
+                        <strong>{row.name}</strong>
+                        <p>
+                          {row.start.slice(11, 16)}–{row.end.slice(11, 16)} ·{' '}
+                          {shiftHours(row).toLocaleString('ru')} ч
+                        </p>
+                        <small className="muted">{row.status}</small>
+                      </div>
+                      {canEdit && (
+                        <div className="shift-detail-actions">
+                          <Button
+                            variant="secondary"
+                            onClick={() => {
+                              setDetails(null);
+                              setEditing(row);
+                            }}
+                          >
+                            Изменить
+                          </Button>
+                          <Button
+                            variant="secondary"
+                            onClick={() => {
+                              const start = row.end;
+                              const finish = new Date(Date.parse(`${start}:00Z`) + 4 * 3600000)
+                                .toISOString()
+                                .slice(0, 16);
+                              setDetails(null);
+                              setEditing({
+                                ...row,
+                                id: '',
+                                name: '',
+                                employeeId: '',
+                                start,
+                                end: finish,
+                                status: 'Запланирована',
+                              });
+                            }}
+                          >
+                            Передать место
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                {!detailsRows.some(({ row }) => (row.workplace || 'Не указано') === workplace) && (
+                  <p className="muted">Смены не добавлены</p>
+                )}
+              </section>
+            ))}
+          </div>
+        </Modal>
+      )}
       {editing && canEdit && (
-        <RecordForm
-          title={editing === 'new' ? 'Добавить смену' : 'Изменить смену'}
-          initial={editing === 'new' ? undefined : editing}
-          fields={[
-            {
-              key: 'name',
-              label: 'Сотрудник',
-              required: true,
-              options: data.employees
-                .filter((row) => row.status === 'Активен')
-                .map((row) => row.name),
-            },
-            { key: 'start', label: 'Начало', type: 'datetime-local', required: true },
-            { key: 'end', label: 'Окончание', type: 'datetime-local', required: true },
-            { key: 'reception', label: 'Ресепшен', options: ['Ресепшен 01', 'Ресепшен 02'] },
-            {
-              key: 'status',
-              label: 'Состояние',
-              options: ['Запланирована', 'На проверке', 'Подтверждено'],
-            },
-          ]}
+        <ShiftEditor
+          key={editing.id + editing.start}
+          initial={editing}
           onClose={() => setEditing(null)}
-          onSave={(record) => {
-            if (record.end <= record.start) return 'Окончание смены должно быть позже начала.';
-            if (
-              data.shifts.some(
-                (row) =>
-                  row.id !== record.id &&
-                  row.name === record.name &&
-                  row.start < record.end &&
-                  row.end > record.start,
-              )
-            )
-              return 'У сотрудника уже есть смена в это время.';
-            put('shifts', {
-              ...record,
-              id: record.id || demoId('shift'),
-              club,
-              hours: String((Date.parse(record.end) - Date.parse(record.start)) / 3600000),
-              rate: '250',
-            });
-            setEditing(null);
-          }}
+          onSaved={() => setMessage('Смена сохранена. График и часы обновлены.')}
         />
       )}
     </div>

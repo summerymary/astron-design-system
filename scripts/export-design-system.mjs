@@ -27,6 +27,7 @@ const { THEME_OPTIONS, visualStyleTokens } = await load('src/lib/visual-style.ts
 const { UI_RULES, UI_METRICS } = await load('src/design-system/registry.ts');
 const { membershipKinds } = await load('src/data/membership-kinds.ts');
 const { TRAINING_INTENSITIES, OCCUPANCY_SCALE } = await load('src/lib/schedule.ts');
+const { SHIFT_STAFF_COLORS } = await load('src/lib/shift-colors.ts');
 const base = Object.fromEntries(
   [...(await read('src/styles/tokens.css')).matchAll(/(--[\w-]+):\s*([^;]+);/g)].map((m) => [
     m[1],
@@ -127,7 +128,7 @@ const data = {
   base,
   themes,
   metrics: UI_METRICS,
-  semantics: { membershipKinds, intensity: TRAINING_INTENSITIES, occupancy: OCCUPANCY_SCALE },
+  semantics: { membershipKinds, intensity: TRAINING_INTENSITIES, occupancy: OCCUPANCY_SCALE, shiftStaffColors: SHIFT_STAFF_COLORS },
   contextualDeclarations: contextual,
   runtimeVariables,
   rules: UI_RULES,

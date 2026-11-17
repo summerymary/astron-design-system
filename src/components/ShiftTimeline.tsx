@@ -1,157 +1,214 @@
 import type { CSSProperties } from 'react';
 import type { DemoRecord } from '../data/workspace';
+import { shiftStaffColors, shiftStaffKey } from '../lib/shift-colors';
+import { SHIFT_WORKPLACES, shiftsOnDay, shiftPeriodHours } from '../lib/shifts';
+import { reportNextDay } from '../lib/report-period';
 
-/** A month journal, with one dated row per reception lane and exact shift intervals. */
+const formatHours = (hours: number) => hours.toLocaleString('ru', { maximumFractionDigits: 2 });
+const time = (minute: number) =>
+  `${String(Math.floor(minute / 60)).padStart(2, '0')}:${String(minute % 60).padStart(2, '0')}`;
+export const shiftDate = (day: string) =>
+  new Date(`${day}T12:00:00Z`).toLocaleDateString('ru', {
+    day: 'numeric',
+    month: 'short',
+    weekday: 'short',
+    timeZone: 'UTC',
+  });
+
+/** One fixed lane per computer. Consecutive bars show handover; parallel lanes show cover. */
 export function ShiftTimeline({
   rows,
-  onOpen,
+  employees = [],
+  allShifts = rows,
+  from,
+  to,
+  onDay,
 }: {
   rows: DemoRecord[];
-  onOpen?: (row: DemoRecord) => void;
+  employees?: DemoRecord[];
+  allShifts?: DemoRecord[];
+  from?: string;
+  to?: string;
+  onDay?: (day: string) => void;
 }) {
-  const days = [...new Set(rows.map((row) => row.start.slice(0, 10)))].sort();
-  const minute = (value: string) => Number(value.slice(11, 13)) * 60 + Number(value.slice(14, 16));
-  const first = Math.floor(Math.min(360, ...rows.map((row) => minute(row.start))) / 60) * 60;
-  const last =
-    Math.ceil(
-      Math.max(
-        1380,
-        ...rows.map((row) =>
-          row.end.slice(0, 10) > row.start.slice(0, 10) ? 1440 : minute(row.end),
-        ),
-      ) / 60,
-    ) * 60;
-  const ticks = Array.from(
-    { length: Math.floor((last - first) / 60) + 1 },
-    (_, index) => first + index * 60,
-  );
-  const hours = (items: DemoRecord[]) =>
-    items
-      .reduce((sum, row) => sum + (Date.parse(row.end) - Date.parse(row.start)) / 3600000, 0)
-      .toLocaleString('ru', { maximumFractionDigits: 2 });
+  const colors = shiftStaffColors(employees, allShifts);
+  const visibleStaff = [...new Map(rows.map((row) => [shiftStaffKey(row, employees), row.name]))];
+  const start = from || rows.map((row) => row.start.slice(0, 10)).sort()[0];
+  const end =
+    to ||
+    rows
+      .map((row) => row.end.slice(0, 10))
+      .sort()
+      .at(-1);
+  const days: string[] = [];
+  if (start && end) for (let day = start; day <= end; day = reportNextDay(day, 1)) days.push(day);
+  const segments = days.flatMap((day) => shiftsOnDay(rows, day));
+  const first = Math.floor(Math.min(360, ...segments.map((item) => item.from)) / 60) * 60;
+  const last = Math.ceil(Math.max(1380, ...segments.map((item) => item.to)) / 60) * 60;
+  const ticks = Array.from({ length: (last - first) / 60 + 1 }, (_, index) => first + index * 60);
   return (
-    <div
-      className="shift-timeline-scroll"
-      tabIndex={0}
-      aria-label="Журнал смен по дням и времени"
-      data-ui="shift-timeline"
-    >
-      <table className="shift-timeline">
-        <caption className="sr-only">
-          Рабочие смены. Время московское. Интервалы содержат имя сотрудника и точные часы.
-        </caption>
-        <thead>
-          <tr>
-            <th>Дата</th>
-            <th>Ресепшен</th>
-            <th>
-              <div className="shift-time-axis">
-                {ticks.map((tick) => (
-                  <span key={tick} style={{ left: `${((tick - first) / (last - first)) * 100}%` }}>
-                    {String(Math.floor(tick / 60)).padStart(2, '0')}:00
-                  </span>
-                ))}
-              </div>
-            </th>
-            <th>Часов</th>
-          </tr>
-        </thead>
-        <tbody>
-          {days.flatMap((day) => {
-            const daily = rows.filter((row) => row.start.startsWith(day));
-            return [...new Set(daily.map((row) => row.reception || 'Сотрудники'))]
-              .sort()
-              .map((lane, index) => {
-                const shifts = daily
-                  .filter((row) => (row.reception || 'Сотрудники') === lane)
-                  .sort((a, b) => a.start.localeCompare(b.start));
+    <section className="shift-journal" data-ui="shift-timeline">
+      <ul className="shift-staff-legend" aria-label="Цвета администраторов">
+        {visibleStaff.map(([key, name]) => (
+          <li key={key} style={{ '--shift-staff-color': colors.get(key) } as CSSProperties}>
+            <span aria-hidden="true" />
+            {name}
+          </li>
+        ))}
+      </ul>
+      <div
+        className="shift-timeline-scroll"
+        tabIndex={0}
+        aria-label="Журнал смен по дням и рабочим местам"
+      >
+        <table className="shift-timeline">
+          <colgroup>
+            <col className="shift-date-column" />
+            <col className="shift-reception-column" />
+            <col />
+            <col className="shift-hours-column" />
+          </colgroup>
+          <caption className="sr-only">
+            Смены администраторов. Две дорожки — два компьютера. Время московское. Нажмите день для
+            полного списка смен.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">День</th>
+              <th scope="col">Место</th>
+              <th scope="col" className="shift-scale-cell">
+                <div className="shift-time-axis">
+                  {ticks.map((tick) => (
+                    <span
+                      key={tick}
+                      style={{ left: `${((tick - first) / (last - first)) * 100}%` }}
+                    >
+                      {time(tick)}
+                    </span>
+                  ))}
+                </div>
+              </th>
+              <th scope="col" className="shift-hours-cell">
+                Часы
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {days.flatMap((day) => {
+              const daily = shiftsOnDay(rows, day);
+              const lanes = [
+                ...SHIFT_WORKPLACES,
+                ...(daily.some(({ row }) => !SHIFT_WORKPLACES.includes(row.workplace))
+                  ? ['Не указано']
+                  : []),
+              ];
+              return lanes.map((workplace, laneIndex) => {
+                const items = daily.filter(
+                  ({ row }) =>
+                    (SHIFT_WORKPLACES.includes(row.workplace) ? row.workplace : 'Не указано') ===
+                    workplace,
+                );
+                // Legacy conflicts stay visible instead of overlapping or being silently hidden.
                 const ends: number[] = [];
-                const tracks = shifts.map((row) => {
-                  const start = minute(row.start);
-                  let track = ends.findIndex((end) => end <= start);
-                  if (track < 0) track = ends.length;
-                  ends[track] = row.end.slice(0, 10) > day ? 1440 : minute(row.end);
-                  return track;
+                const tracks = items.map((item) => {
+                  let index = ends.findIndex((value) => value <= item.from);
+                  if (index < 0) index = ends.length;
+                  ends[index] = item.to;
+                  return index;
                 });
                 return (
-                  <tr key={`${day}:${lane}`}>
-                    <th scope="row">
-                      {index === 0 && (
-                        <>
-                          <strong>
-                            {new Date(`${day}T12:00:00Z`).toLocaleDateString('ru', {
-                              day: 'numeric',
-                              month: 'short',
-                              timeZone: 'UTC',
-                            })}
-                          </strong>
-                          <small>
-                            {new Date(`${day}T12:00:00Z`).toLocaleDateString('ru', {
-                              weekday: 'long',
-                              timeZone: 'UTC',
-                            })}
-                          </small>
-                        </>
-                      )}
+                  <tr
+                    key={`${day}:${workplace}`}
+                    className={laneIndex === 0 ? 'shift-day-start' : ''}
+                  >
+                    {laneIndex === 0 && (
+                      <th scope="rowgroup" rowSpan={lanes.length} className="shift-date-cell">
+                        {onDay ? (
+                          <button
+                            className="shift-day-link"
+                            onClick={() => onDay(day)}
+                            aria-label={`Смены за ${shiftDate(day)}`}
+                          >
+                            {shiftDate(day)}
+                          </button>
+                        ) : (
+                          shiftDate(day)
+                        )}
+                      </th>
+                    )}
+                    <th scope="row" className="shift-reception-cell">
+                      {workplace}
                     </th>
-                    <td>{lane}</td>
-                    <td>
+                    <td className="shift-scale-cell">
                       <div
                         className="shift-time-lane"
                         style={
                           {
-                            height: `${ends.length * 48}px`,
+                            height: `${Math.max(1, ends.length) * 48}px`,
                             '--shift-hours': (last - first) / 60,
                           } as CSSProperties
                         }
                       >
-                        {shifts.map((row, index) => {
-                          const start = minute(row.start),
-                            end = row.end.slice(0, 10) > day ? 1440 : minute(row.end);
+                        {!items.length && <span className="shift-lane-empty">Нет смен</span>}
+                        {items.map(({ row, from: begin, to: finish }, index) => {
                           const style = {
+                            '--shift-staff-color': colors.get(shiftStaffKey(row, employees)),
                             top: `${tracks[index] * 48}px`,
-                            left: `${((start - first) / (last - first)) * 100}%`,
-                            width: `${((end - start) / (last - first)) * 100}%`,
+                            left: `${((begin - first) / (last - first)) * 100}%`,
+                            width: `${((finish - begin) / (last - first)) * 100}%`,
                           } as CSSProperties;
                           const content = (
                             <>
-                              <strong>
-                                {row.start.slice(11, 16)}–{row.end.slice(11, 16)}
-                              </strong>
-                              <span>{row.name}</span>
+                              <strong>{row.name}</strong>
+                              <span className="shift-entry-time">
+                                {time(begin)}–{time(finish)}
+                              </span>
                             </>
                           );
-                          return onOpen ? (
+                          return onDay ? (
                             <button
                               key={row.id}
-                              style={style}
                               className="shift-time-entry"
-                              onClick={() => onOpen(row)}
-                              aria-label={`${row.name}, ${day}, ${row.start.slice(11, 16)}–${row.end.slice(11, 16)}, ${row.status}`}
+                              style={style}
+                              title={`${row.name} · ${time(begin)}–${time(finish)}`}
+                              aria-label={`${row.name}, ${shiftDate(day)}, ${time(begin)}–${time(finish)}, ${workplace}`}
+                              onClick={() => onDay(day)}
                             >
                               {content}
                             </button>
                           ) : (
-                            <div key={row.id} style={style} className="shift-time-entry">
+                            <div
+                              key={row.id}
+                              className="shift-time-entry"
+                              style={style}
+                              title={`${row.name} · ${time(begin)}–${time(finish)}`}
+                            >
                               {content}
                             </div>
                           );
                         })}
                       </div>
                     </td>
-                    <td>{hours(shifts)}</td>
+                    <td className="shift-hours-cell">
+                      {formatHours(
+                        items.reduce((sum, item) => sum + (item.to - item.from) / 60, 0),
+                      )}
+                    </td>
                   </tr>
                 );
               });
-          })}
-        </tbody>
-        <tfoot>
-          <tr>
-            <th colSpan={3}>Всего за выбранный месяц</th>
-            <td>{hours(rows)}</td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+            })}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colSpan={3}>Всего за период · человеко-часы</th>
+              <td className="shift-hours-cell">
+                {start && end ? formatHours(shiftPeriodHours(rows, start, end)) : 0}
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
   );
 }

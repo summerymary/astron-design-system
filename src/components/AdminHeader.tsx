@@ -178,7 +178,13 @@ export function AdminHeader({
           </>
         )}
       </div>
-      <ClientSearch key={workstationId} members={members} onMember={onMember} mode="registration" hidePhones />
+      <ClientSearch
+        key={workstationId}
+        members={members}
+        onMember={onMember}
+        mode="registration"
+        hidePhones
+      />
       <div className="admin-header-actions">
         <Button
           className="header-add-client-action"
@@ -240,8 +246,8 @@ export function AdminHeader({
         <button
           className="admin-user-avatar"
           title={`${name} · Администратор`}
-          aria-label={`Мой профиль: ${name}`}
-          onClick={() => onAction('settings')}
+          aria-label={`Личный кабинет: ${name}`}
+          onClick={() => onAction('admin-account')}
         >
           <UserRound size={17} />
         </button>

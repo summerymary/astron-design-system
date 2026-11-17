@@ -1351,7 +1351,13 @@ body [data-ui='stats'] strong {
     .sale-name-search > div,
     .select-search,
     .calendar-date input,
-    .form-field input:not([type='checkbox']):not([type='radio']):not([type='color']),
+    .form-field
+      input:not([type='checkbox']):not([type='radio']):not([type='color']):not(
+        .search-field > input,
+        .quick-card.client-search > input,
+        .sale-name-search input,
+        .select-search > input
+      ),
     .form-field textarea
   ) {
   box-shadow: inset 0 0 0 var(--contrast-contour-width)
@@ -1570,7 +1576,7 @@ body .client-booking-option {
   justify-content: space-between;
   gap: 16px;
   padding: 16px;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-line);
   border-radius: var(--radius-control);
   background: var(--color-surface);
   color: var(--color-text);
@@ -1791,10 +1797,34 @@ body .calendar-fullscreen-heading {
   gap: 12px;
   flex-shrink: 0;
 }
+/* A single timeline geometry is shared by the hour labels and every lane. */
+body .shift-staff-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding: 12px 20px;
+  margin: 0;
+  list-style: none;
+  font-size: 14px;
+  color: var(--color-text);
+}
+body .shift-staff-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+body .shift-staff-legend li > span {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--shift-staff-color);
+}
 body .shift-timeline-scroll {
   overflow: auto;
   max-height: 65vh;
-  border-block: 1px solid var(--color-line);
+  border-block-start: 1px solid var(--color-line);
+  scrollbar-gutter: stable;
 }
 body .shift-timeline-scroll:focus-visible {
   outline: 2px solid var(--color-accent);
@@ -1802,48 +1832,75 @@ body .shift-timeline-scroll:focus-visible {
 }
 body .shift-timeline {
   width: 100%;
-  min-width: 1080px;
-  border-collapse: collapse;
+  min-width: 980px;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 14px;
 }
-body .shift-timeline th,
-body .shift-timeline td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid var(--color-line);
-  border-right: 1px solid var(--color-line);
+body .shift-timeline .shift-date-column {
+  width: 108px;
 }
-body .shift-timeline thead {
+body .shift-timeline .shift-reception-column {
+  width: 84px;
+}
+body .shift-timeline .shift-hours-column {
+  width: 64px;
+}
+body .shift-timeline :is(th, td) {
+  padding: 4px 12px;
+  text-align: left;
+  vertical-align: middle;
+  border: 0;
+  border-block-end: 1px solid var(--color-line);
+  border-inline-end: 1px solid var(--color-line);
+}
+body .shift-timeline tr > :last-child {
+  border-inline-end: 0;
+}
+body .shift-timeline thead th {
   position: sticky;
   top: 0;
   background: var(--color-surface-subtle);
   z-index: 2;
+  height: 44px;
+  font-weight: 600;
 }
-body .shift-timeline th:first-child {
-  width: 110px;
+body .shift-timeline .shift-date-cell {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--color-surface);
 }
-body .shift-timeline td:nth-child(2),
-body .shift-timeline th:nth-child(2) {
-  width: 130px;
+body .shift-timeline .shift-date-cell strong {
+  display: block;
+  white-space: nowrap;
 }
-body .shift-timeline th:last-child,
-body .shift-timeline td:last-child {
-  width: 64px;
+body .shift-timeline .shift-reception-cell {
+  color: var(--color-muted);
+}
+body .shift-timeline .shift-hours-cell {
   text-align: right;
   font-variant-numeric: tabular-nums;
+  font-weight: 600;
 }
 body .shift-timeline small {
   display: block;
   color: var(--color-muted);
+  font-size: 12px;
   font-weight: 400;
+  margin-block-start: 2px;
+}
+body .shift-timeline .shift-scale-cell {
+  padding: 4px 20px;
 }
 body .shift-time-axis {
   position: relative;
   height: 28px;
-  margin-inline: 20px;
   color: var(--color-muted);
   font-size: 11px;
   font-weight: 400;
+  font-variant-numeric: tabular-nums;
 }
 body .shift-time-axis span {
   position: absolute;
@@ -1853,46 +1910,143 @@ body .shift-time-axis span {
 body .shift-time-lane {
   position: relative;
   min-height: 48px;
-  margin-inline: 20px;
   background: repeating-linear-gradient(
     to right,
     var(--color-line) 0 1px,
     transparent 1px calc(100% / var(--shift-hours, 17))
   );
+  border-inline-end: 1px solid var(--color-line);
 }
 body .shift-time-entry {
   position: absolute;
   height: 44px;
-  padding: 4px 8px;
-  border: 1px solid var(--color-accent);
+  min-width: 0;
+  padding: 4px 10px;
+  border: 1px solid color-mix(in srgb, var(--shift-staff-color) 55%, var(--color-line));
+  border-inline-start: 4px solid var(--shift-staff-color);
   border-radius: 6px;
-  background: var(--color-accent-soft);
+  background: color-mix(in srgb, var(--shift-staff-color) 12%, var(--color-surface));
   color: var(--color-ink);
   display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1px;
+  text-align: left;
   font: inherit;
+  overflow: hidden;
 }
 body button.shift-time-entry {
   cursor: pointer;
+}
+body button.shift-time-entry:hover {
+  background: color-mix(in srgb, var(--shift-staff-color) 20%, var(--color-surface));
 }
 body .shift-time-entry:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: -3px;
 }
-body .shift-time-entry span {
+body .shift-time-entry strong {
+  width: 100%;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 14px;
+  line-height: 16px;
+  flex-shrink: 0;
+  font-weight: 600;
 }
-body .shift-time-entry strong {
+body .shift-time-entry .shift-entry-time {
+  flex-shrink: 0;
   white-space: nowrap;
   font-size: 12px;
+  line-height: 14px;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text);
 }
 body .shift-timeline tfoot {
   background: var(--color-surface-subtle);
   font-weight: 600;
+}
+body .shift-timeline tfoot :is(th, td) {
+  border-block-end: 0;
+}
+body .shift-day-start > :is(th, td) {
+  border-block-start: 1px solid var(--color-line);
+}
+body .shift-day-link {
+  padding: 8px 0;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+body .shift-day-link:hover {
+  color: var(--color-accent);
+}
+body .shift-day-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+body .shift-lane-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: var(--color-muted);
+  font-size: 12px;
+  background: var(--color-surface);
+}
+body .shift-period-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px 24px;
+  padding: 0 20px 12px;
+}
+body .shift-period-toolbar .form-field {
+  margin: 0;
+}
+body .shift-period-toolbar .tabs {
+  margin: 0;
+}
+body .shift-period-caption {
+  font-size: 14px;
+  align-self: center;
+}
+body .shift-journal-help {
+  margin: 0;
+  padding: 12px 20px;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+body .shift-detail-entry {
+  padding: 12px 16px;
+  margin-block-start: 8px;
+  border: 1px solid var(--color-line);
+  border-inline-start: 4px solid var(--shift-staff-color);
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+body .shift-detail-entry p {
+  margin: 4px 0;
+  font-variant-numeric: tabular-nums;
+}
+body .shift-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 @media (max-width: 600px) {
   body .schedule-filter-form {
@@ -1970,4 +2124,24 @@ body .shift-timeline tfoot {
 .report-pyramid-female i {
   background: var(--color-accent);
   border-radius: 0 3px 3px 0;
+}
+/* Shared four-digit PIN entry: the form uses the common control styles. */
+.pin-entry {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  max-width: 360px;
+}
+.pin-entry .form-field {
+  margin: 0;
+}
+.pin-entry input {
+  letter-spacing: 0.35em;
+}
+.pin-entry small {
+  color: var(--color-muted);
+}
+.pin-entry-error {
+  color: var(--color-danger);
+  margin: 0;
 }

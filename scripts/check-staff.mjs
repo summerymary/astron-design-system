@@ -25,7 +25,143 @@ const { managementNavigationGroups } = await load('../src/data/management-naviga
 const { adminSections } = await load('../src/data/admin.ts');
 const { createWorkspaceData } = await load('../src/data/workspace.ts');
 const { validateEvent, moveEvent } = await load('../src/lib/schedule.ts');
+const { shiftStaffColors, shiftStaffKey } = await load('../src/lib/shift-colors.ts');
 const data = createWorkspaceData();
+const { adminEmployee, ownAdminRecords, adminPaySummary } = await load(
+  '../src/lib/admin-account.ts',
+);
+const accountUser = {
+  id: 'user-admin',
+  name: 'Александра Крылова',
+  email: 'admin@example.com',
+  role: 'administrator',
+};
+const accountEmployee = adminEmployee(data.employees, accountUser);
+assert.equal(accountEmployee.id, 'emp-1');
+assert.equal(adminEmployee(data.employees, { ...accountUser, role: 'trainer' }), undefined);
+assert.equal(
+  adminEmployee(data.employees, { ...accountUser, id: 'unknown', email: '' }),
+  undefined,
+  'Never link a personal account by display name',
+);
+assert.deepEqual(ownAdminRecords(data.shifts, ''), []);
+const account = adminPaySummary(
+  ownAdminRecords(data.shifts, accountEmployee.id),
+  ownAdminRecords(data['employee-bonuses'], accountEmployee.id),
+  ownAdminRecords(data['employee-payments'], accountEmployee.id),
+  '2026-11-01',
+  '2026-11-30',
+);
+assert.equal(account.hours, 56);
+assert.equal(account.confirmedHours, 32);
+assert.equal(account.earned, 8000);
+assert.equal(account.approvedBonus, 1200);
+assert.equal(account.pendingBonus, 500);
+assert.equal(account.paid, 5000);
+assert.equal(account.balance, 4200);
+assert.equal(account.forecast, 15200);
+const fractional = {
+  id: 'short-night',
+  start: '2026-10-31T23:30',
+  end: '2026-11-01T01:15',
+  rate: '250',
+  status: 'Завершена',
+};
+assert.equal(
+  adminPaySummary([fractional], [], [], '2026-11-01', '2026-11-30').earned,
+  312.5,
+  'Pay clips a night shift at month boundaries',
+);
+assert.equal(
+  adminPaySummary([{ ...fractional, status: 'Отменена' }], [], [], '2026-11-01', '2026-11-30')
+    .hours,
+  0,
+);
+assert.equal(
+  adminPaySummary([{ ...fractional, rate: '' }], [], [], '2026-11-01', '2026-11-30').missingRates,
+  1,
+  'Missing rate is not zero pay',
+);
+for (const role of [
+  'administrator',
+  'trainer',
+  'bartender',
+  'marketer',
+  'accountant',
+  ...managementRoles,
+])
+  assert.equal(canOpenModule(role, 'admin-account'), role === 'administrator');
+const { shiftProblem, shiftHours, shiftsOnDay, shiftPeriodHours } =
+  await load('../src/lib/shifts.ts');
+const shift = data.shifts.find((row) => row.id === 'shift-1');
+assert.equal(shiftHours(shift), 8);
+for (const row of data.shifts) assert.equal(shiftProblem(row, data.shifts), null, row.id);
+const next = {
+  ...shift,
+  id: 'next-shift',
+  employeeId: 'another-admin',
+  name: 'Следующий администратор',
+  start: '2026-11-06T14:30',
+  end: '2026-11-06T18:30',
+};
+assert.equal(shiftProblem(next, [shift]), null, 'Contiguous shifts hand over the same computer');
+assert.match(shiftProblem({ ...next, start: '2026-11-06T14:00' }, [shift]), /уже занято/);
+assert.equal(
+  shiftProblem({ ...next, workplace: 'Место 2', start: shift.start, end: shift.end }, [shift]),
+  null,
+  'Two administrators may work concurrently',
+);
+assert.match(
+  shiftProblem({ ...shift, id: 'double', club: 'Другой клуб' }, [shift]),
+  /У сотрудника уже есть смена/,
+);
+assert.match(shiftProblem({ ...next, end: next.start }, []), /позже начала/);
+assert.match(shiftProblem({ ...next, start: '', end: '' }, []), /позже начала/);
+assert.equal(
+  shiftProblem({ ...next, reception: 'Ресепшен 02', start: shift.start, end: shift.end }, [shift]),
+  null,
+);
+assert.match(
+  shiftProblem(
+    { ...shift, id: 'legacy-double', employeeId: '', name: `  ${shift.name.toUpperCase()}  ` },
+    [shift],
+  ),
+  /У сотрудника уже есть смена/,
+);
+const night = { ...shift, id: 'night', start: '2026-11-08T22:00', end: '2026-11-09T02:00' };
+assert.equal(shiftHours(night), 4);
+assert.equal(shiftsOnDay([night], '2026-11-08')[0].to, 1440);
+assert.equal(shiftsOnDay([night], '2026-11-09')[0].to, 120);
+assert.equal(
+  shiftPeriodHours([night], '2026-11-02', '2026-11-08'),
+  2,
+  'Clip totals at period boundary',
+);
+assert.equal(
+  shiftPeriodHours(data.shifts, '2026-11-06', '2026-11-06'),
+  24,
+  'Parallel shifts sum as person-hours',
+);
+const colors = shiftStaffColors(data.employees, data.shifts);
+assert.equal(new Set(colors.values()).size, colors.size, 'Demo employees have distinct colours');
+assert.deepEqual(
+  [...shiftStaffColors([...data.employees].reverse(), [...data.shifts].reverse())],
+  [...colors],
+  'Colours must not depend on roster/history order',
+);
+for (const row of data.shifts) {
+  const key = shiftStaffKey(row, data.employees);
+  assert.equal(colors.get(key), shiftStaffColors(data.employees, data.shifts).get(key));
+  assert.equal(
+    shiftStaffKey({ ...row, name: `  ${row.name.toUpperCase()}  ` }, data.employees),
+    key,
+  );
+}
+assert.equal(
+  shiftStaffKey({ id: 'renamed-shift', name: 'Новое имя', employeeId: 'emp-1' }, data.employees),
+  'emp-1',
+  'Saved employee identity survives renaming',
+);
 const trainer = { id: 'user-trainer', name: 'Алина Белова', role: 'trainer', clubIds: ['central'] };
 const admin = { id: 'user-admin', name: 'Александра Крылова', role: 'administrator' };
 const bartender = { id: 'user-bartender', name: 'Никита Романов', role: 'bartender' };
