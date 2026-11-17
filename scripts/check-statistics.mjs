@@ -890,6 +890,244 @@ for (const report of statisticsReports)
     buildStatistics(report.id, f, input).metrics.every((m) => !m.label.includes('Строк')),
     report.id,
   );
+// Trainer report parity: full-week boundaries, explicit formats, relationships and costs.
+const { reportWeek } = await import(
+  await load(new URL('../src/lib/report-period.ts', import.meta.url))
+);
+assert.deepEqual(reportWeek('2027-01-03'), { from: '2026-12-28', to: '2027-01-03' });
+assert.equal(reportWeek('2026-02-30'), null);
+const coachEvent = {
+  ...event,
+  name: 'Тестовое занятие',
+  kind: 'personal',
+  trainerId: 'user-trainer',
+  trainer: 'Алина Белова',
+};
+const coachData = { ...input.data, events: [], 'trainer-duty': [], 'personal-clients': [] };
+const busy = buildStatistics(
+  'gtrener_busy',
+  { ...f, to: '2026-11-08' },
+  {
+    ...input,
+    data: {
+      ...coachData,
+      events: [
+        { ...coachEvent, id: 'mon', day: '2026-11-02', time: '07:15' },
+        { ...coachEvent, id: 'sun', day: '2026-11-08', time: '19:30' },
+        { ...coachEvent, id: 'sun', day: '2026-11-08', time: '19:30' },
+        { ...coachEvent, id: 'next', day: '2026-11-09' },
+        { ...coachEvent, id: 'cancel', day: '2026-11-08', status: 'Отменена' },
+      ],
+    },
+  },
+);
+assert.equal(busy.blocks[0].columns.length, 8);
+assert.equal(
+  busy.metrics[0].value,
+  2,
+  'Week includes Sunday, excludes next Monday, cancellations and duplicate IDs',
+);
+assert.ok(busy.blocks[0].rows[0].day0.includes('Алина Белова'));
+assert.ok(busy.blocks[0].rows[1].day6.includes('Тестовое занятие'));
+const classifiedInput = {
+  ...input,
+  data: {
+    ...coachData,
+    events: [
+      { ...coachEvent, id: 'individual', personalFormat: 'individual', duration: '30' },
+      {
+        ...coachEvent,
+        id: 'spt',
+        personalFormat: 'spt',
+        duration: '90',
+        attendees: '1001,1001,1003',
+      },
+    ],
+  },
+};
+const ptRating = buildStatistics('ptrener_rating', f, classifiedInput).blocks[0].rows[0];
+assert.equal(ptRating.individual, '1');
+assert.equal(ptRating.spt, '1');
+assert.equal(ptRating.sptClients, '2');
+assert.equal(ptRating.unique, '3');
+const ptHours = buildStatistics('ptrener_rating_all', f, classifiedInput).blocks[0].rows[0];
+assert.equal(ptHours.personalHours, '2.0');
+assert.equal(ptHours.individualHours, '0.5');
+assert.equal(ptHours.sptHours, '1.5');
+assert.equal(
+  buildStatistics('ptrener_rating', f, { ...input, data: { ...coachData, events: [coachEvent] } })
+    .blocks[0].rows[0].spt,
+  '',
+  'Unknown SPT must not become zero',
+);
+const relationships = {
+  ...input,
+  data: {
+    ...coachData,
+    'personal-clients': [{ id: 'assigned', memberId: '1001', trainerId: 'trainer-maxim' }],
+    events: [
+      { ...coachEvent, id: 'old-coach', day: '2026-10-01', attendees: '1001', present: '1001' },
+      {
+        ...coachEvent,
+        id: 'new-coach',
+        day: '2026-11-05',
+        trainerId: 'trainer-maxim',
+        attendees: '1001',
+        present: '1001',
+      },
+      {
+        ...coachEvent,
+        id: 'future-present',
+        day: '2026-11-07',
+        attendees: '1001',
+        present: '1001',
+      },
+    ],
+  },
+};
+const lostCoach = buildStatistics(
+  'report_pclients_stat',
+  { ...f, from: '2026-10-01', to: '2026-11-08', threshold: '21', trainer: 'user-trainer' },
+  relationships,
+);
+assert.equal(
+  lostCoach.metrics[2].value,
+  1,
+  'Changing trainer does not erase loss from former trainer',
+);
+assert.equal(
+  lostCoach.blocks[0].rows[0].last,
+  '2026-10-01',
+  'Future presence cannot improve retention',
+);
+const contacts = buildStatistics(
+  'report_pclients_phones',
+  { ...f, from: '2026-10-01' },
+  { ...relationships, hidePhones: true },
+);
+assert.equal(contacts.blocks[0].rows.length, 1, 'Contacts deduplicate clients across trainers');
+assert.ok(contacts.blocks[0].rows[0].phone.includes('•'));
+assert.ok(!statisticsCsv(contacts.blocks).includes(input.members[0].phone));
+const freeFixture = {
+  ...input,
+  data: {
+    ...coachData,
+    'trainer-availability': [
+      {
+        id: 'window',
+        trainerId: 'user-trainer',
+        club: 'Центральный',
+        day: f.to,
+        time: '08:00',
+        end: '18:00',
+      },
+      {
+        id: 'window-copy',
+        trainerId: 'user-trainer',
+        club: 'Центральный',
+        day: f.to,
+        time: '08:00',
+        end: '18:00',
+      },
+    ],
+    events: [{ ...coachEvent, day: f.to, time: '13:00', duration: '60' }],
+  },
+};
+assert.equal(
+  buildStatistics('free_trener_find', { ...f, timeFrom: '14:00', duration: '60' }, freeFixture)
+    .blocks[0].rows.length,
+  1,
+  'Adjacent event is allowed, duplicate window is not a second coach',
+);
+assert.equal(
+  buildStatistics('free_trener_find', { ...f, timeFrom: '13:59', duration: '60' }, freeFixture)
+    .blocks[0].rows.length,
+  0,
+);
+assert.equal(
+  buildStatistics(
+    'free_trener_find',
+    { ...f, timeFrom: '14:00' },
+    { ...freeFixture, data: { ...freeFixture.data, 'trainer-availability': [] } },
+  ).blocks[0].rows.length,
+  0,
+  'Missing working window is not free time',
+);
+const financeFixture = {
+  ...input,
+  data: {
+    ...coachData,
+    ledger: [
+      {
+        id: 'pt-sale',
+        date: f.to,
+        club: 'Центральный',
+        category: 'Персональный тренинг',
+        name: 'Персональные тренировки',
+        kindId: 'personal',
+        amount: '4000',
+        trainerId: 'user-trainer',
+      },
+      {
+        id: 'gp-sale',
+        date: f.to,
+        club: 'Центральный',
+        category: 'Абонементы',
+        name: 'Групповые тренировки',
+        kindId: 'group',
+        amount: '9000',
+        trainerId: 'user-trainer',
+      },
+    ],
+    'trainer-costs': [
+      {
+        id: 'pt-cost',
+        date: f.to,
+        club: 'Центральный',
+        trainerId: 'user-trainer',
+        kind: 'personal',
+        amount: '1000',
+      },
+      {
+        id: 'gp-cost',
+        date: f.to,
+        club: 'Центральный',
+        trainerId: 'user-trainer',
+        kind: 'group',
+        amount: '6000',
+      },
+    ],
+  },
+};
+const finance = buildStatistics('trener_financial_result', f, financeFixture);
+const coachTotal = finance.blocks[1].rows.find((r) => r.id === 'user-trainer');
+assert.equal(coachTotal.amount, '400000');
+assert.equal(coachTotal.expense, '100000');
+assert.equal(coachTotal.percent, '25', 'PT result excludes GP sales and GP pay');
+assert.equal(
+  finance.blocks[1].rows.find((r) => r.id === 'trainer-maxim').percent,
+  '',
+  'No sales gives an unknown percentage, never NaN',
+);
+const groupedGp = buildStatistics(
+  'gt_finance',
+  { ...f, groupByTrainer: '1', reportSort: 'all_shedules' },
+  {
+    ...input,
+    data: {
+      ...coachData,
+      events: [
+        { ...coachEvent, kind: 'group', id: 'gp-a' },
+        { ...coachEvent, kind: 'group', id: 'gp-b' },
+        { ...coachEvent, id: 'pt-excluded' },
+      ],
+    },
+  },
+);
+assert.equal(groupedGp.blocks[0].rows.length, 1);
+assert.equal(groupedGp.blocks[0].rows[0].lessons, '2');
+assert.equal(groupedGp.blocks[0].rows[0].tariff, '', 'Unknown trainer rate remains unknown');
+
 console.log(
   `Statistics: 48 definitions, 46 catalogue entries; ${48 - Object.keys(reportPending).length} demo calculations; dates, Moscow time, uniqueness, no-shows, money, occupancy, CSV and immutability passed.`,
 );
