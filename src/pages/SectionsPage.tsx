@@ -30,7 +30,10 @@ const groups: { title: string; ids: AdminSectionId[] }[] = [
       'reviews',
     ],
   },
-  { title: 'Команда', ids: ['employees', 'positions', 'absences', 'payroll'] },
+  {
+    title: 'Команда',
+    ids: ['admin-account', 'shifts', 'employees', 'positions', 'absences', 'payroll'],
+  },
   {
     title: 'Клубы и занятия',
     ids: [
