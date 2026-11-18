@@ -1,3 +1,4 @@
+import { Field } from './Field';
 import { ShiftEditor } from './ShiftEditor';
 import { Select } from './Select';
 import '../styles/workspace.css';
@@ -19,10 +20,11 @@ import type { StatusTone } from '../lib/ui-semantics';
 import { adminSections } from '../data/admin';
 import type { Member } from '../types';
 import type { AdminSectionId } from '../data/admin';
-import type { DemoRecord, Field, Resource } from '../data/workspace';
+import type { DemoRecord, Field as FieldDefinition, Resource } from '../data/workspace';
 import { money, prettyDate } from '../data/workspace';
 import { demoId, useWorkspace } from './WorkspaceProvider';
 import type { TrainingKind } from '../lib/training-kind';
+import { displayNumber } from '../lib/display-format';
 
 export type Navigate = (
   section: AdminSectionId,
@@ -39,6 +41,7 @@ export function Tabs({
   variant = 'line',
   idPrefix,
   panelId,
+  selection = 'panel',
 }: {
   items: (string | { id: string; label: string; count?: number })[];
   value: string;
@@ -48,6 +51,7 @@ export function Tabs({
   variant?: 'line' | 'segmented';
   idPrefix?: string;
   panelId?: string;
+  selection?: 'panel' | 'filter';
 }) {
   const generatedId = useId();
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -59,17 +63,18 @@ export function Tabs({
       className={`ws-tabs ui-tabs ${className}`}
       data-ui="tabs"
       data-variant={variant}
-      role="tablist"
+      role={selection === 'filter' ? 'radiogroup' : 'tablist'}
       aria-label={label}
     >
       {normalized.map((item, index) => (
         <button
           key={item.id}
           type="button"
-          role="tab"
+          role={selection === 'filter' ? 'radio' : 'tab'}
           id={`${idPrefix || generatedId}-${item.id}`}
           aria-controls={panelId}
-          aria-selected={value === item.id}
+          aria-selected={selection === 'panel' ? value === item.id : undefined}
+          aria-checked={selection === 'filter' ? value === item.id : undefined}
           tabIndex={value === item.id ? 0 : -1}
           className={value === item.id ? 'selected' : ''}
           ref={(el) => {
@@ -97,6 +102,9 @@ export function Tabs({
       ))}
     </div>
   );
+}
+export function SegmentedFilter(props: Omit<Parameters<typeof Tabs>[0], 'variant' | 'selection'>) {
+  return <Tabs {...props} variant="segmented" selection="filter" />;
 }
 export function Status({ children, tone }: { children: ReactNode; tone?: StatusTone }) {
   return (
@@ -172,6 +180,30 @@ export function SearchBox({
     </label>
   );
 }
+export function NavigationCard({
+  title,
+  caption,
+  onClick,
+}: {
+  title: ReactNode;
+  caption?: ReactNode;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      className="ws-link-card panel"
+      data-ui="navigation-card"
+      onClick={onClick}
+    >
+      <span>
+        <strong>{title}</strong>
+        {caption && <small>{caption}</small>}
+      </span>
+      <ChevronRight size={20} aria-hidden="true" />
+    </button>
+  );
+}
 export function SectionLinks({
   ids,
   navigate,
@@ -204,13 +236,12 @@ export function LinkCards({
       {ids.map((id) => {
         const meta = adminSections.find((s) => s.id === id)!;
         return (
-          <button className="ws-link-card panel" key={id} onClick={() => navigate(id)}>
-            <span>
-              <strong>{labels?.[id] || meta.label}</strong>
-              <small>{meta.caption}</small>
-            </span>
-            <ArrowUpRight size={19} />
-          </button>
+          <NavigationCard
+            key={id}
+            title={labels?.[id] || meta.label}
+            caption={meta.caption}
+            onClick={() => navigate(id)}
+          />
         );
       })}
     </div>
@@ -226,7 +257,7 @@ export function Stats({
       {items.map((item) => (
         <div key={item.label}>
           <span>{item.label}</span>
-          <strong>{item.value}</strong>
+          <strong>{displayNumber(item.value)}</strong>
           {item.note && <small>{item.note}</small>}
         </div>
       ))}
@@ -237,21 +268,23 @@ export function FieldControl({
   field,
   value,
   onChange,
+  error,
 }: {
-  field: Field;
+  field: FieldDefinition;
   value: string;
   onChange: (value: string) => void;
+  error?: string;
 }) {
   const id = useId();
   return (
-    <label
+    <Field
       className={`form-field ${field.type === 'textarea' ? 'ws-field-wide' : ''}`}
       htmlFor={id}
+      label={field.label}
+      required={field.required}
+      hint={field.hint}
+      error={error}
     >
-      <span>
-        {field.label}
-        {field.required && <em> *</em>}
-      </span>
       {field.options ? (
         <Select
           id={id}
@@ -290,8 +323,7 @@ export function FieldControl({
           onChange={(e) => onChange(e.target.value)}
         />
       )}
-      {field.hint && <small>{field.hint}</small>}
-    </label>
+    </Field>
   );
 }
 export function RecordForm({
@@ -305,7 +337,7 @@ export function RecordForm({
   inline = false,
 }: {
   title: string;
-  fields: Field[];
+  fields: FieldDefinition[];
   initial?: DemoRecord;
   onClose: () => void;
   onSave: (record: DemoRecord) => void | string;
@@ -348,6 +380,9 @@ export function RecordForm({
             key={field.key}
             field={field}
             value={draft[field.key] ?? ''}
+            error={
+              error && field.required && !draft[field.key]?.trim() ? 'Заполните поле' : undefined
+            }
             onChange={(value) => {
               setDraft((previous) => ({ ...previous, [field.key]: value }));
               setError('');
@@ -412,7 +447,7 @@ export function recordValue(value: string, key = ''): ReactNode {
     );
   if (['price', 'amount', 'cost', 'total'].includes(key)) return money(value);
   if (/^\d{4}-\d{2}-\d{2}/.test(value)) return prettyDate(value);
-  return value;
+  return displayNumber(value);
 }
 export function DataTable({
   columns,
@@ -597,7 +632,7 @@ export function RecordDetails({
 }: {
   title: string;
   record: DemoRecord;
-  fields: Field[];
+  fields: FieldDefinition[];
   onClose: () => void;
   actions?: ReactNode;
   children?: ReactNode;
@@ -851,7 +886,7 @@ function EmployeeExtras({ employee }: { employee: DemoRecord }) {
   const { data, put } = useWorkspace();
   const [form, setForm] = useState<'shifts' | 'assignments' | null>(null);
   const close = useCallback(() => setForm(null), []);
-  const assignmentFields: Field[] = [
+  const assignmentFields: FieldDefinition[] = [
     { key: 'position', label: 'Должность', options: data.positions.map((row) => row.name) },
     { key: 'start', label: 'С даты', type: 'date', required: true },
     { key: 'end', label: 'По дату', type: 'date' },

@@ -1,3 +1,4 @@
+import { Field } from './Field';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from './ui';
 import { reportNextDay, reportWeek } from '../lib/report-period';
@@ -23,8 +24,7 @@ export function ReportWeekPicker({
       >
         <ChevronLeft size={20} />
       </Button>
-      <label className="form-field">
-        <span>Неделя с датой</span>
+      <Field className="form-field" label={<> Неделя с датой </>}>
         <input
           type="date"
           value={day}
@@ -33,7 +33,7 @@ export function ReportWeekPicker({
           onInput={(e) => choose(e.currentTarget.value)}
           onChange={(e) => choose(e.target.value)}
         />
-      </label>
+      </Field>
       <Button
         variant="secondary"
         aria-label="Следующая неделя"

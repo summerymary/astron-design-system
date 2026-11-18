@@ -1,3 +1,4 @@
+import { Field } from './Field';
 import '../styles/client-booking.css';
 import { useId, useState } from 'react';
 import type { DemoUser, Member } from '../types';
@@ -95,8 +96,7 @@ export function ClientBookingDialog({
             }}
             label="Направление записи"
           />
-          <label className="form-field">
-            <span>Клуб занятия</span>
+          <Field className="form-field" label={<> Клуб занятия </>}>
             <Select
               value={club}
               onChange={(event) => {
@@ -120,7 +120,7 @@ export function ClientBookingDialog({
                   </option>
                 ))}
             </Select>
-          </label>
+          </Field>
           {kind === 'Групповые' ? (
             <>
               <p className="form-note">
@@ -195,8 +195,7 @@ export function ClientBookingDialog({
                 onClose();
               }}
             >
-              <label className="form-field">
-                <span>Персональный тренер *</span>
+              <Field className="form-field" label={<> Персональный тренер * </>}>
                 <Select
                   required
                   value={trainerId}
@@ -213,7 +212,7 @@ export function ClientBookingDialog({
                     </option>
                   ))}
                 </Select>
-              </label>
+              </Field>
               {trainer && (
                 <Notice>
                   {trainer.category} · {money(trainer.lessonPrice)} за занятие. Демо-тариф.
@@ -228,8 +227,7 @@ export function ClientBookingDialog({
                 </Notice>
               )}
               <div className="client-booking-fields">
-                <label className="form-field">
-                  <span>Дата *</span>
+                <Field className="form-field" label={<> Дата * </>}>
                   <input
                     type="date"
                     required
@@ -240,18 +238,16 @@ export function ClientBookingDialog({
                       setTime('');
                     }}
                   />
-                </label>
-                <label className="form-field">
-                  <span>Начало *</span>
+                </Field>
+                <Field className="form-field" label={<> Начало * </>}>
                   <input
                     type="time"
                     required
                     value={time}
                     onChange={(event) => setTime(event.target.value)}
                   />
-                </label>
-                <label className="form-field">
-                  <span>Зал *</span>
+                </Field>
+                <Field className="form-field" label={<> Зал * </>}>
                   <Select
                     required
                     value={room?.name || ''}
@@ -266,7 +262,7 @@ export function ClientBookingDialog({
                       </option>
                     ))}
                   </Select>
-                </label>
+                </Field>
               </div>
               <p className="form-note">
                 50 минут. Проверяются занятость тренера, зала и записи клиента.

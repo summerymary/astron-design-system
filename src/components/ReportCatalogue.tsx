@@ -1,15 +1,9 @@
 import { useState } from 'react';
-import { ChevronRight } from 'lucide-react';
-import {
-  catalogueReports,
-  reportDescription,
-  reportGroups,
-  reportPending,
-  reportTitle,
-} from '../data/statistics';
+import { reportDescription, reportTitle } from '../data/statistics';
+import { familyCatalogue, reportCategories } from '../data/report-families';
 import type { ReportDefinition } from '../data/statistics';
 import { matchesSearch } from '../lib/directory-search';
-import { Empty, SearchBox, Tabs } from './WorkspaceUI';
+import { Empty, SearchBox, Tabs, NavigationCard } from './WorkspaceUI';
 import '../styles/statistics.css';
 
 export function ReportCatalogue({
@@ -21,10 +15,13 @@ export function ReportCatalogue({
 }) {
   const [query, setQuery] = useState('');
   const [group, setGroup] = useState('all');
-  const found = catalogueReports(reports).filter((r) =>
-    matchesSearch(`${reportTitle(r)} ${r.sourceTitle} ${reportDescription(r)}`, query),
+  const found = familyCatalogue(reports).filter((family) =>
+    matchesSearch(
+      `${family.title} ${family.description} ${family.available.map((r) => `${reportTitle(r)} ${r.sourceTitle} ${reportDescription(r)}`).join(' ')}`,
+      query,
+    ),
   );
-  const shown = found.filter((r) => group === 'all' || r.group === group);
+  const shown = found.filter((r) => group === 'all' || r.category === group);
   return (
     <section className="panel ws-panel" data-ui="report-catalogue">
       <div className="ws-toolbar statistics-catalogue-search">
@@ -44,35 +41,29 @@ export function ReportCatalogue({
         onChange={setGroup}
         items={[
           { id: 'all', label: 'Все отчёты', count: found.length },
-          ...reportGroups.map((g) => ({
+          ...reportCategories.map((g) => ({
             ...g,
-            count: found.filter((r) => r.group === g.id).length,
+            label: g.shortLabel,
+            count: found.filter((r) => r.category === g.id).length,
           })),
         ]}
       />
       <div className="ws-panel-body statistics-catalogue-groups">
-        {reportGroups
+        {reportCategories
           .filter((g) => group === 'all' || g.id === group)
           .map((g) => {
-            const rows = shown.filter((r) => r.group === g.id);
+            const rows = shown.filter((r) => r.category === g.id);
             return rows.length ? (
               <section key={g.id}>
                 <h3>{g.label}</h3>
                 <div className="ws-card-grid">
                   {rows.map((r) => (
-                    <button
-                      type="button"
-                      className="panel ws-link-card"
+                    <NavigationCard
                       key={r.id}
-                      onClick={() => onOpen(r.id)}
-                    >
-                      <span>
-                        <strong>{reportTitle(r)}</strong>
-                        <small>{reportDescription(r)}</small>
-                        {reportPending[r.id] && <small>Формула уточняется</small>}
-                      </span>
-                      <ChevronRight size={20} aria-hidden="true" />
-                    </button>
+                      title={r.title}
+                      caption={r.description}
+                      onClick={() => onOpen(r.primaryId)}
+                    />
                   ))}
                 </div>
               </section>

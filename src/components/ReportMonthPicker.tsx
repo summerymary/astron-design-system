@@ -1,3 +1,4 @@
+import { Field } from './Field';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from './ui';
 import { reportMonth } from '../lib/report-period';
@@ -5,9 +6,11 @@ import { reportMonth } from '../lib/report-period';
 export function ReportMonthPicker({
   month,
   onChange,
+  label = 'Месяц и год',
 }: {
   month: string;
   onChange: (value: string) => void;
+  label?: string;
 }) {
   const choose = (value: string) => {
     if (reportMonth(value) && value >= '1900-01' && value <= '2100-12') onChange(value);
@@ -27,8 +30,7 @@ export function ReportMonthPicker({
       >
         <ChevronLeft size={20} />
       </Button>
-      <label className="form-field">
-        <span>Месяц и год</span>
+      <Field className="form-field" label={<> {label} </>}>
         <input
           type="month"
           value={month}
@@ -37,7 +39,7 @@ export function ReportMonthPicker({
           onInput={(event) => choose(event.currentTarget.value)}
           onChange={(event) => choose(event.target.value)}
         />
-      </label>
+      </Field>
       <Button
         variant="secondary"
         aria-label="Следующий месяц"

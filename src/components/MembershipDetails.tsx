@@ -1,15 +1,17 @@
+import { Field } from './Field';
 import { useState } from 'react';
 import type { Member, Visit } from '../types';
 import type { DemoSubscription } from '../data/clientProfile';
-import { TODAY } from '../data/workspace';
+import { TODAY, prettyDate, type DemoRecord } from '../data/workspace';
 import { demoStamp, nextDemoNow } from '../lib/demo-clock';
 import { changeMembership } from '../lib/membership-operations';
 import { clientName } from '../lib/client-display';
 import { addDays } from '../lib/schedule';
 import { demoId, useWorkspace } from './WorkspaceProvider';
-import { Button, ConfirmDialog, Modal } from './ui';
+import { Button, ConfirmDialog, Modal, StatusBadge } from './ui';
 import { ClientSearch } from './ClientSearch';
 import { DataTable, Notice } from './WorkspaceUI';
+import { membershipVisits } from '../lib/membership-visit-history';
 
 export function MembershipDetails({
   pass,
@@ -17,6 +19,7 @@ export function MembershipDetails({
   members,
   visits,
   canOperate,
+  onCancelVisit,
   onClose,
 }: {
   pass: DemoSubscription;
@@ -24,6 +27,7 @@ export function MembershipDetails({
   members: Member[];
   visits: Visit[];
   canOperate: boolean;
+  onCancelVisit?: (passId: string, visit: Visit, reason: string) => void;
   onClose: () => void;
 }) {
   const { data, transact } = useWorkspace();
@@ -33,9 +37,32 @@ export function MembershipDetails({
   const [target, setTarget] = useState<Member | null>(null);
   const [confirm, setConfirm] = useState(false);
   const [error, setError] = useState('');
-  const history = visits.filter(
-    (visit) => visit.passId === pass.id || (!visit.passId && visit.plan === pass.name),
-  );
+  const [cancelVisit, setCancelVisit] = useState<Visit | null>(null);
+  const [cancelReason, setCancelReason] = useState('');
+  const history = membershipVisits(member, pass.id, visits, data);
+  const dateTime = (value: string | null) => {
+    if (!value) return 'Не указана';
+    const [date, time] = value.split(/[T ]/);
+    return `${/^\d{4}-/.test(date) ? prettyDate(date) : date}${time ? ` · ${time.slice(0, 5)}` : ''}`;
+  };
+  const clubLabel = (id: string) =>
+    (({ central: 'Центральный', park: 'Парк', river: 'Речной' }) as Record<string, string>)[id] ||
+    id ||
+    'Клуб не указан';
+  const visitLabel = (visit: Visit) => {
+    const receipt = (data['visit-bookings'] || []).find(
+      (r) => r.memberId === String(member.id) && r.passId === pass.id && r.date === visit.enteredAt,
+    );
+    return (
+      (data.events || []).find((e) => receipt?.eventId === e.id)?.name ||
+      {
+        personal: 'Персональная',
+        group: 'Групповая',
+        gym: 'Тренажёрный зал',
+        online: 'Онлайн-тренировка',
+      }[visit.kind]
+    );
+  };
   const override = (data['membership-overrides'] || []).find(
     (row) => row.id === `${member.id}:${pass.id}`,
   );
@@ -62,20 +89,41 @@ export function MembershipDetails({
     }
   };
   return (
-    <Modal title={pass.name} subtitle={clientName(member)} size="wide" onClose={onClose}>
+    <Modal title="История абонемента" subtitle={clientName(member)} size="wide" onClose={onClose}>
       <div className="modal-scroll-body ws-stack">
+        <div className="membership-detail-heading">
+          <h3>{pass.name}</h3>
+          <StatusBadge>
+            {
+              {
+                active: 'Действует',
+                pending: 'Не активирован',
+                paused: 'Заморожен',
+                expired: 'Завершён',
+              }[pass.status]
+            }
+          </StatusBadge>
+        </div>
         <dl className="ws-facts">
           <div>
             <dt>Покупка</dt>
-            <dd>{pass.boughtAt}</dd>
+            <dd>{dateTime(pass.boughtAt)}</dd>
           </div>
           <div>
             <dt>Активация</dt>
-            <dd>{pass.activatedAt || 'Не активирован'}</dd>
+            <dd>{pass.activatedAt ? dateTime(pass.activatedAt) : 'Не активирован'}</dd>
           </div>
           <div>
             <dt>Окончание</dt>
-            <dd>{pass.endsAt || 'После активации'}</dd>
+            <dd>{pass.endsAt ? dateTime(pass.endsAt) : 'После активации'}</dd>
+          </div>
+          <div>
+            <dt>Использовано посещений</dt>
+            <dd>{pass.used}</dd>
+          </div>
+          <div>
+            <dt>Номер абонемента</dt>
+            <dd>{pass.id}</dd>
           </div>
           <div>
             <dt>Остаток</dt>
@@ -83,28 +131,51 @@ export function MembershipDetails({
           </div>
         </dl>
         <h3>История посещений по абонементу</h3>
+        {pass.used > history.length && (
+          <p className="ws-muted">
+            В истории сохранено {history.length} из {pass.used} использованных посещений.
+          </p>
+        )}
         <DataTable
           rows={history.map((visit) => ({
             id: visit.id,
-            name: visit.enteredAt.replace('T', ' · '),
-            kind:
-              visit.kind === 'personal'
-                ? 'Персональная'
-                : visit.kind === 'group'
-                  ? 'Групповая'
-                  : 'Тренажёрный зал',
-            club: visit.clubId,
+            name: dateTime(visit.enteredAt),
+            kind: visitLabel(visit),
+            club: clubLabel(visit.clubId),
           }))}
           columns={[
             { key: 'name', label: 'Дата посещения' },
             { key: 'kind', label: 'Вид посещения' },
             { key: 'club', label: 'Клуб' },
+            ...(canOperate && onCancelVisit
+              ? [
+                  {
+                    key: 'cancel',
+                    label: 'Действие',
+                    render: (row: DemoRecord) => (
+                      <Button
+                        variant="danger-ghost"
+                        size="compact"
+                        onClick={() => {
+                          setCancelVisit(history.find((v) => v.id === row.id)!);
+                          setCancelReason('');
+                          setError('');
+                        }}
+                      >
+                        Отменить посещение…
+                      </Button>
+                    ),
+                  },
+                ]
+              : []),
           ]}
           empty={<p>Сохранённых посещений по этому абонементу нет.</p>}
         />
         {(data['membership-history'] || []).some((row) => row.passId === pass.id) && (
           <DataTable
-            rows={(data['membership-history'] || []).filter((row) => row.passId === pass.id)}
+            rows={(data['membership-history'] || []).filter(
+              (row) => row.passId === pass.id && row.memberId === String(member.id),
+            )}
             columns={[
               { key: 'date', label: 'Когда' },
               { key: 'name', label: 'Операция' },
@@ -115,30 +186,20 @@ export function MembershipDetails({
         {override?.transferredTo && (
           <Notice>Абонемент переоформлен. История прежнего владельца сохранена.</Notice>
         )}
-        {canOperate && pass.status !== 'expired' && (
-          <div className="ws-actions">
-            <Button variant="secondary" onClick={() => setAction('freeze')}>
-              {pass.status === 'paused' ? 'Разморозить' : 'Заморозить'}
-            </Button>
-            <Button variant="secondary" onClick={() => setAction('transfer')}>
-              Переоформить
-            </Button>
-            <Button variant="danger-ghost" onClick={() => setAction('finish')}>
-              Списать…
-            </Button>
-          </div>
-        )}
-        <Button variant="secondary" onClick={() => setAction('contract')}>
-          Демо-договор / печатный вид
-        </Button>
         {action === 'contract' && (
-          <section className="panel ws-panel-body ws-stack">
+          <section className="panel ws-panel-body ws-stack membership-print-view">
             <h3>Демонстрационный документ</h3>
             <p>
               {clientName(member)} · {pass.name}
             </p>
             <p>
-              Покупка {pass.boughtAt}. Действует до {pass.endsAt || 'активации'}.
+              Покупка {dateTime(pass.boughtAt)}. Активация:{' '}
+              {pass.activatedAt ? dateTime(pass.activatedAt) : 'ожидается'}. Окончание:{' '}
+              {pass.endsAt ? dateTime(pass.endsAt) : 'после активации'}.
+            </p>
+            <p>
+              Абонемент № {pass.id}. Использовано: {pass.used}. Остаток:{' '}
+              {pass.remaining === null ? 'Безлимит' : pass.remaining}.
             </p>
             <Notice>
               Это образец состава документа, а не юридический договор клуба. При внедрении
@@ -161,8 +222,7 @@ export function MembershipDetails({
                     : 'Заморозить абонемент'}
             </h3>
             {action === 'freeze' && pass.status !== 'paused' && (
-              <label className="form-field">
-                <span>Заморозить до</span>
+              <Field className="form-field" label={<> Заморозить до </>}>
                 <input
                   type="date"
                   min={addDays(TODAY, 1)}
@@ -170,7 +230,7 @@ export function MembershipDetails({
                   value={until}
                   onChange={(event) => setUntil(event.target.value)}
                 />
-              </label>
+              </Field>
             )}
             {action === 'transfer' &&
               (target ? (
@@ -189,14 +249,13 @@ export function MembershipDetails({
                   onMember={setTarget}
                 />
               ))}
-            <label className="form-field">
-              <span>Основание *</span>
+            <Field className="form-field" label={<> Основание * </>}>
               <textarea
                 rows={2}
                 value={reason}
                 onChange={(event) => setReason(event.target.value)}
               />
-            </label>
+            </Field>
             <Notice>
               {action === 'transfer'
                 ? 'Перенесутся оставшиеся посещения, срок и ограничения. Прежние визиты останутся у первоначального владельца.'
@@ -217,7 +276,34 @@ export function MembershipDetails({
           </div>
         )}
       </div>
-      <div className="modal-actions">
+      <div className="modal-actions membership-detail-actions">
+        {canOperate && pass.status !== 'expired' && (
+          <>
+            <Button variant="secondary" onClick={() => setAction('freeze')}>
+              {pass.status === 'paused' ? 'Разморозить' : 'Заморозить'}
+            </Button>
+            <Button variant="danger-ghost" onClick={() => setAction('finish')}>
+              Списать…
+            </Button>
+          </>
+        )}
+        <Button variant="secondary" onClick={() => setAction('contract')}>
+          Договор
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            setAction('contract');
+            setTimeout(() => window.print(), 0);
+          }}
+        >
+          Распечатать
+        </Button>
+        {canOperate && pass.status !== 'expired' && (
+          <Button variant="secondary" onClick={() => setAction('transfer')}>
+            Переоформить
+          </Button>
+        )}
         <Button variant="secondary" onClick={onClose}>
           Закрыть
         </Button>
@@ -233,6 +319,43 @@ export function MembershipDetails({
             change(action === 'freeze' && pass.status === 'paused' ? 'unfreeze' : action)
           }
         />
+      )}
+      {cancelVisit && onCancelVisit && (
+        <Modal
+          title="Отменить посещение?"
+          subtitle={dateTime(cancelVisit.enteredAt)}
+          onClose={() => setCancelVisit(null)}
+        >
+          <div className="modal-scroll-body ws-stack">
+            <p>
+              Посещение исчезнет из журнала, списание вернётся на этот абонемент. Причина останется
+              в истории.
+            </p>
+            <Field className="form-field" label={<> Причина отмены * </>}>
+              <textarea value={cancelReason} onChange={(e) => setCancelReason(e.target.value)} />
+            </Field>
+            {error && <Notice tone="warning">{error}</Notice>}
+          </div>
+          <div className="modal-actions">
+            <Button variant="secondary" onClick={() => setCancelVisit(null)}>
+              Назад
+            </Button>
+            <Button
+              variant="danger"
+              disabled={!cancelReason.trim()}
+              onClick={() => {
+                try {
+                  onCancelVisit(pass.id, cancelVisit, cancelReason);
+                  setCancelVisit(null);
+                } catch (err) {
+                  setError((err as Error).message);
+                }
+              }}
+            >
+              Отменить посещение
+            </Button>
+          </div>
+        </Modal>
       )}
     </Modal>
   );
