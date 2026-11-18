@@ -174,7 +174,11 @@ export const adminSections = [
   { id: 'calls', label: 'Звонки', caption: 'Журнал звонков и обратная связь' },
   { id: 'notifications', label: 'Уведомления', caption: 'События, требующие внимания' },
   { id: 'directories', label: 'Справочники', caption: 'Клубы, услуги и организация работы' },
-  { id: 'statistics', label: 'Статистика', caption: 'Клиенты, тренеры и продажи' },
+  {
+    id: 'statistics',
+    label: 'Статистика',
+    caption: 'Клиенты, посещения, тренеры, продажи, финансы и общение',
+  },
   { id: 'settings', label: 'Мой профиль', caption: 'Уведомления и личные настройки' },
   { id: 'employees', label: 'Персонал', caption: 'Сотрудники, должности и смены' },
   { id: 'positions', label: 'Должности', caption: 'Структура команды' },
