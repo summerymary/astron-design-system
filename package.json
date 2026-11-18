@@ -23,6 +23,7 @@
     "test:crm": "node scripts/check-crm.mjs",
     "test:statistics": "node scripts/check-statistics.mjs",
     "test:ui": "node scripts/check-ui.mjs",
+    "test:ui-browser": "node scripts/check-ui-browser.mjs",
     "docs:export": "node scripts/export-design-system.mjs",
     "test:reception": "node scripts/check-reception.mjs",
     "test:handoff": "node scripts/export-design-system.mjs --check"
