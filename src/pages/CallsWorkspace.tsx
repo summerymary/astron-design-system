@@ -1,12 +1,13 @@
+import { CallJournal } from '../components/CallJournal';
 import { useState } from 'react';
-import { Phone } from 'lucide-react';
+
 import type { DemoRecord } from '../data/workspace';
 import type { Member } from '../types';
 import { clientName } from '../lib/client-display';
-import { Button } from '../components/ui';
+
 import { CallDialog } from '../components/CallDialog';
 import { useWorkspace } from '../components/WorkspaceProvider';
-import { DataTable, SearchBox } from '../components/WorkspaceUI';
+import { SearchBox } from '../components/WorkspaceUI';
 import { Select } from '../components/Select';
 export function CallsWorkspace({
   members,
@@ -20,7 +21,7 @@ export function CallsWorkspace({
   const { data } = useWorkspace();
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('Все статусы');
-  const [call, setCall] = useState<Member | null>(null);
+  const [call, setCall] = useState<{ name: string; phone: string } | null>(null);
   const memberOf = (id: string) => members.find((member) => String(member.id) === id);
   const rows = (data.calls || [])
     .map((row): DemoRecord => ({
@@ -49,43 +50,16 @@ export function CallsWorkspace({
           <option>Завершён</option>
         </Select>
       </div>
-      <DataTable
+      <CallJournal
         rows={rows}
-        columns={[
-          { key: 'time', label: 'Время' },
-          { key: 'direction', label: 'Направление' },
-          {
-            key: 'name',
-            label: 'Клиент',
-            render: (row) =>
-              memberOf(row.memberId) ? (
-                <button className="text-link" onClick={() => onMember(memberOf(row.memberId)!)}>
-                  {row.name}
-                </button>
-              ) : (
-                row.name
-              ),
-          },
-          { key: 'status', label: 'Состояние' },
-          {
-            key: 'action',
-            label: 'Связаться',
-            render: (row) => (
-              <Button
-                variant="secondary"
-                disabled={!memberOf(row.memberId)}
-                onClick={() => setCall(memberOf(row.memberId)!)}
-              >
-                <Phone size={16} />
-                Позвонить
-              </Button>
-            ),
-          },
-        ]}
+        members={members}
+        onMember={onMember}
+        hidePhones={hidePhones}
+        onCall={setCall}
       />
       {call && (
         <CallDialog
-          name={clientName(call)}
+          name={call.name}
           phone={call.phone}
           hidden={hidePhones}
           onClose={() => setCall(null)}

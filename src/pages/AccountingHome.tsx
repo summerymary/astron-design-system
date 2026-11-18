@@ -1,3 +1,4 @@
+import { NavigationCard } from '../components/WorkspaceUI';
 import { Button } from '../components/ui';
 import { Stats, SectionLinks } from '../components/WorkspaceUI';
 import type { Navigate } from '../components/WorkspaceUI';
@@ -29,22 +30,26 @@ export function AccountingHome({ navigate, clubName }: { navigate: Navigate; clu
         ]}
       />
       <div className="crm-home-links">
-        <button onClick={() => navigate('cash')}>
-          <strong>Касса и операции</strong>
-          <span>Журнал, наличные, ККМ и терминал.</span>
-        </button>
-        <button onClick={() => navigate('statistics')}>
-          <strong>Финансовые отчёты</strong>
-          <span>Продажи и способы оплаты по клубам.</span>
-        </button>
-        <button onClick={() => navigate('services')}>
-          <strong>Оформить продажу</strong>
-          <span>Клиент, покупка и оплата.</span>
-        </button>
-        <button onClick={() => navigate('payroll')}>
-          <strong>Расчёт зарплаты</strong>
-          <span>Смены, часы и начисления.</span>
-        </button>
+        <NavigationCard
+          onClick={() => navigate('cash')}
+          title={<>Касса и операции</>}
+          caption={<>Журнал, наличные, ККМ и терминал.</>}
+        />
+        <NavigationCard
+          onClick={() => navigate('statistics')}
+          title={<>Финансовые отчёты</>}
+          caption={<>Продажи и способы оплаты по клубам.</>}
+        />
+        <NavigationCard
+          onClick={() => navigate('services')}
+          title={<>Оформить продажу</>}
+          caption={<>Клиент, покупка и оплата.</>}
+        />
+        <NavigationCard
+          onClick={() => navigate('payroll')}
+          title={<>Расчёт зарплаты</>}
+          caption={<>Смены, часы и начисления.</>}
+        />
       </div>
       <SectionLinks ids={['inventory', 'memberships']} navigate={navigate} />
       <section className="panel ws-panel accounting-recent">

@@ -25,6 +25,7 @@ import { roles } from '../data/roles';
 import { GiftCardsWorkspace } from './GiftCardsWorkspace';
 import { RetailWorkspace } from './RetailWorkspace';
 import { CallsWorkspace } from './CallsWorkspace';
+import { ReviewsWorkspace } from './ReviewsWorkspace';
 import {
   TrainerClientRoster,
   PersonalTrainingsWorkspace,
@@ -114,6 +115,7 @@ export function AdminSection({
         hidePhones={user.role === 'administrator'}
       />
     );
+  if (section === 'reviews') return <ReviewsWorkspace members={members} onMember={onMember} />;
   if (section === 'employees' && user.role === 'administrator')
     return <StaffContactsWorkspace clubName={clubName} recordId={recordId} onRecord={onRecord} />;
   if (section === 'trainer-clients')
@@ -210,6 +212,20 @@ export function AdminSection({
         onReport={onRecord}
         onMember={onMember}
         hidePhones={user.role === 'administrator'}
+        allowedTargets={adminSections
+          .filter(
+            (s) =>
+              canOpenModule(user.role, s.id) &&
+              (s.id !== 'members' || roles.find((r) => r.id === user.role)?.canViewMembers),
+          )
+          .map((s) => s.id)}
+        navigate={(section, ...args) => {
+          if (
+            canOpenModule(user.role, section) &&
+            (section !== 'members' || roles.find((r) => r.id === user.role)?.canViewMembers)
+          )
+            navigate(section, ...args);
+        }}
       />
     );
   if (section === 'bar')
@@ -256,9 +272,8 @@ export function AdminSection({
     <section className="panel ws-panel-body ws-stack">
       <h2>{adminSections.find((value) => value.id === section)?.label}</h2>
       <p>
-        {section === 'reviews'
-          ? 'Ссылка на отзывы в новом источнике возвращает ошибку 404. Состав страницы будет уточнён.'
-          : 'В новом источнике этот раздел недоступен. Его экраны будут разработаны после уточнения требований.'}
+        В новом источнике этот раздел недоступен. Его экраны будут разработаны после уточнения
+        требований.
       </p>
       <SectionLinks ids={['directories', 'crm']} navigate={navigate} />
       <Button variant="secondary" onClick={onBack}>

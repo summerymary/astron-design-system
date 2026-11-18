@@ -1,3 +1,5 @@
+import { ClientLink } from '../components/RecordActions';
+import { Field } from '../components/Field';
 import { clientName } from '../lib/client-display';
 import { demoStamp, nextDemoNow } from '../lib/demo-clock';
 import { useCallback, useEffect, useState } from 'react';
@@ -150,11 +152,7 @@ export function CashWorkspace({
   const openClient = (row: CashEvent) => {
     const member = members.find((member) => String(member.id) === row.memberId);
     if (member)
-      return (
-        <button className="cash-text-button" onClick={() => onMember(member)}>
-          {clientName(member)}
-        </button>
-      );
+      return <ClientLink onClick={() => onMember(member)}>{clientName(member)}</ClientLink>;
     return row.client;
   };
   return (
@@ -178,8 +176,7 @@ export function CashWorkspace({
       <section className="panel ws-panel cash-main-panel">
         <div className="cash-filters">
           {tab === 'journal' && (
-            <label className="form-field">
-              <span>Дата</span>
+            <Field className="form-field" label={<> Дата </>}>
               <input
                 type="date"
                 value={date}
@@ -190,20 +187,18 @@ export function CashWorkspace({
                   if (!date) setDate(TODAY);
                 }}
               />
-            </label>
+            </Field>
           )}
-          <label className="form-field">
-            <span>Клуб</span>
+          <Field className="form-field" label={<> Клуб </>}>
             <Select value={club} onChange={(e) => setClub(e.target.value)}>
               <option value="all">Все клубы</option>
               {clubs.map((name) => (
                 <option key={name}>{name}</option>
               ))}
             </Select>
-          </label>
+          </Field>
           {tab === 'journal' && (
-            <label className="form-field">
-              <span>Вид оплаты / операции</span>
+            <Field className="form-field" label={<> Вид оплаты / операции </>}>
               <Select value={payment} onChange={(e) => setPayment(e.target.value)}>
                 {cashPaymentFilters.map(([value, label]) => (
                   <option key={value} value={value}>
@@ -211,7 +206,7 @@ export function CashWorkspace({
                   </option>
                 ))}
               </Select>
-            </label>
+            </Field>
           )}
           <span className="cash-register-label">
             <Banknote size={18} />
@@ -556,8 +551,7 @@ export function CashWorkspace({
               </>
             ) : (
               <>
-                <label className="form-field">
-                  <span>Сумма, ₽</span>
+                <Field className="form-field" label={<> Сумма, ₽ </>}>
                   <input
                     type="number"
                     min="0.01"
@@ -566,16 +560,15 @@ export function CashWorkspace({
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                   />
-                </label>
-                <label className="form-field">
-                  <span>Причина</span>
+                </Field>
+                <Field className="form-field" label={<> Причина </>}>
                   <textarea
                     required
                     value={reason}
                     maxLength={300}
                     onChange={(e) => setReason(e.target.value)}
                   />
-                </label>
+                </Field>
                 <label className="cash-checkbox">
                   <input
                     type="checkbox"

@@ -1,3 +1,4 @@
+import { ReviewJournal } from '../components/ReviewJournal';
 import { ClientBookingDialog } from '../components/ClientBookingDialog';
 import { CallDialog } from '../components/CallDialog';
 import { RestoreCardDialog } from '../components/RestoreCardDialog';
@@ -34,7 +35,7 @@ import {
 } from '../components/ui';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { Back, DataTable, Empty, Notice, RecordForm, Tabs } from '../components/WorkspaceUI';
-import { TODAY, prettyDate } from '../data/workspace';
+import { TODAY } from '../data/workspace';
 import { clientTabs, getClientProfile } from '../data/clientProfile';
 import type { ClientTabId, SubscriptionStatus } from '../data/clientProfile';
 import type { AdminSectionId } from '../data/admin';
@@ -75,6 +76,7 @@ export function ClientProfile({
   visits,
   clubName,
   canOperate,
+  onCancelVisit,
   canSell = false,
   user,
   scenario,
@@ -90,6 +92,7 @@ export function ClientProfile({
   visits: Visit[];
   clubName: string;
   canOperate: boolean;
+  onCancelVisit?: (passId: string, visit: Visit, reason: string) => void;
   canSell?: boolean;
   user: DemoUser;
   scenario: Scenario;
@@ -437,21 +440,10 @@ export function ClientProfile({
                                     {sub.remaining === null ? 'Безлимит' : sub.remaining}
                                   </strong>
                                 </div>
+                                <span className="client-membership-open" aria-hidden="true">
+                                  Подробнее →
+                                </span>
                               </button>
-                              <details className="client-membership-details ws-disclosure">
-                                <summary>Подробнее</summary>
-                                <dl className="ws-facts">
-                                  <Fact label="Покупка">{sub.boughtAt}</Fact>
-                                  <Fact label="Активация">
-                                    {sub.activatedAt || 'Не активирован'}
-                                  </Fact>
-                                  <Fact label="Действует до">
-                                    {sub.endsAt || 'Срок начнётся после активации'}
-                                  </Fact>
-                                  <Fact label="Посещений использовано">{sub.used}</Fact>
-                                  <Fact label="Номер">{sub.id}</Fact>
-                                </dl>
-                              </details>
                             </li>
                           ))}
                         </ul>
@@ -665,22 +657,12 @@ export function ClientProfile({
                     />
                   )}
                   {tab === 'reviews' && (
-                    <DataTable
+                    <ReviewJournal
                       rows={(data['client-reviews'] || []).filter(
                         (r) => r.memberId === String(member.id),
                       )}
-                      columns={[
-                        { key: 'date', label: 'Дата', render: (r) => prettyDate(r.date) },
-                        { key: 'text', label: 'Отзыв' },
-                        { key: 'rating', label: 'Оценка' },
-                        { key: 'operator', label: 'Оператор' },
-                      ]}
-                      empty={
-                        <EmptyTab
-                          title="Отзывов пока нет"
-                          description="Отзывы клиента будут собраны в этом разделе."
-                        />
-                      }
+                      members={[member]}
+                      showClient={false}
                     />
                   )}
                   {tab === 'bookings' && !!eventBookings.length && (
@@ -866,6 +848,7 @@ export function ClientProfile({
           members={members}
           visits={visits}
           canOperate={canOperate}
+          onCancelVisit={onCancelVisit}
           onClose={() => setOpenedPassId(null)}
         />
       )}

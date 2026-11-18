@@ -1,3 +1,4 @@
+import { SegmentedFilter } from '../components/WorkspaceUI';
 import { clientName } from '../lib/client-display';
 import { useState } from 'react';
 import { MembershipTag } from '../components/MembershipTag';
@@ -106,21 +107,18 @@ export function Overview({
             title="Ритм клуба"
             subtitle="Посещения за период"
             action={
-              <div className="small-segment" aria-label="Период посещений">
-                {(['week', 'month'] as const).map((p) => (
-                  <button
-                    key={p}
-                    onClick={() => {
-                      setPeriod(p);
-                      setBar(null);
-                    }}
-                    aria-pressed={period === p}
-                    className={period === p ? 'selected' : ''}
-                  >
-                    {p === 'week' ? 'Неделя' : 'Месяц'}
-                  </button>
-                ))}
-              </div>
+              <SegmentedFilter
+                label="Период посещений"
+                items={[
+                  { id: 'week', label: 'Неделя' },
+                  { id: 'month', label: 'Месяц' },
+                ]}
+                value={period}
+                onChange={(value) => {
+                  setPeriod(value as 'week' | 'month');
+                  setBar(null);
+                }}
+              />
             }
           />
           <div className="chart-summary">

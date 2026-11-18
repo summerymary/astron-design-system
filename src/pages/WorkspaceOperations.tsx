@@ -1,3 +1,4 @@
+import { Field } from '../components/Field';
 import { accessWindowLabel } from '../lib/registration';
 import { Select } from '../components/Select';
 import { useCallback, useState } from 'react';
@@ -18,7 +19,7 @@ import {
   Tabs,
 } from '../components/WorkspaceUI';
 import type { Navigate } from '../components/WorkspaceUI';
-import type { DemoRecord, Field } from '../data/workspace';
+import type { DemoRecord, Field as FieldDefinition } from '../data/workspace';
 import { money, TODAY } from '../data/workspace';
 import { inventoryStock, validatePlan } from '../lib/workspace-rules';
 import { membershipKinds } from '../data/membership-kinds';
@@ -29,7 +30,7 @@ import type { SaleSectionId } from '../lib/sale-catalog';
 import { quantityLabel } from '../data/membership-kinds';
 import { matchesSearch } from '../lib/directory-search';
 
-const clubField: Field = {
+const clubField: FieldDefinition = {
   key: 'club',
   label: 'Клуб',
   options: ['Центральный', 'Парк', 'Речной'],
@@ -44,7 +45,7 @@ const planSteps = [
   'Бонусы',
   'Дополнительно',
 ];
-const planFields: Field[][] = [
+const planFields: FieldDefinition[][] = [
   [
     {
       key: 'kind',
@@ -197,8 +198,7 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
               <div className="ws-fields">
                 {step === 'Основное' && (
                   <>
-                    <label className="form-field">
-                      <span>Раздел каталога</span>
+                    <Field className="form-field" label={<> Раздел каталога </>}>
                       <Select
                         value={planSaleSection(draft)}
                         onChange={(e) =>
@@ -217,9 +217,8 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
                             </option>
                           ))}
                       </Select>
-                    </label>
-                    <label className="form-field">
-                      <span>Цвет карты</span>
+                    </Field>
+                    <Field className="form-field" label={<> Цвет карты </>}>
                       <Select
                         value={draft.kindId || 'gym'}
                         onChange={(e) => {
@@ -233,9 +232,8 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
                           </option>
                         ))}
                       </Select>
-                    </label>
-                    <label className="form-field">
-                      <span>Категория</span>
+                    </Field>
+                    <Field className="form-field" label={<> Категория </>}>
                       <Select
                         value={draft.category || ''}
                         onChange={(e) => setDraft({ ...draft, category: e.target.value })}
@@ -247,7 +245,7 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
                           </option>
                         ))}
                       </Select>
-                    </label>
+                    </Field>
                   </>
                 )}
                 {planFields[planSteps.indexOf(step)].map((field) => (
@@ -519,8 +517,7 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
                 {selected ? `Категория: ${selected.name}` : 'Категории и группировка'}
               </summary>
               <div className="ws-toolbar membership-category-toolbar">
-                <label className="form-field">
-                  <span>Категория</span>
+                <Field className="form-field" label={<> Категория </>}>
                   <Select
                     value={category || ''}
                     onChange={(e) => setCategory(e.target.value || null)}
@@ -532,7 +529,7 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
                       </option>
                     ))}
                   </Select>
-                </label>
+                </Field>
                 <Button variant="secondary" onClick={() => setCategoryForm('new')}>
                   <Plus size={15} />
                   Категория
@@ -753,13 +750,12 @@ export function BarWorkspace({
                 </div>
               ))}
             </div>
-            <label className="form-field">
-              <span>Оплата</span>
+            <Field className="form-field" label={<> Оплата </>}>
               <Select value={method} onChange={(e) => setMethod(e.target.value)}>
                 <option>Карта</option>
                 <option>Наличные</option>
               </Select>
-            </label>
+            </Field>
             <div className="ws-total">
               <span>Итого</span>
               <strong>{money(total)}</strong>
@@ -839,7 +835,7 @@ export function InventoryWorkspace({
     setOpened(null);
     setPosting(false);
   }, []);
-  const fields: Field[] = [
+  const fields: FieldDefinition[] = [
     { key: 'name', label: 'Номер / название документа', required: true },
     {
       key: 'type',

@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { Search, X } from 'lucide-react';
 import { adminSections } from '../data/admin';
 import type { AdminSectionId } from '../data/admin';
 import type { UserRole } from '../types';
 import { canOpenModule, isManagementRole } from '../lib/staff-rules';
-import { Empty, LinkCards } from '../components/WorkspaceUI';
+import { Empty, LinkCards, SearchBox } from '../components/WorkspaceUI';
 import { Button } from '../components/ui';
 import '../styles/sections.css';
 
@@ -85,25 +84,12 @@ export function SectionsPage({
   return (
     <div className="sections-page">
       <div className="sections-search-bar">
-        <div className="sections-search" role="search">
-          <Search size={20} aria-hidden="true" />
-          <input
-            type="search"
-            aria-label="Поиск раздела"
-            placeholder="Название раздела или задача"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-          />
-          {query && (
-            <button
-              className="icon-button"
-              aria-label="Очистить поиск разделов"
-              onClick={() => setQuery('')}
-            >
-              <X size={18} />
-            </button>
-          )}
-        </div>
+        <SearchBox
+          label="Поиск раздела"
+          placeholder="Название раздела или задача"
+          value={query}
+          onChange={setQuery}
+        />
         <span className="sections-count" role="status">
           {query.trim() ? 'Найдено' : 'Доступно'}: {count}
         </span>

@@ -1,3 +1,4 @@
+import { Field } from '../components/Field';
 import { Select } from '../components/Select';
 import { useState } from 'react';
 import {
@@ -26,6 +27,8 @@ import type { ThemeToken } from '../lib/theme';
 import { membershipKinds, quantityLabel } from '../data/membership-kinds';
 import { MembershipTag } from '../components/MembershipTag';
 import { MembershipCard } from '../components/MembershipCard';
+import { CatalogSectionCard } from '../components/CatalogSectionCard';
+import { saleSections } from '../lib/sale-catalog';
 const palette = [
   {
     name: 'Главное действие',
@@ -245,8 +248,9 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
               <p>
                 Крупная карта помогает выбрать абонемент: на ней название, назначение, срок или
                 остаток посещений. В карточке клиента абонементы показаны компактным списком:
-                название, статус, срок и остаток, а подробности раскрываются по нажатию. В журнале
-                посещений используем только цветные буквы, чтобы строки оставались компактными.
+                название, статус, срок и остаток на прозрачном фоне. Вся строка открывает одно окно
+                с датами, историей посещений и действиями. В журнале посещений используем только
+                цветные буквы, чтобы строки оставались компактными.
               </p>
               <div className="plastic-card-grid">
                 {membershipKinds.map((kind) => (
@@ -273,8 +277,22 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                 других темах цвета карт остаются прежними. Гостевой визит показан очень светлым.
                 Каталог и продажа используют одинаковые разделы: абонементы, персональный тренинг,
                 корпоративные абонементы, исключения, товары и услуги. Раздел определяет место
-                предложения в каталоге, а цвет карты можно выбрать отдельно.
+                предложения в каталоге, а цвет карты можно выбрать отдельно. В продаже разделы
+                собраны сеткой: три колонки на широком экране, две на среднем и одна на телефоне. В
+                истории абонемента отмена ошибочного посещения требует причины и подтверждения,
+                возвращает списание и сохраняется в истории. Договор и печатный вид открываются
+                отдельными кнопками; печатается только документ.
               </p>
+            </div>
+            <div className="sale-section-grid" aria-label="Пример разделов продажи">
+              {saleSections.map((section) => (
+                <CatalogSectionCard
+                  key={section.id}
+                  id={section.id}
+                  count={section.id === 'memberships' ? 7 : 1}
+                  onClick={() => onNotify(`Выбран раздел «${section.name}»`)}
+                />
+              ))}
             </div>
             <div className="palette-guidance">
               <div>
@@ -483,17 +501,15 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
               action={<span className="ds-section-number">02 / ВВОД ДАННЫХ</span>}
             />
             <div className="component-panel inputs-showcase">
-              <label className="form-field">
-                <span>Фамилия, имя, отчество</span>
+              <Field className="form-field" label={<> Фамилия, имя, отчество </>}>
                 <input
                   placeholder="Смирнова Анна Андреевна"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                 />
                 <small>Полное ФИО клиента.</small>
-              </label>
-              <label className="form-field">
-                <span>Абонемент</span>
+              </Field>
+              <Field className="form-field" label={<> Абонемент </>}>
                 <Select value={selectedPlan} onChange={(e) => setSelectedPlan(e.target.value)}>
                   {membershipKinds.map((kind) => (
                     <option key={kind.id}>{kind.name}</option>
@@ -503,12 +519,11 @@ export function DesignSystem({ onNotify }: { onNotify: (text: string) => void })
                   Стрелки — выбор, Enter — подтвердить, Escape — закрыть. В длинных списках
                   появляется поиск.
                 </small>
-              </label>
-              <label className="form-field field-error">
-                <span>Email</span>
+              </Field>
+              <Field className="form-field field-error" label={<> Email </>}>
                 <input defaultValue="anna@" aria-invalid="true" aria-describedby="ds-email-error" />
                 <small id="ds-email-error">Пример ошибки: проверьте адрес почты.</small>
-              </label>
+              </Field>
               <div className="selection-examples">
                 <Switch checked={toggle} onChange={setToggle} label="Уведомления" />
                 <label className="checkbox-field">

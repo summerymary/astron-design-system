@@ -1,3 +1,6 @@
+import { Field } from '../components/Field';
+import { RowActions } from '../components/RecordActions';
+import { StatisticsWorkspace } from './StatisticsWorkspace';
 import { demoClubs } from '../data/roles';
 import { Select } from '../components/Select';
 import { quantityLabel } from '../data/membership-kinds';
@@ -76,7 +79,33 @@ type Drag = {
   target: DemoRecord | null;
 };
 
-export function ScheduleWorkspace({
+export function ScheduleWorkspace(props: Parameters<typeof ScheduleCalendar>[0]) {
+  const planningId = props.recordId?.replace(/^planning:/, '');
+  if (
+    props.recordId?.startsWith('planning:') &&
+    ['gtrener_busy', 'free_trener_find'].includes(planningId || '') &&
+    isManagementRole(props.user.role) &&
+    props.onRecord
+  ) {
+    return (
+      <div className="ws-stack">
+        <Button variant="secondary" onClick={() => props.onRecord!(null)}>
+          Вернуться в календарь
+        </Button>
+        <StatisticsWorkspace
+          members={props.members}
+          visits={[]}
+          reportId={planningId!}
+          onReport={(id) => props.onRecord!(id ? 'planning:' + id : null)}
+          onMember={props.onMember}
+        />
+      </div>
+    );
+  }
+  return <ScheduleCalendar {...props} />;
+}
+
+function ScheduleCalendar({
   members,
   onRegister,
   navigate,
@@ -745,8 +774,7 @@ export function ScheduleWorkspace({
       {filtersOpen && (
         <Modal title="Фильтры расписания" onClose={() => setFiltersOpen(false)}>
           <div className="schedule-filter-form">
-            <label className="form-field">
-              <span>Клуб расписания</span>
+            <Field className="form-field" label={<> Клуб расписания </>}>
               <Select
                 value={club}
                 disabled={isTrainer}
@@ -762,18 +790,16 @@ export function ScheduleWorkspace({
                     <option key={item.id}>{item.shortName}</option>
                   ))}
               </Select>
-            </label>
-            <label className="form-field">
-              <span>Зал</span>
+            </Field>
+            <Field className="form-field" label={<> Зал </>}>
               <Select value={room} onChange={(e) => setRoom(e.target.value)}>
                 <option>Все залы</option>
                 {activeRooms.map((r) => (
                   <option key={r.id}>{r.name}</option>
                 ))}
               </Select>
-            </label>
-            <label className="form-field">
-              <span>Тренер</span>
+            </Field>
+            <Field className="form-field" label={<> Тренер </>}>
               <Select
                 value={trainer}
                 disabled={isTrainer}
@@ -784,26 +810,24 @@ export function ScheduleWorkspace({
                   <option key={t}>{t}</option>
                 ))}
               </Select>
-            </label>
+            </Field>
             {view !== 'Список' && (
-              <label className="form-field">
-                <span>Размер занятий</span>
+              <Field className="form-field" label={<> Размер занятий </>}>
                 <Select value={scale} onChange={(e) => setScale(e.target.value)}>
                   <option>Весь день</option>
                   <option>Комфортно</option>
                   <option>Крупнее</option>
                 </Select>
-              </label>
+              </Field>
             )}
             {canCreate && !isTrainer && (
-              <label className="form-field">
-                <span>Шаг переноса</span>
+              <Field className="form-field" label={<> Шаг переноса </>}>
                 <Select value={step} onChange={(e) => setStep(e.target.value)}>
                   <option value="5">5 минут</option>
                   <option value="15">15 минут</option>
                   <option value="30">30 минут</option>
                 </Select>
-              </label>
+              </Field>
             )}
           </div>
           {canCreate && !isTrainer && (
@@ -893,6 +917,21 @@ export function ScheduleWorkspace({
             )}
             {isAdmin && filterToggle}
             <div className="calendar-create">
+              {isManagementRole(user.role) && onRecord && !fullscreen && (
+                <RowActions
+                  label="Планирование тренеров"
+                  actions={[
+                    {
+                      label: 'Занятость тренеров',
+                      onClick: () => onRecord('planning:gtrener_busy'),
+                    },
+                    {
+                      label: 'Найти свободное время',
+                      onClick: () => onRecord('planning:free_trener_find'),
+                    },
+                  ]}
+                />
+              )}
               {canCopy && (
                 <Button variant="secondary" onClick={openWeekCopy}>
                   <Copy size={16} />
@@ -1702,11 +1741,16 @@ function EventForm({
     options?: string[],
     required = true,
   ) => (
-    <label className="form-field" key={key}>
-      <span>
-        {label}
-        {required ? ' *' : ''}
-      </span>
+    <Field
+      className="form-field"
+      key={key}
+      label={
+        <>
+          {label}
+          {required ? ' *' : ''}
+        </>
+      }
+    >
       {options ? (
         <Select
           name={key}
@@ -1738,7 +1782,7 @@ function EventForm({
           onChange={(e) => update(key, e.target.value)}
         />
       )}
-    </label>
+    </Field>
   );
   return (
     <Modal
@@ -1758,8 +1802,7 @@ function EventForm({
           if (problem) setError(problem);
         }}
       >
-        <label className="form-field">
-          <span>Шаблон тренировки</span>
+        <Field className="form-field" label={<> Шаблон тренировки </>}>
           <Select
             value={draft.templateId || ''}
             onChange={(e) => {
@@ -1776,15 +1819,14 @@ function EventForm({
                 </option>
               ))}
           </Select>
-        </label>
+        </Field>
         {field('name', 'Название')}
         <div className="calendar-form-grid">
           {field('day', 'Дата', 'date')}
           {field('time', 'Начало', 'time')}
           {field('duration', 'Длительность, мин', 'number')}
           {field('trainer', 'Тренер', 'text', trainers)}
-          <label className="form-field">
-            <span>Клуб *</span>
+          <Field className="form-field" label={<> Клуб * </>}>
             <Select
               name="club"
               value={draft.club}
@@ -1804,9 +1846,8 @@ function EventForm({
                 <option key={item.id}>{item.shortName}</option>
               ))}
             </Select>
-          </label>
-          <label className="form-field">
-            <span>Зал *</span>
+          </Field>
+          <Field className="form-field" label={<> Зал * </>}>
             <Select
               name="room"
               value={draft.room}
@@ -1830,7 +1871,7 @@ function EventForm({
                   <option key={r.id}>{r.name}</option>
                 ))}
             </Select>
-          </label>
+          </Field>
           {field('capacity', 'Количество мест', 'number')}
           {field(
             'intensity',

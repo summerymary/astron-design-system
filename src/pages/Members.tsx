@@ -1,9 +1,9 @@
 import { Select } from '../components/Select';
 import { useMemo, useState } from 'react';
-import { ArrowDown, ArrowUpRight, Search, SlidersHorizontal, X } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Search, SlidersHorizontal } from 'lucide-react';
 import type { Member, MemberStatus } from '../types';
 import { Avatar, Badge, Button } from '../components/ui';
-import { Status, Tabs } from '../components/WorkspaceUI';
+import { Status, Tabs, SearchBox, SegmentedFilter } from '../components/WorkspaceUI';
 import { memberCards } from '../data/admin';
 import { searchMembers } from '../lib/member-search';
 import { MembershipTag } from '../components/MembershipTag';
@@ -60,43 +60,25 @@ export function Members({
           label="Вид клиентской базы"
         />
         {view === 'Абонементы' && (
-          <div className="clients-tabs" aria-label="Статус абонемента">
-            {tabs.map((t) => (
-              <button
-                key={t.id}
-                aria-pressed={filter === t.id}
-                className={filter === t.id ? 'selected' : ''}
-                onClick={() => setFilter(t.id)}
-              >
-                {t.title}
-                <span>
-                  {t.id === 'all'
-                    ? members.length
-                    : members.filter((m) => m.status === t.id).length}
-                </span>
-              </button>
-            ))}
-          </div>
+          <SegmentedFilter
+            label="Статус абонемента"
+            value={filter}
+            onChange={(value) => setFilter(value as MemberStatus | 'all')}
+            items={tabs.map((t) => ({
+              id: t.id,
+              label: t.title,
+              count:
+                t.id === 'all' ? members.length : members.filter((m) => m.status === t.id).length,
+            }))}
+          />
         )}
         <div className="table-toolbar">
-          <label className="search-field">
-            <Search size={17} />
-            <input
-              aria-label="Поиск клиентов"
-              placeholder="ФИО, телефон, email или карта"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            {query && (
-              <button
-                className="icon-button"
-                onClick={() => setQuery('')}
-                aria-label="Очистить поиск"
-              >
-                <X size={14} />
-              </button>
-            )}
-          </label>
+          <SearchBox
+            label="Поиск клиентов"
+            placeholder="ФИО, телефон, email или карта"
+            value={query}
+            onChange={setQuery}
+          />
           <Button
             variant="secondary"
             onClick={() => setFiltersOpen(!filtersOpen)}

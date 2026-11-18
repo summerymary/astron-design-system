@@ -1,3 +1,4 @@
+import { Field } from '../components/Field';
 import { clientName } from '../lib/client-display';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -285,10 +286,10 @@ export function MessagesWorkspace({
                   </div>
                 )}
                 <div className="messenger-compose-row">
-                  <label className="form-field">
-                    <span className="sr-only">
-                      {editing ? 'Текст редактируемого сообщения' : 'Сообщение клиенту'}
-                    </span>
+                  <Field
+                    className="form-field"
+                    label={<>{editing ? 'Текст редактируемого сообщения' : 'Сообщение клиенту'}</>}
+                  >
                     <textarea
                       ref={input}
                       rows={2}
@@ -313,7 +314,7 @@ export function MessagesWorkspace({
                         }
                       }}
                     />
-                  </label>
+                  </Field>
                   <Button
                     type="submit"
                     aria-label={editing ? 'Сохранить сообщение' : 'Отправить сообщение'}

@@ -1,3 +1,4 @@
+import { Field } from '../components/Field';
 import { useCallback, useState } from 'react';
 import { ArrowDown, ArrowUp, ChevronRight, Plus, Settings2, X } from 'lucide-react';
 import { Button, Modal } from '../components/ui';
@@ -180,8 +181,7 @@ export function CrmScenarios({ onLeads }: { onLeads: (pipeline: string, stage: s
               save();
             }}
           >
-            <label className="form-field">
-              <span>Название сценария</span>
+            <Field className="form-field" label={<> Название сценария </>}>
               <input
                 required
                 value={draft.name}
@@ -189,15 +189,14 @@ export function CrmScenarios({ onLeads }: { onLeads: (pipeline: string, stage: s
                 placeholder="Например, Запись на пробное занятие"
                 onChange={(e) => setDraft({ ...draft, name: e.target.value })}
               />
-            </label>
-            <label className="form-field">
-              <span>Для чего нужен этот сценарий</span>
+            </Field>
+            <Field className="form-field" label={<> Для чего нужен этот сценарий </>}>
               <textarea
                 value={draft.description || ''}
                 maxLength={500}
                 onChange={(e) => setDraft({ ...draft, description: e.target.value })}
               />
-            </label>
+            </Field>
             <div>
               <h3>Статусы заявки по порядку</h3>
               <p className="crm-caption">
@@ -211,8 +210,7 @@ export function CrmScenarios({ onLeads }: { onLeads: (pipeline: string, stage: s
                   <span className="crm-step-number" aria-hidden="true">
                     {index + 1}
                   </span>
-                  <label className="form-field">
-                    <span className="sr-only">Статус {index + 1}</span>
+                  <Field className="form-field" label={<> Статус {index + 1} </>}>
                     <input
                       required
                       maxLength={80}
@@ -228,7 +226,7 @@ export function CrmScenarios({ onLeads }: { onLeads: (pipeline: string, stage: s
                       <small>Особый статус, вне основного пути</small>
                     )}
                     {original && index === 0 && <small>Стартовый статус — сохраняется</small>}
-                  </label>
+                  </Field>
                   <div className="crm-stage-controls">
                     <button
                       type="button"
@@ -275,8 +273,7 @@ export function CrmScenarios({ onLeads }: { onLeads: (pipeline: string, stage: s
                 переименовать.
               </p>
             )}
-            <label className="form-field">
-              <span>Доступность сценария</span>
+            <Field className="form-field" label={<> Доступность сценария </>}>
               <Select
                 value={draft.status}
                 onChange={(e) => setDraft({ ...draft, status: e.target.value })}
@@ -284,7 +281,7 @@ export function CrmScenarios({ onLeads }: { onLeads: (pipeline: string, stage: s
                 <option value="Активна">Активен</option>
                 <option>В архиве</option>
               </Select>
-            </label>
+            </Field>
             {error && (
               <p className="form-error" role="alert">
                 {error}
