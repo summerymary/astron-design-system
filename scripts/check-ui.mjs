@@ -14,6 +14,63 @@ const load = async (path) =>
   );
 const { statusTone, feedbackTone } = await load('src/lib/ui-semantics.ts');
 const { lockScroll } = await load('src/lib/overlay.ts');
+const { chartTone, chartScale, chartValueState, chartCategory } = await load(
+  'src/lib/chart-display.ts',
+);
+assert.equal(chartCategory('06.11.2026', '2026-11-06', 'lines'), '06');
+assert.equal(chartCategory('2026-11', '2026-11', 'columns'), 'нояб.');
+assert.equal(chartCategory('Тренер', 'trainer-1', 'bars'), 'Тренер');
+assert.notEqual(
+  chartCategory('01.11.2026', '2026-11-01', 'lines'),
+  chartCategory('02.11.2026', '2026-11-02', 'lines'),
+  'Daily observations need distinct day labels, not repeated month names',
+);
+assert.equal(
+  chartValueState([null, null]),
+  'unknown',
+  'Missing observations must not be described as zero',
+);
+assert.equal(chartValueState([]), 'unknown');
+assert.equal(chartValueState([0, null, 0]), 'zero');
+assert.equal(chartValueState([1, null, 0]), 'known');
+const { displayNumber } = await load('src/lib/display-format.ts');
+const { reportFamilies, reportCategories } = await load('src/data/report-families.ts');
+assert.equal(
+  new Set(reportFamilies.flatMap((f) => f.reports.map((r) => r.id))).size,
+  48,
+  'Every source route belongs to a task family',
+);
+assert.equal(
+  reportFamilies.flatMap((f) => f.reports).length,
+  48,
+  'A source route must not have competing families',
+);
+assert.equal(reportCategories.length, 6);
+const semanticIds = ['Продлил', 'Не продлил', 'Окно ещё открыто'];
+const originalTones = new Map(semanticIds.map((id) => [id, chartTone(id)]));
+for (const ids of [semanticIds.slice(1), [...semanticIds].reverse(), [semanticIds[2]]])
+  ids.forEach((id) =>
+    assert.equal(
+      chartTone(id),
+      originalTones.get(id),
+      'Filtering and sorting cannot reassign semantic colors',
+    ),
+  );
+assert.equal(
+  new Set(semanticIds.map(chartTone)).size,
+  3,
+  'Conversion outcomes have distinct colors',
+);
+for (const maximum of [0, 1, 3, 11, 37, 101]) {
+  const axis = chartScale(maximum);
+  assert.ok(axis.maximum >= maximum);
+  assert.ok(axis.ticks.every(Number.isInteger), 'Count axes must not show fractional visits');
+  assert.ok(axis.ticks.every((n, i, a) => i === 0 || n > a[i - 1]));
+}
+assert.equal(displayNumber('2.00'), '2');
+assert.equal(displayNumber('2.50'), '2,5');
+assert.equal(displayNumber('+7 999 123-45-67'), '+7 999 123-45-67');
+assert.equal(displayNumber('2026-11-06'), '2026-11-06');
 for (const order of [
   [0, 1],
   [1, 0],

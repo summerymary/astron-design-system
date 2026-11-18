@@ -27,6 +27,9 @@ const { statisticsReports, reportPending, catalogueReports } = await import(
 const { statisticsCharts } = await import(
   await load(new URL('../src/lib/statistics-charts.ts', import.meta.url))
 );
+const { transferReportFilters } = await import(
+  await load(new URL('../src/lib/statistics-navigation.ts', import.meta.url))
+);
 const { createWorkspaceData } = await import(
   await load(new URL('../src/data/workspace.ts', import.meta.url))
 );
@@ -51,6 +54,72 @@ const input = {
   at: '2026-11-06T14:35',
 };
 const before = JSON.stringify(input);
+const contextFilters = {
+  ...f,
+  from: '2026-10-01',
+  to: '2026-11-05',
+  club: 'Парк',
+  criterion: 'visit',
+};
+const staleFilters = { ...f, from: '2026-11-01', club: 'all' };
+const transferred = transferReportFilters(
+  'clients_new',
+  'newclients_source',
+  contextFilters,
+  staleFilters,
+);
+assert.equal(
+  transferred.club,
+  'all',
+  'A registration cohort must not acquire a hidden club restriction',
+);
+assert.equal(
+  transferReportFilters('unique_visits', 'timetoabstat', contextFilters, staleFilters).club,
+  'Парк',
+  'A compatible visit view keeps the selected club',
+);
+assert.equal(
+  transferReportFilters('unique_visits', 'clients_gender_age', contextFilters, staleFilters).clubs,
+  'Парк',
+  'Single-club scope maps into the audience multi-club control',
+);
+assert.equal(
+  transferred.from,
+  '2026-10-01',
+  'Shared ranges update even after returning to a previously visited view',
+);
+assert.equal(
+  transferred.criterion,
+  'visit',
+  'The sources and list use the same new-client criterion',
+);
+const ltvHistory = transferReportFilters('clients_ltv_bydate', 'clients_ltv', contextFilters, f);
+assert.equal(ltvHistory.from, '1900-01-01');
+assert.equal(ltvHistory.to, '2026-11-05');
+const cumulativePeriod = transferReportFilters(
+  'financeresult',
+  'trener_financial_result',
+  contextFilters,
+  f,
+);
+assert.equal(cumulativePeriod.from, '2026-01-01');
+assert.equal(cumulativePeriod.to, '2026-11-30');
+const newCriterionRows = buildStatistics('clients_new', { ...f, criterion: 'visit' }, input)
+  .blocks[0].rows;
+const legacyCriterionRows = buildStatistics('newclients', { ...f, criterion: 'visit' }, input)
+  .blocks[0].rows;
+assert.deepEqual(
+  legacyCriterionRows.map((r) => r.memberId),
+  newCriterionRows.map((r) => r.memberId),
+);
+assert.equal(
+  buildStatistics('newclients_source', { ...f, criterion: 'visit' }, input).blocks[0].rows.reduce(
+    (n, r) => n + Number(r.count),
+    0,
+  ),
+  newCriterionRows.length,
+  'Source groups cover the same selected client cohort',
+);
 for (const report of statisticsReports) {
   const result = buildStatistics(report.id, f, input);
   assert.ok(result.pending || result.blocks.length, report.id);
@@ -311,6 +380,196 @@ assert.equal(discounts[0].original, '420000');
 assert.equal(discounts[0].discount, '30000');
 assert.equal(discounts[0].amount, '390000');
 assert.equal(discounts.length, 1, 'Unknown historical discounts are excluded');
+const financialMember = {
+  ...input.members[0],
+  id: 90001,
+  name: 'Демо Покупатель',
+  fullName: 'Демо Покупатель',
+  plan: 'Групповые тренировки',
+  joined: '02.11.2026',
+  expires: '03.11.2026',
+  birthDate: '2000-11-07',
+  gender: 'Мужской',
+};
+const financialInput = {
+  ...input,
+  members: [financialMember],
+  visits: [],
+  data: {
+    ledger: [
+      {
+        id: 'first',
+        memberId: '90001',
+        name: 'Групповые тренировки',
+        category: 'Абонементы',
+        date: '2026-11-02',
+        club: 'Центральный',
+        amount: '100',
+        basePrice: '100',
+        discountAmount: '0',
+        method: 'Карта',
+      },
+      {
+        id: 'second',
+        memberId: '90001',
+        name: 'Групповые тренировки',
+        category: 'Абонементы',
+        date: '2026-11-03',
+        club: 'Центральный',
+        amount: '300',
+        basePrice: '350',
+        discountAmount: '50',
+        discountName: 'Демо акция',
+        method: 'Лицевой счёт',
+      },
+      {
+        id: 'gift-only',
+        memberId: '90001',
+        name: 'Товар',
+        category: 'Товары',
+        date: '2026-11-04',
+        club: 'Парк',
+        amount: '90',
+        method: 'Подарочная карта',
+      },
+    ],
+    'cash-events': [
+      { id: 'deposit', kind: 'deposit', date: '2026-11-03', club: 'Центральный', amount: '30' },
+      {
+        id: 'withdrawal',
+        kind: 'withdrawal',
+        date: '2026-11-04',
+        club: 'Центральный',
+        amount: '20',
+      },
+      {
+        id: 'refund',
+        kind: 'refund',
+        date: '2026-11-05',
+        club: 'Центральный',
+        amount: '10',
+        method: 'Карта',
+      },
+    ],
+  },
+};
+const financialBefore = JSON.stringify(financialInput);
+const newSales = buildStatistics(
+  'selling_clients_new',
+  { ...f, criterion: 'purchase' },
+  financialInput,
+);
+assert.equal(newSales.blocks[0].rows[0].count, '1', 'One first membership per new client');
+assert.equal(newSales.blocks[0].rows[0].amount, '10000');
+const salesBreakdown = buildStatistics('selling_stat', f, financialInput);
+const planSales = salesBreakdown.blocks[0].rows.find((r) => r.name === 'Групповые тренировки');
+assert.equal(planSales.card, '10000');
+assert.equal(planSales.account, '30000');
+assert.equal(planSales.other, '0');
+assert.equal(
+  salesBreakdown.blocks.find((b) => b.detail === `${planSales.detailKey}:buyers`).rows.length,
+  1,
+);
+assert.equal(
+  buildStatistics('selling_stat', { ...f, includeMemberships: '0' }, financialInput).blocks[0].rows
+    .length,
+  1,
+);
+const cashReport = buildStatistics('kassacontrol', f, financialInput);
+assert.equal(
+  cashReport.blocks[0].rows.reduce((n, r) => n + Number(r.income) - Number(r.expense), 0),
+  10000,
+  'Account/gift redemption is not another cash inflow',
+);
+assert.equal(
+  buildStatistics('kassacontrol', { ...f, payment: 'withdrawal' }, financialInput).blocks[0].rows
+    .length,
+  1,
+);
+const buyersAge = buildStatistics('clients_sell_gender_age', f, financialInput);
+assert.equal(buyersAge.blocks[0].rows[0].name, '25 лет', 'Age at end of interval before birthday');
+assert.equal(buyersAge.blocks[0].rows[0].male, '49000', 'Buyer pyramid uses money, not people');
+assert.equal(Number(buyersAge.blocks[1].rows[0].male), Math.round(49000 / 3));
+assert.equal(
+  buildStatistics('clients_sell_gender_age', f, {
+    ...financialInput,
+    members: [{ ...financialMember, birthDate: '1000-01-01' }],
+  }).blocks[0].rows[0].name,
+  'Возраст не известен',
+);
+const discountSummary = buildStatistics('clients_sell_discount', f, financialInput).blocks.find(
+  (b) => b.title === 'Продажи по скидкам',
+);
+assert.deepEqual(
+  discountSummary.rows.map((r) => r.name).sort(),
+  ['Без скидки', 'Демо акция', 'Скидка не известна'].sort(),
+);
+const financeReport = buildStatistics(
+  'financeresult',
+  { ...f, club: 'Центральный' },
+  {
+    ...financialInput,
+    data: {
+      'finance-revenue': [
+        {
+          id: 'rev',
+          date: '2026-11-03',
+          club: 'Центральный',
+          kind: 'group',
+          amount: '200',
+          visits: '4',
+        },
+      ],
+      'trainer-costs': [
+        { id: 'cost', date: '2026-11-03', club: 'Центральный', kind: 'group', amount: '50' },
+      ],
+    },
+  },
+);
+assert.equal(financeReport.blocks[0].rows.find((r) => r.id === 'group:profit').total, '15000');
+assert.equal(
+  financeReport.blocks[0].rows.find((r) => r.id === 'personal:profit').total,
+  '',
+  'Unknown cost/revenue must not become profit zero',
+);
+const advance = buildStatistics('selling_clients_secondary', f, {
+  ...financialInput,
+  members: [{ ...financialMember, joined: '01.10.2026' }],
+  data: {
+    'report-pass-values': [
+      { id: 'value', passId: 'S-90001-01', price: '100', club: 'Центральный' },
+    ],
+    'issued-plans': [
+      {
+        id: 'advance',
+        memberId: '90001',
+        name: 'Групповые тренировки',
+        kindId: 'group',
+        purchasePrice: '300',
+        issued: '2026-10-28',
+        club: 'Центральный',
+        visits: '12',
+      },
+    ],
+    'pass-usage': [
+      {
+        id: 'usage',
+        memberId: '90001',
+        passId: 'advance',
+        used: '0',
+        remaining: '12',
+        activatedAt: '04.11.2026',
+        endsAt: '04.12.2026',
+      },
+    ],
+  },
+});
+assert.equal(
+  advance.blocks[0].rows.find((r) => r.memberId === '90001').status,
+  'Продлил',
+  'Advance purchase counts when its new term exceeds old term',
+);
+assert.equal(JSON.stringify(financialInput), financialBefore);
 assert.equal(
   buildStatistics('feedbacks', { ...f, operator: 'Другой' }, input).blocks[0].rows.length,
   0,
@@ -457,7 +716,7 @@ const planCharts = statisticsCharts(
 );
 assert.deepEqual(
   planCharts.map((c) => c.series[0].key),
-  ['amount', 'count'],
+  ['amount', 'count', 'share'],
 );
 const chronological = { ...f, from: '2026-09-01' };
 const revenue = statisticsCharts(
@@ -569,7 +828,11 @@ assert.equal(emptyUnique.blocks[0].rows.find((r) => r.id === 'network-total').av
 assert.equal(emptyUnique.metrics[0].value, 0);
 
 const ratingCards = catalogueReports(statisticsReports);
-assert.equal(ratingCards.length, 46, 'Three source rating routes become one catalogue entry');
+assert.equal(
+  ratingCards.length,
+  18,
+  'All source routes remain available in eighteen task families',
+);
 assert.equal(
   ratingCards.filter((r) => ['clients_rating', 'clients_rating_visit', 'notcame'].includes(r.id))
     .length,
@@ -1128,6 +1391,302 @@ assert.equal(groupedGp.blocks[0].rows.length, 1);
 assert.equal(groupedGp.blocks[0].rows[0].lessons, '2');
 assert.equal(groupedGp.blocks[0].rows[0].tariff, '', 'Unknown trainer rate remains unknown');
 
+// Follow-up screenshot contracts: distribution, observation dates and historical cohorts.
+const ltvSummary = buildStatistics('clients_ltv', f, input).blocks.find(
+  (b) => b.title === 'Сводка LTV',
+);
+const ltvAmounts = buildStatistics('clients_ltv', f, input).blocks[0].rows.map((r) =>
+  Number(r.amount),
+);
+assert.equal(
+  Number(ltvSummary.rows.find((r) => r.id === 'minimum').amount),
+  Math.min(...ltvAmounts),
+);
+assert.equal(
+  Number(ltvSummary.rows.find((r) => r.id === 'maximum').amount),
+  Math.max(...ltvAmounts),
+);
+assert.equal(ltvSummary.rows.find((r) => r.id === 'average').amount, '140000');
+const futureRevenue = buildStatistics(
+  'finbyyear',
+  { ...f, from: '2026-01-01', to: '2026-12-31' },
+  input,
+);
+assert.equal(futureRevenue.blocks[0].rows.find((r) => r.id === '2026-12').amount, '');
+const futureChart = statisticsCharts('finbyyear', futureRevenue, f)[0];
+assert.equal(futureChart.rows.find((r) => r.id === '2026-12').values[0], null);
+assert.equal(
+  futureChart.reference.value,
+  futureChart.rows.reduce((n, r) => n + (r.values[0] || 0), 0) / 11,
+  'Future month does not lower average',
+);
+const mix = buildStatistics('finbyyear_by_abonements', f, input).blocks[0].rows;
+assert.ok(Math.abs(mix.reduce((n, r) => n + Number(r.countShare), 0) - 100) < 0.0001);
+assert.ok(Math.abs(mix.reduce((n, r) => n + Number(r.share), 0) - 100) < 0.0001);
+const obligationSummary = noValuation.blocks.find(
+  (b) => b.title === 'Сводка обязательств перед клиентами',
+);
+assert.ok(
+  obligationSummary.rows
+    .filter((r) => ['pending', 'active'].includes(r.id))
+    .every((r) => Number(r.unknown) === 0 || r.average === ''),
+  'Missing card values cannot produce a cheap average',
+);
+const counts = [0, 4, 5, 10, 20, 30, 40, 50, 60, 80];
+const frequencyMembers = counts.map((_, i) => ({
+  ...financialMember,
+  id: 91001 + i,
+  name: 'Частота ' + i,
+  fullName: 'Частота ' + i,
+  plan: 'Железная карта',
+  joined: '01.10.2026',
+  expires: '30.10.2026',
+  visits: 1,
+}));
+const frequencyInput = {
+  members: frequencyMembers,
+  visits: counts.flatMap((n, i) =>
+    Array.from({ length: n }, (_, j) => ({
+      id: i + ':' + j,
+      memberId: 91001 + i,
+      passId: 'S-' + (91001 + i) + '-01',
+      plan: 'Железная карта',
+      kind: 'gym',
+      clubId: 'central',
+      enteredAt: '2026-10-20T12:00',
+    })),
+  ),
+  data: {},
+  at: '2026-10-30T23:59',
+};
+const frequencyFilters = { ...f, from: '2026-10-01', to: '2026-10-30' };
+const frequency = buildStatistics('unlim_avg_visit', frequencyFilters, frequencyInput);
+assert.deepEqual(
+  frequency.blocks[0].rows.map((r) => Number(r.count)),
+  [2, 1, 1, 1, 1, 1, 1, 2],
+  'Every boundary is assigned once, including 50–60',
+);
+assert.equal(frequency.blocks[1].rows.find((r) => r.memberId === '91008').frequency, '50');
+const doubledPass = {
+  ...frequencyInput,
+  members: [frequencyMembers[1]],
+  visits: [{ ...frequencyInput.visits[0], memberId: 91002, passId: undefined }],
+  data: {
+    'issued-plans': [
+      {
+        id: 'overlap',
+        name: 'Железная карта',
+        memberId: '91002',
+        type: 'Безлимитный',
+        issued: '2026-10-01',
+      },
+    ],
+    'pass-usage': [
+      {
+        id: 'overlap-usage',
+        memberId: '91002',
+        passId: 'overlap',
+        used: '0',
+        remaining: 'unlimited',
+        activatedAt: '01.10.2026',
+        endsAt: '30.10.2026',
+      },
+    ],
+  },
+};
+const ambiguousFrequency = buildStatistics('unlim_avg_visit', frequencyFilters, doubledPass);
+assert.equal(
+  ambiguousFrequency.blocks[1].rows[0].days,
+  '30',
+  'Overlapping passes do not double exposure',
+);
+assert.equal(
+  ambiguousFrequency.blocks[1].rows[0].frequency,
+  '',
+  'Ambiguous legacy visit is unknown rather than zero',
+);
+const guestMember = {
+  ...financialMember,
+  id: 92001,
+  plan: 'Гостевой визит',
+  joined: '01.01.2026',
+  expires: '07.01.2026',
+};
+const guestInput = {
+  members: [guestMember],
+  visits: [],
+  at: '2026-06-01T12:00',
+  data: {
+    'report-pass-values': [
+      {
+        id: 'guest-value',
+        memberId: '92001',
+        passId: 'S-92001-01',
+        price: '0',
+        club: 'Центральный',
+      },
+    ],
+    'issued-plans': [
+      {
+        id: 'guest-paid',
+        memberId: '92001',
+        name: 'Групповые тренировки',
+        kindId: 'group',
+        purchasePrice: '1000',
+        issued: '2026-03-01',
+        club: 'Центральный',
+        visits: '12',
+      },
+    ],
+  },
+};
+const guestResult = buildStatistics(
+  'selling_clients_afterguest',
+  { ...f, from: '2026-01-01', to: '2026-06-01' },
+  guestInput,
+);
+assert.equal(
+  guestResult.blocks[0].rows[0].status,
+  'Продлил',
+  'Purchase after more than 30 days is not arbitrarily excluded',
+);
+assert.equal(guestResult.blocks.find((b) => b.title === 'Итоги по годам').rows[0].converted, '1');
+const summerInput = {
+  ...guestInput,
+  at: '2026-11-06T12:00',
+  data: {
+    'issued-plans': [
+      {
+        id: 'summer25',
+        memberId: '92001',
+        name: 'Групповые тренировки',
+        kindId: 'group',
+        issued: '2025-06-01',
+        club: 'Центральный',
+        visits: '12',
+      },
+      {
+        id: 'paid25',
+        memberId: '92001',
+        name: 'Групповые тренировки',
+        kindId: 'group',
+        issued: '2025-10-15',
+        club: 'Центральный',
+        purchasePrice: '1000',
+        visits: '12',
+      },
+      {
+        id: 'summer26',
+        memberId: '92001',
+        name: 'Групповые тренировки',
+        kindId: 'group',
+        issued: '2026-06-01',
+        club: 'Центральный',
+        visits: '12',
+      },
+    ],
+    'report-pass-values': [
+      {
+        id: 'v25',
+        memberId: '92001',
+        passId: 'summer25',
+        price: '1000',
+        club: 'Центральный',
+        summer: 'true',
+      },
+      {
+        id: 'v26',
+        memberId: '92001',
+        passId: 'summer26',
+        price: '1000',
+        club: 'Центральный',
+        summer: 'true',
+      },
+    ],
+    'pass-usage': [
+      {
+        id: 'u25',
+        memberId: '92001',
+        passId: 'summer25',
+        used: '12',
+        remaining: '0',
+        activatedAt: '01.06.2025',
+        endsAt: '30.09.2025',
+      },
+      {
+        id: 'u26',
+        memberId: '92001',
+        passId: 'summer26',
+        used: '12',
+        remaining: '0',
+        activatedAt: '01.06.2026',
+        endsAt: '30.09.2026',
+      },
+    ],
+  },
+};
+const summerResult = buildStatistics(
+  'selling_clients_secondary_summer',
+  { ...f, from: '2025-01-01' },
+  summerInput,
+);
+assert.deepEqual(
+  summerResult.blocks.find((b) => b.title === 'Итоги по годам').rows.map((r) => r.name),
+  ['2025', '2026'],
+);
+assert.equal(
+  summerResult.blocks[0].rows.find((r) => r.anchor.startsWith('2026')).status,
+  'Окно ещё открыто',
+);
+const annualFinance = buildStatistics(
+  'trener_financial_result',
+  { ...f, from: '2026-01-01', to: '2026-12-31' },
+  financeFixture,
+);
+const matrix = annualFinance.blocks.find((b) => b.title === 'Накопительный результат ПТ');
+assert.equal(matrix.rows.find((r) => r.id === 'user-trainer')['2026-11:percent'], '25');
+assert.equal(matrix.rows.find((r) => r.id === 'user-trainer')['2026-12:amount'], '');
+const emptyYearFinance = buildStatistics(
+  'trener_financial_result',
+  { ...f, from: '2025-01-01', to: '2025-12-31' },
+  financeFixture,
+);
+assert.ok(
+  emptyYearFinance.blocks
+    .find((b) => b.title === 'Накопительный результат ПТ')
+    .rows.some((r) => r.id === 'user-trainer' && r['2025-01:amount'] === ''),
+  'Empty year preserves trainer and calendar structure with unknown amounts',
+);
+const noExpiryFrequency = buildStatistics('unlim_avg_visit', frequencyFilters, {
+  ...frequencyInput,
+  members: [{ ...frequencyMembers[0], expires: '' }],
+});
+assert.equal(
+  noExpiryFrequency.metrics[2].value,
+  1,
+  'Missing unlimited duration stays in the unknown cohort',
+);
+assert.equal(noExpiryFrequency.blocks[1].rows[0].frequency, '');
+const exactGp = buildStatistics('gt_finance', f, {
+  ...input,
+  data: {
+    ...coachData,
+    events: [{ ...coachEvent, id: 'recorded-gp', kind: 'group', present: '1001' }],
+    'event-finance': [
+      {
+        id: 'event-price',
+        eventId: 'recorded-gp',
+        tariff: '600',
+        quantityRevenue: '200',
+        unlimitedRevenue: '300',
+      },
+    ],
+  },
+}).blocks[0].rows[0];
+assert.equal(exactGp.tariff, '60000');
+assert.equal(exactGp.amount, '50000');
+assert.equal(exactGp.average, '50000');
+
 console.log(
-  `Statistics: 48 definitions, 46 catalogue entries; ${48 - Object.keys(reportPending).length} demo calculations; dates, Moscow time, uniqueness, no-shows, money, occupancy, CSV and immutability passed.`,
+  `Statistics: 48 definitions, 18 catalogue entries; ${48 - Object.keys(reportPending).length} demo calculations; dates, Moscow time, uniqueness, no-shows, money, occupancy, CSV and immutability passed.`,
 );

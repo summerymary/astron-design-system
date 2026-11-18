@@ -30,6 +30,94 @@ const { searchMembers } = await import(
   await load(new URL('../src/lib/member-search.ts', import.meta.url))
 );
 const data = createWorkspaceData();
+const { membershipVisits, cancelMembershipVisit } = await import(
+  await load(new URL('../src/lib/membership-visit-history.ts', import.meta.url))
+);
+const historyMember = {
+  id: 90001,
+  name: 'Тест',
+  email: '',
+  phone: '',
+  plan: 'Групповые тренировки',
+  status: 'active',
+  joined: '01.11.2026',
+  expires: '01.12.2026',
+  visits: 2,
+};
+const historyVisit = {
+  id: 'test-visit',
+  memberId: 90001,
+  passId: 'S-90001-01',
+  enteredAt: '2026-11-05T12:00',
+  kind: 'group',
+  plan: historyMember.plan,
+  clubId: 'central',
+};
+const historyData = {
+  events: [{ id: 'class', present: '90001,90002' }],
+  'visit-bookings': [
+    {
+      id: 'receipt',
+      memberId: '90001',
+      passId: historyVisit.passId,
+      eventId: 'class',
+      date: historyVisit.enteredAt,
+    },
+  ],
+};
+const cancellation = {
+  member: historyMember,
+  passId: historyVisit.passId,
+  visit: historyVisit,
+  visits: [historyVisit],
+  reason: 'Ошибочная отметка',
+  stamp: '2026-11-06T14:00',
+  canOperate: true,
+};
+const cancelled = cancelMembershipVisit(historyData, cancellation);
+assert.equal(getClientProfile(historyMember, cancelled).subscriptions[0].used, 1);
+assert.equal(getClientProfile(historyMember, cancelled).subscriptions[0].remaining, 11);
+assert.equal(cancelled.events[0].present, '90002', 'Cancel only this attendance');
+assert.equal(cancelled['visit-bookings'].length, 0);
+assert.equal(cancelled['membership-history'][0].comment, cancellation.reason);
+assert.equal(historyData.events[0].present, '90001,90002', 'Cancellation is immutable');
+assert.throws(() => cancelMembershipVisit(cancelled, cancellation), /уже отменено/);
+assert.throws(
+  () => cancelMembershipVisit(historyData, { ...cancellation, canOperate: false }),
+  /недоступна/,
+);
+assert.throws(() => cancelMembershipVisit(historyData, { ...cancellation, reason: '' }), /причину/);
+assert.equal(
+  membershipVisits(
+    historyMember,
+    historyVisit.passId,
+    [{ ...historyVisit, memberId: 90002 }],
+    historyData,
+  ).length,
+  0,
+);
+const ambiguousHistory = {
+  ...historyData,
+  'issued-plans': [
+    {
+      id: 'same-name',
+      memberId: '90001',
+      name: historyMember.plan,
+      visits: '12',
+      issued: '2026-11-03',
+    },
+  ],
+};
+assert.equal(
+  membershipVisits(
+    historyMember,
+    historyVisit.passId,
+    [{ ...historyVisit, passId: undefined }],
+    ambiguousHistory,
+  ).length,
+  0,
+  'Legacy same-name purchases cannot steal each other’s visits',
+);
 const before = structuredClone(data);
 const payment = {
   method: 'Безналичная оплата',
