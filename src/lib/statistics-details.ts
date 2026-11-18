@@ -308,7 +308,7 @@ export function detailedStatistics(
         inClub(r.club) &&
         people.has(r.memberId),
     );
-    const rows = group(debits, (r) => r.memberId).map(([memberId, list]) => ({
+    const rows: DemoRecord[] = group(debits, (r) => r.memberId).map(([memberId, list]) => ({
       ...person(people.get(memberId)!),
       amount: String(list.reduce((n, r) => n + cents(r.amount), 0)),
       count: String(list.length),
@@ -328,6 +328,46 @@ export function detailedStatistics(
       rows,
       true,
     );
+    const average = (list: DemoRecord[]) =>
+      list.length
+        ? String(Math.round(list.reduce((n, r) => n + Number(r.amount), 0) / list.length))
+        : '';
+    const summary: DemoRecord[] = ['Пол не указан', 'Мужчины', 'Женщины'].map((name, i) => {
+      const list = rows.filter((r) => {
+        const gender = profile(people.get(r.memberId)!).gender;
+        return i === 1
+          ? gender === 'Мужской'
+          : i === 2
+            ? gender === 'Женский'
+            : !['Мужской', 'Женский'].includes(gender);
+      });
+      return { id: name, name, amount: average(list), count: String(list.length) };
+    });
+    const values = rows.map((r) => Number(r.amount));
+    summary.push(
+      {
+        id: 'minimum',
+        name: 'Минимальная сумма',
+        amount: values.length ? String(Math.min(...values)) : '',
+        count: '',
+      },
+      {
+        id: 'maximum',
+        name: 'Максимальная сумма',
+        amount: values.length ? String(Math.max(...values)) : '',
+        count: '',
+      },
+      { id: 'average', name: 'Общая средняя', amount: average(rows), count: String(rows.length) },
+    );
+    block(
+      'Сводка LTV',
+      [
+        col('name', 'Показатель'),
+        col('amount', 'Значение', 'money'),
+        col('count', 'Клиентов в расчёте'),
+      ],
+      summary,
+    );
     out.notes.push(
       'Воспроизведено пояснение страницы источника: средняя сумма списаний с лицевых счетов клиентов с известными списаниями. Это не прибыль и не общая сумма покупок. Описание каталога источника противоречит странице. Все операции вымышлены.',
     );
@@ -338,12 +378,13 @@ export function detailedStatistics(
     const gifts = (data['gift-cards'] || [])
       .filter((g) => g.status === 'Активна')
       .map((g) => ({ id: g.id, name: g.name, amount: String(cents(g.balance)) }));
-    const valued = cards.filter(
+    const liabilityCandidates = cards.filter(
+      (p) => day(p.boughtAt) <= f.to && (!p.endsAt || day(p.endsAt) >= f.to) && p.remaining !== 0,
+    );
+    const valued = liabilityCandidates.filter(
       (p) =>
         p.price !== null &&
-        day(p.boughtAt) <= f.to &&
-        (!p.endsAt || day(p.endsAt) >= f.to) &&
-        p.remaining !== 0,
+        (!p.activatedAt || day(p.activatedAt) > f.to || p.remaining !== null || p.endsAt),
     );
     const cardRows = valued.map((p) => {
       const duration =
@@ -360,11 +401,12 @@ export function detailedStatistics(
         ...person(people.get(p.memberId)!),
         id: p.id,
         plan: p.name,
-        status: !p.activatedAt
-          ? 'Не активирован'
-          : p.status === 'paused'
-            ? 'Заморожен'
-            : 'Действует',
+        status:
+          !p.activatedAt || day(p.activatedAt) > f.to
+            ? 'Не активирован'
+            : p.status === 'paused'
+              ? 'Заморожен'
+              : 'Действует',
         amount: String(Math.round(p.price! * fraction)),
       };
     });
@@ -400,13 +442,49 @@ export function detailedStatistics(
       cardRows,
       true,
     );
-    const unknown = cards.filter((p) => p.price === null).length;
+    const unknown = liabilityCandidates.length - valued.length;
+    const pendingRows = cardRows.filter((r) => r.status === 'Не активирован');
+    const activeRows = cardRows.filter((r) => r.status !== 'Не активирован');
+    block(
+      'Сводка обязательств перед клиентами',
+      [
+        col('name', 'Показатель'),
+        col('amount', 'Известная сумма', 'money'),
+        col('count', 'Количество'),
+        col('average', 'Средний показатель', 'money'),
+        col('unknown', 'Без оценки'),
+      ],
+      [
+        ['balances', 'Остаток на лицевых счетах', balances],
+        ['gifts', 'Подарочные карты', gifts],
+        ['pending', 'Не активированные абонементы', pendingRows],
+        ['active', 'Активные абонементы', activeRows],
+      ].map(([id, name, list]) => {
+        const rr = list as DemoRecord[];
+        const missing = ['pending', 'active'].includes(id as string)
+          ? liabilityCandidates.filter(
+              (p) =>
+                !valued.includes(p) &&
+                (!p.activatedAt || day(p.activatedAt) > f.to) === (id === 'pending'),
+            ).length
+          : 0;
+        return {
+          id: id as string,
+          name: name as string,
+          amount: String(sum(rr)),
+          count: String(rr.length + missing),
+          average: rr.length && !missing ? String(Math.round(sum(rr) / rr.length)) : '',
+          unknown: String(missing),
+        };
+      }),
+    );
+    if (unknown) out.metrics[0].label = 'Известная сумма обязательств';
     out.notes.push(
       'Это обязательства клуба, а не неоплаченные клиентами покупки. Карта без активации учитывается по цене продажи, количественная — по доле оставшихся посещений, безлимитная — по оставшимся дням. Цены исходных демокарт заданы отдельно; история заморозок неполная. Счета и подарочные карты — текущие остатки, не исторический баланс на дату.',
     );
     if (unknown)
       out.notes.push(
-        `Нет сохранённой цены у карт: ${unknown}. Их стоимость не приравнивается к нулю и в сумму не включена.`,
+        `Нет сохранённой цены или срока для оценки карт: ${unknown}. Их стоимость не приравнивается к нулю и в сумму не включена; среднее такой группы неизвестно.`,
       );
   } else if (id === 'clients_sell_discount') {
     const rows = selectedSales
@@ -449,30 +527,45 @@ export function detailedStatistics(
       : cards.filter(
           (p) => p.endsAt && inPeriod(day(p.endsAt)) && (!summer || p.summer) && eligibleKind(p),
         );
-    if (!summer && Number(f.renewalDays) < 1)
+    if (!summer && !guest && Number(f.renewalDays) < 1)
       return { ...out, error: 'Окно покупки должно быть не меньше одного дня.' };
     const anchorOf = (p: (typeof cards)[number]) => day(guest ? p.activatedAt! : p.endsAt!);
     const rows = [
       ...new Map(
         cohort
-          .filter((p) => inClub(p.club))
+          .filter(
+            (p) =>
+              inClub(p.club) &&
+              (!(summer || guest) || anchorOf(p) <= (day(input.at) < f.to ? day(input.at) : f.to)),
+          )
           .sort((a, b) => anchorOf(a).localeCompare(anchorOf(b)) || a.id.localeCompare(b.id))
-          .map((p) => [p.memberId, p]),
+          .map((p) => [
+            summer || guest ? `${p.memberId}:${anchorOf(p).slice(0, 4)}` : p.memberId,
+            p,
+          ]),
       ).values(),
     ].map((p) => {
       const anchor = day(guest ? p.activatedAt! : p.endsAt!);
-      const deadline = summer ? shiftMonths(anchor, 3) : shift(anchor, Number(f.renewalDays));
+      const observation = day(input.at) < f.to ? day(input.at) : f.to;
+      const deadline = summer
+        ? shiftMonths(anchor, 3)
+        : guest
+          ? observation
+          : shift(anchor, Number(f.renewalDays));
       const next = cards
         .filter(
           (n) =>
             n.memberId === p.memberId &&
             n.id !== p.id &&
             n.kind.id !== 'guest' &&
+            eligibleKind(n) &&
             n.price !== null &&
             n.price > 0 &&
-            day(n.boughtAt) >= anchor &&
+            (id === 'selling_clients_secondary'
+              ? day(n.boughtAt) >= day(p.boughtAt) && Boolean(n.endsAt) && day(n.endsAt!) > anchor
+              : day(n.boughtAt) >= anchor) &&
             day(n.boughtAt) <= deadline &&
-            day(n.boughtAt) <= f.to,
+            day(n.boughtAt) <= observation,
         )
         .sort((a, b) => day(a.boughtAt).localeCompare(day(b.boughtAt)))[0];
       return {
@@ -482,10 +575,13 @@ export function detailedStatistics(
         deadline,
         next: next?.name || '—',
         bought: next ? day(next.boughtAt) : '',
-        status: next ? 'Продлил' : deadline > f.to ? 'Окно ещё открыто' : 'Не продлил',
+        nextEnd: next?.endsAt ? day(next.endsAt) : '',
+        status: next ? 'Продлил' : deadline > observation ? 'Окно ещё открыто' : 'Не продлил',
       };
     });
-    const complete = rows.filter((r) => r.deadline <= f.to),
+    const complete = rows.filter(
+        (r) => r.deadline <= (day(input.at) < f.to ? day(input.at) : f.to),
+      ),
       converted = rows.filter((r) => r.status === 'Продлил').length;
     const completedConversions = complete.filter((r) => r.status === 'Продлил').length;
     out.metrics = [
@@ -497,6 +593,7 @@ export function detailedStatistics(
       },
       {
         label: 'Доля по завершённым окнам',
+        note: `${completedConversions} из ${complete.length} завершённых окон`,
         value: complete.length
           ? `${Math.round((completedConversions / complete.length) * 100)}%`
           : '—',
@@ -512,17 +609,57 @@ export function detailedStatistics(
         col('status', 'Результат'),
         col('next', 'Новая карта'),
         col('bought', 'Дата покупки', 'date'),
+        col('nextEnd', 'Продлено до', 'date'),
       ],
       rows,
       true,
     );
+    if (summer || guest) {
+      block(
+        'Итоги по годам',
+        [
+          col('name', 'Год'),
+          col('count', 'Клиентов'),
+          col('converted', guest ? 'Купили карту' : 'Продлили'),
+          col('open', 'Окно ещё открыто'),
+          col('closed', 'Завершённых окон'),
+          col('convertedClosed', 'Покупок в завершённых окнах'),
+          col('share', guest ? 'Доля покупок к дате среза' : 'Доля завершённых окон', 'percent'),
+        ],
+        group(rows, (r) => r.anchor.slice(0, 4)).map(([year, rr]) => {
+          const closed = rr.filter(
+            (r) => r.deadline <= (day(input.at) < f.to ? day(input.at) : f.to),
+          );
+          return {
+            id: year,
+            name: year,
+            count: String(rr.length),
+            converted: String(rr.filter((r) => r.status === 'Продлил').length),
+            open: String(rr.filter((r) => r.status === 'Окно ещё открыто').length),
+            closed: String(closed.length),
+            convertedClosed: String(closed.filter((r) => r.status === 'Продлил').length),
+            share: closed.length
+              ? String(
+                  Math.round(
+                    (closed.filter((r) => r.status === 'Продлил').length / closed.length) * 100,
+                  ),
+                )
+              : '',
+          };
+        }),
+      );
+    }
     out.notes.push(
       summer
         ? 'Летняя карта определяется явной отметкой в демоданных. Окно — три календарных месяца от окончания карты, с переносом на последний существующий день месяца. В источнике не раскрыты дополнительные исключения.'
-        : `Демо: учитывается покупка в течение ${f.renewalDays} дней после ${guest ? 'активации гостевой карты' : 'окончания карты'}. Окно источника для этого отчёта не раскрыто.`,
+        : guest
+          ? 'Уникальные клиенты с гостевым визитом в периоде, по годам визита. Учитывается последующая платная карта до конца периода, ограниченного датой наблюдения. Порог в 30 дней не применяется: его нет в предоставленном источнике. Отсутствие покупки означает только отсутствие к дате среза.'
+          : `Демо: учитывается покупка в течение ${f.renewalDays} дней после окончания карты. Покупка заранее также учитывается, если новый срок заканчивается позже исходного. Окно источника для этого отчёта не раскрыто.`,
     );
     out.notes.push(
-      'Один клиент учитывается один раз; если в периоде окончились несколько карт, используется последняя. Незавершённые окна не считаются отказом. Возвраты и заморозки требуют полной истории; это предварительная демонстрационная методика.',
+      summer || guest
+        ? 'Один клиент учитывается один раз в каждой годовой группе; используется последняя подходящая карта в году. Группы разных лет не суммируются как уникальные по сети. Открытое окно не считается отказом; история демо неполная.'
+        : 'Один клиент учитывается один раз; если в периоде окончились несколько карт, используется последняя. Незавершённые окна не считаются отказом. Возвраты и заморозки требуют полной истории; это предварительная демонстрационная методика.',
     );
   } else if (id === 'selltovosit') {
     const rows = cards
@@ -605,49 +742,73 @@ export function detailedStatistics(
           else quantity += value;
         }
         const count = new Set(ids(e.present)).size;
+        const recorded = (data['event-finance'] || []).find((r) => r.eventId === e.id);
+        if (recorded?.quantityRevenue !== undefined) quantity = cents(recorded.quantityRevenue);
+        if (recorded?.unlimitedRevenue !== undefined) unlimited = cents(recorded.unlimitedRevenue);
+        if (recorded?.quantityRevenue !== undefined && recorded?.unlimitedRevenue !== undefined)
+          unknown = Number(recorded.unpriced || 0);
         return {
           id: e.id,
-          date: e.day,
+          date: e.day + (e.time ? 'T' + e.time : ''),
           name: e.name,
           trainer:
             e.trainer ||
             (data['trainer-profiles'] || []).find((t) => t.id === trainerKey(e))?.name ||
             'Не определён',
           trainerId: trainerKey(e),
-          tariff: '',
+          tariff: recorded?.tariff !== undefined ? String(cents(recorded.tariff)) : '',
           lessons: '1',
-          avgVisitors: String(count),
-          count: String(count),
-          quantity: String(quantity),
-          unlimited: String(unlimited),
-          amount: String(quantity + unlimited),
+          avgVisitors: e.present !== undefined ? String(count) : '',
+          count: e.present !== undefined ? String(count) : '',
+          quantity:
+            recorded?.quantityRevenue !== undefined || e.present !== undefined
+              ? String(quantity)
+              : '',
+          unlimited:
+            recorded?.unlimitedRevenue !== undefined || e.present !== undefined
+              ? String(unlimited)
+              : '',
+          amount:
+            (recorded?.quantityRevenue !== undefined && recorded?.unlimitedRevenue !== undefined) ||
+            e.present !== undefined
+              ? String(quantity + unlimited)
+              : '',
           average: count && !unknown ? String(Math.round((quantity + unlimited) / count)) : '',
           unknown: String(unknown),
         };
       });
-    if (f.groupByTrainer === '1')
-      rows = group(rows, (r) => r.trainerId).map(([key, entries]) => {
-        const sum = (field: string) => entries.reduce((n, r) => n + Number(r[field]), 0);
-        const count = sum('count'),
-          unknown = sum('unknown'),
-          amount = sum('amount');
-        return {
-          id: key,
-          trainerId: key,
-          trainer: entries[0].trainer,
-          name: '',
-          date: '',
-          tariff: '',
-          lessons: String(entries.length),
-          avgVisitors: String(count / entries.length),
-          count: String(count),
-          quantity: String(sum('quantity')),
-          unlimited: String(sum('unlimited')),
-          amount: String(amount),
-          average: count && !unknown ? String(Math.round(amount / count)) : '',
-          unknown: String(unknown),
-        };
-      });
+    if (f.groupByTrainer === '1' || f.grouping === 'program')
+      rows = group(rows, (r) => (f.grouping === 'program' ? r.name : r.trainerId)).map(
+        ([key, entries]) => {
+          const sum = (field: string) => entries.reduce((n, r) => n + Number(r[field]), 0);
+          const count = sum('count'),
+            unknown = sum('unknown'),
+            amount = sum('amount');
+          return {
+            id: key,
+            trainerId: key,
+            trainer: [...new Set(entries.map((r) => r.trainer))].join(', '),
+            name: f.grouping === 'program' ? key : entries[0].trainer,
+            date: '',
+            tariff: entries.every((r) => r.tariff !== '' && r.tariff === entries[0].tariff)
+              ? entries[0].tariff
+              : '',
+            lessons: String(entries.length),
+            avgVisitors: entries.every((r) => r.count !== '')
+              ? String(Math.round((count / entries.length) * 100) / 100)
+              : '',
+            count: entries.every((r) => r.count !== '') ? String(count) : '',
+            quantity: entries.some((r) => r.quantity !== '') ? String(sum('quantity')) : '',
+            unlimited: entries.some((r) => r.unlimited !== '') ? String(sum('unlimited')) : '',
+            amount: entries.some((r) => r.amount !== '') ? String(amount) : '',
+            average:
+              count && !unknown && entries.every((r) => r.count !== '' && r.amount !== '')
+                ? String(Math.round(amount / count))
+                : '',
+            unknown: String(unknown),
+          };
+        },
+      );
     const sortKey =
       f.reportSort === 'all_shedules'
         ? 'lessons'
@@ -663,8 +824,12 @@ export function detailedStatistics(
     block(
       'Доход по известным списаниям групп',
       [
-        ...(f.groupByTrainer === '1'
-          ? [col('trainer', 'Тренер'), col('lessons', 'Занятий')]
+        ...(f.groupByTrainer === '1' || f.grouping === 'program'
+          ? [
+              col('name', f.grouping === 'program' ? 'Программа' : 'Тренер'),
+              col('lessons', 'Занятий'),
+              col('avgVisitors', 'В среднем посетителей'),
+            ]
           : [col('date', 'Дата', 'date'), col('name', 'Занятие'), col('trainer', 'Тренер')]),
         col('tariff', 'Тариф тренера', 'money'),
         col('count', 'Присутствовали'),
@@ -677,7 +842,7 @@ export function detailedStatistics(
       rows,
     );
     out.notes.push(
-      'Предварительное распределение, не прибыль: количественная карта — цена / исходное число посещений; безлимит — цена / известный счётчик использованных посещений. Неизвестная карта/цена отмечается отдельно, средняя цена не вычисляется при неполных данных. Тариф начисления тренеру в демомодели не задан и показан «—». Группировка и три сортировки сохранены из источника; для среднего числа визитов используется присутствие / число занятий. Метод распределения безлимитов требует согласования с клубом.',
+      'Предварительное распределение, не прибыль: количественная карта — цена / исходное число посещений; безлимит — цена / известный счётчик использованных посещений. Неизвестная карта/цена отмечается отдельно, средняя цена не вычисляется при неполных данных. Сохранённые event-finance имеют приоритет перед оценкой; тариф показывается только при явном значении. Без журнала присутствия не подставляется ноль. При разных тарифах в группе единый тариф — прочерк. Группировка и три сортировки сохранены из источника; для среднего числа визитов используется присутствие / число занятий. Метод распределения безлимитов требует согласования с клубом.',
     );
   } else {
     const kindOfSale = (s: DemoRecord) =>
@@ -694,24 +859,45 @@ export function detailedStatistics(
         (f.trainer === 'all' || r.trainerId === f.trainer),
     );
     if (id === 'trener_financial_result') {
-      const personalSales = selectedSales.filter((s) => kindOfSale(s) === 'personal');
-      const personalCosts = costs.filter((c) => c.kind === 'personal');
+      const cutoff = day(input.at) < f.to ? day(input.at) : f.to;
+      const personalSales = selectedSales.filter(
+        (s) => kindOfSale(s) === 'personal' && s.date <= cutoff,
+      );
+      const personalCosts = costs.filter((c) => c.kind === 'personal' && c.date <= cutoff);
       const months = [
         ...new Set([
           ...personalSales.map((s) => s.date.slice(0, 7)),
           ...personalCosts.map((c) => c.date.slice(0, 7)),
         ]),
       ].sort();
-      const rows = (data['trainer-profiles'] || [])
+      const knownTrainers = data['trainer-profiles'] || [];
+      const trainerIds = [
+        ...new Set([
+          ...knownTrainers.map((t) => t.id),
+          ...personalSales.map((s) => s.trainerId),
+          ...personalCosts.map((c) => c.trainerId),
+        ]),
+      ].filter(Boolean);
+      const trainers = trainerIds.map(
+        (key) =>
+          knownTrainers.find((t) => t.id === key) || {
+            id: key,
+            name: 'Исторический тренер · ' + key,
+            categoryId: '',
+          },
+      );
+      const rows: DemoRecord[] = trainers
         .filter((t) => f.trainer === 'all' || f.trainer === t.id)
         .flatMap((t) =>
           months.map((month) => {
-            const revenue = personalSales
-                .filter((s) => s.trainerId === t.id && s.date.startsWith(month))
-                .reduce((n, s) => n + cents(s.total ?? s.amount), 0),
-              expense = personalCosts
-                .filter((c) => c.trainerId === t.id && c.date.startsWith(month))
-                .reduce((n, c) => n + cents(c.amount), 0);
+            const revenueEntries = personalSales.filter(
+              (s) => s.trainerId === t.id && s.date.startsWith(month),
+            );
+            const expenseEntries = personalCosts.filter(
+              (c) => c.trainerId === t.id && c.date.startsWith(month),
+            );
+            const revenue = revenueEntries.reduce((n, s) => n + cents(s.total ?? s.amount), 0);
+            const expense = expenseEntries.reduce((n, c) => n + cents(c.amount), 0);
             return {
               id: t.id + ':' + month,
               month,
@@ -719,10 +905,14 @@ export function detailedStatistics(
               category:
                 (data['trainer-categories'] || []).find((c) => c.id === t.categoryId)?.name ||
                 'Не указана',
-              amount: String(revenue),
-              expense: String(expense),
-              result: String(revenue - expense),
-              percent: revenue ? String(Math.round((expense / revenue) * 100)) : '',
+              amount: revenueEntries.length ? String(revenue) : '',
+              expense: expenseEntries.length ? String(expense) : '',
+              result:
+                revenueEntries.length && expenseEntries.length ? String(revenue - expense) : '',
+              percent:
+                revenueEntries.length && expenseEntries.length && revenue > 0
+                  ? String(Math.round((expense / revenue) * 100))
+                  : '',
             };
           }),
         );
@@ -746,9 +936,15 @@ export function detailedStatistics(
           id: key,
           name: entries[0].name,
           category: entries[0].category,
-          amount: String(amount),
-          expense: String(expense),
-          percent: amount ? String(Math.round((expense * 100) / amount)) : '',
+          amount: entries.some((r) => r.amount !== '') ? String(amount) : '',
+          expense: entries.some((r) => r.expense !== '') ? String(expense) : '',
+          percent:
+            amount &&
+            entries
+              .filter((r) => r.amount !== '' || r.expense !== '')
+              .every((r) => r.amount !== '' && r.expense !== '')
+              ? String(Math.round((expense * 100) / amount))
+              : '',
         };
       });
       block(
@@ -762,9 +958,64 @@ export function detailedStatistics(
         ],
         summary,
       );
+      const matrixMonths: string[] = [];
+      for (let month = f.from.slice(0, 7); month <= f.to.slice(0, 7);) {
+        matrixMonths.push(month);
+        const date = new Date(month + '-01T00:00:00Z');
+        date.setUTCMonth(date.getUTCMonth() + 1);
+        month = date.toISOString().slice(0, 7);
+      }
+      block(
+        'Накопительный результат ПТ',
+        [
+          col('name', 'Тренер'),
+          col('category', 'Категория'),
+          ...matrixMonths.flatMap((month) => {
+            const label = new Intl.DateTimeFormat('ru', {
+              month: 'long',
+              year: 'numeric',
+              timeZone: 'UTC',
+            }).format(new Date(month + '-01'));
+            return [
+              col(month + ':expense', label + ' · Оплата', 'money'),
+              col(month + ':amount', label + ' · Продажи ПТ', 'money'),
+              col(month + ':percent', label + ' · Доля оплаты', 'percent'),
+            ];
+          }),
+          col('expense', 'Всего оплата ПТ', 'money'),
+          col('amount', 'Всего связанные продажи ПТ', 'money'),
+          col('percent', 'Общая доля оплаты', 'percent'),
+        ],
+        trainers
+          .filter((t) => f.trainer === 'all' || f.trainer === t.id)
+          .map((t) => {
+            const r = summary.find((entry) => entry.id === t.id) || {
+              id: t.id,
+              name: t.name,
+              category:
+                (data['trainer-categories'] || []).find((c) => c.id === t.categoryId)?.name ||
+                'Не указана',
+              expense: '',
+              amount: '',
+              percent: '',
+            };
+            return {
+              ...r,
+              ...Object.fromEntries(
+                matrixMonths.flatMap((month) => {
+                  const cell = rows.find((entry) => entry.id === r.id + ':' + month);
+                  return ['expense', 'amount', 'percent'].map((key) => [
+                    month + ':' + key,
+                    cell?.[key] || '',
+                  ]);
+                }),
+              ),
+            };
+          }),
+      );
       out.notes.push(
-        'Сохранены месяцы и итог по тренеру. Вместо очень широкой таблицы с 12 вложенными месяцами — строки «тренер — месяц», пригодные для телефона и CSV. Включены только персональные продажи и начисления; ГП, дежурства и прочие продажи исключены. Доля оплаты = сумма начислений / сумма связанных продаж; при нуле продаж показано «—».',
-        'В демо доход отнесён тренеру только по явному trainerId продажи, без распределения по текущему закреплению клиента. Старые продажи без связи не приписываются сотруднику. Это разница связанных продаж и начислений, а не полная прибыль клуба.',
+        'Накопительная матрица — с января до выбранного месяца включительно; каждый месяц содержит оплату, связанные продажи ПТ и долю оплаты. «По месяцам» и «Итоги» доступны отдельными вкладками. Доля итога = сумма оплаты / сумма продаж, а не среднее месячных процентов. При отсутствии данных либо нулевом знаменателе — прочерк, без NaN. Категория — текущая из демосправочника.',
+        'Включены только персональные продажи с явным trainerId и начисления ПТ; ГП и дежурства исключены. Старые продажи без связи не приписываются текущему тренеру клиента. Показаны известные суммы; неполная история не даёт подтверждённой прибыли.',
       );
     } else {
       const rows = ['group', 'personal', 'gym'].map((kind) => {

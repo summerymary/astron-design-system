@@ -58,6 +58,7 @@ import { classes, initialMembers, pages, scenarios } from './data/mock';
 import { demoClubs, demoNetworks, demoUsers, roleHomes, roles } from './data/roles';
 import { useTheme } from './components/ThemeProvider';
 import { useWorkspace } from './components/WorkspaceProvider';
+import { cancelMembershipVisit } from './lib/membership-visit-history';
 import { SectionsPage } from './pages/SectionsPage';
 import { Members } from './pages/Members';
 import { AdminOverview } from './pages/AdminOverview';
@@ -1165,6 +1166,32 @@ export function App() {
                         visits={visits.filter((v) => v.memberId === selectedMember.id)}
                         clubName={club.name}
                         canOperate={role === 'administrator' || managingRole}
+                        onCancelVisit={(passId, visit, reason) => {
+                          workspace.transact((current) =>
+                            cancelMembershipVisit(current, {
+                              member: selectedMember,
+                              passId,
+                              visit,
+                              visits,
+                              reason,
+                              stamp: demoStamp(nextDemoNow()),
+                              canOperate: role === 'administrator' || managingRole,
+                            }),
+                          );
+                          setVisits((current) => current.filter((v) => v.id !== visit.id));
+                          setMembers((current) =>
+                            current.map((m) =>
+                              m.id === selectedMember.id
+                                ? {
+                                    ...m,
+                                    visits: Math.max(0, m.visits - 1),
+                                    initialPassVisits: m.initialPassVisits ?? m.visits,
+                                  }
+                                : m,
+                            ),
+                          );
+                          notify('Посещение отменено, списание возвращено');
+                        }}
                         canSell={role === 'accountant'}
                         user={currentUser}
                         scenario={scenario}

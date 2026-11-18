@@ -1,4 +1,4 @@
-/** A compact comparison; the exact values remain readable without colour or graphics. */
+/** A comparison with a controlled visual track and accessible meter values. */
 export function ReportBars({
   rows,
   unit = '',
@@ -14,7 +14,21 @@ export function ReportBars({
       {rows.map((row, index) => (
         <div key={row.id || `${row.name}-${index}`}>
           <span>{row.name}</span>
-          <meter min={0} max={max} value={row.value} aria-label={`${row.name}: ${row.label}`} />
+          <div
+            className="report-bar-track"
+            role="meter"
+            aria-valuemin={0}
+            aria-valuemax={max}
+            aria-valuenow={row.value}
+            aria-valuetext={row.label}
+            aria-label={row.name}
+          >
+            <span
+              className="report-bar-fill"
+              aria-hidden="true"
+              style={{ width: `${(Math.max(0, row.value) * 100) / max}%` }}
+            />
+          </div>
           <strong>{row.label}</strong>
         </div>
       ))}

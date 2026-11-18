@@ -1,3 +1,4 @@
+import { Field } from './Field';
 import { useState } from 'react';
 import type { DemoUser, Member } from '../types';
 import { memberCards } from '../data/admin';
@@ -83,8 +84,7 @@ export function RestoreCardDialog({
           Текущая карта {clientCard(member)} будет заменена после оплаты. Абонементы, счёт и история
           клиента сохранятся.
         </Notice>
-        <label className="form-field">
-          <span>Номер новой карты *</span>
+        <Field className="form-field" label={<> Номер новой карты * </>}>
           <input
             required
             inputMode="numeric"
@@ -95,7 +95,7 @@ export function RestoreCardDialog({
               setError('');
             }}
           />
-        </label>
+        </Field>
         <ReceptionPayment value={payment} onChange={setPayment} total={price} />
         {error && <Notice tone="warning">{error}</Notice>}
         <div className="modal-actions">

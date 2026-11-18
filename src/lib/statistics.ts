@@ -7,6 +7,8 @@ import { cashCents, cashFlow, cashJournal } from './cash';
 import { reportPending } from '../data/statistics';
 import { detailedStatistics } from './statistics-details';
 import { trainerStatistics } from './statistics-trainers';
+import { financialStatistics } from './statistics-sales';
+import { unlimitedStatistics } from './statistics-unlimited';
 import { getMembershipKind } from '../data/membership-kinds';
 import { nextBirthday, reportNextDay } from './report-period';
 
@@ -49,6 +51,10 @@ export type ReportFilters = {
   renewalDays: string;
   groupByTrainer: string;
   reportSort: string;
+  includeMemberships: string;
+  includeGoods: string;
+  salesSort: string;
+  payment: string;
 };
 export const defaultReportFilters: ReportFilters = {
   from: '2026-11-01',
@@ -89,6 +95,10 @@ export const defaultReportFilters: ReportFilters = {
   renewalDays: '30',
   groupByTrainer: '0',
   reportSort: 'avg_visitors',
+  includeMemberships: '1',
+  includeGoods: '1',
+  salesSort: 'count',
+  payment: 'all',
 };
 export type ReportColumn = { key: string; label: string; format?: 'money' | 'date' | 'percent' };
 export type ReportBlock = {
@@ -96,6 +106,7 @@ export type ReportBlock = {
   columns: ReportColumn[];
   rows: DemoRecord[];
   memberLinks?: boolean;
+  detail?: string;
 };
 export type ReportResult = {
   metrics: { label: string; value: string | number; note?: string }[];
@@ -211,6 +222,10 @@ export function buildStatistics(
   if (error) return { ...result, error };
   const trainerReport = trainerStatistics(id, f, input);
   if (trainerReport) return trainerReport;
+  const financialReport = financialStatistics(id, f, input);
+  if (financialReport) return financialReport;
+  const unlimitedReport = unlimitedStatistics(id, f, input);
+  if (unlimitedReport) return unlimitedReport;
   const detailed = detailedStatistics(id, f, input);
   if (detailed) return detailed;
   if (reportPending[id]) return { ...result, pending: reportPending[id] };
@@ -846,7 +861,7 @@ export function buildStatistics(
                 : registered,
         };
       })
-      .filter((r) => inPeriod(id === 'clients_new' ? r.criterion : r.registered))
+      .filter((r) => inPeriod(r.criterion))
       .filter(
         (r) =>
           (f.source === 'all' || r.source === f.source) &&
@@ -858,7 +873,7 @@ export function buildStatistics(
       );
     if (id === 'newclients_source')
       block(
-        'Источники регистраций',
+        'Источники новых клиентов',
         [col('name', 'Источник'), col('count', 'Клиентов')],
         grouped(rows, (r) => r.source).map(([name, list]) => ({
           id: name,

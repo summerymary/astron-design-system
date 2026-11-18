@@ -1,3 +1,4 @@
+import { Field } from '../components/Field';
 import { personalTrainers } from '../lib/personal-training';
 import { ClientBookingDialog } from '../components/ClientBookingDialog';
 import { clientName } from '../lib/client-display';
@@ -127,8 +128,7 @@ export function PersonalTrainingForm({
           if (problem) setError(problem);
         }}
       >
-        <label className="form-field">
-          <span>Персональный клиент *</span>
+        <Field className="form-field" label={<> Персональный клиент * </>}>
           <Select
             name="memberId"
             value={draft.memberId || ''}
@@ -142,13 +142,12 @@ export function PersonalTrainingForm({
               </option>
             ))}
           </Select>
-        </label>
+        </Field>
         {!clients.length && (
           <Notice tone="warning">За этим тренером пока нет закреплённых клиентов.</Notice>
         )}
         <div className="calendar-form-grid">
-          <label className="form-field">
-            <span>Дата *</span>
+          <Field className="form-field" label={<> Дата * </>}>
             <input
               name="day"
               type="date"
@@ -157,9 +156,8 @@ export function PersonalTrainingForm({
               onInput={(e) => set('day', e.currentTarget.value)}
               onChange={(e) => set('day', e.target.value)}
             />
-          </label>
-          <label className="form-field">
-            <span>Начало *</span>
+          </Field>
+          <Field className="form-field" label={<> Начало * </>}>
             <input
               name="time"
               type="time"
@@ -168,9 +166,8 @@ export function PersonalTrainingForm({
               onInput={(e) => set('time', e.currentTarget.value)}
               onChange={(e) => set('time', e.target.value)}
             />
-          </label>
-          <label className="form-field">
-            <span>Длительность, мин *</span>
+          </Field>
+          <Field className="form-field" label={<> Длительность, мин * </>}>
             <input
               name="duration"
               type="number"
@@ -182,9 +179,8 @@ export function PersonalTrainingForm({
               onInput={(e) => set('duration', e.currentTarget.value)}
               onChange={(e) => set('duration', e.target.value)}
             />
-          </label>
-          <label className="form-field">
-            <span>Зал *</span>
+          </Field>
+          <Field className="form-field" label={<> Зал * </>}>
             <Select
               name="room"
               required
@@ -196,10 +192,9 @@ export function PersonalTrainingForm({
                 <option key={room.id}>{room.name}</option>
               ))}
             </Select>
-          </label>
+          </Field>
         </div>
-        <label className="form-field">
-          <span>Интенсивность</span>
+        <Field className="form-field" label={<> Интенсивность </>}>
           <Select
             name="intensity"
             value={draft.intensity || 'Средняя'}
@@ -209,12 +204,11 @@ export function PersonalTrainingForm({
               <option key={item.value}>{item.value}</option>
             ))}
           </Select>
-        </label>
+        </Field>
         <p className="staff-form-context">
           Клуб: {draft.club} · Тренер: {initial.trainer || user.name}
         </p>
-        <label className="form-field">
-          <span>План тренировки</span>
+        <Field className="form-field" label={<> План тренировки </>}>
           <textarea
             name="description"
             rows={3}
@@ -223,7 +217,7 @@ export function PersonalTrainingForm({
             onChange={(e) => set('description', e.target.value)}
             placeholder="Например, разминка и техника основных упражнений"
           />
-        </label>
+        </Field>
         {error && <Notice tone="warning">{error}</Notice>}
         <div className="modal-actions">
           <Button type="button" variant="secondary" onClick={onClose}>
@@ -661,8 +655,10 @@ export function TrainerClients({
                     setMessage('Заметка сохранена.');
                   }}
                 >
-                  <label className="form-field">
-                    <span>{draft.editingId ? 'Изменить заметку' : 'Новая заметка'}</span>
+                  <Field
+                    className="form-field"
+                    label={<> {draft.editingId ? 'Изменить заметку' : 'Новая заметка'} </>}
+                  >
                     <textarea
                       rows={4}
                       required
@@ -672,7 +668,7 @@ export function TrainerClients({
                       onChange={(e) => setDraft({ text: e.target.value })}
                       placeholder="Что получилось и на что обратить внимание на следующем занятии"
                     />
-                  </label>
+                  </Field>
                   <div className="ws-actions">
                     <Button type="submit" disabled={!draft.text.trim()}>
                       <NotebookPen size={15} />

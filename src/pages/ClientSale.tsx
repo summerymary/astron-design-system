@@ -1,3 +1,4 @@
+import { Field } from '../components/Field';
 import { redeemGift, replaceRecord } from '../lib/reception-operations';
 import { supportsTraining } from '../lib/training-kind';
 import { clientTrainers, personalTrainers } from '../lib/personal-training';
@@ -394,8 +395,7 @@ export function SaleWorkspace({
                     ),
                   ))) && (
                 <>
-                  <label className="form-field">
-                    <span>Персональный тренер</span>
+                  <Field className="form-field" label={<> Персональный тренер </>}>
                     <Select
                       value={personalTrainer?.id || ''}
                       onChange={(event) => {
@@ -411,7 +411,7 @@ export function SaleWorkspace({
                         </option>
                       ))}
                     </Select>
-                  </label>
+                  </Field>
                   {personalTrainer && (
                     <Notice>
                       {personalTrainer.category} · {money(personalTrainer.lessonPrice)} за занятие.
@@ -596,8 +596,7 @@ export function SaleWorkspace({
                     <div className="checkout-settings ws-stack">
                       <div className="ws-fields">
                         {category === 'Товары' && (
-                          <label className="form-field">
-                            <span>Количество</span>
+                          <Field className="form-field" label={<> Количество </>}>
                             <input
                               type="number"
                               min="1"
@@ -610,10 +609,9 @@ export function SaleWorkspace({
                                 setError('');
                               }}
                             />
-                          </label>
+                          </Field>
                         )}
-                        <label className="form-field">
-                          <span>Применить скидку</span>
+                        <Field className="form-field" label={<> Применить скидку </>}>
                           <Select
                             value={discount}
                             disabled={done}
@@ -627,7 +625,7 @@ export function SaleWorkspace({
                             <option value="10">10% · пример</option>
                             <option value="15">15% · пример</option>
                           </Select>
-                        </label>
+                        </Field>
                       </div>
                       <label className="ws-checkbox">
                         <input
@@ -639,8 +637,10 @@ export function SaleWorkspace({
                         Печатать чек
                       </label>
 
-                      <label className="form-field mobile-payment-method">
-                        <span>Способ оплаты</span>
+                      <Field
+                        className="form-field mobile-payment-method"
+                        label={<> Способ оплаты </>}
+                      >
                         <Select
                           value={method}
                           disabled={done}
@@ -653,7 +653,7 @@ export function SaleWorkspace({
                             <option key={value}>{value}</option>
                           ))}
                         </Select>
-                      </label>
+                      </Field>
                       <div className="payment-methods" role="radiogroup" aria-label="Способ оплаты">
                         {paymentMethods.map((value, index) => {
                           const Icon = methodIcons[index];
@@ -704,17 +704,22 @@ export function SaleWorkspace({
                       {method === 'Составная оплата' && (
                         <div className="ws-fields">
                           {(['cash', 'card', 'gift', 'credit'] as const).map((key, index) => (
-                            <label className="form-field" key={key}>
-                              <span>
-                                {
-                                  [
-                                    'Наличными, ₽',
-                                    'Безналично, ₽',
-                                    'Подарочной картой, ₽',
-                                    'В долг, ₽',
-                                  ][index]
-                                }
-                              </span>
+                            <Field
+                              className="form-field"
+                              key={key}
+                              label={
+                                <>
+                                  {
+                                    [
+                                      'Наличными, ₽',
+                                      'Безналично, ₽',
+                                      'Подарочной картой, ₽',
+                                      'В долг, ₽',
+                                    ][index]
+                                  }
+                                </>
+                              }
+                            >
                               <input
                                 type="number"
                                 min="0"
@@ -726,14 +731,13 @@ export function SaleWorkspace({
                                   setError('');
                                 }}
                               />
-                            </label>
+                            </Field>
                           ))}
                         </div>
                       )}
                       {(method === 'Подарочная карта' ||
                         (method === 'Составная оплата' && parts.gift > 0)) && (
-                        <label className="form-field">
-                          <span>Подарочная карта</span>
+                        <Field className="form-field" label={<> Подарочная карта </>}>
                           <Select
                             value={giftId}
                             disabled={done}
@@ -751,7 +755,7 @@ export function SaleWorkspace({
                                 </option>
                               ))}
                           </Select>
-                        </label>
+                        </Field>
                       )}
                       {(method === 'В кредит' ||
                         (method === 'Составная оплата' && parts.credit > 0)) && (

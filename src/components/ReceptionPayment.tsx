@@ -1,3 +1,4 @@
+import { Field } from './Field';
 import type { ReceptionPayment as Payment } from '../lib/reception-operations';
 import { Select } from './Select';
 import { money } from '../data/workspace';
@@ -19,8 +20,7 @@ export function ReceptionPayment({
   return (
     <fieldset className="reception-payment ws-stack">
       <legend>Оплата · {money(total)}</legend>
-      <label className="form-field">
-        <span>Способ оплаты</span>
+      <Field className="form-field" label={<> Способ оплаты </>}>
         <Select
           value={value.method}
           onChange={(event) =>
@@ -31,12 +31,11 @@ export function ReceptionPayment({
           <option>Наличные</option>
           <option>Составная оплата</option>
         </Select>
-      </label>
+      </Field>
       {value.method === 'Составная оплата' && (
         <div className="reception-payment-parts">
           {(['cash', 'card'] as const).map((key) => (
-            <label className="form-field" key={key}>
-              <span>{key === 'cash' ? 'Наличными, ₽' : 'Картой, ₽'}</span>
+            <Field className="form-field" key={key} label={<> {key === 'cash' ? 'Наличными, ₽' : 'Картой, ₽'} </>}>
               <input
                 type="number"
                 min="0"
@@ -49,7 +48,7 @@ export function ReceptionPayment({
                   })
                 }
               />
-            </label>
+            </Field>
           ))}
         </div>
       )}

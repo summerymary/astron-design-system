@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Phone } from 'lucide-react';
+import { ClientLink, PhoneAction } from '../components/RecordActions';
 import type { DemoUser, Member } from '../types';
 import type { DemoRecord } from '../data/workspace';
 import { useWorkspace } from '../components/WorkspaceProvider';
@@ -60,15 +61,23 @@ export function TrainerClientRoster({
             key: 'name',
             label: 'Клиент',
             render: (row) => (
-              <button
-                className="text-link"
+              <ClientLink
                 onClick={() => onMember(clients.find((member) => String(member.id) === row.id)!)}
               >
                 {row.name}
-              </button>
+              </ClientLink>
             ),
           },
-          { key: 'phone', label: 'Телефон' },
+          {
+            key: 'phone',
+            label: 'Телефон',
+            render: (row) => {
+              const member = clients.find((m) => String(m.id) === row.id)!;
+              return (
+                <PhoneAction name={row.name} phone={row.phone} onClick={() => setCall(member)} />
+              );
+            },
+          },
           {
             key: 'action',
             label: 'Действия',
@@ -76,10 +85,6 @@ export function TrainerClientRoster({
               const member = clients.find((member) => String(member.id) === row.id)!;
               return (
                 <div className="ws-actions">
-                  <Button variant="secondary" onClick={() => setCall(member)}>
-                    <Phone size={16} />
-                    Позвонить
-                  </Button>
                   <Button variant="secondary" onClick={() => onBook(member)}>
                     Записать
                   </Button>

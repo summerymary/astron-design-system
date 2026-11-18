@@ -13,7 +13,7 @@ import {
   SectionTitle,
   StatusBadge,
 } from './ui';
-import { Notice, SearchBox, Stats, Tabs } from './WorkspaceUI';
+import { Notice, SearchBox, Stats, Tabs, SegmentedFilter } from './WorkspaceUI';
 import { ClientSearch } from './ClientSearch';
 import { initialMembers } from '../data/mock';
 import { UI_RULES } from '../design-system/registry';
@@ -42,6 +42,12 @@ import { MembershipDetails } from './MembershipDetails';
 import { ScheduleDayBoard } from './ScheduleDayBoard';
 import { ShiftTimeline } from './ShiftTimeline';
 import { PinEntry } from './PinEntry';
+import { Field } from './Field';
+import { ClientLink, PhoneAction, RowActions } from './RecordActions';
+import { NavigationCard } from './WorkspaceUI';
+import { ReportFilterBar } from './ReportFilterBar';
+import { CallJournal } from './CallJournal';
+import { ReviewJournal } from './ReviewJournal';
 
 function AdminAccountExample() {
   const [open, setOpen] = useState(false);
@@ -189,6 +195,10 @@ export function DesignRules() {
   const [copyExample, setCopyExample] = useState(false);
   const [exampleSchedule] = useState(createWorkspaceData);
   const [newClientExample, setNewClientExample] = useState(false);
+  const [fieldExample, setFieldExample] = useState('');
+  const [exampleCall, setExampleCall] = useState(false);
+  const [zeroCategory, setZeroCategory] = useState(false);
+  const [filterExample, setFilterExample] = useState('all');
   return (
     <section className="ds-section ui-rules" aria-label="Единые правила интерфейса">
       <SectionTitle
@@ -474,6 +484,150 @@ export function DesignRules() {
         <p className="ws-muted">
           Выбран месяц: {reportMonthExample}. Стрелки переключают месяц, включая переход между
           годами.
+        </p>
+        <h3>Общие поля и действия строк</h3>
+        <SegmentedFilter
+          label="Пример фильтра"
+          value={filterExample}
+          onChange={setFilterExample}
+          items={[
+            { id: 'all', label: 'Все', count: 8 },
+            { id: 'active', label: 'Активные', count: 6 },
+            { id: 'paused', label: 'Заморожены', count: 2 },
+          ]}
+        />
+        <Field
+          label="Пример обязательного поля"
+          required
+          hint="Подсказка связана с полем"
+          error={
+            fieldExample && fieldExample.length < 3 ? 'Введите хотя бы три символа' : undefined
+          }
+        >
+          <input required value={fieldExample} onChange={(e) => setFieldExample(e.target.value)} />
+        </Field>
+        <div className="ws-actions">
+          <ClientLink onClick={() => setResult('Открыта демонстрационная карточка клиента')}>
+            Анна Смирнова
+          </ClientLink>
+          <PhoneAction
+            name="Анна Смирнова"
+            phone="+7 999 123-45-67"
+            onClick={() => setExampleCall(true)}
+          />
+          <RowActions
+            label="Пример действий строки"
+            actions={[
+              { label: 'Покупатели', onClick: () => setResult('Открыт список покупателей') },
+              { label: 'Операции', onClick: () => setResult('Открыты операции') },
+            ]}
+          />
+        </div>
+        {exampleCall && (
+          <CallDialog
+            name="Анна Смирнова"
+            phone="+7 999 123-45-67"
+            hidden={false}
+            onClose={() => setExampleCall(false)}
+          />
+        )}
+        <NavigationCard
+          title="Общая карточка перехода"
+          caption="Одинаковый переход в разделах, отчётах и главной странице"
+          onClick={() => setResult('Карточка перехода выбрана')}
+        />
+        <ReportFilterBar>
+          <Field data-filter="to" label="Дата отчёта">
+            <input
+              type="date"
+              value={reportWeekExample}
+              onChange={(e) => setReportWeekExample(e.target.value)}
+            />
+          </Field>
+          <Field data-filter="operator" label="Дополнительный фильтр">
+            <input value={fieldExample} onChange={(e) => setFieldExample(e.target.value)} />
+          </Field>
+        </ReportFilterBar>
+        <Button
+          variant="secondary"
+          aria-pressed={zeroCategory}
+          onClick={() => setZeroCategory(!zeroCategory)}
+        >
+          Переключить нулевую категорию
+        </Button>
+        <p className="ws-muted">
+          Диаграммы используют ширину своего блока: круг до 380 px, временной график высотой 380/320
+          px, подписи 16 px и полосы 24 px. На телефоне обе половины возрастной диаграммы остаются
+          видимыми. Малые значения сохраняют свою пропорцию.
+        </p>
+        <ReportChart
+          chart={{
+            id: 'guide-stable-colors',
+            title: 'Устойчивые цвета результатов',
+            unit: 'Клиентов',
+            kind: 'donut',
+            series: [{ key: 'count', label: 'Клиентов' }],
+            rows: [
+              { id: 'Продлил', name: 'Продлили', values: [zeroCategory ? 0 : 2] },
+              { id: 'Не продлил', name: 'Не продлили', values: [3] },
+              { id: 'Окно ещё открыто', name: 'Окно открыто', values: [1] },
+            ],
+          }}
+        />
+        <ReportChart
+          chart={{
+            id: 'guide-cohorts',
+            title: 'Когорты по годам',
+            unit: 'Клиентов',
+            kind: 'stacked',
+            series: [
+              { key: 'Продлил', label: 'Продлили' },
+              { key: 'Не продлил', label: 'Не продлили' },
+              { key: 'Окно ещё открыто', label: 'Окно открыто' },
+            ],
+            rows: [
+              { id: '2025', name: '2025', values: [6, 4, 0], note: '6/10 завершённых окон' },
+              { id: '2026', name: '2026', values: [4, 3, 3], note: '4/7 завершённых окон' },
+            ],
+          }}
+        />
+        <h3>Единые журналы</h3>
+        <CallJournal
+          rows={exampleSchedule.calls || []}
+          members={initialMembers}
+          hidePhones
+          onMember={() => setResult('Выбран клиент из общего журнала')}
+          onCall={() => setExampleCall(true)}
+        />
+        <ReviewJournal
+          rows={exampleSchedule['client-reviews'] || []}
+          members={initialMembers}
+          onMember={() => setResult('Выбран клиент из отзывов')}
+        />
+        <h3>Накопительный результат тренера</h3>
+        <ReportMonthPicker
+          month={reportMonthExample}
+          onChange={setReportMonthExample}
+          label="Накопительно по месяц включительно"
+        />
+        <p className="ws-muted">
+          Период: с 1 января {reportMonthExample.slice(0, 4)} года по конец выбранного месяца.
+          Будущие суммы остаются неизвестными, доля оплаты — общая оплата / общие продажи ПТ.
+        </p>
+        <h3>Частота посещений по безлимиту — пример</h3>
+        <ReportBars
+          unit="Клиентов"
+          rows={[
+            { name: 'Менее 5', value: 3, label: '3' },
+            { name: 'От 5 до 10, не включая 10', value: 4, label: '4' },
+            { name: 'От 50 до 60, не включая 60', value: 1, label: '1' },
+            { name: '60 и больше', value: 0, label: '0' },
+          ]}
+        />
+        <p className="ws-muted">
+          Восемь интервалов не пересекаются. Демо-частота: визиты / известные активные дни × 30.
+          Точный метод источника не раскрыт; клиенты без срока или с неполной историей заморозок
+          остаются отдельно от нулевых посещений.
         </p>
         <h3>Занятость тренеров за неделю</h3>
         <ReportWeekPicker day={reportWeekExample} onChange={setReportWeekExample} />

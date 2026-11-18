@@ -1,837 +1,932 @@
 @layer legacy {
-/* Category colours remain independent of the current club theme and of statuses. */
-.ds-membership-colors {
-  display: grid;
-  gap: 20px;
-  margin-top: 32px;
-}
-.ds-membership-colors > p {
-  color: var(--color-muted);
-  font-size: 15px;
-  line-height: 1.7;
-  margin: 0;
-}
-.membership-tag,
-.app-shell .membership-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  max-width: 100%;
-  padding: 3px 8px;
-  border: 1px solid var(--membership-line);
-  border-radius: 6px;
-  background: var(--membership-bg);
-  color: var(--membership-text);
-  font-size: var(--text-caption);
-  font-weight: 500;
-  line-height: 20px;
-  vertical-align: middle;
-  text-align: left;
-}
-.membership-tag > svg {
-  flex-shrink: 0;
-}
-.membership-tag > span {
-  overflow-wrap: anywhere;
-}
-.app-shell .membership-tag > span {
-  color: inherit;
-}
-.membership-kind-grid,
-.app-shell .membership-kind-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-.membership-kind-card,
-.app-shell .membership-kind-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 20px;
-  border: 1px solid var(--color-divider);
-  border-radius: var(--radius-card);
-  background: var(--color-surface);
-  color: var(--color-ink);
-  text-align: left;
-}
-button.membership-kind-card {
-  cursor: pointer;
-}
-.app-shell button.membership-kind-card:hover {
-  border-color: var(--color-control-border);
-}
-.app-shell button.membership-kind-card[aria-pressed='true'] {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-.membership-kind-card p,
-.app-shell .membership-kind-card p {
-  margin: 0;
-  color: var(--color-muted);
-  font-size: 15px;
-  line-height: 1.5;
-}
-.membership-kind-card code {
-  font-size: 14px;
-  color: var(--color-muted);
-}
-.app-shell .ws-plan-preview .membership-tag {
-  margin-block: 20px 8px;
-}
-.app-shell .ws-plan-preview h2 {
-  overflow-wrap: anywhere;
-}
-@container (min-width: 1700px) {
+  /* Category colours remain independent of the current club theme and of statuses. */
+  .ds-membership-colors {
+    display: grid;
+    gap: 20px;
+    margin-top: 32px;
+  }
+  .ds-membership-colors > p {
+    color: var(--color-muted);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+  }
+  .membership-tag,
+  .app-shell .membership-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 100%;
+    padding: 3px 8px;
+    border: 1px solid var(--membership-line);
+    border-radius: 6px;
+    background: var(--membership-bg);
+    color: var(--membership-text);
+    font-size: var(--text-caption);
+    font-weight: 500;
+    line-height: 20px;
+    vertical-align: middle;
+    text-align: left;
+  }
+  .membership-tag > svg {
+    flex-shrink: 0;
+  }
+  .membership-tag > span {
+    overflow-wrap: anywhere;
+  }
+  .app-shell .membership-tag > span {
+    color: inherit;
+  }
   .membership-kind-grid,
   .app-shell .membership-kind-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
   }
-}
-@container (max-width: 1000px) and (min-width: 701px) {
-  .membership-kind-grid,
-  .app-shell .membership-kind-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .membership-kind-card,
+  .app-shell .membership-kind-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px;
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-card);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    text-align: left;
   }
-}
-@container (max-width: 700px) {
-  .membership-kind-grid,
-  .app-shell .membership-kind-grid {
-    grid-template-columns: minmax(0, 1fr);
+  button.membership-kind-card {
+    cursor: pointer;
   }
-}
-.membership-tag.is-text-only,
-.app-shell .membership-tag.is-text-only {
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  font-size: inherit;
-  font-weight: 500;
-  line-height: inherit;
-}
-.plastic-card-grid,
-.app-shell .plastic-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr));
-  gap: 24px;
-}
-.membership-plastic {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  width: 100%;
-  min-height: 224px;
-  padding: 22px;
-  border-radius: 16px;
-  border: 1px solid #ffffff30;
-  background: linear-gradient(130deg, #586571, #293640);
-  color: #fff;
-  text-align: left;
-  box-shadow: 0 6px 15px #181c2414;
-}
-.membership-plastic::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background: linear-gradient(115deg, transparent 20%, #ffffff16 45%, transparent 65%);
-  pointer-events: none;
-}
-.plastic-top,
-.plastic-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 14px;
-  line-height: 1.5;
-}
-.plastic-top b {
-  font-size: 18px;
-}
-.plastic-top > span {
-  font-size: 14px;
-  text-align: right;
-}
-.plastic-chip {
-  display: block;
-  width: 30px;
-  height: 22px;
-  border: 1px solid currentColor;
-  border-radius: 5px;
-  opacity: 0.65;
-  margin: 18px 0 12px;
-  background: linear-gradient(
-    90deg,
-    transparent 30%,
-    #ffffff30 31%,
-    transparent 34%,
-    transparent 65%,
-    #ffffff30 66%,
-    transparent 69%
-  );
-}
-.plastic-title {
-  font-size: 20px;
-  line-height: 1.25;
-  font-weight: 600;
-  overflow-wrap: anywhere;
-}
-.plastic-description,
-.plastic-detail {
-  font-size: 14px;
-  line-height: 1.5;
-  margin-top: 6px;
-}
-.plastic-footer {
-  margin-top: auto;
-  padding-top: 18px;
-  font-weight: 500;
-}
-.plastic-group {
-  background: linear-gradient(130deg, #306649, #153d2c);
-}
-.plastic-personal {
-  background: linear-gradient(130deg, #a84350, #702735);
-}
-.plastic-single {
-  background: linear-gradient(130deg, #235fc4, #163c91);
-}
-.plastic-guest {
-  color: #424c3e;
-  border-color: #c9cfc2;
-  background: linear-gradient(130deg, #fffffb, #eeefe6);
-}
-.plastic-service {
-  color: var(--color-ink);
-  border-color: var(--color-line);
-  background: var(--color-surface);
-}
-.plastic-choice {
-  display: block;
-  min-width: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 16px;
-  background: transparent;
-  text-align: left;
-  cursor: pointer;
-}
-.plastic-choice[aria-pressed='true'] {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 4px;
-}
-.plastic-choice:focus-visible {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 4px;
-}
-.plastic-choice:disabled {
-  cursor: not-allowed;
-  filter: saturate(0.4);
-}
-.client-pass-item {
-  min-width: 0;
-  display: grid;
-  align-content: start;
-  gap: 12px;
-}
-.app-shell .sale-item {
-  display: grid;
-  gap: 16px;
-  padding: 24px;
-  min-height: 160px;
-  border: 1px solid var(--color-line);
-  border-radius: 16px;
-  background: var(--color-surface);
-  color: var(--color-ink);
-}
-.app-shell.is-sidebar-collapsed .nav-accordion > button {
-  width: 100%;
-  margin-left: 0;
-  border: 0;
-  padding: 0;
-  border-radius: 8px;
-}
-.app-shell .registration-workspace .client-search {
-  width: 100%;
-  max-width: none;
-  min-height: 56px;
-}
-.app-shell .registration-workspace .client-search-dropdown {
-  width: 100%;
-  max-width: 100%;
-}
-.app-shell .sale-workspace .client-search {
-  width: 100%;
-  max-width: none;
-  min-height: 52px;
-}
-.checkout-client {
-  display: grid;
-  gap: 8px;
-  padding: 16px;
-  border: 1px solid var(--color-line);
-  border-radius: 10px;
-  font-size: 15px;
-  line-height: 1.5;
-}
-.checkout-client > span {
-  color: var(--color-muted);
-  overflow-wrap: anywhere;
-}
-.checkout-total {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 24px;
-  border-radius: 12px;
-  background: var(--color-accent-soft);
-  color: var(--color-ink);
-}
-.checkout-total strong {
-  font-size: 28px;
-}
-.checkout-total small {
-  flex-basis: 100%;
-  font-size: 14px;
-  color: var(--color-muted);
-}
-.payment-methods {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
-  gap: 12px;
-}
-.payment-methods > button {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  min-height: 152px;
-  padding: 20px;
-  border: 1px solid var(--color-line);
-  border-radius: 12px;
-  background: var(--color-surface);
-  color: var(--color-text);
-  text-align: left;
-  cursor: pointer;
-}
-.payment-methods > button[aria-checked='true'] {
-  border-color: var(--color-accent);
-  background: var(--color-accent-soft);
-  outline: 1px solid var(--color-accent);
-}
-.payment-methods strong {
-  font-size: 16px;
-  line-height: 1.4;
-  color: var(--color-ink);
-}
-.payment-methods small {
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--color-muted);
-}
-.checkout-facts dd {
-  overflow-wrap: anywhere;
-}
-@container workspace (max-width:700px) {
+  .app-shell button.membership-kind-card:hover {
+    border-color: var(--color-control-border);
+  }
+  .app-shell button.membership-kind-card[aria-pressed='true'] {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  .membership-kind-card p,
+  .app-shell .membership-kind-card p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .membership-kind-card code {
+    font-size: 14px;
+    color: var(--color-muted);
+  }
+  .app-shell .ws-plan-preview .membership-tag {
+    margin-block: 20px 8px;
+  }
+  .app-shell .ws-plan-preview h2 {
+    overflow-wrap: anywhere;
+  }
+  @container (min-width: 1700px) {
+    .membership-kind-grid,
+    .app-shell .membership-kind-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+  @container (max-width: 1000px) and (min-width: 701px) {
+    .membership-kind-grid,
+    .app-shell .membership-kind-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @container (max-width: 700px) {
+    .membership-kind-grid,
+    .app-shell .membership-kind-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  .membership-tag.is-text-only,
+  .app-shell .membership-tag.is-text-only {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-size: inherit;
+    font-weight: 500;
+    line-height: inherit;
+  }
+  .plastic-card-grid,
+  .app-shell .plastic-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr));
+    gap: 24px;
+  }
+  .membership-plastic {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    width: 100%;
+    min-height: 224px;
+    padding: 22px;
+    border-radius: 16px;
+    border: 1px solid #ffffff30;
+    background: linear-gradient(130deg, #586571, #293640);
+    color: #fff;
+    text-align: left;
+    box-shadow: 0 6px 15px #181c2414;
+  }
+  .membership-plastic::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 20%, #ffffff16 45%, transparent 65%);
+    pointer-events: none;
+  }
+  .plastic-top,
+  .plastic-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .plastic-top b {
+    font-size: 18px;
+  }
+  .plastic-top > span {
+    font-size: 14px;
+    text-align: right;
+  }
+  .plastic-chip {
+    display: block;
+    width: 30px;
+    height: 22px;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+    opacity: 0.65;
+    margin: 18px 0 12px;
+    background: linear-gradient(
+      90deg,
+      transparent 30%,
+      #ffffff30 31%,
+      transparent 34%,
+      transparent 65%,
+      #ffffff30 66%,
+      transparent 69%
+    );
+  }
+  .plastic-title {
+    font-size: 20px;
+    line-height: 1.25;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+  .plastic-description,
+  .plastic-detail {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 6px;
+  }
+  .plastic-footer {
+    margin-top: auto;
+    padding-top: 18px;
+    font-weight: 500;
+  }
+  .plastic-group {
+    background: linear-gradient(130deg, #306649, #153d2c);
+  }
+  .plastic-personal {
+    background: linear-gradient(130deg, #a84350, #702735);
+  }
+  .plastic-single {
+    background: linear-gradient(130deg, #235fc4, #163c91);
+  }
+  .plastic-guest {
+    color: #424c3e;
+    border-color: #c9cfc2;
+    background: linear-gradient(130deg, #fffffb, #eeefe6);
+  }
+  .plastic-service {
+    color: var(--color-ink);
+    border-color: var(--color-line);
+    background: var(--color-surface);
+  }
+  .plastic-choice {
+    display: block;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 16px;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+  }
+  .plastic-choice[aria-pressed='true'] {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+  .plastic-choice:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+  .plastic-choice:disabled {
+    cursor: not-allowed;
+    filter: saturate(0.4);
+  }
+  .client-pass-item {
+    min-width: 0;
+    display: grid;
+    align-content: start;
+    gap: 12px;
+  }
+  .app-shell .sale-item {
+    display: grid;
+    gap: 16px;
+    padding: 24px;
+    min-height: 160px;
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    background: var(--color-surface);
+    color: var(--color-ink);
+  }
+  .app-shell.is-sidebar-collapsed .nav-accordion > button {
+    width: 100%;
+    margin-left: 0;
+    border: 0;
+    padding: 0;
+    border-radius: 8px;
+  }
+  .app-shell .registration-workspace .client-search {
+    width: 100%;
+    max-width: none;
+    min-height: 56px;
+  }
+  .app-shell .registration-workspace .client-search-dropdown {
+    width: 100%;
+    max-width: 100%;
+  }
+  .app-shell .sale-workspace .client-search {
+    width: 100%;
+    max-width: none;
+    min-height: 52px;
+  }
+  .checkout-client {
+    display: grid;
+    gap: 8px;
+    padding: 16px;
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .checkout-client > span {
+    color: var(--color-muted);
+    overflow-wrap: anywhere;
+  }
+  .checkout-total {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 24px;
+    border-radius: 12px;
+    background: var(--color-accent-soft);
+    color: var(--color-ink);
+  }
+  .checkout-total strong {
+    font-size: 28px;
+  }
+  .checkout-total small {
+    flex-basis: 100%;
+    font-size: 14px;
+    color: var(--color-muted);
+  }
   .payment-methods {
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+    gap: 12px;
   }
   .payment-methods > button {
-    min-height: 108px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    min-height: 152px;
+    padding: 20px;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    text-align: left;
+    cursor: pointer;
   }
-}
-.sale-workspace .sale-item-grid {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
-}
-.client-membership-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.client-membership-list > li {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 104px;
-  gap: 12px;
-  align-items: center;
-  min-height: 80px;
-  border-bottom: 1px solid var(--color-divider);
-  padding: 12px 16px;
-}
-.client-membership-list > li:first-child {
-  border-top: 1px solid var(--color-divider);
-}
-.client-membership-row {
-  display: grid;
-  grid-template-columns: minmax(170px, 1.6fr) minmax(90px, 0.8fr) 108px 100px;
-  gap: 12px;
-  align-items: center;
-  font-size: 16px;
-  line-height: 1.5;
-}
-.client-membership-row > div {
-  min-width: 0;
-}
-.client-membership-row small {
-  display: block;
-  margin-bottom: 3px;
-  color: var(--color-muted);
-  font-size: 14px;
-}
-.client-membership-name .membership-tag {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
-.client-membership-row strong {
-  font-weight: 500;
-}
-.client-membership-row .subscription-status {
-  margin: 0;
-  font-size: 14px;
-}
-.client-membership-row .status-expired {
-  color: var(--color-muted);
-}
-.client-membership-details.ws-disclosure {
-  margin-top: 0;
-  border: 0;
-  background: transparent;
-}
-.client-membership-details.ws-disclosure > summary {
-  padding: 6px 28px 6px 0;
-  font-size: 14px;
-  min-height: 44px;
-}
-.client-membership-list > li:has(details[open]) .client-membership-row,
-.client-membership-details[open] {
-  grid-column: 1 / -1;
-}
-.client-membership-details .ws-facts {
-  padding-top: 12px;
-}
-.sale-section-grid {
-  display: grid;
-  gap: 12px;
-}
-.sale-section-link {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  width: 100%;
-  min-height: 92px;
-  padding: 20px;
-  border: 1px solid var(--color-line);
-  border-radius: 12px;
-  background: var(--color-surface);
-  color: var(--color-ink);
-  text-align: left;
-  cursor: pointer;
-}
-.sale-section-link > span {
-  flex: 1;
-  min-width: 0;
-}
-.sale-section-link > svg {
-  flex-shrink: 0;
-  color: var(--color-muted);
-}
-.sale-section-link strong {
-  display: block;
-  font-size: 17px;
-  line-height: 1.5;
-  font-weight: 600;
-}
-.sale-section-link small {
-  display: block;
-  margin-top: 4px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--color-muted);
-}
-.sale-section-link b {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-muted);
-}
-.sale-section-link:hover {
-  background: var(--color-accent-soft);
-  border-color: var(--color-accent-line);
-}
-.sale-name-search label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 15px;
-  font-weight: 500;
-}
-.sale-name-search > div {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border: 1px solid var(--color-control-border);
-  border-radius: 10px;
-  min-height: 52px;
-  padding: 0 14px;
-  background: var(--color-surface);
-}
-.sale-name-search > div:focus-within {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-.sale-name-search svg {
-  flex-shrink: 0;
-  color: var(--color-muted);
-}
-.sale-name-search input {
-  min-width: 0;
-  width: 100%;
-  padding: 12px 0;
-  font-size: 16px;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: var(--color-ink);
-}
-.app-shell .client-picker-panel {
-  overflow: visible;
-  position: relative;
-  z-index: 5;
-}
-.app-shell .client-search.client-search-select {
-  height: auto;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 10px;
-  gap: 8px;
-}
-.app-shell .client-search-select > input {
-  flex: 1 1 120px;
-  width: auto;
-}
-.app-shell .client-search-select > .client-search-dropdown {
-  position: static;
-  flex: 0 0 100%;
-  width: 100%;
-  max-width: 100%;
-  margin-top: 4px;
-  box-shadow: none;
-}
-@container workspace (max-width: 1000px) {
-  .client-membership-row {
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-    gap: 14px 20px;
+  .payment-methods > button[aria-checked='true'] {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+    outline: 1px solid var(--color-accent);
   }
-}
-@container workspace (max-width: 700px) {
-  .app-shell .client-primary-actions {
-    flex-wrap: wrap;
+  .payment-methods strong {
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--color-ink);
   }
-  .app-shell .client-primary-actions .button {
-    flex: 1;
-    min-height: 44px;
+  .payment-methods small {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-muted);
   }
-  .app-shell .client-primary-actions .button:first-child {
-    flex: 1 0 100%;
+  .checkout-facts dd {
+    overflow-wrap: anywhere;
   }
-  .app-shell .client-primary-actions .client-more > summary {
-    width: 44px;
-    min-height: 44px;
+  @container workspace (max-width:700px) {
+    .payment-methods {
+      grid-template-columns: 1fr;
+    }
+    .payment-methods > button {
+      min-height: 108px;
+    }
+  }
+  .sale-workspace .sale-item-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  }
+  .client-membership-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
   .client-membership-list > li {
-    display: block;
-    padding: 16px;
+    border-bottom: 1px solid var(--color-divider);
+    padding: 0;
   }
-  .client-membership-name {
-    grid-column: 1 / -1;
+  .client-membership-list > li:first-child {
+    border-top: 1px solid var(--color-divider);
+  }
+  .client-membership-row {
+    display: grid;
+    grid-template-columns: minmax(170px, 1.6fr) minmax(90px, 0.8fr) 120px 100px auto;
+    gap: 12px;
+    align-items: center;
+    font-size: 16px;
+    line-height: 1.5;
+    min-height: 88px;
+    padding: 16px 20px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--color-ink);
+    appearance: none;
+  }
+  .client-membership-row:hover {
+    background: var(--color-surface-muted);
+  }
+  .client-membership-row > .ui-status {
+    justify-self: start;
+  }
+  .client-membership-open {
+    color: var(--color-accent);
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .membership-detail-heading {
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .membership-detail-heading h3 {
+    flex: 1;
+    min-width: 200px;
+    margin: 0;
+  }
+  @media print {
+    html:has(.membership-print-view),
+    body:has(.membership-print-view) {
+      height: auto !important;
+      min-height: 0 !important;
+      overflow: visible !important;
+    }
+    body:has(.membership-print-view) * {
+      display: none !important;
+    }
+    body:has(.membership-print-view) *:has(.membership-print-view) {
+      display: contents !important;
+    }
+    body:has(.membership-print-view) .membership-print-view,
+    body:has(.membership-print-view) .membership-print-view * {
+      display: revert !important;
+      color: black !important;
+      background: white !important;
+    }
+    body:has(.membership-print-view) .membership-print-view {
+      position: static;
+      padding: 24px;
+      margin: 0;
+      border: 0;
+    }
+    body:has(.membership-print-view) .membership-print-view button {
+      display: none !important;
+    }
+  }
+  .client-membership-row > div {
+    min-width: 0;
+  }
+  .client-membership-row small {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--color-muted);
+    font-size: 14px;
+  }
+  .client-membership-name .membership-tag {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  .client-membership-row strong {
+    font-weight: 500;
   }
   .client-membership-row .subscription-status {
+    margin: 0;
+    font-size: 14px;
+  }
+  .client-membership-row .status-expired {
+    color: var(--color-muted);
+  }
+  .client-membership-details.ws-disclosure {
+    margin-top: 0;
+    border: 0;
+    background: transparent;
+  }
+  .client-membership-details.ws-disclosure > summary {
+    padding: 6px 28px 6px 0;
+    font-size: 14px;
+    min-height: 44px;
+  }
+  .client-membership-list > li:has(details[open]) .client-membership-row,
+  .client-membership-details[open] {
     grid-column: 1 / -1;
   }
-  .sale-section-link {
-    padding: 16px;
+  .client-membership-details .ws-facts {
+    padding-top: 12px;
+  }
+  .sale-section-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
+  }
+  .sale-section-grid .catalog-section-card {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr) auto;
+    align-content: start;
+    gap: 12px;
+    min-height: 144px;
+    padding: 16px;
+  }
+  .sale-section-grid .catalog-section-card > span {
+    grid-row: 2;
+    grid-column: 1 / -1;
+  }
+  .sale-section-grid .catalog-section-card > b {
+    grid-column: 2;
+    justify-self: end;
+  }
+  .sale-section-grid .catalog-section-card > svg:last-child {
+    grid-column: 3;
+  }
+  @container workspace (max-width: 960px) {
+    .sale-section-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @container workspace (max-width: 480px) {
+    .sale-section-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  .sale-section-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    min-height: 92px;
+    padding: 20px;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    text-align: left;
+    cursor: pointer;
+  }
+  .sale-section-link > span {
+    flex: 1;
+    min-width: 0;
+  }
+  .sale-section-link > svg {
+    flex-shrink: 0;
+    color: var(--color-muted);
   }
   .sale-section-link strong {
-    font-size: 16px;
+    display: block;
+    font-size: 17px;
+    line-height: 1.5;
+    font-weight: 600;
   }
-  .sale-section-link > svg:first-child {
+  .sale-section-link small {
+    display: block;
+    margin-top: 4px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+  .sale-section-link b {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-muted);
+  }
+  .sale-section-link:hover {
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent-line);
+  }
+  .sale-name-search label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .sale-name-search > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--color-control-border);
+    border-radius: 10px;
+    min-height: 52px;
+    padding: 0 14px;
+    background: var(--color-surface);
+  }
+  .sale-name-search > div:focus-within {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  .sale-name-search svg {
+    flex-shrink: 0;
+    color: var(--color-muted);
+  }
+  .sale-name-search input {
+    min-width: 0;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 16px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--color-ink);
+  }
+  .app-shell .client-picker-panel {
+    overflow: visible;
+    position: relative;
+    z-index: 5;
+  }
+  .app-shell .client-search.client-search-select {
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 8px;
+  }
+  .app-shell .client-search-select > input {
+    flex: 1 1 120px;
+    width: auto;
+  }
+  .app-shell .client-search-select > .client-search-dropdown {
+    position: static;
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 4px;
+    box-shadow: none;
+  }
+  @container workspace (max-width: 1000px) {
+    .client-membership-row {
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 14px 20px;
+    }
+  }
+  @container workspace (max-width: 700px) {
+    .app-shell .client-primary-actions {
+      flex-wrap: wrap;
+    }
+    .app-shell .client-primary-actions .button {
+      flex: 1;
+      min-height: 44px;
+    }
+    .app-shell .client-primary-actions .button:first-child {
+      flex: 1 0 100%;
+    }
+    .app-shell .client-primary-actions .client-more > summary {
+      width: 44px;
+      min-height: 44px;
+    }
+    .client-membership-list > li {
+      display: block;
+      padding: 0;
+    }
+    .client-membership-row {
+      padding: 16px;
+    }
+    .client-membership-row > .ui-status {
+      grid-column: 1 / -1;
+    }
+    .client-membership-open {
+      grid-column: 1 / -1;
+    }
+    .client-membership-name {
+      grid-column: 1 / -1;
+    }
+    .client-membership-row .subscription-status {
+      grid-column: 1 / -1;
+    }
+    .sale-section-link {
+      padding: 16px;
+      gap: 12px;
+    }
+    .sale-section-link strong {
+      font-size: 16px;
+    }
+    .sale-section-link > svg:first-child {
+      display: none;
+    }
+  }
+  .sale-catalog .plastic-card-grid:not(.sale-item-grid) {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 228px), 228px));
+    gap: 16px;
+  }
+  .sale-catalog .plastic-choice {
+    width: 100%;
+  }
+  .membership-plastic.is-compact {
+    height: 184px;
+    min-height: 184px;
+    padding: 14px;
+    border-radius: 12px;
+  }
+  .membership-plastic.is-compact .plastic-chip,
+  .membership-plastic.is-compact .plastic-description {
     display: none;
   }
-}
-.sale-catalog .plastic-card-grid:not(.sale-item-grid) {
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 228px), 228px));
-  gap: 16px;
-}
-.sale-catalog .plastic-choice {
-  width: 100%;
-}
-.membership-plastic.is-compact {
-  height: 184px;
-  min-height: 184px;
-  padding: 14px;
-  border-radius: 12px;
-}
-.membership-plastic.is-compact .plastic-chip,
-.membership-plastic.is-compact .plastic-description {
-  display: none;
-}
-.membership-plastic.is-compact .plastic-top b {
-  font-size: 15px;
-}
-.membership-plastic.is-compact .plastic-top > span {
-  font-size: 14px;
-}
-.membership-plastic.is-compact .plastic-title {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-top: 12px;
-  min-height: 44px;
-  font-size: 16px;
-  line-height: 22px;
-}
-.membership-plastic.is-compact .plastic-detail {
-  font-size: 14px;
-  line-height: 20px;
-  margin-top: 6px;
-}
-.membership-plastic.is-compact .plastic-footer {
-  padding-top: 10px;
-  font-size: 14px;
-  line-height: 20px;
-}
-@container workspace (max-width: 700px) {
-    .sale-catalog .plastic-card-grid:not(.sale-item-grid) {
-    grid-template-columns: minmax(0, 1fr);
+  .membership-plastic.is-compact .plastic-top b {
+    font-size: 15px;
   }
-}
+  .membership-plastic.is-compact .plastic-top > span {
+    font-size: 14px;
+  }
+  .membership-plastic.is-compact .plastic-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-top: 12px;
+    min-height: 44px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .membership-plastic.is-compact .plastic-detail {
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 6px;
+  }
+  .membership-plastic.is-compact .plastic-footer {
+    padding-top: 10px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  @container workspace (max-width: 700px) {
+    .sale-catalog .plastic-card-grid:not(.sale-item-grid) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
 
-/* The catalog uses the same business sections as checkout; colours fill the entire tile. */
-.catalog-section-card.section-memberships {
-  --section-bg: #edf0f3;
-  --section-ink: #465462;
-  --section-line: #cdd4dc;
-}
-.catalog-section-card.section-personal {
-  --section-bg: #f8eeee;
-  --section-ink: #914b50;
-  --section-line: #e8cfd1;
-}
-.catalog-section-card.section-corporate {
-  --section-bg: #e8f0ff;
-  --section-ink: #204da8;
-  --section-line: #b8cdf3;
-}
-.catalog-section-card.section-exceptions {
-  --section-bg: #fff2e5;
-  --section-ink: #8a450d;
-  --section-line: #eac5a2;
-}
-.catalog-section-card.section-goods-services {
-  --section-bg: #f5f4ed;
-  --section-ink: #606a5c;
-  --section-line: #ccd2c8;
-}
-.sale-section-link.catalog-section-card {
-  background: var(--section-bg);
-  color: var(--section-ink);
-  border-color: var(--section-line);
-}
-.catalog-section-card :is(small, b, svg) {
-  color: inherit;
-}
-.sale-section-link.catalog-section-card:hover {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-  background: var(--section-bg);
-}
-.membership-kind-card > p,
-.app-shell .membership-kind-card > p {
-  color: inherit;
-}
-.membership-section-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-.membership-section-grid .catalog-section-card {
-  min-height: 112px;
-}
-.membership-workspace {
-  --layout-section-gap: 16px;
-}
-.membership-category-toolbar {
-  align-items: end;
-  gap: 12px;
-}
-.membership-category-toolbar .form-field {
-  flex: 1;
-  min-width: 180px;
-}
-.membership-category-toolbar .select-trigger {
-  width: 100%;
-}
-.membership-catalog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 228px), 1fr));
-  gap: 20px 16px;
-}
-.membership-catalog-card {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  gap: 10px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  text-align: left;
-  color: var(--color-ink);
-  cursor: pointer;
-  border-radius: 12px;
-}
-.membership-catalog-card:hover .membership-plastic {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
-}
-.membership-catalog-meta {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 8px;
-  align-items: center;
-  font-size: 14px;
-  color: var(--color-muted);
-  padding: 0 2px;
-}
-.membership-service-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr));
-  gap: 12px;
-}
-.membership-service-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 18px;
-  border: 1px solid var(--color-line);
-  border-radius: 12px;
-  background: var(--color-surface-subtle);
-}
-@container workspace (max-width: 700px) {
+  /* The catalog uses the same business sections as checkout; colours fill the entire tile. */
+  .catalog-section-card.section-memberships {
+    --section-bg: #edf0f3;
+    --section-ink: #465462;
+    --section-line: #cdd4dc;
+  }
+  .catalog-section-card.section-personal {
+    --section-bg: #f8eeee;
+    --section-ink: #914b50;
+    --section-line: #e8cfd1;
+  }
+  .catalog-section-card.section-corporate {
+    --section-bg: #e8f0ff;
+    --section-ink: #204da8;
+    --section-line: #b8cdf3;
+  }
+  .catalog-section-card.section-exceptions {
+    --section-bg: #fff2e5;
+    --section-ink: #8a450d;
+    --section-line: #eac5a2;
+  }
+  .catalog-section-card.section-goods-services {
+    --section-bg: #f5f4ed;
+    --section-ink: #606a5c;
+    --section-line: #ccd2c8;
+  }
+  .sale-section-link.catalog-section-card {
+    background: var(--section-bg);
+    color: var(--section-ink);
+    border-color: var(--section-line);
+  }
+  .catalog-section-card :is(small, b, svg) {
+    color: inherit;
+  }
+  .sale-section-link.catalog-section-card:hover {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    background: var(--section-bg);
+  }
+  .membership-kind-card > p,
+  .app-shell .membership-kind-card > p {
+    color: inherit;
+  }
   .membership-section-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
   }
   .membership-section-grid .catalog-section-card {
-    min-height: 96px;
+    min-height: 112px;
   }
-}
-.membership-navigation-row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px 16px;
-}
-.membership-navigation-row .ws-search {
-  flex: 1 1 240px;
-  width: 100%;
-  max-width: none;
-}
-.app-shell .membership-workspace .ws-panel-heading,
-.app-shell .membership-workspace .ws-panel-body {
-  padding: 16px 20px;
-}
-.app-shell .membership-workspace .ws-panel-heading h2 {
-  font-size: 18px;
-}
-.membership-workspace .ws-tabs > button {
-  padding: 10px 12px;
-  min-height: 44px;
-}
-.membership-category-filter.ws-disclosure {
-  margin: 0 20px;
-  border: 0;
-  background: transparent;
-  border-radius: 0;
-}
-.membership-category-filter.ws-disclosure > summary {
-  min-height: 44px;
-  padding-block: 10px;
-  padding-left: 0;
-}
-.membership-category-filter .membership-category-toolbar {
-  padding: 8px 0 16px;
-  border: 0;
-}
-.registration-bookings {
-  min-width: 0;
-  margin: 0;
-  padding: 16px;
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-sm);
-}
-.registration-bookings legend {
-  padding-inline: 6px;
-  font-weight: 600;
-}
-.registration-bookings p {
-  margin: 0 0 12px;
-  color: var(--color-muted);
-  font-size: 14px;
-}
-.registration-bookings button[aria-pressed='true'] {
-  border-color: var(--color-accent);
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-}
-.client-membership-name > small {
-  display: block;
-  margin-top: 4px;
-  color: var(--color-muted);
-  font-size: 14px;
-}
-.pass-access-note {
-  display: block;
-  margin: 8px 0 0;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--color-ink);
-  text-align: left;
-}
-.pass-access-problem {
-  color: var(--color-muted);
-}
-
-}
-
-@layer pages {
-.membership-catalog-conditions {
-  display: grid;
-  align-content: start;
-  gap: 4px;
-}
-.membership-catalog-meta {
-  margin-top: auto;
-}
-@supports (grid-template-rows: subgrid) {
-  .membership-catalog-card {
+  .membership-workspace {
+    --layout-section-gap: 16px;
+  }
+  .membership-category-toolbar {
+    align-items: end;
+    gap: 12px;
+  }
+  .membership-category-toolbar .form-field {
+    flex: 1;
+    min-width: 180px;
+  }
+  .membership-category-toolbar .select-trigger {
+    width: 100%;
+  }
+  .membership-catalog-grid {
     display: grid;
-    grid-template-rows: subgrid;
-    grid-row: span 3;
-    row-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 228px), 1fr));
+    gap: 20px 16px;
+  }
+  .membership-catalog-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 10px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    color: var(--color-ink);
+    cursor: pointer;
+    border-radius: 12px;
+  }
+  .membership-catalog-card:hover .membership-plastic {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
   }
   .membership-catalog-meta {
-    align-self: end;
-    margin-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+    font-size: 14px;
+    color: var(--color-muted);
+    padding: 0 2px;
+  }
+  .membership-service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr));
+    gap: 12px;
+  }
+  .membership-service-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 18px;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    background: var(--color-surface-subtle);
+  }
+  @container workspace (max-width: 700px) {
+    .membership-section-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .membership-section-grid .catalog-section-card {
+      min-height: 96px;
+    }
+  }
+  .membership-navigation-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+  .membership-navigation-row .ws-search {
+    flex: 1 1 240px;
+    width: 100%;
+    max-width: none;
+  }
+  .app-shell .membership-workspace .ws-panel-heading,
+  .app-shell .membership-workspace .ws-panel-body {
+    padding: 16px 20px;
+  }
+  .app-shell .membership-workspace .ws-panel-heading h2 {
+    font-size: 18px;
+  }
+  .membership-workspace .ws-tabs > button {
+    padding: 10px 12px;
+    min-height: 44px;
+  }
+  .membership-category-filter.ws-disclosure {
+    margin: 0 20px;
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+  }
+  .membership-category-filter.ws-disclosure > summary {
+    min-height: 44px;
+    padding-block: 10px;
+    padding-left: 0;
+  }
+  .membership-category-filter .membership-category-toolbar {
+    padding: 8px 0 16px;
+    border: 0;
+  }
+  .registration-bookings {
+    min-width: 0;
+    margin: 0;
+    padding: 16px;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+  }
+  .registration-bookings legend {
+    padding-inline: 6px;
+    font-weight: 600;
+  }
+  .registration-bookings p {
+    margin: 0 0 12px;
+    color: var(--color-muted);
+    font-size: 14px;
+  }
+  .registration-bookings button[aria-pressed='true'] {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+  }
+  .client-membership-name > small {
+    display: block;
+    margin-top: 4px;
+    color: var(--color-muted);
+    font-size: 14px;
+  }
+  .pass-access-note {
+    display: block;
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-ink);
+    text-align: left;
+  }
+  .pass-access-problem {
+    color: var(--color-muted);
   }
 }
+@layer pages {
+  @media (max-width: 700px) {
+    .design-system .sale-section-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  .membership-catalog-conditions {
+    display: grid;
+    align-content: start;
+    gap: 4px;
+  }
+  .membership-catalog-meta {
+    margin-top: auto;
+  }
+  @supports (grid-template-rows: subgrid) {
+    .membership-catalog-card {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 3;
+      row-gap: 10px;
+    }
+    .membership-catalog-meta {
+      align-self: end;
+      margin-top: 0;
+    }
+  }
 }

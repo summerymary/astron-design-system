@@ -5,9 +5,9 @@ export type StatisticsChart = {
   title: string;
   unit: string;
   format?: 'money' | 'percent';
-  kind: 'bars' | 'columns' | 'lines' | 'donut' | 'pyramid';
+  kind: 'bars' | 'columns' | 'lines' | 'donut' | 'pyramid' | 'stacked';
   series: { key: string; label: string }[];
-  rows: { id: string; name: string; values: (number | null)[] }[];
+  rows: { id: string; name: string; values: (number | null)[]; note?: string }[];
   maximum?: number;
   reference?: { value: number; label: string };
   note?: string;
@@ -90,10 +90,20 @@ export function statisticsCharts(
     });
   if (id === 'clients_sell_gender_age') {
     add(
+      'Количество покупок по полу и возрасту',
+      'Количество покупок по полу и возрасту',
+      ['male', 'female'],
+      { kind: 'pyramid', unit: 'Покупок' },
+    );
+    add(
       'Сумма покупок по полу и возрасту',
       'Сумма покупок по полу и возрасту',
-      ['male', 'female', 'unknown'],
-      { unit: '₽' },
+      ['male', 'female'],
+      {
+        unit: '₽',
+        kind: 'pyramid',
+        note: 'Одинаковая денежная шкала. Неизвестные пол и возраст сохранены в таблице.',
+      },
     );
     add(
       'Средний чек по полу и возрасту',
@@ -102,8 +112,21 @@ export function statisticsCharts(
       { unit: '₽', note: 'Нет покупок — средний чек неизвестен, а не равен нулю.' },
     );
   }
+  if (id === 'clients_sell_gender_age')
+    charts.forEach((chart) => {
+      if (chart.kind === 'pyramid')
+        chart.rows = chart.rows.filter((r) => !r.name.includes('не известен'));
+    });
+  if (id === 'selling_clients_new') {
+    add('Первые покупки · выручка', 'Первые абонементы новых клиентов', ['amount'], { unit: '₽' });
+    add('Первые покупки · клиенты', 'Первые абонементы новых клиентов', ['count']);
+  }
+  if (id === 'clients_sell_discount') {
+    add('Продажи по скидкам · сумма', 'Продажи по скидкам', ['amount'], { unit: '₽' });
+    add('Продажи по скидкам · операции', 'Продажи по скидкам', ['count']);
+  }
   if (id === 'newclients_source')
-    add('Источники новых клиентов', 'Источники регистраций', ['count']);
+    add('Источники новых клиентов', 'Источники новых клиентов', ['count']);
   if (id === 'ptrener_rating') add('Количество персональных занятий', 'Тренеры', ['count']);
   if (id === 'ptrener_rating_all')
     add('Рабочие часы по видам нагрузки', 'Тренеры', ['personalHours', 'groupHours', 'dutyHours'], {
@@ -118,6 +141,7 @@ export function statisticsCharts(
   if (id === 'finbyyear_by_abonements' || id === 'selling_stat') {
     add('Сумма продаж', 'Распределение продаж', ['amount']);
     add('Количество продаж', 'Распределение продаж', ['count']);
+    add('Доля выручки', 'Распределение продаж', ['share']);
   }
   if (id === 'finbyyear') {
     add('Выручка по месяцам', 'Распределение продаж', ['amount'], { kind: 'columns', unit: '₽' });
@@ -125,11 +149,15 @@ export function statisticsCharts(
     if (chart) {
       chart.rows.sort((a, b) => a.id.localeCompare(b.id));
       chart.reference = {
-        value: chart.rows.reduce((sum, r) => sum + (r.values[0] ?? 0), 0) / chart.rows.length,
+        value:
+          chart.rows
+            .filter((r) => r.values[0] !== null)
+            .reduce((sum, r) => sum + (r.values[0] ?? 0), 0) /
+          Math.max(1, chart.rows.filter((r) => r.values[0] !== null).length),
         label: 'Среднее за месяц',
       };
       chart.note =
-        'Среднее — сумма сохранённых продаж / число месяцев выбранного периода, включая месяцы без сохранённых продаж. Неполные месяцы не пересчитываются до полных.';
+        'Среднее — сумма сохранённых продаж / число наблюдаемых месяцев, включая месяцы без сохранённых продаж. Будущие месяцы не входят в знаменатель; неполный текущий месяц не пересчитывается до полного.';
     }
   }
   if (id === 'visit_by_period') {
@@ -146,17 +174,50 @@ export function statisticsCharts(
     const rows = result.blocks[0]?.rows || [];
     // Summer cohorts remain separate by year, like the source. Open windows are never losses.
     const groups =
-      id === 'selling_clients_secondary_summer'
+      id === 'selling_clients_secondary_summer' || id === 'selling_clients_afterguest'
         ? [...new Set(rows.map((r) => r.anchor.slice(0, 4)))].sort()
         : [''];
-    for (const year of groups) {
+    if (id !== 'selling_clients_secondary' && groups.length) {
+      charts.push({
+        id: `${id}:cohorts`,
+        title: 'Результаты по годам',
+        unit: 'Клиентов',
+        kind: 'stacked',
+        series: ['Продлил', 'Не продлил', 'Окно ещё открыто'].map((key) => ({
+          key,
+          label:
+            id === 'selling_clients_afterguest'
+              ? key === 'Продлил'
+                ? 'Купили карту'
+                : key === 'Не продлил'
+                  ? 'Нет покупки к срезу'
+                  : key
+              : key,
+        })),
+        rows: groups.map((year) => ({
+          id: year,
+          name: year,
+          note: (() => {
+            const summary = result.blocks
+              .find((b) => b.title === 'Итоги по годам')
+              ?.rows.find((r) => r.name === year);
+            return summary ? `${summary.convertedClosed}/${summary.closed} завершённых окон` : '';
+          })(),
+          values: ['Продлил', 'Не продлил', 'Окно ещё открыто'].map(
+            (status) => rows.filter((r) => r.anchor.startsWith(year) && r.status === status).length,
+          ),
+        })),
+        note: 'Каждый год — отдельная когорта. Незавершённые окна показаны отдельно; доля по завершённым окнам и её знаменатель доступны в таблице.',
+      });
+    }
+    for (const year of id === 'selling_clients_secondary' ? groups : []) {
       const list = rows.filter((r) => !year || r.anchor.startsWith(year));
       if (!list.length) continue;
       charts.push({
         id: `${id}:${year}`,
         title: `${id === 'selling_clients_afterguest' ? 'Покупка после гостевого визита' : 'Результат продления'}${year ? ` · ${year}` : ''}`,
         unit: 'Клиентов',
-        kind: 'bars',
+        kind: 'donut',
         series: [{ key: 'count', label: 'Клиентов' }],
         rows: ['Продлил', 'Не продлил', 'Окно ещё открыто'].map((status) => ({
           id: status,
@@ -170,12 +231,19 @@ export function statisticsCharts(
               : status,
           values: [list.filter((r) => r.status === status).length],
         })),
-        note: 'Незавершённые окна показаны отдельно. Процент конверсии выше рассчитан только по завершённым окнам.',
+        note:
+          id === 'selling_clients_afterguest'
+            ? 'Покупки после гостевого визита к дате среза. Неполная демоистория не доказывает окончательный отказ клиента.'
+            : 'Незавершённые окна показаны отдельно. Процент конверсии рассчитан только по завершённым окнам.',
       });
     }
   }
   if (id === 'clients_segmetation') add('Сегменты базы', 'Сегменты базы', ['count']);
   if (id === 'unlim_avg_visit') add('Частота визитов по безлимитам', 'Частота визитов', ['count']);
+  if (id === 'gt_finance')
+    add('Известный доход групповых занятий', 'Доход по известным списаниям групп', ['amount'], {
+      unit: '₽',
+    });
   return charts;
 }
 

@@ -1,3 +1,4 @@
+import { Field } from '../components/Field';
 import { useState } from 'react';
 import { Plus, ShoppingBag } from 'lucide-react';
 import type { DemoRecord } from '../data/workspace';
@@ -188,17 +189,15 @@ export function GiftCardsWorkspace({
               </Notice>
             )}
             <div className="reception-payment-parts">
-              <label className="form-field">
-                <span>Номер подарочной карты *</span>
+              <Field className="form-field" label={<> Номер подарочной карты * </>}>
                 <input
                   required
                   value={number}
                   maxLength={32}
                   onChange={(event) => setNumber(event.target.value)}
                 />
-              </label>
-              <label className="form-field">
-                <span>Номинал, ₽ *</span>
+              </Field>
+              <Field className="form-field" label={<> Номинал, ₽ * </>}>
                 <input
                   required
                   type="number"
@@ -209,7 +208,7 @@ export function GiftCardsWorkspace({
                   value={nominal}
                   onChange={(event) => setNominal(event.target.value)}
                 />
-              </label>
+              </Field>
             </div>
             {mode !== 'online' && (
               <div className="ws-actions">
@@ -267,15 +266,17 @@ export function GiftCardsWorkspace({
                 )}
               </div>
             )}
-            <label className="form-field">
-              <span>{mode === 'issue' ? 'Основание выдачи *' : 'Комментарий'}</span>
+            <Field
+              className="form-field"
+              label={<> {mode === 'issue' ? 'Основание выдачи *' : 'Комментарий'} </>}
+            >
               <textarea
                 value={comment}
                 rows={2}
                 maxLength={1000}
                 onChange={(event) => setComment(event.target.value)}
               />
-            </label>
+            </Field>
             {mode === 'sell' ? (
               <ReceptionPayment
                 value={payment}
@@ -319,8 +320,7 @@ export function GiftCardsWorkspace({
             {card.status === 'Активна' && (
               <>
                 <h3>Списать с баланса</h3>
-                <label className="form-field">
-                  <span>Сумма, ₽</span>
+                <Field className="form-field" label={<> Сумма, ₽ </>}>
                   <input
                     type="number"
                     min="0.01"
@@ -329,14 +329,13 @@ export function GiftCardsWorkspace({
                     value={amount}
                     onChange={(event) => setAmount(event.target.value)}
                   />
-                </label>
-                <label className="form-field">
-                  <span>Основание списания *</span>
+                </Field>
+                <Field className="form-field" label={<> Основание списания * </>}>
                   <input
                     value={debitComment}
                     onChange={(event) => setDebitComment(event.target.value)}
                   />
-                </label>
+                </Field>
                 <Button
                   variant="accent"
                   disabled={!debitComment.trim() || !Number(amount)}

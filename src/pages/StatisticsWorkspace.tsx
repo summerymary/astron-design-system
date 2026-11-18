@@ -1,5 +1,20 @@
-import { useState } from 'react';
-import { Download, RotateCcw, Phone } from 'lucide-react';
+import {
+  transferReportFilters,
+  reportHasClub,
+  reportHasTrainer,
+  reportPeriodMode,
+} from '../lib/statistics-navigation';
+import { CallJournal } from '../components/CallJournal';
+import { ReviewJournal } from '../components/ReviewJournal';
+import { Field } from '../components/Field';
+import { useEffect, useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
+import { reportFamily } from '../data/report-families';
+import { ReportFilterBar } from '../components/ReportFilterBar';
+import { PhoneAction, RowActions } from '../components/RecordActions';
+import { displayNumber, displayDuration } from '../lib/display-format';
+import type { Navigate } from '../components/WorkspaceUI';
+import { Download, RotateCcw } from 'lucide-react';
 import type { Member, Visit } from '../types';
 import { useWorkspace } from '../components/WorkspaceProvider';
 import { DataTable, Empty, Notice, Stats, Tabs } from '../components/WorkspaceUI';
@@ -16,18 +31,32 @@ import { ReportWeekPicker } from '../components/ReportWeekPicker';
 import { reportMonth } from '../lib/report-period';
 import { demoStamp, registrationNow } from '../lib/demo-clock';
 import { statisticsCharts } from '../lib/statistics-charts';
-import {
-  clientRatingTabs,
-  isClientRating,
-  statisticsReports,
-  reportTitle,
-  reportPending,
-} from '../data/statistics';
+import { isClientRating, statisticsReports, reportTitle, reportPending } from '../data/statistics';
 import { TODAY, prettyDate, money } from '../data/workspace';
 import { getClientProfile } from '../data/clientProfile';
 import { buildStatistics, defaultReportFilters, statisticsCsv } from '../lib/statistics';
 import type { ReportFilters } from '../lib/statistics';
 import '../styles/statistics.css';
+
+function reportDefaults(id: string): ReportFilters {
+  return {
+    ...defaultReportFilters,
+    threshold: isClientRating(id) ? '3' : id === 'client_lifetime' ? '30' : '21',
+    ...(['visit_by_period', 'financeresult'].includes(id) ? reportMonth(TODAY.slice(0, 7)) : {}),
+    ...(id === 'free_trener_find' ? { timeFrom: '14:00' } : {}),
+    ...(id === 'gt_finance' ? { grouping: 'trainer', groupByTrainer: '1' } : {}),
+    ...(id === 'selling_clients_secondary_summer' ? { from: '1900-01-01' } : {}),
+    ...(['trener_financial_result', 'finbyyear', 'finbyyear_by_abonements'].includes(id)
+      ? {
+          from: `${TODAY.slice(0, 4)}-01-01`,
+          to:
+            id === 'trener_financial_result'
+              ? reportMonth(TODAY.slice(0, 7))!.to
+              : `${TODAY.slice(0, 4)}-12-31`,
+        }
+      : {}),
+  };
+}
 
 export function StatisticsWorkspace({
   members,
@@ -36,6 +65,8 @@ export function StatisticsWorkspace({
   onReport,
   onMember,
   hidePhones = false,
+  navigate,
+  allowedTargets,
 }: {
   members: Member[];
   visits: Visit[];
@@ -43,12 +74,14 @@ export function StatisticsWorkspace({
   onReport: (id: string | null) => void;
   onMember: (member: Member) => void;
   hidePhones?: boolean;
+  navigate?: Navigate;
+  allowedTargets?: string[];
 }) {
   const report = statisticsReports.find((r) => r.id === reportId);
   if (!reportId)
     return (
       <div className="ws-stack">
-        <p className="ws-muted">Клиенты, тренеры и продажи · демонстрационные данные</p>
+        <p className="ws-muted">Аналитика по задачам · демонстрационные данные</p>
         <ReportCatalogue reports={statisticsReports} onOpen={onReport} />
       </div>
     );
@@ -61,13 +94,15 @@ export function StatisticsWorkspace({
     );
   return (
     <StatisticsReport
-      key={isClientRating(report.id) ? 'client-ratings' : report.id}
+      key={reportFamily(report.id).id}
       id={report.id}
       onReport={onReport}
       members={members}
       visits={visits}
       onMember={onMember}
       hidePhones={hidePhones}
+      navigate={navigate}
+      allowedTargets={allowedTargets}
     />
   );
 }
@@ -79,6 +114,8 @@ function StatisticsReport({
   visits,
   onMember,
   hidePhones,
+  navigate,
+  allowedTargets,
 }: {
   id: string;
   onReport: (id: string | null) => void;
@@ -86,20 +123,19 @@ function StatisticsReport({
   visits: Visit[];
   onMember: (member: Member) => void;
   hidePhones: boolean;
+  navigate?: Navigate;
+  allowedTargets?: string[];
 }) {
   const { data } = useWorkspace();
-  const defaults = {
-    ...defaultReportFilters,
-    threshold: isClientRating(id) ? '3' : id === 'client_lifetime' ? '30' : '21',
-    ...(id === 'visit_by_period' ? reportMonth(TODAY.slice(0, 7)) : {}),
-    ...(id === 'free_trener_find' ? { timeFrom: '14:00' } : {}),
-    ...(['selling_clients_secondary_summer', 'trener_financial_result', 'financeresult'].includes(
-      id,
-    )
-      ? { from: `${TODAY.slice(0, 4)}-01-01` }
-      : {}),
-  };
-  const [filters, setFilters] = useState<ReportFilters>(defaults);
+  const defaults = reportDefaults(id);
+  const family = reportFamily(id);
+  const [storedFilters, storeFilters] = useState<Record<string, ReportFilters>>({});
+  const filters = storedFilters[id] || defaults;
+  const setFilters: Dispatch<SetStateAction<ReportFilters>> = (action) =>
+    storeFilters((current) => ({
+      ...current,
+      [id]: typeof action === 'function' ? action(current[id] || defaults) : action,
+    }));
   const report = statisticsReports.find((r) => r.id === id)!;
   const output = buildStatistics(id, filters, {
     members,
@@ -110,8 +146,18 @@ function StatisticsReport({
   });
   const charts = statisticsCharts(id, output, filters);
   const [view, setView] = useState('');
+  const [detail, setDetail] = useState('');
   const [cohort, setCohort] = useState<{ age: string; gender: string } | null>(null);
+  const [chartMeasure, setChartMeasure] = useState('amount');
+  const [matrixMeasure, setMatrixMeasure] = useState('expense');
   const [call, setCall] = useState<{ name: string; phone: string } | null>(null);
+  useEffect(() => {
+    setView('');
+    setDetail('');
+    setCohort(null);
+    setChartMeasure('amount');
+    setMatrixMeasure('expense');
+  }, [id]);
   const views =
     id === 'unique_visits'
       ? [
@@ -130,10 +176,44 @@ function StatisticsReport({
             { id: 'По типам абонементов', label: 'Типы абонементов' },
             { id: 'По названиям абонементов', label: 'Названия абонементов' },
           ]
-        : [];
+        : ['clients_ltv', 'clients_ltv_bydate'].includes(id)
+          ? [
+              { id: 'Сводка LTV', label: 'Сводка' },
+              { id: 'Расходы клиентов с лицевых счетов', label: 'Клиенты' },
+            ]
+          : id === 'fincredits'
+            ? [
+                { id: 'Сводка обязательств перед клиентами', label: 'Сводка' },
+                { id: 'Положительные остатки лицевых счетов', label: 'Лицевые счета' },
+                { id: 'Активные подарочные карты', label: 'Подарочные карты' },
+                { id: 'Неиспользованная стоимость абонементов', label: 'Абонементы' },
+              ]
+            : id === 'trener_financial_result'
+              ? [
+                  { id: 'Накопительный результат ПТ', label: 'Накопительно' },
+                  { id: 'Результат по тренерам и месяцам', label: 'По месяцам' },
+                  { id: 'Итоги ПТ за выбранный период', label: 'Итоги' },
+                ]
+              : ['selling_clients_secondary_summer', 'selling_clients_afterguest'].includes(id)
+                ? [
+                    { id: 'Итоги по годам', label: 'По годам' },
+                    { id: 'Покупка следующей карты', label: 'Клиенты' },
+                  ]
+                : id === 'unlim_avg_visit'
+                  ? [
+                      { id: 'Частота визитов', label: 'Частота посещений' },
+                      { id: 'Визиты по безлимитным картам', label: 'Клиенты' },
+                    ]
+                  : [];
   const activeIndex = Number.isInteger(Number(view)) && views[Number(view)] ? Number(view) : 0;
   const activeView = views[activeIndex]?.id;
-  const visibleBlocks = output.blocks
+  let visibleBlocks = output.blocks
+    .filter((block) => (detail ? block.detail === detail : !block.detail))
+    .sort((a, b) =>
+      id === 'clients_sell_discount'
+        ? Number(b.title === 'Продажи по скидкам') - Number(a.title === 'Продажи по скидкам')
+        : 0,
+    )
     .filter((block) =>
       id === 'clients_segmetation'
         ? block.title === (filters.segment === 'all' ? 'Сегменты базы' : 'Клиенты сегмента')
@@ -154,6 +234,7 @@ function StatisticsReport({
     .filter(
       (block) =>
         !activeView ||
+        detail ||
         block.title === activeView ||
         (id === 'unique_visits' &&
           activeView === 'Все направления' &&
@@ -161,7 +242,8 @@ function StatisticsReport({
         (activeView === 'Популярность групповых программ' &&
           block.title === 'Направления групповых программ'),
     );
-  const visibleCharts = charts
+  let visibleCharts = charts
+    .filter(() => !detail)
     .filter(
       () =>
         !(id === 'clients_gender_age' && cohort) &&
@@ -170,18 +252,134 @@ function StatisticsReport({
     .filter(
       (chart) =>
         !activeView ||
+        (id === 'unlim_avg_visit' && activeView === 'Частота визитов') ||
+        (['selling_clients_secondary_summer', 'selling_clients_afterguest'].includes(id) &&
+          activeView === 'Итоги по годам') ||
         chart.title === activeView ||
         (id === 'unique_visits' &&
           ['Все направления', 'Клиенты по числу клубов'].includes(activeView)),
     );
 
+  const measureOptions = ['selling_stat', 'finbyyear_by_abonements'].includes(id)
+    ? [
+        { id: 'amount', name: 'Сумма' },
+        { id: 'count', name: 'Количество' },
+        { id: 'share', name: 'Доля выручки' },
+      ]
+    : id === 'clients_sell_gender_age'
+      ? [
+          { id: 'amount', name: 'Сумма' },
+          { id: 'average', name: 'Средний чек' },
+          { id: 'count', name: 'Количество покупок' },
+        ]
+      : [];
+  if (measureOptions.length) {
+    if (id === 'clients_sell_gender_age') {
+      const title =
+        chartMeasure === 'average'
+          ? 'Средний чек по полу и возрасту'
+          : chartMeasure === 'count'
+            ? 'Количество покупок по полу и возрасту'
+            : 'Сумма покупок по полу и возрасту';
+      visibleCharts = visibleCharts.filter((c) => c.title === title);
+      visibleBlocks = visibleBlocks.filter((b) => b.title === title);
+    } else visibleCharts = visibleCharts.filter((c) => c.series[0]?.key === chartMeasure);
+  }
+  visibleBlocks = visibleBlocks.map((block) => {
+    if (id === 'feedbacks')
+      return {
+        ...block,
+        columns: [
+          { key: 'date', label: 'Дата', format: 'date' },
+          { key: 'name', label: 'Клиент' },
+          { key: 'club', label: 'Клуб' },
+          { key: 'text', label: 'Отзыв' },
+          { key: 'operator', label: 'Сотрудник' },
+          { key: 'rating', label: 'Оценка' },
+        ],
+      };
+    if (
+      block.columns.some((c) => c.key === 'buyers') &&
+      block.columns.some((c) => c.key === 'operations')
+    )
+      return {
+        ...block,
+        columns: [
+          ...block.columns.filter((c) => !['buyers', 'operations'].includes(c.key)),
+          { key: 'actions', label: 'Действия' },
+        ],
+      };
+    if (block.title === 'Накопительный результат ПТ' && matrixMeasure !== 'all')
+      return {
+        ...block,
+        columns: block.columns
+          .filter(
+            (c) =>
+              ['name', 'category', matrixMeasure].includes(c.key) ||
+              c.key.endsWith(':' + matrixMeasure),
+          )
+          .map((c) =>
+            c.key.includes(':')
+              ? {
+                  ...c,
+                  label: new Intl.DateTimeFormat('ru', {
+                    month: 'short',
+                    year: '2-digit',
+                    timeZone: 'UTC',
+                  }).format(new Date(c.key.split(':')[0] + '-01')),
+                }
+              : c,
+          ),
+      };
+    return block;
+  });
+  if (id === 'trener_financial_result' && filters.trainer !== 'all') {
+    const row = output.blocks
+      .find((b) => b.title === 'Накопительный результат ПТ')
+      ?.rows.find((r) => r.id === filters.trainer);
+    if (row) {
+      const metric = matrixMeasure === 'all' ? 'amount' : matrixMeasure;
+      const months = Object.keys(row)
+        .filter((k) => k.endsWith(':' + metric))
+        .sort();
+      visibleCharts.push({
+        id: 'trainer-trend',
+        title: 'Динамика выбранного тренера',
+        unit: metric === 'percent' ? '%' : '₽',
+        kind: 'lines',
+        format: metric === 'percent' ? 'percent' : 'money',
+        series: [
+          {
+            key: metric,
+            label:
+              metric === 'expense' ? 'Оплата' : metric === 'amount' ? 'Продажи ПТ' : 'Доля оплаты',
+          },
+        ],
+        rows: months.map((k) => ({
+          id: k,
+          name: new Intl.DateTimeFormat('ru', { month: 'short', timeZone: 'UTC' }).format(
+            new Date(k.split(':')[0] + '-01'),
+          ),
+          values: [row[k] === '' ? null : Number(row[k])],
+        })),
+      });
+    }
+  }
+
   const update = (key: keyof ReportFilters, value: string) => {
     setCohort(null);
-    setFilters((f) => ({ ...f, [key]: value, ...(key === 'to' && asOf ? { from: value } : {}) }));
+    setDetail('');
+    setFilters((f) => ({
+      ...f,
+      [key]: value,
+      ...(key === 'to' && asOf ? { from: value } : {}),
+      ...(id === 'gt_finance' && key === 'grouping'
+        ? { groupByTrainer: value === 'trainer' ? '1' : '0' }
+        : {}),
+    }));
   };
   const field = (key: keyof ReportFilters, label: string, type = 'date') => (
-    <label className="form-field" key={key}>
-      <span>{label}</span>
+    <Field className="form-field" data-filter={key} key={key} label={<> {label} </>}>
       <input
         type={type}
         value={filters[key]}
@@ -189,15 +387,14 @@ function StatisticsReport({
         onChange={(e) => update(key, e.target.value)}
         {...(type === 'number' ? { min: 0, step: 1 } : {})}
       />
-    </label>
+    </Field>
   );
   const choice = (
     key: keyof ReportFilters,
     label: string,
     options: { id: string; name: string }[],
   ) => (
-    <label className="form-field" key={key}>
-      <span>{label}</span>
+    <Field className="form-field" data-filter={key} key={key} label={label}>
       <Select value={filters[key]} onChange={(e) => update(key, e.target.value)}>
         {options.map((o) => (
           <option key={o.id} value={o.id}>
@@ -205,10 +402,10 @@ function StatisticsReport({
           </option>
         ))}
       </Select>
-    </label>
+    </Field>
   );
   const flag = (key: keyof ReportFilters, label: string) => (
-    <label className="ws-checkbox" key={key}>
+    <label className="ws-checkbox" data-filter={key} key={key}>
       <input
         type="checkbox"
         checked={filters[key] === '1'}
@@ -218,6 +415,9 @@ function StatisticsReport({
     </label>
   );
   const noPeriod = [
+    'financeresult',
+    'trener_financial_result',
+    'selling_clients_secondary_summer',
     'client_lifetime',
     'clients_ltv',
     'birdthday',
@@ -235,19 +435,7 @@ function StatisticsReport({
     'clients_segmetation',
     'gtrener_busy',
   ].includes(id);
-  const noClub = [
-    'birdthday',
-    'clients_new',
-    'newclients',
-    'newclients_source',
-    'clients_active',
-    'report_all_clients_phones',
-    'clients_gender_age',
-    'report_pclients_lost',
-    'fincredits',
-    'client_lifetime',
-    'clients_segmetation',
-  ].includes(id);
+  const noClub = !reportHasClub(id);
   const showKind = [
     'client_lastvisit',
     'timetoabstat',
@@ -260,21 +448,25 @@ function StatisticsReport({
     // Human-facing CSV uses displayed units; domain tables keep numeric kopecks for sorting.
     const blocks = visibleBlocks.map((b) => ({
       ...b,
-      columns: b.columns.map((c) => ({
-        ...c,
-        label: c.format === 'money' ? `${c.label}, ₽` : c.label,
-      })),
+      columns: b.columns
+        .filter((c) => !['buyers', 'operations', 'actions'].includes(c.key))
+        .map((c) => ({
+          ...c,
+          label: c.format === 'money' ? `${c.label}, ₽` : c.label,
+        })),
       rows: b.rows.map(
         (r) =>
           Object.fromEntries(
             Object.entries(r).map(([key, value]) => [
               key,
-              b.columns.find((c) => c.key === key)?.format === 'money' && value !== ''
-                ? (Number(value) / 100).toLocaleString('ru-RU', {
-                    useGrouping: false,
-                    maximumFractionDigits: 2,
-                  })
-                : value,
+              id === 'calls' && key === 'duration'
+                ? displayDuration(value)
+                : b.columns.find((c) => c.key === key)?.format === 'money' && value !== ''
+                  ? (Number(value) / 100).toLocaleString('ru-RU', {
+                      useGrouping: false,
+                      maximumFractionDigits: 2,
+                    })
+                  : value,
             ]),
           ) as typeof r,
       ),
@@ -289,6 +481,35 @@ function StatisticsReport({
     setTimeout(() => URL.revokeObjectURL(url), 0);
   };
   const renderCell = (r: DemoRecord, c: ReportColumn, title: string) => {
+    if (c.key === 'actions')
+      return (
+        <RowActions
+          label={`Действия: ${r.name}`}
+          actions={[
+            { label: 'Кто купил', onClick: () => setDetail(`${r.detailKey}:buyers`) },
+            { label: 'Список операций', onClick: () => setDetail(`${r.detailKey}:operations`) },
+          ]}
+        />
+      );
+    if (id === 'unlim_avg_visit' && title === 'Частота визитов' && c.key === 'count')
+      return (
+        <Button
+          variant="ghost"
+          disabled={!Number(r.count)}
+          onClick={() => setDetail(r.detailKey)}
+          aria-label={`Показать клиентов: ${r.name}`}
+        >
+          {r.count} · Подробнее
+        </Button>
+      );
+    if (id === 'selling_clients_afterguest' && c.key === 'status')
+      return r.status === 'Продлил' ? 'Купил карту' : 'Нет покупки к дате среза';
+    if (r.detailKey && ['buyers', 'operations'].includes(c.key))
+      return (
+        <Button variant="ghost" onClick={() => setDetail(`${r.detailKey}:${c.key}`)}>
+          {c.key === 'buyers' ? 'Кто купил' : 'Список операций'}
+        </Button>
+      );
     if (id === 'gtrener_busy' && /^day[0-6]$/.test(c.key))
       return r[c.key] ? (
         <div className="statistics-week-cell">
@@ -331,54 +552,29 @@ function StatisticsReport({
           {r[c.key]}
         </Button>
       );
-    if (id === 'calls' && c.key === 'name') {
-      const member = members.find((m) => String(m.id) === r.memberId);
-      return member ? (
-        <Button variant="ghost" onClick={() => onMember(member)}>
-          {r.name}
-        </Button>
-      ) : (
-        r.name
-      );
-    }
-    if ((id === 'calls' || id.startsWith('report_pclients')) && c.key === 'phone') {
-      const original = id === 'calls' ? data.calls?.find((row) => row.id === r.id) : undefined;
-      const phone = original?.phone || members.find((m) => String(m.id) === r.memberId)?.phone;
+    if (id.startsWith('report_pclients') && c.key === 'phone') {
+      const phone = members.find((m) => String(m.id) === r.memberId)?.phone;
       return phone ? (
-        <Button
-          variant="ghost"
+        <PhoneAction
+          name={r.name}
+          phone={r.phone}
           onClick={() => setCall({ name: r.name, phone })}
-          aria-label={`Позвонить: ${r.name}`}
-        >
-          <Phone size={16} />
-          {r.phone}
-        </Button>
+        />
       ) : (
         '—'
       );
     }
-    if (id === 'calls' && c.key === 'recording') {
-      const localRecording = r.recordingUrl?.startsWith('audio/') ? r.recordingUrl : '';
-      return localRecording ? (
-        <audio
-          controls
-          preload="none"
-          src={new URL(localRecording, window.location.href.split('#')[0]).href}
-          aria-label={`Запись звонка ${r.time}`}
-        />
-      ) : (
-        <span className="ws-muted">Нет записи</span>
-      );
-    }
-    return r[c.key] === '' || r[c.key] === undefined
-      ? '—'
-      : c.format === 'money'
-        ? money(Number(r[c.key]) / 100)
-        : c.format === 'date'
-          ? prettyDate(r[c.key])
-          : c.format === 'percent'
-            ? `${r[c.key]}%`
-            : r[c.key];
+    const formatted =
+      r[c.key] === '' || r[c.key] === undefined
+        ? '—'
+        : c.format === 'money'
+          ? money(Number(r[c.key]) / 100)
+          : c.format === 'date'
+            ? prettyDate(r[c.key])
+            : c.format === 'percent'
+              ? `${Number(r[c.key]).toLocaleString('ru-RU', { maximumFractionDigits: 2 })}%`
+              : displayNumber(r[c.key]);
+    return r.rowKind === 'profit' ? <strong>{formatted}</strong> : formatted;
   };
   return (
     <div className="ws-stack statistics-report">
@@ -409,28 +605,97 @@ function StatisticsReport({
         </div>
       </div>
       {call && <CallDialog {...call} hidden={hidePhones} onClose={() => setCall(null)} />}
+      {detail && (
+        <Button variant="secondary" onClick={() => setDetail('')}>
+          ← К сводке отчёта
+        </Button>
+      )}
       <section className="panel ws-panel">
         <div className="ws-panel-heading statistics-report-heading">
           <div>
-            <h2>{isClientRating(id) ? 'Рейтинг клиентов' : reportTitle(report)}</h2>
+            <h2>{family.title}</h2>
+            {reportTitle(report) !== family.title && (
+              <p className="ws-muted">{reportTitle(report)}</p>
+            )}
           </div>
+          {family.target &&
+            navigate &&
+            (!allowedTargets || allowedTargets.includes(family.target)) && (
+              <Button variant="ghost" onClick={() => navigate(family.target!)}>
+                Открыть{' '}
+                {family.target === 'schedule'
+                  ? 'расписание'
+                  : family.target === 'calls'
+                    ? 'общий журнал звонков'
+                    : family.target === 'reviews'
+                      ? 'общий журнал отзывов'
+                      : family.target === 'members'
+                        ? 'клиентскую базу'
+                        : 'кассу'}
+              </Button>
+            )}
         </div>
-        {isClientRating(id) && (
+        {family.reports.length > 1 && (
           <Tabs
-            label="Вид рейтинга клиентов"
-            value={id}
-            onChange={onReport}
-            items={clientRatingTabs}
+            label="Раздел аналитики"
+            value={id === 'newclients' ? 'clients_new' : id}
+            items={family.reports.filter((r) => !r.hidden)}
+            onChange={(nextId) => {
+              storeFilters((current) => ({
+                ...current,
+                [id]: filters,
+                [nextId]: transferReportFilters(
+                  id,
+                  nextId,
+                  filters,
+                  current[nextId] || reportDefaults(nextId),
+                ),
+              }));
+              setView('');
+              setDetail('');
+              setCohort(null);
+              setChartMeasure('amount');
+              onReport(nextId);
+            }}
           />
         )}
         {!reportPending[id] && id !== 'birdthday' && (
-          <div className="ws-toolbar statistics-filters">
-            {id === 'visit_by_period' && (
+          <ReportFilterBar
+            activeCount={
+              Object.keys(defaults).filter(
+                (key) =>
+                  ![
+                    'from',
+                    'to',
+                    'club',
+                    'trainer',
+                    'kind',
+                    'criterion',
+                    'threshold',
+                    'plan',
+                  ].includes(key) &&
+                  filters[key as keyof ReportFilters] !== defaults[key as keyof ReportFilters],
+              ).length
+            }
+          >
+            {['visit_by_period', 'financeresult', 'trener_financial_result'].includes(id) && (
               <ReportMonthPicker
-                month={filters.from.slice(0, 7)}
+                month={(id === 'trener_financial_result' ? filters.to : filters.from).slice(0, 7)}
+                label={
+                  id === 'trener_financial_result'
+                    ? 'Накопительно по месяц включительно'
+                    : 'Месяц и год'
+                }
                 onChange={(month) => {
                   const period = reportMonth(month);
-                  if (period) setFilters((current) => ({ ...current, ...period }));
+                  if (period)
+                    setFilters((current) => ({
+                      ...current,
+                      ...period,
+                      ...(id === 'trener_financial_result'
+                        ? { from: month.slice(0, 4) + '-01-01' }
+                        : {}),
+                    }));
                 }}
               />
             )}
@@ -462,7 +727,7 @@ function StatisticsReport({
                 { id: 'personal', name: 'Персональные тренировки' },
                 { id: 'online', name: 'Онлайн-тренировки' },
               ])}
-            {report.group === 'trainers' &&
+            {reportHasTrainer(id) &&
               choice('trainer', 'Тренер', [
                 { id: 'all', name: 'Все тренеры' },
                 ...(data['trainer-profiles'] || []).map((t) => ({ id: t.id, name: t.name })),
@@ -470,12 +735,13 @@ function StatisticsReport({
             {['clients_active', 'selltovosit', 'selling_clients_secondary'].includes(id) && (
               <>
                 {flag('includePersonal', 'Включать персональные тренировки')}
-                {flag('includeSingle', 'Включать разовые и гостевые')}
+                {id !== 'selling_clients_secondary' &&
+                  flag('includeSingle', 'Включать разовые и гостевые')}
                 {flag('includeCorporate', 'Включать корпоративные')}
                 {id === 'clients_active' && flag('onlyUnlimited', 'Только безлимитные')}
               </>
             )}
-            {id === 'newclients' && (
+            {['clients_new', 'newclients', 'newclients_source'].includes(id) && (
               <>
                 {choice('source', 'Источник', [
                   { id: 'all', name: 'Любой источник' },
@@ -487,6 +753,38 @@ function StatisticsReport({
                 {flag('onlyNoPurchase', 'Ничего не купил')}
               </>
             )}
+            {id === 'selling_clients_new' && (
+              <>
+                {flag('includePersonal', 'Считать персональные тренировки')}
+                {flag('includeSingle', 'Считать разовые посещения')}
+              </>
+            )}
+            {id === 'selling_stat' && (
+              <>
+                {choice('salesSort', 'Сортировать', [
+                  { id: 'count', name: 'По количеству продаж' },
+                  { id: 'amount', name: 'По сумме продаж' },
+                ])}
+                {flag('includeMemberships', 'Количественные и безлимитные')}
+                {flag('includePersonal', 'Персональные тренировки')}
+                {flag('includeSingle', 'Разовые посещения')}
+                {flag('includeCorporate', 'Корпоративные')}
+                {flag('includeGoods', 'Товары и услуги')}
+              </>
+            )}
+            {id === 'kassacontrol' &&
+              choice('payment', 'Вид оплаты / операции', [
+                { id: 'all', name: 'Любая · касса №1' },
+                { id: 'cash', name: 'Наличные' },
+                { id: 'card', name: 'Банковская карта' },
+                { id: 'website', name: 'Сайт' },
+                { id: 'gift', name: 'Подарочная карта' },
+                { id: 'credit', name: 'В кредит' },
+                { id: 'deposit', name: 'Внесение' },
+                { id: 'withdrawal', name: 'Снятие' },
+                { id: 'refund', name: 'Возврат наличными' },
+                { id: 'card-refund', name: 'Возврат на карту' },
+              ])}
             {id === 'clients_sell_gender_age' &&
               flag('onlyPersonal', 'Только персональные тренировки')}
             {id === 'clients_segmetation' &&
@@ -515,7 +813,11 @@ function StatisticsReport({
             )}
             {id === 'gt_finance' && (
               <>
-                {flag('groupByTrainer', 'Группировать по тренеру')}
+                {choice('grouping', 'Представление', [
+                  { id: 'trainer', name: 'По тренерам' },
+                  { id: 'program', name: 'По программам' },
+                  { id: 'events', name: 'Занятия' },
+                ])}
                 {choice('reportSort', 'Сортировать', [
                   { id: 'avg_visitors', name: 'По среднему числу посещений' },
                   { id: 'all_shedules', name: 'По количеству занятий' },
@@ -538,7 +840,7 @@ function StatisticsReport({
             )}
             {['client_lifetime', 'report_pclients_stat', 'report_pclients_lost'].includes(id) &&
               field('threshold', 'Интервал бездействия, дней', 'number')}
-            {['selling_clients_secondary', 'selling_clients_afterguest'].includes(id) &&
+            {id === 'selling_clients_secondary' &&
               field('renewalDays', 'Демо-окно покупки, дней', 'number')}
             {id === 'unlim_avg_visit' &&
               choice('plan', 'Безлимитная карта', [
@@ -569,10 +871,11 @@ function StatisticsReport({
                     { id: 'club', name: 'По клубам' },
                     { id: 'category', name: 'По категориям' },
                   ])}
-                {choice('compare', 'Сравнение', [
-                  { id: 'none', name: 'Без сравнения' },
-                  { id: 'previous', name: 'Предыдущий период' },
-                ])}
+                {id !== 'selling_stat' &&
+                  choice('compare', 'Сравнение', [
+                    { id: 'none', name: 'Без сравнения' },
+                    { id: 'previous', name: 'Предыдущий период' },
+                  ])}
               </>
             )}
             {['notcame', 'client_lastvisit', 'client_lastvisit_personal'].includes(id) &&
@@ -581,7 +884,9 @@ function StatisticsReport({
                 id === 'notcame' ? 'Минимум пропусков' : 'Дней без визитов более',
                 'number',
               )}
-            {['clients_new', 'selling_clients_new'].includes(id) &&
+            {['clients_new', 'newclients', 'newclients_source', 'selling_clients_new'].includes(
+              id,
+            ) &&
               choice('criterion', 'Считать новыми по', [
                 { id: 'registration', name: 'Дате регистрации' },
                 { id: 'visit', name: 'Первому известному визиту' },
@@ -635,12 +940,15 @@ function StatisticsReport({
                 ))}
               </fieldset>
             )}
-          </div>
+          </ReportFilterBar>
         )}
       </section>
       <p className="ws-muted statistics-data-note">
         Демоданные · сегодня {prettyDate(demoStamp(registrationNow()).slice(0, 10))} · московское
         время · ₽
+        {['history', 'snapshot', 'week'].includes(reportPeriodMode(id)) && (
+          <> · Срез: {prettyDate(filters.to)}</>
+        )}
       </p>
       {output.error ? (
         <Notice tone="warning">{output.error}</Notice>
@@ -680,6 +988,37 @@ function StatisticsReport({
               idPrefix="statistics-view"
             />
           )}
+          {!!measureOptions.length && !detail && (
+            <div className="statistics-chart-controls">
+              <Field label="Показатель">
+                <Select value={chartMeasure} onChange={(e) => setChartMeasure(e.target.value)}>
+                  {measureOptions.map((o) => (
+                    <option key={o.id} value={o.id}>
+                      {o.name}
+                    </option>
+                  ))}
+                </Select>
+              </Field>
+            </div>
+          )}
+          {id === 'trener_financial_result' && activeView === 'Накопительный результат ПТ' && (
+            <div className="statistics-chart-controls">
+              <Field label="Показатель по месяцам">
+                <Select value={matrixMeasure} onChange={(e) => setMatrixMeasure(e.target.value)}>
+                  <option value="expense">Оплата тренеру</option>
+                  <option value="amount">Продажи ПТ</option>
+                  <option value="percent">Доля оплаты</option>
+                  <option value="all">Все показатели</option>
+                </Select>
+              </Field>
+            </div>
+          )}
+          {id === 'gt_finance' && (
+            <Notice>
+              В графике показан только известный доход. Занятия без сохранённой оценки не считаются
+              нулевым доходом; тариф и число присутствовавших доступны в детализации.
+            </Notice>
+          )}
           <div
             className="ws-stack"
             id="statistics-result"
@@ -691,36 +1030,54 @@ function StatisticsReport({
             ))}
             {visibleBlocks.map((block, index) => (
               <section
-                className={`panel ws-panel${id === 'gtrener_busy' ? ' statistics-week-table' : ''}`}
+                className={`panel ws-panel${id === 'gtrener_busy' ? ' statistics-week-table' : ''}${block.title === 'Накопительный результат ПТ' ? ' statistics-trainer-matrix' : ''}`}
                 key={`${id}-${index}`}
               >
                 <div className="ws-panel-heading">
                   <h3>{block.title}</h3>
                 </div>
-                <DataTable
-                  rows={block.rows.filter((row) => row.id !== 'network-total')}
-                  footerRows={block.rows.filter((row) => row.id === 'network-total')}
-                  tableLabel={block.title}
-                  columns={block.columns.map((c) => ({
-                    ...c,
-                    render: (r) => renderCell(r, c, block.title),
-                  }))}
-                  onOpen={
-                    block.memberLinks &&
-                    block.rows.every((r) => members.some((m) => String(m.id) === r.memberId))
-                      ? (r) => {
-                          const m = members.find((m) => String(m.id) === r.memberId);
-                          if (m) onMember(m);
-                        }
-                      : undefined
-                  }
-                  empty={
-                    <Empty
-                      title="По выбранным условиям данных нет"
-                      text="Выберите другой период или снимите часть фильтров."
-                    />
-                  }
-                />
+                {id === 'calls' ? (
+                  <CallJournal
+                    rows={block.rows.map((r) => ({
+                      ...r,
+                      phone:
+                        data.calls?.find((c) => c.id === r.id)?.phone ||
+                        members.find((m) => String(m.id) === r.memberId)?.phone ||
+                        '',
+                    }))}
+                    members={members}
+                    hidePhones={hidePhones}
+                    onMember={onMember}
+                    onCall={setCall}
+                  />
+                ) : id === 'feedbacks' ? (
+                  <ReviewJournal rows={block.rows} members={members} onMember={onMember} />
+                ) : (
+                  <DataTable
+                    rows={block.rows.filter((row) => row.id !== 'network-total')}
+                    footerRows={block.rows.filter((row) => row.id === 'network-total')}
+                    tableLabel={block.title}
+                    columns={block.columns.map((c) => ({
+                      ...c,
+                      render: (r) => renderCell(r, c, block.title),
+                    }))}
+                    onOpen={
+                      block.memberLinks &&
+                      block.rows.every((r) => members.some((m) => String(m.id) === r.memberId))
+                        ? (r) => {
+                            const m = members.find((m) => String(m.id) === r.memberId);
+                            if (m) onMember(m);
+                          }
+                        : undefined
+                    }
+                    empty={
+                      <Empty
+                        title="По выбранным условиям данных нет"
+                        text="Выберите другой период или снимите часть фильтров."
+                      />
+                    }
+                  />
+                )}
               </section>
             ))}
           </div>

@@ -1,3 +1,4 @@
+import { familyCatalogue } from './report-families';
 export type ReportGroup = 'clients' | 'trainers' | 'sales';
 export const reportGroups: { id: ReportGroup; label: string }[] = [
   { id: 'clients', label: 'Клиенты' },
@@ -10,7 +11,7 @@ const displayTitles: Record<string, string> = {
   clients_ltv: 'Средние расходы клиента (LTV)',
   clients_ltv_bydate: 'Средние расходы клиента за период',
   report_pclients_stat: 'Удержание и потеря клиентов тренера',
-  newclients: 'Новые клиенты по источникам',
+  newclients: 'Новые клиенты: регистрация, визит, покупка',
   gtrener_busy: 'Занятость тренеров за неделю',
   ptrener_rating_all: 'Рабочие часы тренеров',
   report_pclients_lost: 'Потерянные клиенты тренера',
@@ -55,10 +56,10 @@ const descriptions: Record<string, string> = {
   selltovosit: 'Стоимость посещения с учётом проданной карты',
   kassacontrol: 'Поступления, выдачи, внесения и снятия одной кассы',
   selling_clients_new: 'Первая карта нового клиента по выбранному критерию',
-  selling_clients_secondary: 'Покупка новой карты после окончания предыдущей',
+  selling_clients_secondary: 'Новая карта после окончания предыдущей, включая покупку заранее',
   clients_sell_gender_age: 'Сумма покупок по полу и возрасту клиентов',
-  clients_sell_discount: 'Продажи со сниженной ценой',
-  financeresult: 'Доходы, расходы и финансовый результат',
+  clients_sell_discount: 'Продажи по скидкам и без скидки, суммы и покупатели',
+  financeresult: 'Выручка направлений минус оплата тренерам по клубам за месяц',
   clients_ltv: 'Средняя сумма известных списаний с лицевых счетов',
   clients_ltv_bydate: 'Средние списания с лицевых счетов за период',
   finbyyear: 'Динамика суммы продаж по месяцам',
@@ -485,20 +486,11 @@ export const clientRatingTabs = [
 export const isClientRating = (id: string) => clientRatingTabs.some((tab) => tab.id === id);
 /** Keep source route IDs, but show a single searchable rating card in the catalogue. */
 export function catalogueReports(reports: ReportDefinition[]) {
-  const rating =
-    reports.find((report) => report.id === 'clients_rating_visit') ||
-    reports.find((report) => isClientRating(report.id));
-  return reports.flatMap((report) => {
-    if (!isClientRating(report.id)) return [report];
-    if (report !== rating) return [];
-    return [
-      {
-        ...report,
-        title: 'Рейтинг клиентов',
-        sourceTitle: 'Рейтинг посещений, пропусков и покупок',
-        description: 'Три вкладки: посещения, пропуски занятий и сумма покупок',
-        catalogueTitle: 'Рейтинг клиентов',
-      },
-    ];
-  });
+  return familyCatalogue(reports).map((family) => ({
+    ...family.available[0],
+    title: family.title,
+    catalogueTitle: family.title,
+    description: family.description,
+    sourceTitle: family.available.map((r) => r.sourceTitle).join(' · '),
+  }));
 }

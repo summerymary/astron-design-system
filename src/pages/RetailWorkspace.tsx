@@ -1,3 +1,4 @@
+import { Field } from '../components/Field';
 import { useState } from 'react';
 import { Button } from '../components/ui';
 import { DataTable, Empty, Notice, SearchBox } from '../components/WorkspaceUI';
@@ -100,8 +101,7 @@ export function RetailWorkspace({
                     key: 'quantity',
                     label: 'Количество',
                     render: (row) => (
-                      <label className="form-field">
-                        <span className="sr-only">Количество: {row.name}</span>
+                      <Field className="form-field" label={<> Количество: {row.name} </>}>
                         <input
                           type="number"
                           min="1"
@@ -121,7 +121,7 @@ export function RetailWorkspace({
                             setError('');
                           }}
                         />
-                      </label>
+                      </Field>
                     ),
                   },
                   {

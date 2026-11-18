@@ -1,3 +1,4 @@
+import { NavigationCard } from '../components/WorkspaceUI';
 import { Select } from '../components/Select';
 import { useCallback, useState } from 'react';
 import { ArrowRight, Check, Plus } from 'lucide-react';
@@ -118,28 +119,35 @@ export function CRMWorkspace({
           ]}
         />
         <div className="crm-home-links">
-          <button onClick={() => openLeads()}>
-            <strong>Заявки</strong>
-            <span>
-              Люди, которые интересуются клубом. Контакты, текущий статус и следующее действие.
-            </span>
-          </button>
-          <button onClick={() => navigate('pipelines')}>
-            <strong>Сценарии работы с заявками</strong>
-            <span>
-              Путь от первого обращения до покупки. Что означает каждый статус и что делать дальше.
-            </span>
-          </button>
-          <button onClick={() => navigate('segments')}>
-            <strong>Группы клиентов</strong>
-            <span>
-              Соберите нужную аудиторию, например людей, которым назначено пробное занятие.
-            </span>
-          </button>
-          <button onClick={() => navigate('retention')}>
-            <strong>Вернуть клиентов в клуб</strong>
-            <span>Кому нужно позвонить, чтобы помочь вернуться к занятиям.</span>
-          </button>
+          <NavigationCard
+            onClick={() => openLeads()}
+            title={<>Заявки</>}
+            caption={
+              <>Люди, которые интересуются клубом. Контакты, текущий статус и следующее действие.</>
+            }
+          />
+          <NavigationCard
+            onClick={() => navigate('pipelines')}
+            title={<>Сценарии работы с заявками</>}
+            caption={
+              <>
+                Путь от первого обращения до покупки. Что означает каждый статус и что делать
+                дальше.
+              </>
+            }
+          />
+          <NavigationCard
+            onClick={() => navigate('segments')}
+            title={<>Группы клиентов</>}
+            caption={
+              <>Соберите нужную аудиторию, например людей, которым назначено пробное занятие.</>
+            }
+          />
+          <NavigationCard
+            onClick={() => navigate('retention')}
+            title={<>Вернуть клиентов в клуб</>}
+            caption={<>Кому нужно позвонить, чтобы помочь вернуться к занятиям.</>}
+          />
         </div>
         <section className="panel ws-panel">
           <div className="ws-panel-heading">

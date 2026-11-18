@@ -1,3 +1,4 @@
+import { Field } from './Field';
 import { useEffect, useState } from 'react';
 import { ArrowRight, Check, Copy, RotateCcw } from 'lucide-react';
 import { Button, SectionTitle } from './ui';
@@ -95,8 +96,7 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
                     onChange={(event) => apply(event.target.value)}
                   />
                 </label>
-                <label className="form-field theme-hex-field">
-                  <span>Основной цвет · HEX</span>
+                <Field className="form-field theme-hex-field" label={<> Основной цвет · HEX </>}>
                   <input
                     aria-label="Основной цвет HEX"
                     value={draft}
@@ -109,7 +109,7 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
                     aria-invalid={!!error}
                     aria-describedby={error ? 'theme-color-error' : undefined}
                   />
-                </label>
+                </Field>
                 <Button type="submit">
                   Применить <ArrowRight size={14} />
                 </Button>
@@ -168,10 +168,9 @@ export function ThemePlayground({ onNotify }: { onNotify: (text: string) => void
           </div>
           <p>Смирнова Анна Андреевна</p>
           <small>Подписи остаются читаемыми на выбранном фоне.</small>
-          <label className="form-field">
-            <span>Абонемент</span>
+          <Field className="form-field" label={<> Абонемент </>}>
             <input value="Железная карта" readOnly />
-          </label>
+          </Field>
           <Button onClick={() => onNotify('Это образец кнопки в выбранной палитре')}>
             Оформить абонемент <ArrowRight size={14} />
           </Button>

@@ -1,3 +1,4 @@
+import { Field } from './Field';
 import { useId, useRef, useState } from 'react';
 import { Button } from './ui';
 
@@ -31,8 +32,7 @@ export function PinEntry({
         onUnlock();
       }}
     >
-      <label className="form-field" htmlFor={id}>
-        <span>{label}</span>
+      <Field className="form-field" htmlFor={id} label={<> {label} </>}>
         <input
           ref={input}
           id={id}
@@ -48,7 +48,7 @@ export function PinEntry({
             setError('');
           }}
         />
-      </label>
+      </Field>
       {error && (
         <p id={`${id}-error`} className="pin-entry-error" role="alert">
           {error}

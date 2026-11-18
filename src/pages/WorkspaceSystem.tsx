@@ -1,3 +1,4 @@
+import { Field } from '../components/Field';
 import { Select } from '../components/Select';
 import { useCallback, useMemo, useState } from 'react';
 import {
@@ -32,12 +33,12 @@ import {
 import type { Navigate } from '../components/WorkspaceUI';
 import { adminSections } from '../data/admin';
 import type { AdminSectionId } from '../data/admin';
-import type { DemoRecord, Field, Resource } from '../data/workspace';
+import type { DemoRecord, Field as FieldDefinition, Resource } from '../data/workspace';
 import { directoryGroups, resources, money, prettyDate, TODAY } from '../data/workspace';
 import { roles } from '../data/roles';
 import { directorySnippet, searchDirectories, searchWords } from '../lib/directory-search';
 
-const membershipSearchFields: Field[] = [
+const membershipSearchFields: FieldDefinition[] = [
   { key: 'name', label: 'Название' },
   { key: 'short', label: 'Условия' },
   { key: 'description', label: 'Описание' },
@@ -246,7 +247,7 @@ export function PayrollWorkspace({ navigate }: { navigate: Navigate }) {
   const close = useCallback(() => setForm(null), []);
   const shift = data.shifts.find((row) => row.id === selected);
   const amount = shift ? Number(shift.hours) * Number(shift.rate) : 0;
-  const periodFields: Field[] = [
+  const periodFields: FieldDefinition[] = [
     { key: 'name', label: 'Название периода', required: true },
     { key: 'start', label: 'С даты', type: 'date', required: true },
     { key: 'end', label: 'По дату', type: 'date', required: true },
@@ -270,8 +271,7 @@ export function PayrollWorkspace({ navigate }: { navigate: Navigate }) {
         <div className="ws-panel-body ws-stack">
           {tab === 'Рабочий день' && (
             <>
-              <label className="form-field">
-                <span>Смена</span>
+              <Field className="form-field" label={<> Смена </>}>
                 <Select value={selected} onChange={(e) => setSelected(e.target.value)}>
                   {data.shifts.map((row) => (
                     <option key={row.id} value={row.id}>
@@ -279,7 +279,7 @@ export function PayrollWorkspace({ navigate }: { navigate: Navigate }) {
                     </option>
                   ))}
                 </Select>
-              </label>
+              </Field>
               {shift ? (
                 <>
                   <Stats
@@ -699,14 +699,12 @@ export function EventLogsWorkspace() {
             <option key={value}>{value}</option>
           ))}
         </Select>
-        <label className="form-field">
-          <span>С даты</span>
+        <Field className="form-field" label={<> С даты </>}>
           <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} />
-        </label>
-        <label className="form-field">
-          <span>По дату</span>
+        </Field>
+        <Field className="form-field" label={<> По дату </>}>
           <input type="date" value={to} min={from} onChange={(e) => setTo(e.target.value)} />
-        </label>
+        </Field>
         <Button
           variant="ghost"
           onClick={() => {
@@ -814,15 +812,14 @@ export function CamerasWorkspace() {
               label="Режим камеры"
             />
             {mode === 'Архив' && (
-              <label className="form-field">
-                <span>Дата записи</span>
+              <Field className="form-field" label={<> Дата записи </>}>
                 <input
                   type="date"
                   max={TODAY}
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
                 />
-              </label>
+              </Field>
             )}
             <div className={`ws-camera-placeholder ws-camera-large ${playing ? 'is-playing' : ''}`}>
               <Camera size={50} />
@@ -999,8 +996,7 @@ export function PreferencesWorkspace({ section, name }: { section: AdminSectionI
               { key: 'newPin', label: 'Новый демо-PIN' },
               { key: 'confirmPin', label: 'Повторите демо-PIN' },
             ].map((item) => (
-              <label className="form-field" key={item.key}>
-                <span>{item.label}</span>
+              <Field className="form-field" key={item.key} label={<> {item.label} </>}>
                 <input
                   name={item.key}
                   type="password"
@@ -1011,7 +1007,7 @@ export function PreferencesWorkspace({ section, name }: { section: AdminSectionI
                   required
                   autoComplete="off"
                 />
-              </label>
+              </Field>
             ))}
             <Button type="submit" variant="secondary">
               Проверить форму
@@ -1053,14 +1049,13 @@ export function PreferencesWorkspace({ section, name }: { section: AdminSectionI
                   value={/^#[\da-f]{6}$/i.test(primary) ? primary : palette.primary}
                   onChange={(e) => setPrimaryDraft(e.target.value)}
                 />
-                <label className="form-field">
-                  <span>Основной цвет, HEX</span>
+                <Field className="form-field" label={<> Основной цвет, HEX </>}>
                   <input
                     value={primary}
                     maxLength={7}
                     onChange={(e) => setPrimaryDraft(e.target.value)}
                   />
-                </label>
+                </Field>
               </div>
               <div className="ws-actions">
                 <Button
