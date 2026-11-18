@@ -1,0 +1,885 @@
+{
+  "views": 64,
+  "results": [
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "selling_stat",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма продаж\nСумма продаж\n12 занятий\n5 400 ₽\nБезлимит\n3 900 ₽\nГрупповые тренировки\n5 400 ₽\nДневной\n2"
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "kassacontrol",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Журнал кассы · №1\nОперация\tДата и время\tПриход\tРасход\tОплата\tКасса\tКомментарий\tКассир\tКлуб\ncash-demo"
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "selling_clients_new",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Первые покупки · выручка\n₽\nГрупповые тренировки\n5 400 ₽\nПервые покупки · клиенты\nКлиентов\nГрупповые "
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "selling_clients_secondary",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Результат продления\nКлиентов\n2\nклиентов\nПродлил\n2 · 100%\n\nНезавершённые окна показаны отдельно. Проц"
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "clients_sell_gender_age",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма покупок по полу и возрасту\n₽\nМужчины\nВозраст\nЖенщины\n0\n21 лет\n5 400\n5 400\n25 лет\n0\n0\n28 лет\n3 "
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "clients_sell_discount",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Продажи по скидкам · сумма\n₽\nПриветственная скидка\n3 900 ₽\nСкидка не известна\n13 500 ₽\nПродажи по ск"
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "financeresult",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44
+      ],
+      "text": "Промежуточный финансовый результат\nПоказатель\tЦентральный\tПарк\tРечной\tВсего по выбранным клубам\tПосе"
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "selling_stat",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма продаж\nСумма продаж\n12 занятий\n5 400 ₽\nБезлимит\n3 900 ₽\nГрупповые тренировки\n5 400 ₽\nДневной\n2"
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "kassacontrol",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Журнал кассы · №1\nОперация\tДата и время\tПриход\tРасход\tОплата\tКасса\tКомментарий\tКассир\tКлуб\ncash-demo"
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "selling_clients_new",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Первые покупки · выручка\n₽\nГрупповые тренировки\n5 400 ₽\nПервые покупки · клиенты\nКлиентов\nГрупповые "
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "selling_clients_secondary",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Результат продления\nКлиентов\n2\nклиентов\nПродлил\n2 · 100%\n\nНезавершённые окна показаны отдельно. Проц"
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "clients_sell_gender_age",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма покупок по полу и возрасту\n₽\nМужчины\nВозраст\nЖенщины\n0\n21 лет\n5 400\n5 400\n25 лет\n0\n0\n28 лет\n3 "
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "clients_sell_discount",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Продажи по скидкам · сумма\n₽\nПриветственная скидка\n3 900 ₽\nСкидка не известна\n13 500 ₽\nПродажи по ск"
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "financeresult",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44
+      ],
+      "text": "Промежуточный финансовый результат\nПоказатель\tЦентральный\tПарк\tРечной\tВсего по выбранным клубам\tПосе"
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "selling_stat",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма продаж\nСумма продаж\n12 занятий\n5 400 ₽\nБезлимит\n3 900 ₽\nГрупповые тренировки\n5 400 ₽\nДневной\n2"
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "kassacontrol",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Журнал кассы · №1\nОперация\tДата и время\tПриход\tРасход\tОплата\tКасса\tКомментарий\tКассир\tКлуб\ncash-demo"
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "selling_clients_new",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Первые покупки · выручка\n₽\nГрупповые тренировки\n5 400 ₽\nПервые покупки · клиенты\nКлиентов\nГрупповые "
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "selling_clients_secondary",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Результат продления\nКлиентов\n2\nклиентов\nПродлил\n2 · 100%\n\nНезавершённые окна показаны отдельно. Проц"
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "clients_sell_gender_age",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма покупок по полу и возрасту\n₽\nМужчины\nВозраст\nЖенщины\n0\n21 лет\n5 400\n5 400\n25 лет\n0\n0\n28 лет\n3 "
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "clients_sell_discount",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Продажи по скидкам · сумма\n₽\nПриветственная скидка\n3 900 ₽\nСкидка не известна\n13 500 ₽\nПродажи по ск"
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "financeresult",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44
+      ],
+      "text": "Промежуточный финансовый результат\nПоказатель\tЦентральный\tПарк\tРечной\tВсего по выбранным клубам\tПосе"
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "selling_stat",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма продаж\nСумма продаж\n12 занятий\n5 400 ₽\nБезлимит\n3 900 ₽\nГрупповые тренировки\n5 400 ₽\nДневной\n2"
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "kassacontrol",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Журнал кассы · №1\nОперация\tДата и время\tПриход\tРасход\tОплата\tКасса\tКомментарий\tКассир\tКлуб\ncash-demo"
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "selling_clients_new",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Первые покупки · выручка\n₽\nГрупповые тренировки\n5 400 ₽\nПервые покупки · клиенты\nКлиентов\nГрупповые "
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "selling_clients_secondary",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Результат продления\nКлиентов\n2\nклиентов\nПродлил\n2 · 100%\n\nНезавершённые окна показаны отдельно. Проц"
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "clients_sell_gender_age",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма покупок по полу и возрасту\n₽\nМужчины\nВозраст\nЖенщины\n0\n21 лет\n5 400\n5 400\n25 лет\n0\n0\n28 лет\n3 "
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "clients_sell_discount",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Продажи по скидкам · сумма\n₽\nПриветственная скидка\n3 900 ₽\nСкидка не известна\n13 500 ₽\nПродажи по ск"
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "financeresult",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44
+      ],
+      "text": "Промежуточный финансовый результат\nПоказатель\tЦентральный\tПарк\tРечной\tВсего по выбранным клубам\tПосе"
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "selling_stat",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма продаж\nСумма продаж\n12 занятий\n5 400 ₽\nБезлимит\n3 900 ₽\nГрупповые тренировки\n5 400 ₽\nДневной\n2"
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "kassacontrol",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Журнал кассы · №1\ncash-demo-withdrawal\nДата и время\n2026-11-06 13:00\nПриход\n0 ₽\nРасход\n1 000 ₽\nОплат"
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "selling_clients_new",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Первые покупки · выручка\n₽\nГрупповые тренировки\n5 400 ₽\nПервые покупки · клиенты\nКлиентов\nГрупповые "
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "selling_clients_secondary",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Результат продления\nКлиентов\n2\nклиентов\nПродлил\n2 · 100%\n\nНезавершённые окна показаны отдельно. Проц"
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "clients_sell_gender_age",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма покупок по полу и возрасту\n₽\nМужчины\nВозраст\nЖенщины\n0\n21 лет\n5 400\n5 400\n25 лет\n0\n0\n28 лет\n3 "
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "clients_sell_discount",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Продажи по скидкам · сумма\n₽\nПриветственная скидка\n3 900 ₽\nСкидка не известна\n13 500 ₽\nПродажи по ск"
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "financeresult",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44
+      ],
+      "text": "Промежуточный финансовый результат\nВыручка · Групповые программы\nЦентральный\n9 000 ₽\nПарк\n4 800 ₽\nРе"
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "selling_stat",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма продаж\nСумма продаж\n12 занятий\n5 400 ₽\nБезлимит\n3 900 ₽\nГрупповые тренировки\n5 400 ₽\nДневной\n2"
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "kassacontrol",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Журнал кассы · №1\ncash-demo-withdrawal\nДата и время\n2026-11-06 13:00\nПриход\n0 ₽\nРасход\n1 000 ₽\nОплат"
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "selling_clients_new",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Первые покупки · выручка\n₽\nГрупповые тренировки\n5 400 ₽\nПервые покупки · клиенты\nКлиентов\nГрупповые "
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "selling_clients_secondary",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Результат продления\nКлиентов\n2\nклиентов\nПродлил\n2 · 100%\n\nНезавершённые окна показаны отдельно. Проц"
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "clients_sell_gender_age",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма покупок по полу и возрасту\n₽\nМужчины\nВозраст\nЖенщины\n0\n21 лет\n5 400\n5 400\n25 лет\n0\n0\n28 лет\n3 "
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "clients_sell_discount",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Продажи по скидкам · сумма\n₽\nПриветственная скидка\n3 900 ₽\nСкидка не известна\n13 500 ₽\nПродажи по ск"
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "financeresult",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44
+      ],
+      "text": "Промежуточный финансовый результат\nВыручка · Групповые программы\nЦентральный\n9 000 ₽\nПарк\n4 800 ₽\nРе"
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "selling_stat",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма продаж\nСумма продаж\n12 занятий\n5 400 ₽\nБезлимит\n3 900 ₽\nГрупповые тренировки\n5 400 ₽\nДневной\n2"
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "kassacontrol",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Журнал кассы · №1\ncash-demo-withdrawal\nДата и время\n2026-11-06 13:00\nПриход\n0 ₽\nРасход\n1 000 ₽\nОплат"
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "selling_clients_new",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Первые покупки · выручка\n₽\nГрупповые тренировки\n5 400 ₽\nПервые покупки · клиенты\nКлиентов\nГрупповые "
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "selling_clients_secondary",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Результат продления\nКлиентов\n2\nклиентов\nПродлил\n2 · 100%\n\nНезавершённые окна показаны отдельно. Проц"
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "clients_sell_gender_age",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма покупок по полу и возрасту\n₽\nМужчины\nВозраст\nЖенщины\n0\n21 лет\n5 400\n5 400\n25 лет\n0\n0\n28 лет\n3 "
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "clients_sell_discount",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Продажи по скидкам · сумма\n₽\nПриветственная скидка\n3 900 ₽\nСкидка не известна\n13 500 ₽\nПродажи по ск"
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "financeresult",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44
+      ],
+      "text": "Промежуточный финансовый результат\nВыручка · Групповые программы\nЦентральный\n9 000 ₽\nПарк\n4 800 ₽\nРе"
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "selling_stat",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма продаж\nСумма продаж\n12 занятий\n5 400 ₽\nБезлимит\n3 900 ₽\nГрупповые тренировки\n5 400 ₽\nДневной\n2"
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "kassacontrol",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Журнал кассы · №1\ncash-demo-withdrawal\nДата и время\n2026-11-06 13:00\nПриход\n0 ₽\nРасход\n1 000 ₽\nОплат"
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "selling_clients_new",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Первые покупки · выручка\n₽\nГрупповые тренировки\n5 400 ₽\nПервые покупки · клиенты\nКлиентов\nГрупповые "
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "selling_clients_secondary",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "text": "Результат продления\nКлиентов\n2\nклиентов\nПродлил\n2 · 100%\n\nНезавершённые окна показаны отдельно. Проц"
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "clients_sell_gender_age",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Сумма покупок по полу и возрасту\n₽\nМужчины\nВозраст\nЖенщины\n0\n21 лет\n5 400\n5 400\n25 лет\n0\n0\n28 лет\n3 "
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "clients_sell_discount",
+      "overflow": false,
+      "tables": 2,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "text": "Продажи по скидкам · сумма\n₽\nПриветственная скидка\n3 900 ₽\nСкидка не известна\n13 500 ₽\nПродажи по ск"
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "financeresult",
+      "overflow": false,
+      "tables": 1,
+      "fields": [
+        44,
+        44
+      ],
+      "text": "Промежуточный финансовый результат\nВыручка · Групповые программы\nЦентральный\n9 000 ₽\nПарк\n4 800 ₽\nРе"
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "profile-and-sale",
+      "profile": {
+        "overflow": false,
+        "bg": "rgba(0, 0, 0, 0)",
+        "details": 0
+      },
+      "grid": {
+        "cols": 3,
+        "overflow": false
+      }
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "profile-and-sale",
+      "profile": {
+        "overflow": false,
+        "bg": "rgba(0, 0, 0, 0)",
+        "details": 0
+      },
+      "grid": {
+        "cols": 3,
+        "overflow": false
+      }
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "profile-and-sale",
+      "profile": {
+        "overflow": false,
+        "bg": "rgba(0, 0, 0, 0)",
+        "details": 0
+      },
+      "grid": {
+        "cols": 3,
+        "overflow": false
+      }
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "profile-and-sale",
+      "profile": {
+        "overflow": false,
+        "bg": "rgba(0, 0, 0, 0)",
+        "details": 0
+      },
+      "grid": {
+        "cols": 3,
+        "overflow": false
+      }
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "profile-and-sale",
+      "profile": {
+        "overflow": false,
+        "bg": "rgba(0, 0, 0, 0)",
+        "details": 0
+      },
+      "grid": {
+        "cols": 1,
+        "overflow": false
+      }
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "profile-and-sale",
+      "profile": {
+        "overflow": false,
+        "bg": "rgba(0, 0, 0, 0)",
+        "details": 0
+      },
+      "grid": {
+        "cols": 1,
+        "overflow": false
+      }
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "profile-and-sale",
+      "profile": {
+        "overflow": false,
+        "bg": "rgba(0, 0, 0, 0)",
+        "details": 0
+      },
+      "grid": {
+        "cols": 1,
+        "overflow": false
+      }
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "profile-and-sale",
+      "profile": {
+        "overflow": false,
+        "bg": "rgba(0, 0, 0, 0)",
+        "details": 0
+      },
+      "grid": {
+        "cols": 1,
+        "overflow": false
+      }
+    }
+  ],
+  "errors": [],
+  "scenarios": [
+    "buyers",
+    "operations",
+    "csv",
+    "membership cancellation",
+    "document print"
+  ]
+}

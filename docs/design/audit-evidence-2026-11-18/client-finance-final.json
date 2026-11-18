@@ -1,0 +1,11 @@
+{
+  "focus": true,
+  "errors": [],
+  "checks": [
+    "isolated print",
+    "mobile footer three themes",
+    "rounded money",
+    "month switching",
+    "styleguide grid"
+  ]
+}

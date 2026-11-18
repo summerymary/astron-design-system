@@ -1,0 +1,1320 @@
+{
+  "views": 80,
+  "results": [
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "clients_ltv",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "clients_ltv_bydate",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "finbyyear",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Выручка по месяцам",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "selling_clients_secondary_summer",
+      "overflow": false,
+      "fields": [
+        44
+      ],
+      "headings": [
+        "Результат продления · 2026",
+        "Итоги по годам"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "selling_clients_afterguest",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Итоги по годам",
+        "По выбранным условиям данных нет"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "trener_financial_result",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Накопительный результат ПТ"
+      ],
+      "nan": false,
+      "matrix": {
+        "visible": 1150,
+        "content": 6773,
+        "sticky": "sticky",
+        "tab": 0
+      }
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "fincredits",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка обязательств перед клиентами"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "finbyyear_by_abonements",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сумма продаж",
+        "Количество продаж",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "gt_finance",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Известный доход групповых занятий",
+        "Доход по известным списаниям групп"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "",
+      "id": "unlim_avg_visit",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Частота визитов по безлимитам",
+        "Частота визитов"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "clients_ltv",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "clients_ltv_bydate",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "finbyyear",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Выручка по месяцам",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "selling_clients_secondary_summer",
+      "overflow": false,
+      "fields": [
+        44
+      ],
+      "headings": [
+        "Результат продления · 2026",
+        "Итоги по годам"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "selling_clients_afterguest",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Итоги по годам",
+        "По выбранным условиям данных нет"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "trener_financial_result",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Накопительный результат ПТ"
+      ],
+      "nan": false,
+      "matrix": {
+        "visible": 1150,
+        "content": 6773,
+        "sticky": "sticky",
+        "tab": 0
+      }
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "fincredits",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка обязательств перед клиентами"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "finbyyear_by_abonements",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сумма продаж",
+        "Количество продаж",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "gt_finance",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Известный доход групповых занятий",
+        "Доход по известным списаниям групп"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=111111",
+      "id": "unlim_avg_visit",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Частота визитов по безлимитам",
+        "Частота визитов"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "clients_ltv",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "clients_ltv_bydate",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "finbyyear",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Выручка по месяцам",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "selling_clients_secondary_summer",
+      "overflow": false,
+      "fields": [
+        44
+      ],
+      "headings": [
+        "Результат продления · 2026",
+        "Итоги по годам"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "selling_clients_afterguest",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Итоги по годам",
+        "По выбранным условиям данных нет"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "trener_financial_result",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Накопительный результат ПТ"
+      ],
+      "nan": false,
+      "matrix": {
+        "visible": 1150,
+        "content": 6773,
+        "sticky": "sticky",
+        "tab": 0
+      }
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "fincredits",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка обязательств перед клиентами"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "finbyyear_by_abonements",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сумма продаж",
+        "Количество продаж",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "gt_finance",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Известный доход групповых занятий",
+        "Доход по известным списаниям групп"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?style=contrast",
+      "id": "unlim_avg_visit",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Частота визитов по безлимитам",
+        "Частота визитов"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "clients_ltv",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "clients_ltv_bydate",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "finbyyear",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Выручка по месяцам",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "selling_clients_secondary_summer",
+      "overflow": false,
+      "fields": [
+        44
+      ],
+      "headings": [
+        "Результат продления · 2026",
+        "Итоги по годам"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "selling_clients_afterguest",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Итоги по годам",
+        "По выбранным условиям данных нет"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "trener_financial_result",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Накопительный результат ПТ"
+      ],
+      "nan": false,
+      "matrix": {
+        "visible": 1150,
+        "content": 6773,
+        "sticky": "sticky",
+        "tab": 0
+      }
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "fincredits",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка обязательств перед клиентами"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "finbyyear_by_abonements",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сумма продаж",
+        "Количество продаж",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "gt_finance",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Известный доход групповых занятий",
+        "Доход по известным списаниям групп"
+      ],
+      "nan": false
+    },
+    {
+      "width": 1440,
+      "theme": "?theme=202020&style=vivid",
+      "id": "unlim_avg_visit",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Частота визитов по безлимитам",
+        "Частота визитов"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "clients_ltv",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "clients_ltv_bydate",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "finbyyear",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Выручка по месяцам",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "selling_clients_secondary_summer",
+      "overflow": false,
+      "fields": [
+        44
+      ],
+      "headings": [
+        "Результат продления · 2026",
+        "Итоги по годам"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "selling_clients_afterguest",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Итоги по годам",
+        "По выбранным условиям данных нет"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "trener_financial_result",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Накопительный результат ПТ"
+      ],
+      "nan": false,
+      "matrix": {
+        "visible": 326,
+        "content": 6773,
+        "sticky": "sticky",
+        "tab": 0
+      }
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "fincredits",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка обязательств перед клиентами"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "finbyyear_by_abonements",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сумма продаж",
+        "Количество продаж",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "gt_finance",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Известный доход групповых занятий",
+        "Доход по известным списаниям групп"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "",
+      "id": "unlim_avg_visit",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Частота визитов по безлимитам",
+        "Частота визитов"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "clients_ltv",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "clients_ltv_bydate",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "finbyyear",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Выручка по месяцам",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "selling_clients_secondary_summer",
+      "overflow": false,
+      "fields": [
+        44
+      ],
+      "headings": [
+        "Результат продления · 2026",
+        "Итоги по годам"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "selling_clients_afterguest",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Итоги по годам",
+        "По выбранным условиям данных нет"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "trener_financial_result",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Накопительный результат ПТ"
+      ],
+      "nan": false,
+      "matrix": {
+        "visible": 326,
+        "content": 6773,
+        "sticky": "sticky",
+        "tab": 0
+      }
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "fincredits",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка обязательств перед клиентами"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "finbyyear_by_abonements",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сумма продаж",
+        "Количество продаж",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "gt_finance",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Известный доход групповых занятий",
+        "Доход по известным списаниям групп"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=111111",
+      "id": "unlim_avg_visit",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Частота визитов по безлимитам",
+        "Частота визитов"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "clients_ltv",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "clients_ltv_bydate",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "finbyyear",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Выручка по месяцам",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "selling_clients_secondary_summer",
+      "overflow": false,
+      "fields": [
+        44
+      ],
+      "headings": [
+        "Результат продления · 2026",
+        "Итоги по годам"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "selling_clients_afterguest",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Итоги по годам",
+        "По выбранным условиям данных нет"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "trener_financial_result",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Накопительный результат ПТ"
+      ],
+      "nan": false,
+      "matrix": {
+        "visible": 326,
+        "content": 6773,
+        "sticky": "sticky",
+        "tab": 0
+      }
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "fincredits",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка обязательств перед клиентами"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "finbyyear_by_abonements",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сумма продаж",
+        "Количество продаж",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "gt_finance",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Известный доход групповых занятий",
+        "Доход по известным списаниям групп"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?style=contrast",
+      "id": "unlim_avg_visit",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Частота визитов по безлимитам",
+        "Частота визитов"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "clients_ltv",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "clients_ltv_bydate",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сводка LTV"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "finbyyear",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Выручка по месяцам",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "selling_clients_secondary_summer",
+      "overflow": false,
+      "fields": [
+        44
+      ],
+      "headings": [
+        "Результат продления · 2026",
+        "Итоги по годам"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "selling_clients_afterguest",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Итоги по годам",
+        "По выбранным условиям данных нет"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "trener_financial_result",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Накопительный результат ПТ"
+      ],
+      "nan": false,
+      "matrix": {
+        "visible": 326,
+        "content": 6773,
+        "sticky": "sticky",
+        "tab": 0
+      }
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "fincredits",
+      "overflow": false,
+      "fields": [],
+      "headings": [
+        "Сводка обязательств перед клиентами"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "finbyyear_by_abonements",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Сумма продаж",
+        "Количество продаж",
+        "Распределение продаж"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "gt_finance",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Известный доход групповых занятий",
+        "Доход по известным списаниям групп"
+      ],
+      "nan": false
+    },
+    {
+      "width": 390,
+      "theme": "?theme=202020&style=vivid",
+      "id": "unlim_avg_visit",
+      "overflow": false,
+      "fields": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "headings": [
+        "Частота визитов по безлимитам",
+        "Частота визитов"
+      ],
+      "nan": false
+    }
+  ],
+  "errors": [],
+  "scenarios": [
+    {
+      "id": "clients_ltv",
+      "tabs": 2,
+      "filtersPreserved": true
+    },
+    {
+      "id": "clients_ltv_bydate",
+      "tabs": 2,
+      "filtersPreserved": true
+    },
+    {
+      "id": "fincredits",
+      "tabs": 4,
+      "filtersPreserved": true
+    },
+    {
+      "id": "trener_financial_result",
+      "tabs": 3,
+      "filtersPreserved": true
+    },
+    {
+      "id": "selling_clients_secondary_summer",
+      "tabs": 2,
+      "filtersPreserved": true
+    },
+    {
+      "id": "selling_clients_afterguest",
+      "tabs": 2,
+      "filtersPreserved": true
+    },
+    {
+      "id": "unlim_avg_visit",
+      "tabs": 2,
+      "filtersPreserved": true
+    },
+    "trainer month and year boundary",
+    "unlimited eight bins, drilldown and current-view CSV",
+    "group finance grouped by trainer",
+    "LTV client profile",
+    "live styleguide month example"
+  ]
+}
