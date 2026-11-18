@@ -1,4 +1,50 @@
 @layer pages {
+  .statistics-filters-main,
+  .statistics-filters-extra {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+    align-items: end;
+    gap: 16px;
+    min-width: 0;
+  }
+  .statistics-filters-main > *, .statistics-filters-extra > * { min-width: 0; }
+  .statistics-filter-disclosure { grid-column: 1 / -1; }
+  .statistics-filter-disclosure > summary { min-height: 44px; cursor: pointer; color: var(--color-accent); }
+  .statistics-filter-disclosure[open] > summary { margin-bottom: 12px; }
+  .statistics-filters-extra .ws-checkbox { white-space: normal; overflow-wrap: anywhere; min-width: 0; min-height: 44px; }
+  .statistics-chart-controls { padding: 0 var(--panel-padding); }
+  .statistics-operational-link { padding: 12px var(--panel-padding); }
+  .statistics-report .ws-table th, .statistics-report .ws-table td { white-space: normal; }
+  .statistics-report .ws-table td:has(.phone-action) { min-width: 190px; }
+  .statistics-report .ws-table td:has(.client-link) { min-width: 180px; }
+  .statistics-trainer-matrix .ws-table-wrap {
+    display: block;
+    overflow: auto;
+    max-width: 100%;
+  }
+  .statistics-trainer-matrix .ws-mobile-records {
+    display: none;
+  }
+  .statistics-trainer-matrix .ws-table {
+    min-width: 100%;
+    width: max-content;
+  }
+  .statistics-trainer-matrix .ws-table :is(th, td) {
+    min-width: 160px;
+    max-width: 180px;
+  }
+  .statistics-trainer-matrix .ws-table th,
+  .statistics-trainer-matrix .ws-table th > button {
+    white-space: normal;
+    line-height: 1.4;
+  }
+  .statistics-trainer-matrix .ws-table :is(th, td):first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    min-width: 180px;
+    background: var(--color-surface);
+  }
   .statistics-report {
     gap: 16px;
   }
