@@ -1,0 +1,1141 @@
+{
+  "date": "2026-11-19",
+  "views": [
+    {
+      "theme": "",
+      "view": "sources",
+      "chartHeight": 380,
+      "firstColumn": 283.328125,
+      "height": 1000,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 1138,
+        "scroll": 1138
+      },
+      "width": 1440
+    },
+    {
+      "theme": "",
+      "view": "materials",
+      "firstColumn": 328.8359375,
+      "height": 1000,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 1138,
+        "scroll": 1138
+      },
+      "width": 1440
+    },
+    {
+      "theme": "",
+      "view": "offers",
+      "firstColumn": 240,
+      "height": 1000,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 1138,
+        "scroll": 1138
+      },
+      "width": 1440
+    },
+    {
+      "theme": "?theme=111111",
+      "view": "sources",
+      "chartHeight": 380,
+      "firstColumn": 283.328125,
+      "height": 1000,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 1138,
+        "scroll": 1138
+      },
+      "width": 1440
+    },
+    {
+      "theme": "?theme=111111",
+      "view": "materials",
+      "firstColumn": 328.8359375,
+      "height": 1000,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 1138,
+        "scroll": 1138
+      },
+      "width": 1440
+    },
+    {
+      "theme": "?theme=111111",
+      "view": "offers",
+      "firstColumn": 240,
+      "height": 1000,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 1138,
+        "scroll": 1138
+      },
+      "width": 1440
+    },
+    {
+      "theme": "?style=contrast",
+      "view": "sources",
+      "chartHeight": 380,
+      "firstColumn": 283.328125,
+      "height": 1000,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 1138,
+        "scroll": 1138
+      },
+      "width": 1440
+    },
+    {
+      "theme": "?style=contrast",
+      "view": "materials",
+      "firstColumn": 328.8359375,
+      "height": 1000,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 1138,
+        "scroll": 1138
+      },
+      "width": 1440
+    },
+    {
+      "theme": "?style=contrast",
+      "view": "offers",
+      "firstColumn": 240,
+      "height": 1000,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 1138,
+        "scroll": 1138
+      },
+      "width": 1440
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "view": "sources",
+      "chartHeight": 380,
+      "firstColumn": 283.328125,
+      "height": 1000,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 1138,
+        "scroll": 1138
+      },
+      "width": 1440
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "view": "materials",
+      "firstColumn": 328.8359375,
+      "height": 1000,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 1138,
+        "scroll": 1138
+      },
+      "width": 1440
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "view": "offers",
+      "firstColumn": 240,
+      "height": 1000,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 1138,
+        "scroll": 1138
+      },
+      "width": 1440
+    },
+    {
+      "theme": "",
+      "view": "sources",
+      "chartHeight": 320,
+      "firstColumn": 164.796875,
+      "height": 844,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 344,
+        "scroll": 912
+      },
+      "width": 390
+    },
+    {
+      "theme": "",
+      "view": "materials",
+      "firstColumn": 160,
+      "height": 844,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 344,
+        "scroll": 912
+      },
+      "width": 390
+    },
+    {
+      "theme": "",
+      "view": "offers",
+      "firstColumn": 160,
+      "height": 844,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 344,
+        "scroll": 912
+      },
+      "width": 390
+    },
+    {
+      "theme": "?theme=111111",
+      "view": "sources",
+      "chartHeight": 320,
+      "firstColumn": 164.796875,
+      "height": 844,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 344,
+        "scroll": 912
+      },
+      "width": 390
+    },
+    {
+      "theme": "?theme=111111",
+      "view": "materials",
+      "firstColumn": 160,
+      "height": 844,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 344,
+        "scroll": 912
+      },
+      "width": 390
+    },
+    {
+      "theme": "?theme=111111",
+      "view": "offers",
+      "firstColumn": 160,
+      "height": 844,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 344,
+        "scroll": 912
+      },
+      "width": 390
+    },
+    {
+      "theme": "?style=contrast",
+      "view": "sources",
+      "chartHeight": 320,
+      "firstColumn": 164.796875,
+      "height": 844,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 344,
+        "scroll": 912
+      },
+      "width": 390
+    },
+    {
+      "theme": "?style=contrast",
+      "view": "materials",
+      "firstColumn": 160,
+      "height": 844,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 344,
+        "scroll": 912
+      },
+      "width": 390
+    },
+    {
+      "theme": "?style=contrast",
+      "view": "offers",
+      "firstColumn": 160,
+      "height": 844,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 344,
+        "scroll": 912
+      },
+      "width": 390
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "view": "sources",
+      "chartHeight": 320,
+      "firstColumn": 164.796875,
+      "height": 844,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 344,
+        "scroll": 912
+      },
+      "width": 390
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "view": "materials",
+      "firstColumn": 160,
+      "height": 844,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 344,
+        "scroll": 912
+      },
+      "width": 390
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "view": "offers",
+      "firstColumn": 160,
+      "height": 844,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 344,
+        "scroll": 912
+      },
+      "width": 390
+    },
+    {
+      "theme": "",
+      "view": "sources",
+      "chartHeight": 380,
+      "firstColumn": 240,
+      "height": 900,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 722,
+        "scroll": 912
+      },
+      "width": 1024
+    },
+    {
+      "theme": "",
+      "view": "materials",
+      "firstColumn": 240,
+      "height": 900,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 722,
+        "scroll": 981
+      },
+      "width": 1024
+    },
+    {
+      "theme": "",
+      "view": "offers",
+      "firstColumn": 240,
+      "height": 900,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 722,
+        "scroll": 912
+      },
+      "width": 1024
+    },
+    {
+      "theme": "?theme=111111",
+      "view": "sources",
+      "chartHeight": 380,
+      "firstColumn": 240,
+      "height": 900,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 722,
+        "scroll": 912
+      },
+      "width": 1024
+    },
+    {
+      "theme": "?theme=111111",
+      "view": "materials",
+      "firstColumn": 240,
+      "height": 900,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 722,
+        "scroll": 981
+      },
+      "width": 1024
+    },
+    {
+      "theme": "?theme=111111",
+      "view": "offers",
+      "firstColumn": 240,
+      "height": 900,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 722,
+        "scroll": 912
+      },
+      "width": 1024
+    },
+    {
+      "theme": "?style=contrast",
+      "view": "sources",
+      "chartHeight": 380,
+      "firstColumn": 240,
+      "height": 900,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 722,
+        "scroll": 912
+      },
+      "width": 1024
+    },
+    {
+      "theme": "?style=contrast",
+      "view": "materials",
+      "firstColumn": 240,
+      "height": 900,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 722,
+        "scroll": 981
+      },
+      "width": 1024
+    },
+    {
+      "theme": "?style=contrast",
+      "view": "offers",
+      "firstColumn": 240,
+      "height": 900,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 722,
+        "scroll": 912
+      },
+      "width": 1024
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "view": "sources",
+      "chartHeight": 380,
+      "firstColumn": 240,
+      "height": 900,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 722,
+        "scroll": 912
+      },
+      "width": 1024
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "view": "materials",
+      "firstColumn": 240,
+      "height": 900,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 722,
+        "scroll": 981
+      },
+      "width": 1024
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "view": "offers",
+      "firstColumn": 240,
+      "height": 900,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 722,
+        "scroll": 912
+      },
+      "width": 1024
+    },
+    {
+      "theme": "",
+      "view": "sources",
+      "chartHeight": 320,
+      "firstColumn": 164.796875,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320
+    },
+    {
+      "theme": "",
+      "view": "materials",
+      "firstColumn": 160,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320
+    },
+    {
+      "theme": "",
+      "view": "offers",
+      "firstColumn": 160,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320
+    },
+    {
+      "theme": "?theme=111111",
+      "view": "sources",
+      "chartHeight": 320,
+      "firstColumn": 164.796875,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320
+    },
+    {
+      "theme": "?theme=111111",
+      "view": "materials",
+      "firstColumn": 160,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320
+    },
+    {
+      "theme": "?theme=111111",
+      "view": "offers",
+      "firstColumn": 160,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320
+    },
+    {
+      "theme": "?style=contrast",
+      "view": "sources",
+      "chartHeight": 320,
+      "firstColumn": 164.796875,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320
+    },
+    {
+      "theme": "?style=contrast",
+      "view": "materials",
+      "firstColumn": 160,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320
+    },
+    {
+      "theme": "?style=contrast",
+      "view": "offers",
+      "firstColumn": 160,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "view": "sources",
+      "chartHeight": 320,
+      "firstColumn": 164.796875,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 4,
+      "selected": [
+        "Источники переходов"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "view": "materials",
+      "firstColumn": 160,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "view": "offers",
+      "firstColumn": 160,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 3,
+      "selected": [
+        "Категории и предложения"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "Filtered hierarchy CSV",
+      "lines": 5,
+      "iron": true,
+      "total": true
+    },
+    {
+      "name": "Mobile offer hierarchy and modal",
+      "width": 320,
+      "viewportContained": true,
+      "escapeFocus": "Подробнее: Железная карта"
+    },
+    {
+      "name": "Mobile material details",
+      "chartHeight": 320,
+      "firstColumn": 160,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [
+        {
+          "bottom": 725,
+          "right": 304,
+          "x": 16,
+          "y": 15
+        }
+      ],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320,
+      "returnedFocus": "Подробнее: Как выбрать клубную карту"
+    },
+    {
+      "name": "Mobile filters device and robots",
+      "firstColumn": 160,
+      "height": 740,
+      "invalid": false,
+      "minRowButton": 44,
+      "modal": [],
+      "overflow": false,
+      "rows": 6,
+      "selected": [
+        "Материалы"
+      ],
+      "sticky": "sticky",
+      "table": true,
+      "tableScroll": {
+        "client": 274,
+        "scroll": 912
+      },
+      "width": 320,
+      "summary": "Аналитика сайта\nВ маркетинг\nИсточники переходов\nМатериалы\nКатегории и предложения\nДемо-данные\n31.10.2026–06.11.2026 · Все источники · Телефоны · С роботами · Метрика не подключена\nДень\n7 дней\n30 дней\nФильтры · изменено 2\nС даты\nПо дату\nИсточник перехода\nВсе источники\nУстройство\nТелефон\nУчитывать роботов\nПросмотры материалов\n235\nЧитатели\n114\nСреднее время\n1:55\nДочтения\n61,6%\nСкрыть график\nCSV\nПросмотры материалов\nпросмотров\nЧто взять с собой на тренировку\n65\nКак выбрать клубную карту\n49\nЧто даёт занятие с тренером\n48\nВосстановление после тренировки\n45\nГрупповые занятия: выбираем направление\n28\nПервый раз в клубе: с чего начать\n0\nМатериалы\n\nНаж"
+    },
+    {
+      "name": "Chart toggle and ascending sort",
+      "toggle": true,
+      "sort": "ascending",
+      "first": "Первый раз в клубе: с чего начать\n/journal/first-visit"
+    },
+    {
+      "name": "Styleguide working tree example",
+      "selected": true
+    },
+    {
+      "name": "Keyboard table scrolling",
+      "width": 320,
+      "scrollLeftAfterArrow": 3,
+      "stickyColumnX": 17,
+      "regionX": 17
+    },
+    {
+      "name": "Navigation entry and return",
+      "entry": "Маркетинг → Аналитика сайта",
+      "back": "Маркетинг"
+    }
+  ],
+  "scope": "Local demo analytics only. No real counters, club data, API or publication.",
+  "earlierObservedScenarios": [
+    "Source Реклама filter: 73 visits, 41 visitors, 6 visits with a purchase, 8.2%; source retains tone 2",
+    "Visitors graph metric and seven-day preset",
+    "Material detail daily chart height 380px and measurement coverage",
+    "Search железная карта keeps category and group ancestors",
+    "Partial-coverage notice shown after native date change"
+  ],
+  "consoleErrors": [],
+  "checks": {
+    "all16ProjectChecks": "passed",
+    "typecheck": "passed",
+    "productionBuild": "passed",
+    "diffCheck": "passed",
+    "finalSharedChangeChecks": [
+      "ui",
+      "handoff",
+      "build"
+    ]
+  },
+  "limitations": [
+    "No live counter or external data",
+    "Date validation and absent-coverage states verified by pure checks; browser partial-coverage notice observed",
+    "Changed scenarios only, not all roles or business workflows"
+  ],
+  "screenshot": "/private/tmp/astron-marketing-analytics-20261119.jpg"
+}
