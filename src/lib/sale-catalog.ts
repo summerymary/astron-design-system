@@ -2,6 +2,7 @@ import type { DemoRecord } from '../data/workspace';
 import { matchesSearch } from './directory-search';
 import { supportsTraining } from './training-kind';
 import type { TrainingKind } from './training-kind';
+import { matchesCatalogPlan } from './membership-catalog';
 
 export const saleSections = [
   {
@@ -21,8 +22,8 @@ export const saleSections = [
   },
   {
     id: 'exceptions',
-    name: 'Исключения',
-    description: 'Специальные, акционные и социальные тарифы',
+    name: 'Специальные абонементы',
+    description: 'Социальные и акционные тарифы',
   },
   {
     id: 'goods-services',
@@ -98,6 +99,9 @@ export function searchSaleCatalog(
 ) {
   return items.filter(
     (item) =>
-      (!sectionId || item.sectionId === sectionId) && matchesSearch(item.record.name, query),
+      (!sectionId || item.sectionId === sectionId) &&
+      (item.type === 'plan'
+        ? matchesCatalogPlan(item.record, item.sectionId as PlanSectionId, query)
+        : matchesSearch(item.record.name, query)),
   );
 }
