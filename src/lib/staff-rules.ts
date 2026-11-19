@@ -13,6 +13,14 @@ export function isManagementRole(role: UserRole): boolean {
 }
 
 export function canOpenModule(role: UserRole, section: string): boolean {
+  if (section === 'companies')
+    return [
+      'administrator',
+      'club-director',
+      'network-director',
+      'operations-director',
+      'accountant',
+    ].includes(role);
   if (section === 'admin-account') return role === 'administrator';
   if (isManagementRole(role)) return !['collagen', 'trainer-clients'].includes(section);
   if (role === 'administrator')

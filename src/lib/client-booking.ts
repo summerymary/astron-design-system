@@ -25,6 +25,18 @@ export function nearestGroupEvents(
     .sort((a, b) => `${a.day}T${a.time}`.localeCompare(`${b.day}T${b.time}`));
 }
 
+/** Search the entire eligible result set before any display limit. */
+export function filterBookingEvents(events: DemoRecord[], query: string): DemoRecord[] {
+  const normalize = (text: string) => text.toLocaleLowerCase('ru').replaceAll('ё', 'е');
+  const words = normalize(query).trim().split(/\s+/).filter(Boolean);
+  return events.filter((event) => {
+    const text = normalize(
+      `${event.name} ${event.trainer} ${event.room} ${event.day} ${event.day.split('-').reverse().join('.')} ${event.time}`,
+    );
+    return words.every((word) => text.includes(word));
+  });
+}
+
 export function createPersonalBooking(
   data: Record<string, DemoRecord[]>,
   user: DemoUser,
@@ -106,4 +118,122 @@ export function personalBookingSlots(
       result.push(time);
   }
   return result;
+}
+
+export type PersonalBookingSlot = { day: string; time: string; room: string };
+
+export function personalSlotProblem(
+  data: Record<string, DemoRecord[]>,
+  trainerId: string,
+  club: string,
+  slot: PersonalBookingSlot,
+): string | null {
+  const start = minutes(slot.time),
+    end = start + 50;
+  if (
+    !(data['trainer-availability'] || []).some(
+      (window) =>
+        window.trainerId === trainerId &&
+        window.club === club &&
+        window.day === slot.day &&
+        minutes(window.time) <= start &&
+        minutes(window.end) >= end,
+    )
+  )
+    return 'Рабочее время тренера для этого слота не подтверждено.';
+  if (
+    (data['trainer-duty'] || []).some(
+      (duty) =>
+        duty.trainerId === trainerId &&
+        duty.day === slot.day &&
+        minutes(duty.time) < end &&
+        start < minutes(duty.time) + Number(duty.duration),
+    )
+  )
+    return 'Тренер занят дежурством. Выберите другой слот.';
+  return null;
+}
+
+/** Availability is explicit: missing working hours never imply an empty calendar is free. */
+export function nearestPersonalBookingSlots(
+  data: Record<string, DemoRecord[]>,
+  user: DemoUser,
+  member: Member,
+  trainerId: string,
+  club: string,
+  at: string,
+): PersonalBookingSlot[] {
+  const rooms = (data.rooms || [])
+    .filter((row) => row.club === club && row.status !== 'В архиве')
+    .sort(
+      (a, b) =>
+        Number(b.name === 'Зал персональных тренировок') -
+        Number(a.name === 'Зал персональных тренировок'),
+    );
+  const windows = (data['trainer-availability'] || []).filter(
+    (row) =>
+      row.trainerId === trainerId &&
+      row.club === club &&
+      row.day >= at.slice(0, 10) &&
+      row.day <= addDays(at.slice(0, 10), 6),
+  );
+  const result = new Map<string, PersonalBookingSlot>();
+  for (const window of windows) {
+    const from = Math.max(
+      360,
+      minutes(window.time),
+      window.day === at.slice(0, 10) ? minutes(at.slice(11)) : 0,
+    );
+    for (
+      let start = Math.ceil(from / 15) * 15;
+      start + 50 <= Math.min(1390, minutes(window.end));
+      start += 15
+    ) {
+      const key = `${window.day}T${clock(start)}`;
+      if (result.has(key)) continue;
+      for (const room of rooms) {
+        const slot = { day: window.day, time: clock(start), room: room.name };
+        if (
+          !personalSlotProblem(data, trainerId, club, slot) &&
+          typeof createPersonalBooking(
+            data,
+            user,
+            member,
+            { id: 'preview-personal-slot', trainerId, club, ...slot },
+            at,
+          ) !== 'string'
+        ) {
+          result.set(key, slot);
+          break;
+        }
+      }
+    }
+  }
+  return [...result.values()].sort((a, b) =>
+    `${a.day}T${a.time}`.localeCompare(`${b.day}T${b.time}`),
+  );
+}
+
+/** Recheck the latest schedule at click time and commit booking + assignment atomically. */
+export function bookPersonalSlot(
+  data: Record<string, DemoRecord[]>,
+  user: DemoUser,
+  member: Member,
+  input: PersonalBookingSlot & { id: string; trainerId: string; club: string },
+  at: string,
+) {
+  const problem = personalSlotProblem(data, input.trainerId, input.club, input);
+  if (problem) throw new Error(problem);
+  const result = createPersonalBooking(data, user, member, input, at);
+  if (typeof result === 'string') throw new Error(result);
+  return {
+    event: result.event,
+    data: {
+      ...data,
+      events: [...data.events, result.event],
+      'personal-clients': result.assignment
+        ? [...(data['personal-clients'] || []), result.assignment]
+        : data['personal-clients'] || [],
+    },
+  };
 }
