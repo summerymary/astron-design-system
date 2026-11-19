@@ -5,6 +5,7 @@ import type { DemoUser, Member, RegisterVisit } from '../types';
 import type { Navigate } from '../components/WorkspaceUI';
 import { Avatar, Button } from '../components/ui';
 import { ClientBookingDialog } from '../components/ClientBookingDialog';
+import { ClientActionButton } from '../components/ClientActionButton';
 import { personalBooking } from '../lib/personal-training';
 import { ClientSearch } from '../components/ClientSearch';
 import { VisitPassList } from '../components/VisitPassList';
@@ -188,11 +189,6 @@ export function RegistrationWorkspace({
         : undefined,
     );
   };
-  const saleLabel = booking
-    ? booking.kind === 'personal'
-      ? 'Продать абонемент на персональные тренировки'
-      : 'Продать абонемент на групповые занятия'
-    : 'Продать абонемент';
   return (
     <div className="ws-stack registration-workspace">
       {!selected && !hasHeaderSearch && (
@@ -248,19 +244,9 @@ export function RegistrationWorkspace({
                   Другой клиент
                 </Button>
               )}
-              {!done && (
-                <Button variant="secondary" onClick={() => setBookingOpen(true)}>
-                  Записать
-                </Button>
-              )}
-              <Button variant="secondary" onClick={() => onMember(selected)}>
-                Карточка клиента
-              </Button>
-              {(done || availablePasses.length > 0) && (
-                <Button variant="accent" onClick={() => navigate('services', selected)}>
-                  Продать
-                </Button>
-              )}
+              {!done && <ClientActionButton action="book" onClick={() => setBookingOpen(true)} />}
+              <ClientActionButton action="profile" onClick={() => onMember(selected)} />
+              <ClientActionButton action="sell" onClick={sellPass} />
             </div>
           </div>
           <div className="ws-panel-body ws-stack">
@@ -393,7 +379,7 @@ export function RegistrationWorkspace({
                         ? `Для записи «${booking.name}» нужен абонемент на ${booking.kind === 'personal' ? `персональные тренировки${bookingCategory ? ` категории «${bookingCategory}»` : ''}` : 'групповые занятия'}.`
                         : 'Можно продать абонемент и затем зарегистрировать посещение.'}
                     </p>
-                    <Button onClick={sellPass}>{saleLabel}</Button>
+                    <p>Оформите покупку кнопкой «Продать» в действиях клиента.</p>
                   </div>
                 )}
                 {availablePasses.length > 0 && (

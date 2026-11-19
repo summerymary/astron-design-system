@@ -1,9 +1,10 @@
 import { useId, useRef, useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type { DemoRecord } from '../data/workspace';
 import type { PlanSectionId } from '../lib/sale-catalog';
 import { catalogGroups, catalogPlacement, sortCatalogPlans } from '../lib/membership-catalog';
-import { Back, Empty, NavigationCard } from './WorkspaceUI';
+import { Empty, NavigationCard } from './WorkspaceUI';
 import { Button } from './ui';
 
 export function MembershipCatalog({
@@ -13,6 +14,7 @@ export function MembershipCatalog({
   showEmpty = false,
   renderPlans,
   onCreate,
+  scopeLabel,
 }: {
   section: PlanSectionId;
   plans: DemoRecord[];
@@ -20,6 +22,7 @@ export function MembershipCatalog({
   showEmpty?: boolean;
   renderPlans: (plans: DemoRecord[]) => ReactNode;
   onCreate?: (familyId: string) => void;
+  scopeLabel?: string;
 }) {
   const [groupId, setGroupId] = useState('');
   const [familyId, setFamilyId] = useState('');
@@ -39,8 +42,21 @@ export function MembershipCatalog({
   const move = (nextGroup: string, nextFamily = '') => {
     setGroupId(nextGroup);
     setFamilyId(nextFamily);
-    requestAnimationFrame(() => title.current?.focus());
+    requestAnimationFrame(() => title.current?.focus({ preventScroll: true }));
   };
+  const searchFamilies = groups.flatMap((group) =>
+    group.families.flatMap((family) => {
+      const rows = rowsFor(family.id);
+      return rows.length ? [{ group, family, rows }] : [];
+    }),
+  );
+  const heading =
+    scopeLabel ||
+    (searching
+      ? searchFamilies.length === 1
+        ? `${searchFamilies[0].group.name} / ${searchFamilies[0].family.name}`
+        : 'Результаты по группам'
+      : family?.name || group?.name || 'Группы абонементов');
   return (
     <section
       className="membership-browser ws-stack"
@@ -49,41 +65,38 @@ export function MembershipCatalog({
     >
       <div className="membership-browser-heading">
         <h3 id={titleId} tabIndex={-1} ref={title}>
-          {searching
-            ? 'Результаты по группам'
-            : family?.name || group?.name || 'Группы абонементов'}
+          {heading}
         </h3>
-        {!searching && group && (
-          <Back onClick={() => move(family && visibleFamilies.length > 1 ? group.id : '')}>
-            {family && visibleFamilies.length > 1 ? 'К подгруппам' : 'К группам'}
-          </Back>
+        {!scopeLabel && !searching && group && (
+          <Button
+            variant="ghost"
+            className="membership-browser-back"
+            aria-label={family && visibleFamilies.length > 1 ? 'К подгруппам' : 'К группам'}
+            onClick={() => move(family && visibleFamilies.length > 1 ? group.id : '')}
+          >
+            <ArrowLeft size={18} aria-hidden="true" />
+            <span>{family && visibleFamilies.length > 1 ? 'К подгруппам' : 'К группам'}</span>
+          </Button>
         )}
       </div>
-      {!searching && group && (
-        <p className="membership-browser-path">
-          {group.name}
-          {family ? ` / ${family.name}` : ''}
-        </p>
-      )}
-      {searching && !plans.length ? (
+      {!plans.length && (searching || scopeLabel) ? (
         <Empty
           title="Абонементы не найдены"
           text="Измените название, группу или подгруппу в поиске."
         />
+      ) : scopeLabel ? (
+        renderPlans(sortCatalogPlans(plans))
       ) : searching ? (
-        groups.map((group) =>
-          group.families.map((family) => {
-            const rows = rowsFor(family.id);
-            return rows.length ? (
-              <section className="ws-stack" key={family.id}>
-                <h4>
-                  {group.name} / {family.name}
-                </h4>
-                {renderPlans(rows)}
-              </section>
-            ) : null;
-          }),
-        )
+        searchFamilies.map(({ group, family, rows }) => (
+          <section className="ws-stack" key={family.id}>
+            {searchFamilies.length > 1 && (
+              <h4>
+                {group.name} / {family.name}
+              </h4>
+            )}
+            {renderPlans(rows)}
+          </section>
+        ))
       ) : family ? (
         rowsFor(family.id).length ? (
           renderPlans(rowsFor(family.id))

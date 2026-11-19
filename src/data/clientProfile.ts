@@ -89,7 +89,11 @@ export function getClientProfile(member: Member, data: Record<string, DemoRecord
       status: 'expired',
     },
   ];
-  const all = hasDemoProfile ? subscriptions : subscriptions.slice(0, 1);
+  const all = hasDemoProfile
+    ? subscriptions
+    : member.plan === 'Без абонемента'
+      ? []
+      : subscriptions.slice(0, 1);
   for (const row of (data['issued-plans'] || []).filter(
     (row) => row.memberId === String(member.id),
   )) {

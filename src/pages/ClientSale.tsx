@@ -3,7 +3,7 @@ import { QuantityStepper } from '../components/QuantityStepper';
 import { Field } from '../components/Field';
 import { redeemGift, replaceRecord } from '../lib/reception-operations';
 import { supportsTraining } from '../lib/training-kind';
-import { clientTrainers, personalTrainers } from '../lib/personal-training';
+import { saleTrainerSelection } from '../lib/personal-training';
 import type { TrainingKind } from '../lib/training-kind';
 import { accessWindowLabel } from '../lib/registration';
 import { clientName, hiddenPhone } from '../lib/client-display';
@@ -82,9 +82,11 @@ export function SaleWorkspace({
     return () => cancelAnimationFrame(frame);
   }, [saleStep, itemId, method]);
   const member = members.find((member) => String(member.id) === memberId);
-  const assignedTrainers = member ? clientTrainers(data, member.id) : [];
-  const trainers = assignedTrainers.length ? assignedTrainers : personalTrainers(data);
-  const personalTrainer = trainers.find((trainer) => trainer.id === trainerId) || trainers[0];
+  const {
+    assigned: assignedTrainers,
+    trainers,
+    selected: personalTrainer,
+  } = saleTrainerSelection(data, member?.id, trainerId);
   const catalog = saleCatalog(data, training, personalTrainer?.categoryId || null);
   const selected = catalog.find((entry) => entry.record.id === itemId);
   const item = selected?.record;
@@ -100,6 +102,16 @@ export function SaleWorkspace({
         ? 'Услуги'
         : saleSections.find((section) => section.id === selected?.sectionId)?.name || 'Абонементы';
   const visibleItems = searchSaleCatalog(catalog, query, sectionId);
+  const showPersonalTrainer =
+    training === 'personal' ||
+    sectionId === 'personal' ||
+    (!!query.trim() &&
+      visibleItems.some((entry) =>
+        supportsTraining(
+          { training: entry.record.training, kindId: entry.record.kindId },
+          'personal',
+        ),
+      ));
   const currentSection = saleSections.find((section) => section.id === sectionId);
   let pricing = { base: 0, discount: 0, total: 0 };
   let calculationError = '';
@@ -333,6 +345,7 @@ export function SaleWorkspace({
                   members={members}
                   onMember={(next) => {
                     setMemberId(String(next.id));
+                    setTrainerId('');
                     setClientSearchOpen(false);
                     setSaleStep('catalog');
                     setDiscount('0');
@@ -398,37 +411,30 @@ export function SaleWorkspace({
               )}
             </div>
             <div className="ws-panel-body ws-stack">
-              <div className="ws-actions sale-search-row">
-                <SearchBox
-                  value={query}
-                  onChange={setQuery}
-                  label="Поиск по названию"
-                  placeholder={
-                    sectionId
-                      ? 'Название, группа или подгруппа'
-                      : training
-                        ? 'Найти подходящий абонемент'
-                        : 'Абонемент, тренировка, товар или услуга'
-                  }
-                />
-                {(training || sectionId || query.trim()) && (
-                  <span className="ws-muted" role="status">
-                    Найдено: {visibleItems.length}
-                  </span>
-                )}
-              </div>
-              {(training === 'personal' ||
-                sectionId === 'personal' ||
-                (query.trim() &&
-                  visibleItems.some((entry) =>
-                    supportsTraining(
-                      { training: entry.record.training, kindId: entry.record.kindId },
-                      'personal',
-                    ),
-                  ))) && (
-                <>
-                  <Field className="form-field" label={<> Персональный тренер </>}>
+              <div className={`sale-catalog-controls${showPersonalTrainer ? ' has-trainer' : ''}`}>
+                <div className="ws-actions sale-search-row">
+                  <SearchBox
+                    value={query}
+                    onChange={setQuery}
+                    label="Поиск по названию"
+                    placeholder={
+                      sectionId
+                        ? 'Название, группа или подгруппа'
+                        : training
+                          ? 'Найти подходящий абонемент'
+                          : 'Абонемент, тренировка, товар или услуга'
+                    }
+                  />
+                  {(training || sectionId || query.trim()) && (
+                    <span className="ws-muted" role="status">
+                      Найдено: {visibleItems.length}
+                    </span>
+                  )}
+                </div>
+                {showPersonalTrainer && (
+                  <div className="sale-catalog-trainer">
                     <Select
+                      aria-label="Персональный тренер"
                       searchable
                       searchLabel="Поиск тренера"
                       searchPlaceholder="Имя или категория тренера"
@@ -436,9 +442,13 @@ export function SaleWorkspace({
                       onChange={(event) => {
                         setTrainerId(event.target.value);
                         setItemId('');
+                        setQuery('');
                         clearResult();
                       }}
                     >
+                      {!personalTrainer && trainers.length > 0 && (
+                        <option value="">Выберите закреплённого тренера</option>
+                      )}
                       {!trainers.length && <option value="">Нет действующих тренеров</option>}
                       {trainers.map((trainer) => (
                         <option key={trainer.id} value={trainer.id}>
@@ -446,25 +456,40 @@ export function SaleWorkspace({
                         </option>
                       ))}
                     </Select>
-                  </Field>
-                  {personalTrainer && (
-                    <Notice>
-                      {personalTrainer.category} · {money(personalTrainer.lessonPrice)} за занятие.
-                      Демо-тариф.
-                      {!assignedTrainers.length && (
-                        <p>
-                          При покупке персонального абонемента клиент будет закреплён за выбранным
-                          тренером.
-                        </p>
-                      )}
-                    </Notice>
-                  )}
-                </>
+                  </div>
+                )}
+              </div>
+              {showPersonalTrainer && personalTrainer && (
+                <p className="sale-trainer-note">
+                  {personalTrainer.category} · {money(personalTrainer.lessonPrice)} за занятие ·
+                  демо-тариф.
+                  {!assignedTrainers.length &&
+                    ' При покупке клиент будет закреплён за выбранным тренером.'}
+                </p>
               )}
-              {!training && !sectionId && !query.trim() ? (
+              {showPersonalTrainer && !personalTrainer ? (
+                <Empty
+                  title="Выберите тренера"
+                  text={
+                    assignedTrainers.length > 1
+                      ? 'У клиента несколько закреплённых тренеров. После выбора откроются тарифы его категории.'
+                      : 'Действующих тренеров для продажи пока нет.'
+                  }
+                />
+              ) : !training && !sectionId && !query.trim() ? (
                 <CatalogSectionGrid>
                   {saleSections.map((section) => {
-                    const count = catalog.filter((entry) => entry.sectionId === section.id).length;
+                    const countedCatalog =
+                      section.id === 'personal' && !personalTrainer && assignedTrainers.length > 1
+                        ? saleCatalog(data, training).filter((entry) =>
+                            assignedTrainers.some(
+                              (trainer) => trainer.categoryId === entry.record.trainerCategory,
+                            ),
+                          )
+                        : catalog;
+                    const count = countedCatalog.filter(
+                      (entry) => entry.sectionId === section.id,
+                    ).length;
                     return (
                       <CatalogSectionCard
                         key={section.id}
@@ -487,17 +512,22 @@ export function SaleWorkspace({
                       );
                       return (
                         <div className="ws-stack" key={section.id}>
-                          {!sectionId && <h3>{section.name}</h3>}
+                          {!sectionId && section.id !== 'personal' && <h3>{section.name}</h3>}
                           {section.id === 'goods-services' ? (
                             <div className="plastic-card-grid sale-item-grid">
                               {entries.map(renderItem)}
                             </div>
                           ) : (
                             <MembershipCatalog
-                              key={section.id}
+                              key={`${section.id}:${section.id === 'personal' ? personalTrainer?.categoryId : ''}`}
                               section={section.id as PlanSectionId}
                               plans={entries.map((entry) => entry.record)}
                               searching={!!query.trim() || !sectionId || !!training}
+                              scopeLabel={
+                                section.id === 'personal' && personalTrainer
+                                  ? `Тарифы · ${personalTrainer.category}`
+                                  : undefined
+                              }
                               renderPlans={(rows) => (
                                 <div className="plastic-card-grid">
                                   {rows.map((row) =>

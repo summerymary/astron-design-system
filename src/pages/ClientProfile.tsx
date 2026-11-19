@@ -1,5 +1,7 @@
 import { ReviewJournal } from '../components/ReviewJournal';
 import { ClientBookingDialog } from '../components/ClientBookingDialog';
+import { ClientActionButton } from '../components/ClientActionButton';
+import { ClientPhotoDialog } from '../components/ClientPhotoDialog';
 import { CallDialog } from '../components/CallDialog';
 import { RestoreCardDialog } from '../components/RestoreCardDialog';
 import { MembershipDetails } from '../components/MembershipDetails';
@@ -11,7 +13,6 @@ import { daysInClub as countDaysInClub, demoStamp, nextDemoNow } from '../lib/de
 import { useCallback, useState } from 'react';
 import type { ReactNode } from 'react';
 import {
-  CalendarDays,
   Camera,
   Check,
   CreditCard,
@@ -21,7 +22,6 @@ import {
   MessageSquare,
   MoreHorizontal,
   Plus,
-  ShoppingBag,
   Wallet,
 } from 'lucide-react';
 import {
@@ -140,6 +140,7 @@ export function ClientProfile({
     data['client-pins']?.find((row) => row.id === String(member.id))?.commentId || '';
   const pinnedNote = notes.find((row) => row.id === pinnedId);
   const [previewAction, setPreviewAction] = useState<string | null>(null);
+  const [photoOpen, setPhotoOpen] = useState(false);
   const closePreview = useCallback(() => setPreviewAction(null), []);
   const subscriptions = profile.subscriptions.filter((subscription) => subscription.kindId);
   const categoryName = (id?: string) =>
@@ -195,13 +196,16 @@ export function ClientProfile({
               <div className="client-photo">
                 <Avatar member={member} portrait />
                 {canOperate && (
-                  <IconButton
+                  <Button
                     variant="secondary"
-                    label="Сфотографировать клиента"
-                    onClick={() => setPreviewAction('Фотография клиента')}
+                    className="client-photo-retake"
+                    aria-label="Перефотографировать клиента"
+                    title="Перефотографировать клиента"
+                    onClick={() => setPhotoOpen(true)}
                   >
-                    <Camera size={14} />
-                  </IconButton>
+                    <Camera size={20} />
+                    <span>Перефотографировать</span>
+                  </Button>
                 )}
               </div>
               <div className="client-name-block">
@@ -291,34 +295,14 @@ export function ClientProfile({
               {balanceBlock}
               {!canOperate && canSell && (
                 <div className="client-primary-actions">
-                  <Button
-                    variant="accent"
-                    className="client-sell-button"
-                    onClick={() => onAction('services')}
-                  >
-                    <ShoppingBag size={15} />
-                    Продать
-                  </Button>
+                  <ClientActionButton action="sell" onClick={() => onAction('services')} />
                 </div>
               )}
               {canOperate && (
                 <div className="client-primary-actions">
-                  <Button variant="secondary" onClick={() => setBookingOpen(true)}>
-                    <CalendarDays size={15} />
-                    Записать
-                  </Button>
-                  <Button onClick={onRegistration}>
-                    <Check size={15} />
-                    Отметить посещение
-                  </Button>
-                  <Button
-                    variant="accent"
-                    className="client-sell-button"
-                    onClick={() => onAction('services')}
-                  >
-                    <ShoppingBag size={15} />
-                    Продать
-                  </Button>
+                  <ClientActionButton action="book" onClick={() => setBookingOpen(true)} />
+                  <ClientActionButton action="visit" onClick={onRegistration} />
+                  <ClientActionButton action="sell" onClick={() => onAction('services')} />
                 </div>
               )}
             </div>
@@ -449,8 +433,16 @@ export function ClientProfile({
                         </ul>
                       ) : (
                         <EmptyTab
-                          title="Нет абонементов в этой категории"
-                          description="Выберите другую категорию, чтобы посмотреть остальные покупки."
+                          title={
+                            subscriptions.length
+                              ? 'Нет абонементов в этой категории'
+                              : 'У клиента пока нет абонементов'
+                          }
+                          description={
+                            subscriptions.length
+                              ? 'Выберите другую категорию, чтобы посмотреть остальные покупки.'
+                              : 'Оформите покупку кнопкой «Продать» в действиях клиента.'
+                          }
                         />
                       )}
                       <div className="client-table-footer">
@@ -719,6 +711,16 @@ export function ClientProfile({
           </section>
         </div>
       </div>
+      {photoOpen && (
+        <ClientPhotoDialog
+          member={member}
+          onClose={() => setPhotoOpen(false)}
+          onSave={(photoDataUrl) => {
+            onUpdate({ ...member, photoDataUrl, photoIndex: undefined });
+            setPhotoOpen(false);
+          }}
+        />
+      )}
       {previewAction === 'Звонок клиенту' && (
         <CallDialog
           name={clientName(member)}

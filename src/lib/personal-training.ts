@@ -41,6 +41,18 @@ export function clientTrainers(
     assigned.some((row) => row.trainerId === trainer.id),
   );
 }
+export function saleTrainerSelection(
+  data: Record<string, DemoRecord[]>,
+  memberId: number | undefined,
+  requestedId = '',
+) {
+  const assigned = memberId === undefined ? [] : clientTrainers(data, memberId);
+  const trainers = assigned.length ? assigned : personalTrainers(data);
+  const selected =
+    trainers.find((trainer) => trainer.id === requestedId) ||
+    (assigned.length > 1 ? undefined : trainers[0]);
+  return { assigned, trainers, selected };
+}
 export function personalBooking(event: DemoRecord, data: Record<string, DemoRecord[]>): DemoRecord {
   if (event.kind !== 'personal') return event;
   const trainer = personalTrainers(data).find(

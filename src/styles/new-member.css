@@ -13,6 +13,18 @@
     flex-direction: column;
     min-height: 0;
   }
+  .new-client-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .new-client-layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 20px;
+    }
+  }
   .new-client-body {
     overflow-y: auto;
     min-height: 0;

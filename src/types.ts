@@ -69,6 +69,7 @@ export interface Member {
   name: string;
   fullName?: string;
   photoIndex?: number;
+  photoDataUrl?: string;
   birthDate?: string;
   gender?: string;
   organization?: string;

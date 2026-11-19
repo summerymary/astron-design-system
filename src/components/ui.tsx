@@ -192,15 +192,15 @@ export function Avatar({
   small = false,
   portrait = false,
 }: {
-  member: Pick<Member, 'name' | 'color' | 'photoIndex'>;
+  member: Pick<Member, 'name' | 'color' | 'photoIndex' | 'photoDataUrl'>;
   small?: boolean;
   portrait?: boolean;
 }) {
   return (
     <span
-      className={`avatar avatar-${member.color} ${small ? 'avatar-small' : ''} ${member.photoIndex !== undefined ? 'avatar-photo' : ''}`}
+      className={`avatar avatar-${member.color} ${small ? 'avatar-small' : ''} ${member.photoIndex !== undefined || member.photoDataUrl ? 'avatar-photo' : ''}`}
       style={
-        member.photoIndex !== undefined && !portrait
+        !member.photoDataUrl && member.photoIndex !== undefined && !portrait
           ? {
               backgroundImage: 'url("./demo/client-portraits.png")',
               backgroundPosition: `${(member.photoIndex % 3) * 50}% ${Math.floor(member.photoIndex / 3) * 100}%`,
@@ -209,7 +209,8 @@ export function Avatar({
       }
       aria-hidden="true"
     >
-      {portrait && member.photoIndex !== undefined && (
+      {member.photoDataUrl && <img src={member.photoDataUrl} alt="" />}
+      {!member.photoDataUrl && portrait && member.photoIndex !== undefined && (
         <svg
           viewBox="0 0 100 100"
           preserveAspectRatio="xMidYMid slice"
@@ -227,7 +228,7 @@ export function Avatar({
           />
         </svg>
       )}
-      {member.photoIndex === undefined &&
+      {!member.photoDataUrl && member.photoIndex === undefined &&
         member.name
           .split(' ')
           .slice(0, 2)
@@ -339,7 +340,7 @@ export function Modal({
 }: {
   title: string;
   subtitle?: string;
-  size?: 'default' | 'wide';
+  size?: 'default' | 'wide' | 'large';
   onClose: () => void;
   children: ReactNode;
 }) {

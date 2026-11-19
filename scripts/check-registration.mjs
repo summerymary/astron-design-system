@@ -33,6 +33,30 @@ const member = {
   expires: '12.12.2026',
 };
 const profile = getClientProfile(member);
+const newClient = { ...member, id: 9001, plan: 'Без абонемента', expires: '', visits: 0 };
+assert.deepEqual(
+  getClientProfile(newClient).subscriptions,
+  [],
+  'Creating a client does not issue a membership',
+);
+assert.equal(
+  getClientProfile(newClient, {
+    'issued-plans': [
+      {
+        id: 'bought',
+        memberId: '9001',
+        name: 'Купленный абонемент',
+        kindId: 'group',
+        type: 'По посещениям',
+        visits: '12',
+        duration: '60',
+        issued: '2026-11-06',
+      },
+    ],
+  }).subscriptions.length,
+  1,
+  'The first explicit sale appears without a phantom initial membership',
+);
 const personal = profile.subscriptions.find((pass) => pass.kindId === 'personal');
 assert.equal(personal.remaining, 3);
 const original = structuredClone(personal);
@@ -344,6 +368,31 @@ assert.deepEqual(
   ['master'],
 );
 const bookingData = { ...structuredClone(seed), events: [] };
+assert.equal(personalRules.saleTrainerSelection(seed, 1002).selected.categoryId, 'senior');
+assert.equal(personalRules.saleTrainerSelection(seed, 1004).selected.categoryId, 'master');
+assert.equal(
+  personalRules.saleTrainerSelection(seed, 1002, 'unknown-trainer').selected.categoryId,
+  'senior',
+);
+const secondAssignedTrainer = personalRules
+  .personalTrainers(seed)
+  .find((trainer) => trainer.id !== personalRules.saleTrainerSelection(seed, 1002).selected.id);
+const multiTrainerSale = {
+  ...seed,
+  'personal-clients': [
+    ...seed['personal-clients'],
+    { id: 'second-assignment', memberId: '1002', trainerId: secondAssignedTrainer.id },
+  ],
+};
+assert.equal(
+  personalRules.saleTrainerSelection(multiTrainerSale, 1002).selected,
+  undefined,
+  'Multiple assignments require an explicit trainer',
+);
+assert.equal(
+  personalRules.saleTrainerSelection(multiTrainerSale, 1002, secondAssignedTrainer.id).selected.id,
+  secondAssignedTrainer.id,
+);
 const adminBooker = { id: 'user-admin', name: 'Александра Крылова', role: 'administrator' };
 const newBookingClient = { ...member, id: 1008 };
 const bookingInput = {

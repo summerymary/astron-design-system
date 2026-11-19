@@ -156,3 +156,42 @@ console.log(
     'Client duplicate checks passed: name+DOB, changed phone, normalized full phone, silent name-only, archived/multiple matches and immutable input.',
   );
 }
+
+// A cancelled permission request must never leave a camera stream running.
+{
+  const { createCameraSession, portraitCrop, cameraError } = await load(
+    '../src/lib/client-photo.ts',
+  );
+  assert.deepEqual(portraitCrop(1280, 720), { x: 280, y: 0, side: 720 });
+  assert.deepEqual(portraitCrop(600, 1000), { x: 0, y: 200, side: 600 });
+  assert.throws(() => portraitCrop(0, 720));
+  assert.throws(() => portraitCrop(Infinity, 720));
+  let firstStopped = 0,
+    secondStopped = 0,
+    resolvePermission;
+  const first = { getTracks: () => [{ stop: () => firstStopped++ }] };
+  const second = { getTracks: () => [{ stop: () => secondStopped++ }] };
+  const session = createCameraSession();
+  const pending = session.start({
+    getUserMedia: (constraints) => {
+      assert.equal(constraints.audio, false);
+      return new Promise((resolve) => {
+        resolvePermission = resolve;
+      });
+    },
+  });
+  session.stop();
+  resolvePermission(first);
+  assert.equal(await pending, null);
+  assert.equal(firstStopped, 1, 'Late stream after closing must be stopped');
+  assert.equal(await session.start({ getUserMedia: async () => second }), second);
+  session.stop();
+  session.stop();
+  assert.equal(secondStopped, 1, 'Closing stops every active track once');
+  await assert.rejects(() => session.start(undefined));
+  for (const name of ['NotAllowedError', 'NotFoundError', 'NotReadableError'])
+    assert.ok(cameraError(Object.assign(new Error(), { name })).length > 20);
+  console.log(
+    'Client photo checks passed: centered portrait crops, no audio and late/cancelled stream cleanup.',
+  );
+}
