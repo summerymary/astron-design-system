@@ -142,7 +142,7 @@ export function changeMembership(
       freeze: 'Заморозка',
       unfreeze: 'Разморозка',
       finish: 'Списание абонемента',
-      transfer: 'Переоформление',
+      transfer: 'Передача другому клиенту',
     }[kind],
     comment: reason.trim(),
     targetId: target ? String(target.id) : '',
