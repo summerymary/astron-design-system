@@ -417,3 +417,364 @@ assert.equal(
   'A fixed card owner takes priority over draft recipient',
 );
 assert.equal(creditRestore.receivables.at(-1).amount, '100');
+
+// Reissue is a same-client recalculation, independent of legacy recipient transfers.
+const {
+  quoteMembershipReissue: quoteReissue,
+  reissueMembership,
+  membershipPurchasePrice,
+} = await import(await load(new URL('../src/lib/membership-reissue.ts', import.meta.url)));
+const { clientFinanceRows, clientFinanceTotals, accountBalance, financeCents } = await import(
+  await load(new URL('../src/lib/client-finance.ts', import.meta.url))
+);
+const reissueMember = { ...member, id: 90090, plan: 'Без абонемента', birthDate: '1980-01-01' };
+const reissueData = {
+  ...createWorkspaceData(),
+  plans: [
+    {
+      id: 'target',
+      name: 'Новый групповой',
+      kindId: 'group',
+      training: 'Групповые',
+      type: 'По посещениям',
+      visits: '10',
+      duration: '30',
+      price: '5000',
+      status: 'Опубликован',
+    },
+  ],
+  'issued-plans': [
+    {
+      id: 'source',
+      memberId: '90090',
+      name: 'Исходный групповой',
+      kindId: 'group',
+      training: 'Групповые',
+      type: 'По посещениям',
+      visits: '10',
+      issued: '2026-11-01',
+      purchasePrice: '6000',
+    },
+  ],
+  'pass-usage': [
+    {
+      id: 'usage',
+      memberId: '90090',
+      passId: 'source',
+      used: '2',
+      remaining: '8',
+      activatedAt: '2026-11-01',
+      endsAt: '2026-11-30',
+    },
+  ],
+};
+const reissueInput = {
+  passId: 'source',
+  planId: 'target',
+  mode: 'visits',
+  today: '2026-11-06',
+  purchasePrice: '',
+  singlePrice: '1000',
+  manualCredit: '3500',
+  trainerId: '',
+};
+const quote = quoteReissue(reissueData, reissueMember, reissueInput);
+assert.equal(quote.credit, 480000);
+assert.equal(quote.due, 20000);
+assert.equal(
+  quoteReissue(reissueData, reissueMember, { ...reissueInput, mode: 'days' }).credit,
+  500000,
+  '25 of 30 days, including today and end',
+);
+assert.equal(
+  quoteReissue(reissueData, reissueMember, { ...reissueInput, mode: 'single' }).credit,
+  400000,
+);
+assert.equal(
+  quoteReissue(reissueData, reissueMember, { ...reissueInput, mode: 'single', singlePrice: '4000' })
+    .credit,
+  0,
+);
+assert.equal(
+  quoteReissue(reissueData, reissueMember, { ...reissueInput, mode: 'manual' }).credit,
+  350000,
+);
+assert.throws(() =>
+  quoteReissue(reissueData, reissueMember, {
+    ...reissueInput,
+    mode: 'manual',
+    manualCredit: '6001',
+  }),
+);
+assert.throws(() => financeCents('1.001'));
+assert.throws(() => financeCents(''));
+assert.equal(financeCents('0'), 0);
+const unknownPrice = {
+  ...reissueData,
+  'issued-plans': reissueData['issued-plans'].map((row) => ({ ...row, purchasePrice: '' })),
+};
+assert.equal(membershipPurchasePrice(unknownPrice, 90090, 'source').cents, null);
+assert.throws(() => quoteReissue(unknownPrice, reissueMember, reissueInput));
+assert.equal(
+  quoteReissue(unknownPrice, reissueMember, { ...reissueInput, purchasePrice: '6000' }).credit,
+  480000,
+);
+const pausedReissue = {
+  ...reissueData,
+  'membership-overrides': [
+    { id: '90090:source', memberId: '90090', passId: 'source', status: 'paused' },
+  ],
+};
+assert.throws(
+  () => quoteReissue(pausedReissue, reissueMember, { ...reissueInput, mode: 'days' }),
+  /замороз/,
+);
+const pendingReissue = { ...reissueData, 'pass-usage': [] };
+assert.equal(
+  quoteReissue(pendingReissue, reissueMember, { ...reissueInput, mode: 'days' }).credit,
+  600000,
+);
+const operator = {
+  id: 'operator',
+  name: 'Демо оператор',
+  role: 'administrator',
+  clubIds: ['central'],
+};
+const runInput = {
+  ...reissueInput,
+  id: 'test-reissue',
+  stamp: '2026-11-06T15:00',
+  reason: 'Переход на другой тариф',
+  club: 'Центральный',
+  expected: quote.signature,
+  payment,
+};
+const originalReissue = structuredClone(reissueData);
+const reissued = reissueMembership(reissueData, reissueMember, runInput, operator, true);
+assert.deepEqual(reissueData, originalReissue, 'Atomic operation must not mutate source');
+const oldPass = getClientProfile(reissueMember, reissued).subscriptions.find(
+  (row) => row.id === 'source',
+);
+const newPass = getClientProfile(reissueMember, reissued).subscriptions.find(
+  (row) => row.id === 'reissued:test-reissue',
+);
+assert.equal(oldPass.status, 'expired');
+assert.equal(oldPass.remaining, 0);
+assert.equal(oldPass.used, 2, 'Retain consumed history');
+assert.equal(newPass.status, 'pending');
+assert.equal(newPass.used, 0);
+assert.equal(newPass.remaining, 10);
+assert.equal(reissued['issued-plans'].at(-1).memberId, '90090');
+assert.equal(reissued.ledger.at(-1).amount, '200', 'Only supplement is new payment');
+assert.equal(reissued.ledger.at(-1).kind, 'membership-reissue');
+assert.equal(accountBalance(0, 90090, reissued), 0, 'Full credit immediately applied to target');
+assert.equal(reissued.receipts.at(-1).saleId, 'test-reissue');
+assert.throws(() => reissueMembership(reissued, reissueMember, runInput, operator, true), /уже/);
+assert.throws(
+  () => reissueMembership(reissued, reissueMember, { ...runInput, id: 'repeat' }, operator, true),
+  /незаверш/,
+);
+assert.throws(() => reissueMembership(reissueData, reissueMember, runInput, operator, false));
+assert.throws(() =>
+  reissueMembership(reissueData, reissueMember, runInput, { ...operator, role: 'trainer' }, true),
+);
+assert.throws(() =>
+  reissueMembership(reissueData, reissueMember, runInput, { ...operator, clubIds: ['east'] }, true),
+);
+assert.throws(() =>
+  reissueMembership(reissueData, reissueMember, { ...runInput, reason: ' ' }, operator, true),
+);
+assert.throws(() => quoteReissue(reissueData, { ...reissueMember, id: 90091 }, reissueInput));
+assert.throws(() => quoteReissue(reissueData, { ...reissueMember, archived: true }, reissueInput));
+assert.throws(() =>
+  quoteReissue(reissueData, reissueMember, { ...reissueInput, today: '2026-12-01' }),
+);
+const stale = {
+  ...reissueData,
+  'pass-usage': reissueData['pass-usage'].map((row) => ({ ...row, used: '3', remaining: '7' })),
+};
+assert.throws(() => reissueMembership(stale, reissueMember, runInput, operator, true), /заново/);
+const cheaper = {
+  ...reissueData,
+  plans: reissueData.plans.map((row) => ({ ...row, price: '3000' })),
+};
+const cheapQuote = quoteReissue(cheaper, reissueMember, reissueInput);
+const cheapResult = reissueMembership(
+  cheaper,
+  reissueMember,
+  { ...runInput, expected: cheapQuote.signature },
+  operator,
+  true,
+);
+assert.equal(accountBalance(100, 90090, cheapResult), 1900);
+assert.equal(
+  cheapResult.ledger.length,
+  cheaper.ledger.length,
+  'No zero payment or duplicate income',
+);
+assert.equal((cheapResult.receipts || []).length, (cheaper.receipts || []).length);
+const debtResult = reissueMembership(
+  reissueData,
+  reissueMember,
+  { ...runInput, payment: { ...payment, method: 'В кредит' } },
+  operator,
+  true,
+);
+assert.equal(debtResult.ledger.at(-1).amount, '0');
+assert.equal(debtResult.receivables.at(-1).amount, '200');
+const debtInput = { ...reissueInput, passId: 'reissued:test-reissue', mode: 'days' };
+assert.throws(() => quoteReissue(debtResult, reissueMember, debtInput), /задолженность/);
+const giftFailure = {
+  ...runInput,
+  payment: { ...payment, method: 'Подарочная карта', giftId: 'missing' },
+};
+assert.throws(() => reissueMembership(reissueData, reissueMember, giftFailure, operator, true));
+assert.deepEqual(reissueData, originalReissue, 'Failed payment leaves old plan and history intact');
+const ambiguousMember = { ...reissueMember, id: 90091 };
+const financeData = {
+  ...reissued,
+  ledger: [
+    {
+      id: 'exact',
+      memberId: '90090',
+      client: 'Другое имя',
+      name: 'Покупка',
+      amount: '100',
+      creditAmount: '20',
+      date: '2026-11-06',
+      time: '10:00',
+    },
+    {
+      id: 'other',
+      memberId: '90091',
+      client: reissueMember.name,
+      name: 'Чужая',
+      amount: '999',
+      date: '2026-11-06',
+    },
+    {
+      id: 'ambiguous',
+      client: reissueMember.name,
+      name: 'Неоднозначная',
+      amount: '999',
+      date: '2026-11-06',
+    },
+    { id: 'unknown', memberId: '90090', name: 'Сумма неизвестна', amount: '', date: '' },
+  ],
+  'cash-events': [
+    {
+      id: 'cash-duplicate',
+      kind: 'sale',
+      saleId: 'exact',
+      memberId: '90090',
+      amount: '100',
+      date: '2026-11-06',
+    },
+  ],
+  receivables: [],
+};
+const financeRows = clientFinanceRows(
+  reissueMember,
+  [reissueMember, ambiguousMember],
+  financeData,
+  1200,
+);
+assert.equal(
+  financeRows.filter((row) => row.group === 'purchase').length,
+  2,
+  'Exact id wins; ambiguous name and cash duplicate excluded',
+);
+assert.equal(financeRows.find((row) => row.sourceId === 'unknown').stamp, '');
+assert.equal(financeRows.find((row) => row.group === 'opening').stamp, '');
+assert.equal(financeRows.find((row) => row.group === 'opening').type, 'Входящий остаток ЛС');
+assert.equal(
+  clientFinanceTotals(reissueMember, [reissueMember, ambiguousMember], financeData).paid,
+  null,
+);
+assert.equal(
+  clientFinanceTotals(reissueMember, [reissueMember, ambiguousMember], financeData).debt,
+  20,
+);
+assert.equal(clientFinanceTotals(reissueMember, [reissueMember], debtResult).debt, 200);
+assert.equal(
+  clientFinanceRows(reissueMember, [reissueMember], cheapResult, 0).filter(
+    (row) => row.group === 'account',
+  ).length,
+  2,
+);
+console.log(
+  'Reissue/finance checks passed: four formulas, cents, same-client atomic replacement, supplement/credit/surplus, stale/replay/role checks, identity and unknown history.',
+);
+const personalTarget = {
+  ...reissueData,
+  plans: reissueData.plans.map((row) => ({
+    ...row,
+    kindId: 'personal',
+    training: 'Персональные',
+    trainerCategory: 'trainer',
+  })),
+};
+assert.throws(() => quoteReissue(personalTarget, reissueMember, reissueInput), /тренера/);
+const activeTrainer = personalTarget['trainer-profiles'].find(
+  (row) => row.categoryId === 'trainer' && row.status === 'Активен',
+);
+assert.equal(
+  quoteReissue(personalTarget, reissueMember, { ...reissueInput, trainerId: activeTrainer.id })
+    .trainer.id,
+  activeTrainer.id,
+);
+assert.throws(
+  () =>
+    quoteReissue(
+      {
+        ...personalTarget,
+        plans: personalTarget.plans.map((row) => ({ ...row, trainerCategory: 'master' })),
+      },
+      reissueMember,
+      { ...reissueInput, trainerId: activeTrainer.id },
+    ),
+  /категории/,
+);
+assert.throws(
+  () =>
+    quoteReissue(
+      {
+        ...reissueData,
+        plans: reissueData.plans.map((row) => ({ ...row, ageMin: '14', ageMax: '23' })),
+      },
+      reissueMember,
+      reissueInput,
+    ),
+  /возраст/,
+);
+assert.throws(
+  () =>
+    reissueMembership(
+      { ...reissueData, plans: reissueData.plans.map((row) => ({ ...row, price: '5001' })) },
+      reissueMember,
+      runInput,
+      operator,
+      true,
+    ),
+  /заново/,
+);
+assert.throws(
+  () =>
+    quoteReissue(
+      { ...reissueData, plans: reissueData.plans.map((row) => ({ ...row, status: 'Черновик' })) },
+      reissueMember,
+      reissueInput,
+    ),
+  /опубликованный/,
+);
+assert.equal(
+  quoteReissue(
+    {
+      ...reissueData,
+      'issued-plans': reissueData['issued-plans'].map((row) => ({ ...row, purchasePrice: '0' })),
+    },
+    reissueMember,
+    reissueInput,
+  ).credit,
+  0,
+);
