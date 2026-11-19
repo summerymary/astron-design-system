@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { ArrowUpRight, Plus } from 'lucide-react';
 import { Avatar, Button, Modal } from './ui';
 import { FieldControl, Notice, RecordForm } from './WorkspaceUI';
-import { membershipKinds } from '../data/membership-kinds';
 import { clientCard } from '../lib/member-search';
 import { memberCards } from '../data/admin';
 import { clientName, hiddenPhone } from '../lib/client-display';
@@ -13,6 +12,7 @@ import {
 } from '../lib/member-duplicates';
 import type { NewMemberDraft } from '../lib/member-duplicates';
 import type { Member } from '../types';
+import { ClientPhotoField } from './ClientPhotoField';
 import '../styles/new-member.css';
 
 export function NewMemberDialog({
@@ -35,11 +35,11 @@ export function NewMemberDialog({
     birthDate: '',
     phone: '',
     email: '',
-    plan: membershipKinds[0].name,
   });
   const [reviewed, setReviewed] = useState(false);
   const [error, setError] = useState('');
   const [updating, setUpdating] = useState<Member | null>(null);
+  const [photoBusy, setPhotoBusy] = useState(false);
   const matches = findMemberDuplicates(members, draft);
   const change = (key: keyof NewMemberDraft, value: string) => {
     setDraft((previous) => ({ ...previous, [key]: value }));
@@ -48,11 +48,12 @@ export function NewMemberDialog({
   };
   return (
     <>
-      <Modal size="wide" title="Новый клиент" onClose={onClose}>
+      <Modal size="large" title="Новый клиент" onClose={onClose}>
         <form
           className="new-client-form"
           onSubmit={(event) => {
             event.preventDefault();
+            if (photoBusy) return setError('Сделайте снимок или выключите камеру.');
             const problem = memberContactError(draft);
             if (problem) return setError(problem);
             if (matches.length && !reviewed)
@@ -64,35 +65,33 @@ export function NewMemberDialog({
           }}
         >
           <div className="new-client-body">
-            <div className="ws-fields">
-              <FieldControl
-                field={{ key: 'fullName', label: 'Фамилия, имя, отчество', required: true }}
-                value={draft.fullName}
-                onChange={(value) => change('fullName', value)}
-              />
-              <FieldControl
-                field={{ key: 'birthDate', label: 'Дата рождения', type: 'date' }}
-                value={draft.birthDate}
-                onChange={(value) => change('birthDate', value)}
-              />
-              <FieldControl
-                field={{ key: 'phone', label: 'Телефон', type: 'tel' }}
-                value={draft.phone}
-                onChange={(value) => change('phone', value)}
-              />
-              <FieldControl
-                field={{ key: 'email', label: 'Электронная почта', type: 'email' }}
-                value={draft.email}
-                onChange={(value) => change('email', value)}
-              />
-              <FieldControl
-                field={{
-                  key: 'plan',
-                  label: 'Абонемент',
-                  options: membershipKinds.map((kind) => kind.name),
-                }}
-                value={draft.plan}
-                onChange={(value) => change('plan', value)}
+            <div className="new-client-layout">
+              <div className="ws-fields">
+                <FieldControl
+                  field={{ key: 'fullName', label: 'Фамилия, имя, отчество', required: true }}
+                  value={draft.fullName}
+                  onChange={(value) => change('fullName', value)}
+                />
+                <FieldControl
+                  field={{ key: 'birthDate', label: 'Дата рождения', type: 'date' }}
+                  value={draft.birthDate}
+                  onChange={(value) => change('birthDate', value)}
+                />
+                <FieldControl
+                  field={{ key: 'phone', label: 'Телефон', type: 'tel' }}
+                  value={draft.phone}
+                  onChange={(value) => change('phone', value)}
+                />
+                <FieldControl
+                  field={{ key: 'email', label: 'Электронная почта', type: 'email' }}
+                  value={draft.email}
+                  onChange={(value) => change('email', value)}
+                />
+              </div>
+              <ClientPhotoField
+                value={draft.photoDataUrl || ''}
+                onChange={(photoDataUrl) => change('photoDataUrl', photoDataUrl)}
+                onBusyChange={setPhotoBusy}
               />
             </div>
             {!!matches.length && (
@@ -162,7 +161,7 @@ export function NewMemberDialog({
             <Button variant="secondary" onClick={onClose}>
               Отмена
             </Button>
-            <Button type="submit" disabled={!!matches.length && !reviewed}>
+            <Button type="submit" disabled={photoBusy || (!!matches.length && !reviewed)}>
               <Plus size={16} />
               {matches.length ? 'Создать отдельного клиента' : 'Добавить клиента'}
             </Button>

@@ -1,4 +1,6 @@
 import { ProductCard } from './ProductCard';
+import { ClientActionButton } from './ClientActionButton';
+import { ClientPhotoDialog } from './ClientPhotoDialog';
 import { QuantityStepper } from './QuantityStepper';
 import { VisitPassList } from './VisitPassList';
 import { getClientProfile } from '../data/clientProfile';
@@ -277,6 +279,7 @@ export function DesignRules() {
   const [copyExample, setCopyExample] = useState(false);
   const [exampleSchedule] = useState(createWorkspaceData);
   const [newClientExample, setNewClientExample] = useState(false);
+  const [photoExample, setPhotoExample] = useState(false);
   const [fieldExample, setFieldExample] = useState('');
   const [exampleCall, setExampleCall] = useState(false);
   const [zeroCategory, setZeroCategory] = useState(false);
@@ -297,9 +300,7 @@ export function DesignRules() {
           Одинаковое окно в карточке и регистрации. Групповые занятия, резерв или персональная
           запись к закреплённому тренеру.
         </p>
-        <Button variant="secondary" onClick={() => setBookingExample(true)}>
-          Записать — пример
-        </Button>
+        <ClientActionButton action="book" onClick={() => setBookingExample(true)} />
       </div>
       {bookingExample && (
         <WorkspaceProvider>
@@ -333,6 +334,21 @@ export function DesignRules() {
       </div>
       <div className="panel ws-panel-body ws-stack">
         <h3>Действия и состояния</h3>
+        <div className="ws-actions" role="group" aria-label="Действия с клиентом — пример">
+          <ClientActionButton action="book" onClick={() => setBookingExample(true)} />
+          <ClientActionButton
+            action="visit"
+            onClick={() => setResult('Открыт пример регистрации посещения. Посещение не списано.')}
+          />
+          <ClientActionButton
+            action="sell"
+            onClick={() => setResult('Открыт пример продажи клиенту. Оплата не выполнена.')}
+          />
+          <ClientActionButton
+            action="profile"
+            onClick={() => setResult('Открыт пример карточки клиента.')}
+          />
+        </div>
         <div className="ws-actions">
           <Button>
             <Plus size={18} />
@@ -425,7 +441,20 @@ export function DesignRules() {
         <Button variant="secondary" onClick={() => setNewClientExample(true)}>
           Новый клиент — пример
         </Button>
+        <Button variant="secondary" onClick={() => setPhotoExample(true)}>
+          Фото клиента — пример
+        </Button>
       </div>
+      {photoExample && (
+        <ClientPhotoDialog
+          member={initialMembers[0]}
+          onClose={() => setPhotoExample(false)}
+          onSave={() => {
+            setPhotoExample(false);
+            setResult('Пример: новый портрет выбран. Данные приложения не изменены.');
+          }}
+        />
+      )}
       {newClientExample && (
         <NewMemberDialog
           members={initialMembers}
