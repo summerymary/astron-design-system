@@ -5,7 +5,14 @@ import { paymentPlan, saleTotal } from './checkout';
 import type { PaymentMethod, PaymentParts } from './checkout';
 
 type Data = Record<string, DemoRecord[]>;
-export type ReceptionPayment = { method: PaymentMethod; parts: PaymentParts; receipt: boolean };
+export type ReceptionPayment = {
+  method: PaymentMethod;
+  parts: PaymentParts;
+  receipt: boolean;
+  giftId?: string;
+  memberId?: string;
+  client?: string;
+};
 export const replaceRecord = (data: Data, collection: string, row: DemoRecord): Data => ({
   ...data,
   [collection]: [...(data[collection] || []).filter((item) => item.id !== row.id), row],
@@ -29,29 +36,55 @@ export function paidOperation(
 ): Data {
   if ((data.ledger || []).some((item) => item.id === row.id))
     throw new Error('Оплата уже проведена.');
-  if (
-    !['Наличные', 'Безналичная оплата', 'Составная оплата'].includes(payment.method) ||
-    payment.parts.gift ||
-    payment.parts.credit
-  )
-    throw new Error('Для этой операции выберите наличные, банковскую карту или их сочетание.');
-  const parts = paymentPlan(amount, payment.method, payment.parts);
+  const gift = (data['gift-cards'] || []).find(
+    (item) => item.id === payment.giftId && item.status === 'Активна',
+  );
+  const parts = paymentPlan(
+    amount,
+    payment.method,
+    payment.parts,
+    gift ? Number(gift.balance) : undefined,
+  );
+  const memberId = row.memberId || payment.memberId || '';
+  const client = row.memberId ? row.client : payment.client || row.client;
+  if (parts.credit > 0 && (!/^\d+$/.test(memberId) || !client?.trim()))
+    throw new Error('Выберите клиента, на которого будет записана задолженность.');
   const sale = {
     ...row,
     total: String(amount),
-    amount: String(amount),
+    amount: String(Math.round((amount - parts.credit) * 100) / 100),
+    memberId,
+    client,
     cashAmount: String(parts.cash),
     cardAmount: String(parts.card),
-    giftAmount: '0',
-    creditAmount: '0',
+    giftAmount: String(parts.gift),
+    creditAmount: String(parts.credit),
     method: payment.method,
-    status: 'Оплачено',
+    status: parts.credit ? (parts.credit === amount ? 'В долг' : 'Частичная оплата') : 'Оплачено',
     receiptRequested: String(payment.receipt),
     receiptNumber: payment.receipt ? `DEMO-${row.id.slice(-8).toUpperCase()}` : '',
   };
   let next = replaceRecord(data, 'ledger', sale);
   if (payment.receipt)
     next = replaceRecord(next, 'receipts', { ...sale, id: `receipt-${row.id}`, saleId: row.id });
+  if (parts.gift > 0 && gift)
+    next = redeemGift(next, gift.id, parts.gift, {
+      id: `payment-gift:${row.id}`,
+      date: `${row.date}T${row.time}`,
+      name: 'Оплата покупки',
+      saleId: row.id,
+      comment: row.name,
+    });
+  if (parts.credit > 0)
+    next = replaceRecord(next, 'receivables', {
+      id: `debt-${row.id}`,
+      memberId,
+      name: client,
+      saleId: row.id,
+      amount: String(parts.credit),
+      date: row.date,
+      status: 'Не погашено',
+    });
   return next;
 }
 export function retailSale(
@@ -59,13 +92,31 @@ export function retailSale(
   cart: Record<string, number>,
   row: DemoRecord,
   payment: ReceptionPayment,
+) {
+  return stockSale(data, cart, row, payment, 'retail-products', 'Товары');
+}
+export function barSale(
+  data: Data,
+  cart: Record<string, number>,
+  row: DemoRecord,
+  payment: ReceptionPayment,
+) {
+  return stockSale(data, cart, row, payment, 'products', 'Бар');
+}
+function stockSale(
+  data: Data,
+  cart: Record<string, number>,
+  row: DemoRecord,
+  payment: ReceptionPayment,
+  collection: 'products' | 'retail-products',
+  category: 'Бар' | 'Товары',
 ): Data {
   if (Object.values(cart).some((quantity) => !Number.isInteger(quantity) || quantity <= 0))
     throw new Error('Количество должно быть целым положительным числом.');
   const lines = Object.entries(cart);
   if (!lines.length) throw new Error('Добавьте товары в покупку.');
   let total = 0;
-  const products = data['retail-products'] || [];
+  const products = data[collection] || [];
   const items = lines.map(([id, quantity]) => {
     const product = products.find((item) => item.id === id && item.status === 'Активен');
     if (!product) throw new Error('Товар больше не доступен на ресепшене.');
@@ -79,7 +130,7 @@ export function retailSale(
     data,
     {
       ...row,
-      category: 'Товары',
+      category,
       client: 'Без привязки к клиенту',
       memberId: '',
       name: items.map(({ product, quantity }) => `${product.name} × ${quantity}`).join(', '),
@@ -89,11 +140,11 @@ export function retailSale(
     payment,
   );
   for (const { product, quantity } of items) {
-    next = replaceRecord(next, 'retail-products', {
+    next = replaceRecord(next, collection, {
       ...product,
       stock: String(Number(product.stock) - quantity),
     });
-    next = replaceRecord(next, 'retail-sale-lines', {
+    next = replaceRecord(next, category === 'Бар' ? 'bar-sale-lines' : 'retail-sale-lines', {
       id: `${row.id}:${product.id}`,
       saleId: row.id,
       productId: product.id,

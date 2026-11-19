@@ -81,7 +81,10 @@ export function GiftCardsWorkspace({
       setTab('Карты');
       setMessage(
         mode === 'sell'
-          ? 'Подарочная карта продана. Оплата сохранена в кассе.'
+          ? payment.method === 'В кредит' ||
+            (payment.method === 'Составная оплата' && payment.parts.credit > 0)
+            ? 'Подарочная карта продана. Задолженность сохранена за покупателем.'
+            : 'Подарочная карта продана. Оплата сохранена в кассе.'
           : 'Подарочная карта выдана.',
       );
     } catch (err) {
@@ -279,6 +282,8 @@ export function GiftCardsWorkspace({
             </Field>
             {mode === 'sell' ? (
               <ReceptionPayment
+                members={members}
+                member={buyer}
                 value={payment}
                 onChange={setPayment}
                 total={Number(nominal) || 0}

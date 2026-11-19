@@ -55,8 +55,15 @@ export function Select({
   id,
   className = '',
   autoFocus,
+  searchable: searchOverride,
+  searchLabel,
+  searchPlaceholder = 'Поиск в списке',
   ...props
-}: SelectHTMLAttributes<HTMLSelectElement>) {
+}: SelectHTMLAttributes<HTMLSelectElement> & {
+  searchable?: boolean;
+  searchLabel?: string;
+  searchPlaceholder?: string;
+}) {
   const generatedId = useId();
   const controlId = id || `select-${generatedId}`;
   const listId = `${controlId}-list`;
@@ -74,7 +81,7 @@ export function Select({
   const popup = useRef<HTMLDivElement>(null);
   const search = useRef<HTMLInputElement>(null);
   const typeahead = useRef({ text: '', time: 0 });
-  const searchable = options.length > 7;
+  const searchable = searchOverride ?? options.length > 7;
   const filtered = options.filter(
     (option) => !query || normalize(option.label).includes(normalize(query)),
   );
@@ -312,12 +319,12 @@ export function Select({
                 <input
                   ref={search}
                   role="combobox"
-                  aria-label={`Поиск: ${label}`}
+                  aria-label={searchLabel || `Поиск: ${label}`}
                   aria-controls={listId}
                   aria-expanded="true"
                   aria-activedescendant={activeOption ? `${listId}-${active}` : undefined}
                   value={query}
-                  placeholder="Поиск в списке"
+                  placeholder={searchPlaceholder}
                   onChange={(event) => {
                     setQuery(event.target.value);
                     setActive(0);

@@ -1,3 +1,8 @@
+import { ProductCard } from '../components/ProductCard';
+import { ReceptionPayment, initialReceptionPayment } from '../components/ReceptionPayment';
+import { barSale } from '../lib/reception-operations';
+import { demoStamp, nextDemoNow } from '../lib/demo-clock';
+import type { Member } from '../types';
 import { Field } from '../components/Field';
 import { accessWindowLabel } from '../lib/registration';
 import { Select } from '../components/Select';
@@ -20,7 +25,7 @@ import {
 } from '../components/WorkspaceUI';
 import type { Navigate } from '../components/WorkspaceUI';
 import type { DemoRecord, Field as FieldDefinition } from '../data/workspace';
-import { money, TODAY } from '../data/workspace';
+import { money } from '../data/workspace';
 import { inventoryStock, validatePlan } from '../lib/workspace-rules';
 import { membershipKinds } from '../data/membership-kinds';
 import { MembershipCard } from '../components/MembershipCard';
@@ -616,21 +621,31 @@ export function BarWorkspace({
   navigate,
   clubName,
   limited = false,
+  members = [],
+  employeeName = 'Не указан',
 }: {
   navigate: Navigate;
   clubName: string;
   limited?: boolean;
+  members?: Member[];
+  employeeName?: string;
 }) {
-  const { data, put, barOpen, setBarOpen } = useWorkspace();
+  const { data, put, transact, barOpen, setBarOpen } = useWorkspace();
   const cart = JSON.parse(
     data['bar-cart']?.find((r) => r.id === 'current')?.items || '{}',
   ) as Record<string, number>;
   const setCart = (value: Record<string, number>) =>
-    put('bar-cart', { id: 'current', items: JSON.stringify(value) });
+    put('bar-cart', {
+      id: 'current',
+      items: JSON.stringify(
+        Object.fromEntries(Object.entries(value).filter(([, quantity]) => quantity > 0)),
+      ),
+    });
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('Все');
-  const [method, setMethod] = useState('Карта');
+  const [payment, setPayment] = useState(initialReceptionPayment);
   const [message, setMessage] = useState('');
+  const [paymentError, setPaymentError] = useState(false);
   const [closing, setClosing] = useState(false);
   const close = useCallback(() => setClosing(false), []);
   const products = data.products.filter((row) => row.status === 'Активен');
@@ -677,7 +692,7 @@ export function BarWorkspace({
           Закрыть смену…
         </Button>
       </div>
-      {message && <Notice tone="success">{message}</Notice>}
+      {message && <Notice tone={paymentError ? 'warning' : 'success'}>{message}</Notice>}
       <div className="ws-pos">
         <section className="panel ws-panel">
           <div className="ws-toolbar">
@@ -703,18 +718,12 @@ export function BarWorkspace({
                     .includes(query.toLowerCase()),
               )
               .map((product) => (
-                <button
+                <ProductCard
                   key={product.id}
-                  disabled={(cart[product.id] || 0) >= Number(product.stock)}
-                  onClick={() => setCart({ ...cart, [product.id]: (cart[product.id] || 0) + 1 })}
-                >
-                  <CupSoda size={23} />
-                  <strong>{product.name}</strong>
-                  <b>{money(product.price)}</b>
-                  <small>
-                    Остаток: {product.stock} {product.unit}
-                  </small>
-                </button>
+                  product={product}
+                  quantity={cart[product.id] || 0}
+                  onAdd={() => setCart({ ...cart, [product.id]: (cart[product.id] || 0) + 1 })}
+                />
               ))}
           </div>
         </section>
@@ -750,12 +759,12 @@ export function BarWorkspace({
                 </div>
               ))}
             </div>
-            <Field className="form-field" label={<> Оплата </>}>
-              <Select value={method} onChange={(e) => setMethod(e.target.value)}>
-                <option>Карта</option>
-                <option>Наличные</option>
-              </Select>
-            </Field>
+            <ReceptionPayment
+              members={limited ? [] : members}
+              value={payment}
+              onChange={setPayment}
+              total={total}
+            />
             <div className="ws-total">
               <span>Итого</span>
               <strong>{money(total)}</strong>
@@ -763,26 +772,33 @@ export function BarWorkspace({
             <Button
               disabled={!lines.length}
               onClick={() => {
-                if (lines.some((line) => line.quantity > Number(line.product.stock))) {
-                  setMessage('Остатки изменились. Проверьте заказ.');
-                  return;
+                try {
+                  const stamp = demoStamp(nextDemoNow());
+                  transact((current) =>
+                    barSale(
+                      current,
+                      cart,
+                      {
+                        id: demoId('bar-sale'),
+                        date: stamp.slice(0, 10),
+                        time: stamp.slice(11),
+                        cashier: employeeName,
+                        club: clubName.split(' · ').at(-1)!,
+                      },
+                      payment,
+                    ),
+                  );
+                  setCart({});
+                  setPaymentError(false);
+                  setMessage(
+                    'Демозаказ сохранён. Остатки, подарочная карта и задолженность обновлены по выбранной оплате.',
+                  );
+                } catch (cause) {
+                  setPaymentError(true);
+                  setMessage(
+                    cause instanceof Error ? cause.message : 'Не удалось сохранить заказ.',
+                  );
                 }
-                lines.forEach(({ product, quantity }) => {
-                  put('products', { ...product, stock: String(Number(product.stock) - quantity) });
-                  put('ledger', {
-                    id: demoId('sale'),
-                    name: `${product.name} × ${quantity}`,
-                    category: 'Бар',
-                    date: TODAY,
-                    club: clubName.split(' · ').at(-1) || 'Центральный',
-                    client: 'Гость',
-                    amount: String(Number(product.price) * quantity),
-                    method,
-                    status: 'Оплачено',
-                  });
-                });
-                setCart({});
-                setMessage('Демозаказ сохранён в кассе; остатки обновлены. Реальной оплаты нет.');
               }}
             >
               Подтвердить демозаказ

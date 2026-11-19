@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Building2, ChevronRight, Dumbbell, ShoppingBag, Sparkles, UserRound } from 'lucide-react';
 import type { SaleSectionId } from '../lib/sale-catalog';
 import { saleSections } from '../lib/sale-catalog';
@@ -30,5 +31,13 @@ export function CatalogSectionCard({
       <b aria-label={`Позиций: ${count}`}>{count}</b>
       <ChevronRight size={19} aria-hidden="true" />
     </button>
+  );
+}
+
+export function CatalogSectionGrid({ children }: { children: ReactNode }) {
+  return (
+    <div className="catalog-section-container" data-ui="catalog-section-grid">
+      <div className="sale-section-grid">{children}</div>
+    </div>
   );
 }

@@ -1,23 +1,26 @@
 import { Field } from './Field';
 import '../styles/client-booking.css';
-import { useId, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
+import { ArrowLeft, ChevronRight } from 'lucide-react';
 import type { DemoUser, Member } from '../types';
 import type { DemoRecord } from '../data/workspace';
 import { money, prettyDate } from '../data/workspace';
 import { demoStamp, registrationNow } from '../lib/demo-clock';
 import { clientTrainers, personalTrainers } from '../lib/personal-training';
 import {
-  createPersonalBooking,
+  bookPersonalSlot,
+  filterBookingEvents,
   nearestGroupEvents,
-  personalBookingSlots,
+  nearestPersonalBookingSlots,
 } from '../lib/client-booking';
+import type { PersonalBookingSlot } from '../lib/client-booking';
 import { changeAttendance, changeReserve, rosterIds } from '../lib/schedule-attendance';
 import { canOpenModule } from '../lib/staff-rules';
 import { clientName } from '../lib/client-display';
 import { demoId, useWorkspace } from './WorkspaceProvider';
 import { Button, Modal } from './ui';
 import { Select } from './Select';
-import { Empty, Notice, Tabs } from './WorkspaceUI';
+import { Empty, Notice, Tabs, SearchBox } from './WorkspaceUI';
 
 export function ClientBookingDialog({
   member,
@@ -36,40 +39,39 @@ export function ClientBookingDialog({
   onClose: () => void;
   onBooked: (event: DemoRecord, reserved: boolean) => void;
 }) {
-  const { data, put } = useWorkspace();
-  const formId = useId();
+  const { data, put, transact } = useWorkspace();
   const assigned = clientTrainers(data, member.id);
   const selfBooking = user.role === 'trainer';
   const [kind, setKind] = useState(
     selfBooking || initialKind === 'personal' ? 'Персональные' : 'Групповые',
   );
   const [club, setClub] = useState(clubName.split(' · ').at(-1)!);
-  const [trainerId, setTrainerId] = useState(
-    (selfBooking ? user.id : initialTrainerId) ||
-      assigned[0]?.id ||
-      personalTrainers(data)[0]?.id ||
-      '',
-  );
-  const [day, setDay] = useState(demoStamp(registrationNow()).slice(0, 10));
-  const [time, setTime] = useState('');
+  const [trainerId, setTrainerId] = useState((selfBooking ? user.id : initialTrainerId) || '');
   const [limit, setLimit] = useState(8);
+  const [query, setQuery] = useState('');
   const [error, setError] = useState('');
+  const submitting = useRef(false);
   const at = demoStamp(registrationNow());
   const trainers = (assigned.length ? assigned : personalTrainers(data)).filter(
     (trainer) => trainer.club === club && (!selfBooking || trainer.id === user.id),
   );
   const trainer = trainers.find((row) => row.id === trainerId);
-  const rooms = data.rooms.filter((room) => room.club === club && room.status !== 'В архиве');
-  const [roomName, setRoomName] = useState('');
-  const room =
-    rooms.find((row) => row.name === roomName) ||
-    rooms.find((row) => row.name === 'Зал персональных тренировок') ||
-    rooms[0];
-  const groups = nearestGroupEvents(data, club, at);
-  const slots =
-    trainer && room
-      ? personalBookingSlots(data, user, member, trainer.id, club, day, room.name, at)
-      : [];
+  const words = query
+    .toLocaleLowerCase('ru')
+    .replaceAll('ё', 'е')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  const filteredTrainers = trainers.filter((row) =>
+    words.every((word) =>
+      `${row.name} ${row.category}`.toLocaleLowerCase('ru').replaceAll('ё', 'е').includes(word),
+    ),
+  );
+  const groups = filterBookingEvents(nearestGroupEvents(data, club, at), query);
+  const slots = useMemo(
+    () => (trainer ? nearestPersonalBookingSlots(data, user, member, trainer.id, club, at) : []),
+    [data, user, member, trainer, club, at],
+  );
   const bookGroup = (event: DemoRecord) => {
     if (!canOpenModule(user.role, 'registration')) return;
     const current = data.events.find((row) => row.id === event.id);
@@ -83,48 +85,120 @@ export function ClientBookingDialog({
     onBooked(result, reserved);
     onClose();
   };
+  const bookSlot = (slot: PersonalBookingSlot) => {
+    if (!trainer || submitting.current) return;
+    submitting.current = true;
+    setError('');
+    try {
+      let booked: DemoRecord | undefined;
+      const id = demoId('personal');
+      transact((previous) => {
+        const result = bookPersonalSlot(
+          previous,
+          user,
+          member,
+          { ...slot, id, trainerId: trainer.id, club },
+          demoStamp(registrationNow()),
+        );
+        booked = result.event;
+        return result.data;
+      });
+      if (booked) {
+        onBooked(booked, false);
+        onClose();
+      }
+    } catch (cause) {
+      submitting.current = false;
+      setError(cause instanceof Error ? cause.message : 'Не удалось записать клиента.');
+    }
+  };
+  const resetTrainer = () => {
+    setTrainerId('');
+    setQuery('');
+    setLimit(8);
+    setError('');
+  };
   return (
     <Modal title="Записать клиента" subtitle={clientName(member)} size="wide" onClose={onClose}>
-      <div className="modal-scroll-body">
-        <div className="ws-stack client-booking-dialog">
-          <Tabs
-            items={selfBooking ? ['Персональные'] : ['Групповые', 'Персональные']}
-            value={kind}
-            onChange={(value) => {
-              setKind(value);
-              setError('');
+      <div className="client-booking-controls ws-stack">
+        <Tabs
+          items={selfBooking ? ['Персональные'] : ['Групповые', 'Персональные']}
+          value={kind}
+          label="Направление записи"
+          onChange={(value) => {
+            setKind(value);
+            setQuery('');
+            setLimit(8);
+            setError('');
+          }}
+        />
+        <Field className="form-field" label="Клуб занятия">
+          <Select
+            value={club}
+            onChange={(event) => {
+              setClub(event.target.value);
+              resetTrainer();
             }}
-            label="Направление записи"
+          >
+            {data.clubs
+              .filter((row) => row.status !== 'В архиве')
+              .map((row) => (
+                <option key={row.id} value={row.name}>
+                  {row.name}
+                </option>
+              ))}
+          </Select>
+        </Field>
+        {(kind === 'Групповые' || !trainer) && (
+          <SearchBox
+            value={query}
+            onChange={(value) => {
+              setQuery(value);
+              setLimit(8);
+            }}
+            label={kind === 'Групповые' ? 'Поиск занятия' : 'Поиск тренера'}
+            placeholder={
+              kind === 'Групповые'
+                ? 'Занятие, тренер, зал, дата или время'
+                : 'Имя или категория тренера'
+            }
           />
-          <Field className="form-field" label={<> Клуб занятия </>}>
-            <Select
-              value={club}
-              onChange={(event) => {
-                const nextClub = event.target.value;
-                setClub(nextClub);
-                setTrainerId(
-                  (assigned.length ? assigned : personalTrainers(data)).find(
-                    (trainer) =>
-                      trainer.club === nextClub && (!selfBooking || trainer.id === user.id),
-                  )?.id || '',
-                );
-                setTime('');
-                setRoomName('');
-              }}
-            >
-              {data.clubs
-                .filter((row) => row.status !== 'В архиве')
-                .map((row) => (
-                  <option key={row.id} value={row.name}>
-                    {row.name}
-                  </option>
-                ))}
-            </Select>
-          </Field>
+        )}
+        {kind === 'Персональные' && trainer && (
+          <div className="booking-selected-trainer">
+            <div>
+              <strong>{trainer.name}</strong>
+              <p className="ws-muted">
+                {trainer.category} · {money(trainer.lessonPrice)} · 50 минут
+              </p>
+            </div>
+            <Button variant="ghost" onClick={resetTrainer}>
+              <ArrowLeft size={16} />
+              Другой тренер
+            </Button>
+          </div>
+        )}
+      </div>
+      <div
+        className="modal-scroll-body"
+        tabIndex={0}
+        role="region"
+        aria-label={
+          kind === 'Групповые'
+            ? 'Результаты поиска занятий'
+            : trainer
+              ? 'Свободные слоты тренера'
+              : 'Результаты поиска тренеров'
+        }
+      >
+        <div className="ws-stack client-booking-dialog">
           {kind === 'Групповые' ? (
             <>
               <p className="form-note">
                 Ближайшие занятия на 7 дней. Запись или резерв не списывают посещение.
+              </p>
+              <p className="sr-only" role="status">
+                Найдено занятий: {groups.length}
               </p>
               {groups.length ? (
                 groups.slice(0, limit).map((event) => {
@@ -165,8 +239,25 @@ export function ClientBookingDialog({
                 })
               ) : (
                 <Empty
-                  title="Нет ближайших групповых занятий"
-                  text="Выберите другой клуб или посмотрите расписание позднее."
+                  title={query.trim() ? 'Занятия не найдены' : 'Нет ближайших групповых занятий'}
+                  text={
+                    query.trim()
+                      ? 'Измените запрос или выберите другой клуб. Поиск охватывает ближайшие семь дней.'
+                      : 'Выберите другой клуб или посмотрите расписание позднее.'
+                  }
+                  action={
+                    query.trim() ? (
+                      <Button
+                        variant="secondary"
+                        onClick={() => {
+                          setQuery('');
+                          setLimit(8);
+                        }}
+                      >
+                        Сбросить поиск
+                      </Button>
+                    ) : undefined
+                  }
                 />
               )}
               {groups.length > limit && (
@@ -175,127 +266,118 @@ export function ClientBookingDialog({
                 </Button>
               )}
             </>
-          ) : (
-            <form
-              id={formId}
-              className="ws-stack"
-              onSubmit={(event) => {
-                event.preventDefault();
-                const result = createPersonalBooking(
-                  data,
-                  user,
-                  member,
-                  { id: demoId('personal'), trainerId, club, day, time, room: room?.name || '' },
-                  demoStamp(registrationNow()),
-                );
-                if (typeof result === 'string') return setError(result);
-                if (result.assignment) put('personal-clients', result.assignment);
-                put('events', result.event);
-                onBooked(result.event, false);
-                onClose();
-              }}
-            >
-              <Field className="form-field" label={<> Персональный тренер * </>}>
-                <Select
-                  required
-                  value={trainerId}
-                  onChange={(event) => {
-                    setTrainerId(event.target.value);
-                    setTime('');
-                    setError('');
-                  }}
-                >
-                  <option value="">Выберите тренера</option>
-                  {trainers.map((trainer) => (
-                    <option key={trainer.id} value={trainer.id}>
-                      {trainer.name} · {trainer.category}
-                    </option>
-                  ))}
-                </Select>
-              </Field>
-              {trainer && (
-                <Notice>
-                  {trainer.category} · {money(trainer.lessonPrice)} за занятие. Демо-тариф.
-                  {!assigned.length && <p>После записи клиент будет закреплён за этим тренером.</p>}
-                </Notice>
-              )}
-              {!trainers.length && (
-                <Notice>
-                  {selfBooking && assigned.length
-                    ? 'Клиент закреплён за другим тренером. Для записи к себе сначала требуется изменить закрепление у руководителя.'
-                    : 'В выбранном клубе нет подходящего закреплённого тренера. Выберите клуб его работы.'}
-                </Notice>
-              )}
-              <div className="client-booking-fields">
-                <Field className="form-field" label={<> Дата * </>}>
-                  <input
-                    type="date"
-                    required
-                    min={at.slice(0, 10)}
-                    value={day}
-                    onChange={(event) => {
-                      setDay(event.target.value);
-                      setTime('');
-                    }}
-                  />
-                </Field>
-                <Field className="form-field" label={<> Начало * </>}>
-                  <input
-                    type="time"
-                    required
-                    value={time}
-                    onChange={(event) => setTime(event.target.value)}
-                  />
-                </Field>
-                <Field className="form-field" label={<> Зал * </>}>
-                  <Select
-                    required
-                    value={room?.name || ''}
-                    onChange={(event) => {
-                      setRoomName(event.target.value);
-                      setTime('');
-                    }}
-                  >
-                    {rooms.map((room) => (
-                      <option key={room.id} value={room.name}>
-                        {room.name}
-                      </option>
-                    ))}
-                  </Select>
-                </Field>
-              </div>
+          ) : trainer ? (
+            <>
               <p className="form-note">
-                50 минут. Проверяются занятость тренера, зала и записи клиента.
+                Ближайшие свободные слоты на 7 дней. Нажмите на время, чтобы записать клиента.
+                Посещение с абонемента не списывается.
               </p>
-              <div className="ws-actions">
-                {slots.map((slot) => (
-                  <Button
-                    key={slot}
-                    variant="secondary"
-                    aria-pressed={time === slot}
-                    onClick={() => setTime(slot)}
+              {!assigned.length && (
+                <Notice>При записи клиент будет закреплён за {trainer.name}.</Notice>
+              )}
+              {slots.length ? (
+                <>
+                  {[...new Set(slots.slice(0, limit).map((slot) => slot.day))].map((day) => (
+                    <section
+                      className="booking-slot-day"
+                      key={day}
+                      aria-label={`Свободное время ${prettyDate(day)}`}
+                    >
+                      <h3>{prettyDate(day)}</h3>
+                      <div className="booking-slot-grid">
+                        {slots
+                          .slice(0, limit)
+                          .filter((slot) => slot.day === day)
+                          .map((slot) => (
+                            <button
+                              type="button"
+                              className="booking-slot"
+                              key={`${slot.day}T${slot.time}`}
+                              aria-label={`Записать: ${trainer.name}, ${prettyDate(slot.day)} в ${slot.time}, ${slot.room}`}
+                              onClick={() => bookSlot(slot)}
+                            >
+                              <strong>{slot.time}</strong>
+                              <span>{slot.room}</span>
+                              <span className="booking-slot-action" aria-hidden="true">
+                                Записать
+                              </span>
+                            </button>
+                          ))}
+                      </div>
+                    </section>
+                  ))}
+                  {slots.length > limit && (
+                    <Button variant="ghost" onClick={() => setLimit((value) => value + 12)}>
+                      Показать ещё слоты
+                    </Button>
+                  )}
+                </>
+              ) : (
+                <Empty
+                  title="Свободных слотов пока нет"
+                  text="На ближайшие 7 дней нет подходящего времени по заданному рабочему расписанию. Выберите другого тренера или клуб."
+                />
+              )}
+            </>
+          ) : (
+            <>
+              <p className="form-note">
+                Выберите тренера — откроются его ближайшие свободные слоты.
+              </p>
+              <div className="booking-trainer-grid">
+                {filteredTrainers.map((row) => (
+                  <button
+                    type="button"
+                    className="booking-trainer-card"
+                    key={row.id}
+                    aria-label={`Выбрать тренера: ${row.name}`}
+                    onClick={() => {
+                      setTrainerId(row.id);
+                      setLimit(12);
+                      setError('');
+                    }}
                   >
-                    {slot}
-                  </Button>
+                    <span>
+                      <strong>{row.name}</strong>
+                      <small>
+                        {row.category} · {money(row.lessonPrice)} за 50 минут
+                      </small>
+                      {assigned.some((item) => item.id === row.id) && <small>Тренер клиента</small>}
+                    </span>
+                    <ChevronRight size={20} />
+                  </button>
                 ))}
               </div>
-              {trainer && !slots.length && (
-                <Notice>На выбранную дату нет доступных вариантов. Выберите другой день.</Notice>
+              {!filteredTrainers.length && (
+                <Empty
+                  title={query.trim() ? 'Тренер не найден' : 'Нет доступных тренеров'}
+                  text={
+                    query.trim()
+                      ? 'Проверьте имя или категорию. Поиск учитывает выбранный клуб и закрепление клиента.'
+                      : 'Выберите клуб работы тренера. Существующее закрепление клиента сохраняется.'
+                  }
+                  action={
+                    query.trim() ? (
+                      <Button variant="secondary" onClick={() => setQuery('')}>
+                        Сбросить поиск
+                      </Button>
+                    ) : undefined
+                  }
+                />
               )}
-            </form>
+            </>
           )}
-          {error && <p role="alert">{error}</p>}
+          {error && (
+            <p className="ws-error" role="alert">
+              {error}
+            </p>
+          )}
         </div>
       </div>
       <div className="modal-actions">
         <Button variant="secondary" onClick={onClose}>
-          {kind === 'Персональные' ? 'Отмена' : 'Готово'}
+          Готово
         </Button>
-        {kind === 'Персональные' && (
-          <Button form={formId} type="submit" disabled={!trainer || !time || !room}>
-            Записать
-          </Button>
-        )}
       </div>
     </Modal>
   );

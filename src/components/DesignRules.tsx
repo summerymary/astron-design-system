@@ -1,3 +1,5 @@
+import { ProductCard } from './ProductCard';
+import { QuantityStepper } from './QuantityStepper';
 import { VisitPassList } from './VisitPassList';
 import { getClientProfile } from '../data/clientProfile';
 import { availableVisitPasses } from '../lib/registration';
@@ -24,7 +26,7 @@ import { ReportMonthPicker } from './ReportMonthPicker';
 import { ReportWeekPicker } from './ReportWeekPicker';
 import { statisticsReports, reportTitle } from '../data/statistics';
 import { ReceptionShift } from './ReceptionShift';
-import { CatalogSectionCard } from './CatalogSectionCard';
+import { CatalogSectionCard, CatalogSectionGrid } from './CatalogSectionCard';
 import { ScheduleCopyDialog } from './ScheduleCopyDialog';
 import { createWorkspaceData } from '../data/workspace';
 import { planWeekCopy } from '../lib/schedule-copy';
@@ -35,6 +37,7 @@ import { NewMemberDialog } from './NewMemberDialog';
 import { ScheduleAttendees } from './ScheduleAttendees';
 import { useWorkspace } from './WorkspaceProvider';
 
+import { CompanyTopUpDialog } from './CompanyTopUpDialog';
 import { ReceptionPayment, initialReceptionPayment } from './ReceptionPayment';
 import { CallDialog } from './CallDialog';
 import { RestoreCardDialog } from './RestoreCardDialog';
@@ -76,13 +79,33 @@ function AdminAccountExample() {
 function ReceptionExample() {
   const { data } = useWorkspace();
   const [payment, setPayment] = useState(initialReceptionPayment);
+  const [companyResult, setCompanyResult] = useState('');
+  const [quantityExample, setQuantityExample] = useState(1);
   const [member, setMember] = useState(initialMembers[0]);
   const [dialog, setDialog] = useState('');
   const pass = getClientProfile(member, data).subscriptions[0];
   return (
     <section className="panel ws-panel-body ws-stack">
       <h3>Операции ресепшена — рабочие примеры</h3>
-      <ReceptionPayment value={payment} onChange={setPayment} total={100} />
+      <div className="reception-product-grid">
+        <ProductCard
+          product={{ ...data['retail-products'][0], stock: '5' }}
+          quantity={quantityExample}
+          onAdd={() => setQuantityExample((value) => Math.min(5, value + 1))}
+        />
+      </div>
+      <QuantityStepper
+        label="Количество — пример"
+        value={quantityExample}
+        max={5}
+        onChange={setQuantityExample}
+      />
+      <ReceptionPayment
+        members={initialMembers}
+        value={payment}
+        onChange={setPayment}
+        total={100}
+      />
       <div className="ws-actions">
         <Button variant="secondary" onClick={() => setDialog('call')}>
           Позвонить клиенту
@@ -94,6 +117,22 @@ function ReceptionExample() {
           История абонемента
         </Button>
       </div>
+      <Button variant="secondary" onClick={() => setDialog('company')}>
+        Пополнить счёт компании — пример
+      </Button>
+      {companyResult && <Notice tone="success">{companyResult}</Notice>}
+      {dialog === 'company' && (
+        <CompanyTopUpDialog
+          company={data.companies[0]}
+          clubId="central"
+          user={demoUsers.find((user) => user.role === 'administrator')!}
+          onClose={() => setDialog('')}
+          onSuccess={(message) => {
+            setDialog('');
+            setCompanyResult(message);
+          }}
+        />
+      )}
       <h3>Две смены одновременно и передача места</h3>
       <p className="muted">
         Две дорожки — два компьютера ресепшена. Последовательные смены на одной дорожке показывают
@@ -444,7 +483,7 @@ export function DesignRules() {
         <WorkspaceProvider>
           <ReceptionExample />
         </WorkspaceProvider>
-        <div className="ui-rule-grid">
+        <CatalogSectionGrid>
           <CatalogSectionCard
             id="memberships"
             count={7}
@@ -455,7 +494,7 @@ export function DesignRules() {
             count={1}
             onClick={() => setResult('Выбран персональный тренинг.')}
           />
-        </div>
+        </CatalogSectionGrid>
       </div>
       <div className="ws-stack">
         <h3>Каталог отчётов — рабочий пример</h3>

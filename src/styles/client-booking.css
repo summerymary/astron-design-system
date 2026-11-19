@@ -13,3 +13,17 @@
     }
   }
 }
+
+@layer pages {
+  body .client-booking-controls {
+    flex-shrink: 0;
+    padding-block-end: 16px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  body .client-booking-controls .search-field {
+    width: 100%;
+  }
+  body .client-booking-controls + .modal-scroll-body {
+    padding-block-start: 16px;
+  }
+}

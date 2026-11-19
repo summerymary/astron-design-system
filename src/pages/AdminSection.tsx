@@ -1,3 +1,4 @@
+import { CompaniesWorkspace } from './CompaniesWorkspace';
 import { ScheduleWorkspace } from './ScheduleWorkspace';
 import { AdminAccountWorkspace } from './AdminAccountWorkspace';
 import { Button } from '../components/ui';
@@ -82,6 +83,16 @@ export function AdminSection({
   onBack: () => void;
 }) {
   const { data } = useWorkspace();
+  if (section === 'companies')
+    return (
+      <CompaniesWorkspace
+        user={user}
+        clubName={clubName}
+        recordId={recordId}
+        onRecord={onRecord}
+        navigate={navigate}
+      />
+    );
   if (section === 'admin-account')
     return <AdminAccountWorkspace key={user.id} user={user} screenLocked={screenLocked} />;
   if (section === 'gift-cards')
@@ -125,7 +136,7 @@ export function AdminSection({
   if (section === 'bar-catalog') return <BarCatalog navigate={navigate} />;
   if (section === 'bar-sales') return <BarSales clubName={clubName} />;
   if (section === 'products')
-    return <RetailWorkspace clubName={clubName} employeeName={employeeName} />;
+    return <RetailWorkspace members={members} clubName={clubName} employeeName={employeeName} />;
   if (section === 'bar-inventory') return <InventoryWorkspace key="bar" bar navigate={navigate} />;
   if (resources[section])
     return (
@@ -230,13 +241,19 @@ export function AdminSection({
     );
   if (section === 'bar')
     return user.role === 'bartender' ? (
-      <BartenderHome navigate={navigate} clubName={clubName} />
+      <BartenderHome employeeName={employeeName} navigate={navigate} clubName={clubName} />
     ) : (
-      <BarWorkspace navigate={navigate} clubName={clubName} />
+      <BarWorkspace
+        members={members}
+        employeeName={employeeName}
+        navigate={navigate}
+        clubName={clubName}
+      />
     );
   if (section === 'cash')
     return (
       <CashWorkspace
+        onCompany={(id) => navigate('companies', undefined, id)}
         clubName={clubName}
         employeeName={employeeName}
         members={members}

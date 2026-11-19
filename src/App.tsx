@@ -77,6 +77,7 @@ const navigation = [
   { id: 'members' as const, label: 'Клиенты', icon: Users },
 ];
 const workNavigation = [
+  { id: 'companies', label: 'Компании', icon: Building2 },
   { id: 'personal-trainings', label: 'Персональные тренировки', icon: Dumbbell },
   { id: 'gift-cards', label: 'Подарочные карты', icon: Gift },
   { id: 'calls', label: 'Звонки', icon: Phone },
@@ -91,6 +92,7 @@ const managementNavigation = [
   { id: 'service-settings', label: 'Настройки', icon: Settings2 },
 ] as const;
 const managementIcons = {
+  companies: Building2,
   'personal-trainings': Dumbbell,
   'gift-cards': Gift,
   shifts: CalendarDays,
@@ -837,29 +839,31 @@ export function App() {
                         <BookOpen size={18} />
                         <span className="nav-item-label">{group.label}</span>
                       </summary>
-                      {group.items.map((id) => {
-                        const section = adminSections.find((section) => section.id === id)!;
-                        const label = section.label;
-                        const Icon =
-                          managementIcons[id as keyof typeof managementIcons] || BookOpen;
-                        return (
-                          <button
-                            key={id}
-                            title={sidebarCollapsed ? label : undefined}
-                            aria-label={sidebarCollapsed ? label : undefined}
-                            aria-current={
-                              page === 'admin-section' && adminSection === id ? 'page' : undefined
-                            }
-                            className={
-                              page === 'admin-section' && adminSection === id ? 'active' : ''
-                            }
-                            onClick={() => openModule(id)}
-                          >
-                            <Icon size={18} strokeWidth={1.75} />
-                            <span className="nav-item-label">{label}</span>
-                          </button>
-                        );
-                      })}
+                      {group.items
+                        .filter((id) => canOpenModule(role, id))
+                        .map((id) => {
+                          const section = adminSections.find((section) => section.id === id)!;
+                          const label = section.label;
+                          const Icon =
+                            managementIcons[id as keyof typeof managementIcons] || BookOpen;
+                          return (
+                            <button
+                              key={id}
+                              title={sidebarCollapsed ? label : undefined}
+                              aria-label={sidebarCollapsed ? label : undefined}
+                              aria-current={
+                                page === 'admin-section' && adminSection === id ? 'page' : undefined
+                              }
+                              className={
+                                page === 'admin-section' && adminSection === id ? 'active' : ''
+                              }
+                              onClick={() => openModule(id)}
+                            >
+                              <Icon size={18} strokeWidth={1.75} />
+                              <span className="nav-item-label">{label}</span>
+                            </button>
+                          );
+                        })}
                     </details>
                   ))}
                   <button
@@ -1301,7 +1305,11 @@ export function App() {
                         navigate={openModule}
                       />
                     ) : role === 'bartender' ? (
-                      <BartenderHome clubName={club.name} navigate={openModule} />
+                      <BartenderHome
+                        employeeName={currentUser.name}
+                        clubName={club.name}
+                        navigate={openModule}
+                      />
                     ) : role === 'accountant' ? (
                       <AccountingHome navigate={openModule} clubName={club.name} />
                     ) : role !== 'administrator' ? (

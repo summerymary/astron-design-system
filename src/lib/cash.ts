@@ -8,11 +8,12 @@ export type CashEvent = {
   club: string;
   client: string;
   memberId: string;
+  companyId: string;
   cashier: string;
   comment: string;
   receipt: string;
   method: string;
-  kind: 'sale' | 'deposit' | 'withdrawal' | 'refund';
+  kind: 'sale' | 'deposit' | 'withdrawal' | 'refund' | 'company-topup';
   cash: number;
   card: number;
   website: number;
@@ -26,6 +27,7 @@ export const cashPaymentFilters = [
   ['refund', 'Возврат наличными'],
   ['withdrawal', 'Снятие наличных'],
   ['deposit', 'Внесение наличных'],
+  ['company-topup', 'Пополнение счёта компании'],
   ['website', 'Оплата на сайте'],
   ['card-refund', 'Возврат по карте'],
   ['credit', 'В кредит'],
@@ -43,7 +45,9 @@ export function cashCents(value: string | number | undefined): number {
 export function cashJournal(ledger: DemoRecord[], movements: DemoRecord[]): CashEvent[] {
   return [...ledger.filter((row) => row.category !== 'Бар'), ...movements]
     .map((row) => {
-      const kind: CashEvent['kind'] = ['deposit', 'withdrawal', 'refund'].includes(row.kind)
+      const kind: CashEvent['kind'] = ['deposit', 'withdrawal', 'refund', 'company-topup'].includes(
+        row.kind,
+      )
         ? (row.kind as CashEvent['kind'])
         : 'sale';
       const amount = cashCents(row.amount);
@@ -58,6 +62,7 @@ export function cashJournal(ledger: DemoRecord[], movements: DemoRecord[]): Cash
         club: row.club,
         client: row.client || '—',
         memberId: row.memberId || '',
+        companyId: row.companyId || '',
         cashier: row.cashier || 'Не указан',
         comment: row.comment || '',
         receipt: row.receiptNumber || '',
@@ -92,13 +97,15 @@ export function filterCashJournal(rows: CashEvent[], date: string, club: string,
     if ((date && row.date !== date) || (club !== 'all' && row.club !== club)) return false;
     switch (payment) {
       case 'cash':
-        return row.kind === 'sale' && row.cash > 0;
+        return ['sale', 'company-topup'].includes(row.kind) && row.cash > 0;
       case 'card':
-        return row.kind === 'sale' && row.card > 0;
+        return ['sale', 'company-topup'].includes(row.kind) && row.card > 0;
       case 'refund':
         return row.kind === 'refund' && row.cash > 0;
       case 'withdrawal':
         return row.kind === 'withdrawal';
+      case 'company-topup':
+        return row.kind === 'company-topup';
       case 'deposit':
         return row.kind === 'deposit';
       case 'website':

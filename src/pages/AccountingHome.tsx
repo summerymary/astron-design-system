@@ -51,7 +51,7 @@ export function AccountingHome({ navigate, clubName }: { navigate: Navigate; clu
           caption={<>Смены, часы и начисления.</>}
         />
       </div>
-      <SectionLinks ids={['inventory', 'memberships']} navigate={navigate} />
+      <SectionLinks ids={['companies', 'inventory', 'memberships']} navigate={navigate} />
       <section className="panel ws-panel accounting-recent">
         <div className="ws-panel-heading">
           <h2>Последние операции</h2>

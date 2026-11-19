@@ -746,7 +746,15 @@ export function TrainerClients({
   );
 }
 
-export function BartenderHome({ clubName, navigate }: { clubName: string; navigate: Navigate }) {
+export function BartenderHome({
+  clubName,
+  navigate,
+  employeeName,
+}: {
+  clubName: string;
+  navigate: Navigate;
+  employeeName?: string;
+}) {
   const { data } = useWorkspace();
   const club = clubName.split(' · ').at(-1);
   const sales = data.ledger.filter(
@@ -767,7 +775,7 @@ export function BartenderHome({ clubName, navigate }: { clubName: string; naviga
           },
         ]}
       />
-      <BarWorkspace navigate={navigate} clubName={clubName} limited />
+      <BarWorkspace employeeName={employeeName} navigate={navigate} clubName={clubName} limited />
     </div>
   );
 }
