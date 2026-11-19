@@ -190,7 +190,7 @@ export function MembershipReissueDialog({
             </section>
             <div className="reissue-columns">
               <section className="reissue-form-section reissue-methods" aria-label="Расчёт остатка">
-                <h3>Способ перерасчёта</h3>
+                <h3>Способ расчёта</h3>
                 <SegmentedFilter
                   label="Способ перерасчёта"
                   layout="grid"
@@ -302,6 +302,18 @@ export function MembershipReissueDialog({
                   )}
               </section>
             </div>
+            <dl className="reissue-secondary-facts" aria-label="Параметры исходного абонемента">
+              <div>
+                <dt>Использовано посещений</dt>
+                <dd>{pass.used}</dd>
+              </div>
+              <div>
+                <dt>Срок исходного</dt>
+                <dd>
+                  {pass.activatedAt || 'Не активирован'} — {pass.endsAt || 'После активации'}
+                </dd>
+              </div>
+            </dl>
             <Field label="Основание переоформления" required>
               <input value={reason} onChange={(event) => setReason(event.target.value)} />
             </Field>

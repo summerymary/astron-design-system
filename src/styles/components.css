@@ -1097,6 +1097,7 @@ body .modal:has(> [data-ui='membership-reissue']) > .modal-actions {
   padding-bottom: 12px;
   border-bottom: 1px solid var(--color-line);
 }
+.reissue-secondary-facts { display: none; }
 @container membership-reissue (max-width: 900px) {
   .reissue-source {
     grid-template-columns: minmax(0, 1fr);
@@ -1116,17 +1117,31 @@ body .modal:has(> [data-ui='membership-reissue']) > .modal-actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .reissue-source-facts {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
   }
-  .reissue-source-facts > div:last-child {
-    grid-column: 1 / -1;
-    display: flex;
-    align-items: baseline;
+  .reissue-source-facts > :is(div:first-child, div:last-child) {
+    display: none;
+  }
+  .reissue-secondary-facts {
+    display: grid;
     gap: 8px;
   }
-  .reissue-source-facts > div:last-child dd {
-    margin-top: 0;
+  .reissue-secondary-facts > div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 8px;
+  }
+  .reissue-secondary-facts dt {
+    color: var(--color-muted);
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .reissue-secondary-facts dd {
+    margin: 0;
+    font-size: 16px;
+    line-height: 24px;
+    overflow-wrap: anywhere;
   }
   .reissue-source {
     padding: 12px;
