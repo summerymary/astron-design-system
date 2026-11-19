@@ -536,10 +536,11 @@ export function App() {
       email: draft.email.trim(),
       phone: draft.phone.trim() || 'Не указан',
       birthDate: draft.birthDate,
-      plan: draft.plan,
+      photoDataUrl: draft.photoDataUrl,
+      plan: 'Без абонемента',
       status: 'active',
       joined: DEMO_DAY.split('-').reverse().join('.'),
-      expires: '01.12.2026',
+      expires: '',
       visits: 0,
       color: 'sage',
     };
