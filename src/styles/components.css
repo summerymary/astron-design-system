@@ -944,6 +944,7 @@ body .count-badge[data-ui='count'] {
 }
 body .ui-tabs[data-ui='tabs'] {
   display: flex;
+  flex-shrink: 0;
   gap: 20px;
   padding: 0 var(--panel-padding);
   border: 0;
@@ -1436,6 +1437,12 @@ body [data-ui='stats'] .stats-network-route {
 }
 body [data-ui='stats'] .stats-network-node circle {
   fill: var(--color-canvas);
+}
+ [data-ui='client-finance-journal'] .client-finance-amount[data-direction='credit'] {
+  color: var(--color-success);
+}
+ [data-ui='client-finance-journal'] .client-finance-amount[data-direction='debit'] {
+  color: var(--color-danger);
 }
 @container workspace (max-width: 700px) {
   body [data-ui='stats'] {
