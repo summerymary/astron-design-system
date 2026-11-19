@@ -5,7 +5,7 @@ export type NewMemberDraft = {
   birthDate: string;
   phone: string;
   email: string;
-  plan: string;
+  photoDataUrl?: string;
 };
 
 const nameParts = (name: string) =>
