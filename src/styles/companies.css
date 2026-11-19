@@ -1,0 +1,52 @@
+@layer pages {
+  .company-heading,
+  .company-filters {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .company-heading > div {
+    min-width: 0;
+  }
+  .company-heading h2,
+  .company-facts dd {
+    overflow-wrap: anywhere;
+  }
+  .company-filters > .ws-search {
+    flex: 1;
+  }
+  .company-facts {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+  }
+  .company-facts > div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    gap: 12px;
+  }
+  .company-facts dt {
+    color: var(--color-muted);
+  }
+  .company-facts dd {
+    margin: 0;
+    font-weight: 600;
+  }
+  .company-topup {
+    min-width: 0;
+  }
+  @media (max-width: 600px) {
+    .company-filters {
+      align-items: stretch;
+    }
+    .company-filters > * {
+      width: 100%;
+    }
+    .company-facts > div {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 4px;
+    }
+  }
+}
