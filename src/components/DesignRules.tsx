@@ -27,6 +27,10 @@ import { ReportWeekPicker } from './ReportWeekPicker';
 import { statisticsReports, reportTitle } from '../data/statistics';
 import { ReceptionShift } from './ReceptionShift';
 import { CatalogSectionCard, CatalogSectionGrid } from './CatalogSectionCard';
+import { MembershipCatalog } from './MembershipCatalog';
+import { matchesCatalogPlan } from '../lib/membership-catalog';
+import { planSaleSection } from '../lib/sale-catalog';
+import { MembershipCard } from './MembershipCard';
 import { ScheduleCopyDialog } from './ScheduleCopyDialog';
 import { createWorkspaceData } from '../data/workspace';
 import { planWeekCopy } from '../lib/schedule-copy';
@@ -51,6 +55,45 @@ import { NavigationCard } from './WorkspaceUI';
 import { ReportFilterBar } from './ReportFilterBar';
 import { CallJournal } from './CallJournal';
 import { ReviewJournal } from './ReviewJournal';
+
+function MembershipCatalogExample() {
+  const [query, setQuery] = useState('');
+  const [data] = useState(createWorkspaceData);
+  return (
+    <div className="panel ws-panel-body ws-stack">
+      <h3>Группы и подгруппы абонементов</h3>
+      <SearchBox
+        value={query}
+        onChange={setQuery}
+        label="Поиск в примере абонементов"
+        placeholder="Название, группа или подгруппа"
+      />
+      <MembershipCatalog
+        section="memberships"
+        plans={data.plans.filter(
+          (plan) =>
+            planSaleSection(plan) === 'memberships' &&
+            matchesCatalogPlan(plan, 'memberships', query),
+        )}
+        searching={!!query.trim()}
+        showEmpty
+        renderPlans={(plans) => (
+          <div className="membership-catalog-grid">
+            {plans.map((plan) => (
+              <MembershipCard
+                compact
+                key={plan.id}
+                name={plan.name}
+                kindId={plan.kindId}
+                detail={plan.short}
+              />
+            ))}
+          </div>
+        )}
+      />
+    </div>
+  );
+}
 
 function AdminAccountExample() {
   const [open, setOpen] = useState(false);
@@ -474,27 +517,32 @@ export function DesignRules() {
         />
       </div>
       <AdminAccountExample />
-      <div className="panel ws-panel-body ws-stack">
-        <h3>Переходы каталога</h3>
-        <p className="ui-rule-purpose">
-          При наведении меняется цвет рамки. Клавиша Tab показывает внутренний контур, который не
-          обрезается по краям блока.
-        </p>
-        <WorkspaceProvider>
-          <ReceptionExample />
-        </WorkspaceProvider>
-        <CatalogSectionGrid>
-          <CatalogSectionCard
-            id="memberships"
-            count={7}
-            onClick={() => setResult('Выбран раздел абонементов.')}
-          />
-          <CatalogSectionCard
-            id="personal"
-            count={1}
-            onClick={() => setResult('Выбран персональный тренинг.')}
-          />
-        </CatalogSectionGrid>
+      <MembershipCatalogExample />
+      <div className="panel ws-panel">
+        <div className="ws-panel-heading">
+          <h3>Переходы каталога</h3>
+        </div>
+        <div className="ws-panel-body ws-stack">
+          <p className="ui-rule-purpose">
+            При наведении меняется цвет рамки. Клавиша Tab показывает внутренний контур, который не
+            обрезается по краям блока.
+          </p>
+          <WorkspaceProvider>
+            <ReceptionExample />
+          </WorkspaceProvider>
+          <CatalogSectionGrid>
+            <CatalogSectionCard
+              id="memberships"
+              count={7}
+              onClick={() => setResult('Выбран раздел абонементов.')}
+            />
+            <CatalogSectionCard
+              id="personal"
+              count={1}
+              onClick={() => setResult('Выбран персональный тренинг.')}
+            />
+          </CatalogSectionGrid>
+        </div>
       </div>
       <div className="ws-stack">
         <h3>Каталог отчётов — рабочий пример</h3>
