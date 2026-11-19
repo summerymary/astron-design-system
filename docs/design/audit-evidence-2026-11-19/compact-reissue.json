@@ -1,0 +1,4655 @@
+{
+  "date": "2026-11-19",
+  "scope": "Fictional prototype; layout changes only; no club systems or real records",
+  "views": [
+    {
+      "theme": "Астрон",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 569.1484375,
+        "ch": 416,
+        "sh": 416,
+        "top": 153.1484375
+      },
+      "choices": [
+        {
+          "bottom": 331.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 287.1484375
+        },
+        {
+          "bottom": 331.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 287.1484375
+        },
+        {
+          "bottom": 379.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 335.1484375
+        },
+        {
+          "bottom": 379.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 335.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 320.1484375,
+        "top": 276.1484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По дням",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 571.046875,
+        "ch": 420,
+        "sh": 420,
+        "top": 151.25
+      },
+      "choices": [
+        {
+          "bottom": 329.25,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 285.25
+        },
+        {
+          "bottom": 329.25,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 285.25
+        },
+        {
+          "bottom": 377.25,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 333.25
+        },
+        {
+          "bottom": 377.25,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 333.25
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 318.25,
+        "top": 274.25
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 585.1484375,
+        "ch": 448,
+        "sh": 448,
+        "top": 137.1484375
+      },
+      "choices": [
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 319.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 319.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 304.1484375,
+        "top": 260.1484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Астрон",
+      "mode": "Вручную",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 585.1484375,
+        "ch": 448,
+        "sh": 448,
+        "top": 137.1484375
+      },
+      "choices": [
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 319.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 319.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 304.1484375,
+        "top": 260.1484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 605.046875,
+        "ch": 440,
+        "sh": 440,
+        "top": 165.25
+      },
+      "choices": [
+        {
+          "bottom": 363.25,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 319.25
+        },
+        {
+          "bottom": 363.25,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 319.25
+        },
+        {
+          "bottom": 411.25,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 367.25
+        },
+        {
+          "bottom": 411.25,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 367.25
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 352.25,
+        "top": 308.25
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По дням",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 616.2421875,
+        "ch": 462,
+        "sh": 462,
+        "top": 154.046875
+      },
+      "choices": [
+        {
+          "bottom": 352.046875,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 308.046875
+        },
+        {
+          "bottom": 352.046875,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 308.046875
+        },
+        {
+          "bottom": 400.046875,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 356.046875
+        },
+        {
+          "bottom": 400.046875,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 356.046875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 341.046875,
+        "top": 297.046875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 619.1484375,
+        "ch": 468,
+        "sh": 468,
+        "top": 151.1484375
+      },
+      "choices": [
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 353.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 353.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 338.1484375,
+        "top": 294.1484375
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Астрон",
+      "mode": "Вручную",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 619.1484375,
+        "ch": 468,
+        "sh": 468,
+        "top": 151.1484375
+      },
+      "choices": [
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 353.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 353.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 338.1484375,
+        "top": 294.1484375
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 718,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 392.296875
+        },
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 392.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 440.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 440.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 597.296875,
+        "top": 553.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По дням",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 763,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 392.296875
+        },
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 392.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 440.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 440.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 597.296875,
+        "top": 553.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 360.296875
+        },
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 360.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 408.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 408.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 565.296875,
+        "top": 521.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Астрон",
+      "mode": "Вручную",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 360.296875
+        },
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 360.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 408.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 408.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 565.296875,
+        "top": 521.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 718,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 354.296875
+        },
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 354.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 402.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 559.296875,
+        "top": 515.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По дням",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 763,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 354.296875
+        },
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 354.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 402.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 559.296875,
+        "top": 515.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 298.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 298.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Астрон",
+      "mode": "Вручную",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 298.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 298.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 801,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 346.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 410.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 410.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 567.296875,
+        "top": 523.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По дням",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 846,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 346.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 410.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 410.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 567.296875,
+        "top": 523.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 807,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 282.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 282.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Астрон",
+      "mode": "Вручную",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 807,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 282.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 282.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Графит",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 569.1484375,
+        "ch": 416,
+        "sh": 416,
+        "top": 153.1484375
+      },
+      "choices": [
+        {
+          "bottom": 331.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 287.1484375
+        },
+        {
+          "bottom": 331.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 287.1484375
+        },
+        {
+          "bottom": 379.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 335.1484375
+        },
+        {
+          "bottom": 379.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 335.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 320.1484375,
+        "top": 276.1484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Графит",
+      "mode": "По дням",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 571.046875,
+        "ch": 420,
+        "sh": 420,
+        "top": 151.25
+      },
+      "choices": [
+        {
+          "bottom": 329.25,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 285.25
+        },
+        {
+          "bottom": 329.25,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 285.25
+        },
+        {
+          "bottom": 377.25,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 333.25
+        },
+        {
+          "bottom": 377.25,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 333.25
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 318.25,
+        "top": 274.25
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Графит",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 585.1484375,
+        "ch": 448,
+        "sh": 448,
+        "top": 137.1484375
+      },
+      "choices": [
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 319.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 319.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 304.1484375,
+        "top": 260.1484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Графит",
+      "mode": "Вручную",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 585.1484375,
+        "ch": 448,
+        "sh": 448,
+        "top": 137.1484375
+      },
+      "choices": [
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 319.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 319.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 304.1484375,
+        "top": 260.1484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Графит",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 605.046875,
+        "ch": 440,
+        "sh": 440,
+        "top": 165.25
+      },
+      "choices": [
+        {
+          "bottom": 363.25,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 319.25
+        },
+        {
+          "bottom": 363.25,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 319.25
+        },
+        {
+          "bottom": 411.25,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 367.25
+        },
+        {
+          "bottom": 411.25,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 367.25
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 352.25,
+        "top": 308.25
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Графит",
+      "mode": "По дням",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 616.2421875,
+        "ch": 462,
+        "sh": 462,
+        "top": 154.046875
+      },
+      "choices": [
+        {
+          "bottom": 352.046875,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 308.046875
+        },
+        {
+          "bottom": 352.046875,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 308.046875
+        },
+        {
+          "bottom": 400.046875,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 356.046875
+        },
+        {
+          "bottom": 400.046875,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 356.046875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 341.046875,
+        "top": 297.046875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Графит",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 619.1484375,
+        "ch": 468,
+        "sh": 468,
+        "top": 151.1484375
+      },
+      "choices": [
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 353.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 353.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 338.1484375,
+        "top": 294.1484375
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Графит",
+      "mode": "Вручную",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 619.1484375,
+        "ch": 468,
+        "sh": 468,
+        "top": 151.1484375
+      },
+      "choices": [
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 353.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 353.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 338.1484375,
+        "top": 294.1484375
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Графит",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 718,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 392.296875
+        },
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 392.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 440.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 440.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 597.296875,
+        "top": 553.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Графит",
+      "mode": "По дням",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 763,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 392.296875
+        },
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 392.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 440.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 440.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 597.296875,
+        "top": 553.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Графит",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 360.296875
+        },
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 360.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 408.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 408.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 565.296875,
+        "top": 521.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Графит",
+      "mode": "Вручную",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 360.296875
+        },
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 360.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 408.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 408.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 565.296875,
+        "top": 521.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Графит",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 718,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 354.296875
+        },
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 354.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 402.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 559.296875,
+        "top": 515.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Графит",
+      "mode": "По дням",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 763,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 354.296875
+        },
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 354.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 402.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 559.296875,
+        "top": 515.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Графит",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 298.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 298.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Графит",
+      "mode": "Вручную",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 298.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 298.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Графит",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 801,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 346.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 410.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 410.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 567.296875,
+        "top": 523.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Графит",
+      "mode": "По дням",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 846,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 346.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 410.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 410.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 567.296875,
+        "top": 523.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Графит",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 807,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 282.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 282.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Графит",
+      "mode": "Вручную",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 807,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 282.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 282.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 569.1484375,
+        "ch": 416,
+        "sh": 416,
+        "top": 153.1484375
+      },
+      "choices": [
+        {
+          "bottom": 331.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 287.1484375
+        },
+        {
+          "bottom": 331.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 287.1484375
+        },
+        {
+          "bottom": 379.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 335.1484375
+        },
+        {
+          "bottom": 379.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 335.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 320.1484375,
+        "top": 276.1484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По дням",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 571.046875,
+        "ch": 420,
+        "sh": 420,
+        "top": 151.25
+      },
+      "choices": [
+        {
+          "bottom": 329.25,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 285.25
+        },
+        {
+          "bottom": 329.25,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 285.25
+        },
+        {
+          "bottom": 377.25,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 333.25
+        },
+        {
+          "bottom": 377.25,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 333.25
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 318.25,
+        "top": 274.25
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 585.1484375,
+        "ch": 448,
+        "sh": 448,
+        "top": 137.1484375
+      },
+      "choices": [
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 319.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 319.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 304.1484375,
+        "top": 260.1484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Контраст",
+      "mode": "Вручную",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 585.1484375,
+        "ch": 448,
+        "sh": 448,
+        "top": 137.1484375
+      },
+      "choices": [
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 319.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 319.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 304.1484375,
+        "top": 260.1484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 605.046875,
+        "ch": 440,
+        "sh": 440,
+        "top": 165.25
+      },
+      "choices": [
+        {
+          "bottom": 363.25,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 319.25
+        },
+        {
+          "bottom": 363.25,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 319.25
+        },
+        {
+          "bottom": 411.25,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 367.25
+        },
+        {
+          "bottom": 411.25,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 367.25
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 352.25,
+        "top": 308.25
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По дням",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 616.2421875,
+        "ch": 462,
+        "sh": 462,
+        "top": 154.046875
+      },
+      "choices": [
+        {
+          "bottom": 352.046875,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 308.046875
+        },
+        {
+          "bottom": 352.046875,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 308.046875
+        },
+        {
+          "bottom": 400.046875,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 356.046875
+        },
+        {
+          "bottom": 400.046875,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 356.046875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 341.046875,
+        "top": 297.046875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 619.1484375,
+        "ch": 468,
+        "sh": 468,
+        "top": 151.1484375
+      },
+      "choices": [
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 353.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 353.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 338.1484375,
+        "top": 294.1484375
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Контраст",
+      "mode": "Вручную",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 619.1484375,
+        "ch": 468,
+        "sh": 468,
+        "top": 151.1484375
+      },
+      "choices": [
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 353.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 353.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 338.1484375,
+        "top": 294.1484375
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 718,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 392.296875
+        },
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 392.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 440.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 440.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 597.296875,
+        "top": 553.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По дням",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 763,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 392.296875
+        },
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 392.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 440.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 440.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 597.296875,
+        "top": 553.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 360.296875
+        },
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 360.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 408.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 408.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 565.296875,
+        "top": 521.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Контраст",
+      "mode": "Вручную",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 360.296875
+        },
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 360.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 408.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 408.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 565.296875,
+        "top": 521.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 718,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 354.296875
+        },
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 354.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 402.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 559.296875,
+        "top": 515.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По дням",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 763,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 354.296875
+        },
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 354.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 402.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 559.296875,
+        "top": 515.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 298.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 298.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Контраст",
+      "mode": "Вручную",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 298.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 298.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 801,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 346.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 410.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 410.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 567.296875,
+        "top": 523.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По дням",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 846,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 346.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 410.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 410.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 567.296875,
+        "top": 523.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 807,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 282.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 282.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Контраст",
+      "mode": "Вручную",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 807,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 282.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 282.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 569.1484375,
+        "ch": 416,
+        "sh": 416,
+        "top": 153.1484375
+      },
+      "choices": [
+        {
+          "bottom": 331.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 287.1484375
+        },
+        {
+          "bottom": 331.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 287.1484375
+        },
+        {
+          "bottom": 379.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 335.1484375
+        },
+        {
+          "bottom": 379.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 335.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 320.1484375,
+        "top": 276.1484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По дням",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 571.046875,
+        "ch": 420,
+        "sh": 420,
+        "top": 151.25
+      },
+      "choices": [
+        {
+          "bottom": 329.25,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 285.25
+        },
+        {
+          "bottom": 329.25,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 285.25
+        },
+        {
+          "bottom": 377.25,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 333.25
+        },
+        {
+          "bottom": 377.25,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 333.25
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 318.25,
+        "top": 274.25
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 585.1484375,
+        "ch": 448,
+        "sh": 448,
+        "top": 137.1484375
+      },
+      "choices": [
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 319.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 319.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 304.1484375,
+        "top": 260.1484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "Вручную",
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 585.1484375,
+        "ch": 448,
+        "sh": 448,
+        "top": 137.1484375
+      },
+      "choices": [
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По посещениям",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 315.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "По дням",
+          "top": 271.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 69,
+          "right": 342.5,
+          "text": "По разовой цене",
+          "top": 319.1484375
+        },
+        {
+          "bottom": 363.1484375,
+          "height": 44,
+          "left": 346.5,
+          "right": 620,
+          "text": "Вручную",
+          "top": 319.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 304.1484375,
+        "top": 260.1484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 605.046875,
+        "ch": 440,
+        "sh": 440,
+        "top": 165.25
+      },
+      "choices": [
+        {
+          "bottom": 363.25,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 319.25
+        },
+        {
+          "bottom": 363.25,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 319.25
+        },
+        {
+          "bottom": 411.25,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 367.25
+        },
+        {
+          "bottom": 411.25,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 367.25
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 352.25,
+        "top": 308.25
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По дням",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 616.2421875,
+        "ch": 462,
+        "sh": 462,
+        "top": 154.046875
+      },
+      "choices": [
+        {
+          "bottom": 352.046875,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 308.046875
+        },
+        {
+          "bottom": 352.046875,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 308.046875
+        },
+        {
+          "bottom": 400.046875,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 356.046875
+        },
+        {
+          "bottom": 400.046875,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 356.046875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 341.046875,
+        "top": 297.046875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 619.1484375,
+        "ch": 468,
+        "sh": 468,
+        "top": 151.1484375
+      },
+      "choices": [
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 353.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 353.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 338.1484375,
+        "top": 294.1484375
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "Вручную",
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 619.1484375,
+        "ch": 468,
+        "sh": 468,
+        "top": 151.1484375
+      },
+      "choices": [
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По посещениям",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 349.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "По дням",
+          "top": 305.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 51,
+          "right": 269.5,
+          "text": "По разовой цене",
+          "top": 353.1484375
+        },
+        {
+          "bottom": 397.1484375,
+          "height": 44,
+          "left": 273.5,
+          "right": 492,
+          "text": "Вручную",
+          "top": 353.1484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 338.1484375,
+        "top": 294.1484375
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 718,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 392.296875
+        },
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 392.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 440.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 440.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 597.296875,
+        "top": 553.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По дням",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 763,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 392.296875
+        },
+        {
+          "bottom": 436.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 392.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 440.296875
+        },
+        {
+          "bottom": 500.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 440.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 597.296875,
+        "top": 553.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 360.296875
+        },
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 360.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 408.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 408.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 565.296875,
+        "top": 521.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "Вручную",
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "ch": 600,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 360.296875
+        },
+        {
+          "bottom": 404.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 360.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 408.296875
+        },
+        {
+          "bottom": 468.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 408.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 565.296875,
+        "top": 521.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 718,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 354.296875
+        },
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 354.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 402.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 559.296875,
+        "top": 515.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По дням",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 763,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 354.296875
+        },
+        {
+          "bottom": 398.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 354.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 402.296875
+        },
+        {
+          "bottom": 462.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 559.296875,
+        "top": 515.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 298.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 298.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "Вручную",
+      "requested": {
+        "width": 390,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 746,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 37,
+          "right": 189,
+          "text": "По посещениям",
+          "top": 298.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 44,
+          "left": 193,
+          "right": 345,
+          "text": "По дням",
+          "top": 298.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 189,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 193,
+          "right": 345,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По посещениям",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 801,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 346.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 410.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 410.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 567.296875,
+        "top": 523.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По дням",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 846,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 346.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 410.296875
+        },
+        {
+          "bottom": 470.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 410.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 567.296875,
+        "top": 523.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По разовой цене",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 807,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 282.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 282.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "Вручную",
+      "requested": {
+        "width": 320,
+        "height": 720
+      },
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "ch": 476,
+        "sh": 807,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По посещениям",
+          "top": 282.296875
+        },
+        {
+          "bottom": 342.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "По дням",
+          "top": 282.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 37,
+          "right": 154,
+          "text": "По разовой цене",
+          "top": 346.296875
+        },
+        {
+          "bottom": 406.296875,
+          "height": 60,
+          "left": 158,
+          "right": 275,
+          "text": "Вручную",
+          "top": 346.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "target": {
+        "bottom": 503.296875,
+        "top": 459.296875
+      },
+      "width": 320
+    }
+  ],
+  "scenarios": {
+    "keyboard": "End selects manual and focuses it; Home restores visits",
+    "search": "Search inside target Select filters to the group tariff",
+    "review": "Переоформить абонемент\n\nСмирнова Анна Андреевна\n\nПерсональные тренировки · 4 занятия → Групповые тренировки\nЦена покупки исходного\n6 000 ₽\nК зачёту\n4 500 ₽\nЦена нового абонемента\n5 400 ₽\nЗачтено в оплату нового\n4 500 ₽\nДоплатить\n900 ₽\nОстанется на лицевом счёте\n0 ₽\n6 000 ₽ × 3 / 4 посещений = 4 500 ₽\n\nОснование: Переход на другой тариф\n\nИсходный абонемент завершится. Новый будет выдан этому же клиенту и начнёт действовать после активации. Остаток стоимости зачислится на лицевой счёт.\n\nОплата · 900 ₽\nСпособ оплаты\nНаличные\nБанковская карта\nПодарочная карта\nВ кредит\nСоставная оплата\nДемонстрационный чек\nК расчёту\nОтмена\nПереоформить · доплата 900 ₽",
+    "cancel": "Focus returns to Reissue in parent dialog",
+    "styleguide": "Grid filter and large recalculation dialog both work"
+  },
+  "consoleErrorsForCurrentBuild": [],
+  "limits": "Changed dialog and common grid variant; not every role or workflow"
+}

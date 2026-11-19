@@ -1006,6 +1006,133 @@ body .ui-tabs[data-variant='segmented'] > button:is([aria-selected='true'], [ari
   color: var(--color-ink);
   box-shadow: 0 1px 4px #181c2414;
 }
+body .ui-tabs[data-layout='grid'] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  overflow: visible;
+}
+body .ui-tabs[data-layout='grid'] > button {
+  min-width: 0;
+  min-height: var(--control-height);
+  justify-content: center;
+  white-space: normal;
+}
+
+/* Shared membership recalculation dialog: the choices and target are peers. */
+body .modal:has(> [data-ui='membership-reissue']) {
+  container: membership-reissue / inline-size;
+  gap: 16px;
+}
+body .modal:has(> [data-ui='membership-reissue']) > .modal-heading {
+  margin-bottom: 0;
+}
+body .modal:has(> [data-ui='membership-reissue']) > .modal-actions {
+  margin-top: 0;
+  padding-top: 12px;
+}
+[data-ui='membership-reissue'] {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+}
+[data-ui='membership-reissue'] :is(h3, p, dl) {
+  margin: 0;
+}
+[data-ui='membership-reissue'] h3 {
+  font-size: 16px;
+  line-height: 24px;
+}
+.reissue-source {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.9fr) minmax(0, 2.1fr);
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  background: var(--color-surface-muted);
+}
+.reissue-source > div > p,
+.reissue-price-origin,
+.reissue-source-facts dt,
+.reissue-result-facts dt {
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+.reissue-source-facts {
+  display: grid;
+  grid-template-columns: 0.7fr 0.7fr 1fr 1.7fr;
+  gap: 12px;
+}
+:is(.reissue-source-facts, .reissue-result-facts) dd {
+  margin: 4px 0 0;
+  font-size: 16px;
+  line-height: 24px;
+  overflow-wrap: anywhere;
+}
+.reissue-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas: 'methods target' 'calculation trainer';
+  align-items: start;
+  gap: 12px 24px;
+}
+.reissue-methods { grid-area: methods; }
+.reissue-target { grid-area: target; }
+.reissue-calculation { grid-area: calculation; }
+.reissue-trainer { grid-area: trainer; }
+.reissue-form-section {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
+}
+.reissue-result-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 24px;
+}
+.reissue-result-facts > div {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-line);
+}
+@container membership-reissue (max-width: 900px) {
+  .reissue-source {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+@container membership-reissue (max-width: 700px) {
+  [data-ui='membership-reissue'] {
+    gap: 8px;
+  }
+  .reissue-columns {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'methods' 'target' 'calculation' 'trainer';
+    gap: 12px;
+  }
+  .reissue-result-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .reissue-source-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .reissue-source-facts > div:last-child {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .reissue-source-facts > div:last-child dd {
+    margin-top: 0;
+  }
+  .reissue-source {
+    padding: 12px;
+    gap: 8px;
+  }
+}
 body .ws-empty.ws-empty {
   padding: 32px var(--panel-padding);
   gap: 12px;

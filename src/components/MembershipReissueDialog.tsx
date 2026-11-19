@@ -13,12 +13,11 @@ import type { ReissueMode } from '../lib/membership-reissue';
 import { saleTrainerSelection } from '../lib/personal-training';
 import { saleCatalog } from '../lib/sale-catalog';
 import { supportsTraining } from '../lib/training-kind';
-import { matchesSearch } from '../lib/directory-search';
 import { demoId, useWorkspace } from './WorkspaceProvider';
 import { Field } from './Field';
 import { Select } from './Select';
 import { Button, Modal } from './ui';
-import { Notice, SearchBox, SegmentedFilter } from './WorkspaceUI';
+import { Notice, SegmentedFilter } from './WorkspaceUI';
 import { ReceptionPayment, initialReceptionPayment } from './ReceptionPayment';
 
 export function MembershipReissueDialog({
@@ -49,7 +48,6 @@ export function MembershipReissueDialog({
   const [manualCredit, setManualCredit] = useState('');
   const [planId, setPlanId] = useState('');
   const [trainerId, setTrainerId] = useState('');
-  const [query, setQuery] = useState('');
   const [reason, setReason] = useState('');
   const [payment, setPayment] = useState(initialReceptionPayment);
   const [review, setReview] = useState<ReturnType<typeof quoteMembershipReissue> | null>(null);
@@ -61,7 +59,6 @@ export function MembershipReissueDialog({
   const plans = saleCatalog(data, null, trainers.selected?.categoryId || null).filter(
     (item) => item.type === 'plan',
   );
-  const visible = plans.filter((item) => matchesSearch(item.record.name, query));
   const input = {
     passId: pass.id,
     planId,
@@ -124,16 +121,16 @@ export function MembershipReissueDialog({
     <Modal
       title="Переоформить абонемент"
       subtitle={member.fullName || member.name}
-      size="wide"
+      size="large"
       onClose={onClose}
     >
-      <div className="modal-scroll-body ws-stack">
+      <div className="modal-scroll-body" data-ui="membership-reissue">
         {review ? (
           <>
             <h3>
               {review.pass.name} → {review.plan.name}
             </h3>
-            <dl className="ws-facts">
+            <dl className="reissue-result-facts">
               {facts &&
                 facts.map(([label, cents]) => (
                   <div key={label}>
@@ -165,129 +162,148 @@ export function MembershipReissueDialog({
           </>
         ) : (
           <>
-            <h3>Исходный абонемент: {pass.name}</h3>
-            <dl className="ws-facts">
+            <section className="reissue-source" aria-label="Исходный абонемент">
               <div>
-                <dt>Использовано</dt>
-                <dd>{pass.used} посещений</dd>
+                <p className="ws-muted">Исходный абонемент</p>
+                <h3>{pass.name}</h3>
               </div>
-              <div>
-                <dt>Остаток</dt>
-                <dd>{pass.remaining === null ? 'Безлимит' : `${pass.remaining} посещений`}</dd>
-              </div>
-              <div>
-                <dt>{known.origin}</dt>
-                <dd>{known.cents === null ? 'Нужно указать' : money(known.cents / 100)}</dd>
-              </div>
-              <div>
-                <dt>Срок</dt>
-                <dd>
-                  {pass.activatedAt || 'Не активирован'} — {pass.endsAt || 'После активации'}
-                </dd>
-              </div>
-            </dl>
-            {known.cents === null && (
-              <Field label="Цена исходной покупки, ₽" required>
-                <input
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value={purchasePrice}
-                  onChange={(event) => setPurchasePrice(event.target.value)}
+              <dl className="reissue-source-facts">
+                <div>
+                  <dt>Использовано</dt>
+                  <dd>{pass.used}</dd>
+                </div>
+                <div>
+                  <dt>Остаток</dt>
+                  <dd>{pass.remaining === null ? 'Безлимит' : pass.remaining}</dd>
+                </div>
+                <div>
+                  <dt>Цена покупки</dt>
+                  <dd>{known.cents === null ? 'Нужно указать' : money(known.cents / 100)}</dd>
+                </div>
+                <div>
+                  <dt>Срок</dt>
+                  <dd>
+                    {pass.activatedAt || 'Не активирован'} — {pass.endsAt || 'После активации'}
+                  </dd>
+                </div>
+              </dl>
+            </section>
+            <div className="reissue-columns">
+              <section className="reissue-form-section reissue-methods" aria-label="Расчёт остатка">
+                <h3>Способ перерасчёта</h3>
+                <SegmentedFilter
+                  label="Способ перерасчёта"
+                  layout="grid"
+                  items={[...reissueModes]}
+                  value={mode}
+                  onChange={(value) => {
+                    setMode(value as ReissueMode);
+                    setError('');
+                  }}
                 />
-              </Field>
-            )}
-            <SegmentedFilter
-              label="Способ перерасчёта"
-              items={[...reissueModes]}
-              value={mode}
-              onChange={(value) => {
-                setMode(value as ReissueMode);
-                setError('');
-              }}
-            />
-            {mode === 'visits' && (
-              <p className="ws-muted">
-                Цена покупки × оставшиеся посещения / исходное число посещений.
-              </p>
-            )}
-            {mode === 'days' && (
-              <p className="ws-muted">
-                Цена покупки × оставшиеся календарные дни / полный срок. Сегодня и день окончания
-                включены. После заморозок выберите другой способ.
-              </p>
-            )}
-            {mode === 'single' && (
-              <Field label="Цена разового посещения, ₽" required>
-                <input
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value={singlePrice}
-                  onChange={(event) => setSinglePrice(event.target.value)}
-                />
-              </Field>
-            )}
-            {mode === 'manual' && (
-              <Field label="Сумма к зачёту, ₽" required>
-                <input
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value={manualCredit}
-                  onChange={(event) => setManualCredit(event.target.value)}
-                />
-              </Field>
-            )}
-            <h3>Новый абонемент</h3>
-            <SearchBox
-              value={query}
-              onChange={(value) => {
-                setQuery(value);
-                setPlanId('');
-              }}
-              placeholder="Найти абонемент по названию"
-            />
-            <Field label="Персональный тренер (для тарифов ПТ)">
-              <Select
-                value={trainers.selected?.id || ''}
-                onChange={(event) => {
-                  setTrainerId(event.target.value);
-                  setPlanId('');
-                }}
+              </section>
+              <section className="reissue-form-section reissue-target" aria-label="Новый тариф">
+                <Field label="Новый абонемент" required>
+                  <Select
+                    value={planId}
+                    onChange={(event) => setPlanId(event.target.value)}
+                    searchable
+                    searchLabel="Найти новый абонемент"
+                    searchPlaceholder="Название абонемента"
+                  >
+                    <option value="">Выберите абонемент</option>
+                    {plans.map(({ record }) => (
+                      <option key={record.id} value={record.id}>
+                        {record.name} · {money(record.price)}
+                      </option>
+                    ))}
+                  </Select>
+                </Field>
+              </section>
+              <section
+                className="reissue-form-section reissue-calculation"
+                aria-label="Условия расчёта"
               >
-                <option value="">Выберите тренера</option>
-                {trainers.trainers.map((trainer) => (
-                  <option key={trainer.id} value={trainer.id}>
-                    {trainer.name} · {trainer.category}
-                  </option>
-                ))}
-              </Select>
-            </Field>
-            <Field label="Новый абонемент" required>
-              <Select value={planId} onChange={(event) => setPlanId(event.target.value)}>
-                <option value="">Выберите абонемент</option>
-                {visible.map(({ record }) => (
-                  <option key={record.id} value={record.id}>
-                    {record.name} · {money(record.price)}
-                  </option>
-                ))}
-              </Select>
-            </Field>
-            {planId &&
-              supportsTraining(
-                {
-                  training: plans.find((item) => item.record.id === planId)?.record.training,
-                  kindId: plans.find((item) => item.record.id === planId)?.record.kindId,
-                },
-                'personal',
-              ) && <p className="ws-muted">Категория тарифа соответствует выбранному тренеру.</p>}
+                <p className="reissue-price-origin">{known.origin}</p>
+                {known.cents === null && (
+                  <Field label="Цена исходной покупки, ₽" required>
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      value={purchasePrice}
+                      onChange={(event) => setPurchasePrice(event.target.value)}
+                    />
+                  </Field>
+                )}
+                {mode === 'visits' && (
+                  <p className="ws-muted">
+                    Цена покупки × оставшиеся посещения / исходное число посещений.
+                  </p>
+                )}
+                {mode === 'days' && (
+                  <p className="ws-muted">
+                    Цена покупки × оставшиеся календарные дни / полный срок. Сегодня и день
+                    окончания включены. После заморозок выберите другой способ.
+                  </p>
+                )}
+                {mode === 'single' && (
+                  <Field label="Цена разового посещения, ₽" required>
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      value={singlePrice}
+                      onChange={(event) => setSinglePrice(event.target.value)}
+                    />
+                  </Field>
+                )}
+                {mode === 'manual' && (
+                  <Field label="Сумма к зачёту, ₽" required>
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      value={manualCredit}
+                      onChange={(event) => setManualCredit(event.target.value)}
+                    />
+                  </Field>
+                )}
+              </section>
+              <section
+                className="reissue-form-section reissue-trainer"
+                aria-label="Тренер нового тарифа"
+              >
+                <Field label="Персональный тренер (для тарифов ПТ)">
+                  <Select
+                    value={trainers.selected?.id || ''}
+                    onChange={(event) => {
+                      setTrainerId(event.target.value);
+                      setPlanId('');
+                    }}
+                  >
+                    <option value="">Выберите тренера</option>
+                    {trainers.trainers.map((trainer) => (
+                      <option key={trainer.id} value={trainer.id}>
+                        {trainer.name} · {trainer.category}
+                      </option>
+                    ))}
+                  </Select>
+                </Field>
+                {planId &&
+                  supportsTraining(
+                    {
+                      training: plans.find((item) => item.record.id === planId)?.record.training,
+                      kindId: plans.find((item) => item.record.id === planId)?.record.kindId,
+                    },
+                    'personal',
+                  ) && (
+                    <p className="ws-muted">Категория тарифа соответствует выбранному тренеру.</p>
+                  )}
+              </section>
+            </div>
             <Field label="Основание переоформления" required>
-              <textarea
-                rows={2}
-                value={reason}
-                onChange={(event) => setReason(event.target.value)}
-              />
+              <input value={reason} onChange={(event) => setReason(event.target.value)} />
             </Field>
           </>
         )}
