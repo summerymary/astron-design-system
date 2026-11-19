@@ -1,0 +1,446 @@
+{
+  "date": "2026-11-19",
+  "scope": "Fictional local prototype only; no club systems or real records",
+  "views": [
+    {
+      "phase": "journal",
+      "theme": "Астрон",
+      "requestedWidth": 1440,
+      "choices": [],
+      "dialogs": [],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 1440
+    },
+    {
+      "phase": "reissue",
+      "theme": "Астрон",
+      "requestedWidth": 1440,
+      "choices": [
+        {
+          "height": 52,
+          "scroll": 52
+        }
+      ],
+      "dialogs": [
+        {
+          "overflow": false,
+          "w": 920
+        },
+        {
+          "overflow": false,
+          "w": 920
+        }
+      ],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 1440
+    },
+    {
+      "phase": "journal",
+      "theme": "Астрон",
+      "requestedWidth": 390,
+      "choices": [],
+      "dialogs": [],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 390
+    },
+    {
+      "phase": "reissue",
+      "theme": "Астрон",
+      "requestedWidth": 390,
+      "choices": [
+        {
+          "height": 60,
+          "scroll": 60
+        }
+      ],
+      "dialogs": [
+        {
+          "overflow": false,
+          "w": 358
+        },
+        {
+          "overflow": false,
+          "w": 358
+        }
+      ],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 390
+    },
+    {
+      "phase": "journal",
+      "theme": "Астрон",
+      "requestedWidth": 320,
+      "choices": [],
+      "dialogs": [],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 320
+    },
+    {
+      "phase": "reissue",
+      "theme": "Астрон",
+      "requestedWidth": 320,
+      "choices": [
+        {
+          "height": 60,
+          "scroll": 60
+        }
+      ],
+      "dialogs": [
+        {
+          "overflow": false,
+          "w": 288
+        },
+        {
+          "overflow": false,
+          "w": 288
+        }
+      ],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 320
+    },
+    {
+      "phase": "journal",
+      "theme": "Графит",
+      "requestedWidth": 1440,
+      "choices": [],
+      "dialogs": [],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 1440
+    },
+    {
+      "phase": "reissue",
+      "theme": "Графит",
+      "requestedWidth": 1440,
+      "choices": [
+        {
+          "height": 52,
+          "scroll": 52
+        }
+      ],
+      "dialogs": [
+        {
+          "overflow": false,
+          "w": 920
+        },
+        {
+          "overflow": false,
+          "w": 920
+        }
+      ],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 1440
+    },
+    {
+      "phase": "journal",
+      "theme": "Графит",
+      "requestedWidth": 390,
+      "choices": [],
+      "dialogs": [],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 390
+    },
+    {
+      "phase": "reissue",
+      "theme": "Графит",
+      "requestedWidth": 390,
+      "choices": [
+        {
+          "height": 60,
+          "scroll": 60
+        }
+      ],
+      "dialogs": [
+        {
+          "overflow": false,
+          "w": 358
+        },
+        {
+          "overflow": false,
+          "w": 358
+        }
+      ],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 390
+    },
+    {
+      "phase": "journal",
+      "theme": "Графит",
+      "requestedWidth": 320,
+      "choices": [],
+      "dialogs": [],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 320
+    },
+    {
+      "phase": "reissue",
+      "theme": "Графит",
+      "requestedWidth": 320,
+      "choices": [
+        {
+          "height": 60,
+          "scroll": 60
+        }
+      ],
+      "dialogs": [
+        {
+          "overflow": false,
+          "w": 288
+        },
+        {
+          "overflow": false,
+          "w": 288
+        }
+      ],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 320
+    },
+    {
+      "phase": "journal",
+      "theme": "Контраст",
+      "requestedWidth": 1440,
+      "choices": [],
+      "dialogs": [],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 1440
+    },
+    {
+      "phase": "reissue",
+      "theme": "Контраст",
+      "requestedWidth": 1440,
+      "choices": [
+        {
+          "height": 52,
+          "scroll": 52
+        }
+      ],
+      "dialogs": [
+        {
+          "overflow": false,
+          "w": 920
+        },
+        {
+          "overflow": false,
+          "w": 920
+        }
+      ],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 1440
+    },
+    {
+      "phase": "journal",
+      "theme": "Контраст",
+      "requestedWidth": 390,
+      "choices": [],
+      "dialogs": [],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 390
+    },
+    {
+      "phase": "reissue",
+      "theme": "Контраст",
+      "requestedWidth": 390,
+      "choices": [
+        {
+          "height": 60,
+          "scroll": 60
+        }
+      ],
+      "dialogs": [
+        {
+          "overflow": false,
+          "w": 358
+        },
+        {
+          "overflow": false,
+          "w": 358
+        }
+      ],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 390
+    },
+    {
+      "phase": "journal",
+      "theme": "Контраст",
+      "requestedWidth": 320,
+      "choices": [],
+      "dialogs": [],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 320
+    },
+    {
+      "phase": "reissue",
+      "theme": "Контраст",
+      "requestedWidth": 320,
+      "choices": [
+        {
+          "height": 60,
+          "scroll": 60
+        }
+      ],
+      "dialogs": [
+        {
+          "overflow": false,
+          "w": 288
+        },
+        {
+          "overflow": false,
+          "w": 288
+        }
+      ],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 320
+    },
+    {
+      "phase": "journal",
+      "theme": "Тёмная",
+      "requestedWidth": 1440,
+      "choices": [],
+      "dialogs": [],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 1440
+    },
+    {
+      "phase": "reissue",
+      "theme": "Тёмная",
+      "requestedWidth": 1440,
+      "choices": [
+        {
+          "height": 52,
+          "scroll": 52
+        }
+      ],
+      "dialogs": [
+        {
+          "overflow": false,
+          "w": 920
+        },
+        {
+          "overflow": false,
+          "w": 920
+        }
+      ],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 1440
+    },
+    {
+      "phase": "journal",
+      "theme": "Тёмная",
+      "requestedWidth": 390,
+      "choices": [],
+      "dialogs": [],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 390
+    },
+    {
+      "phase": "reissue",
+      "theme": "Тёмная",
+      "requestedWidth": 390,
+      "choices": [
+        {
+          "height": 60,
+          "scroll": 60
+        }
+      ],
+      "dialogs": [
+        {
+          "overflow": false,
+          "w": 358
+        },
+        {
+          "overflow": false,
+          "w": 358
+        }
+      ],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 390
+    },
+    {
+      "phase": "journal",
+      "theme": "Тёмная",
+      "requestedWidth": 320,
+      "choices": [],
+      "dialogs": [],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 320
+    },
+    {
+      "phase": "reissue",
+      "theme": "Тёмная",
+      "requestedWidth": 320,
+      "choices": [
+        {
+          "height": 60,
+          "scroll": 60
+        }
+      ],
+      "dialogs": [
+        {
+          "overflow": false,
+          "w": 288
+        },
+        {
+          "overflow": false,
+          "w": 288
+        }
+      ],
+      "pageOverflow": false,
+      "shortControls": [],
+      "width": 320
+    }
+  ],
+  "calculationScenarios": [
+    {
+      "mode": "По посещениям",
+      "text": "Переоформить абонемент\n\nСмирнова Анна Андреевна\n\nПерсональные тренировки · 4 занятия → Групповые тренировки\nЦена покупки исходного\n6 000 ₽\nК зачёту\n4 500 ₽\nЦена нового абонемента\n5 400 ₽\nЗачтено в оплату нового\n4 500 ₽\nДоплатить\n900 ₽\nОстанется на лицевом счёте\n0 ₽\n6 000 ₽ × 3 / 4 посещений = 4 500 ₽\n\nОснование: Проверка вариантов перерасчёта\n\nИсходный абонемент завершится. Новый будет выдан этому же клиенту и начнёт действовать после активации. Остаток стоимости зачислится на лицевой счёт.\n\nОплата · 900 ₽\nСпособ оплаты\nНаличные\nБанковская карта\nПодарочная карта\nВ кредит\nСоставная оплата\nДемонстрационный чек\nК расчёту\nОтмена\nПереоформить · доплата 900 ₽"
+    },
+    {
+      "mode": "По дням",
+      "text": "Переоформить абонемент\n\nСмирнова Анна Андреевна\n\nПерсональные тренировки · 4 занятия → Групповые тренировки\nЦена покупки исходного\n6 000 ₽\nК зачёту\n2 903,23 ₽\nЦена нового абонемента\n5 400 ₽\nЗачтено в оплату нового\n2 903,23 ₽\nДоплатить\n2 496,77 ₽\nОстанется на лицевом счёте\n0 ₽\n6 000 ₽ × 15 / 31 календарных дней = 2 903,23 ₽. Сегодня и день окончания включены.\n\nОснование: Проверка вариантов перерасчёта\n\nИсходный абонемент завершится. Новый будет выдан этому же клиенту и начнёт действовать после активации. Остаток стоимости зачислится на лицевой счёт.\n\nОплата · 2 496,77 ₽\nСпособ оплаты\nНаличные\nБанковская карта\nПодарочная карта\nВ кредит\nСоставная оплата\nДемонстрационный чек\nК расчёту\nОтмена\nПереоформить · доплата 2 496,77 ₽"
+    },
+    {
+      "mode": "По разовой цене",
+      "text": "Переоформить абонемент\n\nСмирнова Анна Андреевна\n\nПерсональные тренировки · 4 занятия → Групповые тренировки\nЦена покупки исходного\n6 000 ₽\nК зачёту\n4 500 ₽\nЦена нового абонемента\n5 400 ₽\nЗачтено в оплату нового\n4 500 ₽\nДоплатить\n900 ₽\nОстанется на лицевом счёте\n0 ₽\n6 000 ₽ − 1 × 1 500 ₽ = 4 500 ₽ к зачёту (не меньше нуля)\n\nОснование: Проверка вариантов перерасчёта\n\nИсходный абонемент завершится. Новый будет выдан этому же клиенту и начнёт действовать после активации. Остаток стоимости зачислится на лицевой счёт.\n\nОплата · 900 ₽\nСпособ оплаты\nНаличные\nБанковская карта\nПодарочная карта\nВ кредит\nСоставная оплата\nДемонстрационный чек\nК расчёту\nОтмена\nПереоформить · доплата 900 ₽"
+    },
+    {
+      "mode": "Вручную",
+      "text": "Переоформить абонемент\n\nСмирнова Анна Андреевна\n\nПерсональные тренировки · 4 занятия → Групповые тренировки\nЦена покупки исходного\n6 000 ₽\nК зачёту\n3 200 ₽\nЦена нового абонемента\n5 400 ₽\nЗачтено в оплату нового\n3 200 ₽\nДоплатить\n2 200 ₽\nОстанется на лицевом счёте\n0 ₽\nСумма к зачёту указана вручную: 3 200 ₽. Основание обязательно.\n\nОснование: Проверка вариантов перерасчёта\n\nИсходный абонемент завершится. Новый будет выдан этому же клиенту и начнёт действовать после активации. Остаток стоимости зачислится на лицевой счёт.\n\nОплата · 2 200 ₽\nСпособ оплаты\nНаличные\nБанковская карта\nПодарочная карта\nВ кредит\nСоставная оплата\nДемонстрационный чек\nК расчёту\nОтмена\nПереоформить · доплата 2 200 ₽"
+    }
+  ],
+  "operations": [
+    "4500 credit - 3900 target = 600 surplus; balance 2400 -> 3000",
+    "Pending 3900 -> personal 6000; 2100 supplement financed; paid unchanged; debt 2100",
+    "Same client new full pending plan, source closed and usage retained",
+    "Financial operation formula/details; Escape restores focus",
+    "Journal filters and search; opening is not income"
+  ],
+  "console": [],
+  "limits": "Changed scenarios, not all roles or workflows",
+  "styleguide": {
+    "journalExample": true,
+    "reissueExample": true,
+    "errorsAfterFix": []
+  }
+}
