@@ -30,8 +30,10 @@ import { inventoryStock, validatePlan } from '../lib/workspace-rules';
 import { membershipKinds } from '../data/membership-kinds';
 import { MembershipCard } from '../components/MembershipCard';
 import { CatalogSectionCard } from '../components/CatalogSectionCard';
+import { MembershipCatalog } from '../components/MembershipCatalog';
+import { catalogGroups, catalogPlacement, matchesCatalogPlan } from '../lib/membership-catalog';
 import { planSaleSection, saleSections } from '../lib/sale-catalog';
-import type { SaleSectionId } from '../lib/sale-catalog';
+import type { PlanSectionId, SaleSectionId } from '../lib/sale-catalog';
 import { quantityLabel } from '../data/membership-kinds';
 import { matchesSearch } from '../lib/directory-search';
 
@@ -151,6 +153,8 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
   const [message, setMessage] = useState('');
   const closeCategory = useCallback(() => setCategoryForm(null), []);
   const selected = data.categories.find((row) => row.id === category);
+  const draftGroups = draft ? catalogGroups(planSaleSection(draft)) : [];
+  const draftPlacement = draft ? catalogPlacement(draft, planSaleSection(draft)) : null;
   const currentSection = saleSections.find((section) => section.id === sectionId);
   const sectionPlans = data.plans.filter(
     (plan) => !sectionId || planSaleSection(plan) === sectionId,
@@ -172,7 +176,12 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
       setError(invalid.message);
       return;
     }
-    put('plans', { ...draft, currency: 'RUB', status: publish ? 'Опубликован' : 'Черновик' });
+    put('plans', {
+      ...draft,
+      catalogFamily: catalogPlacement(draft, planSaleSection(draft)).family.id,
+      currency: 'RUB',
+      status: publish ? 'Опубликован' : 'Черновик',
+    });
     openSection(planSaleSection(draft));
     setDraft(null);
     setError('');
@@ -210,6 +219,7 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
                           setDraft({
                             ...draft,
                             saleSection: e.target.value,
+                            catalogFamily: '',
                             corporate: e.target.value === 'corporate' ? 'Да' : 'Нет',
                           })
                         }
@@ -238,7 +248,37 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
                         ))}
                       </Select>
                     </Field>
-                    <Field className="form-field" label={<> Категория </>}>
+                    <Field className="form-field" label="Группа абонементов">
+                      <Select
+                        value={draftPlacement?.group.id || ''}
+                        onChange={(e) =>
+                          setDraft({
+                            ...draft,
+                            catalogFamily: draftGroups.find((group) => group.id === e.target.value)!
+                              .families[0].id,
+                          })
+                        }
+                      >
+                        {draftGroups.map((group) => (
+                          <option key={group.id} value={group.id}>
+                            {group.name}
+                          </option>
+                        ))}
+                      </Select>
+                    </Field>
+                    <Field className="form-field" label="Подгруппа абонементов">
+                      <Select
+                        value={draftPlacement?.family.id || ''}
+                        onChange={(e) => setDraft({ ...draft, catalogFamily: e.target.value })}
+                      >
+                        {draftPlacement?.group.families.map((family) => (
+                          <option key={family.id} value={family.id}>
+                            {family.name}
+                          </option>
+                        ))}
+                      </Select>
+                    </Field>
+                    <Field className="form-field" label={<> Дополнительная категория </>}>
                       <Select
                         value={draft.category || ''}
                         onChange={(e) => setDraft({ ...draft, category: e.target.value })}
@@ -363,7 +403,7 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
   const plans = sectionPlans.filter(
     (row) =>
       (!category || row.category === category) &&
-      matchesSearch([row.name, row.short, row.description, row.kind].join(' '), query) &&
+      matchesCatalogPlan(row, planSaleSection(row), query, true) &&
       (filter === 'Все' ||
         (filter === 'Онлайн' ? row.online === 'Доступен' : row.status === filter)),
   );
@@ -390,7 +430,11 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
           className="membership-catalog-card"
           aria-label={`Редактировать: ${row.name}`}
           onClick={() => {
-            setDraft({ ...row, saleSection: planSaleSection(row) });
+            setDraft({
+              ...row,
+              saleSection: planSaleSection(row),
+              catalogFamily: catalogPlacement(row, planSaleSection(row)).family.id,
+            });
             setStep(planSteps[0]);
             setError('');
           }}
@@ -420,8 +464,12 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
       ))}
     </div>
   );
-  const startPlan = () => {
-    const base = data.plans.find((plan) => planSaleSection(plan) === sectionId);
+  const startPlan = (familyId?: string) => {
+    const base = data.plans.find(
+      (plan) =>
+        planSaleSection(plan) === sectionId &&
+        (!familyId || catalogPlacement(plan, planSaleSection(plan)).family.id === familyId),
+    );
     const kind = membershipKinds.find(
       (kind) => kind.id === (sectionId === 'personal' ? 'personal' : 'gym'),
     )!;
@@ -430,6 +478,7 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
       id: demoId('plan'),
       name: '',
       saleSection: sectionId || 'memberships',
+      catalogFamily: familyId || '',
       corporate: sectionId === 'corporate' ? 'Да' : 'Нет',
       category: category || base?.category || data.categories[0]?.id || '',
       kindId: base?.kindId || kind.id,
@@ -457,7 +506,7 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
           value={query}
           onChange={setQuery}
           label="Поиск в каталоге абонементов"
-          placeholder={sectionId ? 'Поиск в разделе по названию' : 'Поиск по всему каталогу'}
+          placeholder={sectionId ? 'Название, группа или подгруппа' : 'Поиск по всему каталогу'}
         />
       </div>
       {!sectionId && !query.trim() ? (
@@ -504,7 +553,7 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
           <div className="ws-panel-heading">
             <h2>{currentSection?.name || 'Результаты поиска'}</h2>
             {sectionId && (
-              <Button onClick={startPlan}>
+              <Button onClick={() => startPlan()}>
                 <Plus size={16} />
                 Абонемент
               </Button>
@@ -519,7 +568,9 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
           {sectionId && (
             <details className="ws-disclosure membership-category-filter">
               <summary>
-                {selected ? `Категория: ${selected.name}` : 'Категории и группировка'}
+                {selected
+                  ? `Дополнительная категория: ${selected.name}`
+                  : 'Дополнительные категории'}
               </summary>
               <div className="ws-toolbar membership-category-toolbar">
                 <Field className="form-field" label={<> Категория </>}>
@@ -550,7 +601,15 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
           <div className="ws-panel-body ws-stack">
             {plans.length || (!sectionId && otherResults.length) ? (
               sectionId ? (
-                renderPlans(plans)
+                <MembershipCatalog
+                  key={`${sectionId}:${category || ''}`}
+                  section={sectionId as PlanSectionId}
+                  plans={plans}
+                  searching={!!query.trim()}
+                  showEmpty
+                  renderPlans={renderPlans}
+                  onCreate={startPlan}
+                />
               ) : (
                 <>
                   {saleSections
@@ -560,7 +619,12 @@ export function MembershipWorkspace({ navigate }: { navigate: Navigate }) {
                       return rows.length ? (
                         <section className="ws-stack" key={section.id}>
                           <h3>{section.name}</h3>
-                          {renderPlans(rows)}
+                          <MembershipCatalog
+                            section={section.id as PlanSectionId}
+                            plans={rows}
+                            searching
+                            renderPlans={renderPlans}
+                          />
                         </section>
                       ) : null;
                     })}
