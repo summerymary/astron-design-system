@@ -796,10 +796,6 @@ body .avatar > img {
   object-fit: cover;
   border-radius: inherit;
 }
-body .button.client-photo-retake {
-  min-height: 44px;
-  padding: 8px;
-}
 [data-ui='client-photo'] {
   display: grid;
   align-content: start;
@@ -1393,6 +1389,53 @@ body [data-ui='stats'] strong {
   font-size: var(--text-heading-xl);
   font-weight: 500;
   line-height: 1.2;
+}
+body [data-ui='stats'] > div[data-graphic] {
+  position: relative;
+  isolation: isolate;
+}
+body [data-ui='stats'] > div[data-graphic] > :is(span, strong, small) {
+  position: relative;
+  z-index: 1;
+}
+body [data-ui='stats'] .stats-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  color: var(--color-accent);
+  fill: currentColor;
+  opacity: 0.12;
+}
+body [data-ui='stats'] .stats-backdrop-area {
+  fill-opacity: 0.18;
+}
+body [data-ui='stats'] .stats-backdrop-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+body [data-ui='stats'] .stats-backdrop-end {
+  fill: currentColor;
+}
+body [data-ui='stats'] .stats-network-street {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1px;
+  stroke-opacity: 0.3;
+}
+body [data-ui='stats'] .stats-network-route {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+}
+body [data-ui='stats'] .stats-network-node circle {
+  fill: var(--color-canvas);
 }
 @container workspace (max-width: 700px) {
   body [data-ui='stats'] {
@@ -2505,6 +2548,7 @@ body
   :is(
     .table-scroll,
     .ws-table-wrap,
+    .report-tree-scroll,
     .client-table-wrap,
     .cash-table-wrap,
     .visitor-table-scroll,
@@ -2915,4 +2959,35 @@ body .ws-master-list {
   justify-content: space-between;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+@layer components {
+  [data-ui='report-tree-table'] { max-width: 100%; overflow: auto; }
+  .report-tree-table.report-tree-table { width: 100%; min-width: 900px; border-collapse: separate; border-spacing: 0; font-variant-numeric: tabular-nums; }
+  .report-tree-table.report-tree-table :is(th, td) { padding: 8px 12px; white-space: normal; border-bottom: 1px solid var(--color-line); text-align: right; }
+  .report-tree-table.report-tree-table :is(th, td):first-child { position: sticky; left: 0; z-index: 1; min-width: 240px; max-width: 320px; text-align: left; background: var(--color-surface); }
+  .report-tree-table.report-tree-table thead th { vertical-align: bottom; }
+  .report-tree-table.report-tree-table thead th:first-child { z-index: 2; }
+  .report-tree-table.report-tree-table th > button, .report-tree-name > button { display: flex; align-items: center; gap: 8px; min-height: 44px; width: 100%; padding: 8px; border: 0; border-radius: var(--radius-sm); background: transparent; color: inherit; font: inherit; text-align: inherit; cursor: pointer; }
+  .report-tree-table.report-tree-table thead th > button { justify-content: flex-end; font-size: 14px; line-height: 21px; }
+  .report-tree-table.report-tree-table thead th:first-child > button { justify-content: flex-start; }
+  .report-tree-name > button { justify-content: space-between; text-align: left; font-weight: 500; }
+  .report-tree-name > button[aria-expanded] { justify-content: flex-start; font-weight: 600; }
+  .report-tree-name svg { flex-shrink: 0; }
+  .report-tree-name > button > span { min-width: 0; overflow-wrap: anywhere; }
+  .report-tree-scroll:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -3px; }
+  .report-tree-name small { display: block; color: var(--color-muted); font-size: 14px; overflow-wrap: anywhere; margin-top: 4px; font-weight: 400; }
+  .report-tree-table tr[data-depth='1'] .report-tree-name { padding-inline-start: 20px; }
+  .report-tree-table tr[data-depth='2'] .report-tree-name { padding-inline-start: 40px; }
+  .report-tree-name > button:hover, .report-tree-table th > button:hover { background: var(--color-surface-muted); }
+  .report-tree-name > button:focus-visible, .report-tree-table th > button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -3px; }
+  .report-tree-table.report-tree-table tfoot :is(th, td) { font-weight: 700; border-top: 1px solid var(--color-line); }
+  @container workspace (max-width: 560px) {
+    .report-tree-table.report-tree-table :is(th, td):first-child { min-width: 160px; max-width: 160px; }
+    .report-tree-table tr[data-depth='1'] .report-tree-name { padding-inline-start: 12px; }
+    .report-tree-table tr[data-depth='2'] .report-tree-name { padding-inline-start: 24px; }
+  }
+  @media (max-width: 700px) {
+    .design-system .report-tree-table.report-tree-table :is(th, td):first-child { min-width: 160px; max-width: 160px; }
+  }
 }

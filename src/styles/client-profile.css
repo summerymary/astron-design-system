@@ -992,26 +992,14 @@
 @layer pages {
   .client-photo > .client-photo-retake {
     position: absolute;
-    inset-inline: 8px;
+    inset-inline-start: auto;
+    inset-inline-end: 8px;
     bottom: 8px;
-    width: calc(100% - 16px);
-    height: auto;
   }
   .client-primary-actions {
     flex-wrap: wrap;
     gap: 12px;
     margin-inline-start: 0;
     padding-inline-start: 0;
-  }
-  @container workspace (max-width: 700px) {
-    .client-photo > .client-photo-retake {
-      inset-inline-start: auto;
-      inset-inline-end: 0;
-      bottom: 0;
-      width: 44px;
-    }
-    .client-photo-retake > span {
-      display: none;
-    }
   }
 }
