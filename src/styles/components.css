@@ -769,6 +769,9 @@ body
 body :is(.ws-panel-heading, .ws-panel-body) {
   padding: var(--panel-padding);
 }
+body .ws-panel-heading + .ws-panel-body {
+  padding-block-start: 0;
+}
 body .ws-stack {
   gap: var(--panel-gap);
 }
