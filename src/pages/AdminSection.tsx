@@ -262,7 +262,7 @@ export function AdminSection({
     );
   if (section === 'inventory') return <InventoryWorkspace key="retail" navigate={navigate} />;
   if (['crm', 'leads', 'requests', 'segments', 'pipelines', 'retention'].includes(section))
-    return <CRMWorkspace key={section} section={section} navigate={navigate} />;
+    return <CRMWorkspace key={section} section={section} navigate={navigate} recordId={recordId} />;
   if (section === 'messages' || section === 'external-messages')
     return (
       <MessagesWorkspace

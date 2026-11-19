@@ -196,16 +196,14 @@ export function ClientProfile({
               <div className="client-photo">
                 <Avatar member={member} portrait />
                 {canOperate && (
-                  <Button
+                  <IconButton
                     variant="secondary"
                     className="client-photo-retake"
-                    aria-label="Перефотографировать клиента"
-                    title="Перефотографировать клиента"
+                    label="Перефотографировать клиента"
                     onClick={() => setPhotoOpen(true)}
                   >
-                    <Camera size={20} />
-                    <span>Перефотографировать</span>
-                  </Button>
+                    <Camera size={18} aria-hidden="true" />
+                  </IconButton>
                 )}
               </div>
               <div className="client-name-block">
