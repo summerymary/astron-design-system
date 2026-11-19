@@ -10,7 +10,7 @@ import '../styles/sections.css';
 const groups: { title: string; ids: AdminSectionId[] }[] = [
   {
     title: 'Работа с клиентами',
-    ids: ['members', 'registration', 'schedule', 'trainer-clients', 'memberships'],
+    ids: ['members', 'companies', 'registration', 'schedule', 'trainer-clients', 'memberships'],
   },
   { title: 'Продажи и финансы', ids: ['services', 'products', 'cash', 'statistics', 'inventory'] },
   {

@@ -23,7 +23,13 @@ import type { CashEvent } from '../lib/cash';
 import '../styles/cash.css';
 
 const rubles = (cents: number) => money(cents / 100);
-const kinds = { sale: 'Продажа', deposit: 'Внесение', withdrawal: 'Снятие', refund: 'Возврат' };
+const kinds = {
+  'company-topup': 'Пополнение счёта компании',
+  sale: 'Продажа',
+  deposit: 'Внесение',
+  withdrawal: 'Снятие',
+  refund: 'Возврат',
+};
 const commands = {
   open: 'Открыть смену',
   x: 'X-отчёт без закрытия смены',
@@ -41,11 +47,13 @@ export function CashWorkspace({
   employeeName,
   members,
   onMember,
+  onCompany,
 }: {
   clubName: string;
   employeeName: string;
   members: Member[];
   onMember: (member: Member) => void;
+  onCompany?: (id: string) => void;
 }) {
   const { data, put } = useWorkspace();
   const [tab, setTab] = useState('journal');
@@ -150,6 +158,8 @@ export function CashWorkspace({
     return <span className="cash-muted">Без прихода денег</span>;
   };
   const openClient = (row: CashEvent) => {
+    if (row.companyId && onCompany)
+      return <ClientLink onClick={() => onCompany(row.companyId)}>{row.client}</ClientLink>;
     const member = members.find((member) => String(member.id) === row.memberId);
     if (member)
       return <ClientLink onClick={() => onMember(member)}>{clientName(member)}</ClientLink>;
@@ -230,8 +240,8 @@ export function CashWorkspace({
                     </caption>
                     <thead>
                       <tr>
-                        <th scope="col">Время / покупка</th>
-                        <th scope="col">Клиент</th>
+                        <th scope="col">Время / операция</th>
+                        <th scope="col">Клиент / компания</th>
                         <th scope="col" className="cash-number">
                           Приход, ₽
                         </th>
@@ -351,10 +361,10 @@ export function CashWorkspace({
             <details className="cash-explanation">
               <summary>Как считаются суммы</summary>
               <p>
-                Приход включает полученные наличные, оплату картой и на сайте, а также внесение
-                размена. Расход включает возвраты и снятие наличных. Это движение денег, а не
-                выручка. Списание с подарочной карты ({rubles(totals.gift)}) и долг (
-                {rubles(totals.credit)}) показаны отдельно в операциях.
+                Приход включает полученные наличные, оплату картой и на сайте, пополнения счетов
+                компаний и внесение размена. Расход включает возвраты и снятие наличных. Это
+                движение денег, а не выручка. Списание с подарочной карты ({rubles(totals.gift)}) и
+                долг ({rubles(totals.credit)}) показаны отдельно в операциях.
               </p>
             </details>
           </>
@@ -496,6 +506,17 @@ export function CashWorkspace({
                 </div>
               ))}
             </dl>
+            {detail.companyId && onCompany && (
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  closeDetail();
+                  onCompany(detail.companyId);
+                }}
+              >
+                Открыть компанию
+              </Button>
+            )}
             {detailMember && (
               <Button variant="secondary" onClick={() => onMember(detailMember)}>
                 Открыть карточку клиента

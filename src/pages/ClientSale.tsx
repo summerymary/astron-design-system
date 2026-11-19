@@ -1,3 +1,5 @@
+import { PaymentMethodPicker } from '../components/PaymentMethodPicker';
+import { QuantityStepper } from '../components/QuantityStepper';
 import { Field } from '../components/Field';
 import { redeemGift, replaceRecord } from '../lib/reception-operations';
 import { supportsTraining } from '../lib/training-kind';
@@ -8,7 +10,7 @@ import { clientName, hiddenPhone } from '../lib/client-display';
 import { demoStamp, nextDemoNow } from '../lib/demo-clock';
 import { Select } from '../components/Select';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowLeft, Banknote, CreditCard, Gift, Layers, Search, Wallet, X } from 'lucide-react';
+import { ArrowLeft, Search, X } from 'lucide-react';
 import type { Member } from '../types';
 import type { Navigate } from '../components/WorkspaceUI';
 import { Button, Modal } from '../components/ui';
@@ -16,17 +18,16 @@ import { Notice, Empty } from '../components/WorkspaceUI';
 import { ClientSearch } from '../components/ClientSearch';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { MembershipCard } from '../components/MembershipCard';
-import { CatalogSectionCard } from '../components/CatalogSectionCard';
+import { CatalogSectionCard, CatalogSectionGrid } from '../components/CatalogSectionCard';
 import { quantityLabel } from '../data/membership-kinds';
 import { memberCards } from '../data/admin';
 import { money, TODAY } from '../data/workspace';
 import type { DemoRecord } from '../data/workspace';
-import { paymentMethods, paymentPlan, saleTotal } from '../lib/checkout';
+import { paymentPlan, saleTotal } from '../lib/checkout';
 import type { PaymentMethod, PaymentParts } from '../lib/checkout';
 
 import { saleCatalog, saleSections, searchSaleCatalog } from '../lib/sale-catalog';
 import type { SaleCatalogItem, SaleSectionId } from '../lib/sale-catalog';
-const methodIcons = [Banknote, CreditCard, Gift, Wallet, Layers];
 export function SaleWorkspace({
   members,
   initialMember,
@@ -397,6 +398,9 @@ export function SaleWorkspace({
                 <>
                   <Field className="form-field" label={<> Персональный тренер </>}>
                     <Select
+                      searchable
+                      searchLabel="Поиск тренера"
+                      searchPlaceholder="Имя или категория тренера"
                       value={personalTrainer?.id || ''}
                       onChange={(event) => {
                         setTrainerId(event.target.value);
@@ -463,7 +467,7 @@ export function SaleWorkspace({
                 </div>
               </div>
               {!training && !sectionId && !query.trim() ? (
-                <div className="sale-section-grid">
+                <CatalogSectionGrid>
                   {saleSections.map((section) => {
                     const count = catalog.filter((entry) => entry.sectionId === section.id).length;
                     return (
@@ -475,7 +479,7 @@ export function SaleWorkspace({
                       />
                     );
                   })}
-                </div>
+                </CatalogSectionGrid>
               ) : visibleItems.length ? (
                 <>
                   <p className="form-note" role="status">
@@ -596,20 +600,16 @@ export function SaleWorkspace({
                     <div className="checkout-settings ws-stack">
                       <div className="ws-fields">
                         {category === 'Товары' && (
-                          <Field className="form-field" label={<> Количество </>}>
-                            <input
-                              type="number"
-                              min="1"
-                              max="999"
-                              step="1"
-                              value={quantity}
-                              disabled={done}
-                              onChange={(e) => {
-                                setQuantity(e.target.value);
-                                setError('');
-                              }}
-                            />
-                          </Field>
+                          <QuantityStepper
+                            label="Количество"
+                            value={Number(quantity)}
+                            max={Math.min(999, Number(item.stock))}
+                            disabled={done}
+                            onChange={(value) => {
+                              setQuantity(String(value));
+                              setError('');
+                            }}
+                          />
                         )}
                         <Field className="form-field" label={<> Применить скидку </>}>
                           <Select
@@ -637,70 +637,14 @@ export function SaleWorkspace({
                         Печатать чек
                       </label>
 
-                      <Field
-                        className="form-field mobile-payment-method"
-                        label={<> Способ оплаты </>}
-                      >
-                        <Select
-                          value={method}
-                          disabled={done}
-                          onChange={(event) => {
-                            setMethod(event.target.value as PaymentMethod);
-                            setError('');
-                          }}
-                        >
-                          {paymentMethods.map((value) => (
-                            <option key={value}>{value}</option>
-                          ))}
-                        </Select>
-                      </Field>
-                      <div className="payment-methods" role="radiogroup" aria-label="Способ оплаты">
-                        {paymentMethods.map((value, index) => {
-                          const Icon = methodIcons[index];
-                          return (
-                            <button
-                              role="radio"
-                              aria-checked={method === value}
-                              disabled={done}
-                              key={value}
-                              onKeyDown={(event) => {
-                                const direction = ['ArrowRight', 'ArrowDown'].includes(event.key)
-                                  ? 1
-                                  : ['ArrowLeft', 'ArrowUp'].includes(event.key)
-                                    ? -1
-                                    : 0;
-                                if (!direction) return;
-                                event.preventDefault();
-                                const next =
-                                  (index + direction + paymentMethods.length) %
-                                  paymentMethods.length;
-                                setMethod(paymentMethods[next]);
-                                setError('');
-                                event.currentTarget.parentElement
-                                  ?.querySelectorAll<HTMLButtonElement>('[role="radio"]')
-                                  [next]?.focus();
-                              }}
-                              tabIndex={method === value ? 0 : -1}
-                              onClick={() => {
-                                setMethod(value);
-                                setError('');
-                              }}
-                            >
-                              <Icon size={22} />
-                              <strong>{value}</strong>
-                              <small>
-                                {value === 'Составная оплата'
-                                  ? 'Несколько способов в одной покупке'
-                                  : value === 'В кредит'
-                                    ? 'Зафиксировать задолженность'
-                                    : value === 'Подарочная карта'
-                                      ? 'Списать с демонстрационного остатка'
-                                      : 'Зачисление и подготовка чека'}
-                              </small>
-                            </button>
-                          );
-                        })}
-                      </div>
+                      <PaymentMethodPicker
+                        value={method}
+                        disabled={done}
+                        onChange={(value) => {
+                          setMethod(value);
+                          setError('');
+                        }}
+                      />
                       {method === 'Составная оплата' && (
                         <div className="ws-fields">
                           {(['cash', 'card', 'gift', 'credit'] as const).map((key, index) => (

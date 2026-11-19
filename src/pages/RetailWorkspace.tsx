@@ -1,7 +1,8 @@
-import { Field } from '../components/Field';
+import { ProductCard } from '../components/ProductCard';
+import { QuantityStepper } from '../components/QuantityStepper';
 import { useState } from 'react';
 import { Button } from '../components/ui';
-import { DataTable, Empty, Notice, SearchBox } from '../components/WorkspaceUI';
+import { Empty, Notice, SearchBox } from '../components/WorkspaceUI';
 import { ReceptionPayment, initialReceptionPayment } from '../components/ReceptionPayment';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import type { DemoRecord } from '../data/workspace';
@@ -12,9 +13,11 @@ import { demoStamp, nextDemoNow } from '../lib/demo-clock';
 export function RetailWorkspace({
   clubName,
   employeeName,
+  members,
 }: {
   clubName: string;
   employeeName: string;
+  members: import('../types').Member[];
 }) {
   const { data, transact } = useWorkspace();
   const [query, setQuery] = useState('');
@@ -49,25 +52,19 @@ export function RetailWorkspace({
                   .includes(query.toLocaleLowerCase('ru')),
               )
               .map((row) => (
-                <button
-                  className="ws-link-card reception-product"
+                <ProductCard
+                  product={row}
+                  quantity={cart[row.id] || 0}
                   key={row.id}
-                  disabled={!Number(row.stock)}
-                  onClick={() => {
+                  onAdd={() => {
                     setCart((current) => ({
                       ...current,
-                      [row.id]: Math.min(Number(row.stock), (current[row.id] || 0) + 1),
+                      [row.id]: Math.min(999, Number(row.stock), (current[row.id] || 0) + 1),
                     }));
                     setDone(false);
                     setError('');
                   }}
-                >
-                  <strong>{row.name}</strong>
-                  <span>{money(row.price)}</span>
-                  <small>
-                    В наличии: {row.stock} {row.unit}
-                  </small>
-                </button>
+                />
               ))}
           </div>
         </div>
@@ -80,7 +77,12 @@ export function RetailWorkspace({
           {done ? (
             <>
               <Notice tone="success">
-                Товары оплачены. Остатки обновлены, операция сохранена в кассе.
+                {payment.method === 'В кредит' ||
+                (payment.method === 'Составная оплата' && payment.parts.credit > 0)
+                  ? 'Покупка оформлена. Задолженность сохранена за выбранным клиентом.'
+                  : payment.method === 'Подарочная карта'
+                    ? 'Покупка оформлена. Средства списаны с подарочной карты.'
+                    : 'Товары оплачены. Остатки обновлены, операция сохранена в кассе.'}
               </Notice>
               <Button
                 onClick={() => {
@@ -93,43 +95,27 @@ export function RetailWorkspace({
             </>
           ) : rows.length ? (
             <>
-              <DataTable
-                rows={rows}
-                columns={[
-                  { key: 'name', label: 'Товар' },
-                  {
-                    key: 'quantity',
-                    label: 'Количество',
-                    render: (row) => (
-                      <Field className="form-field" label={<> Количество: {row.name} </>}>
-                        <input
-                          type="number"
-                          min="1"
-                          max={row.stock}
-                          value={cart[row.id]}
-                          onChange={(event) => {
-                            setCart((current) => ({
-                              ...current,
-                              [row.id]: Math.max(
-                                1,
-                                Math.min(
-                                  Number(row.stock),
-                                  Math.floor(Number(event.target.value)) || 1,
-                                ),
-                              ),
-                            }));
-                            setError('');
-                          }}
-                        />
-                      </Field>
-                    ),
-                  },
-                  {
-                    key: 'action',
-                    label: 'Убрать',
-                    render: (row) => (
+              <ul className="retail-cart-list" aria-label="Товары в покупке">
+                {rows.map((row) => (
+                  <li key={row.id}>
+                    <div className="retail-cart-heading">
+                      <strong>{row.name}</strong>
+                      <b>{money(Number(row.price) * cart[row.id])}</b>
+                    </div>
+                    <div className="retail-cart-controls">
+                      <QuantityStepper
+                        label="Количество"
+                        itemName={row.name}
+                        value={cart[row.id]}
+                        max={Math.min(999, Number(row.stock))}
+                        onChange={(value) => {
+                          setCart((current) => ({ ...current, [row.id]: value }));
+                          setError('');
+                        }}
+                      />
                       <Button
                         variant="ghost"
+                        aria-label={`Убрать: ${row.name}`}
                         onClick={() =>
                           setCart((current) => {
                             const next = { ...current };
@@ -140,11 +126,16 @@ export function RetailWorkspace({
                       >
                         Убрать
                       </Button>
-                    ),
-                  },
-                ]}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <ReceptionPayment
+                members={members}
+                value={payment}
+                onChange={setPayment}
+                total={total}
               />
-              <ReceptionPayment value={payment} onChange={setPayment} total={total} />
               {error && <Notice tone="warning">{error}</Notice>}
               <Button
                 onClick={() => {
@@ -171,7 +162,14 @@ export function RetailWorkspace({
                   }
                 }}
               >
-                Оплатить {money(total)}
+                {payment.method === 'В кредит'
+                  ? 'Оформить в кредит'
+                  : payment.method === 'Подарочная карта'
+                    ? 'Списать с подарочной карты'
+                    : payment.method === 'Составная оплата'
+                      ? 'Подтвердить покупку'
+                      : 'Оплатить'}{' '}
+                {money(total)}
               </Button>
             </>
           ) : (
