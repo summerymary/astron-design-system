@@ -150,7 +150,7 @@ function ReportTimeline({
                   x2="28"
                   y1="8"
                   y2="8"
-                  className={`report-chart-line report-chart-series-${i % 4}`}
+                  className={`report-chart-line report-chart-series-${s.tone ?? i % 4}`}
                 />
               </svg>
               {s.label}
@@ -210,7 +210,7 @@ function ReportTimeline({
                   <polyline
                     key={`${s.key}:${j}`}
                     points={points.join(' ')}
-                    className={`report-chart-line report-chart-series-${i % 4}`}
+                    className={`report-chart-line report-chart-series-${s.tone ?? i % 4}`}
                   />
                 ));
             })}
@@ -247,7 +247,7 @@ function ReportTimeline({
                         cx={xAt(i)}
                         cy={yAt(v)}
                         r="4"
-                        className={`report-chart-point report-chart-series-${j % 4}`}
+                        className={`report-chart-point report-chart-series-${chart.series[j].tone ?? j % 4}`}
                       >
                         <title>
                           {row.name} · {chart.series[j].label}: {format(v)}

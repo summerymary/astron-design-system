@@ -49,12 +49,27 @@ export interface RoleDefinition {
   canAddMembers: boolean;
 }
 
+export interface StatsTrendGraphic {
+  kind: 'trend';
+  points: readonly { label: string; value: number }[];
+  domain: 'zero' | 'extent';
+  description: string;
+}
+export type StatsGraphic =
+  | StatsTrendGraphic
+  | {
+      kind: 'network';
+      nodes: readonly { id: string; label: string; x: number; y: number }[];
+      links: readonly (readonly [string, string])[];
+      description: string;
+    };
+
 export interface RoleHomeData {
   title: string;
   caption: string;
   summaryTitle: string;
   summaryText: string;
-  metrics: { label: string; value: string; detail: string }[];
+  metrics: { label: string; value: string; detail: string; graphic?: StatsGraphic }[];
   itemsTitle: string;
   itemsCaption: string;
   items: { id: string; title: string; subtitle: string; time: string; status: string }[];

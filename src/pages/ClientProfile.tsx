@@ -1,3 +1,4 @@
+import { ClientFinanceJournal } from '../components/ClientFinanceJournal';
 import { ReviewJournal } from '../components/ReviewJournal';
 import { ClientBookingDialog } from '../components/ClientBookingDialog';
 import { ClientActionButton } from '../components/ClientActionButton';
@@ -113,10 +114,6 @@ export function ClientProfile({
   const [tab, setTab] = useState<ClientTabId>('subscriptions');
   const [form, setForm] = useState<'edit' | 'comment' | null>(null);
   const closeForm = useCallback(() => setForm(null), []);
-  const clientSales = data.ledger.filter(
-    (row) =>
-      row.category !== 'Бар' && (row.memberId === String(member.id) || row.client === member.name),
-  );
   const notes = (data.comments || []).filter((row) => row.memberId === String(member.id));
   const eventBookings = data.events
     .filter(
@@ -196,16 +193,14 @@ export function ClientProfile({
               <div className="client-photo">
                 <Avatar member={member} portrait />
                 {canOperate && (
-                  <Button
+                  <IconButton
                     variant="secondary"
                     className="client-photo-retake"
-                    aria-label="Перефотографировать клиента"
-                    title="Перефотографировать клиента"
+                    label="Перефотографировать клиента"
                     onClick={() => setPhotoOpen(true)}
                   >
-                    <Camera size={20} />
-                    <span>Перефотографировать</span>
-                  </Button>
+                    <Camera size={18} aria-hidden="true" />
+                  </IconButton>
                 )}
               </div>
               <div className="client-name-block">
@@ -551,56 +546,7 @@ export function ClientProfile({
                         description="Здесь появятся зарегистрированные посещения клиента."
                       />
                     ))}
-                  {tab === 'finances' &&
-                    (profile.balance > 0 ? (
-                      <div className="client-table-wrap">
-                        <table className="client-simple-table">
-                          <thead>
-                            <tr>
-                              <th>Тип операции</th>
-                              <th>Сумма</th>
-                              <th>Время операции</th>
-                              <th>Описание</th>
-                              <th>Финансовая операция</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>Пополнение</td>
-                              <td>
-                                <strong className="client-positive">
-                                  +{money(profile.balance)}
-                                </strong>
-                              </td>
-                              <td>28.10.2026 · 18:42</td>
-                              <td>Пополнение лицевого счёта</td>
-                              <td>DEMO-{member.id}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    ) : (
-                      <EmptyTab
-                        title="Операций пока нет"
-                        description="История операций по лицевому счёту будет отображаться здесь."
-                      />
-                    ))}
-                  {tab === 'finances' && !!clientSales.length && (
-                    <div className="ws-panel-body">
-                      <h3>Покупки в прототипе</h3>
-                      <DataTable
-                        rows={clientSales}
-                        columns={[
-                          { key: 'name', label: 'Покупка' },
-                          { key: 'date', label: 'Дата' },
-                          { key: 'amount', label: 'Оплачено, ₽' },
-                          { key: 'creditAmount', label: 'В долг, ₽' },
-                          { key: 'status', label: 'Статус' },
-                          { key: 'method', label: 'Оплата' },
-                        ]}
-                      />
-                    </div>
-                  )}
+                  {tab === 'finances' && <ClientFinanceJournal member={member} members={members} />}
                   {tab === 'finances' && additionalServices.length > 0 && (
                     <section className="ws-panel-body" aria-label="Дополнительные услуги клиента">
                       <h3>Дополнительные услуги</h3>
@@ -850,6 +796,8 @@ export function ClientProfile({
           members={members}
           visits={visits}
           canOperate={canOperate}
+          user={user}
+          clubName={clubName}
           onCancelVisit={onCancelVisit}
           onClose={() => setOpenedPassId(null)}
         />

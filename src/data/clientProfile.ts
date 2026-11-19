@@ -3,6 +3,7 @@ import { memberCards, memberDemographics } from './admin';
 import type { Member } from '../types';
 import { getMembershipKind } from './membership-kinds';
 import type { DemoRecord } from './workspace';
+import { accountBalance } from '../lib/client-finance';
 
 export const clientTabs = [
   { id: 'subscriptions', label: 'Абонементы' },
@@ -156,7 +157,12 @@ export function getClientProfile(member: Member, data: Record<string, DemoRecord
     gender:
       member.gender ||
       (demographic ? (demographic.gender === 'male' ? 'Мужской' : 'Женский') : 'Не указан'),
-    balance: hasDemoProfile ? (member.id === 1001 ? 2400 : 1200) : 0,
+    openingBalance: hasDemoProfile ? (member.id === 1001 ? 2400 : 1200) : 0,
+    balance: accountBalance(
+      hasDemoProfile ? (member.id === 1001 ? 2400 : 1200) : 0,
+      member.id,
+      data,
+    ),
     organization:
       member.organization !== undefined
         ? member.organization || 'Не привязан'

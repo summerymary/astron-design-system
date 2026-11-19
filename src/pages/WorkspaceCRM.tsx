@@ -24,13 +24,17 @@ import { leadTask, leadTransitions } from '../lib/workspace-rules';
 import { AttentionFlags } from '../components/AttentionFlags';
 import { CrmScenarios } from './CrmScenarios';
 import { parseStages, stageAction, stageMeaning } from '../lib/crm';
+import { MarketingAnalyticsWorkspace } from './MarketingAnalyticsWorkspace';
+import type { WebView } from '../lib/web-analytics';
 
 export function CRMWorkspace({
   section,
   navigate,
+  recordId,
 }: {
   section: AdminSectionId;
   navigate: Navigate;
+  recordId?: string | null;
 }) {
   const { data, put } = useWorkspace();
   const savedView = data['crm-view']?.find((row) => row.id === 'active');
@@ -90,6 +94,14 @@ export function CRMWorkspace({
     setStage('Все этапы');
     setCompleted(['Покупка', 'Отказ'].includes(next) ? 'Завершены' : 'В работе');
   };
+  if (section === 'crm' && ['web-sources', 'web-materials', 'web-offers'].includes(recordId || ''))
+    return (
+      <MarketingAnalyticsWorkspace
+        view={recordId!.slice(4) as WebView}
+        onView={(view) => navigate('crm', undefined, `web-${view}`)}
+        onBack={() => navigate('crm')}
+      />
+    );
   if (section === 'crm') {
     const tasks = data.leads.filter(
       (row) =>
@@ -119,6 +131,11 @@ export function CRMWorkspace({
           ]}
         />
         <div className="crm-home-links">
+          <NavigationCard
+            onClick={() => navigate('crm', undefined, 'web-sources')}
+            title="Аналитика сайта"
+            caption="Источники переходов, материалы, категории и предложения."
+          />
           <NavigationCard
             onClick={() => openLeads()}
             title={<>Заявки</>}

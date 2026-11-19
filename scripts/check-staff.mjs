@@ -26,7 +26,83 @@ const { adminSections } = await load('../src/data/admin.ts');
 const { createWorkspaceData } = await load('../src/data/workspace.ts');
 const { validateEvent, moveEvent } = await load('../src/lib/schedule.ts');
 const { shiftStaffColors, shiftStaffKey } = await load('../src/lib/shift-colors.ts');
+const {
+  managementMetrics,
+  managementDailyRevenue,
+  managementNetworkClubs,
+  managementNetworkMetric,
+} = await load('../src/data/management-metrics.ts');
+for (const metric of Object.values(managementMetrics)) {
+  const points = metric.graphic.points;
+  assert.equal(points.length, 6);
+  assert.equal(new Set(points.map((point) => point.label)).size, 6);
+  assert.ok(points.every((point) => Number.isFinite(point.value) && point.value >= 0));
+  assert.equal(
+    Number(metric.value.replace(/[^\d.-]/g, '')),
+    points.at(-1).value,
+    'The headline and last plotted point must use the same data',
+  );
+  assert.ok(metric.detail.includes('демо'), 'Fictional history must be identified on screen');
+  assert.ok(metric.graphic.description.includes('демонстрационный'));
+}
+const revenueTotals = {
+  central: 842500,
+  park: 798000,
+  river: 774500,
+  north: 620000,
+  south: 585000,
+  east: 700000,
+};
+for (const [club, values] of Object.entries(managementDailyRevenue)) {
+  assert.equal(values.length, 6);
+  assert.equal(
+    values.reduce((sum, value) => sum + value, 0),
+    revenueTotals[club],
+  );
+}
+for (let i = 0; i < 6; i++) {
+  const expected = Object.values(managementDailyRevenue).reduce(
+    (sum, values) => sum + values.slice(0, i + 1).reduce((total, value) => total + value, 0),
+    0,
+  );
+  assert.equal(
+    managementMetrics.networkRevenue.graphic.points[i].value,
+    expected,
+    'Each cumulative network point must include the same days across all clubs',
+  );
+  assert.equal(
+    managementMetrics.clubRevenue.graphic.points[i].value,
+    managementDailyRevenue.central.slice(0, i + 1).reduce((sum, value) => sum + value, 0),
+  );
+}
+assert.equal(managementMetrics.networkRevenue.graphic.points.at(-1).value, 4320000);
+assert.equal(managementMetrics.activeClients.graphic.points.at(-1).value, 6500);
+assert.equal(managementNetworkClubs.length, 6);
+assert.equal(managementNetworkMetric.value, '6');
+const networkGraph = managementNetworkMetric.graphic;
+assert.equal(networkGraph.kind, 'network');
+assert.deepEqual(
+  networkGraph.nodes.map((node) => node.id),
+  managementNetworkClubs.map((club) => club.id),
+);
+const clubIds = new Set(managementNetworkClubs.map((club) => club.id));
+assert.equal(clubIds.size, 6);
+assert.ok(networkGraph.links.every(([a, b]) => a !== b && clubIds.has(a) && clubIds.has(b)));
+const connected = new Set([networkGraph.nodes[0].id]);
+for (let pass = 0; pass < clubIds.size; pass++)
+  for (const [a, b] of networkGraph.links) {
+    if (connected.has(a)) connected.add(b);
+    if (connected.has(b)) connected.add(a);
+  }
+assert.equal(connected.size, 6, 'All six club pins must belong to one connected network');
+for (const key of ['renewals', 'occupancy'])
+  assert.ok(managementMetrics[key].graphic.points.every((point) => point.value <= 100));
 const data = createWorkspaceData();
+assert.deepEqual(
+  new Set(data.clubs.map((club) => club.id)),
+  clubIds,
+  'The network overview and club directory must have the same six clubs',
+);
 const { adminEmployee, ownAdminRecords, adminPaySummary } = await load(
   '../src/lib/admin-account.ts',
 );

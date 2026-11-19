@@ -26,7 +26,7 @@ export type Resource = {
 const f = (key: string, label: string, options?: string[]): Field => ({ key, label, options });
 const name: Field = { key: 'name', label: 'Название', required: true };
 const state = f('status', 'Статус', ['Активен', 'В архиве']);
-const club = f('club', 'Клуб', ['Центральный', 'Парк', 'Речной']);
+const club = f('club', 'Клуб', ['Центральный', 'Парк', 'Речной', 'Северный', 'Южный', 'Восточный']);
 const description: Field = { key: 'description', label: 'Описание', type: 'textarea' };
 const price: Field = { key: 'price', label: 'Цена, ₽', type: 'number', min: 0, required: true };
 export const resources: Record<string, Resource> = {
@@ -57,6 +57,27 @@ export const resources: Record<string, Resource> = {
         name: 'Речной',
         address: 'Йошкар-Ола, набережная, 4',
         description: 'Студия групповых занятий.',
+        status: 'Активен',
+      },
+      {
+        id: 'north',
+        name: 'Северный',
+        address: '',
+        description: 'Вымышленный клуб для демонстрации сети.',
+        status: 'Активен',
+      },
+      {
+        id: 'south',
+        name: 'Южный',
+        address: '',
+        description: 'Вымышленный клуб для демонстрации сети.',
+        status: 'Активен',
+      },
+      {
+        id: 'east',
+        name: 'Восточный',
+        address: '',
+        description: 'Вымышленный клуб для демонстрации сети.',
         status: 'Активен',
       },
     ],

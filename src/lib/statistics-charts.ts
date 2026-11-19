@@ -6,7 +6,7 @@ export type StatisticsChart = {
   unit: string;
   format?: 'money' | 'percent';
   kind: 'bars' | 'columns' | 'lines' | 'donut' | 'pyramid' | 'stacked';
-  series: { key: string; label: string }[];
+  series: { key: string; label: string; tone?: 0 | 1 | 2 | 3 }[];
   rows: { id: string; name: string; values: (number | null)[]; note?: string }[];
   maximum?: number;
   reference?: { value: number; label: string };

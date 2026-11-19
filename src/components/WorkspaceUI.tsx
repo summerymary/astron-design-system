@@ -18,7 +18,7 @@ import {
 import { Button, ConfirmDialog, Modal, StatusBadge } from './ui';
 import type { StatusTone } from '../lib/ui-semantics';
 import { adminSections } from '../data/admin';
-import type { Member } from '../types';
+import type { Member, StatsGraphic } from '../types';
 import type { AdminSectionId } from '../data/admin';
 import type { DemoRecord, Field as FieldDefinition, Resource } from '../data/workspace';
 import { money, prettyDate } from '../data/workspace';
@@ -247,15 +247,84 @@ export function LinkCards({
     </div>
   );
 }
+function StatsBackdrop({ graphic }: { graphic: StatsGraphic }) {
+  if (graphic.kind === 'network') {
+    return (
+      <svg
+        className="stats-backdrop stats-network-map"
+        viewBox="0 0 320 112"
+        preserveAspectRatio="xMidYMid meet"
+        role="img"
+        aria-label={graphic.description}
+        focusable="false"
+      >
+        <path
+          className="stats-network-street"
+          d="M-8 22 L68 52 L153 39 L225 64 L330 20 M-8 93 L83 74 L184 98 L330 76 M58 -8 L76 52 L42 120 M167 -8 L151 39 L183 98 M261 -8 L225 64 L269 120"
+        />
+        {graphic.links.map(([from, to]) => {
+          const a = graphic.nodes.find((node) => node.id === from);
+          const b = graphic.nodes.find((node) => node.id === to);
+          if (!a || !b) return null;
+          return (
+            <path
+              key={`${from}-${to}`}
+              className="stats-network-route"
+              d={`M${a.x} ${a.y} Q${(a.x + b.x) / 2} ${(a.y + b.y) / 2 - 9} ${b.x} ${b.y}`}
+              vectorEffect="non-scaling-stroke"
+            />
+          );
+        })}
+        {graphic.nodes.map((node) => (
+          <g
+            className="stats-network-node"
+            key={node.id}
+            transform={`translate(${node.x} ${node.y})`}
+          >
+            <path d="M0 5 C-3 1 -7 -2 -7 -6 A7 7 0 1 1 7 -6 C7 -2 3 1 0 5 Z" />
+            <circle cy="-6" r="2.3" />
+          </g>
+        ))}
+      </svg>
+    );
+  }
+  const values = graphic.points.map((point) => point.value);
+  if (values.length < 2 || values.some((value) => !Number.isFinite(value) || value < 0))
+    return null;
+  const min = graphic.domain === 'zero' ? 0 : Math.min(...values);
+  const max = Math.max(...values);
+  const range = max - min;
+  const coordinates = values.map((value, i) => ({
+    x: 4 + (i / (values.length - 1)) * 312,
+    y: range ? 100 - ((value - min) / range) * 80 : 60,
+  }));
+  const points = coordinates.map((point) => `${point.x},${point.y}`).join(' ');
+  const last = coordinates[coordinates.length - 1];
+  return (
+    <svg
+      className="stats-backdrop"
+      viewBox="0 0 320 112"
+      preserveAspectRatio="none"
+      role="img"
+      aria-label={graphic.description}
+      focusable="false"
+    >
+      <path className="stats-backdrop-area" d={`M4 108 L${points} L316 108 Z`} />
+      <polyline className="stats-backdrop-line" points={points} vectorEffect="non-scaling-stroke" />
+      <circle className="stats-backdrop-end" cx={last.x} cy={last.y} r="3" />
+    </svg>
+  );
+}
 export function Stats({
   items,
 }: {
-  items: { label: string; value: string | number; note?: string }[];
+  items: { label: string; value: string | number; note?: string; graphic?: StatsGraphic }[];
 }) {
   return (
     <div className="ws-stats" data-ui="stats">
       {items.map((item) => (
-        <div key={item.label}>
+        <div key={item.label} data-graphic={item.graphic?.kind}>
+          {item.graphic && <StatsBackdrop graphic={item.graphic} />}
           <span>{item.label}</span>
           <strong>{displayNumber(item.value)}</strong>
           {item.note && <small>{item.note}</small>}

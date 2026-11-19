@@ -1,0 +1,808 @@
+{
+  "date": "2026-11-19",
+  "views": [
+    {
+      "theme": "",
+      "role": "network-director",
+      "clubRows": 6,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 900,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов в сети\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "4320000",
+          "text": "Выручка сети\n4 320 000 ₽\nНакоплено за 1–6 ноя · демо"
+        },
+        {
+          "fits": true,
+          "number": "6500",
+          "text": "Активные клиенты\n6 500\n1–6 ноя: 6 360 → 6 500 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 1440
+    },
+    {
+      "theme": "",
+      "role": "operations-director",
+      "clubRows": 2,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 900,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "3",
+          "text": "Открытых смен\n3\nДемонстрационный пример"
+        },
+        {
+          "fits": true,
+          "number": "4",
+          "text": "Вопросов в работе\n4\n1–6 ноя: 7 → 4 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 1440
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "network-director",
+      "clubRows": 6,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 900,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов в сети\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "4320000",
+          "text": "Выручка сети\n4 320 000 ₽\nНакоплено за 1–6 ноя · демо"
+        },
+        {
+          "fits": true,
+          "number": "6500",
+          "text": "Активные клиенты\n6 500\n1–6 ноя: 6 360 → 6 500 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 1440
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "operations-director",
+      "clubRows": 2,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 900,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "3",
+          "text": "Открытых смен\n3\nДемонстрационный пример"
+        },
+        {
+          "fits": true,
+          "number": "4",
+          "text": "Вопросов в работе\n4\n1–6 ноя: 7 → 4 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 1440
+    },
+    {
+      "theme": "?style=contrast",
+      "role": "network-director",
+      "clubRows": 6,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 900,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов в сети\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "4320000",
+          "text": "Выручка сети\n4 320 000 ₽\nНакоплено за 1–6 ноя · демо"
+        },
+        {
+          "fits": true,
+          "number": "6500",
+          "text": "Активные клиенты\n6 500\n1–6 ноя: 6 360 → 6 500 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 1440
+    },
+    {
+      "theme": "?style=contrast",
+      "role": "operations-director",
+      "clubRows": 2,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 900,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "3",
+          "text": "Открытых смен\n3\nДемонстрационный пример"
+        },
+        {
+          "fits": true,
+          "number": "4",
+          "text": "Вопросов в работе\n4\n1–6 ноя: 7 → 4 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 1440
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "role": "network-director",
+      "clubRows": 6,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 900,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов в сети\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "4320000",
+          "text": "Выручка сети\n4 320 000 ₽\nНакоплено за 1–6 ноя · демо"
+        },
+        {
+          "fits": true,
+          "number": "6500",
+          "text": "Активные клиенты\n6 500\n1–6 ноя: 6 360 → 6 500 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 1440
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "role": "operations-director",
+      "clubRows": 2,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 900,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "3",
+          "text": "Открытых смен\n3\nДемонстрационный пример"
+        },
+        {
+          "fits": true,
+          "number": "4",
+          "text": "Вопросов в работе\n4\n1–6 ноя: 7 → 4 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 1440
+    },
+    {
+      "theme": "",
+      "role": "network-director",
+      "clubRows": 6,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 844,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов в сети\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "4320000",
+          "text": "Выручка сети\n4 320 000 ₽\nНакоплено за 1–6 ноя · демо"
+        },
+        {
+          "fits": true,
+          "number": "6500",
+          "text": "Активные клиенты\n6 500\n1–6 ноя: 6 360 → 6 500 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 390
+    },
+    {
+      "theme": "",
+      "role": "operations-director",
+      "clubRows": 2,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 844,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "3",
+          "text": "Открытых смен\n3\nДемонстрационный пример"
+        },
+        {
+          "fits": true,
+          "number": "4",
+          "text": "Вопросов в работе\n4\n1–6 ноя: 7 → 4 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 390
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "network-director",
+      "clubRows": 6,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 844,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов в сети\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "4320000",
+          "text": "Выручка сети\n4 320 000 ₽\nНакоплено за 1–6 ноя · демо"
+        },
+        {
+          "fits": true,
+          "number": "6500",
+          "text": "Активные клиенты\n6 500\n1–6 ноя: 6 360 → 6 500 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 390
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "operations-director",
+      "clubRows": 2,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 844,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "3",
+          "text": "Открытых смен\n3\nДемонстрационный пример"
+        },
+        {
+          "fits": true,
+          "number": "4",
+          "text": "Вопросов в работе\n4\n1–6 ноя: 7 → 4 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 390
+    },
+    {
+      "theme": "?style=contrast",
+      "role": "network-director",
+      "clubRows": 6,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 844,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов в сети\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "4320000",
+          "text": "Выручка сети\n4 320 000 ₽\nНакоплено за 1–6 ноя · демо"
+        },
+        {
+          "fits": true,
+          "number": "6500",
+          "text": "Активные клиенты\n6 500\n1–6 ноя: 6 360 → 6 500 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 390
+    },
+    {
+      "theme": "?style=contrast",
+      "role": "operations-director",
+      "clubRows": 2,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 844,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "3",
+          "text": "Открытых смен\n3\nДемонстрационный пример"
+        },
+        {
+          "fits": true,
+          "number": "4",
+          "text": "Вопросов в работе\n4\n1–6 ноя: 7 → 4 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 390
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "role": "network-director",
+      "clubRows": 6,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 844,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов в сети\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "4320000",
+          "text": "Выручка сети\n4 320 000 ₽\nНакоплено за 1–6 ноя · демо"
+        },
+        {
+          "fits": true,
+          "number": "6500",
+          "text": "Активные клиенты\n6 500\n1–6 ноя: 6 360 → 6 500 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 390
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "role": "operations-director",
+      "clubRows": 2,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 844,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "3",
+          "text": "Открытых смен\n3\nДемонстрационный пример"
+        },
+        {
+          "fits": true,
+          "number": "4",
+          "text": "Вопросов в работе\n4\n1–6 ноя: 7 → 4 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 390
+    },
+    {
+      "theme": "",
+      "role": "network-director",
+      "clubRows": 6,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 740,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов в сети\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "4320000",
+          "text": "Выручка сети\n4 320 000 ₽\nНакоплено за 1–6 ноя · демо"
+        },
+        {
+          "fits": true,
+          "number": "6500",
+          "text": "Активные клиенты\n6 500\n1–6 ноя: 6 360 → 6 500 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 320
+    },
+    {
+      "theme": "",
+      "role": "operations-director",
+      "clubRows": 2,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 740,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "3",
+          "text": "Открытых смен\n3\nДемонстрационный пример"
+        },
+        {
+          "fits": true,
+          "number": "4",
+          "text": "Вопросов в работе\n4\n1–6 ноя: 7 → 4 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 320
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "network-director",
+      "clubRows": 6,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 740,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов в сети\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "4320000",
+          "text": "Выручка сети\n4 320 000 ₽\nНакоплено за 1–6 ноя · демо"
+        },
+        {
+          "fits": true,
+          "number": "6500",
+          "text": "Активные клиенты\n6 500\n1–6 ноя: 6 360 → 6 500 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 320
+    },
+    {
+      "theme": "?theme=111111",
+      "role": "operations-director",
+      "clubRows": 2,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 740,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "3",
+          "text": "Открытых смен\n3\nДемонстрационный пример"
+        },
+        {
+          "fits": true,
+          "number": "4",
+          "text": "Вопросов в работе\n4\n1–6 ноя: 7 → 4 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 320
+    },
+    {
+      "theme": "?style=contrast",
+      "role": "network-director",
+      "clubRows": 6,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 740,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов в сети\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "4320000",
+          "text": "Выручка сети\n4 320 000 ₽\nНакоплено за 1–6 ноя · демо"
+        },
+        {
+          "fits": true,
+          "number": "6500",
+          "text": "Активные клиенты\n6 500\n1–6 ноя: 6 360 → 6 500 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 320
+    },
+    {
+      "theme": "?style=contrast",
+      "role": "operations-director",
+      "clubRows": 2,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 740,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "3",
+          "text": "Открытых смен\n3\nДемонстрационный пример"
+        },
+        {
+          "fits": true,
+          "number": "4",
+          "text": "Вопросов в работе\n4\n1–6 ноя: 7 → 4 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 320
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "role": "network-director",
+      "clubRows": 6,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 740,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов в сети\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "4320000",
+          "text": "Выручка сети\n4 320 000 ₽\nНакоплено за 1–6 ноя · демо"
+        },
+        {
+          "fits": true,
+          "number": "6500",
+          "text": "Активные клиенты\n6 500\n1–6 ноя: 6 360 → 6 500 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 320
+    },
+    {
+      "theme": "?theme=202020&style=vivid",
+      "role": "operations-director",
+      "clubRows": 2,
+      "description": "Схема сети: 6 клубов — Центральный, Парк, Речной, Северный, Южный, Восточный. Условные соединения, не точная карта и не маршруты поездок.",
+      "height": 740,
+      "invalid": false,
+      "metrics": [
+        {
+          "fits": true,
+          "number": "6",
+          "text": "Клубов\n6\nЙошкар-Ола · схема · демо"
+        },
+        {
+          "fits": true,
+          "number": "3",
+          "text": "Открытых смен\n3\nДемонстрационный пример"
+        },
+        {
+          "fits": true,
+          "number": "4",
+          "text": "Вопросов в работе\n4\n1–6 ноя: 7 → 4 · демо"
+        }
+      ],
+      "opacity": "0.12",
+      "overflow": false,
+      "pins": 6,
+      "pointer": "none",
+      "routes": 7,
+      "width": 320
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "Network club picker",
+      "count": 6
+    },
+    {
+      "name": "Select new club",
+      "selected": true
+    },
+    {
+      "name": "Club directory",
+      "rows": 6,
+      "missingAddresses": 3
+    },
+    {
+      "name": "Short desktop keyboard scroll",
+      "lastBottom": 851.5703125,
+      "lastClub": "Йошкар-Ола\nАстрон · Восточный\n\n700 000 ₽ · 1 060 активных клиентов\n\n70% плана",
+      "regionBottom": 703,
+      "top": 6,
+      "settled": {
+        "lastBottom": 691.0703125,
+        "regionBottom": 703,
+        "top": 166.5
+      }
+    },
+    {
+      "name": "Styleguide",
+      "mapCount": 1,
+      "pins": 6
+    }
+  ],
+  "scope": "Six fictional clubs, schematic network backdrop, coherent demo totals. Local only.",
+  "screenshot": "/private/tmp/astron-six-clubs-20261119.jpg",
+  "finalMap": {
+    "aspect": "xMidYMid meet",
+    "caption": "Клубов в сети\n6\nЙошкар-Ола · схема · демо",
+    "pins": 6
+  },
+  "console": [],
+  "checks": {
+    "all16": "passed",
+    "typecheck": "passed",
+    "productionBuild": "passed",
+    "diffCheck": "passed",
+    "finalRepeat": [
+      "ui",
+      "handoff",
+      "build"
+    ],
+    "data": "six connected ids; directory agreement; per-day and final financial/client totals"
+  },
+  "export": "d1f01160a1ef8592",
+  "limitations": [
+    "Fictional clubs and history, schematic positions without real addresses or map service",
+    "No new sessions, visits or real cash transactions seeded in added clubs",
+    "Changed UI/scenarios, not all roles and business workflows",
+    "Local only, no commit/push"
+  ]
+}

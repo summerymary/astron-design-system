@@ -12,6 +12,7 @@ export function RoleOverview({ user }: { user: DemoUser }) {
           label: metric.label,
           value: metric.value,
           note: metric.detail,
+          graphic: metric.graphic,
         }))}
       />
       <section className="panel role-items">

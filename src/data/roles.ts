@@ -1,35 +1,22 @@
 import { astronBrand } from './branding';
+import {
+  managementMetrics,
+  managementNetworkClubs,
+  managementNetworkMetric,
+} from './management-metrics';
 import type { DemoUser, RoleDefinition, RoleHomeData, UserRole } from '../types';
 
 export const demoNetworks = [
   { id: 'astron', name: `Сеть «${astronBrand.name}»`, brand: astronBrand },
 ];
-export const demoClubs = [
-  {
-    id: 'central',
-    networkId: 'astron',
-    brand: astronBrand,
-    shortName: 'Центральный',
-    name: `${astronBrand.name} · Центральный`,
-    city: 'Йошкар-Ола',
-  },
-  {
-    id: 'park',
-    networkId: 'astron',
-    brand: astronBrand,
-    shortName: 'Парк',
-    name: `${astronBrand.name} · Парк`,
-    city: 'Йошкар-Ола',
-  },
-  {
-    id: 'river',
-    networkId: 'astron',
-    brand: astronBrand,
-    shortName: 'Речной',
-    name: `${astronBrand.name} · Речной`,
-    city: 'Йошкар-Ола',
-  },
-];
+export const demoClubs = managementNetworkClubs.map(({ id, shortName, city }) => ({
+  id,
+  networkId: 'astron',
+  brand: astronBrand,
+  shortName,
+  name: `${astronBrand.name} · ${shortName}`,
+  city,
+}));
 
 export const roles: RoleDefinition[] = [
   {
@@ -99,7 +86,7 @@ export const demoUsers: DemoUser[] = [
     email: 'accounting@example.com',
     role: 'accountant',
     networkId: 'astron',
-    clubIds: ['central', 'park', 'river'],
+    clubIds: demoClubs.map((club) => club.id),
   },
   {
     id: 'user-fitness-director',
@@ -115,7 +102,7 @@ export const demoUsers: DemoUser[] = [
     email: 'operations-director@example.com',
     role: 'operations-director',
     networkId: 'astron',
-    clubIds: ['central', 'park', 'river'],
+    clubIds: demoClubs.map((club) => club.id),
   },
   {
     id: 'user-sysadmin',
@@ -123,7 +110,7 @@ export const demoUsers: DemoUser[] = [
     email: 'sysadmin@example.com',
     role: 'sysadmin',
     networkId: 'astron',
-    clubIds: ['central', 'park', 'river'],
+    clubIds: demoClubs.map((club) => club.id),
   },
   {
     id: 'user-admin',
@@ -163,7 +150,7 @@ export const demoUsers: DemoUser[] = [
     email: 'network@example.com',
     role: 'network-director',
     networkId: 'astron',
-    clubIds: ['central', 'park', 'river'],
+    clubIds: demoClubs.map((club) => club.id),
   },
   {
     id: 'user-marketer',
@@ -171,7 +158,7 @@ export const demoUsers: DemoUser[] = [
     email: 'marketing@example.com',
     role: 'marketer',
     networkId: 'astron',
-    clubIds: ['central', 'park', 'river'],
+    clubIds: demoClubs.map((club) => club.id),
   },
 ];
 
@@ -196,9 +183,13 @@ export const roleHomes: Record<UserRole, RoleHomeData> = {
     summaryTitle: 'Расписание и команда тренеров',
     summaryText: 'Обзор фитнес-направления Центрального клуба.',
     metrics: [
-      { label: 'Занятий сегодня', value: '14', detail: 'Во всех залах клуба' },
+      {
+        label: 'Занятий сегодня',
+        value: '14',
+        detail: 'Во всех залах клуба',
+      },
       { label: 'Тренеров', value: '6', detail: 'В демокоманде клуба' },
-      { label: 'Заполняемость', value: '76%', detail: 'Пример показателя за неделю' },
+      managementMetrics.occupancy,
     ],
     itemsTitle: 'В фокусе фитнес-директора',
     itemsCaption: 'Демонстрационные задачи клуба.',
@@ -226,12 +217,16 @@ export const roleHomes: Record<UserRole, RoleHomeData> = {
   'operations-director': {
     title: 'Операционная работа',
     caption: 'Ежедневная работа клубов сети.',
-    summaryTitle: 'Три клуба в одном рабочем пространстве',
+    summaryTitle: 'Шесть клубов в одном рабочем пространстве',
     summaryText: 'Смены, команда и процессы сети «Астрон».',
     metrics: [
-      { label: 'Клубов', value: '3', detail: 'Йошкар-Ола' },
-      { label: 'Открытых смен', value: '3', detail: 'Демонстрационный пример' },
-      { label: 'Вопросов в работе', value: '4', detail: 'По клубам сети' },
+      { ...managementNetworkMetric, label: 'Клубов' },
+      {
+        label: 'Открытых смен',
+        value: '3',
+        detail: 'Демонстрационный пример',
+      },
+      managementMetrics.openIssues,
     ],
     itemsTitle: 'Операционные задачи',
     itemsCaption: 'Примеры задач по клубам сети.',
@@ -263,7 +258,7 @@ export const roleHomes: Record<UserRole, RoleHomeData> = {
     summaryTitle: 'Система клубов под наблюдением',
     summaryText: 'Демонстрационный обзор рабочих мест и системных задач.',
     metrics: [
-      { label: 'Клубов', value: '3', detail: 'В демосети' },
+      { label: 'Клубов', value: String(demoClubs.length), detail: 'В демосети' },
       { label: 'Рабочих мест', value: '4', detail: 'Точки ресепшена' },
       { label: 'Проверок доступа', value: '2', detail: 'Примеры задач' },
     ],
@@ -359,9 +354,13 @@ export const roleHomes: Record<UserRole, RoleHomeData> = {
     summaryTitle: 'Клуб движется к месячному плану',
     summaryText: 'Загрузка стабильна. В фокусе — продление абонементов и вечерние занятия.',
     metrics: [
-      { label: 'Выручка за месяц', value: '842 500 ₽', detail: '84% от плана 1 млн ₽' },
-      { label: 'Команда на смене', value: '12', detail: 'Все ключевые зоны закрыты' },
-      { label: 'Продления', value: '86%', detail: '+4 п. п. к прошлому месяцу' },
+      managementMetrics.clubRevenue,
+      {
+        label: 'Команда на смене',
+        value: '12',
+        detail: 'Все ключевые зоны закрыты',
+      },
+      managementMetrics.renewals,
     ],
     itemsTitle: 'В фокусе руководителя',
     itemsCaption: 'Операционные вопросы Центрального клуба.',
@@ -390,45 +389,33 @@ export const roleHomes: Record<UserRole, RoleHomeData> = {
     ],
     noteTitle: 'Результат складывается из деталей',
     noteText:
-      'В этом представлении собраны показатели одного клуба. Для общего обзора трёх клубов выберите роль директора сети.',
+      'В этом представлении собраны показатели одного клуба. Для общего обзора шести клубов выберите роль директора сети.',
     emptyTitle: 'Показателей пока нет',
     emptyDescription: 'Здесь появятся результаты и рабочие вопросы вашего клуба.',
   },
   'network-director': {
     title: 'Обзор сети',
-    caption: 'Три клуба. Общая картина. Единый ритм.',
+    caption: 'Шесть клубов. Общая картина. Единый ритм.',
     summaryTitle: 'Сеть «Астрон» растёт',
-    summaryText: 'Сводные примеры показателей Центрального, Паркового и Речного клубов.',
+    summaryText: 'Сводные примеры показателей шести клубов сети.',
     metrics: [
-      { label: 'Клубов в сети', value: '3', detail: 'Все в Йошкар-Оле' },
-      { label: 'Выручка сети', value: '2 415 000 ₽', detail: 'За демонстрационный месяц' },
-      { label: 'Активные клиенты', value: '3 620', detail: 'Во всех клубах сети' },
+      managementNetworkMetric,
+      managementMetrics.networkRevenue,
+      managementMetrics.activeClients,
     ],
     itemsTitle: 'Клубы сети',
     itemsCaption: 'Выручка и активная клиентская база по филиалам.',
-    items: [
-      {
-        id: 'central',
-        title: 'Астрон · Центральный',
-        subtitle: '842 500 ₽ · 1 248 активных клиентов',
-        time: 'Йошкар-Ола',
-        status: '84% плана',
-      },
-      {
-        id: 'park',
-        title: 'Астрон · Парк',
-        subtitle: '798 000 ₽ · 1 180 активных клиентов',
-        time: 'Йошкар-Ола',
-        status: '80% плана',
-      },
-      {
-        id: 'river',
-        title: 'Астрон · Речной',
-        subtitle: '774 500 ₽ · 1 192 активных клиентов',
-        time: 'Йошкар-Ола',
-        status: '77% плана',
-      },
-    ],
+    items: managementNetworkClubs.map((club) => {
+      const revenue = club.dailyRevenue.reduce((sum: number, value) => sum + value, 0);
+      const clients = club.activeClients.at(-1)!;
+      return {
+        id: club.id,
+        title: `${astronBrand.name} · ${club.shortName}`,
+        subtitle: `${revenue.toLocaleString('ru-RU')} ₽ · ${clients.toLocaleString('ru-RU')} активных клиентов`,
+        time: club.city,
+        status: `${Math.round((revenue / 1000000) * 100)}% плана`,
+      };
+    }),
     noteTitle: 'Фокус на качестве сети',
     noteText:
       'На этой неделе — общая встреча директоров и согласование декабрьской программы занятий.',
@@ -440,7 +427,7 @@ export const roleHomes: Record<UserRole, RoleHomeData> = {
     caption: 'От первого интереса — к первому посещению.',
     summaryTitle: 'Ноябрь начинается с новых знакомств',
     summaryText:
-      'Кампании работают на три клуба сети. В фокусе — пробные визиты и возвращение клиентов.',
+      'Кампании работают на шесть клубов сети. В фокусе — пробные визиты и возвращение клиентов.',
     metrics: [
       { label: 'Новые заявки', value: '128', detail: '+18% за неделю' },
       { label: 'Пробные визиты', value: '42', detail: 'Из рекламных кампаний' },
