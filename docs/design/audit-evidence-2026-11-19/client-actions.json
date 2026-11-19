@@ -1,0 +1,4773 @@
+{
+  "date": "2026-11-19",
+  "scope": "Local prototype only; current final camera-only workflow and Sell priority",
+  "views": [
+    {
+      "name": "Assigned master direct tariff",
+      "theme": "",
+      "actions": [],
+      "catalog": [
+        {
+          "bottom": 704.7890625,
+          "contentTop": 520.7890625,
+          "heading": "Тарифы · Мастер-тренер",
+          "height": 244,
+          "right": 333,
+          "width": 300,
+          "x": 33,
+          "y": 460.7890625
+        }
+      ],
+      "height": 844,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 390
+    },
+    {
+      "name": "Assigned trainer category direct tariffs",
+      "theme": "",
+      "actions": [],
+      "catalog": [
+        {
+          "bottom": 776.3984375,
+          "contentTop": 592.3984375,
+          "heading": "Тарифы · Старший тренер",
+          "height": 240,
+          "right": 1351,
+          "width": 1046,
+          "x": 305,
+          "y": 536.3984375
+        }
+      ],
+      "height": 1000,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 1440
+    },
+    {
+      "name": "Assigned trainer category direct tariffs",
+      "theme": "?theme=111111",
+      "actions": [],
+      "catalog": [
+        {
+          "bottom": 776.3984375,
+          "contentTop": 592.3984375,
+          "heading": "Тарифы · Старший тренер",
+          "height": 240,
+          "right": 1351,
+          "width": 1046,
+          "x": 305,
+          "y": 536.3984375
+        }
+      ],
+      "height": 1000,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 1440
+    },
+    {
+      "name": "Assigned trainer category direct tariffs",
+      "theme": "?style=contrast",
+      "actions": [],
+      "catalog": [
+        {
+          "bottom": 776.3984375,
+          "contentTop": 592.3984375,
+          "heading": "Тарифы · Старший тренер",
+          "height": 240,
+          "right": 1351,
+          "width": 1046,
+          "x": 305,
+          "y": 536.3984375
+        }
+      ],
+      "height": 1000,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 1440
+    },
+    {
+      "name": "Assigned trainer category direct tariffs",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [],
+      "catalog": [
+        {
+          "bottom": 776.3984375,
+          "contentTop": 592.3984375,
+          "heading": "Тарифы · Старший тренер",
+          "height": 240,
+          "right": 1351,
+          "width": 1046,
+          "x": 305,
+          "y": 536.3984375
+        }
+      ],
+      "height": 1000,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 1440
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": true,
+      "overflow": false,
+      "viewport": 1440,
+      "width": 264,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "?theme=111111",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": true,
+      "overflow": false,
+      "viewport": 1440,
+      "width": 264,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "?style=contrast",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": true,
+      "overflow": false,
+      "viewport": 1440,
+      "width": 264,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "?theme=202020&style=vivid",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": true,
+      "overflow": false,
+      "viewport": 1440,
+      "width": 264,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": true,
+      "overflow": false,
+      "viewport": 1024,
+      "width": 229.7578125,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "?theme=111111",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": true,
+      "overflow": false,
+      "viewport": 1024,
+      "width": 229.7578125,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "?style=contrast",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": true,
+      "overflow": false,
+      "viewport": 1024,
+      "width": 229.7578125,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "?theme=202020&style=vivid",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": true,
+      "overflow": false,
+      "viewport": 1024,
+      "width": 229.7578125,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": false,
+      "overflow": false,
+      "viewport": 390,
+      "width": 44,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "?theme=111111",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": false,
+      "overflow": false,
+      "viewport": 390,
+      "width": 44,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "?style=contrast",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": false,
+      "overflow": false,
+      "viewport": 390,
+      "width": 44,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "?theme=202020&style=vivid",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": false,
+      "overflow": false,
+      "viewport": 390,
+      "width": 44,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": false,
+      "overflow": false,
+      "viewport": 320,
+      "width": 44,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "?theme=111111",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": false,
+      "overflow": false,
+      "viewport": 320,
+      "width": 44,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "?style=contrast",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": false,
+      "overflow": false,
+      "viewport": 320,
+      "width": 44,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Final retake button geometry",
+      "theme": "?theme=202020&style=vivid",
+      "fitsPhoto": true,
+      "height": 44,
+      "labelFits": true,
+      "labelVisible": false,
+      "overflow": false,
+      "viewport": 320,
+      "width": 44,
+      "actions": [],
+      "modal": []
+    },
+    {
+      "name": "Profile",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1117.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1065.484375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1181.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1129.484375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1245.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1193.484375
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 592.890625,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 548.890625
+        }
+      ],
+      "width": 320
+    },
+    {
+      "name": "Retake",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 916.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 864.484375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 980.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 928.484375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1044.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 992.484375
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [
+        {
+          "bottom": 663.6484375,
+          "camera": {
+            "bottom": 420.6484375,
+            "height": 244,
+            "right": 276,
+            "width": 244,
+            "x": 32,
+            "y": 176.6484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 646.6484375,
+            "height": 89,
+            "right": 288,
+            "width": 256,
+            "x": 32,
+            "y": 557.6484375
+          },
+          "height": 587.296875,
+          "right": 305,
+          "width": 290,
+          "x": 15,
+          "y": 76.3515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 391.890625,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 347.890625
+        }
+      ],
+      "width": 320
+    },
+    {
+      "name": "New client",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1117.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1065.484375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1181.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1129.484375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1245.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1193.484375
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [
+        {
+          "bottom": 724,
+          "camera": {
+            "bottom": 742,
+            "height": 246,
+            "right": 279,
+            "width": 246,
+            "x": 33,
+            "y": 496
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 707,
+            "height": 121,
+            "right": 287,
+            "width": 254,
+            "x": 33,
+            "y": 586
+          },
+          "height": 708,
+          "right": 304,
+          "width": 288,
+          "x": 16,
+          "y": 16
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 592.890625,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 548.890625
+        }
+      ],
+      "width": 320
+    },
+    {
+      "name": "100007 registration",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 695.28125,
+          "height": 52,
+          "right": 170.4375,
+          "width": 137.4375,
+          "x": 33,
+          "y": 643.28125
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 757.28125,
+          "height": 52,
+          "right": 238.5078125,
+          "width": 205.5078125,
+          "x": 33,
+          "y": 705.28125
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 819.28125,
+          "height": 52,
+          "right": 165.96875,
+          "width": 132.96875,
+          "x": 33,
+          "y": 767.28125
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 320
+    },
+    {
+      "name": "Profile",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1117.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1065.484375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1181.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1129.484375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1245.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1193.484375
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 592.890625,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 548.890625
+        }
+      ],
+      "width": 320
+    },
+    {
+      "name": "Retake",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 916.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 864.484375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 980.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 928.484375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1044.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 992.484375
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [
+        {
+          "bottom": 663.6484375,
+          "camera": {
+            "bottom": 420.6484375,
+            "height": 244,
+            "right": 276,
+            "width": 244,
+            "x": 32,
+            "y": 176.6484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 646.6484375,
+            "height": 89,
+            "right": 288,
+            "width": 256,
+            "x": 32,
+            "y": 557.6484375
+          },
+          "height": 587.296875,
+          "right": 305,
+          "width": 290,
+          "x": 15,
+          "y": 76.3515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 391.890625,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 347.890625
+        }
+      ],
+      "width": 320
+    },
+    {
+      "name": "New client",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1117.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1065.484375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1181.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1129.484375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1245.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1193.484375
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [
+        {
+          "bottom": 724,
+          "camera": {
+            "bottom": 742,
+            "height": 246,
+            "right": 279,
+            "width": 246,
+            "x": 33,
+            "y": 496
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 707,
+            "height": 121,
+            "right": 287,
+            "width": 254,
+            "x": 33,
+            "y": 586
+          },
+          "height": 708,
+          "right": 304,
+          "width": 288,
+          "x": 16,
+          "y": 16
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 592.890625,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 548.890625
+        }
+      ],
+      "width": 320
+    },
+    {
+      "name": "100007 registration",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 695.28125,
+          "height": 52,
+          "right": 170.4375,
+          "width": 137.4375,
+          "x": 33,
+          "y": 643.28125
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 757.28125,
+          "height": 52,
+          "right": 238.5078125,
+          "width": 205.5078125,
+          "x": 33,
+          "y": 705.28125
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 819.28125,
+          "height": 52,
+          "right": 165.96875,
+          "width": 132.96875,
+          "x": 33,
+          "y": 767.28125
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 320
+    },
+    {
+      "name": "Profile",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1117.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1065.484375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1181.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1129.484375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1245.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1193.484375
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 592.890625,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 548.890625
+        }
+      ],
+      "width": 320
+    },
+    {
+      "name": "Retake",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 916.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 864.484375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 980.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 928.484375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1044.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 992.484375
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [
+        {
+          "bottom": 663.6484375,
+          "camera": {
+            "bottom": 420.6484375,
+            "height": 244,
+            "right": 276,
+            "width": 244,
+            "x": 32,
+            "y": 176.6484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 646.6484375,
+            "height": 89,
+            "right": 288,
+            "width": 256,
+            "x": 32,
+            "y": 557.6484375
+          },
+          "height": 587.296875,
+          "right": 305,
+          "width": 290,
+          "x": 15,
+          "y": 76.3515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 391.890625,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 347.890625
+        }
+      ],
+      "width": 320
+    },
+    {
+      "name": "New client",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1117.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1065.484375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1181.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1129.484375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1245.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1193.484375
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [
+        {
+          "bottom": 724,
+          "camera": {
+            "bottom": 742,
+            "height": 246,
+            "right": 279,
+            "width": 246,
+            "x": 33,
+            "y": 496
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 707,
+            "height": 121,
+            "right": 287,
+            "width": 254,
+            "x": 33,
+            "y": 586
+          },
+          "height": 708,
+          "right": 304,
+          "width": 288,
+          "x": 16,
+          "y": 16
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 592.890625,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 548.890625
+        }
+      ],
+      "width": 320
+    },
+    {
+      "name": "100007 registration",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 695.28125,
+          "height": 52,
+          "right": 170.4375,
+          "width": 137.4375,
+          "x": 33,
+          "y": 643.28125
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 757.28125,
+          "height": 52,
+          "right": 238.5078125,
+          "width": 205.5078125,
+          "x": 33,
+          "y": 705.28125
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 819.28125,
+          "height": 52,
+          "right": 165.96875,
+          "width": 132.96875,
+          "x": 33,
+          "y": 767.28125
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 320
+    },
+    {
+      "name": "Profile",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1117.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1065.484375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1181.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1129.484375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1245.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1193.484375
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 592.890625,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 548.890625
+        }
+      ],
+      "width": 320
+    },
+    {
+      "name": "Retake",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 916.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 864.484375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 980.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 928.484375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1044.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 992.484375
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [
+        {
+          "bottom": 663.6484375,
+          "camera": {
+            "bottom": 420.6484375,
+            "height": 244,
+            "right": 276,
+            "width": 244,
+            "x": 32,
+            "y": 176.6484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 646.6484375,
+            "height": 89,
+            "right": 288,
+            "width": 256,
+            "x": 32,
+            "y": 557.6484375
+          },
+          "height": 587.296875,
+          "right": 305,
+          "width": 290,
+          "x": 15,
+          "y": 76.3515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 391.890625,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 347.890625
+        }
+      ],
+      "width": 320
+    },
+    {
+      "name": "New client",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1117.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1065.484375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1181.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1129.484375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1245.484375,
+          "height": 52,
+          "right": 271,
+          "width": 234,
+          "x": 37,
+          "y": 1193.484375
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [
+        {
+          "bottom": 724,
+          "camera": {
+            "bottom": 742,
+            "height": 246,
+            "right": 279,
+            "width": 246,
+            "x": 33,
+            "y": 496
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 707,
+            "height": 121,
+            "right": 287,
+            "width": 254,
+            "x": 33,
+            "y": 586
+          },
+          "height": 708,
+          "right": 304,
+          "width": 288,
+          "x": 16,
+          "y": 16
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 592.890625,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 548.890625
+        }
+      ],
+      "width": 320
+    },
+    {
+      "name": "100007 registration",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 695.28125,
+          "height": 52,
+          "right": 170.4375,
+          "width": 137.4375,
+          "x": 33,
+          "y": 643.28125
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 757.28125,
+          "height": 52,
+          "right": 238.5078125,
+          "width": 205.5078125,
+          "x": 33,
+          "y": 705.28125
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 819.28125,
+          "height": 52,
+          "right": 165.96875,
+          "width": 132.96875,
+          "x": 33,
+          "y": 767.28125
+        }
+      ],
+      "catalog": [],
+      "height": 740,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 320
+    },
+    {
+      "name": "Profile",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1000.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 948.1875
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1064.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1012.1875
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1128.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1076.1875
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 572.59375,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 528.59375
+        }
+      ],
+      "width": 390
+    },
+    {
+      "name": "Retake",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 871.6875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 819.6875
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 935.6875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 883.6875
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 999.6875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 947.6875
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [
+        {
+          "bottom": 738.6484375,
+          "camera": {
+            "bottom": 519.6484375,
+            "height": 314,
+            "right": 346,
+            "width": 314,
+            "x": 32,
+            "y": 205.6484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 721.6484375,
+            "height": 65,
+            "right": 358,
+            "width": 326,
+            "x": 32,
+            "y": 656.6484375
+          },
+          "height": 633.296875,
+          "right": 375,
+          "width": 360,
+          "x": 15,
+          "y": 105.3515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 444.09375,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 400.09375
+        }
+      ],
+      "width": 390
+    },
+    {
+      "name": "New client",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1000.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 948.1875
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1064.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1012.1875
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1128.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1076.1875
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [
+        {
+          "bottom": 828,
+          "camera": {
+            "bottom": 812,
+            "height": 316,
+            "right": 349,
+            "width": 316,
+            "x": 33,
+            "y": 496
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 811,
+            "height": 65,
+            "right": 357,
+            "width": 324,
+            "x": 33,
+            "y": 746
+          },
+          "height": 812,
+          "right": 374,
+          "width": 358,
+          "x": 16,
+          "y": 16
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 572.59375,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 528.59375
+        }
+      ],
+      "width": 390
+    },
+    {
+      "name": "100007 registration",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 674.984375,
+          "height": 52,
+          "right": 170.4375,
+          "width": 137.4375,
+          "x": 33,
+          "y": 622.984375
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 736.984375,
+          "height": 52,
+          "right": 238.5078125,
+          "width": 205.5078125,
+          "x": 33,
+          "y": 684.984375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 798.984375,
+          "height": 52,
+          "right": 165.96875,
+          "width": 132.96875,
+          "x": 33,
+          "y": 746.984375
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 390
+    },
+    {
+      "name": "Profile",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1000.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 948.1875
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1064.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1012.1875
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1128.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1076.1875
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 572.59375,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 528.59375
+        }
+      ],
+      "width": 390
+    },
+    {
+      "name": "Retake",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 871.6875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 819.6875
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 935.6875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 883.6875
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 999.6875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 947.6875
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [
+        {
+          "bottom": 738.6484375,
+          "camera": {
+            "bottom": 519.6484375,
+            "height": 314,
+            "right": 346,
+            "width": 314,
+            "x": 32,
+            "y": 205.6484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 721.6484375,
+            "height": 65,
+            "right": 358,
+            "width": 326,
+            "x": 32,
+            "y": 656.6484375
+          },
+          "height": 633.296875,
+          "right": 375,
+          "width": 360,
+          "x": 15,
+          "y": 105.3515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 444.09375,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 400.09375
+        }
+      ],
+      "width": 390
+    },
+    {
+      "name": "New client",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1000.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 948.1875
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1064.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1012.1875
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1128.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1076.1875
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [
+        {
+          "bottom": 828,
+          "camera": {
+            "bottom": 812,
+            "height": 316,
+            "right": 349,
+            "width": 316,
+            "x": 33,
+            "y": 496
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 811,
+            "height": 65,
+            "right": 357,
+            "width": 324,
+            "x": 33,
+            "y": 746
+          },
+          "height": 812,
+          "right": 374,
+          "width": 358,
+          "x": 16,
+          "y": 16
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 572.59375,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 528.59375
+        }
+      ],
+      "width": 390
+    },
+    {
+      "name": "100007 registration",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 674.984375,
+          "height": 52,
+          "right": 170.4375,
+          "width": 137.4375,
+          "x": 33,
+          "y": 622.984375
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 736.984375,
+          "height": 52,
+          "right": 238.5078125,
+          "width": 205.5078125,
+          "x": 33,
+          "y": 684.984375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 798.984375,
+          "height": 52,
+          "right": 165.96875,
+          "width": 132.96875,
+          "x": 33,
+          "y": 746.984375
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 390
+    },
+    {
+      "name": "Profile",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1000.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 948.1875
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1064.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1012.1875
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1128.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1076.1875
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 572.59375,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 528.59375
+        }
+      ],
+      "width": 390
+    },
+    {
+      "name": "Retake",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 871.6875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 819.6875
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 935.6875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 883.6875
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 999.6875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 947.6875
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [
+        {
+          "bottom": 738.6484375,
+          "camera": {
+            "bottom": 519.6484375,
+            "height": 314,
+            "right": 346,
+            "width": 314,
+            "x": 32,
+            "y": 205.6484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 721.6484375,
+            "height": 65,
+            "right": 358,
+            "width": 326,
+            "x": 32,
+            "y": 656.6484375
+          },
+          "height": 633.296875,
+          "right": 375,
+          "width": 360,
+          "x": 15,
+          "y": 105.3515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 444.09375,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 400.09375
+        }
+      ],
+      "width": 390
+    },
+    {
+      "name": "New client",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1000.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 948.1875
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1064.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1012.1875
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1128.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1076.1875
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [
+        {
+          "bottom": 828,
+          "camera": {
+            "bottom": 812,
+            "height": 316,
+            "right": 349,
+            "width": 316,
+            "x": 33,
+            "y": 496
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 811,
+            "height": 65,
+            "right": 357,
+            "width": 324,
+            "x": 33,
+            "y": 746
+          },
+          "height": 812,
+          "right": 374,
+          "width": 358,
+          "x": 16,
+          "y": 16
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 572.59375,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 528.59375
+        }
+      ],
+      "width": 390
+    },
+    {
+      "name": "100007 registration",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 674.984375,
+          "height": 52,
+          "right": 170.4375,
+          "width": 137.4375,
+          "x": 33,
+          "y": 622.984375
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 736.984375,
+          "height": 52,
+          "right": 238.5078125,
+          "width": 205.5078125,
+          "x": 33,
+          "y": 684.984375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 798.984375,
+          "height": 52,
+          "right": 165.96875,
+          "width": 132.96875,
+          "x": 33,
+          "y": 746.984375
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 390
+    },
+    {
+      "name": "Profile",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1000.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 948.1875
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1064.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1012.1875
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1128.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1076.1875
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 572.59375,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 528.59375
+        }
+      ],
+      "width": 390
+    },
+    {
+      "name": "Retake",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 871.6875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 819.6875
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 935.6875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 883.6875
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 999.6875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 947.6875
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [
+        {
+          "bottom": 738.6484375,
+          "camera": {
+            "bottom": 519.6484375,
+            "height": 314,
+            "right": 346,
+            "width": 314,
+            "x": 32,
+            "y": 205.6484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 721.6484375,
+            "height": 65,
+            "right": 358,
+            "width": 326,
+            "x": 32,
+            "y": 656.6484375
+          },
+          "height": 633.296875,
+          "right": 375,
+          "width": 360,
+          "x": 15,
+          "y": 105.3515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 444.09375,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 400.09375
+        }
+      ],
+      "width": 390
+    },
+    {
+      "name": "New client",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 1000.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 948.1875
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 1064.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1012.1875
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 1128.1875,
+          "height": 52,
+          "right": 341,
+          "width": 304,
+          "x": 37,
+          "y": 1076.1875
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [
+        {
+          "bottom": 828,
+          "camera": {
+            "bottom": 812,
+            "height": 316,
+            "right": 349,
+            "width": 316,
+            "x": 33,
+            "y": 496
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 811,
+            "height": 65,
+            "right": 357,
+            "width": 324,
+            "x": 33,
+            "y": 746
+          },
+          "height": 812,
+          "right": 374,
+          "width": 358,
+          "x": 16,
+          "y": 16
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 572.59375,
+          "height": 44,
+          "right": 133,
+          "width": 44,
+          "x": 89,
+          "y": 528.59375
+        }
+      ],
+      "width": 390
+    },
+    {
+      "name": "100007 registration",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 674.984375,
+          "height": 52,
+          "right": 170.4375,
+          "width": 137.4375,
+          "x": 33,
+          "y": 622.984375
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 736.984375,
+          "height": 52,
+          "right": 238.5078125,
+          "width": 205.5078125,
+          "x": 33,
+          "y": 684.984375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 798.984375,
+          "height": 52,
+          "right": 165.96875,
+          "width": 132.96875,
+          "x": 33,
+          "y": 746.984375
+        }
+      ],
+      "catalog": [],
+      "height": 844,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 390
+    },
+    {
+      "name": "Profile",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 708.59375,
+          "height": 52,
+          "right": 692.1953125,
+          "width": 137.4375,
+          "x": 554.7578125,
+          "y": 656.59375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 708.59375,
+          "height": 52,
+          "right": 937.9765625,
+          "width": 233.78125,
+          "x": 704.1953125,
+          "y": 656.59375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 772.59375,
+          "height": 52,
+          "right": 687.7265625,
+          "width": 132.96875,
+          "x": 554.7578125,
+          "y": 720.59375
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 764.59375,
+          "height": 44,
+          "right": 522.7578125,
+          "width": 229.7578125,
+          "x": 293,
+          "y": 720.59375
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "name": "Retake",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 692.1953125,
+          "width": 137.4375,
+          "x": 554.7578125,
+          "y": 386.59375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 937.9765625,
+          "width": 233.78125,
+          "x": 704.1953125,
+          "y": 386.59375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 502.59375,
+          "height": 52,
+          "right": 687.7265625,
+          "width": 132.96875,
+          "x": 554.7578125,
+          "y": 450.59375
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [
+        {
+          "bottom": 701.1484375,
+          "camera": {
+            "bottom": 495.1484375,
+            "height": 320,
+            "right": 627,
+            "width": 320,
+            "x": 307,
+            "y": 175.1484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 676.1484375,
+            "height": 65,
+            "right": 717,
+            "width": 410,
+            "x": 307,
+            "y": 611.1484375
+          },
+          "height": 634.296875,
+          "right": 742,
+          "width": 460,
+          "x": 282,
+          "y": 66.8515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 494.59375,
+          "height": 44,
+          "right": 522.7578125,
+          "width": 229.7578125,
+          "x": 293,
+          "y": 450.59375
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "name": "New client",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 692.1953125,
+          "width": 137.4375,
+          "x": 554.7578125,
+          "y": 386.59375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 937.9765625,
+          "width": 233.78125,
+          "x": 704.1953125,
+          "y": 386.59375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 502.59375,
+          "height": 52,
+          "right": 687.7265625,
+          "width": 132.96875,
+          "x": 554.7578125,
+          "y": 450.59375
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [
+        {
+          "bottom": 722,
+          "camera": {
+            "bottom": 454,
+            "height": 280,
+            "right": 969,
+            "width": 280,
+            "x": 689,
+            "y": 174
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 697,
+            "height": 65,
+            "right": 977,
+            "width": 930,
+            "x": 47,
+            "y": 632
+          },
+          "height": 676,
+          "right": 1002,
+          "width": 980,
+          "x": 22,
+          "y": 46
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 494.59375,
+          "height": 44,
+          "right": 522.7578125,
+          "width": 229.7578125,
+          "x": 293,
+          "y": 450.59375
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "name": "100007 registration",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 430,
+          "height": 52,
+          "right": 426.4375,
+          "width": 137.4375,
+          "x": 289,
+          "y": 378
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 430,
+          "height": 52,
+          "right": 641.9453125,
+          "width": 205.5078125,
+          "x": 436.4375,
+          "y": 378
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 430,
+          "height": 52,
+          "right": 784.9140625,
+          "width": 132.96875,
+          "x": 651.9453125,
+          "y": 378
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 1024
+    },
+    {
+      "name": "Profile",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 708.59375,
+          "height": 52,
+          "right": 692.1953125,
+          "width": 137.4375,
+          "x": 554.7578125,
+          "y": 656.59375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 708.59375,
+          "height": 52,
+          "right": 937.9765625,
+          "width": 233.78125,
+          "x": 704.1953125,
+          "y": 656.59375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 772.59375,
+          "height": 52,
+          "right": 687.7265625,
+          "width": 132.96875,
+          "x": 554.7578125,
+          "y": 720.59375
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 764.59375,
+          "height": 44,
+          "right": 522.7578125,
+          "width": 229.7578125,
+          "x": 293,
+          "y": 720.59375
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "name": "Retake",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 692.1953125,
+          "width": 137.4375,
+          "x": 554.7578125,
+          "y": 386.59375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 937.9765625,
+          "width": 233.78125,
+          "x": 704.1953125,
+          "y": 386.59375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 502.59375,
+          "height": 52,
+          "right": 687.7265625,
+          "width": 132.96875,
+          "x": 554.7578125,
+          "y": 450.59375
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [
+        {
+          "bottom": 701.1484375,
+          "camera": {
+            "bottom": 495.1484375,
+            "height": 320,
+            "right": 627,
+            "width": 320,
+            "x": 307,
+            "y": 175.1484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 676.1484375,
+            "height": 65,
+            "right": 717,
+            "width": 410,
+            "x": 307,
+            "y": 611.1484375
+          },
+          "height": 634.296875,
+          "right": 742,
+          "width": 460,
+          "x": 282,
+          "y": 66.8515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 494.59375,
+          "height": 44,
+          "right": 522.7578125,
+          "width": 229.7578125,
+          "x": 293,
+          "y": 450.59375
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "name": "New client",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 692.1953125,
+          "width": 137.4375,
+          "x": 554.7578125,
+          "y": 386.59375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 937.9765625,
+          "width": 233.78125,
+          "x": 704.1953125,
+          "y": 386.59375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 502.59375,
+          "height": 52,
+          "right": 687.7265625,
+          "width": 132.96875,
+          "x": 554.7578125,
+          "y": 450.59375
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [
+        {
+          "bottom": 722,
+          "camera": {
+            "bottom": 454,
+            "height": 280,
+            "right": 969,
+            "width": 280,
+            "x": 689,
+            "y": 174
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 697,
+            "height": 65,
+            "right": 977,
+            "width": 930,
+            "x": 47,
+            "y": 632
+          },
+          "height": 676,
+          "right": 1002,
+          "width": 980,
+          "x": 22,
+          "y": 46
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 494.59375,
+          "height": 44,
+          "right": 522.7578125,
+          "width": 229.7578125,
+          "x": 293,
+          "y": 450.59375
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "name": "100007 registration",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 430,
+          "height": 52,
+          "right": 426.4375,
+          "width": 137.4375,
+          "x": 289,
+          "y": 378
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 430,
+          "height": 52,
+          "right": 641.9453125,
+          "width": 205.5078125,
+          "x": 436.4375,
+          "y": 378
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 430,
+          "height": 52,
+          "right": 784.9140625,
+          "width": 132.96875,
+          "x": 651.9453125,
+          "y": 378
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 1024
+    },
+    {
+      "name": "Profile",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 708.59375,
+          "height": 52,
+          "right": 692.1953125,
+          "width": 137.4375,
+          "x": 554.7578125,
+          "y": 656.59375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 708.59375,
+          "height": 52,
+          "right": 937.9765625,
+          "width": 233.78125,
+          "x": 704.1953125,
+          "y": 656.59375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 772.59375,
+          "height": 52,
+          "right": 687.7265625,
+          "width": 132.96875,
+          "x": 554.7578125,
+          "y": 720.59375
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 764.59375,
+          "height": 44,
+          "right": 522.7578125,
+          "width": 229.7578125,
+          "x": 293,
+          "y": 720.59375
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "name": "Retake",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 692.1953125,
+          "width": 137.4375,
+          "x": 554.7578125,
+          "y": 386.59375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 937.9765625,
+          "width": 233.78125,
+          "x": 704.1953125,
+          "y": 386.59375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 502.59375,
+          "height": 52,
+          "right": 687.7265625,
+          "width": 132.96875,
+          "x": 554.7578125,
+          "y": 450.59375
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [
+        {
+          "bottom": 701.1484375,
+          "camera": {
+            "bottom": 495.1484375,
+            "height": 320,
+            "right": 627,
+            "width": 320,
+            "x": 307,
+            "y": 175.1484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 676.1484375,
+            "height": 65,
+            "right": 717,
+            "width": 410,
+            "x": 307,
+            "y": 611.1484375
+          },
+          "height": 634.296875,
+          "right": 742,
+          "width": 460,
+          "x": 282,
+          "y": 66.8515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 494.59375,
+          "height": 44,
+          "right": 522.7578125,
+          "width": 229.7578125,
+          "x": 293,
+          "y": 450.59375
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "name": "New client",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 692.1953125,
+          "width": 137.4375,
+          "x": 554.7578125,
+          "y": 386.59375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 937.9765625,
+          "width": 233.78125,
+          "x": 704.1953125,
+          "y": 386.59375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 502.59375,
+          "height": 52,
+          "right": 687.7265625,
+          "width": 132.96875,
+          "x": 554.7578125,
+          "y": 450.59375
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [
+        {
+          "bottom": 722,
+          "camera": {
+            "bottom": 454,
+            "height": 280,
+            "right": 969,
+            "width": 280,
+            "x": 689,
+            "y": 174
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 697,
+            "height": 65,
+            "right": 977,
+            "width": 930,
+            "x": 47,
+            "y": 632
+          },
+          "height": 676,
+          "right": 1002,
+          "width": 980,
+          "x": 22,
+          "y": 46
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 494.59375,
+          "height": 44,
+          "right": 522.7578125,
+          "width": 229.7578125,
+          "x": 293,
+          "y": 450.59375
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "name": "100007 registration",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 430,
+          "height": 52,
+          "right": 426.4375,
+          "width": 137.4375,
+          "x": 289,
+          "y": 378
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 430,
+          "height": 52,
+          "right": 641.9453125,
+          "width": 205.5078125,
+          "x": 436.4375,
+          "y": 378
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 430,
+          "height": 52,
+          "right": 784.9140625,
+          "width": 132.96875,
+          "x": 651.9453125,
+          "y": 378
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 1024
+    },
+    {
+      "name": "Profile",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 708.59375,
+          "height": 52,
+          "right": 692.1953125,
+          "width": 137.4375,
+          "x": 554.7578125,
+          "y": 656.59375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 708.59375,
+          "height": 52,
+          "right": 937.9765625,
+          "width": 233.78125,
+          "x": 704.1953125,
+          "y": 656.59375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 772.59375,
+          "height": 52,
+          "right": 687.7265625,
+          "width": 132.96875,
+          "x": 554.7578125,
+          "y": 720.59375
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 764.59375,
+          "height": 44,
+          "right": 522.7578125,
+          "width": 229.7578125,
+          "x": 293,
+          "y": 720.59375
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "name": "Retake",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 692.1953125,
+          "width": 137.4375,
+          "x": 554.7578125,
+          "y": 386.59375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 937.9765625,
+          "width": 233.78125,
+          "x": 704.1953125,
+          "y": 386.59375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 502.59375,
+          "height": 52,
+          "right": 687.7265625,
+          "width": 132.96875,
+          "x": 554.7578125,
+          "y": 450.59375
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [
+        {
+          "bottom": 701.1484375,
+          "camera": {
+            "bottom": 495.1484375,
+            "height": 320,
+            "right": 627,
+            "width": 320,
+            "x": 307,
+            "y": 175.1484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 676.1484375,
+            "height": 65,
+            "right": 717,
+            "width": 410,
+            "x": 307,
+            "y": 611.1484375
+          },
+          "height": 634.296875,
+          "right": 742,
+          "width": 460,
+          "x": 282,
+          "y": 66.8515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 494.59375,
+          "height": 44,
+          "right": 522.7578125,
+          "width": 229.7578125,
+          "x": 293,
+          "y": 450.59375
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "name": "New client",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 692.1953125,
+          "width": 137.4375,
+          "x": 554.7578125,
+          "y": 386.59375
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 438.59375,
+          "height": 52,
+          "right": 937.9765625,
+          "width": 233.78125,
+          "x": 704.1953125,
+          "y": 386.59375
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 502.59375,
+          "height": 52,
+          "right": 687.7265625,
+          "width": 132.96875,
+          "x": 554.7578125,
+          "y": 450.59375
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [
+        {
+          "bottom": 722,
+          "camera": {
+            "bottom": 454,
+            "height": 280,
+            "right": 969,
+            "width": 280,
+            "x": 689,
+            "y": 174
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 697,
+            "height": 65,
+            "right": 977,
+            "width": 930,
+            "x": 47,
+            "y": 632
+          },
+          "height": 676,
+          "right": 1002,
+          "width": 980,
+          "x": 22,
+          "y": 46
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 494.59375,
+          "height": 44,
+          "right": 522.7578125,
+          "width": 229.7578125,
+          "x": 293,
+          "y": 450.59375
+        }
+      ],
+      "width": 1024
+    },
+    {
+      "name": "100007 registration",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 430,
+          "height": 52,
+          "right": 426.4375,
+          "width": 137.4375,
+          "x": 289,
+          "y": 378
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 430,
+          "height": 52,
+          "right": 641.9453125,
+          "width": 205.5078125,
+          "x": 436.4375,
+          "y": 378
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 430,
+          "height": 52,
+          "right": 784.9140625,
+          "width": 132.96875,
+          "x": 651.9453125,
+          "y": 378
+        }
+      ],
+      "catalog": [],
+      "height": 768,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 1024
+    },
+    {
+      "name": "Profile",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 634.5,
+          "height": 52,
+          "right": 742.4375,
+          "width": 137.4375,
+          "x": 605,
+          "y": 582.5
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 634.5,
+          "height": 52,
+          "right": 988.21875,
+          "width": 233.78125,
+          "x": 754.4375,
+          "y": 582.5
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 634.5,
+          "height": 52,
+          "right": 1133.1875,
+          "width": 132.96875,
+          "x": 1000.21875,
+          "y": 582.5
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 626.5,
+          "height": 44,
+          "right": 573,
+          "width": 264,
+          "x": 309,
+          "y": 582.5
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "Retake",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 742.4375,
+          "width": 137.4375,
+          "x": 605,
+          "y": 566.5
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 988.21875,
+          "width": 233.78125,
+          "x": 754.4375,
+          "y": 566.5
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 1133.1875,
+          "width": 132.96875,
+          "x": 1000.21875,
+          "y": 566.5
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [
+        {
+          "bottom": 817.1484375,
+          "camera": {
+            "bottom": 611.1484375,
+            "height": 320,
+            "right": 835,
+            "width": 320,
+            "x": 515,
+            "y": 291.1484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 792.1484375,
+            "height": 65,
+            "right": 925,
+            "width": 410,
+            "x": 515,
+            "y": 727.1484375
+          },
+          "height": 634.296875,
+          "right": 950,
+          "width": 460,
+          "x": 490,
+          "y": 182.8515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 610.5,
+          "height": 44,
+          "right": 573,
+          "width": 264,
+          "x": 309,
+          "y": 566.5
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "New client",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 742.4375,
+          "width": 137.4375,
+          "x": 605,
+          "y": 566.5
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 988.21875,
+          "width": 233.78125,
+          "x": 754.4375,
+          "y": 566.5
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 1133.1875,
+          "width": 132.96875,
+          "x": 1000.21875,
+          "y": 566.5
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [
+        {
+          "bottom": 838,
+          "camera": {
+            "bottom": 570,
+            "height": 280,
+            "right": 1287,
+            "width": 280,
+            "x": 1007,
+            "y": 290
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 813,
+            "height": 65,
+            "right": 1295,
+            "width": 1150,
+            "x": 145,
+            "y": 748
+          },
+          "height": 676,
+          "right": 1320,
+          "width": 1200,
+          "x": 120,
+          "y": 162
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 610.5,
+          "height": 44,
+          "right": 573,
+          "width": 264,
+          "x": 309,
+          "y": 566.5
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "100007 registration",
+      "theme": "",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 344,
+          "height": 52,
+          "right": 1004.5234375,
+          "width": 137.4375,
+          "x": 867.0859375,
+          "y": 292
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 344,
+          "height": 52,
+          "right": 1220.03125,
+          "width": 205.5078125,
+          "x": 1014.5234375,
+          "y": 292
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 344,
+          "height": 52,
+          "right": 1363,
+          "width": 132.96875,
+          "x": 1230.03125,
+          "y": 292
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 1440
+    },
+    {
+      "name": "Profile",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 634.5,
+          "height": 52,
+          "right": 742.4375,
+          "width": 137.4375,
+          "x": 605,
+          "y": 582.5
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 634.5,
+          "height": 52,
+          "right": 988.21875,
+          "width": 233.78125,
+          "x": 754.4375,
+          "y": 582.5
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 634.5,
+          "height": 52,
+          "right": 1133.1875,
+          "width": 132.96875,
+          "x": 1000.21875,
+          "y": 582.5
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 626.5,
+          "height": 44,
+          "right": 573,
+          "width": 264,
+          "x": 309,
+          "y": 582.5
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "Retake",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 742.4375,
+          "width": 137.4375,
+          "x": 605,
+          "y": 566.5
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 988.21875,
+          "width": 233.78125,
+          "x": 754.4375,
+          "y": 566.5
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 1133.1875,
+          "width": 132.96875,
+          "x": 1000.21875,
+          "y": 566.5
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [
+        {
+          "bottom": 817.1484375,
+          "camera": {
+            "bottom": 611.1484375,
+            "height": 320,
+            "right": 835,
+            "width": 320,
+            "x": 515,
+            "y": 291.1484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 792.1484375,
+            "height": 65,
+            "right": 925,
+            "width": 410,
+            "x": 515,
+            "y": 727.1484375
+          },
+          "height": 634.296875,
+          "right": 950,
+          "width": 460,
+          "x": 490,
+          "y": 182.8515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 610.5,
+          "height": 44,
+          "right": 573,
+          "width": 264,
+          "x": 309,
+          "y": 566.5
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "New client",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 742.4375,
+          "width": 137.4375,
+          "x": 605,
+          "y": 566.5
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 988.21875,
+          "width": 233.78125,
+          "x": 754.4375,
+          "y": 566.5
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 1133.1875,
+          "width": 132.96875,
+          "x": 1000.21875,
+          "y": 566.5
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [
+        {
+          "bottom": 838,
+          "camera": {
+            "bottom": 570,
+            "height": 280,
+            "right": 1287,
+            "width": 280,
+            "x": 1007,
+            "y": 290
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 813,
+            "height": 65,
+            "right": 1295,
+            "width": 1150,
+            "x": 145,
+            "y": 748
+          },
+          "height": 676,
+          "right": 1320,
+          "width": 1200,
+          "x": 120,
+          "y": 162
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 610.5,
+          "height": 44,
+          "right": 573,
+          "width": 264,
+          "x": 309,
+          "y": 566.5
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "100007 registration",
+      "theme": "?theme=111111",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 344,
+          "height": 52,
+          "right": 1004.5234375,
+          "width": 137.4375,
+          "x": 867.0859375,
+          "y": 292
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 344,
+          "height": 52,
+          "right": 1220.03125,
+          "width": 205.5078125,
+          "x": 1014.5234375,
+          "y": 292
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 344,
+          "height": 52,
+          "right": 1363,
+          "width": 132.96875,
+          "x": 1230.03125,
+          "y": 292
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 1440
+    },
+    {
+      "name": "Profile",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 634.5,
+          "height": 52,
+          "right": 742.4375,
+          "width": 137.4375,
+          "x": 605,
+          "y": 582.5
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 634.5,
+          "height": 52,
+          "right": 988.21875,
+          "width": 233.78125,
+          "x": 754.4375,
+          "y": 582.5
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 634.5,
+          "height": 52,
+          "right": 1133.1875,
+          "width": 132.96875,
+          "x": 1000.21875,
+          "y": 582.5
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 626.5,
+          "height": 44,
+          "right": 573,
+          "width": 264,
+          "x": 309,
+          "y": 582.5
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "Retake",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 742.4375,
+          "width": 137.4375,
+          "x": 605,
+          "y": 566.5
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 988.21875,
+          "width": 233.78125,
+          "x": 754.4375,
+          "y": 566.5
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 1133.1875,
+          "width": 132.96875,
+          "x": 1000.21875,
+          "y": 566.5
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [
+        {
+          "bottom": 817.1484375,
+          "camera": {
+            "bottom": 611.1484375,
+            "height": 320,
+            "right": 835,
+            "width": 320,
+            "x": 515,
+            "y": 291.1484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 792.1484375,
+            "height": 65,
+            "right": 925,
+            "width": 410,
+            "x": 515,
+            "y": 727.1484375
+          },
+          "height": 634.296875,
+          "right": 950,
+          "width": 460,
+          "x": 490,
+          "y": 182.8515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 610.5,
+          "height": 44,
+          "right": 573,
+          "width": 264,
+          "x": 309,
+          "y": 566.5
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "New client",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 742.4375,
+          "width": 137.4375,
+          "x": 605,
+          "y": 566.5
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 988.21875,
+          "width": 233.78125,
+          "x": 754.4375,
+          "y": 566.5
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 1133.1875,
+          "width": 132.96875,
+          "x": 1000.21875,
+          "y": 566.5
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [
+        {
+          "bottom": 838,
+          "camera": {
+            "bottom": 570,
+            "height": 280,
+            "right": 1287,
+            "width": 280,
+            "x": 1007,
+            "y": 290
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 813,
+            "height": 65,
+            "right": 1295,
+            "width": 1150,
+            "x": 145,
+            "y": 748
+          },
+          "height": 676,
+          "right": 1320,
+          "width": 1200,
+          "x": 120,
+          "y": 162
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 610.5,
+          "height": 44,
+          "right": 573,
+          "width": 264,
+          "x": 309,
+          "y": 566.5
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "100007 registration",
+      "theme": "?style=contrast",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 344,
+          "height": 52,
+          "right": 1004.5234375,
+          "width": 137.4375,
+          "x": 867.0859375,
+          "y": 292
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 344,
+          "height": 52,
+          "right": 1220.03125,
+          "width": 205.5078125,
+          "x": 1014.5234375,
+          "y": 292
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 344,
+          "height": 52,
+          "right": 1363,
+          "width": 132.96875,
+          "x": 1230.03125,
+          "y": 292
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 1440
+    },
+    {
+      "name": "Profile",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 634.5,
+          "height": 52,
+          "right": 742.4375,
+          "width": 137.4375,
+          "x": 605,
+          "y": 582.5
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 634.5,
+          "height": 52,
+          "right": 988.21875,
+          "width": 233.78125,
+          "x": 754.4375,
+          "y": 582.5
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 634.5,
+          "height": 52,
+          "right": 1133.1875,
+          "width": 132.96875,
+          "x": 1000.21875,
+          "y": 582.5
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 626.5,
+          "height": 44,
+          "right": 573,
+          "width": 264,
+          "x": 309,
+          "y": 582.5
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "Retake",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 742.4375,
+          "width": 137.4375,
+          "x": 605,
+          "y": 566.5
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 988.21875,
+          "width": 233.78125,
+          "x": 754.4375,
+          "y": 566.5
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 1133.1875,
+          "width": 132.96875,
+          "x": 1000.21875,
+          "y": 566.5
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [
+        {
+          "bottom": 817.1484375,
+          "camera": {
+            "bottom": 611.1484375,
+            "height": 320,
+            "right": 835,
+            "width": 320,
+            "x": 515,
+            "y": 291.1484375
+          },
+          "fields": [],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 792.1484375,
+            "height": 65,
+            "right": 925,
+            "width": 410,
+            "x": 515,
+            "y": 727.1484375
+          },
+          "height": 634.296875,
+          "right": 950,
+          "width": 460,
+          "x": 490,
+          "y": 182.8515625
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 610.5,
+          "height": 44,
+          "right": 573,
+          "width": 264,
+          "x": 309,
+          "y": 566.5
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "New client",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 742.4375,
+          "width": 137.4375,
+          "x": 605,
+          "y": 566.5
+        },
+        {
+          "action": "visit",
+          "border": "1px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 988.21875,
+          "width": 233.78125,
+          "x": 754.4375,
+          "y": 566.5
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 618.5,
+          "height": 52,
+          "right": 1133.1875,
+          "width": 132.96875,
+          "x": 1000.21875,
+          "y": 566.5
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [
+        {
+          "bottom": 838,
+          "camera": {
+            "bottom": 570,
+            "height": 280,
+            "right": 1287,
+            "width": 280,
+            "x": 1007,
+            "y": 290
+          },
+          "fields": [
+            "text",
+            "date",
+            "tel",
+            "email"
+          ],
+          "fileInputs": 0,
+          "footer": {
+            "bottom": 813,
+            "height": 65,
+            "right": 1295,
+            "width": 1150,
+            "x": 145,
+            "y": 748
+          },
+          "height": 676,
+          "right": 1320,
+          "width": 1200,
+          "x": 120,
+          "y": 162
+        }
+      ],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [
+        {
+          "bottom": 610.5,
+          "height": 44,
+          "right": 573,
+          "width": 264,
+          "x": 309,
+          "y": 566.5
+        }
+      ],
+      "width": 1440
+    },
+    {
+      "name": "100007 registration",
+      "theme": "?theme=202020&style=vivid",
+      "actions": [
+        {
+          "action": "book",
+          "border": "1px",
+          "bottom": 344,
+          "height": 52,
+          "right": 1004.5234375,
+          "width": 137.4375,
+          "x": 867.0859375,
+          "y": 292
+        },
+        {
+          "action": "profile",
+          "border": "1px",
+          "bottom": 344,
+          "height": 52,
+          "right": 1220.03125,
+          "width": 205.5078125,
+          "x": 1014.5234375,
+          "y": 292
+        },
+        {
+          "action": "sell",
+          "border": "3px",
+          "bottom": 344,
+          "height": 52,
+          "right": 1363,
+          "width": 132.96875,
+          "x": 1230.03125,
+          "y": 292
+        }
+      ],
+      "catalog": [],
+      "height": 1000,
+      "modal": [],
+      "overflow": false,
+      "photoTracks": 0,
+      "retake": [],
+      "width": 1440
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "Retake dialog",
+      "result": {
+        "buttons": [
+          "",
+          "Переснять",
+          "Отмена",
+          "Сохранить фото"
+        ],
+        "fileInputs": 0,
+        "videoTracks": 0
+      }
+    },
+    {
+      "name": "Retake Escape returns focus",
+      "result": "Перефотографировать клиента"
+    },
+    {
+      "name": "New client camera-only fields",
+      "result": {
+        "fileInputs": 0,
+        "labels": [
+          {
+            "name": null,
+            "type": "text"
+          },
+          {
+            "name": null,
+            "type": "date"
+          },
+          {
+            "name": null,
+            "type": "tel"
+          },
+          {
+            "name": null,
+            "type": "email"
+          }
+        ],
+        "membershipChoices": 0,
+        "modalWidth": 1200
+      }
+    },
+    {
+      "name": "New client profile no memberships; sale available",
+      "result": {
+        "body": "0 действующихВсе0Действующие0Не активированы0Завершённые0Замороженные0Нет абонементов в этой категорииВыберите другую категорию, чтобы посмотреть остальные покупки.Записей: 0 из 0Архив сохраняется в истории клиента",
+        "passes": 0,
+        "sell": "Продать"
+      }
+    },
+    {
+      "name": "100007 registration",
+      "result": {
+        "noPass": "Нет доступных сейчас абонементовМожно продать абонемент и затем зарегистрировать посещение.Оформите покупку кнопкой «Продать» в действиях клиента.",
+        "sellCount": 1,
+        "sellVisible": 52
+      }
+    },
+    {
+      "name": "Catalog root group family stable result top",
+      "levels": [
+        {
+          "headerHeight": 44,
+          "heading": "Группы абонементов",
+          "scroll": 0,
+          "top": 547.3984375
+        },
+        {
+          "headerHeight": 44,
+          "heading": "Клубные абонементы",
+          "scroll": 0,
+          "top": 547.3984375
+        },
+        {
+          "headerHeight": 44,
+          "heading": "Лайт",
+          "scroll": 0,
+          "top": 547.3984375
+        }
+      ]
+    },
+    {
+      "name": "Single assigned senior category opens directly in regular sale",
+      "result": {
+        "heading": "Тарифы · Старший тренер",
+        "top": 536.3984375,
+        "trainer": "Максим Ветров · Старший тренер"
+      }
+    },
+    {
+      "name": "Styleguide working photo example",
+      "result": {
+        "actions": [
+          {
+            "action": "book",
+            "border": "1px",
+            "bottom": -1389.3203125,
+            "height": 52,
+            "right": 1287,
+            "width": 1134,
+            "x": 153,
+            "y": -1441.3203125
+          },
+          {
+            "action": "book",
+            "border": "1px",
+            "bottom": -465.9296875,
+            "height": 52,
+            "right": 290.4375,
+            "width": 137.4375,
+            "x": 153,
+            "y": -517.9296875
+          },
+          {
+            "action": "visit",
+            "border": "1px",
+            "bottom": -465.9296875,
+            "height": 52,
+            "right": 534.21875,
+            "width": 233.78125,
+            "x": 300.4375,
+            "y": -517.9296875
+          },
+          {
+            "action": "sell",
+            "border": "3px",
+            "bottom": -465.9296875,
+            "height": 52,
+            "right": 677.1875,
+            "width": 132.96875,
+            "x": 544.21875,
+            "y": -517.9296875
+          },
+          {
+            "action": "profile",
+            "border": "1px",
+            "bottom": -465.9296875,
+            "height": 52,
+            "right": 892.6953125,
+            "width": 205.5078125,
+            "x": 687.1875,
+            "y": -517.9296875
+          }
+        ],
+        "catalog": [
+          {
+            "bottom": 2002.4453125,
+            "contentTop": 1689.0546875,
+            "heading": "Группы абонементов",
+            "height": 369.390625,
+            "right": 1287,
+            "width": 1134,
+            "x": 153,
+            "y": 1633.0546875
+          }
+        ],
+        "height": 1000,
+        "modal": [
+          {
+            "bottom": 817.1484375,
+            "camera": {
+              "bottom": 611.1484375,
+              "height": 320,
+              "right": 835,
+              "width": 320,
+              "x": 515,
+              "y": 291.1484375
+            },
+            "fields": [],
+            "fileInputs": 0,
+            "footer": {
+              "bottom": 792.1484375,
+              "height": 65,
+              "right": 925,
+              "width": 410,
+              "x": 515,
+              "y": 727.1484375
+            },
+            "height": 634.296875,
+            "right": 950,
+            "width": 460,
+            "x": 490,
+            "y": 182.8515625
+          }
+        ],
+        "overflow": false,
+        "photoTracks": 0,
+        "retake": [],
+        "width": 1440
+      }
+    },
+    {
+      "name": "Styleguide working new client example",
+      "result": {
+        "actions": [
+          {
+            "action": "book",
+            "border": "1px",
+            "bottom": -1321.3203125,
+            "height": 52,
+            "right": 1287,
+            "width": 1134,
+            "x": 153,
+            "y": -1373.3203125
+          },
+          {
+            "action": "book",
+            "border": "1px",
+            "bottom": -397.9296875,
+            "height": 52,
+            "right": 290.4375,
+            "width": 137.4375,
+            "x": 153,
+            "y": -449.9296875
+          },
+          {
+            "action": "visit",
+            "border": "1px",
+            "bottom": -397.9296875,
+            "height": 52,
+            "right": 534.21875,
+            "width": 233.78125,
+            "x": 300.4375,
+            "y": -449.9296875
+          },
+          {
+            "action": "sell",
+            "border": "3px",
+            "bottom": -397.9296875,
+            "height": 52,
+            "right": 677.1875,
+            "width": 132.96875,
+            "x": 544.21875,
+            "y": -449.9296875
+          },
+          {
+            "action": "profile",
+            "border": "1px",
+            "bottom": -397.9296875,
+            "height": 52,
+            "right": 892.6953125,
+            "width": 205.5078125,
+            "x": 687.1875,
+            "y": -449.9296875
+          }
+        ],
+        "catalog": [
+          {
+            "bottom": 2070.4453125,
+            "contentTop": 1757.0546875,
+            "heading": "Группы абонементов",
+            "height": 369.390625,
+            "right": 1287,
+            "width": 1134,
+            "x": 153,
+            "y": 1701.0546875
+          }
+        ],
+        "height": 1000,
+        "modal": [
+          {
+            "bottom": 838,
+            "camera": {
+              "bottom": 570,
+              "height": 280,
+              "right": 1287,
+              "width": 280,
+              "x": 1007,
+              "y": 290
+            },
+            "fields": [
+              "text",
+              "date",
+              "tel",
+              "email"
+            ],
+            "fileInputs": 0,
+            "footer": {
+              "bottom": 813,
+              "height": 65,
+              "right": 1295,
+              "width": 1150,
+              "x": 145,
+              "y": 748
+            },
+            "height": 676,
+            "right": 1320,
+            "width": 1200,
+            "x": 120,
+            "y": 162
+          }
+        ],
+        "overflow": false,
+        "photoTracks": 0,
+        "retake": [],
+        "width": 1440
+      }
+    },
+    {
+      "name": "Booking Enter and Escape",
+      "focused": "Записать"
+    }
+  ],
+  "final": {
+    "views": 85,
+    "errors": [],
+    "checks": "16 domain/UI/handoff checks, TypeScript and production build passed; focused UI/handoff/build repeated after final layout changes",
+    "camera": "Hardware not activated. Stream lifecycle and crop verified with mocks. No file upload/delete controls exist.",
+    "exportSha": "649d6c433a2623b5",
+    "screenshots": [
+      "/private/tmp/astron-client-actions-20261119.jpg",
+      "/private/tmp/astron-new-client-20261119.jpg"
+    ]
+  }
+}
