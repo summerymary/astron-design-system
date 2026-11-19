@@ -13,9 +13,11 @@ function flatten(children: ReactNode): ReactNode[] {
 export function ReportFilterBar({
   children,
   activeCount = 0,
+  label = 'Дополнительные фильтры',
 }: {
   children: ReactNode;
   activeCount?: number;
+  label?: string;
 }) {
   const items = flatten(children);
   const isMain = (child: ReactNode) =>
@@ -40,7 +42,10 @@ export function ReportFilterBar({
       {!!main.length && <div className="statistics-filters-main">{main}</div>}
       {!!extra.length && (
         <details className="statistics-filter-disclosure">
-          <summary>Дополнительные фильтры{activeCount ? ` · изменено ${activeCount}` : ''}</summary>
+          <summary>
+            {label}
+            {activeCount ? ` · изменено ${activeCount}` : ''}
+          </summary>
           <div className="statistics-filters-extra">{extra}</div>
         </details>
       )}

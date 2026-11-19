@@ -1,3 +1,4 @@
+import { managementMetrics, managementNetworkMetric } from '../data/management-metrics';
 import { ProductCard } from './ProductCard';
 import { ClientActionButton } from './ClientActionButton';
 import { ClientPhotoDialog } from './ClientPhotoDialog';
@@ -57,6 +58,44 @@ import { NavigationCard } from './WorkspaceUI';
 import { ReportFilterBar } from './ReportFilterBar';
 import { CallJournal } from './CallJournal';
 import { ReviewJournal } from './ReviewJournal';
+import { ReportTreeTable } from './ReportTreeTable';
+import type { ReportTreeSort } from '../lib/report-tree';
+
+function ReportTreeExample() {
+  const [sort, setSort] = useState<ReportTreeSort>({ key: 'views', asc: false });
+  const [opened, setOpened] = useState('');
+  return (
+    <section className="panel ws-panel-body ws-stack">
+      <h3>Вложенные строки отчёта</h3>
+      <p className="ws-muted">
+        Раскрытие, сортировка внутри уровня и закреплённое название при прокрутке. В родительской
+        строке три уникальных посетителя; один человек мог видеть оба предложения.
+      </p>
+      <ReportTreeTable
+        label="Пример вложенного отчёта"
+        nodes={[
+          {
+            id: 'memberships',
+            name: 'Абонементы',
+            values: { views: 12, visitors: 3 },
+            children: [
+              { id: 'iron', name: 'Железная карта', values: { views: 8, visitors: 2 } },
+              { id: 'light', name: 'Лайт', values: { views: 4, visitors: 2 } },
+            ],
+          },
+        ]}
+        columns={[
+          { key: 'views', label: 'Просмотры' },
+          { key: 'visitors', label: 'Посетители' },
+        ]}
+        sort={sort}
+        onSort={setSort}
+        onOpen={(node) => setOpened(node.name)}
+      />
+      {opened && <p role="status">Выбрано: {opened}</p>}
+    </section>
+  );
+}
 
 function MembershipCatalogExample() {
   const [query, setQuery] = useState('');
@@ -426,6 +465,22 @@ export function DesignRules() {
         />
       </div>
       <div className="panel ws-panel-body ws-stack">
+        <h3>Фоновые графики руководителей</h3>
+        <p>
+          Линия показывает значения по дням, большая цифра — последнюю точку. Выручка накапливается
+          с начала месяца. Период и демонстрационный характер данных подписаны; у показателя без
+          истории графика нет. Количество клубов сопровождает схема шести связанных площадок.
+        </p>
+        <Stats
+          items={[
+            managementNetworkMetric,
+            managementMetrics.networkRevenue,
+            managementMetrics.activeClients,
+            managementMetrics.renewals,
+          ].map((metric) => ({ ...metric, note: metric.detail }))}
+        />
+      </div>
+      <div className="panel ws-panel-body ws-stack">
         <h3>Смена ресепшена</h3>
         <ReceptionShift
           shift={{ start: '2026-11-06T08:00', end: '2026-11-06T20:00' }}
@@ -664,6 +719,7 @@ export function DesignRules() {
             <input value={fieldExample} onChange={(e) => setFieldExample(e.target.value)} />
           </Field>
         </ReportFilterBar>
+        <ReportTreeExample />
         <Button
           variant="secondary"
           aria-pressed={zeroCategory}
