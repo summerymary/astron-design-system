@@ -668,6 +668,7 @@ export function DesignRules() {
         <h3>Общие поля и действия строк</h3>
         <SegmentedFilter
           label="Пример фильтра"
+          layout="grid"
           value={filterExample}
           onChange={setFilterExample}
           items={[

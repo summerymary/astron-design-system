@@ -42,6 +42,7 @@ export function Tabs({
   idPrefix,
   panelId,
   selection = 'panel',
+  layout = 'scroll',
 }: {
   items: (string | { id: string; label: string; count?: number })[];
   value: string;
@@ -52,6 +53,7 @@ export function Tabs({
   idPrefix?: string;
   panelId?: string;
   selection?: 'panel' | 'filter';
+  layout?: 'scroll' | 'grid';
 }) {
   const generatedId = useId();
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -63,6 +65,7 @@ export function Tabs({
       className={`ws-tabs ui-tabs ${className}`}
       data-ui="tabs"
       data-variant={variant}
+      data-layout={layout}
       role={selection === 'filter' ? 'radiogroup' : 'tablist'}
       aria-label={label}
     >
