@@ -162,6 +162,7 @@ export const adminSections = [
   { id: 'bar-inventory', label: 'Склад бара', caption: 'Остатки и документы только бара' },
   { id: 'registration', label: 'Регистрация посещения', caption: 'Выбрать клиента' },
   { id: 'services', label: 'Продажа услуг', caption: 'Абонементы и тренировки' },
+  { id: 'companies', label: 'Компании', caption: 'Корпоративные клиенты, счета и пополнение' },
   { id: 'members', label: 'Клиенты', caption: 'База и карточки клиентов' },
   { id: 'products', label: 'Продажа товаров', caption: 'Товары ресепшена' },
   { id: 'cash', label: 'Касса', caption: 'Операции смены' },

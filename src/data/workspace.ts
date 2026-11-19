@@ -1791,6 +1791,41 @@ export function createWorkspaceData(): Record<string, DemoRecord[]> {
     ...initialExtra,
     ...createReportingData(),
     'cash-events': demoCashMovements,
+    companies: [
+      {
+        id: 'company-mayak',
+        name: 'ООО «Маяк Демо»',
+        account: 'К-1001',
+        contract: 'ДЕМО-01',
+        status: 'Активна',
+        openingBalance: '25000',
+      },
+      {
+        id: 'company-vector',
+        name: 'ООО «Вектор Демо»',
+        account: 'К-1002',
+        contract: 'ДЕМО-02',
+        status: 'Активна',
+        openingBalance: '0',
+      },
+      {
+        id: 'company-orbita',
+        name: 'ООО «Орбита Демо»',
+        account: 'К-1003',
+        contract: 'ДЕМО-03',
+        status: 'Активна',
+        openingBalance: '8500.50',
+      },
+      {
+        id: 'company-archive',
+        name: 'ООО «Архив Демо»',
+        account: 'К-1004',
+        contract: 'ДЕМО-04',
+        status: 'В архиве',
+        openingBalance: '1200',
+      },
+    ],
+    'company-account-operations': [],
   });
   data.employees.push(
     {

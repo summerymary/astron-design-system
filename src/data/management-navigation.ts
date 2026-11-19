@@ -7,7 +7,7 @@ export const managementNavigationGroups: { label: string; items: AdminSectionId[
   },
   {
     label: 'Клиенты и продажи',
-    items: ['services', 'gift-cards', 'crm', 'messages', 'notifications'],
+    items: ['services', 'companies', 'gift-cards', 'crm', 'messages', 'notifications'],
   },
   { label: 'Команда', items: ['employees', 'shifts', 'payroll'] },
   {
