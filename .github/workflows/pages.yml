@@ -33,6 +33,7 @@ jobs:
       - run: pnpm test:registration
       - run: pnpm test:checkout
       - run: pnpm test:cash
+      - run: pnpm test:companies
       - run: pnpm test:crm
       - run: pnpm test:statistics
       - run: pnpm test:reception
