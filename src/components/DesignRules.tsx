@@ -1,3 +1,4 @@
+import { ClientFinanceJournal } from './ClientFinanceJournal';
 import { managementMetrics, managementNetworkMetric } from '../data/management-metrics';
 import { ProductCard } from './ProductCard';
 import { ClientActionButton } from './ClientActionButton';
@@ -271,6 +272,8 @@ function ReceptionExample() {
           members={initialMembers}
           visits={[]}
           canOperate
+          user={demoUsers.find((user) => user.role === 'administrator')!}
+          clubName="Астрон · Центральный"
           onClose={() => setDialog('')}
         />
       )}
@@ -479,6 +482,12 @@ export function DesignRules() {
             managementMetrics.renewals,
           ].map((metric) => ({ ...metric, note: metric.detail }))}
         />
+      </div>
+      <div className="panel ws-panel-body ws-stack">
+        <h3>Финансовый журнал клиента</h3>
+        <WorkspaceProvider>
+          <ClientFinanceJournal member={initialMembers[0]} members={initialMembers} />
+        </WorkspaceProvider>
       </div>
       <div className="panel ws-panel-body ws-stack">
         <h3>Смена ресепшена</h3>

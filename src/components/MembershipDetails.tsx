@@ -1,6 +1,6 @@
 import { Field } from './Field';
 import { useState } from 'react';
-import type { Member, Visit } from '../types';
+import type { Member, Visit, DemoUser } from '../types';
 import type { DemoSubscription } from '../data/clientProfile';
 import { TODAY, prettyDate, type DemoRecord } from '../data/workspace';
 import { demoStamp, nextDemoNow } from '../lib/demo-clock';
@@ -9,7 +9,7 @@ import { clientName } from '../lib/client-display';
 import { addDays } from '../lib/schedule';
 import { demoId, useWorkspace } from './WorkspaceProvider';
 import { Button, ConfirmDialog, Modal, StatusBadge } from './ui';
-import { ClientSearch } from './ClientSearch';
+import { MembershipReissueDialog } from './MembershipReissueDialog';
 import { DataTable, Notice } from './WorkspaceUI';
 import { membershipVisits } from '../lib/membership-visit-history';
 
@@ -19,6 +19,8 @@ export function MembershipDetails({
   members,
   visits,
   canOperate,
+  user,
+  clubName,
   onCancelVisit,
   onClose,
 }: {
@@ -27,14 +29,16 @@ export function MembershipDetails({
   members: Member[];
   visits: Visit[];
   canOperate: boolean;
+  user: DemoUser;
+  clubName: string;
   onCancelVisit?: (passId: string, visit: Visit, reason: string) => void;
   onClose: () => void;
 }) {
   const { data, transact } = useWorkspace();
-  const [action, setAction] = useState<'freeze' | 'finish' | 'transfer' | 'contract' | null>(null);
+  const [action, setAction] = useState<'freeze' | 'finish' | 'contract' | null>(null);
   const [until, setUntil] = useState(addDays(TODAY, 7));
   const [reason, setReason] = useState('');
-  const [target, setTarget] = useState<Member | null>(null);
+  const [reissueOpen, setReissueOpen] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [error, setError] = useState('');
   const [cancelVisit, setCancelVisit] = useState<Visit | null>(null);
@@ -46,9 +50,7 @@ export function MembershipDetails({
     return `${/^\d{4}-/.test(date) ? prettyDate(date) : date}${time ? ` · ${time.slice(0, 5)}` : ''}`;
   };
   const clubLabel = (id: string) =>
-    (({ central: 'Центральный', park: 'Парк', river: 'Речной' }) as Record<string, string>)[id] ||
-    id ||
-    'Клуб не указан';
+    data.clubs.find((club) => club.id === id)?.name || id || 'Клуб не указан';
   const visitLabel = (visit: Visit) => {
     const receipt = (data['visit-bookings'] || []).find(
       (r) => r.memberId === String(member.id) && r.passId === pass.id && r.date === visit.enteredAt,
@@ -66,14 +68,13 @@ export function MembershipDetails({
   const override = (data['membership-overrides'] || []).find(
     (row) => row.id === `${member.id}:${pass.id}`,
   );
-  const change = (kind: 'freeze' | 'unfreeze' | 'finish' | 'transfer') => {
+  const change = (kind: 'freeze' | 'unfreeze' | 'finish') => {
     try {
       transact((current) =>
         changeMembership(current, {
           member,
           passId: pass.id,
           kind,
-          target,
           until,
           reason,
           today: TODAY,
@@ -147,7 +148,7 @@ export function MembershipDetails({
             { key: 'name', label: 'Дата посещения' },
             { key: 'kind', label: 'Вид посещения' },
             { key: 'club', label: 'Клуб' },
-            ...(canOperate && onCancelVisit
+            ...(canOperate && onCancelVisit && !override?.reissuedTo && !override?.transferredTo
               ? [
                   {
                     key: 'cancel',
@@ -183,8 +184,14 @@ export function MembershipDetails({
             ]}
           />
         )}
+        {override?.reissuedTo && (
+          <Notice>
+            Абонемент пересчитан на другой тариф. Новый абонемент и финансовые операции сохранены в
+            карточке клиента.
+          </Notice>
+        )}
         {override?.transferredTo && (
-          <Notice>Абонемент переоформлен. История прежнего владельца сохранена.</Notice>
+          <Notice>Абонемент передан другому клиенту. История прежнего владельца сохранена.</Notice>
         )}
         {action === 'contract' && (
           <section className="panel ws-panel-body ws-stack membership-print-view">
@@ -213,13 +220,11 @@ export function MembershipDetails({
         {action && action !== 'contract' && (
           <div className="ws-stack">
             <h3>
-              {action === 'transfer'
-                ? 'Переоформить на другого клиента'
-                : action === 'finish'
-                  ? 'Завершить абонемент'
-                  : pass.status === 'paused'
-                    ? 'Разморозить абонемент'
-                    : 'Заморозить абонемент'}
+              {action === 'finish'
+                ? 'Завершить абонемент'
+                : pass.status === 'paused'
+                  ? 'Разморозить абонемент'
+                  : 'Заморозить абонемент'}
             </h3>
             {action === 'freeze' && pass.status !== 'paused' && (
               <Field className="form-field" label={<> Заморозить до </>}>
@@ -232,23 +237,6 @@ export function MembershipDetails({
                 />
               </Field>
             )}
-            {action === 'transfer' &&
-              (target ? (
-                <div className="ws-list-line">
-                  <strong>{clientName(target)}</strong>
-                  <Button variant="ghost" onClick={() => setTarget(null)}>
-                    Изменить
-                  </Button>
-                </div>
-              ) : (
-                <ClientSearch
-                  mode="selection"
-                  purpose="покупки"
-                  hidePhones
-                  members={members.filter((item) => item.id !== member.id && !item.archived)}
-                  onMember={setTarget}
-                />
-              ))}
             <Field className="form-field" label={<> Основание * </>}>
               <textarea
                 rows={2}
@@ -257,18 +245,16 @@ export function MembershipDetails({
               />
             </Field>
             <Notice>
-              {action === 'transfer'
-                ? 'Перенесутся оставшиеся посещения, срок и ограничения. Прежние визиты останутся у первоначального владельца.'
-                : action === 'finish'
-                  ? 'Абонемент завершится, оставшиеся посещения станут недоступны. Возврат денег отдельно не оформляется.'
-                  : pass.status === 'paused'
-                    ? 'Доступ по абонементу будет восстановлен.'
-                    : 'До разморозки посещения будут недоступны. Конец действия будет продлён на выбранный срок заморозки.'}
+              {action === 'finish'
+                ? 'Абонемент завершится, оставшиеся посещения станут недоступны. Возврат денег отдельно не оформляется.'
+                : pass.status === 'paused'
+                  ? 'Доступ по абонементу будет восстановлен.'
+                  : 'До разморозки посещения будут недоступны. Конец действия будет продлён на выбранный срок заморозки.'}
             </Notice>
             {error && <Notice tone="warning">{error}</Notice>}
             <Button
               variant={action === 'finish' ? 'danger' : 'primary'}
-              disabled={!reason.trim() || (action === 'transfer' && !target)}
+              disabled={!reason.trim()}
               onClick={() => setConfirm(true)}
             >
               Продолжить…
@@ -300,7 +286,13 @@ export function MembershipDetails({
           Распечатать
         </Button>
         {canOperate && pass.status !== 'expired' && (
-          <Button variant="secondary" onClick={() => setAction('transfer')}>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setAction(null);
+              setReissueOpen(true);
+            }}
+          >
             Переоформить
           </Button>
         )}
@@ -308,6 +300,18 @@ export function MembershipDetails({
           Закрыть
         </Button>
       </div>
+      {reissueOpen && (
+        <MembershipReissueDialog
+          pass={pass}
+          member={member}
+          members={members}
+          user={user}
+          clubName={clubName}
+          canOperate={canOperate}
+          onClose={() => setReissueOpen(false)}
+          onSuccess={onClose}
+        />
+      )}
       {confirm && action && action !== 'contract' && (
         <ConfirmDialog
           title="Подтвердить изменение абонемента?"
