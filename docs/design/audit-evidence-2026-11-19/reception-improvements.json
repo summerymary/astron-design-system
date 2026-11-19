@@ -9962,5 +9962,2191 @@
     "/private/tmp/astron-retail-final-20261119.png",
     "/private/tmp/astron-account-final-20261119.png",
     "/private/tmp/astron-reception-preview-20261119.jpg"
-  ]
+  ],
+  "catalogDensity": {
+    "views": [
+      {
+        "label": "1440/0/sale-root",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 499,
+            "width": 1096,
+            "y": 317.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/0/Абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 633,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 434,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/0/Персональный тренинг",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 550.3984375,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 1046,
+            "y": 658.796875
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/0/Корпоративные абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 383,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/0/Исключения",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 383,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/0/Товары и услуги",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 573.7734375,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid sale-item-grid",
+            "height": 374.7734375,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/1/sale-root",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 499,
+            "width": 1096,
+            "y": 317.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/1/Абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 633,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 434,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/1/Персональный тренинг",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 550.3984375,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 1046,
+            "y": 658.796875
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/1/Корпоративные абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 383,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/1/Исключения",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 383,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/1/Товары и услуги",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 573.7734375,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid sale-item-grid",
+            "height": 374.7734375,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/2/sale-root",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 499,
+            "width": 1096,
+            "y": 317.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/2/Абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 633,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 434,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/2/Персональный тренинг",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 550.3984375,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 1046,
+            "y": 658.796875
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/2/Корпоративные абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 383,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/2/Исключения",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 383,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/2/Товары и услуги",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 573.7734375,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid sale-item-grid",
+            "height": 374.7734375,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/3/sale-root",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 499,
+            "width": 1096,
+            "y": 317.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/3/Абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 633,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 434,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/3/Персональный тренинг",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 550.3984375,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 1046,
+            "y": 658.796875
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/3/Корпоративные абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 383,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/3/Исключения",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 383,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1440/3/Товары и услуги",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 573.7734375,
+            "width": 1096,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid sale-item-grid",
+            "height": 374.7734375,
+            "width": 1046,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "390/0/sale-root",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 956.1953125,
+            "width": 304,
+            "y": 491.09375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/0/Абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 1680.1953125,
+            "width": 304,
+            "y": 272.59375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 1492,
+            "width": 270,
+            "y": 443.7890625
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/0/Персональный тренинг",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 571.1875,
+            "width": 304,
+            "y": 91.59375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 270,
+            "y": 461.78125
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/0/Корпоративные абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 397.390625,
+            "width": 304,
+            "y": 258.59375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 270,
+            "y": 454.984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/0/Исключения",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 572.1953125,
+            "width": 304,
+            "y": 84.09375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 384,
+            "width": 270,
+            "y": 255.2890625
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/0/Товары и услуги",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 1158.9375,
+            "width": 304,
+            "y": -299.90625
+          },
+          {
+            "class": "plastic-card-grid sale-item-grid",
+            "height": 970.7421875,
+            "width": 270,
+            "y": -128.7109375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/1/sale-root",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 956.1953125,
+            "width": 304,
+            "y": 584.59375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/1/Абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 1680.1953125,
+            "width": 304,
+            "y": 272.59375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 1492,
+            "width": 270,
+            "y": 443.7890625
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/1/Персональный тренинг",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 571.1875,
+            "width": 304,
+            "y": 91.59375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 270,
+            "y": 461.78125
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/1/Корпоративные абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 397.390625,
+            "width": 304,
+            "y": 258.59375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 270,
+            "y": 454.984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/1/Исключения",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 572.1953125,
+            "width": 304,
+            "y": 84.09375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 384,
+            "width": 270,
+            "y": 255.2890625
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/1/Товары и услуги",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 1158.9375,
+            "width": 304,
+            "y": -299.90625
+          },
+          {
+            "class": "plastic-card-grid sale-item-grid",
+            "height": 970.7421875,
+            "width": 270,
+            "y": -128.7109375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/2/sale-root",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 956.1953125,
+            "width": 304,
+            "y": 584.59375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/2/Абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 1680.1953125,
+            "width": 304,
+            "y": 272.59375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 1492,
+            "width": 270,
+            "y": 443.7890625
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/2/Персональный тренинг",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 571.1875,
+            "width": 304,
+            "y": 91.59375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 270,
+            "y": 461.78125
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/2/Корпоративные абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 397.390625,
+            "width": 304,
+            "y": 258.59375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 270,
+            "y": 454.984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/2/Исключения",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 572.1953125,
+            "width": 304,
+            "y": 84.09375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 384,
+            "width": 270,
+            "y": 255.2890625
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/2/Товары и услуги",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 1158.9375,
+            "width": 304,
+            "y": -299.90625
+          },
+          {
+            "class": "plastic-card-grid sale-item-grid",
+            "height": 970.7421875,
+            "width": 270,
+            "y": -128.7109375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/3/sale-root",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 956.1953125,
+            "width": 304,
+            "y": 584.59375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/3/Абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 1680.1953125,
+            "width": 304,
+            "y": 272.59375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 1492,
+            "width": 270,
+            "y": 443.7890625
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/3/Персональный тренинг",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 571.1875,
+            "width": 304,
+            "y": 91.59375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 270,
+            "y": 461.78125
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/3/Корпоративные абонементы",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 397.390625,
+            "width": 304,
+            "y": 258.59375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 184,
+            "width": 270,
+            "y": 454.984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/3/Исключения",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 572.1953125,
+            "width": 304,
+            "y": 84.09375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 384,
+            "width": 270,
+            "y": 255.2890625
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "390/3/Товары и услуги",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 1158.9375,
+            "width": 304,
+            "y": -299.90625
+          },
+          {
+            "class": "plastic-card-grid sale-item-grid",
+            "height": 970.7421875,
+            "width": 270,
+            "y": -128.7109375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 390
+      },
+      {
+        "label": "1440/0/products",
+        "catalog": [
+          {
+            "class": "reception-product-grid",
+            "height": 218.796875,
+            "width": 564.953125,
+            "y": 394
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          },
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/0/gift-cards",
+        "catalog": [
+          {
+            "class": "ws-table",
+            "height": 129.5,
+            "width": 1094,
+            "y": 495
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/0/memberships",
+        "catalog": [],
+        "overflow": false,
+        "panels": [],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/0/bar",
+        "catalog": [
+          {
+            "class": "ws-product-grid",
+            "height": 266.796875,
+            "width": 786,
+            "y": 523
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/1/products",
+        "catalog": [
+          {
+            "class": "reception-product-grid",
+            "height": 218.796875,
+            "width": 564.953125,
+            "y": 394
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          },
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/1/gift-cards",
+        "catalog": [
+          {
+            "class": "ws-table",
+            "height": 129.5,
+            "width": 1094,
+            "y": 495
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/1/memberships",
+        "catalog": [],
+        "overflow": false,
+        "panels": [],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/1/bar",
+        "catalog": [
+          {
+            "class": "ws-product-grid",
+            "height": 266.796875,
+            "width": 786,
+            "y": 523
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/2/products",
+        "catalog": [
+          {
+            "class": "reception-product-grid",
+            "height": 218.796875,
+            "width": 564.953125,
+            "y": 394
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          },
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/2/gift-cards",
+        "catalog": [
+          {
+            "class": "ws-table",
+            "height": 129.5,
+            "width": 1094,
+            "y": 495
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/2/memberships",
+        "catalog": [],
+        "overflow": false,
+        "panels": [],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/2/bar",
+        "catalog": [
+          {
+            "class": "ws-product-grid",
+            "height": 266.796875,
+            "width": 786,
+            "y": 523
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/3/products",
+        "catalog": [
+          {
+            "class": "reception-product-grid",
+            "height": 218.796875,
+            "width": 564.953125,
+            "y": 394
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          },
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/3/gift-cards",
+        "catalog": [
+          {
+            "class": "ws-table",
+            "height": 129.5,
+            "width": 1094,
+            "y": 495
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/3/memberships",
+        "catalog": [],
+        "overflow": false,
+        "panels": [],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "1440/3/bar",
+        "catalog": [
+          {
+            "class": "ws-product-grid",
+            "height": 266.796875,
+            "width": 786,
+            "y": 523
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 1440
+      },
+      {
+        "label": "390/0/products",
+        "catalog": [
+          {
+            "class": "reception-product-grid",
+            "height": 613.1953125,
+            "width": 282,
+            "y": 630.7890625
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          },
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/0/gift-cards",
+        "catalog": [],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/0/memberships",
+        "catalog": [],
+        "overflow": false,
+        "panels": [],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/0/bar",
+        "catalog": [
+          {
+            "class": "ws-product-grid",
+            "height": 867.59375,
+            "width": 314,
+            "y": 744.59375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/1/products",
+        "catalog": [
+          {
+            "class": "reception-product-grid",
+            "height": 613.1953125,
+            "width": 282,
+            "y": 630.7890625
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          },
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/1/gift-cards",
+        "catalog": [],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/1/memberships",
+        "catalog": [],
+        "overflow": false,
+        "panels": [],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/1/bar",
+        "catalog": [
+          {
+            "class": "ws-product-grid",
+            "height": 867.59375,
+            "width": 314,
+            "y": 744.59375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/2/products",
+        "catalog": [
+          {
+            "class": "reception-product-grid",
+            "height": 613.1953125,
+            "width": 282,
+            "y": 630.7890625
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          },
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/2/gift-cards",
+        "catalog": [],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/2/memberships",
+        "catalog": [],
+        "overflow": false,
+        "panels": [],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/2/bar",
+        "catalog": [
+          {
+            "class": "ws-product-grid",
+            "height": 867.59375,
+            "width": 314,
+            "y": 744.59375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/3/products",
+        "catalog": [
+          {
+            "class": "reception-product-grid",
+            "height": 613.1953125,
+            "width": 282,
+            "y": 630.7890625
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          },
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/3/gift-cards",
+        "catalog": [],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/3/memberships",
+        "catalog": [],
+        "overflow": false,
+        "panels": [],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "390/3/bar",
+        "catalog": [
+          {
+            "class": "ws-product-grid",
+            "height": 867.59375,
+            "width": 314,
+            "y": 744.59375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 390
+      },
+      {
+        "label": "1440/sale-payment",
+        "catalog": [],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 0,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1440
+      },
+      {
+        "label": "1280/compact-memberships",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 862,
+            "width": 968,
+            "y": 317.3984375
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 663,
+            "width": 918,
+            "y": 491.3984375
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 1280
+      },
+      {
+        "label": "320/compact-memberships",
+        "catalog": [
+          {
+            "class": "panel ws-panel sale-catalog",
+            "height": 1757.59375,
+            "width": 234,
+            "y": 210.078125
+          },
+          {
+            "class": "plastic-card-grid ",
+            "height": 1513,
+            "width": 200,
+            "y": 437.671875
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "16px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [
+          {
+            "height": 42,
+            "label": "Поиск по названию"
+          }
+        ],
+        "width": 320
+      },
+      {
+        "label": "1280/styleguide",
+        "catalog": [
+          {
+            "class": "reception-product-grid",
+            "height": 196.3984375,
+            "width": 1084,
+            "y": 3741.453125
+          },
+          {
+            "class": "ws-table",
+            "height": 206,
+            "width": 1425.0546875,
+            "y": 8165.3125
+          },
+          {
+            "class": "ws-table",
+            "height": 140.5,
+            "width": 1172,
+            "y": 8407.3125
+          },
+          {
+            "class": "reception-product-grid",
+            "height": 196.3984375,
+            "width": 1134,
+            "y": 10952.1875
+          }
+        ],
+        "overflow": false,
+        "panels": [
+          {
+            "previousBottomPadding": "24px",
+            "topPadding": "0px"
+          }
+        ],
+        "searches": [],
+        "width": 1280
+      }
+    ],
+    "scenarios": [
+      "Поиск → одна карта, очистка → все 7, выбор → оплата",
+      "Пустая выдача и сброс поиска; 1280×720 и 320×780"
+    ],
+    "baseline": {
+      "width": 1440,
+      "firstMembershipY": 680.1953125
+    },
+    "errors": [],
+    "preGroupingMeasurement": true,
+    "combinedGrouping": [
+      {
+        "width": 1440,
+        "theme": 0,
+        "controls": 44,
+        "groups": 538.796875,
+        "overflow": false,
+        "padding": "0px"
+      },
+      {
+        "width": 1440,
+        "theme": 1,
+        "controls": 44,
+        "groups": 538.796875,
+        "overflow": false,
+        "padding": "0px"
+      },
+      {
+        "width": 1440,
+        "theme": 2,
+        "controls": 44,
+        "groups": 538.796875,
+        "overflow": false,
+        "padding": "0px"
+      },
+      {
+        "width": 1440,
+        "theme": 3,
+        "controls": 44,
+        "groups": 538.796875,
+        "overflow": false,
+        "padding": "0px"
+      },
+      {
+        "width": 390,
+        "theme": 0,
+        "controls": 44,
+        "groups": 483.1875,
+        "overflow": false,
+        "padding": "0px"
+      },
+      {
+        "width": 390,
+        "theme": 1,
+        "controls": 44,
+        "groups": 483.1875,
+        "overflow": false,
+        "padding": "0px"
+      },
+      {
+        "width": 390,
+        "theme": 2,
+        "controls": 44,
+        "groups": 483.1875,
+        "overflow": false,
+        "padding": "0px"
+      },
+      {
+        "width": 390,
+        "theme": 3,
+        "controls": 44,
+        "groups": 483.1875,
+        "overflow": false,
+        "padding": "0px"
+      }
+    ]
+  }
 }

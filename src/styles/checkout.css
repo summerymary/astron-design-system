@@ -7,6 +7,7 @@
   min-width: 0;
   gap: 12px;
 }
+
 .sale-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 320px);
@@ -332,4 +333,29 @@
   background: none;
 }
 
+}
+
+@layer pages {
+  .sale-search-row > .ws-search {
+    flex: 1 1 160px;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+  }
+  .sale-search-row > [role='status'] {
+    flex-shrink: 0;
+  }
+  .sale-catalog-heading > div {
+    flex: 1;
+    min-width: 0;
+  }
+  .sale-section-back {
+    flex-shrink: 0;
+    width: auto;
+  }
+  @container sale (max-width: 520px) {
+    .sale-section-back > span {
+      display: none;
+    }
+  }
 }

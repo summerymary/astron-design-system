@@ -10,15 +10,16 @@ import { clientName, hiddenPhone } from '../lib/client-display';
 import { demoStamp, nextDemoNow } from '../lib/demo-clock';
 import { Select } from '../components/Select';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowLeft, Search, X } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import type { Member } from '../types';
 import type { Navigate } from '../components/WorkspaceUI';
 import { Button, Modal } from '../components/ui';
-import { Notice, Empty } from '../components/WorkspaceUI';
+import { Notice, Empty, SearchBox } from '../components/WorkspaceUI';
 import { ClientSearch } from '../components/ClientSearch';
 import { demoId, useWorkspace } from '../components/WorkspaceProvider';
 import { MembershipCard } from '../components/MembershipCard';
 import { CatalogSectionCard, CatalogSectionGrid } from '../components/CatalogSectionCard';
+import { MembershipCatalog } from '../components/MembershipCatalog';
 import { quantityLabel } from '../data/membership-kinds';
 import { memberCards } from '../data/admin';
 import { money, TODAY } from '../data/workspace';
@@ -27,7 +28,7 @@ import { paymentPlan, saleTotal } from '../lib/checkout';
 import type { PaymentMethod, PaymentParts } from '../lib/checkout';
 
 import { saleCatalog, saleSections, searchSaleCatalog } from '../lib/sale-catalog';
-import type { SaleCatalogItem, SaleSectionId } from '../lib/sale-catalog';
+import type { PlanSectionId, SaleCatalogItem, SaleSectionId } from '../lib/sale-catalog';
 export function SaleWorkspace({
   members,
   initialMember,
@@ -367,7 +368,7 @@ export function SaleWorkspace({
             </div>
           </section>
           <section className="panel ws-panel sale-catalog" aria-label="Каталог продажи">
-            <div className="ws-panel-heading">
+            <div className="ws-panel-heading sale-catalog-heading">
               <div>
                 <h2>
                   2.{' '}
@@ -384,8 +385,38 @@ export function SaleWorkspace({
                     'Выберите раздел или найдите покупку по названию.'}
                 </p>
               </div>
+              {sectionId && (
+                <Button
+                  className="sale-section-back"
+                  variant="ghost"
+                  aria-label="Все разделы продажи"
+                  title="Все разделы продажи"
+                  onClick={() => openSection(null)}
+                >
+                  <ArrowLeft size={16} /> <span>Все разделы продажи</span>
+                </Button>
+              )}
             </div>
             <div className="ws-panel-body ws-stack">
+              <div className="ws-actions sale-search-row">
+                <SearchBox
+                  value={query}
+                  onChange={setQuery}
+                  label="Поиск по названию"
+                  placeholder={
+                    sectionId
+                      ? 'Название, группа или подгруппа'
+                      : training
+                        ? 'Найти подходящий абонемент'
+                        : 'Абонемент, тренировка, товар или услуга'
+                  }
+                />
+                {(training || sectionId || query.trim()) && (
+                  <span className="ws-muted" role="status">
+                    Найдено: {visibleItems.length}
+                  </span>
+                )}
+              </div>
               {(training === 'personal' ||
                 sectionId === 'personal' ||
                 (query.trim() &&
@@ -430,42 +461,6 @@ export function SaleWorkspace({
                   )}
                 </>
               )}
-              {sectionId && (
-                <div className="ws-actions">
-                  <Button variant="ghost" onClick={() => openSection(null)}>
-                    <ArrowLeft size={16} /> Все разделы продажи
-                  </Button>
-                </div>
-              )}
-              <div className="sale-name-search">
-                <label htmlFor="sale-name-query">Поиск по названию</label>
-                <div>
-                  <Search size={20} aria-hidden="true" />
-                  <input
-                    id="sale-name-query"
-                    type="search"
-                    value={query}
-                    placeholder={
-                      sectionId
-                        ? 'Название в этом разделе'
-                        : training
-                          ? 'Название подходящего абонемента'
-                          : 'Абонемент, тренировка, товар или услуга'
-                    }
-                    onChange={(event) => setQuery(event.target.value)}
-                  />
-                  {query && (
-                    <button
-                      type="button"
-                      className="icon-button"
-                      aria-label="Очистить поиск по названию"
-                      onClick={() => setQuery('')}
-                    >
-                      <X size={18} />
-                    </button>
-                  )}
-                </div>
-              </div>
               {!training && !sectionId && !query.trim() ? (
                 <CatalogSectionGrid>
                   {saleSections.map((section) => {
@@ -482,9 +477,6 @@ export function SaleWorkspace({
                 </CatalogSectionGrid>
               ) : visibleItems.length ? (
                 <>
-                  <p className="form-note" role="status">
-                    Найдено позиций: {visibleItems.length}
-                  </p>
                   {saleSections
                     .filter((section) =>
                       visibleItems.some((entry) => entry.sectionId === section.id),
@@ -496,11 +488,27 @@ export function SaleWorkspace({
                       return (
                         <div className="ws-stack" key={section.id}>
                           {!sectionId && <h3>{section.name}</h3>}
-                          <div
-                            className={`plastic-card-grid ${section.id === 'goods-services' ? 'sale-item-grid' : ''}`}
-                          >
-                            {entries.map(renderItem)}
-                          </div>
+                          {section.id === 'goods-services' ? (
+                            <div className="plastic-card-grid sale-item-grid">
+                              {entries.map(renderItem)}
+                            </div>
+                          ) : (
+                            <MembershipCatalog
+                              key={section.id}
+                              section={section.id as PlanSectionId}
+                              plans={entries.map((entry) => entry.record)}
+                              searching={!!query.trim() || !sectionId || !!training}
+                              renderPlans={(rows) => (
+                                <div className="plastic-card-grid">
+                                  {rows.map((row) =>
+                                    renderItem(
+                                      entries.find((entry) => entry.record.id === row.id)!,
+                                    ),
+                                  )}
+                                </div>
+                              )}
+                            />
+                          )}
                         </div>
                       );
                     })}

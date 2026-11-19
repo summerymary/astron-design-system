@@ -226,3 +226,110 @@ assert.equal(
 console.log(
   'Trainer tariff checks passed: category-specific prices, filtered personal catalog and independent group sales.',
 );
+
+const { catalogGroups, catalogPlacement, matchesCatalogPlan, sortCatalogPlans } = await load(
+  '../src/lib/membership-catalog.ts',
+);
+for (const [name, section, group, family] of [
+  ['Абонемент «до 60 занятий»', 'memberships', 'club', 'visits'],
+  ['Абонемент «до 90 занятий»', 'memberships', 'club', 'visits'],
+  ['Абонемент «до 120 занятий»', 'memberships', 'club', 'visits'],
+  ['Абонемент «Добро пожаловать»', 'memberships', 'intro', 'welcome'],
+  ['Абонемент «Лайт»', 'memberships', 'club', 'light'],
+  ['Абонемент «Ланч»', 'memberships', 'club', 'lunch'],
+  ['Абонемент «Оптимум»', 'memberships', 'club', 'optimum'],
+  ['Безлимитный абонемент', 'memberships', 'club', 'unlimited'],
+  ['Детский абонемент', 'memberships', 'age', 'children'],
+  ['Железный абонемент', 'memberships', 'gym', 'iron'],
+  ['Железный абонемент количественный', 'memberships', 'gym', 'iron'],
+  ['Молодежный абонемент', 'memberships', 'age', 'youth'],
+  ['Молодежный абонемент количественный', 'memberships', 'age', 'youth'],
+  ['Разовое занятие', 'memberships', 'intro', 'single'],
+  ['Социальный абонемент', 'exceptions', 'special', 'social'],
+  ['Аква (коммерч. класс) 10 посещений', 'memberships', 'group', 'aqua'],
+  ['Инструктор', 'personal', 'trainer', 'instructor'],
+  ['Персональный тренер', 'personal', 'trainer', 'trainer'],
+  ['Мастер', 'personal', 'trainer', 'master'],
+  ['Эксперт', 'personal', 'trainer', 'expert'],
+  ['Методист', 'personal', 'trainer', 'methodist'],
+  ['Высшая категория', 'personal', 'trainer', 'highest'],
+  ['Плавание', 'personal', 'special-training', 'swimming'],
+  ['Кинезио', 'personal', 'special-training', 'kinesio'],
+  ['Эксперт старый', 'personal', 'legacy-training', 'expert-old'],
+]) {
+  const record = {
+    id: 'reference-label',
+    name,
+    status: 'Опубликован',
+    price: '1234',
+    training: 'Без изменений',
+  };
+  const before = structuredClone(record);
+  const placement = catalogPlacement(record, section);
+  assert.equal(placement.group.id, group, name);
+  assert.equal(placement.family.id, family, name);
+  assert.deepEqual(record, before, 'Grouping must not rewrite terms or archive old labels');
+}
+for (const section of ['memberships', 'personal', 'corporate', 'exceptions']) {
+  const families = catalogGroups(section).flatMap((group) =>
+    group.families.map((family) => family.id),
+  );
+  assert.equal(new Set(families).size, families.length, 'No duplicate family within a section');
+  for (const record of data.plans.filter((row) => planSaleSection(row) === section))
+    assert.ok(
+      families.includes(catalogPlacement(record, section).family.id),
+      'Every tariff remains reachable',
+    );
+}
+const arbitrary = { ...data.plans[0], id: 'new-plan', name: 'Произвольное название' };
+assert.equal(catalogPlacement(arbitrary, 'memberships').family.id, 'memberships-other');
+assert.equal(
+  catalogPlacement({ ...arbitrary, catalogFamily: 'youth' }, 'memberships').family.id,
+  'youth',
+);
+assert.equal(
+  catalogPlacement({ ...arbitrary, catalogFamily: 'youth' }, 'personal').family.id,
+  'personal-other',
+);
+const renamed = { ...data.plans[0], name: 'Новое название', catalogFamily: 'youth' };
+assert.equal(
+  catalogPlacement(renamed, 'memberships').family.id,
+  'youth',
+  'Explicit assignment survives renaming',
+);
+assert.equal(matchesCatalogPlan(renamed, 'memberships', 'молодежные'), true);
+assert.equal(matchesCatalogPlan(renamed, 'memberships', 'молодёжный абонемент'), true);
+assert.equal(
+  matchesCatalogPlan(renamed, 'memberships', 'молодёжный количественный'),
+  false,
+  'A family alias must not imply a different visit accounting type',
+);
+assert.equal(
+  matchesCatalogPlan(
+    { ...renamed, type: 'По посещениям', visits: '4' },
+    'memberships',
+    'молодёжный количественный',
+  ),
+  true,
+);
+assert.equal(
+  searchSaleCatalog(catalog, 'тренажерный зал', 'memberships').some(
+    (item) => item.record.id === 'plan-1',
+  ),
+  true,
+);
+const variants = [
+  { ...arbitrary, id: 'eight', type: 'По посещениям', visits: '8', duration: '30' },
+  { ...arbitrary, id: 'four-long', type: 'По посещениям', visits: '4', duration: '60' },
+  { ...arbitrary, id: 'unlimited', type: 'Безлимитный', visits: '0', duration: '30' },
+  { ...arbitrary, id: 'four', type: 'По посещениям', visits: '4', duration: '30' },
+];
+const variantsBefore = structuredClone(variants);
+assert.deepEqual(
+  sortCatalogPlans(variants).map((row) => row.id),
+  ['unlimited', 'four', 'four-long', 'eight'],
+);
+assert.deepEqual(variants, variantsBefore, 'Ordering must not change workspace data');
+console.log(
+  'Membership hierarchy checks passed: 25 reference labels, explicit placement, unknown/custom plans, section isolation, search aliases and variant ordering without term mutations.',
+);

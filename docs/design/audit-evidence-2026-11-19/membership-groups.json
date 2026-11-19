@@ -1,0 +1,2805 @@
+{
+  "date": "2026-11-19",
+  "scope": "Local membership hierarchy only; fictional tariffs; no source systems, API, commits or deployment",
+  "views": [
+    {
+      "label": "groups 1440/0",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 150.6875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 150.6875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 150.6875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 175.875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 175.875
+        }
+      ]
+    },
+    {
+      "label": "iron variants 1440/0",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "youth variants 1440/0",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "club families 1440/0",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 1440/0",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 1440/0",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "empty search 1440/0",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 1440/0",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "sale groups 1440/0",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 150.6875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 150.6875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 150.6875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 175.875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 175.875
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 1440/0",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 128.1875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 1440/0",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "explicit move preserves tariff terms",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "groups 1440/1",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 150.6875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 150.6875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 150.6875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 175.875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 175.875
+        }
+      ]
+    },
+    {
+      "label": "iron variants 1440/1",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "youth variants 1440/1",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "club families 1440/1",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 1440/1",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 1440/1",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "empty search 1440/1",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 1440/1",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "sale groups 1440/1",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 150.6875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 150.6875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 150.6875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 175.875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 175.875
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 1440/1",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 128.1875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 1440/1",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "groups 1440/2",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 150.6875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 150.6875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 150.6875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 175.875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 175.875
+        }
+      ]
+    },
+    {
+      "label": "iron variants 1440/2",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "youth variants 1440/2",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "club families 1440/2",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 1440/2",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 1440/2",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "empty search 1440/2",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 1440/2",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "sale groups 1440/2",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 150.6875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 150.6875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 150.6875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 175.875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 175.875
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 1440/2",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 128.1875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 1440/2",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "groups 1440/3",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 150.6875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 150.6875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 150.6875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 175.875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 175.875
+        }
+      ]
+    },
+    {
+      "label": "iron variants 1440/3",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "youth variants 1440/3",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "club families 1440/3",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        },
+        {
+          "width": 353,
+          "scroll": 353,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 1440/3",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 1440/3",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "empty search 1440/3",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 1440/3",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "sale groups 1440/3",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 150.6875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 150.6875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 150.6875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 175.875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 175.875
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 1440/3",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 128.1875
+        },
+        {
+          "width": 339,
+          "scroll": 339,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 1440/3",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": []
+    },
+    {
+      "label": "groups 1024/0",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 243.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 243.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 243.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 246.0625
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 246.0625
+        }
+      ]
+    },
+    {
+      "label": "iron variants 1024/0",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "youth variants 1024/0",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "club families 1024/0",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 198.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 198.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 198.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 173.1875
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 1024/0",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 1024/0",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "empty search 1024/0",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 1024/0",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "sale groups 1024/0",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 243.375
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 243.375
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 243.375
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 246.0625
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 246.0625
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 1024/0",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 173.1875
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 1024/0",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "groups 1024/1",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 243.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 243.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 243.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 246.0625
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 246.0625
+        }
+      ]
+    },
+    {
+      "label": "iron variants 1024/1",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "youth variants 1024/1",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "club families 1024/1",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 198.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 198.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 198.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 173.1875
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 1024/1",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 1024/1",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "empty search 1024/1",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 1024/1",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "sale groups 1024/1",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 243.375
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 243.375
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 243.375
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 246.0625
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 246.0625
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 1024/1",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 173.1875
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 1024/1",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "groups 1024/2",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 243.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 243.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 243.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 246.0625
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 246.0625
+        }
+      ]
+    },
+    {
+      "label": "iron variants 1024/2",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "youth variants 1024/2",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "club families 1024/2",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 198.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 198.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 198.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 173.1875
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 1024/2",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 1024/2",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "empty search 1024/2",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 1024/2",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "sale groups 1024/2",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 243.375
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 243.375
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 243.375
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 246.0625
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 246.0625
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 1024/2",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 173.1875
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 1024/2",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "groups 1024/3",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 243.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 243.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 243.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 246.0625
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 246.0625
+        }
+      ]
+    },
+    {
+      "label": "iron variants 1024/3",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "youth variants 1024/3",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "club families 1024/3",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 198.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 198.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 198.375
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 173.1875
+        },
+        {
+          "width": 215,
+          "scroll": 215,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 1024/3",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 1024/3",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "empty search 1024/3",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 1024/3",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "sale groups 1024/3",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 243.375
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 243.375
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 243.375
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 246.0625
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 246.0625
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 1024/3",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": [
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 173.1875
+        },
+        {
+          "width": 211,
+          "scroll": 211,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 1024/3",
+      "pageWidth": 1024,
+      "pageContent": 1024,
+      "cards": []
+    },
+    {
+      "label": "groups 390/0",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 198.375
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 173.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 150.6875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 173.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 198.375
+        }
+      ]
+    },
+    {
+      "label": "iron variants 390/0",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "youth variants 390/0",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "club families 390/0",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 390/0",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 390/0",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "empty search 390/0",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 390/0",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "sale groups 390/0",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 198.375
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 173.1875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 150.6875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 173.1875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 198.375
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 390/0",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 128.1875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 390/0",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "groups 390/1",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 198.375
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 173.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 150.6875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 173.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 198.375
+        }
+      ]
+    },
+    {
+      "label": "iron variants 390/1",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "youth variants 390/1",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "club families 390/1",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 390/1",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 390/1",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "empty search 390/1",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 390/1",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "sale groups 390/1",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 198.375
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 173.1875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 150.6875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 173.1875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 198.375
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 390/1",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 128.1875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 390/1",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "groups 390/2",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 198.375
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 173.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 150.6875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 173.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 198.375
+        }
+      ]
+    },
+    {
+      "label": "iron variants 390/2",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "youth variants 390/2",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "club families 390/2",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 390/2",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 390/2",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "empty search 390/2",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 390/2",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "sale groups 390/2",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 198.375
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 173.1875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 150.6875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 173.1875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 198.375
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 390/2",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 128.1875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 390/2",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "groups 390/3",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 198.375
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 173.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 150.6875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 173.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 198.375
+        }
+      ]
+    },
+    {
+      "label": "iron variants 390/3",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "youth variants 390/3",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "club families 390/3",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        },
+        {
+          "width": 280,
+          "scroll": 280,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 390/3",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 390/3",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "empty search 390/3",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 390/3",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "sale groups 390/3",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 198.375
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 173.1875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 150.6875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 173.1875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 198.375
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 390/3",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 128.1875
+        },
+        {
+          "width": 268,
+          "scroll": 268,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 390/3",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": []
+    },
+    {
+      "label": "groups 320/0",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 243.375
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 220.875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 198.375
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 220.875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 246.0625
+        }
+      ]
+    },
+    {
+      "label": "iron variants 320/0",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "youth variants 320/0",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "club families 320/0",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 198.375
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 320/0",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 320/0",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "empty search 320/0",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 320/0",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "sale groups 320/0",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 265.875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 220.875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 198.375
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 220.875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 268.5625
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 320/0",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 173.1875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 320/0",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "groups 320/1",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 243.375
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 220.875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 198.375
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 220.875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 246.0625
+        }
+      ]
+    },
+    {
+      "label": "iron variants 320/1",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "youth variants 320/1",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "club families 320/1",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 198.375
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 320/1",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 320/1",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "empty search 320/1",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 320/1",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "sale groups 320/1",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 265.875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 220.875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 198.375
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 220.875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 268.5625
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 320/1",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 173.1875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 320/1",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "groups 320/2",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 243.375
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 220.875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 198.375
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 220.875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 246.0625
+        }
+      ]
+    },
+    {
+      "label": "iron variants 320/2",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "youth variants 320/2",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "club families 320/2",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 198.375
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 320/2",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 320/2",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "empty search 320/2",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 320/2",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "sale groups 320/2",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 265.875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 220.875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 198.375
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 220.875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 268.5625
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 320/2",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 173.1875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 320/2",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "groups 320/3",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 243.375
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 220.875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 198.375
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 220.875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 246.0625
+        }
+      ]
+    },
+    {
+      "label": "iron variants 320/3",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "youth variants 320/3",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "club families 320/3",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 198.375
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        },
+        {
+          "width": 210,
+          "scroll": 210,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "empty configured family 320/3",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "legacy-name search 320/3",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "empty search 320/3",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "new tariff placement 320/3",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "sale groups 320/3",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 265.875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 220.875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 198.375
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 220.875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 268.5625
+        }
+      ]
+    },
+    {
+      "label": "sale populated subgroups 320/3",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": [
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 173.1875
+        },
+        {
+          "width": 198,
+          "scroll": 198,
+          "height": 173.1875
+        }
+      ]
+    },
+    {
+      "label": "sale selected variant payment 320/3",
+      "pageWidth": 320,
+      "pageContent": 320,
+      "cards": []
+    },
+    {
+      "label": "guide interactive example 1440/0",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "guide interactive example 1440/1",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "guide interactive example 1440/2",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "guide interactive example 1440/3",
+      "pageWidth": 1440,
+      "pageContent": 1440,
+      "cards": [
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        },
+        {
+          "width": 368,
+          "scroll": 368,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "guide interactive example 390/0",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "guide interactive example 390/1",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "guide interactive example 390/2",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        }
+      ]
+    },
+    {
+      "label": "guide interactive example 390/3",
+      "pageWidth": 390,
+      "pageContent": 390,
+      "cards": [
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        },
+        {
+          "width": 318,
+          "scroll": 318,
+          "height": 128.1875
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 1440/0",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 1440/0",
+    "Explicit subgroup edit persists with original price, duration and visit accounting",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 1440/1",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 1440/1",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 1440/2",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 1440/2",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 1440/3",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 1440/3",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 1024/0",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 1024/0",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 1024/1",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 1024/1",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 1024/2",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 1024/2",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 1024/3",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 1024/3",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 390/0",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 390/0",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 390/1",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 390/1",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 390/2",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 390/2",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 390/3",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 390/3",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 320/0",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 320/0",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 320/1",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 320/1",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 320/2",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 320/2",
+    "admin navigation, keyboard focus, aliases, empty family and prefilled creation 320/3",
+    "sale hierarchy, empty-family exclusion and selected tariff checkout 320/3"
+  ],
+  "errors": [],
+  "summary": {
+    "views": 185,
+    "scenarios": 33,
+    "errors": 0
+  },
+  "checks": {
+    "projectCommands": 16,
+    "typecheck": "passed",
+    "productionBuild": "passed",
+    "diffCheck": "passed",
+    "repeatedAfterSearchRefinement": [
+      "catalog",
+      "ui",
+      "registration",
+      "checkout",
+      "handoff",
+      "typecheck",
+      "build"
+    ],
+    "referenceLabels": 25
+  }
+}
