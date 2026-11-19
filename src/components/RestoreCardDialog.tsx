@@ -96,7 +96,7 @@ export function RestoreCardDialog({
             }}
           />
         </Field>
-        <ReceptionPayment value={payment} onChange={setPayment} total={price} />
+        <ReceptionPayment member={member} value={payment} onChange={setPayment} total={price} />
         {error && <Notice tone="warning">{error}</Notice>}
         <div className="modal-actions">
           <Button variant="secondary" onClick={onClose}>
