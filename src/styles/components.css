@@ -368,6 +368,46 @@ body .button.button-accent {
 body .button.button-accent:hover:not(:disabled) {
   background: var(--color-accent-soft);
 }
+/* The same client task keeps its icon and emphasis in profile and reception. */
+body .button.button[data-client-action] {
+  min-height: 52px;
+  padding: 10px 16px;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  white-space: normal;
+  text-align: left;
+}
+body .button[data-client-action] > svg {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+}
+body .button[data-client-action] > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+body .button.button[data-client-action='visit'] {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+body .button.button[data-client-action='visit']:hover:not(:disabled) {
+  background: var(--color-accent-soft-hover);
+}
+body .button.button[data-client-action='visit']:active:not(:disabled) {
+  background: var(--color-accent-soft-hover);
+  border-color: var(--color-accent-pressed);
+}
+body .button.button[data-client-action]:focus-visible {
+  outline-offset: -4px;
+}
+body .button.button[data-client-action='sell'] {
+  border-width: 3px;
+  border-color: var(--color-accent-pressed);
+  padding: 8px 14px;
+  font-weight: 700;
+}
 /* A completed attendance remains green even when repeat activation is disabled. */
 body .button.button-success {
   color: var(--color-success);
@@ -746,6 +786,78 @@ body .modal.modal {
 }
 body .modal.modal[data-size='wide'] {
   width: min(920px, calc(100vw - 32px));
+}
+body .modal.modal[data-size='large'] {
+  width: min(1200px, calc(100vw - 32px));
+}
+body .avatar > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+body .button.client-photo-retake {
+  min-height: 44px;
+  padding: 8px;
+}
+[data-ui='client-photo'] {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
+}
+[data-ui='client-photo'] h3 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+.client-photo-preview {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 320px;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  color: var(--color-muted);
+  background: var(--color-surface-muted);
+}
+.client-photo-preview > :is(video, img, .avatar) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.client-photo-preview > video[hidden] {
+  display: none;
+}
+.client-photo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.client-photo-controls .button {
+  flex: 1 1 160px;
+}
+.client-photo-hint {
+  margin: 0;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--color-muted);
+}
+body .modal:has(> [data-ui='client-photo']) {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - 32px);
+  overflow: hidden;
+}
+body .modal > [data-ui='client-photo'] {
+  min-height: 0;
+  overflow-y: auto;
+  padding-inline-end: 12px;
+}
+body .modal:has(> [data-ui='client-photo']) > :is(.modal-heading, .modal-actions) {
+  flex-shrink: 0;
 }
 body .modal-actions.modal-actions {
   display: flex;

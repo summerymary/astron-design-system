@@ -132,27 +132,6 @@
   align-items: center;
   gap: 7px;
 }
-.client-primary-actions .button {
-  min-height: 38px;
-  font-size: var(--text-caption);
-  padding: 0 12px;
-  white-space: nowrap;
-}
-.app-shell .client-primary-actions .client-sell-button {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  background: var(--color-surface);
-}
-.app-shell .client-primary-actions .client-sell-button:hover {
-  border-color: var(--color-accent-hover);
-  color: var(--color-accent-hover);
-  background: var(--color-accent-soft);
-}
-.app-shell .client-primary-actions .client-sell-button:active {
-  border-color: var(--color-accent-pressed);
-  color: var(--color-accent-pressed);
-  background: var(--color-accent-soft-hover);
-}
 .client-more {
   position: relative;
 }
@@ -777,16 +756,8 @@
     gap: 6px;
     margin-top: 8px;
   }
-  .client-primary-actions .button {
-    font-size: var(--text-caption);
-    padding: 0 10px;
-    min-height: 39px;
-  }
   .client-primary-actions .button:first-child {
     flex: 1;
-  }
-  .client-primary-actions .button svg {
-    width: 13px;
   }
   .client-more > summary {
     width: 32px;
@@ -1016,4 +987,31 @@
   color: var(--color-muted);
 }
 
+}
+
+@layer pages {
+  .client-photo > .client-photo-retake {
+    position: absolute;
+    inset-inline: 8px;
+    bottom: 8px;
+    width: calc(100% - 16px);
+    height: auto;
+  }
+  .client-primary-actions {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-inline-start: 0;
+    padding-inline-start: 0;
+  }
+  @container workspace (max-width: 700px) {
+    .client-photo > .client-photo-retake {
+      inset-inline-start: auto;
+      inset-inline-end: 0;
+      bottom: 0;
+      width: 44px;
+    }
+    .client-photo-retake > span {
+      display: none;
+    }
+  }
 }

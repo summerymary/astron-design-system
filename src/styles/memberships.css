@@ -904,14 +904,18 @@
   }
 }
 @layer pages {
+  .membership-browser {
+    --panel-gap: 12px;
+  }
   .membership-browser-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
   }
   .membership-browser-heading {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    min-height: 44px;
     align-items: center;
     justify-content: space-between;
     gap: 8px 16px;
@@ -920,12 +924,29 @@
   .membership-browser-path {
     margin: 0;
   }
+  .membership-browser-heading h3 {
+    min-width: 0;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .membership-browser-heading h3:focus {
+    outline-offset: -2px;
+  }
   @container workspace (max-width: 900px) {
     .membership-browser-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   @container workspace (max-width: 560px) {
+    .membership-browser-heading {
+      min-height: 48px;
+    }
+    .membership-browser-back > span {
+      display: none;
+    }
+    .membership-browser-back {
+      width: 44px;
+    }
     .membership-browser-grid {
       grid-template-columns: minmax(0, 1fr);
     }
