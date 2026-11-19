@@ -286,3 +286,134 @@ assert.equal(
   ).status,
   'paused',
 );
+
+// Extended payment methods share the same atomic stock/payment operation.
+const paymentData = {
+  ...createWorkspaceData(),
+  'gift-cards': [
+    { id: 'gift-payment-test', name: 'DEMO-TEST', balance: '1000', status: 'Активна' },
+  ],
+  'gift-history': [],
+};
+const productForPayment = paymentData['retail-products'].find((row) => row.status === 'Активен');
+const saleForPayment = {
+  id: 'extended-gift-sale',
+  date: '2026-11-06',
+  time: '15:00',
+  club: 'Центральный',
+  cashier: 'Тестовый сотрудник',
+};
+const productTotal = Number(productForPayment.price);
+const extendedGift = { ...payment, method: 'Подарочная карта', giftId: 'gift-payment-test' };
+const giftSale = retailSale(
+  paymentData,
+  { [productForPayment.id]: 1 },
+  saleForPayment,
+  extendedGift,
+);
+assert.equal(Number(giftSale['gift-cards'][0].balance), 1000 - productTotal);
+assert.equal(giftSale['gift-history'].length, 1);
+assert.equal(Number(giftSale.ledger.at(-1).giftAmount), productTotal);
+assert.equal(giftSale.ledger.at(-1).cashAmount, '0');
+assert.equal(giftSale.ledger.at(-1).cardAmount, '0');
+assert.throws(() =>
+  retailSale(giftSale, { [productForPayment.id]: 1 }, saleForPayment, extendedGift),
+);
+assert.throws(() =>
+  retailSale(paymentData, { [productForPayment.id]: 1 }, saleForPayment, {
+    ...extendedGift,
+    giftId: 'missing',
+  }),
+);
+assert.throws(
+  () =>
+    retailSale(paymentData, { [productForPayment.id]: 1 }, saleForPayment, {
+      ...payment,
+      method: 'В кредит',
+    }),
+  /клиента/,
+);
+const creditSale = retailSale(
+  paymentData,
+  { [productForPayment.id]: 1 },
+  { ...saleForPayment, id: 'credit-retail' },
+  { ...payment, method: 'В кредит', memberId: '1001', client: 'Демо-клиент' },
+);
+assert.equal(creditSale.ledger.at(-1).memberId, '1001');
+assert.equal(creditSale.ledger.at(-1).amount, '0');
+assert.equal(Number(creditSale.receivables.at(-1).amount), productTotal);
+assert.equal(creditSale.receivables.at(-1).memberId, '1001');
+assert.equal(creditSale.ledger.at(-1).status, 'В долг');
+const mixedSale = retailSale(
+  paymentData,
+  { [productForPayment.id]: 1 },
+  { ...saleForPayment, id: 'mixed-retail' },
+  {
+    ...extendedGift,
+    method: 'Составная оплата',
+    parts: { cash: 0.29, card: 0, gift: productTotal - 1, credit: 0.71 },
+    memberId: '1001',
+    client: 'Демо-клиент',
+  },
+);
+assert.equal(mixedSale.receivables.at(-1).amount, '0.71');
+assert.equal(mixedSale.ledger.at(-1).cashAmount, '0.29');
+assert.equal(
+  Math.round(Number(mixedSale['gift-cards'][0].balance) * 100),
+  Math.round((1001 - productTotal) * 100),
+);
+const { barSale } = await import(
+  await load(new URL('../src/lib/reception-operations.ts', import.meta.url))
+);
+const barProduct = paymentData.products.find((row) => row.status === 'Активен');
+const barPayment = barSale(
+  paymentData,
+  { [barProduct.id]: 1 },
+  { ...saleForPayment, id: 'credit-bar' },
+  { ...payment, method: 'В кредит', memberId: '1001', client: 'Демо-клиент' },
+);
+assert.equal(barPayment.ledger.at(-1).category, 'Бар');
+assert.equal(barPayment.receivables.at(-1).memberId, '1001');
+assert.equal(
+  Number(barPayment.products.find((row) => row.id === barProduct.id).stock),
+  Number(barProduct.stock) - 1,
+);
+assert.equal(paymentData['gift-cards'][0].balance, '1000', 'Payment input remains immutable');
+console.log(
+  'Extended payments passed: gift debit, named credit, mixed kopecks, no cash inflow for gift/debt, replay protection, and atomic bar stock.',
+);
+
+const creditGift = issueGift(
+  paymentData,
+  {
+    id: 'gift-on-credit',
+    name: 'DEMO-CREDIT',
+    nominal: '300',
+    date: '2026-11-06',
+    time: '15:00',
+    club: 'Центральный',
+    cashier: 'Тестовый сотрудник',
+  },
+  { ...payment, method: 'В кредит', memberId: '1001', client: 'Демо-клиент' },
+);
+assert.equal(creditGift['gift-cards'].find((row) => row.id === 'gift-on-credit').balance, '300');
+assert.equal(creditGift.receivables.at(-1).memberId, '1001');
+assert.equal(creditGift.receivables.at(-1).amount, '300');
+const creditRestore = paidOperation(
+  paymentData,
+  {
+    ...saleForPayment,
+    id: 'restore-credit',
+    name: 'Восстановление карты',
+    memberId: '1001',
+    client: 'Клиент карты',
+  },
+  100,
+  { ...payment, method: 'В кредит', memberId: '1002', client: 'Другой клиент' },
+);
+assert.equal(
+  creditRestore.receivables.at(-1).memberId,
+  '1001',
+  'A fixed card owner takes priority over draft recipient',
+);
+assert.equal(creditRestore.receivables.at(-1).amount, '100');

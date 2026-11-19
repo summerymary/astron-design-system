@@ -216,7 +216,7 @@ assert.equal(
 );
 const omitted = ['members', 'bar', 'bar-catalog', 'bar-sales', 'bar-categories', 'bar-collections'];
 assert.ok(
-  managerSections.length <= 18,
+  managerSections.length <= 19,
   'Management navigation should contain only key destinations',
 );
 for (const id of managerSections)
@@ -240,7 +240,11 @@ assert.equal(managementRoles.length, 5);
 for (const role of managementRoles) {
   assert.ok(isManagementRole(role));
   for (const section of managerSections)
-    assert.ok(canOpenModule(role, section), `${role}: ${section}`);
+    assert.equal(
+      canOpenModule(role, section),
+      section !== 'companies' || !['fitness-director', 'sysadmin'].includes(role),
+      `${role}: ${section}`,
+    );
   assert.ok(canOpenModule(role, 'members'));
   assert.equal(
     canOpenModule(role, 'trainer-clients'),

@@ -436,7 +436,150 @@ assert.ok(
       (event) => event.kind !== 'personal' && !['Отменено', 'Завершено'].includes(event.status),
     ),
 );
+assert.deepEqual(bookingRules.filterBookingEvents(nearest, ''), nearest);
+const searchFixtures = [
+  {
+    id: 'a',
+    name: 'Мягкая йога',
+    trainer: 'Алёна Белова',
+    room: 'Большой зал',
+    day: '2026-11-07',
+    time: '16:05',
+  },
+  {
+    id: 'b',
+    name: 'Сайкл',
+    trainer: 'Максим Ветров',
+    room: 'Студия',
+    day: '2026-11-08',
+    time: '17:00',
+  },
+];
+for (const query of ['ЙОГА белова', 'алена', 'Большой 16:05', '07.11.2026', '2026-11-07'])
+  assert.deepEqual(
+    bookingRules.filterBookingEvents(searchFixtures, query).map((row) => row.id),
+    ['a'],
+  );
+assert.equal(bookingRules.filterBookingEvents(searchFixtures, 'нет такого').length, 0);
 assert.ok(nearest.every((event) => event.day > '2026-11-06' || event.time >= '14:05'));
+const nearestPersonal = bookingRules.nearestPersonalBookingSlots(
+  withBooking,
+  adminBooker,
+  newBookingClient,
+  'trainer-maxim',
+  'Центральный',
+  '2026-11-06T14:35',
+);
+assert.ok(nearestPersonal.length > 0);
+assert.ok(
+  nearestPersonal.every(
+    (slot) => slot.day === '2026-11-06' && slot.time >= '15:30' && slot.time <= '20:10',
+  ),
+);
+assert.equal(
+  new Set(nearestPersonal.map((slot) => `${slot.day}T${slot.time}`)).size,
+  nearestPersonal.length,
+);
+assert.deepEqual(
+  bookingRules.nearestPersonalBookingSlots(
+    { ...withBooking, 'trainer-availability': [] },
+    adminBooker,
+    newBookingClient,
+    'trainer-maxim',
+    'Центральный',
+    '2026-11-06T14:35',
+  ),
+  [],
+);
+const slotInput = {
+  ...nearestPersonal[0],
+  id: 'slot-one-click',
+  trainerId: 'trainer-maxim',
+  club: 'Центральный',
+};
+const beforeSlot = structuredClone(withBooking);
+const bookedSlot = bookingRules.bookPersonalSlot(
+  withBooking,
+  adminBooker,
+  newBookingClient,
+  slotInput,
+  '2026-11-06T14:35',
+);
+assert.deepEqual(withBooking, beforeSlot);
+assert.equal(bookedSlot.data.events.length, withBooking.events.length + 1);
+assert.equal(bookedSlot.event.attendees, String(newBookingClient.id));
+assert.deepEqual(
+  bookedSlot.data.ledger,
+  withBooking.ledger,
+  'Booking does not charge a pass or create a sale',
+);
+assert.throws(() =>
+  bookingRules.bookPersonalSlot(
+    bookedSlot.data,
+    adminBooker,
+    newBookingClient,
+    slotInput,
+    '2026-11-06T14:35',
+  ),
+);
+assert.throws(
+  () =>
+    bookingRules.bookPersonalSlot(
+      bookedSlot.data,
+      adminBooker,
+      newBookingClient,
+      { ...slotInput, id: 'stale-slot' },
+      '2026-11-06T14:35',
+    ),
+  /тренер|Тренер|клиент|Клиент|[Зз]ал/,
+);
+assert.throws(
+  () =>
+    bookingRules.bookPersonalSlot(
+      { ...withBooking, 'trainer-availability': [] },
+      adminBooker,
+      newBookingClient,
+      slotInput,
+      '2026-11-06T14:35',
+    ),
+  /Рабочее время/,
+);
+const withDuty = {
+  ...withBooking,
+  'trainer-duty': [
+    {
+      id: 'new-duty',
+      trainerId: 'trainer-maxim',
+      club: 'Парк',
+      day: slotInput.day,
+      time: slotInput.time,
+      duration: '60',
+    },
+  ],
+};
+assert.throws(
+  () =>
+    bookingRules.bookPersonalSlot(
+      withDuty,
+      adminBooker,
+      newBookingClient,
+      slotInput,
+      '2026-11-06T14:35',
+    ),
+  /дежурством/,
+);
+assert.ok(
+  !bookingRules
+    .nearestPersonalBookingSlots(
+      withDuty,
+      adminBooker,
+      newBookingClient,
+      'trainer-maxim',
+      'Центральный',
+      '2026-11-06T14:35',
+    )
+    .some((slot) => slot.day === slotInput.day && slot.time === slotInput.time),
+);
 console.log(
   'Client booking checks passed: mandatory booking, trainer categories, assignments, administrator personal booking, role checks, conflicts, future slots and nearest groups.',
 );
