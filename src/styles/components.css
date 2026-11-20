@@ -1017,6 +1017,106 @@ body .ui-tabs[data-layout='grid'] > button {
   justify-content: center;
   white-space: normal;
 }
+body .ui-tabs[data-variant='cards'] {
+  container: choice-cards / inline-size;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+body .ui-tabs[data-variant='cards'] > button {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 14px;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  min-height: 72px;
+  padding: 10px;
+  border: 1px solid var(--color-control-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  text-align: left;
+  white-space: normal;
+}
+body .ui-tabs[data-variant='cards'] > button:hover {
+  border-color: var(--color-accent);
+}
+body .ui-tabs[data-variant='cards'] > button:is([aria-selected='true'], [aria-checked='true']) {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+  color: var(--color-accent);
+}
+.ui-choice-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--color-surface-muted);
+  color: var(--color-muted);
+}
+:is([aria-checked='true'], [aria-selected='true']) > .ui-choice-icon {
+  background: var(--color-surface);
+  color: var(--color-accent);
+}
+.ui-choice-copy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.ui-choice-label {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+}
+.ui-choice-label > .ui-tab-count {
+  margin-inline-start: 6px;
+}
+.ui-choice-description {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--color-muted);
+}
+.ui-choice-mark {
+  display: grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--color-control-border);
+  border-radius: 50%;
+}
+:is([aria-checked='true'], [aria-selected='true']) > .ui-choice-mark {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+@container choice-cards (max-width: 400px) {
+  body .ui-tabs[data-variant='cards'] > button {
+    position: relative;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    min-height: 60px;
+    padding: 8px;
+  }
+  .ui-choice-copy {
+    text-align: center;
+  }
+  .ui-choice-icon,
+  .ui-choice-description {
+    display: none;
+  }
+  .ui-choice-mark {
+    position: absolute;
+    inset-block-start: 5px;
+    inset-inline-end: 5px;
+    width: 12px;
+    height: 12px;
+  }
+}
 
 /* Shared membership recalculation dialog: the choices and target are peers. */
 body .modal:has(> [data-ui='membership-reissue']) {
@@ -1033,7 +1133,7 @@ body .modal:has(> [data-ui='membership-reissue']) > .modal-actions {
 [data-ui='membership-reissue'] {
   display: grid;
   align-content: start;
-  gap: 16px;
+  gap: 12px;
 }
 [data-ui='membership-reissue'] :is(h3, p, dl) {
   margin: 0;
@@ -1047,12 +1147,35 @@ body .modal:has(> [data-ui='membership-reissue']) > .modal-actions {
   grid-template-columns: minmax(180px, 0.9fr) minmax(0, 2.1fr);
   align-items: center;
   gap: 16px;
-  padding: 12px 16px;
+  padding: 10px 14px;
   border: 1px solid var(--color-line);
+  border-inline-start: 3px solid var(--color-accent);
   border-radius: var(--radius-control);
-  background: var(--color-surface-muted);
+  background: var(--color-surface);
 }
-.reissue-source > div > p,
+.reissue-source-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.reissue-source-title > div {
+  min-width: 0;
+}
+.reissue-source-title h3 {
+  line-height: 22px;
+}
+.reissue-source-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+.reissue-source-title p,
 .reissue-price-origin,
 .reissue-source-facts dt,
 .reissue-result-facts dt {
@@ -1074,14 +1197,74 @@ body .modal:has(> [data-ui='membership-reissue']) > .modal-actions {
 .reissue-columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-areas: 'methods target' 'calculation trainer';
+  grid-template-areas: 'methods target' 'calculation target';
   align-items: start;
   gap: 12px 24px;
 }
-.reissue-methods { grid-area: methods; }
-.reissue-target { grid-area: target; }
-.reissue-calculation { grid-area: calculation; }
-.reissue-trainer { grid-area: trainer; }
+.reissue-methods {
+  grid-area: methods;
+}
+.reissue-target {
+  grid-area: target;
+}
+.reissue-calculation {
+  grid-area: calculation;
+}
+.reissue-target {
+  align-self: stretch;
+  padding: 12px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+.reissue-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.reissue-section-title > svg {
+  flex-shrink: 0;
+  color: var(--color-muted);
+}
+.reissue-calculation {
+  padding: 10px 12px;
+  gap: 8px;
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  background: var(--color-canvas);
+}
+.reissue-calculation > p {
+  font-size: 14px;
+  line-height: 20px;
+}
+.reissue-plan-preview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 8px 0;
+  border-block: 1px solid var(--color-line);
+}
+.reissue-plan-preview dt {
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+.reissue-plan-preview dd {
+  margin: 4px 0 0;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+.reissue-plan-preview > div:first-child dd {
+  color: var(--color-accent);
+}
+.reissue-plan-hint {
+  padding-block: 8px;
+  border-block: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 20px;
+}
 .reissue-form-section {
   display: grid;
   align-content: start;
@@ -1097,7 +1280,9 @@ body .modal:has(> [data-ui='membership-reissue']) > .modal-actions {
   padding-bottom: 12px;
   border-bottom: 1px solid var(--color-line);
 }
-.reissue-secondary-facts { display: none; }
+.reissue-secondary-facts {
+  display: none;
+}
 @container membership-reissue (max-width: 900px) {
   .reissue-source {
     grid-template-columns: minmax(0, 1fr);
@@ -1110,8 +1295,21 @@ body .modal:has(> [data-ui='membership-reissue']) > .modal-actions {
   }
   .reissue-columns {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: 'methods' 'target' 'calculation' 'trainer';
+    grid-template-areas: 'methods' 'target' 'calculation';
     gap: 12px;
+  }
+  .reissue-source-icon {
+    display: none;
+  }
+  .reissue-target {
+    padding: 0;
+    border: 0;
+  }
+  .reissue-target > .reissue-section-title {
+    display: none;
+  }
+  .reissue-methods .ui-choice-label {
+    line-height: 22px;
   }
   .reissue-result-facts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
