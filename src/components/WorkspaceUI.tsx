@@ -44,12 +44,14 @@ export function Tabs({
   selection = 'panel',
   layout = 'scroll',
 }: {
-  items: (string | { id: string; label: string; count?: number })[];
+  items: (
+    string | { id: string; label: string; count?: number; icon?: ReactNode; description?: string }
+  )[];
   value: string;
   onChange: (value: string) => void;
   label?: string;
   className?: string;
-  variant?: 'line' | 'segmented';
+  variant?: 'line' | 'segmented' | 'cards';
   idPrefix?: string;
   panelId?: string;
   selection?: 'panel' | 'filter';
@@ -76,6 +78,16 @@ export function Tabs({
           role={selection === 'filter' ? 'radio' : 'tab'}
           id={`${idPrefix || generatedId}-${item.id}`}
           aria-controls={panelId}
+          aria-label={
+            variant === 'cards'
+              ? `${item.label}${'count' in item && item.count !== undefined ? ` ${item.count}` : ''}`
+              : undefined
+          }
+          aria-describedby={
+            variant === 'cards' && 'description' in item && item.description
+              ? `${idPrefix || generatedId}-${item.id}-description`
+              : undefined
+          }
           aria-selected={selection === 'panel' ? value === item.id : undefined}
           aria-checked={selection === 'filter' ? value === item.id : undefined}
           tabIndex={value === item.id ? 0 : -1}
@@ -97,17 +109,53 @@ export function Tabs({
             onChange(normalized[next].id);
           }}
         >
-          {item.label}
-          {'count' in item && item.count !== undefined && (
-            <span className="ui-tab-count">{item.count}</span>
+          {variant === 'cards' ? (
+            <>
+              {'icon' in item && item.icon && (
+                <span className="ui-choice-icon" aria-hidden="true">
+                  {item.icon}
+                </span>
+              )}
+              <span className="ui-choice-copy">
+                <span className="ui-choice-label">
+                  {item.label}
+                  {'count' in item && item.count !== undefined && (
+                    <span className="ui-tab-count">{item.count}</span>
+                  )}
+                </span>
+                {'description' in item && item.description && (
+                  <span
+                    className="ui-choice-description"
+                    id={`${idPrefix || generatedId}-${item.id}-description`}
+                  >
+                    {item.description}
+                  </span>
+                )}
+              </span>
+              <span className="ui-choice-mark" aria-hidden="true">
+                {value === item.id && <Check size={12} />}
+              </span>
+            </>
+          ) : (
+            <>
+              {item.label}
+              {'count' in item && item.count !== undefined && (
+                <span className="ui-tab-count">{item.count}</span>
+              )}
+            </>
           )}
         </button>
       ))}
     </div>
   );
 }
-export function SegmentedFilter(props: Omit<Parameters<typeof Tabs>[0], 'variant' | 'selection'>) {
-  return <Tabs {...props} variant="segmented" selection="filter" />;
+export function SegmentedFilter({
+  variant = 'segmented',
+  ...props
+}: Omit<Parameters<typeof Tabs>[0], 'variant' | 'selection'> & {
+  variant?: 'segmented' | 'cards';
+}) {
+  return <Tabs {...props} variant={variant} selection="filter" />;
 }
 export function Status({ children, tone }: { children: ReactNode; tone?: StatusTone }) {
   return (

@@ -1,4 +1,13 @@
 import { useRef, useState } from 'react';
+import {
+  ArrowRightLeft,
+  Calculator,
+  CalendarDays,
+  ReceiptText,
+  SlidersHorizontal,
+  TicketCheck,
+  Tickets,
+} from 'lucide-react';
 import type { DemoUser, Member } from '../types';
 import type { DemoSubscription } from '../data/clientProfile';
 import { TODAY, money } from '../data/workspace';
@@ -59,6 +68,13 @@ export function MembershipReissueDialog({
   const plans = saleCatalog(data, null, trainers.selected?.categoryId || null).filter(
     (item) => item.type === 'plan',
   );
+  const selectedPlan = plans.find((item) => item.record.id === planId)?.record;
+  const modePresentation = {
+    visits: { icon: <TicketCheck size={20} />, description: 'Оставшиеся посещения' },
+    days: { icon: <CalendarDays size={20} />, description: 'Оставшиеся дни' },
+    single: { icon: <ReceiptText size={20} />, description: 'По цене одного визита' },
+    manual: { icon: <SlidersHorizontal size={20} />, description: 'Своя сумма к зачёту' },
+  };
   const input = {
     passId: pass.id,
     planId,
@@ -163,9 +179,14 @@ export function MembershipReissueDialog({
         ) : (
           <>
             <section className="reissue-source" aria-label="Исходный абонемент">
-              <div>
-                <p className="ws-muted">Исходный абонемент</p>
-                <h3>{pass.name}</h3>
+              <div className="reissue-source-title">
+                <span className="reissue-source-icon" aria-hidden="true">
+                  <Tickets size={22} />
+                </span>
+                <div>
+                  <p className="ws-muted">Исходный абонемент</p>
+                  <h3>{pass.name}</h3>
+                </div>
               </div>
               <dl className="reissue-source-facts">
                 <div>
@@ -190,11 +211,15 @@ export function MembershipReissueDialog({
             </section>
             <div className="reissue-columns">
               <section className="reissue-form-section reissue-methods" aria-label="Расчёт остатка">
-                <h3>Способ расчёта</h3>
+                <h3 className="reissue-section-title">
+                  <Calculator size={18} aria-hidden="true" />
+                  Способ расчёта
+                </h3>
                 <SegmentedFilter
                   label="Способ перерасчёта"
                   layout="grid"
-                  items={[...reissueModes]}
+                  variant="cards"
+                  items={reissueModes.map((item) => ({ ...item, ...modePresentation[item.id] }))}
                   value={mode}
                   onChange={(value) => {
                     setMode(value as ReissueMode);
@@ -203,6 +228,10 @@ export function MembershipReissueDialog({
                 />
               </section>
               <section className="reissue-form-section reissue-target" aria-label="Новый тариф">
+                <h3 className="reissue-section-title">
+                  <ArrowRightLeft size={18} aria-hidden="true" />
+                  Тариф взамен
+                </h3>
                 <Field label="Новый абонемент" required>
                   <Select
                     value={planId}
@@ -219,6 +248,63 @@ export function MembershipReissueDialog({
                     ))}
                   </Select>
                 </Field>
+                {selectedPlan ? (
+                  <dl className="reissue-plan-preview" aria-label="Условия нового абонемента">
+                    <div>
+                      <dt>Стоимость</dt>
+                      <dd>
+                        {selectedPlan.price === '' || selectedPlan.price === undefined
+                          ? 'Не указана'
+                          : money(selectedPlan.price)}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Срок</dt>
+                      <dd>
+                        {selectedPlan.duration ? `${selectedPlan.duration} дней` : 'Не указан'}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Посещения</dt>
+                      <dd>
+                        {selectedPlan.type === 'Безлимитный'
+                          ? 'Безлимит'
+                          : selectedPlan.visits || 'Не указаны'}
+                      </dd>
+                    </div>
+                  </dl>
+                ) : (
+                  <p className="reissue-plan-hint">
+                    После выбора здесь появятся стоимость и условия нового абонемента.
+                  </p>
+                )}
+
+                <Field label="Персональный тренер (для тарифов ПТ)">
+                  <Select
+                    value={trainers.selected?.id || ''}
+                    onChange={(event) => {
+                      setTrainerId(event.target.value);
+                      setPlanId('');
+                    }}
+                  >
+                    <option value="">Выберите тренера</option>
+                    {trainers.trainers.map((trainer) => (
+                      <option key={trainer.id} value={trainer.id}>
+                        {trainer.name} · {trainer.category}
+                      </option>
+                    ))}
+                  </Select>
+                </Field>
+                {planId &&
+                  supportsTraining(
+                    {
+                      training: plans.find((item) => item.record.id === planId)?.record.training,
+                      kindId: plans.find((item) => item.record.id === planId)?.record.kindId,
+                    },
+                    'personal',
+                  ) && (
+                    <p className="ws-muted">Категория тарифа соответствует выбранному тренеру.</p>
+                  )}
               </section>
               <section
                 className="reissue-form-section reissue-calculation"
@@ -270,37 +356,6 @@ export function MembershipReissueDialog({
                   </Field>
                 )}
               </section>
-              <section
-                className="reissue-form-section reissue-trainer"
-                aria-label="Тренер нового тарифа"
-              >
-                <Field label="Персональный тренер (для тарифов ПТ)">
-                  <Select
-                    value={trainers.selected?.id || ''}
-                    onChange={(event) => {
-                      setTrainerId(event.target.value);
-                      setPlanId('');
-                    }}
-                  >
-                    <option value="">Выберите тренера</option>
-                    {trainers.trainers.map((trainer) => (
-                      <option key={trainer.id} value={trainer.id}>
-                        {trainer.name} · {trainer.category}
-                      </option>
-                    ))}
-                  </Select>
-                </Field>
-                {planId &&
-                  supportsTraining(
-                    {
-                      training: plans.find((item) => item.record.id === planId)?.record.training,
-                      kindId: plans.find((item) => item.record.id === planId)?.record.kindId,
-                    },
-                    'personal',
-                  ) && (
-                    <p className="ws-muted">Категория тарифа соответствует выбранному тренеру.</p>
-                  )}
-              </section>
             </div>
             <dl className="reissue-secondary-facts" aria-label="Параметры исходного абонемента">
               <div>
@@ -315,7 +370,11 @@ export function MembershipReissueDialog({
               </div>
             </dl>
             <Field label="Основание переоформления" required>
-              <input value={reason} onChange={(event) => setReason(event.target.value)} />
+              <input
+                value={reason}
+                placeholder="Например, смена формата тренировок"
+                onChange={(event) => setReason(event.target.value)}
+              />
             </Field>
           </>
         )}

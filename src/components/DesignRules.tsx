@@ -8,7 +8,7 @@ import { VisitPassList } from './VisitPassList';
 import { getClientProfile } from '../data/clientProfile';
 import { availableVisitPasses } from '../lib/registration';
 import { useState } from 'react';
-import { Check, Edit3, MoreHorizontal, Plus, Trash2 } from 'lucide-react';
+import { Check, Edit3, MoreHorizontal, Plus, Trash2, Users, Snowflake } from 'lucide-react';
 import {
   Button,
   ConfirmDialog,
@@ -669,12 +669,31 @@ export function DesignRules() {
         <SegmentedFilter
           label="Пример фильтра"
           layout="grid"
+          variant="cards"
           value={filterExample}
           onChange={setFilterExample}
           items={[
-            { id: 'all', label: 'Все', count: 8 },
-            { id: 'active', label: 'Активные', count: 6 },
-            { id: 'paused', label: 'Заморожены', count: 2 },
+            {
+              id: 'all',
+              label: 'Все',
+              count: 8,
+              icon: <Users size={20} />,
+              description: 'Любой статус',
+            },
+            {
+              id: 'active',
+              label: 'Активные',
+              count: 6,
+              icon: <Check size={20} />,
+              description: 'Действующие',
+            },
+            {
+              id: 'paused',
+              label: 'Заморожены',
+              count: 2,
+              icon: <Snowflake size={20} />,
+              description: 'На паузе',
+            },
           ]}
         />
         <Field
