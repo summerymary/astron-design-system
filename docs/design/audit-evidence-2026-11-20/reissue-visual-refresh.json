@@ -1,0 +1,4327 @@
+{
+  "date": "2026-11-20",
+  "scope": "Local visual refresh of MembershipReissueDialog and shared SegmentedFilter cards variant; fictional prototype data, not a full role/business-process audit.",
+  "views": [
+    {
+      "theme": "Астрон",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 605.6484375,
+        "height": 489,
+        "scroll": 489,
+        "top": 116.6484375
+      },
+      "choices": [
+        {
+          "bottom": 326.6484375,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 254.6484375
+        },
+        {
+          "bottom": 326.6484375,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 254.6484375
+        },
+        {
+          "bottom": 406.6484375,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 334.6484375
+        },
+        {
+          "bottom": 406.6484375,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 334.6484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.6484375,
+        "top": 296.6484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 606,
+        "height": 490,
+        "scroll": 497,
+        "top": 116.296875
+      },
+      "choices": [
+        {
+          "bottom": 326.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 254.296875
+        },
+        {
+          "bottom": 326.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 254.296875
+        },
+        {
+          "bottom": 406.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 334.296875
+        },
+        {
+          "bottom": 406.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 334.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.296875,
+        "top": 296.296875
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 603,
+        "height": 490,
+        "scroll": 530,
+        "top": 113.296875
+      },
+      "choices": [
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 243.796875
+        },
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 243.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 323.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 323.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 329.796875,
+        "top": 285.796875
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Астрон",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 604.5,
+        "height": 490,
+        "scroll": 530,
+        "top": 114.796875
+      },
+      "choices": [
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 243.796875
+        },
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 243.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 323.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 323.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 329.796875,
+        "top": 285.796875
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 654,
+        "height": 538,
+        "scroll": 547,
+        "top": 116.296875
+      },
+      "choices": [
+        {
+          "bottom": 340.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 254.296875
+        },
+        {
+          "bottom": 340.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 254.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 348.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 348.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.296875,
+        "top": 296.296875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 654,
+        "height": 538,
+        "scroll": 567,
+        "top": 116.296875
+      },
+      "choices": [
+        {
+          "bottom": 340.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 254.296875
+        },
+        {
+          "bottom": 340.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 254.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 348.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 348.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.296875,
+        "top": 296.296875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 652.5,
+        "height": 538,
+        "scroll": 580,
+        "top": 114.796875
+      },
+      "choices": [
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 235.796875
+        },
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 235.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 329.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 329.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 321.796875,
+        "top": 277.796875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Астрон",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 652.5,
+        "height": 538,
+        "scroll": 580,
+        "top": 114.796875
+      },
+      "choices": [
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 235.796875
+        },
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 235.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 329.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 329.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 321.796875,
+        "top": 277.796875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 877,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 917,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 910,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Астрон",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 910,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 942,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 394.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 332.296875
+        },
+        {
+          "bottom": 394.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 332.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 402.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 561.296875,
+        "top": 517.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 982,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 394.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 332.296875
+        },
+        {
+          "bottom": 394.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 332.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 402.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 561.296875,
+        "top": 517.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Астрон",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 955,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 275.296875
+        },
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 275.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 345.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 345.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 504.296875,
+        "top": 460.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Астрон",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 955,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 275.296875
+        },
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 275.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 345.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 345.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 504.296875,
+        "top": 460.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Графит",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 605.6484375,
+        "height": 489,
+        "scroll": 489,
+        "top": 116.6484375
+      },
+      "choices": [
+        {
+          "bottom": 326.6484375,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 254.6484375
+        },
+        {
+          "bottom": 326.6484375,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 254.6484375
+        },
+        {
+          "bottom": 406.6484375,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 334.6484375
+        },
+        {
+          "bottom": 406.6484375,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 334.6484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.6484375,
+        "top": 296.6484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Графит",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 606,
+        "height": 490,
+        "scroll": 497,
+        "top": 116.296875
+      },
+      "choices": [
+        {
+          "bottom": 326.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 254.296875
+        },
+        {
+          "bottom": 326.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 254.296875
+        },
+        {
+          "bottom": 406.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 334.296875
+        },
+        {
+          "bottom": 406.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 334.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.296875,
+        "top": 296.296875
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Графит",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 603,
+        "height": 490,
+        "scroll": 530,
+        "top": 113.296875
+      },
+      "choices": [
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 243.796875
+        },
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 243.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 323.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 323.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 329.796875,
+        "top": 285.796875
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Графит",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 604.5,
+        "height": 490,
+        "scroll": 530,
+        "top": 114.796875
+      },
+      "choices": [
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 243.796875
+        },
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 243.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 323.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 323.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 329.796875,
+        "top": 285.796875
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Графит",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 654,
+        "height": 538,
+        "scroll": 547,
+        "top": 116.296875
+      },
+      "choices": [
+        {
+          "bottom": 340.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 254.296875
+        },
+        {
+          "bottom": 340.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 254.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 348.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 348.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.296875,
+        "top": 296.296875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Графит",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 654,
+        "height": 538,
+        "scroll": 567,
+        "top": 116.296875
+      },
+      "choices": [
+        {
+          "bottom": 340.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 254.296875
+        },
+        {
+          "bottom": 340.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 254.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 348.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 348.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.296875,
+        "top": 296.296875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Графит",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 652.5,
+        "height": 538,
+        "scroll": 580,
+        "top": 114.796875
+      },
+      "choices": [
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 235.796875
+        },
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 235.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 329.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 329.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 321.796875,
+        "top": 277.796875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Графит",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 652.5,
+        "height": 538,
+        "scroll": 580,
+        "top": 114.796875
+      },
+      "choices": [
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 235.796875
+        },
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 235.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 329.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 329.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 321.796875,
+        "top": 277.796875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Графит",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 877,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Графит",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 917,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Графит",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 910,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Графит",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 910,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Графит",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 942,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 394.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 332.296875
+        },
+        {
+          "bottom": 394.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 332.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 402.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 561.296875,
+        "top": 517.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Графит",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 982,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 394.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 332.296875
+        },
+        {
+          "bottom": 394.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 332.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 402.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 561.296875,
+        "top": 517.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Графит",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 955,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 275.296875
+        },
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 275.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 345.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 345.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 504.296875,
+        "top": 460.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Графит",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 955,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 275.296875
+        },
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 275.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 345.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 345.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 504.296875,
+        "top": 460.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 605.6484375,
+        "height": 489,
+        "scroll": 489,
+        "top": 116.6484375
+      },
+      "choices": [
+        {
+          "bottom": 326.6484375,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 254.6484375
+        },
+        {
+          "bottom": 326.6484375,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 254.6484375
+        },
+        {
+          "bottom": 406.6484375,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 334.6484375
+        },
+        {
+          "bottom": 406.6484375,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 334.6484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.6484375,
+        "top": 296.6484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 606,
+        "height": 490,
+        "scroll": 497,
+        "top": 116.296875
+      },
+      "choices": [
+        {
+          "bottom": 326.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 254.296875
+        },
+        {
+          "bottom": 326.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 254.296875
+        },
+        {
+          "bottom": 406.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 334.296875
+        },
+        {
+          "bottom": 406.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 334.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.296875,
+        "top": 296.296875
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 603,
+        "height": 490,
+        "scroll": 530,
+        "top": 113.296875
+      },
+      "choices": [
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 243.796875
+        },
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 243.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 323.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 323.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 329.796875,
+        "top": 285.796875
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Контраст",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 604.5,
+        "height": 490,
+        "scroll": 530,
+        "top": 114.796875
+      },
+      "choices": [
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 243.796875
+        },
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 243.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 323.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 323.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 329.796875,
+        "top": 285.796875
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 654,
+        "height": 538,
+        "scroll": 547,
+        "top": 116.296875
+      },
+      "choices": [
+        {
+          "bottom": 340.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 254.296875
+        },
+        {
+          "bottom": 340.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 254.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 348.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 348.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.296875,
+        "top": 296.296875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 654,
+        "height": 538,
+        "scroll": 567,
+        "top": 116.296875
+      },
+      "choices": [
+        {
+          "bottom": 340.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 254.296875
+        },
+        {
+          "bottom": 340.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 254.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 348.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 348.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.296875,
+        "top": 296.296875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 652.5,
+        "height": 538,
+        "scroll": 580,
+        "top": 114.796875
+      },
+      "choices": [
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 235.796875
+        },
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 235.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 329.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 329.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 321.796875,
+        "top": 277.796875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Контраст",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 652.5,
+        "height": 538,
+        "scroll": 580,
+        "top": 114.796875
+      },
+      "choices": [
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 235.796875
+        },
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 235.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 329.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 329.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 321.796875,
+        "top": 277.796875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 877,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 917,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 910,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Контраст",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 910,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 942,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 394.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 332.296875
+        },
+        {
+          "bottom": 394.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 332.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 402.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 561.296875,
+        "top": 517.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 982,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 394.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 332.296875
+        },
+        {
+          "bottom": 394.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 332.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 402.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 561.296875,
+        "top": 517.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Контраст",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 955,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 275.296875
+        },
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 275.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 345.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 345.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 504.296875,
+        "top": 460.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Контраст",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 955,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 275.296875
+        },
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 275.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 345.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 345.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 504.296875,
+        "top": 460.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 605.6484375,
+        "height": 489,
+        "scroll": 489,
+        "top": 116.6484375
+      },
+      "choices": [
+        {
+          "bottom": 326.6484375,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 254.6484375
+        },
+        {
+          "bottom": 326.6484375,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 254.6484375
+        },
+        {
+          "bottom": 406.6484375,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 334.6484375
+        },
+        {
+          "bottom": 406.6484375,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 334.6484375
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.6484375,
+        "top": 296.6484375
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 606,
+        "height": 490,
+        "scroll": 497,
+        "top": 116.296875
+      },
+      "choices": [
+        {
+          "bottom": 326.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 254.296875
+        },
+        {
+          "bottom": 326.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 254.296875
+        },
+        {
+          "bottom": 406.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 334.296875
+        },
+        {
+          "bottom": 406.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 334.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.296875,
+        "top": 296.296875
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 603,
+        "height": 490,
+        "scroll": 530,
+        "top": 113.296875
+      },
+      "choices": [
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 243.796875
+        },
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 243.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 323.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 323.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 329.796875,
+        "top": 285.796875
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 604.5,
+        "height": 490,
+        "scroll": 530,
+        "top": 114.796875
+      },
+      "choices": [
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 72,
+          "label": "По посещениям",
+          "left": 65,
+          "right": 340.5,
+          "top": 243.796875
+        },
+        {
+          "bottom": 315.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 72,
+          "label": "По дням",
+          "left": 348.5,
+          "right": 624,
+          "top": 243.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 72,
+          "label": "По разовой цене",
+          "left": 65,
+          "right": 340.5,
+          "top": 323.796875
+        },
+        {
+          "bottom": 395.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 72,
+          "label": "Вручную",
+          "left": 348.5,
+          "right": 624,
+          "top": 323.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 1200,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 329.796875,
+        "top": 285.796875
+      },
+      "width": 1280
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 654,
+        "height": 538,
+        "scroll": 547,
+        "top": 116.296875
+      },
+      "choices": [
+        {
+          "bottom": 340.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 254.296875
+        },
+        {
+          "bottom": 340.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 254.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 348.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 348.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.296875,
+        "top": 296.296875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 654,
+        "height": 538,
+        "scroll": 567,
+        "top": 116.296875
+      },
+      "choices": [
+        {
+          "bottom": 340.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 254.296875
+        },
+        {
+          "bottom": 340.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 254.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 348.296875
+        },
+        {
+          "bottom": 456.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 348.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 340.296875,
+        "top": 296.296875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 652.5,
+        "height": 538,
+        "scroll": 580,
+        "top": 114.796875
+      },
+      "choices": [
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 235.796875
+        },
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 235.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 329.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 329.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 321.796875,
+        "top": 277.796875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 652.5,
+        "height": 538,
+        "scroll": 580,
+        "top": 114.796875
+      },
+      "choices": [
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 86,
+          "label": "По посещениям",
+          "left": 47,
+          "right": 267.5,
+          "top": 235.796875
+        },
+        {
+          "bottom": 321.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 86,
+          "label": "По дням",
+          "left": 275.5,
+          "right": 496,
+          "top": 235.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 108,
+          "label": "По разовой цене",
+          "left": 47,
+          "right": 267.5,
+          "top": 329.796875
+        },
+        {
+          "bottom": 437.796875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 108,
+          "label": "Вручную",
+          "left": 275.5,
+          "right": 496,
+          "top": 329.796875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 768,
+      "modalWidth": 980,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 321.796875,
+        "top": 277.796875
+      },
+      "width": 1024
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 877,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 917,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 910,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 738,
+        "height": 600,
+        "scroll": 910,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 60,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 187,
+          "top": 332.296875
+        },
+        {
+          "bottom": 392.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 60,
+          "label": "По дням",
+          "left": 195,
+          "right": 349,
+          "top": 332.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 60,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 187,
+          "top": 400.296875
+        },
+        {
+          "bottom": 460.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 60,
+          "label": "Вручную",
+          "left": 195,
+          "right": 349,
+          "top": 400.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 844,
+      "modalWidth": 358,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 557.296875,
+        "top": 513.296875
+      },
+      "width": 390
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По посещениям",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 942,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 394.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 332.296875
+        },
+        {
+          "bottom": 394.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 332.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 402.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 561.296875,
+        "top": 517.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По дням",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 982,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 394.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 332.296875
+        },
+        {
+          "bottom": 394.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 332.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 402.296875
+        },
+        {
+          "bottom": 464.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 402.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 561.296875,
+        "top": 517.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "По разовой цене",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 955,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 275.296875
+        },
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 275.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 345.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 345.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 504.296875,
+        "top": 460.296875
+      },
+      "width": 320
+    },
+    {
+      "theme": "Тёмная",
+      "mode": "Вручную",
+      "allPriorityVisible": true,
+      "body": {
+        "bottom": 614,
+        "height": 476,
+        "scroll": 955,
+        "top": 138.296875
+      },
+      "choices": [
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся посещения",
+          "height": 62,
+          "label": "По посещениям",
+          "left": 33,
+          "right": 152,
+          "top": 275.296875
+        },
+        {
+          "bottom": 337.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "Оставшиеся дни",
+          "height": 62,
+          "label": "По дням",
+          "left": 160,
+          "right": 279,
+          "top": 275.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "false",
+          "copyOverflow": false,
+          "description": "По цене одного визита",
+          "height": 62,
+          "label": "По разовой цене",
+          "left": 33,
+          "right": 152,
+          "top": 345.296875
+        },
+        {
+          "bottom": 407.296875,
+          "checked": "true",
+          "copyOverflow": false,
+          "description": "Своя сумма к зачёту",
+          "height": 62,
+          "label": "Вручную",
+          "left": 160,
+          "right": 279,
+          "top": 345.296875
+        }
+      ],
+      "dialogOverflow": false,
+      "height": 720,
+      "modalWidth": 288,
+      "pageOverflow": false,
+      "preview": "Стоимость5 400 ₽Срок60 днейПосещения12",
+      "target": {
+        "bottom": 504.296875,
+        "top": 460.296875
+      },
+      "width": 320
+    }
+  ],
+  "summary": {
+    "states": 64,
+    "allPriorityVisible": true,
+    "noPageOrDialogHorizontalOverflow": true,
+    "noChoiceCopyOverflow": true,
+    "controlsAtLeast44": true
+  },
+  "scenarios": {
+    "manualQuote": {
+      "credit": 3200,
+      "due": 2200,
+      "verified": true
+    },
+    "visitsQuote": {
+      "credit": 4500,
+      "due": 900,
+      "verified": true
+    },
+    "keyboard": "Home/End changed calculation mode; shared guide cards moved to the last radio with End, including count in the accessible name.",
+    "guideVariant": "cards",
+    "planSearch": "Selected published group plan through searchable Select; preview shows 5,400 RUB / 60 days / 12 visits."
+  },
+  "desktopFinal": {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "bodyClientHeight": 489,
+    "bodyScrollHeight": 489
+  },
+  "consoleErrors": [],
+  "proof": "/private/tmp/astron-reissue-style-20261120.jpg",
+  "publication": "No new commit, push or deployment requested or performed."
+}
